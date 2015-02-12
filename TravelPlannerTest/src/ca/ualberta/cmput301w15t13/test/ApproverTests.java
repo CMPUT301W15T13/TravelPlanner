@@ -7,10 +7,13 @@ import ca.ualberta.cmput301w15t13.LoginActivity;
 
 public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivity>{
 
-	public ApproverTests(Class<LoginActivity> activityClass) {
-		super(activityClass);
+	public ApproverTests() {
+		super(LoginActivity.class);
 	}
 	
+	protected void setUp() throws Exception {
+		super.setUp();
+	}
 	
 	/*
 	* Test that as an approver you're able to change the status of a claim
@@ -50,7 +53,6 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		approver.approveClaim(claim);
 		assertTrue("Approver was able to approve an APPROVED claim", claim.getStatus == INPROGRESS);
 		
-	
 	}
 	
 	/*
