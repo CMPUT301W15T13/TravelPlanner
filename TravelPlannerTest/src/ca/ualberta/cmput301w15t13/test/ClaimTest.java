@@ -28,42 +28,103 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/**
 	 * Test a regular name and a starting date preceding an end date is accepted 
+	 * Use Case A1
+	 */
+	
+	public void testAddClaim(){
+			
+		//this will test the creation of 1 claim
+		this.makeRegularClaim();
+		
+		//this will test to see if an invalid date is entered
+		this.addInvalidClaimDate();
+		
+		//this will check to see if a claim can be added
+		this.addClaim();
+		
+		
+	}
+	
+	
+	/** Use Case A1
+	 * This will test to see if we can make a regular claim
+	 * 	 * Test that you can't add an end date that occurs after the start date. 
 	 * US01.01.01
 	 */
-	public void testMakeRegularClaim(){
+	private void makeRegularClaim(){
 		
 		String name = "Bill Smith";
 		Date startDate = new Date(100), endDate = new Date(120);
 		
+		//ClaimList to hold claims
+		ClaimList claimList = new ClaimList();
+		
 		//Claim constructor with string name, Date startDate, Date endDate
 		Claim claim = new Claim(name, startDate, endDate);
 	
-		
+		//Add description to claim
 		claim.addDescription("Trip to Rome");
 
+		
 		
 		assertTrue("Claim is null", claim != null);
 		assertTrue("Claim name is wrong", claim.getName().equals(name));
 		assertTrue("Claim startDate is wrong", claim.getStartDate().equals(startDate));
 		assertTrue("Claim name is wrong", claim.getEndDate().equals(endDate));
 		assertTrue("Claim description is wrong", claim.getDescription().equals("Trip to Rome"));
+	}
+	
+	/**Use Case A1
+	 * This will test to see if we can add 1-3 claims to a claim list 
+	 * US01.01.01
+	 */
+	private void addClaim(){
 		
+		//ClaimList to hold claims
+		ClaimList claimList = new ClaimList();
+		
+		//Claim constructor with string name, Date startDate, Date endDate
+		Claim claim1 = new Claim("Name1", new Date(100), new Date(120));
+		
+		claimList.add(claim1);
+		
+		//add single claim
+		AssertTrue("Claimlist is of null size" claimList.getNumberOfClaims() !=null );
+		assertEquals("Claimlist size is not 1", 1, claimList.getNumberOfClaims());
+		
+		
+		//add 2 more claims
+		Claim claim2 = new Claim("Name2", new Date(100), new Date(120));
+		Claim claim3 = new Claim("Name3", new Date(100), new Date(120));
+
+		
+		claimList.add(claim2);
+		claimList.add(claim3);
+		
+		//check to see that 3 items were added
+		assertEquals("Claimlist size is not 3 ", 3, claimList.getNumberOfClaims());
 	}
 	
 	
 
-	/**
+	/**Use Case A1
 	 * Test that you can't add an end date that occurs after the start date. 
 	 * US01.01.02
 	 */
-	public void testUseInvalidDate(){
+	private void addInvalidClaimDate(){
 		
 		String name = "Bill Smith";
 		Date startDate = new Date(120), endDate = new Date(100);
-		Claim claim = new Claim(name, startDate, endDate);
 		
-		assertTrue("Invalid Claim: Start date occurs after end date", claim.getEndDate.before(claim.getStartDate()));
+		try{
+			Claim claim = new Claim(name, startDate, endDate);
+		}
+		catch(InvalidDateException e){
+			fail("Invalid Claim: Start date occures after end date");
+		}
+		
 	}
+	
 	
 	/**
 	 * Tests that the claim can add travelDestination 
