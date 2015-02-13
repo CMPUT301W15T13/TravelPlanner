@@ -1,7 +1,7 @@
 # TravelPlanner
 CMPUT301 TEAM CMPUT301W15T13 Git Repository
 - - - 
-###Travel Planner  
+### The Application 
 Travel Planner is a lightweight, easy to use android application that tracks expenses incurred during travel. Expenses are organized into claims such that they can be submitted for approval.
 
 - - -
