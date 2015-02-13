@@ -53,8 +53,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	public void testAddClaim(){
 			
-		//these tests are wrapped in a generic exeption handling routine for convience... will change to correct exceptions once they are finalized
-		try{
 		//this will test the creation of 1 claim
 		this.makeRegularClaim();
 		
@@ -66,11 +64,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		//this will check to see if a claim can be added
 		this.addClaim();
-		}
-		catch (Exception e){
-			System.out.println(e.getStackTrace());
-		}
-		
+
 	}
 	
 	
@@ -156,6 +150,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		Date startDate = new Date(120), endDate = new Date(100);
 		
 		try{
+			//This will throw an InvalidDateException if the claim model is working correctly
 			Claim claim = new Claim(name, startDate, endDate);
 			
 			//if we make it here, we failed the test
@@ -175,6 +170,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 		
 		try{
+			//If claim is working properly, it will throw an InvalidNameException
 			Claim claim = new Claim(null, new Date(100), new Date(120));
 			
 			//if we make it here, we failed the test
@@ -185,6 +181,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		}
 		
 		try{
+			//If claim is working properly, it will throw an InvalidNameException
 			Claim claim = new Claim("   ", new Date(100), new Date(120));
 			
 			//if we make it here, we failed the test
@@ -203,8 +200,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 */
 	public void testAddTravelDestination(){
 		
-		//these tests are wrapped in a generic exeption handling routine for convience... will change to correct exceptions once they are finalized
-		try{
 		//test valid travel destination
 		this.addTravelDestination();
 		
@@ -212,9 +207,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		this.addDuplicateTravelDestination();
 		//test invalid travel destination
 		this.addInvalidTravelDestination();
-		}catch (Exception e){
-			
-		}
 	}
 	
 	/**Use Case A2
@@ -256,6 +248,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 		//Uses an exception to catch duplicate entries
 		try {
+			//If this works properly, it will throw a DuplicateException
 			claim.addTravelDestination("Russia","Bear wrestling");
 			
 			//if we make it here, we failed the test
@@ -278,7 +271,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		Claim claim = new Claim(name, startDate, endDate);
 		
 		try{
-			
+			//if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination(null, startDate);
 			
 			//if we make it here, we failed the test
@@ -291,7 +284,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		
 		try{
-			
+			//if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination("  ", startDate);
 			
 			//if we make it here, we failed the test
@@ -304,7 +297,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		
 		try{
-			
+			//if this works correctly it will throw an InvalidDateException
 			claim.addTravelDestination(name, new Date(150));
 			
 			//if we make it here, we failed the test
@@ -316,7 +309,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		}
 		
 		try{
-			
+			//if this works correctly it will throw an InvalidDateException
 			claim.addTravelDestination(name, new Date(50));
 			
 			//if we make it here, we failed the test
@@ -336,8 +329,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 */
 	public void testEditClaim(){
 		
-		//these tests are wrapped in a generic exeption handling routine for convience... will change to correct exceptions once they are finalized
-		try{
 		//this test the editability of simple claim items (Name, dates, description)
 		this.editSimpleClaim();
 		
@@ -347,9 +338,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		//this will test the editability of travel destinations
 		this.editTravelDestinations();
 		this.deleteTravelDetinations();
-		}catch(Exception e){
-			
-		}
 	}
 	
 	
@@ -396,6 +384,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		claim.addDescription(description);
 		
 		try {
+			//If this works properly, it will throw an InvalidNameException
 			claim.editName(null);
 			
 			//if we make it here, we failed the test
@@ -405,6 +394,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		}
 		
 		try {
+			//If this works properly, it will throw an InvalidNameException
 			claim.editName("   ");
 			
 			//if we make it here, we failed the test
@@ -414,7 +404,10 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		}
 		
 		try {
+			
+			//If this works properly, it will throw an InvalidDateException (ie start date is after end date)
 			claim.editStartDate(new Date(120));
+			
 			claim.editEndDate(new Date(100));
 			
 			//if we make it here, we failed the test
@@ -438,19 +431,13 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		//This will edit a description based on the index of the selected item
 		claim.editDescription(0, "China", "Relic hunting");
 		
-		try{
-		
 		assertEquals("Edit Travel Destination failed: Check Location", "China", claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Edit Travel Destination failed: Check Description", "Relic hunting", claim.getTravelDestination(0).getDestinationDescription());
 		assertEquals("Edit Travel Destination failed: Changed wrong Location", "Japan", claim.getTravelDestination(1).getDestinationName());
 		assertEquals("Edit Travel Destination failed: Changed wrong Description", "Sushi hunting", claim.getTravelDestination(1).getDestinationDescription());
-		}
-		catch(Exception e){
-			
-		}
 		
 		try{
-			//This will test to see if we can edit the destinations so they are identical
+			//If this works, it will throw a DuplicateException
 			claim.editDescription(1, "China", "Relic hunting");
 			
 			//if we make it here, we failed the test
@@ -461,7 +448,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		}
 		
 		try{
-			//This will test to see if we can edit the destinations so they are identical
+			//If this works it will throw an InvalidFieldEntryExeption
 			claim.editDescription(1,  null, "Relic hunting");
 			
 			//if we make it here, we failed the test
@@ -473,7 +460,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		
 		try{
-			//This will test to see if we can edit the destinations so they are identical
+			//If this works it will throw an InvalidFieldEntryExeption
 			claim.editDescription(1,  "Canada",null);
 			
 			//if we make it here, we failed the test
@@ -512,9 +499,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * US01.05.01
 	 */
 	public void testDeleteClaim(){
-		
-		try {
-
 		Claim claim = new Claim("test", new Date(1), new Date(2));
 		Claim claim2 = new Claim("test2", new Date(5), new Date(6));
 		ClaimList claimlist = new ClaimList();
@@ -529,10 +513,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertTrue("Claim removed too many claims", claimlist.contains(claim2));
 		
 		assertEquals("Removed wrong claim", claimlist.get(0).getName(), "test2");
-		
-		}
-		catch(Exception e){
-			
-		}
+
 	}
 }
