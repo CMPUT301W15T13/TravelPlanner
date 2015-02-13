@@ -126,11 +126,26 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	}
 	
 	
-	/**
+	/**Use Case A2
 	 * Tests that the claim can add travelDestination 
+	 * US01.02.01 to US01.02.03
+	 */
+	public void testAddTravelDestion(){
+		
+		//test valid travel destination
+		this.addTravelDestination();
+		
+		//test duplicate travel destination
+		this.addDuplicateTravelDestination();
+		//test invalid travel destination
+		this.addInvalidTravelDestination();
+	}
+	
+	/**Use Case A2
+	 * Tests to see if wwe can add a valid travel destination
 	 * US01.02.01
 	 */
-	public void testTravelDestination(){
+	private void addTravelDestination(){
 		
 		String name = "Bill Smith";
 		Date startDate = new Date(120), endDate = new Date(100);
@@ -149,11 +164,11 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	}
 	
 	
-	/**
+	/**Use Case A2
 	 * Tests that the claim does not add duplicate entries
 	 * US01.02.02
 	 */
-	public void testInvalidTravelDestination(){
+	private void addDuplicateTravelDestination(){
 		
 		String name = "Bill Smith";
 		Date startDate = new Date(120), endDate = new Date(100);
@@ -170,6 +185,60 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		catch (DuplicateException e){
 		
 		}
+	}
+	
+	/**Use Case A2
+	 * Tests to see if the travel destination entry is valid
+	 * US01.02.03
+	 */
+	private void addInvalidTravelDestination(){
+		
+		String name = "Bill Smith";
+		Date startDate = new Date(120), endDate = new Date(100);
+		Claim claim = new Claim(name, startDate, endDate);
+		
+		try{
+			
+			claim.addTravelDestion(null, startDate);
+			fail("Travel Destination is null");
+			
+		}
+		catch(InvalidFieldEntry e){
+			
+		}
+		
+		
+		try{
+			
+			claim.addTravelDestion("", startDate);
+			fail("Travel Destination is empty");
+			
+		}
+		catch(InvalidFieldEntry e){
+			
+		}
+		
+		
+		try{
+			
+			claim.addTravelDestion(name, new Date(150));
+			fail("Date occurs after the claim ended");
+			
+		}
+		catch(InvalidDateException e){
+			
+		}
+		
+		try{
+			
+			claim.addTravelDestion(name, new Date(50));
+			fail("Date occurs before the claim started");
+			
+		}
+		catch(InvalidDateException e){
+			
+		}
+		
 	}
 	
 	
