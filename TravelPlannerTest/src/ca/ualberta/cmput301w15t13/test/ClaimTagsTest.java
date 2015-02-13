@@ -49,7 +49,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 			claim.addTag(vtag);
 			assertTrue("Valid tag wasn't added", claim.getTags().contains(vtag));
 		}
-		String[] tags = claim.getTaigs();
+		String[] tags = claim.getTags();
 		assertTrue("Tags is null", tags != null);
 		assertTrue("Not all tags added", tags.length == validTags.length);
 		
@@ -69,9 +69,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	public void testRemoveTag(){
 		Claim claim = new Claim("Name", new Date(1), new Date(2));
 		String tag = "test";
-		
-		claim.addTag(tag);
-		assertTrue("Claim doesnt contain tag", claim.getTags().contains(tag));
+	
 		
 		claim.removeTag(tag);
 		assertFalse("Tag was not removed", claim.getTags().contains(tag));
@@ -93,7 +91,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	public void testNoDuplicates(){
 		Claim claim = new Claim("Name", new Date(1), new Date(2));
-		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
+		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
 		
 		for(String vtag: validTags){
 			claim.addTag(vtag);
@@ -105,7 +103,8 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 			}
 		}
 
-	}
+	} 
+	
 	/**
 	 * Test Renaming a tag
 	 * US03.02.04
