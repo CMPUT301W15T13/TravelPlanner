@@ -17,6 +17,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * Tests that you're able to add a tag to a claim
 	 * and that the tag MUST be alphanumeric
 	 * US03.01.01
+	 * US03.02.02 - Adding a tag
 	 */
 	
 	public void testAddTag(){
@@ -43,6 +44,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	/**
 	 * Test that you can remove a tag
 	 * US03.01.02
+	 * US03.02.03 - Deleting a tag
 	 */
 	public void testRemoveTag(){
 		Claim claim = new Claim("Name", new Date(1), new Date(2));
@@ -54,6 +56,14 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		claim.removeTag(tag);
 		assertFalse("Tag was not removed", claim.getTags().contains(tag));
 
+	}
+	
+	/**
+	 * Test listing available tags
+	 * US03.02.01
+	 */
+	public void testListTags(){
+		//stub, This is may be a view/ui test
 	}
 	
 	/**
@@ -75,6 +85,15 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 			}
 		}
 
+	}
+	/**
+	 * Test Renaming a tag
+	 * US03.02.04
+	 */
+	public void testRename(Claim, tagIndex, String newTag){
+		Claim.tag[tagIndex] = newTag;
+		assertEquals("Claim has the new name", Claim.tag[tagIndex], newName);
+		
 	}
 
 }
