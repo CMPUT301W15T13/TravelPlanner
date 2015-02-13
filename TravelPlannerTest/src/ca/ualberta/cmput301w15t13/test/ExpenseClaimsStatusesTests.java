@@ -22,5 +22,12 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		assertEquals("Claim is submitted", claim.getStatus(), "Submitted");
 		assertEquals("Claim cannot be editted by claimant", claim.getPermission(), 1);
 	}
+	
+	public void testClaimantOnReturned(){
+		LoginActivity.setUserType("Claimant");
+		Claim claim = new Claim;
+		claim.setStatus("Returned");
+		assertEquals("Claim can be editted by claimant", claim.getPermission(), 0);
+	}
 
 }
