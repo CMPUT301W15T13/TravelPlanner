@@ -32,5 +32,14 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		assertEquals("Claim can be editted by claimant", claim.getPermission(), 0);
 		
 	}
+	
+	//07.04.01
+	//Claim has approved status and can no longer be editted
+	public void testClaimStatusApproved(){
+		LoginActivity.setUserType("Claimant");
+		Claim claim = new Claim;
+		claim.setStatus("Approved");
+		assertEquals("Claim is approved and can't be editted", claim.getPermission(),2);
+	}
 
 }
