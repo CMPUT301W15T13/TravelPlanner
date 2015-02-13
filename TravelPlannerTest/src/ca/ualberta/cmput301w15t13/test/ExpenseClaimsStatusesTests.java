@@ -23,11 +23,14 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		assertEquals("Claim cannot be editted by claimant", claim.getPermission(), 1);
 	}
 	
+	//07.03.01
+	//Claimant can edit a returned claim
 	public void testClaimantOnReturned(){
 		LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim;
 		claim.setStatus("Returned");
 		assertEquals("Claim can be editted by claimant", claim.getPermission(), 0);
+		
 	}
 
 }
