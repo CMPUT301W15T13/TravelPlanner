@@ -487,17 +487,32 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	
 	
-	/** 
+	/** Use Case A5
 	 * Tests that you can delete a claim
 	 * US01.05.01
 	 */
 	public void testDeleteClaim(){
+		
+		try {
+
 		Claim claim = new Claim("test", new Date(1), new Date(2));
-		ClaimListSingleton.getClaimList().addClaim(claim);
+		Claim claim2 = new Claim("test2", new Date(5), new Date(6));
+		ClaimList claimlist = new ClaimList();
 		
-		assertTrue("Claim was not entered", ClaimListSingleton.getClaimList().contains(claim));
+		claimlist.addClaim(claim);
+		claimlist.addClaim(claim2);
 		
-		ClaimListSingleton.getClaimList().removeClaim(claim);
-		assertFalse("Claim was not removed", ClaimListSingleton.getClaimList().contains(claim));
+		assertTrue("Claim was not entered", claimlist.contains(claim));
+		
+		claimlist.removeClaim(claim);
+		assertFalse("Claim was not removed", claimlist.contains(claim));
+		assertTrue("Claim removed too many claims", claimlist.contains(claim2));
+		
+		assertEquals("Removed wrong claim", claimlist.get(0).getName(), "test2");
+		
+		}
+		catch(Exception e){
+			
+		}
 	}
 }
