@@ -333,7 +333,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	}
 	
 	
-	/**
+	/** Use case A4
 	 *Tests that we can edit a claim
 	 * US01.04.01
 	 */
@@ -361,7 +361,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	}
 
 	
-	/**
+	/** Use case A4
 	 *Tests that we can edit a claim
 	 * US01.04.01
 	 */
@@ -406,7 +406,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 	}
 	
-	/**
+	/** Use case A4
 	 * This will test to see if we can edit a travel destination
 	 */
 	private void editTravelDestinations(){
@@ -465,7 +465,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 	}
 	
-	/**
+	/** Use case A4
 	 * This wil ltest to see if we can delete a Travel Destination
 	 */
 	private void deleteTravelDetinations(){
