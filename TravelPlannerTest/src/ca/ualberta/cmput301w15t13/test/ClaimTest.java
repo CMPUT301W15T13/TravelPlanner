@@ -114,7 +114,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/**
 	 *Tests that we can edit a claim
-	 * US01.06.01
+	 * US01.04.01
 	 */
 	public void testEditClaim(){
 		
@@ -139,4 +139,17 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
 	}
 	
+	/** 
+	 * Tests that you can delete a claim
+	 * US01.05.01
+	 */
+	public void testDeleteClaim(){
+		Claim claim = new Claim("test", new Date(1), new Date(2));
+		ClaimListSingleton.getClaimList().addClaim(claim);
+		
+		assertTrue("Claim was not entered", ClaimListSingleton.getClaimList().contains(claim));
+		
+		ClaimListSingleton.getClaimList().removeClaim(claim);
+		assertFalse("Claim was not removed", ClaimListSingleton.getClaimList().contains(claim));
+	}
 }
