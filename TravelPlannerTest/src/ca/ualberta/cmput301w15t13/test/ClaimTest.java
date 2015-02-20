@@ -23,6 +23,7 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.Date;
 
 import ca.ualberta.cmput301w15t13.LoginActivity;
+import ca.ualberta.cmput301w15t13.Claim;
 import android.test.ActivityInstrumentationTestCase2;
 
 
@@ -357,7 +358,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		claim.editName(name2);
 		claim.editStartDate(startDate2);
-		claim.editEndDate(endDate2);
+		claim.editStartDate(endDate2);
 		claim.editDescription("Trip to Italy");
 		
 		assertTrue("Edited claim is null", claim != null);
@@ -408,7 +409,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 			//If this works properly, it will throw an InvalidDateException (ie start date is after end date)
 			claim.editStartDate(new Date(120));
 			
-			claim.editEndDate(new Date(100));
+			claim.editStartDate(new Date(100));
 			
 			//if we make it here, we failed the test
 			fail("Invalid Date: Start date occurs after end Date");
@@ -424,12 +425,12 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 */
 	private void editTravelDestinations(){
 		
-		claim claim = new Claim("name", new Date(100), new Date(120));
+		Claim claim = new Claim("name", new Date(100), new Date(120));
 		claim.addTravelDestination("Russia", "Bear hunting");
 		claim.addTravelDestination("Japan", "Sushi hunting");
 		
 		//This will edit a description based on the index of the selected item
-		claim.editDescription(0, "China", "Relic hunting");
+		claim.editTravelDescription(0, "China", "Relic hunting");
 		
 		assertEquals("Edit Travel Destination failed: Check Location", "China", claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Edit Travel Destination failed: Check Description", "Relic hunting", claim.getTravelDestination(0).getDestinationDescription());
@@ -438,7 +439,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		try{
 			//If this works, it will throw a DuplicateException
-			claim.editDescription(1, "China", "Relic hunting");
+			claim.editTravelDescription(1, "China", "Relic hunting");
 			
 			//if we make it here, we failed the test
 			fail("Invalid Travel Destination: Duplicate entry");
