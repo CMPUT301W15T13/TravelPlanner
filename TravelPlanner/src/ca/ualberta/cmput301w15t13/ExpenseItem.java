@@ -1,7 +1,8 @@
 package ca.ualberta.cmput301w15t13;
 
-import java.util.ArrayList;
 import java.util.Date;
+
+import ca.ualberta.cmput301w15t13.Models.Receipt;
 
 public class ExpenseItem {
 	protected String ExpenseItemName = null;

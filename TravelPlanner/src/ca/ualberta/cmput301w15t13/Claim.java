@@ -19,7 +19,7 @@ public class Claim {
 	protected String description = null;
 	protected TravelItineraryList travelList = null;
 	
-	protected int editible = NONEDITIBLE;
+	protected int editible = NONEDITABLE;
 	protected int status = INPROGRESS;
 	
 	
