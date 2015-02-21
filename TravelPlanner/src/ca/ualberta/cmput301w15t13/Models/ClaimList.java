@@ -27,8 +27,7 @@ import ca.ualberta.cmput301w15t13.Controllers.Listener;
 
 public class ClaimList {
 	/* A wrapper class for ArrayList<Claim>
-	 * with standard ArrayList methods, as well as 
-	 * methods for sorting and parsing the list.
+	 * with standard ArrayList methods.
 	 * Also contains a list of listeners such that 
 	 * on updates, the appropriate lists are
 	 * updated all at once.
@@ -80,7 +79,7 @@ public class ClaimList {
 		}
 	}
 
-	public ArrayList<Claim> getList() {
+	public ArrayList<Claim> getClaimArrayList() {
 		if(claimList == null){
 			this.claimList = new ArrayList<Claim>();
 		}

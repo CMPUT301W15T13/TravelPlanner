@@ -56,7 +56,7 @@ public class ClaimItemListTest extends
 		assertTrue("Item list is null", claimList != null);
 		assertTrue("Item list is not empty", claimList.length() == 0);
 		
-		ArrayList<Claim> dupes = claimList.getList();
+		ArrayList<Claim> dupes = claimList.getClaimArrayList();
 		assertTrue("Dupes is null", dupes != null);
 		assertTrue("Dupes is empty", dupes.size() != 0);
 		assertTrue("dupes is not size 2", dupes.size() == 2);
