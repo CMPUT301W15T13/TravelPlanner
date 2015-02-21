@@ -11,7 +11,7 @@ public class ExpenseItem {
 	protected int Amount = (Integer) null;
 	protected String Currency = null;
 	public Receipt receipt = null;
-	
+	public boolean complete = false;
 	
 	/**
 	 * 
