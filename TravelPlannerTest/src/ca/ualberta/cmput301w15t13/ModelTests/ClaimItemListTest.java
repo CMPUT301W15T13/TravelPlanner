@@ -25,6 +25,7 @@ import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
@@ -121,5 +122,14 @@ public class ClaimItemListTest extends
 
 	}
 
-
+	public void testListeners(){
+		ClaimList claimList = new ClaimList();
+		claimList.addListener(new Listener(){
+			public void update(){
+				assertTrue("Passed!" , true);
+			}
+		});
+	
+		claimList.notifyListeners();
+	}
 }

@@ -22,6 +22,8 @@ package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
 
+import ca.ualberta.cmput301w15t13.Controllers.Listener;
+
 
 public class ClaimList {
 	/* A wrapper class for ArrayList<Claim>
@@ -33,6 +35,7 @@ public class ClaimList {
 	 * 
 	 */
 	ArrayList<Claim> claimList = null;
+	ArrayList<Listener> listenerList = null;
 
 	public ClaimList(ArrayList<Claim> oldClaims) {
 		if(oldClaims != null){
@@ -40,10 +43,12 @@ public class ClaimList {
 		}else{
 			claimList = new ArrayList<Claim>();
 		}
+		listenerList = new ArrayList<Listener>();
 	}
 
 	public ClaimList() {
 		claimList = new ArrayList<Claim>();
+		listenerList = new ArrayList<Listener>();
 	}
 
 	public int length() {
@@ -68,7 +73,6 @@ public class ClaimList {
 	}
 
 
-
 	public void removeClaimAtIndex(int i) {
 		//make sure the index is valid
 		if(!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)){
@@ -89,6 +93,18 @@ public class ClaimList {
 			return null;
 		}
 		return this.claimList.get(i);
+	}
+
+	public void addListener(Listener listener) {
+		if(listener != null){
+			listenerList.add(listener);
+		}
+	}
+
+	public void notifyListeners() {
+		for(Listener l : listenerList){
+			l.update();
+		}
 	}
 
 }
