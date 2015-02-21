@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
-import ca.ualberta.cmput301w15t13.LoginActivity;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
 
 public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<LoginActivity>{

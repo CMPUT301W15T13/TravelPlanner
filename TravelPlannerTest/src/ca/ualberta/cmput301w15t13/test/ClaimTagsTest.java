@@ -21,7 +21,7 @@
 package ca.ualberta.cmput301w15t13.test;
 
 import android.test.ActivityInstrumentationTestCase2;
-import ca.ualberta.cmput301w15t13.LoginActivity;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
 public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 

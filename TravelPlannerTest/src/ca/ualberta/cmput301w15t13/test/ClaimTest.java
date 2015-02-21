@@ -22,8 +22,8 @@ package ca.ualberta.cmput301w15t13.test;
 
 import java.util.Date;
 
-import ca.ualberta.cmput301w15t13.LoginActivity;
-import ca.ualberta.cmput301w15t13.Claim;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 import android.test.ActivityInstrumentationTestCase2;
 
 

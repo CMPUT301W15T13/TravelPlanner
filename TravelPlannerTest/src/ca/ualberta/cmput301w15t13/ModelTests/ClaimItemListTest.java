@@ -24,10 +24,10 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
-import ca.ualberta.cmput301w15t13.Claim;
-import ca.ualberta.cmput301w15t13.LoginActivity;
-import ca.ualberta.cmput301w15t13.TravelItineraryList;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 
 public class ClaimItemListTest extends
 		ActivityInstrumentationTestCase2<LoginActivity> {

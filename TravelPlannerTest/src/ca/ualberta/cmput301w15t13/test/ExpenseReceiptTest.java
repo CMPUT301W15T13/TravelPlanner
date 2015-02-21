@@ -24,7 +24,7 @@ import java.util.Date;
 
 import android.graphics.Bitmap;
 import android.test.ActivityInstrumentationTestCase2;
-import ca.ualberta.cmput301w15t13.LoginActivity;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
 public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 

@@ -22,7 +22,6 @@ package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
 
-import ca.ualberta.cmput301w15t13.Claim;
 
 public class ClaimList {
 	/* A wrapper class for ArrayList<Claim>

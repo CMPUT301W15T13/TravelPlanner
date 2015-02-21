@@ -1,4 +1,4 @@
-package ca.ualberta.cmput301w15t13;
+package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
 

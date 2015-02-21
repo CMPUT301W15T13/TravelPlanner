@@ -23,7 +23,7 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.ArrayList;
 
 import android.test.ActivityInstrumentationTestCase2;
-import ca.ualberta.cmput301w15t13.LoginActivity;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
 public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivity>{
 

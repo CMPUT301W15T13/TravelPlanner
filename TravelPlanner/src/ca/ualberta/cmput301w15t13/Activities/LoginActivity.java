@@ -18,8 +18,12 @@
  * limitations under the License.
  */
 
-package ca.ualberta.cmput301w15t13;
+package ca.ualberta.cmput301w15t13.Activities;
 
+import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.R.id;
+import ca.ualberta.cmput301w15t13.R.layout;
+import ca.ualberta.cmput301w15t13.R.menu;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;

@@ -20,8 +20,8 @@
 
 package ca.ualberta.cmput301w15t13.test;
 
-import ca.ualberta.cmput301w15t13.ClaimModel;
-import ca.ualberta.cmput301w15t13.LoginActivity;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Models.ClaimModel;
 import android.test.ActivityInstrumentationTestCase2;
 
 public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2<ClaimModel>{
