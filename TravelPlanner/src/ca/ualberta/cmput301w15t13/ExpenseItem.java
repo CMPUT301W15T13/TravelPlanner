@@ -7,9 +7,6 @@ public class ExpenseItem {
 	protected String ExpenseItemName = null;
 	protected String ExpenseCategory = null;
 	protected Date purchaseDate = null;
-	protected ArrayList<String> Destination = null;
-	// every expense Item has a destination. This was from the UI Storyboard
-	// destination can be multiple
 	protected String ExpenseDescription = null;
 	protected int Amount = (Integer) null;
 	protected String Currency = null;
@@ -20,7 +17,6 @@ public class ExpenseItem {
 	 * @param Name
 	 * @param Category
 	 * @param purchaseDate
-	 * @param Destination
 	 * @param Amount
 	 * @param Currency
 	 */
