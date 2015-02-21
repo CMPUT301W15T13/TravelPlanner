@@ -5,8 +5,8 @@ import java.util.Date;
 
 public class Claim {
 
-	protected static int EDITIBLE = 1;
-	protected static int NONEDITIBLE = 0;
+	protected static int EDITABLE = 1;
+	protected static int NONEDITABLE = 0;
 	
 	protected static int INPROGRESS = 0;
 	protected static int SUBMITTED = 1;
