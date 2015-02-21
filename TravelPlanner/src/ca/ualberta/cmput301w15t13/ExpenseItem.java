@@ -10,6 +10,7 @@ public class ExpenseItem {
 	protected String ExpenseDescription = null;
 	protected int Amount = (Integer) null;
 	protected String Currency = null;
+	public Receipt receipt = null;
 	
 	
 	/**
