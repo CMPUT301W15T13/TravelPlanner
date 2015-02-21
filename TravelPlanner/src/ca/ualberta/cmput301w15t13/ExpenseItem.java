@@ -6,8 +6,7 @@ import java.util.Date;
 public class ExpenseItem {
 	protected String ExpenseItemName = null;
 	protected String ExpenseCategory = null;
-	protected Date StartDate = null;
-	protected Date EndDate = null;
+	protected Date purchaseDate = null;
 	protected ArrayList<String> Destination = null;
 	// every expense Item has a destination. This was from the UI Storyboard
 	// destination can be multiple
@@ -25,11 +24,10 @@ public class ExpenseItem {
 	 * @param ExpenseDescription
 	 * @param Amount
 	 */
-	public ExpenseItem(String Name, String Category, Date StartDate, Date EndDate, ArrayList<String> Destination, String ExpenseDescription, int Amount){
+	public ExpenseItem(String Name, String Category, Date puchaseDate, ArrayList<String> Destination, String ExpenseDescription, int Amount){
 		this.ExpenseItemName = Name;
 		this.ExpenseCategory = Category;
-		this.StartDate = StartDate;
-		this.EndDate = EndDate;
+		this.purchaseDate = puchaseDate;
 		this.Destination = Destination;
 		this.ExpenseDescription = ExpenseDescription;
 		this.Amount = Amount;
