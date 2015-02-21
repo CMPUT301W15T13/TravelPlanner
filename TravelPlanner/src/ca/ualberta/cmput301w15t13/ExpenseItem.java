@@ -12,6 +12,7 @@ public class ExpenseItem {
 	// destination can be multiple
 	protected String ExpenseDescription = null;
 	protected int Amount = (Integer) null;
+	protected String Currency = null;
 	
 	
 	/**
@@ -24,13 +25,13 @@ public class ExpenseItem {
 	 * @param ExpenseDescription
 	 * @param Amount
 	 */
-	public ExpenseItem(String Name, String Category, Date puchaseDate, ArrayList<String> Destination, String ExpenseDescription, int Amount){
+	public ExpenseItem(String Name, String Category, Date puchaseDate, String ExpenseDescription, int Amount, String Currency){
 		this.ExpenseItemName = Name;
 		this.ExpenseCategory = Category;
 		this.purchaseDate = puchaseDate;
-		this.Destination = Destination;
 		this.ExpenseDescription = ExpenseDescription;
 		this.Amount = Amount;
+		this.Currency = Currency;
 		
 	}
 }
