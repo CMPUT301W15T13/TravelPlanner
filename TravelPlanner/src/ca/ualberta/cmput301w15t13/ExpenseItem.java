@@ -19,16 +19,15 @@ public class ExpenseItem {
 	 * 
 	 * @param Name
 	 * @param Category
-	 * @param StartDate
-	 * @param EndDate
+	 * @param purchaseDate
 	 * @param Destination
-	 * @param ExpenseDescription
 	 * @param Amount
+	 * @param Currency
 	 */
-	public ExpenseItem(String Name, String Category, Date puchaseDate, String ExpenseDescription, int Amount, String Currency){
+	public ExpenseItem(String Name, String Category, Date purchaseDate, String ExpenseDescription, int Amount, String Currency){
 		this.ExpenseItemName = Name;
 		this.ExpenseCategory = Category;
-		this.purchaseDate = puchaseDate;
+		this.purchaseDate = purchaseDate;
 		this.ExpenseDescription = ExpenseDescription;
 		this.Amount = Amount;
 		this.Currency = Currency;
