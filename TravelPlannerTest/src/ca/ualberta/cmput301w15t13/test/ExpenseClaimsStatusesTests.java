@@ -24,6 +24,14 @@ import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.ClaimModel;
 import android.test.ActivityInstrumentationTestCase2;
 
+
+/**
+ * 
+ * @author BRAINPALACE
+ *
+ * General use case can be found on the wiki at
+ * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ */
 public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2<ClaimModel>{
 	public ExpenseClaimsStatusesTests() {
 		super(ClaimModel.class);
@@ -33,8 +41,11 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		super.setUp();
 	}
 	
-	//07.01.01
-	//Claimant submits a claim can no longer edit
+	/**
+	 * 07.01.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/65
+	 * Claimant submits a claim can no longer edit
+	 */
 	public void testClaimantSubmit(){
 		LoginActivity.setUserType("claimant"); 
 		Claim claim = new Claim;
@@ -43,8 +54,11 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		assertEquals("Claim cannot be editted by claimant", claim.getPermission(), 1);
 	}
 	
-	//07.03.01
-	//Claimant can edit a returned claim
+	/**
+	 * 07.03.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/67
+	 * Claimant can edit a returned claim
+	 */
 	public void testClaimantOnReturned(){
 		LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim;
@@ -53,8 +67,12 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		
 	}
 	
-	//07.04.01
-	//Claim has approved status and can no longer be editted
+	/**
+	 * 07.04.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/68
+	 * Claim has approved status and can no longer be editted
+	 */
+
 	public void testClaimStatusApproved(){
 		LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim;
