@@ -49,9 +49,10 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
 	
 	
-	/**
+	/**  Use Case A1
+	 * 
 	 * Test a regular name and a starting date preceding an end date is accepted 
-	 * Use Case A1
+	 * 
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	
@@ -73,9 +74,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	
 	/** Use Case A1
+	 * 
 	 * This will test to see if we can make a regular claim
 	 * 	 * Test that you can't add an end date that occurs after the start date. 
-	 * US01.01.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	private void makeRegularClaim(){
@@ -93,21 +94,17 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		claim.addDescription("Trip to Rome");
 
 		
-		
-		assertTrue("Claim is null", claim != null);
-		assertTrue("Claim name is wrong", claim.getName().equals(name));
-		assertTrue("Claim startDate is wrong", claim.getStartDate().equals(startDate));
-		assertTrue("Claim name is wrong", claim.getEndDate().equals(endDate));
-		assertTrue("Claim description is wrong", claim.getDescription().equals("Trip to Rome"));
-		
-		
-		
+		assertNotNull("Claim is null", claim);
+		assertEquals("Claim name is wrong", name, claim.getName());
+		assertEquals("Claim startDate is wrong", startDate, claim.getStartDate());
+		assertEquals("Claim endDate is wrong", endDate, claim.getEndDate());
+		assertEquals("Claim description is wrong", "Trip to Rome",  claim.getDescription());
+
 		
 	}
 	
 	/**Use Case A1
 	 * This will test to see if we can add 1-3 claims to a claim list 
-	 * US01.01.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	private void addClaim(){
@@ -123,7 +120,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		claimList.add(claim1);
 		
 		//add single claim
-		AssertTrue("Claimlist is of null size" claimList.getNumberOfClaims() !=null );
+		AssertNotNull("Claimlist is of null size" claimList.getNumberOfClaims() );
 		assertEquals("Claimlist size is not 1", 1, claimList.getNumberOfClaims());
 		
 		
@@ -148,7 +145,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
 	/**Use Case A1
 	 * Test that you can't add an end date that occurs after the start date. 
-	 * US01.01.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	private void makeInvalidClaimDate(){
@@ -171,7 +167,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/**Use Case A1
 	 * Test that you can't add an end date that occurs after the start date. 
-	 * US01.01.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	private void makeInvalidClaim(){
@@ -204,7 +199,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/**Use Case A2
 	 * Tests that the claim can add travelDestination 
-	 * US01.02.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 */
 	public void testAddTravelDestination(){
@@ -220,7 +214,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/**Use Case A2
 	 * Tests to see if wwe can add a valid travel destination
-	 * US01.02.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 */
 	private void addTravelDestination(){
@@ -233,11 +226,12 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		claim.addTravelDestination("Russia","Bear wrestling");
 		
 		//look to see if destination collection is larger than 0
-		assertTrue("Claim has has no Travel Destinations", claim.numberOfDestinations() > 0);
+		assertEquals("Claim has has no Travel Destinations",1, claim.numberOfDestinations());
+
 		
 		//test to see if the contents of the destination collection are correct
-		assertTrue("Claim has invalid Travel Destination", claim.getTravelDestination(0).getDestinationName().equals("Russia"));
-		assertTrue("Claim has invalid description", claim.getTravelDestination(0).getDestinationDescription().equals("Bear wrestling"));
+		assertEquals("Claim has invalid Travel Destination", "Russia",claim.getTravelDestination(0).getDestinationName());
+		assertEquals("Claim has invalid Travel Destination", "Bear wrestling",claim.getTravelDestination(0).getDestinationDescription());
 
 		
 	}
@@ -245,7 +239,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/**Use Case A2
 	 * Tests that the claim does not add duplicate entries
-	 * US01.02.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 */
 	private void addDuplicateTravelDestination(){
@@ -273,7 +266,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/**Use Case A2
 	 * Tests to see if the travel destination entry is valid
-	 * US01.02.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 */
 	private void addInvalidTravelDestination(){
@@ -335,9 +327,8 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	}
 	
 	
-	/** Use case A4
+	/** Use case A3
 	 * Test that we can edit a claim
-	 * US01.04.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/51
 	 */
 	public void testEditClaim(){
@@ -354,9 +345,8 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	}
 	
 	
-	/** Use case A4
+	/** Use case A3
 	 *Tests that we can edit a claim
-	 * US01.04.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/51
 	 */
 	private void editSimpleClaim(){
@@ -374,18 +364,19 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		claim.editStartDate(endDate2);
 		claim.editDescription("Trip to Italy");
 		
-		assertTrue("Edited claim is null", claim != null);
-		assertTrue("Edited claim name is wrong", claim.getName().equals(name2));
-		assertTrue("Edited claim startDate is wrong", claim.getStartDate().equals(startDate2));
-		assertTrue("Edited claim name is wrong", claim.getEndDate().equals(endDate2));
-		assertTrue("Edited claim description is wrong", claim.getDescription().equals(description2));
+		assertNotNull("Edited claim is null", claim);
+		
+
+		assertEquals("Edited claim name is wrong",  name2, claim.getName());
+		assertEquals("Edited claim startDate is wrong" , startDate2, claim.getStartDate());
+		assertEquals("Edited claim name is wrong", endDate2, claim.getEndDate());
+		assertEquals("Edited claim description is wrong", description2, claim.getDescription());
 
 	}
 
 	
-	/** Use case A4
+	/** Use case A3
 	 *Tests that we can edit a claim
-	 * US01.04.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/51
 	 */
 	private void editInvalidClaim(){
@@ -434,9 +425,8 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 	}
 	
-	/** Use case A4
+	/** Use case A3
 	 * This will test to see if we can edit a travel destination
-	 * US01.05.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
 	 */
 	private void editTravelDestinations(){
@@ -489,9 +479,8 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 	}
 	
-	/** Use case A4
+	/** Use case A3
 	 * This wil ltest to see if we can delete a Travel Destination
-	 * US01.05.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
 	 */
 	private void deleteTravelDetinations(){
@@ -502,7 +491,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		claim.deleteTravelDestionation(0);
 		
-		assertEquals("Delete Travel Destination is of invalid size", claim.numberOfTravelDestinations() == 1);
+		assertEquals("Delete Travel Destination is of invalid size",1,  claim.numberOfTravelDestinations());
 		assertEquals("Delete Travel Destination failed: Check Location", "China", claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Delete Travel Destination failed: Check Description", "Relic hunting", claim.getTravelDestination(0).getDestinationDescription());
 		
@@ -515,7 +504,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/** Use Case A4
 	 * Tests that you can delete a claim
-	 * US01.05.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
 	 */
 	public void testDeleteClaim(){
@@ -532,7 +520,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertFalse("Claim was not removed", claimlist.contains(claim));
 		assertTrue("Claim removed too many claims", claimlist.contains(claim2));
 		
-		assertEquals("Removed wrong claim", claimlist.get(0).getName(), "test2");
+		assertEquals("Removed wrong claim", "test2", claimlist.get(0).getName());
 
 	}
 }
