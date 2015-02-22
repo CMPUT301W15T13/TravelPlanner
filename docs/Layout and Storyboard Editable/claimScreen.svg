@@ -27,7 +27,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.4"
-     inkscape:cx="271.29231"
+     inkscape:cx="164.5066"
      inkscape:cy="808.71253"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -45,7 +45,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -54,7 +54,7 @@
      inkscape:groupmode="layer"
      id="layer1">
     <g
-       id="g7073"
+       id="g3529"
        inkscape:export-filename="C:\Users\BRAINPALACE\Documents\GitHub\TravelPlanner\docs\Layout and Storyboard - Firefox compatible\ClaimScreen.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
@@ -222,7 +222,7 @@
            sodipodi:type="star" />
       </g>
       <text
-         transform="scale(0.76167796,1.3128908)"
+         transform="scale(0.76167797,1.3128908)"
          sodipodi:linespacing="125%"
          id="text10457"
          y="39.270988"
@@ -234,11 +234,11 @@
            id="tspan10459"
            sodipodi:role="line">Opens a menu with</tspan><tspan
            id="tspan10461"
-           y="51.097099"
+           y="54.623867"
            x="17.790613"
            sodipodi:role="line">predefined filter</tspan><tspan
            id="tspan10463"
-           y="62.923214"
+           y="69.976746"
            x="17.790613"
            sodipodi:role="line">options</tspan></text>
       <g
@@ -271,7 +271,7 @@
            transform="matrix(0.76190476,0,0,0.91752139,-712.38099,25.354153)" />
       </g>
       <text
-         transform="scale(0.85409789,1.170826)"
+         transform="scale(0.85409788,1.170826)"
          sodipodi:linespacing="125%"
          id="text10501"
          y="33.982815"
@@ -283,11 +283,11 @@
            id="tspan10503"
            sodipodi:role="line">Text field</tspan><tspan
            id="tspan10505"
-           y="45.971264"
+           y="49.546444"
            x="171.6368"
            sodipodi:role="line">to search for a </tspan><tspan
            id="tspan10507"
-           y="57.959717"
+           y="65.110077"
            x="171.6368"
            sodipodi:role="line">claim</tspan></text>
       <g
@@ -332,15 +332,15 @@
            id="tspan10517"
            sodipodi:role="line">A list of currently</tspan><tspan
            id="tspan10519"
-           y="135.10101"
+           y="139.24048"
            x="281.54807"
            sodipodi:role="line">stored claims will </tspan><tspan
            id="tspan10521"
-           y="148.98164"
+           y="157.26056"
            x="281.54807"
            sodipodi:role="line">be empty if no claims</tspan><tspan
            id="tspan10523"
-           y="162.86226"
+           y="175.28065"
            x="281.54807"
            sodipodi:role="line">present</tspan></text>
       <g
@@ -373,7 +373,7 @@
            transform="matrix(0.76190476,0,0,0.91752139,-712.38099,25.354153)" />
       </g>
       <text
-         transform="scale(0.80847139,1.2369022)"
+         transform="scale(0.80847137,1.2369022)"
          sodipodi:linespacing="125%"
          id="text10546"
          y="345.5838"
@@ -385,7 +385,7 @@
            id="tspan10548"
            sodipodi:role="line">Button used to </tspan><tspan
            id="tspan10550"
-           y="363.37967"
+           y="368.68671"
            x="166.2778"
            sodipodi:role="line">create a new claim</tspan></text>
       <g
@@ -418,7 +418,7 @@
            transform="matrix(0.76190476,0,0,0.91752139,-712.38099,25.354153)" />
       </g>
       <text
-         transform="scale(0.68676378,1.4561047)"
+         transform="scale(0.68676379,1.4561047)"
          sodipodi:linespacing="125%"
          id="text10573"
          y="227.34387"
@@ -430,7 +430,7 @@
            id="tspan10575"
            sodipodi:role="line">Long pressing a claim</tspan><tspan
            id="tspan10577"
-           y="241.90147"
+           y="246.24281"
            x="296.10965"
            sodipodi:role="line">item will open a context menu</tspan></text>
       <rect
@@ -453,15 +453,15 @@
            id="tspan7982-3"
            sodipodi:role="line">Edit</tspan><tspan
            id="tspan7984-3"
-           y="140.69443"
+           y="149.52419"
            x="510.36276"
            sodipodi:role="line">View</tspan><tspan
            id="tspan7986-0"
-           y="170.30275"
+           y="187.96227"
            x="510.36276"
            sodipodi:role="line">Delete</tspan><tspan
            id="tspan7988-6"
-           y="199.91107"
+           y="226.40033"
            x="510.36276"
            sodipodi:role="line">Submit</tspan></text>
       <g
@@ -535,7 +535,7 @@
            id="tspan10667"
            sodipodi:role="line">Opens the edit claim screen</tspan></text>
       <text
-         transform="scale(0.6726372,1.4866856)"
+         transform="scale(0.67263719,1.4866856)"
          sodipodi:linespacing="125%"
          id="text10669"
          y="112.2839"
@@ -617,7 +617,7 @@
            sodipodi:type="star" />
       </g>
       <text
-         transform="scale(0.76280046,1.3109588)"
+         transform="scale(0.76280047,1.3109588)"
          sodipodi:linespacing="125%"
          id="text10719"
          y="206.81606"
@@ -629,19 +629,19 @@
            id="tspan10721"
            sodipodi:role="line">Moves the selected screen</tspan><tspan
            id="tspan10723"
-           y="220.83357"
+           y="225.01387"
            x="739.53137"
            sodipodi:role="line">to an android email app</tspan><tspan
            id="tspan10725"
-           y="234.8511"
+           y="243.21167"
            x="739.53137"
            sodipodi:role="line">will change the status of the </tspan><tspan
            id="tspan10727"
-           y="248.86862"
+           y="261.40948"
            x="739.53137"
            sodipodi:role="line">claim on success</tspan></text>
       <text
-         transform="scale(0.64870644,1.5415293)"
+         transform="scale(0.64870645,1.5415293)"
          sodipodi:linespacing="125%"
          id="text10729"
          y="25.915989"
@@ -652,6 +652,35 @@
            x="583.37512"
            id="tspan10731"
            sodipodi:role="line">Claim Context menu</tspan></text>
+      <g
+         style="fill:#4d4d4d"
+         id="g10509-3"
+         transform="matrix(0.06612592,-0.07556174,0.10711619,0.10639647,376.20335,70.298717)">
+        <rect
+           y="989.50507"
+           x="-1960"
+           height="28.571428"
+           width="411.42856"
+           id="rect10511-5"
+           style="fill:#4d4d4d" />
+        <path
+           transform="matrix(0.76190476,0,0,0.91752139,-712.38099,25.354153)"
+           inkscape:transform-center-x="-15.238093"
+           d="m -1000.0001,1069.5051 -60,34.641 -60,34.6411 0,-69.2821 0,-69.282 60,34.641 z"
+           inkscape:randomized="0"
+           inkscape:rounded="0"
+           inkscape:flatsided="false"
+           sodipodi:arg2="1.0471976"
+           sodipodi:arg1="0"
+           sodipodi:r2="40"
+           sodipodi:r1="80"
+           sodipodi:cy="1069.5051"
+           sodipodi:cx="-1080.0001"
+           sodipodi:sides="3"
+           id="path10513-2"
+           style="fill:#4d4d4d"
+           sodipodi:type="star" />
+      </g>
     </g>
   </g>
 </svg>
