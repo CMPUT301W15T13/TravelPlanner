@@ -37,7 +37,9 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * Tests that you're able to add a tag to a claim
 	 * and that the tag MUST be alphanumeric
 	 * US03.01.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
 	 * US03.02.02 - Adding a tag
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
 	
 	public void testAddTag(){
@@ -64,7 +66,9 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	/**
 	 * Test that you can remove a tag
 	 * US03.01.02
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
 	 * US03.02.03 - Deleting a tag
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
 	public void testRemoveTag(){
 		Claim claim = new Claim("Name", new Date(1), new Date(2));
@@ -79,6 +83,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	/**
 	 * Test listing available tags
 	 * US03.02.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
 	public void testListTags(){
 		//stub, This is may be a view/ui test
@@ -87,6 +92,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	/**
 	 * Test that you cannot add duplicate tags
 	 * US03.01.03
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
 	 */
 	
 	public void testNoDuplicates(){
@@ -108,6 +114,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	/**
 	 * Test Renaming a tag
 	 * US03.02.04
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
 	public void testRename(Claim, tagIndex, String newTag){
 		Claim.tag[tagIndex] = newTag;
