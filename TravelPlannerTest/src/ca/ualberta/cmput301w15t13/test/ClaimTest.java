@@ -31,6 +31,8 @@ import android.test.ActivityInstrumentationTestCase2;
  * These are the JUnit tests for the claim class
  * @author eorodrig
  *
+ * General use case can be found on the wiki at
+ * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
  */
 
 //This is the test for claims
@@ -50,6 +52,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/**
 	 * Test a regular name and a starting date preceding an end date is accepted 
 	 * Use Case A1
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	
 	public void testAddClaim(){
@@ -73,6 +76,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * This will test to see if we can make a regular claim
 	 * 	 * Test that you can't add an end date that occurs after the start date. 
 	 * US01.01.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	private void makeRegularClaim(){
 		
@@ -104,6 +108,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/**Use Case A1
 	 * This will test to see if we can add 1-3 claims to a claim list 
 	 * US01.01.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	private void addClaim(){
 		
@@ -144,6 +149,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/**Use Case A1
 	 * Test that you can't add an end date that occurs after the start date. 
 	 * US01.01.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	private void makeInvalidClaimDate(){
 		
@@ -166,6 +172,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/**Use Case A1
 	 * Test that you can't add an end date that occurs after the start date. 
 	 * US01.01.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 */
 	private void makeInvalidClaim(){
 	
@@ -198,6 +205,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/**Use Case A2
 	 * Tests that the claim can add travelDestination 
 	 * US01.02.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 */
 	public void testAddTravelDestination(){
 		
@@ -213,6 +221,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/**Use Case A2
 	 * Tests to see if wwe can add a valid travel destination
 	 * US01.02.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 */
 	private void addTravelDestination(){
 
@@ -237,6 +246,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/**Use Case A2
 	 * Tests that the claim does not add duplicate entries
 	 * US01.02.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 */
 	private void addDuplicateTravelDestination(){
 		
@@ -264,6 +274,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/**Use Case A2
 	 * Tests to see if the travel destination entry is valid
 	 * US01.02.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 */
 	private void addInvalidTravelDestination(){
 		
@@ -327,6 +338,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/** Use case A4
 	 * Test that we can edit a claim
 	 * US01.04.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/51
 	 */
 	public void testEditClaim(){
 		
@@ -345,6 +357,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/** Use case A4
 	 *Tests that we can edit a claim
 	 * US01.04.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/51
 	 */
 	private void editSimpleClaim(){
 		
@@ -373,6 +386,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	/** Use case A4
 	 *Tests that we can edit a claim
 	 * US01.04.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/51
 	 */
 	private void editInvalidClaim(){
 		
@@ -422,6 +436,8 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/** Use case A4
 	 * This will test to see if we can edit a travel destination
+	 * US01.05.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
 	 */
 	private void editTravelDestinations(){
 		
@@ -475,6 +491,8 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	/** Use case A4
 	 * This wil ltest to see if we can delete a Travel Destination
+	 * US01.05.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
 	 */
 	private void deleteTravelDetinations(){
 		
@@ -495,9 +513,10 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	
 	
 	
-	/** Use Case A5
+	/** Use Case A4
 	 * Tests that you can delete a claim
 	 * US01.05.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
 	 */
 	public void testDeleteClaim(){
 		Claim claim = new Claim("test", new Date(1), new Date(2));

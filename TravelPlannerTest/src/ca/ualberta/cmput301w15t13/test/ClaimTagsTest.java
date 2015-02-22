@@ -23,6 +23,12 @@ package ca.ualberta.cmput301w15t13.test;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
+/**
+ * @author BRAINPALACE
+ * 
+ * General use case can be found on the wiki at
+ * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ */
 public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
 	public ClaimTagsTest() {
