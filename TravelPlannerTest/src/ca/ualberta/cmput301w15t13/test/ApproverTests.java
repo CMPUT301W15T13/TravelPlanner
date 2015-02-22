@@ -40,7 +40,9 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	* to returned or approved if it's submitted and not if it's anything but.
 	* 
 	* US08.07.01
+	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
 	* US08.08.01
+	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
 	*/
 	public void testClaimReturns(){
 		Claim claim = new Claim();
@@ -79,6 +81,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 * Approver can set one or more comments on a claim that is submitted,
 	 * and cannot modify a claim that is not submitted.
 	 * US08.06.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/77
 	 */
 	
 	public void testComment(){
