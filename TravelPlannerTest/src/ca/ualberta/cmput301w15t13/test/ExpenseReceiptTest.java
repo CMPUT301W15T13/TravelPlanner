@@ -26,6 +26,10 @@ import android.graphics.Bitmap;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
+/** 
+ * General use case can be found on the wiki at
+ * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ */
 public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
 	public ExpenseRepeiptTest(String name) {
@@ -39,6 +43,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	/**
 	 * Test that you can add a bitmap to a claim
 	 * US06.01.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/61
 	 */
 	
 	public void testAddBitmap(){
@@ -57,6 +62,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	/**
 	 * Test that you can delete a bitmap from a claim
 	 * US06.03.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/63
 	 */
 	
 	public void testRemoveBitmap(){
@@ -77,6 +83,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	/**
 	 * Test that you bitmaps are compressed before they're stored
 	 * US06.04.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/64
 	 */
 	
 	public void testLargeBitmap(){
