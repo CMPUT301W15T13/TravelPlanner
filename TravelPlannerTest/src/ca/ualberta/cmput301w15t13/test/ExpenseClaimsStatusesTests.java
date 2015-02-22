@@ -26,9 +26,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 
 /**
- * 
- * @author BRAINPALACE
- *
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
  */
