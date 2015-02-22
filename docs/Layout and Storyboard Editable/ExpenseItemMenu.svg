@@ -16,7 +16,10 @@
    id="svg7962"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="ExpenseItemMenu.svg">
+   sodipodi:docname="ExpenseItemMenu.svg"
+   inkscape:export-filename="C:\Users\BRAINPALACE\Documents\GitHub\TravelPlanner\docs\Layout and Storyboard - Firefox compatible\ExpenseItemMenu.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs7964" />
   <sodipodi:namedview
@@ -27,7 +30,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="298.52945"
+     inkscape:cx="223.02055"
      inkscape:cy="873.73534"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -45,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -55,7 +58,7 @@
      id="layer1">
     <g
        id="g8250"
-       transform="matrix(1.0658656,0,0,1.0543107,-173.75875,-97.142439)"
+       transform="matrix(1.3220097,0,0,1.1442042,-217.01948,-105.78005)"
        inkscape:export-filename="C:\Users\BRAINPALACE\Documents\GitHub\TravelPlanner\docs\Layout and Storyboard - Firefox compatible\ExpenseItemMenu.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
