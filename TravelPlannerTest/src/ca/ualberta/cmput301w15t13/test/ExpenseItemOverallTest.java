@@ -26,6 +26,10 @@ import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
 
+/** 
+ * General use case can be found on the wiki at
+ * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ */
 public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<LoginActivity>{
 	
 	public ExpenseItemOverallTest() {
@@ -38,6 +42,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	
 	/*
 	 * US04.01.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/81
 	 * Test that you can add one or more expense items to an existing claim
 	 * as a claimant.
 	 */
@@ -71,6 +76,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	
 	/*
 	 * US04.02.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/82
 	 * Test that a category must be one of the proper categories
 	 */
 	
@@ -90,6 +96,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	/*
 	 * Test that you can only add the valid currencies
 	 * US04.03.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/83
 	 */
 	
 	public void testWrongCurrency(){
@@ -108,6 +115,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 
 	/*
 	 * US04.04.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/84
 	 * Test that you can flag and unflag an expenseItem 
 	 */
 
@@ -122,6 +130,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 
 	/*
 	 * US04.06.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/85
 	 * Test that you're only allowed to manage an expenseItem when 
 	 * the claim is editable
 	 */
@@ -162,6 +171,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	
 	/*
 	 * US04.07.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/86
 	 * Test that you can delete an expense Item from a claim
 	 */
 	public void testDeleteExpenseItem(){
