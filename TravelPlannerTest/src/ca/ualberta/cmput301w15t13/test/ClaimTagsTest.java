@@ -20,8 +20,13 @@
 
 package ca.ualberta.cmput301w15t13.test;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.DuplicateException;
 
 
 
@@ -69,7 +74,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	
 	public void addTag(){
-		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
 				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
 		
@@ -81,7 +86,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		assertNotNull("Tags is null", tags);
 		assertEquals("Not all tags added",validTags.length, tags.length );
 		
-		claim = new Claim("Name", new Date(1), new Date(2));
+		claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		for(String itag: invalidTags){
 			claim.addTag(itag);
 			assertFalse("inValid tag was added", claim.getTags().contains(itag));
@@ -97,7 +102,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
 	public void removeTag(){
-		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String tag = "test";
 	
 		
@@ -115,7 +120,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	
 	public void noDuplicates(){
-		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
 		
 		for(String vtag: validTags){
@@ -137,7 +142,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	public void renameTag(){
 		
-		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
 				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
 		
@@ -159,17 +164,17 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
 	public void testListTags(){
-		Claim claim = new Claim ("User1", new Date(10), new Date(200));
+		Claim claim = new Claim ("User1", new Date(10), new Date(200), null, null);
 		claim.addTag("yolo");
 		claim.addTag("Gift to self");
 		claimlistSingleton.addclaim(claim);
 		
-		claim = new Claim ("User2", new Date(10), new Date(200));
+		claim = new Claim ("User2", new Date(10), new Date(200), null, null);
 		claim.addTag("yolo");
 		claim.addTag("On Sale");
 		claimlistSingleton.addclaim(claim);
 		
-		claim = new Claim ("User3", new Date(10), new Date(200));
+		claim = new Claim ("User3", new Date(10), new Date(200), null, null);
 		claim.addTag("Aniversary gift");
 		claim.addTag("On Sale");
 		claimlistSingleton.addclaim(claim);

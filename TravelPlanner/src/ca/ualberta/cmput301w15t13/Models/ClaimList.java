@@ -25,6 +25,7 @@ import java.util.Collections;
 
 import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 
 
 public class ClaimList {
@@ -37,6 +38,7 @@ public class ClaimList {
 	 */
 	ArrayList<Claim> claimList = null;
 	ArrayList<Listener> listenerList = null;
+	TagManager tagManager = null;
 
 	public ClaimList(ArrayList<Claim> oldClaims) {
 		if(oldClaims != null){
