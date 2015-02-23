@@ -24,6 +24,7 @@ import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 
 /** 
@@ -40,13 +41,25 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		super.setUp();
 	}
 	
-	/*
-	 * US04.01.01
+	/**Use Case D1
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/81
 	 * Test that you can add one or more expense items to an existing claim
 	 * as a claimant.
 	 */
-	public void testAddExpenseItem(){
+	public void testAddExpense(){
+		
+		this.addExpenseItem();
+		this.addWrongCategory();
+		this.addWrongCurrency();
+	}
+	
+	
+	/**
+	 * This is part of Use case D1
+	 * 
+	 * This adds and tests the addition of expense items
+	 */
+	public void addExpenseItem(){
 		Claim claim = new Claim();
 		String category = "air fare", description = "Desc", currency = "CAD";
 		float price = 12.0;
@@ -62,59 +75,57 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		}
 		
 		ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
-		assertTrue("Expense list is null" expenseList != null);
-		assertTrue("Expenselist is empty", expenseList.size() > 0);
+		assertNotNull("Expense list is null", expenseList);
+		assertEquals("Expenselist is empty", 3, expenseList.size() );
 		for(ExpenseItem e : expenseList){
-			assertTrue("Expense Item has wrong date", e.getDate() == date);
-			assertTrue("Expense Item has wrong category", e.getCategory().equals(category));
-			assertTrue("Expense Item has wrong Description", e.getDescription().equals(description));
-			assertTrue("Expense Item has wrong currency", e.getCurrency().equals(currency));
+			assertEquals("Expense Item has wrong date",date,  e.getDate());
+			assertEquals("Expense Item has wrong category",category,  e.getCategory());
+			assertEquals("Expense Item has wrong Description",description,  e.getDescription());
+			assertEquals("Expense Item has wrong currency",currency, e.getCurrency());
 		}
 		
 	}
 
 	
-	/*
-	 * US04.02.01
+	/** This is part of Use case D1
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/82
 	 * Test that a category must be one of the proper categories
 	 */
 	
-	public void testWrongCategory(){
+	public void addWrongCategory(){
 		Claim claim = new Claim();
 		String[] validCategories = {"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking", "registration", "accommodation", "meal",  "supplies"};
 		/*A default constructor which doesn't initialize values */
 		ExpenseItem expenseItem = new ExpenseItem();
 		expenseItem.setCategory("NONVALID");
-		assertTrue("Category was set to a nonValid item", expenseItem.getCategory() == null);
+		assertNull("Category was set to a nonValid item", expenseItem.getCategory());
 		
 		for(String cat: validCategories){
 			expenseItem.setCategory(cat);
-			assertTrue("Valid category wasn't added", expenseItem.getCategory().equals(cat));
+			assertEquals("Valid category wasn't added",cat, expenseItem.getCategory());
 		}
 	}
-	/*
+	/** This is part of Use case D1
 	 * Test that you can only add the valid currencies
-	 * US04.03.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/83
 	 */
 	
-	public void testWrongCurrency(){
+	public void addWrongCurrency(){
 		Claim claim = new Claim();
 		String[] validCurrencies = {"CAD", "USD", "EUR", "GBP", "CHF", "JPY", "CNY"};
 		/*A default constructor which doesn't initialize values */
 		ExpenseItem expenseItem = new ExpenseItem();
 		expenseItem.setCurrency("NONVALID");
-		assertTrue("Currency was set to a nonValid item", expenseItem.getCategory() == null);
+		assertNull("Currency was set to a nonValid item", expenseItem.getCategory());
 		
 		for(String cur: validCurrencies){
 			expenseItem.setCurrency(cur);
-			assertTrue("Valid currency wasn't added", expenseItem.getCurrency().equals(cur));
+			assertEquals("Valid currency wasn't added", cur ,expenseItem.getCurrency());
 		}
 	}
 
-	/*
-	 * US04.04.01
+	/** Use case D2
+	 *
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/84
 	 * Test that you can flag and unflag an expenseItem 
 	 */
@@ -128,13 +139,12 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	}
 
 
-	/*
-	 * US04.06.01
+	/** Use Case D3
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/85
 	 * Test that you're only allowed to manage an expenseItem when 
 	 * the claim is editable
 	 */
-	
+
 	public void testEditExpenseItem(){
 		Claim claim = new Claim();
 		ExpenseItem expenseItem = new ExpenseItem();
@@ -142,35 +152,22 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		claim.addExpenseItem(expenseItem);
 
 		claim.setStatus(SUBMITTED);
-		if(claim.isEditable()){
-			expenseList = claim.getExpenseItemList();
-		}
-		assertTrue("ExpenseItem was able to be retrieved for a SUBMITTED claim", expenseList == null);
-		expenseList = null;
+		
+		assertFalse("Expense is editable while submitted", claim.isEditable());
 		
 		claim.setStatus(APPROVED);
-		if(claim.isEditable()){
-			expenseList = claim.getExpenseItemList();
-		}
-		assertTrue("ExpenseItem was able to be retrieved for an APPROVED claim", expenseList == null);
-		expenseList = null;
+		
+		assertFalse("Expense is editable while approved", claim.isEditable());
 		
 		claim.setStatus(INPROGRESS);
-		if(claim.isEditable()){
-			expenseList = claim.getExpenseItemList();
-		}
-		assertFalse("ExpenseItem was not retrieved for an INPROGRESS claim", expenseList == null);
-		expenseList = null;
-		
+		assertTrue("Expense is not editable while in progress", claim.isEditable());
+
 		claim.setStatus(RETURNED);
-		if(claim.isEditable()){
-			expenseList = claim.getExpenseItemList();
-		}
-		assertFalse("ExpenseItem was not retrieved for a RETURNED claim", expenseList == null);
+		assertTrue("Expense is not editable while returned", claim.isEditable());
+
 	}
 	
-	/*
-	 * US04.07.01
+	/** Use case D4
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/86
 	 * Test that you can delete an expense Item from a claim
 	 */
