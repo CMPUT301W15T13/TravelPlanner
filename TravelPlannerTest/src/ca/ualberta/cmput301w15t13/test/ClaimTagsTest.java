@@ -59,7 +59,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	
 	
-	/**
+	/**Part of Use Case C1
 	 * Tests that you're able to add a tag to a claim
 	 * and that the tag MUST be alphanumeric
 	 * US03.01.01
@@ -89,7 +89,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 
 	}
 	
-	/**
+	/**Part of Use Case C1
 	 * Test that you can remove a tag
 	 * US03.01.02
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
@@ -106,16 +106,9 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 
 	}
 	
-	/**
-	 * Test listing available tags
-	 * US03.02.01
-	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
-	 */
-	public void testListTags(){
-		//stub, This is may be a view/ui test
-	}
+
 	
-	/**
+	/**Part of Use Case C1
 	 * Test that you cannot add duplicate tags
 	 * US03.01.03
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
@@ -137,7 +130,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 
 	} 
 	
-	/**
+	/**Part of Use Case C1
 	 * Test Renaming a tag
 	 * US03.02.04
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
@@ -158,4 +151,36 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		
 	}
 
+	
+	
+	/**
+	 * Test listing available tags
+	 * US03.02.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
+	 */
+	public void testListTags(){
+		Claim claim = new Claim ("User1", new Date(10), new Date(200));
+		claim.addTag("yolo");
+		claim.addTag("Gift to self");
+		claimlistSingleton.addclaim(claim);
+		
+		claim = new Claim ("User2", new Date(10), new Date(200));
+		claim.addTag("yolo");
+		claim.addTag("On Sale");
+		claimlistSingleton.addclaim(claim);
+		
+		claim = new Claim ("User3", new Date(10), new Date(200));
+		claim.addTag("Aniversary gift");
+		claim.addTag("On Sale");
+		claimlistSingleton.addclaim(claim);
+		
+		ArrayList<Tags> tagList = TagManagerSingleton.getTagList();
+		
+		AssertEquals("Contains more or less than 4 tags",4, taglist.size());
+		AssertTrue("yolo Tag not found", taglist.contains("yolo"));
+		AssertTrue("Gift to self Tag not found", taglist.contains("Gift to self"));
+		AssertTrue("On Sale Tag not found",  taglist.contains("On Sale"));
+		AssertTrue("Aniversary gift Tag not found",  taglist.contains("Aniversary gift"));
+	}
+	
 }
