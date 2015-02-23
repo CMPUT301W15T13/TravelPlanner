@@ -23,6 +23,8 @@ package ca.ualberta.cmput301w15t13.test;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
+
+
 /**
  * 
  * General use case can be found on the wiki at
@@ -38,6 +40,25 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		super.setUp();
 	}
 	
+	
+	/**Use Case C1
+	 * 
+	 * Test that we can add ,edit and del
+	 */
+	public void testTags(){
+	
+		this.addTag();
+		
+		this.removeTag();
+		
+		this.renameTag();
+		
+		//tests to see if there are any duplicates
+		this.noDuplicates();
+	}
+	
+	
+	
 	/**
 	 * Tests that you're able to add a tag to a claim
 	 * and that the tag MUST be alphanumeric
@@ -47,7 +68,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
 	
-	public void testAddTag(){
+	public void addTag(){
 		Claim claim = new Claim("Name", new Date(1), new Date(2));
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
 				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
@@ -57,8 +78,8 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 			assertTrue("Valid tag wasn't added", claim.getTags().contains(vtag));
 		}
 		String[] tags = claim.getTags();
-		assertTrue("Tags is null", tags != null);
-		assertTrue("Not all tags added", tags.length == validTags.length);
+		assertNotNull("Tags is null", tags);
+		assertEquals("Not all tags added",validTags.length, tags.length );
 		
 		claim = new Claim("Name", new Date(1), new Date(2));
 		for(String itag: invalidTags){
@@ -75,7 +96,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * US03.02.03 - Deleting a tag
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
-	public void testRemoveTag(){
+	public void removeTag(){
 		Claim claim = new Claim("Name", new Date(1), new Date(2));
 		String tag = "test";
 	
@@ -100,7 +121,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
 	 */
 	
-	public void testNoDuplicates(){
+	public void noDuplicates(){
 		Claim claim = new Claim("Name", new Date(1), new Date(2));
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
 		
@@ -121,9 +142,19 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * US03.02.04
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 */
-	public void testRename(Claim, tagIndex, String newTag){
-		Claim.tag[tagIndex] = newTag;
-		assertEquals("Claim has the new name", Claim.tag[tagIndex], newName);
+	public void renameTag(){
+		
+		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
+				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
+		
+		for(String vtag: validTags){
+			claim.addTag(vtag);
+		}
+
+		//Renames tags
+		claim.tag[1] = "Hello";
+		assertEquals("Claim has the new name", "Hello", claim.tag[1]);
 		
 	}
 
