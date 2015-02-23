@@ -49,9 +49,11 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	public void testReturnClaim(){
 		Claim claim = new Claim();
 		claim.setStatus(SUBMITTED);
-		Approver approver = new Approver();
-		approver.returnClaim(claim);
+		Approver approver = new Approver("Catbert");
+		
+		approver.returnClaim(claim, approverName);
 		assertEquals("Claim status isn't returned", RETURNED, claim.getStatus());
+		assertEquals("Approver name not set", "Catbert", claim.lastApproverName());
 		
 		claim.setStatus(INPROGRESS);
 		approver.returnClaim(claim);
@@ -76,8 +78,11 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	public void testClaimApprove(){
 		Claim claim = new Claim();
 		claim.setStatus(SUBMITTED);
+		Approver approver = new Approver("Catbert");
 		approver.approveClaim(claim);
+		
 		assertEquals("Claim status isn't approved",APPROVED, claim.getStatus() );
+		assertEquals("Approver name not set", "Catbert", claim.lastApproverName());
 		
 		claim.setStatus(INPROGRESS);
 		approver.approveClaim(claim);
@@ -102,7 +107,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	public void testComment(){
 		Claim claim = new Claim();
-		Approver approver = new Approver();
+		Approver approver = new Approver("catbert");
 		String comment = "Test";
 		
 		claim.setStatus(SUBMITTED);
@@ -112,6 +117,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		assertNotNull("Claim comments are null", comments);
 		assertEquals("There are no claim comments",1,  comments.size());
 		assertTrue("Comment isn't added", comments.contains(comment));
+		assertEquals("Approver name not set", "Catberg", claim.lastApproverName());
 		
 		claim.setStatus(INPROGRESS);
 		claim.clearComments();
