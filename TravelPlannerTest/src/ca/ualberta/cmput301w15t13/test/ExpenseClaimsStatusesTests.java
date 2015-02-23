@@ -38,21 +38,20 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		super.setUp();
 	}
 	
-	/**
-	 * 07.01.01
+	/**Use case G1
+	 * 	
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/65
-	 * Claimant submits a claim can no longer edit
+	 * Claimant submits a claim...claim can no longer edit
 	 */
 	public void testClaimantSubmit(){
 		LoginActivity.setUserType("claimant"); 
 		Claim claim = new Claim;
 		LoginActivity.submit(claim);
-		assertEquals("Claim is submitted", claim.getStatus(), "Submitted");
-		assertEquals("Claim cannot be editted by claimant", claim.getPermission(), 1);
+		assertEquals("Claim is submitted","Submitted", claim.getStatus() );
+		assertEquals("Claim cannot be editted by claimant", 1, claim.getPermission());
 	}
 	
-	/**
-	 * 07.03.01
+	/**Use case G2
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/67
 	 * Claimant can edit a returned claim
 	 */
@@ -60,12 +59,11 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim;
 		claim.setStatus("Returned");
-		assertEquals("Claim can be editted by claimant", claim.getPermission(), 0);
+		assertEquals("Claim can be editted by claimant", 0, claim.getPermission());
 		
 	}
 	
-	/**
-	 * 07.04.01
+	/**Use case G3
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/68
 	 * Claim has approved status and can no longer be editted
 	 */
@@ -74,7 +72,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim;
 		claim.setStatus("Approved");
-		assertEquals("Claim is approved and can't be editted", claim.getPermission(),2);
+		assertEquals("Claim is approved and can't be editted",2, claim.getPermission());
 	}
 
 }
