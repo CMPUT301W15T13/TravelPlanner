@@ -40,52 +40,63 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		super.setUp();
 	}
 	
-	/*
-	* Test that as an approver you're able to change the status of a claim
-	* to returned or approved if it's submitted and not if it's anything but.
-	* 
-	* US08.07.01
+
+	
+	/** Test Case H2
+	 * Tests that as an approver you are able to return a claim
 	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
-	* US08.08.01
-	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
-	*/
-	public void testClaimReturns(){
+	 */
+	public void testReturnClaim(){
 		Claim claim = new Claim();
 		claim.setStatus(SUBMITTED);
 		Approver approver = new Approver();
 		approver.returnClaim(claim);
-		assertTrue("Claim status isn't returned", claim.getStatus() == RETURNED);
+		assertEquals("Claim status isn't returned", RETURNED, claim.getStatus());
+		
+		claim.setStatus(INPROGRESS);
+		approver.returnClaim(claim);
+		assertTrue("Approver was able to return an INPROGRESS claim",INPROGRESS, claim.getStatus());
+		
+		
+		//Is this one necessary?
+		claim.setStatus(RETURNED);
+		approver.returnClaim(claim);
+		assertEquals("Approver was able to return a RETURNED claim",RETURNED, claim.getStatus() );
+		
+		claim.setStatus(APPROVED);
+		approver.returnClaim(claim);
+		assertEquals("Approver was able to return an APPROVED claim",APPROVED, claim.getStatus());
+	}
+	
+	
+	/** Test Case H3
+	 * Tests that as an approver you are able to approve a claim
+	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
+	 */
+	public void testClaimApprove(){
+		Claim claim = new Claim();
 		claim.setStatus(SUBMITTED);
 		approver.approveClaim(claim);
-		assertTrue("Claim status isn't submitted", claim.getStatus() == SUBMITTED);
+		assertEquals("Claim status isn't approved",APPROVED, claim.getStatus() );
 		
 		claim.setStatus(INPROGRESS);
-		approver.returnClaim(claim);
-		assertTrue("Approver was able to return an INPROGRESS claim", claim.getStatus == INPROGRESS);
-		claim.setStatus(INPROGRESS);
 		approver.approveClaim(claim);
-		assertTrue("Approver was able to approve an INPROGRESS claim", claim.getStatus == INPROGRESS);
+		assertEquals("Approver was able to approve an INPROGRESS claim",INPROGRESS, claim.getStatus());
 		
 		claim.setStatus(RETURNED);
-		approver.returnClaim(claim);
-		assertTrue("Approver was able to return a RETURNED claim", claim.getStatus == INPROGRESS);
-		claim.setStatus(RETURNED);
 		approver.approveClaim(claim);
-		assertTrue("Approver was able to approve a RETURNED claim", claim.getStatus == INPROGRESS);
+		assertEquals("Approver was able to approve a RETURNED claim",RETURNED, claim.getStatus());
 		
-		claim.setStatus(APPROVED);
-		approver.returnClaim(claim);
-		assertTrue("Approver was able to return an APPROVED claim", claim.getStatus == INPROGRESS);
+		//Is this one needed?
 		claim.setStatus(APPROVED);
 		approver.approveClaim(claim);
-		assertTrue("Approver was able to approve an APPROVED claim", claim.getStatus == INPROGRESS);
+		assertEquals("Approver was able to approve an APPROVED claim",APPROVED, claim.getStatus());
 		
 	}
 	
-	/*
+	/** Use Case H4
 	 * Approver can set one or more comments on a claim that is submitted,
 	 * and cannot modify a claim that is not submitted.
-	 * US08.06.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/77
 	 */
 	
@@ -98,8 +109,8 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		
 		approver.addComment(claim, comment);
 		ArrayList<String> comments = claim.getComments();
-		assertTrue("Claim comments are null", comments != null);
-		assertTrue("There are no claim comments", comments.size() > 0);
+		assertNotNull("Claim comments are null", comments);
+		assertEquals("There are no claim comments",1,  comments.size());
 		assertTrue("Comment isn't added", comments.contains(comment));
 		
 		claim.setStatus(INPROGRESS);
