@@ -41,27 +41,54 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	}
 	
 	/**
+	 * Tests for use case F1
+	 * 
+	 */
+	public void testBitmap(){
+		this.addBitmap();
+		this.largeBitmap();
+	}
+	
+	
+	/**Part of use case F1
 	 * Test that you can add a bitmap to a claim
-	 * US06.01.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/61
 	 */
 	
-	public void testAddBitmap(){
+	public void addBitmap(){
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Claim claim = new Claim("Name", new Date(1), new Date(2));
 		
 		claim.addReceipt(bitmap);
 		Bitmap returnedBitmap = claim.getReceipt();
 		
-		assertTrue("Bitmap is null", returnedBitmap != null);
+		assertNotNull("Bitmap is null", returnedBitmap);
 		assertEquals("Bitmap has been changed", bitmap, returnedBitmap);
 		
 	}	
 	
+	/**Part of Use Case F1
+	 * Test that you bitmaps are compressed before they're stored
+	 * US06.04.01
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/64
+	 */
 	
-	/**
+	public void largeBitmap(){
+		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
+		
+		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		
+		claim.addReceipt(bitmapLarge);
+		Bitmap returnedBitmap = claim.getReceipt();
+		if(returnedBitmap.getByteCount() > 65536){
+			fail("Addded a bitmap too large");
+		}
+		assertNotSame("Bitmap wasn't modified", bitmapLarge, returnedBitmap);
+	}
+	
+	
+	/**Use case F3
 	 * Test that you can delete a bitmap from a claim
-	 * US06.03.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/63
 	 */
 	
@@ -76,27 +103,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 
 		claim.removeReceipt(bitmap);
 		returnedBitmap = claim.getReceipt();
-		assertEquals("Bitmap was not removed", null, returnedBitmap);
+		assertNull("Bitmap was not removed", returnedBitmap);
 		
 	}
 	
-	/**
-	 * Test that you bitmaps are compressed before they're stored
-	 * US06.04.01
-	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/64
-	 */
-	
-	public void testLargeBitmap(){
-		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
-		
-		Claim claim = new Claim("Name", new Date(1), new Date(2));
-		
-		claim.addReceipt(bitmapLarge);
-		Bitmap returnedBitmap = claim.getReceipt();
-		if(returnedBitmap.getByteCount() > 65536){
-			fail("Addded a bitmap too large");
-		}
-		assertFalse("Bitmap wasn't modified", bitmapLarge == returnedBitmap);
-	}
+
 
 }
