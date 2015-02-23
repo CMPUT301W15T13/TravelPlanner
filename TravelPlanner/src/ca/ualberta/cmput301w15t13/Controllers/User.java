@@ -20,6 +20,12 @@
 package ca.ualberta.cmput301w15t13.Controllers;
 
 public abstract class User {
+	/*
+	 * Parent class to Approver and Claimant.
+	 * Currently very bare, because we 
+	 * need more details on how users
+	 * log-in and interact.
+	 */
 	protected String name;
 	
 	public User(String name){

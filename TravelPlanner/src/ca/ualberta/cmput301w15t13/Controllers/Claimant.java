@@ -20,10 +20,25 @@
 
 package ca.ualberta.cmput301w15t13.Controllers;
 
-public class Claimant extends User {
+import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 
+public class Claimant extends User {
+	/*
+	 * Claimant child class.
+	 * Currently only submits but 
+	 * as more details
+	 * are released, as will more
+	 * functionality
+	 */
 	public Claimant(String name) {
 		super(name);
+	}
+	
+	public void submitClaim(Claim claim){
+		if(claim != null && claim.getStatus() == ClaimStatus.INPROGRESS){
+			claim.setStatus(ClaimStatus.SUBMITTED);
+		}
 	}
 
 }

@@ -23,7 +23,13 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 
 public class Approver extends User {
-
+	/*
+	 * Approver child class.
+	 * Currently only approves and 
+	 * returns, but as more details
+	 * are released, as will more
+	 * functionality
+	 */
 	public Approver(String name) {
 		super(name);
 	}
@@ -31,6 +37,12 @@ public class Approver extends User {
 	public void approveClaim(Claim claim){
 		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
 			claim.setStatus(ClaimStatus.APPROVED);
+		}
+	}
+	
+	public void returnClaim(Claim claim){
+		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
+			claim.setStatus(ClaimStatus.RETURNED);
 		}
 	}
 
