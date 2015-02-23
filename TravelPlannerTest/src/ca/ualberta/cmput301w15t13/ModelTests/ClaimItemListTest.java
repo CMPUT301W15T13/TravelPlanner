@@ -44,7 +44,7 @@ public class ClaimItemListTest extends
 	public void testSetUp(){
 		ClaimList itemList = new ClaimList();
 		assertNotNull("Item list is null", itemList);
-		assertEquals("Item list is not empty",0, itemList.length());
+		assertEquals("Item list is not empty",0, itemList.size());
 		
 		ArrayList<Claim> oldClaims = new ArrayList<Claim>();
 		Claim claim1 = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
@@ -54,7 +54,7 @@ public class ClaimItemListTest extends
 
 		ClaimList claimList = new ClaimList(oldClaims);
 		assertNotNull("Item list is null", claimList);
-		assertEquals("Item list is not empty", 0,  claimList.length());
+		assertEquals("Item list is not empty", 0,  claimList.size());
 		
 		ArrayList<Claim> dupes = claimList.getClaimArrayList();
 		assertNotNull("Dupes is null", dupes);
@@ -72,29 +72,29 @@ public class ClaimItemListTest extends
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
 		
 		claimList.add(claim);
-		assertEquals("ClaimList length is not 1", 1,claimList.length());
+		assertEquals("ClaimList length is not 1", 1,claimList.size());
 		assertTrue("Claim list doesn't containt claim 1", claimList.contains(claim));
 		assertFalse("Claim list thinks it has claim 2", claimList.contains(claim2));
 		
 		claimList.add(claim2);
-		assertEquals("ClaimList length is not 2",2, claimList.length());
+		assertEquals("ClaimList length is not 2",2, claimList.size());
 		assertTrue("Claim list doesn't containt claim 1 with 2 elements", claimList.contains(claim));
 		assertTrue("Claim list doesn't containt claim 2", claimList.contains(claim2));
 		
 		claimList.add(claim);
-		assertEquals("Claim length reperesents the duplicate claim",2, claimList.length());
+		assertEquals("Claim length reperesents the duplicate claim",2, claimList.size());
 		assertTrue("Claim was added twice", claimList.contains(claim));
 		
 		claimList.remove(claim);
-		assertEquals("ClaimList length is not 1", 1, claimList.length());
+		assertEquals("ClaimList length is not 1", 1, claimList.size());
 		assertFalse("Claim list contains claim 1", claimList.contains(claim));
 		
 		claimList.remove(claim);
-		assertEquals("ClaimList length is not 1", 1, claimList.length());
+		assertEquals("ClaimList length is not 1", 1, claimList.size());
 		assertFalse("Claim list contains claim 1", claimList.contains(claim));
 		
 		claimList.remove(claim2);
-		assertEquals("ClaimList length is not 0", 0, claimList.length());
+		assertEquals("ClaimList length is not 0", 0, claimList.size());
 		assertFalse("Claim list contains claim 2", claimList.contains(claim2));
 	}
 
@@ -120,7 +120,7 @@ public class ClaimItemListTest extends
 		
 		claimList.removeClaimAtIndex(0);
 		assertFalse("Claimlist still has claim 2", claimList.contains(claim2));
-		assertEquals("claim list is not empty",0, claimList.length() );
+		assertEquals("claim list is not empty",0, claimList.size() );
 
 	}
 

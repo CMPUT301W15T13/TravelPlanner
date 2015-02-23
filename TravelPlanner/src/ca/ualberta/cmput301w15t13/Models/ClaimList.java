@@ -21,7 +21,9 @@
 package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
+import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 
 
@@ -50,7 +52,7 @@ public class ClaimList {
 		listenerList = new ArrayList<Listener>();
 	}
 
-	public int length() {
+	public int size() {
 		return claimList.size();
 	}
 
@@ -70,7 +72,6 @@ public class ClaimList {
 			claimList.add(claim);
 		}
 	}
-
 
 	public void removeClaimAtIndex(int i) {
 		//make sure the index is valid
@@ -106,4 +107,7 @@ public class ClaimList {
 		}
 	}
 
+	public void sortClaimListByDate(){
+		Collections.sort(claimList, new ClaimDateSorter());
+	}
 }

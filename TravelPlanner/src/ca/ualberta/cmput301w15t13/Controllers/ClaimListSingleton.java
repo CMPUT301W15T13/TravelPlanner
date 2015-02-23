@@ -26,7 +26,4 @@ public class ClaimListSingleton {
 		claimList = new ClaimList(claims);
 	}
 	
-	static public void sortClaimListByDate(){
-		Collections.sort(getClaimList().getClaimArrayList(), new ClaimDateSorter());
-	}
 }
