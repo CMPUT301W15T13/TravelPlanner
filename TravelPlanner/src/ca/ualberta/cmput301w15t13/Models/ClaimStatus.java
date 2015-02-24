@@ -31,11 +31,26 @@ public class ClaimStatus {
 	public final static int INPROGRESS = 0, RETURNED = 1, 
 			SUBMITTED = 2, APPROVED = 3;
 	
-	private int status;
+	
+	
+	private int status;   //holds the status of the claim
+	
+	
+	/**
+	 * Constructor for the class. 
+	 * Inits it to be in progress
+	 */
+	public ClaimStatus(){
+		this.status = INPROGRESS;
+	}
 
+	
+	
 	public int getStatus() {
 		return status;
 	}
+
+	
 
 	public void setStatus(int newStatus) {
 		if(newStatus >= 0 && newStatus <= 3){

@@ -30,6 +30,8 @@ public class Claim {
 	protected ClaimStatus status = null;
 	
 	
+	
+	
 	/**
 	 * 
 	 * @param name
