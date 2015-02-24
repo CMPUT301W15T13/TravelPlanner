@@ -25,6 +25,8 @@ import java.util.Date;
 import android.graphics.Bitmap;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 
 /** 
  * General use case can be found on the wiki at
@@ -57,7 +59,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	
 	public void addBitmap(){
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
-		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		
 		claim.addReceipt(bitmap);
 		Bitmap returnedBitmap = claim.getReceipt();

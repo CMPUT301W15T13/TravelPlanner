@@ -19,7 +19,14 @@
  */
 package ca.ualberta.cmput301w15t13.Models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+
+import Expceptions.DuplicateException;
+import Expceptions.InvalidDateException;
+import Expceptions.InvalidFieldEntryException;
+import Expceptions.InvalidNameException;
 
 public class Claim {
 	
@@ -29,6 +36,7 @@ public class Claim {
 	protected Date endDate = null;
 	protected String description = null;
 	protected TravelItineraryList travelList = null;
+	protected HashMap<String, String> approverComments = null;
 	
 	protected ClaimStatus status = null;
 	
@@ -65,7 +73,7 @@ public class Claim {
 		//this sets the travel List. If null, it makes an empty list
 		this.setTravelList(travelList);
 
-		
+		this.approverComments = new HashMap<String,String>();
 	}
 
 	
@@ -264,8 +272,8 @@ public class Claim {
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
+
+
 
 
 }

@@ -25,10 +25,10 @@ import java.util.Date;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
-import ca.ualberta.cmput301w15t13.Models.InvalidDateException;
-import ca.ualberta.cmput301w15t13.Models.InvalidFieldEntryException;
-import ca.ualberta.cmput301w15t13.Models.InvalidNameException;
-import ca.ualberta.cmput301w15t13.Models.DuplicateException;
+import Expceptions.DuplicateException;
+import Expceptions.InvalidDateException;
+import Expceptions.InvalidFieldEntryException;
+import Expceptions.InvalidNameException;
 import android.test.ActivityInstrumentationTestCase2;
 
 

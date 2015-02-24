@@ -46,4 +46,10 @@ public class Approver extends User {
 		}
 	}
 
+	public void addComment(Claim claim, String comment) {
+		if(claim.getStatus() == ClaimStatus.SUBMITTED && comment != null){
+			claim.addComment(comment);
+		}
+	}
+
 }

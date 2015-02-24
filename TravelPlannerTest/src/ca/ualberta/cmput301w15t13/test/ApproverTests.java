@@ -21,12 +21,14 @@
 package ca.ualberta.cmput301w15t13.test;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Approver;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 
 
 /** 
@@ -50,17 +52,17 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
 	 */
 	public void testReturnClaim(){
-		Claim claim = new Claim();
+		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());;
 		claim.setStatus(ClaimStatus.RETURNED);
 		Approver approver = new Approver("Catbert");
 		
-		approver.returnClaim(claim, approverName);
+		approver.returnClaim(claim);
 		assertEquals("Claim status isn't returned", ClaimStatus.RETURNED, claim.getStatus());
 		assertEquals("Approver name not set", "Catbert", claim.lastApproverName());
 		
 		claim.setStatus(ClaimStatus.INPROGRESS);
 		approver.returnClaim(claim);
-		assertTrue("Approver was able to return an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
+		assertEquals("Approver was able to return an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
 		
 		
 		//Is this one necessary?
@@ -79,13 +81,13 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
 	 */
 	public void testClaimApprove(){
-		Claim claim = new Claim();
+		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		claim.setStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
 		approver.approveClaim(claim);
 		
 		assertEquals("Claim status isn't approved",ClaimStatus.APPROVED, claim.getStatus() );
-		assertEquals("Approver name not set", "Catbert", claim.lastApproverName());
+		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
 		claim.setStatus(ClaimStatus.INPROGRESS);
 		approver.approveClaim(claim);
@@ -109,7 +111,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	
 	public void testComment(){
-		Claim claim = new Claim();
+		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		Approver approver = new Approver("catbert");
 		String comment = "Test";
 		
@@ -120,7 +122,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		assertNotNull("Claim comments are null", comments);
 		assertEquals("There are no claim comments",1,  comments.size());
 		assertTrue("Comment isn't added", comments.contains(comment));
-		assertEquals("Approver name not set", "Catberg", claim.lastApproverName());
+		assertEquals("Approver name not set", "Catberg", claim.getlastApproverName());
 		
 		claim.setStatus(ClaimStatus.INPROGRESS);
 		claim.clearComments();

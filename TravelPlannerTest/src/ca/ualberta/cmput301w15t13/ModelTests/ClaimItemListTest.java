@@ -24,6 +24,8 @@ package ca.ualberta.cmput301w15t13.ModelTests;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Expceptions.InvalidDateException;
+import Expceptions.InvalidNameException;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
@@ -43,14 +45,16 @@ public class ClaimItemListTest extends
 		super.setUp();
 	}
 	
-	public void testSetUp(){
+	public void testSetUp() throws InvalidDateException, InvalidNameException{
 		ClaimList itemList = new ClaimList();
 		assertNotNull("Item list is null", itemList);
 		assertEquals("Item list is not empty",0, itemList.size());
 		
 		ArrayList<Claim> oldClaims = new ArrayList<Claim>();
-		Claim claim1 = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		Claim claim2 = new Claim("name3", new Date(2), new Date(4), "Des3t", new TravelItineraryList());
+		Claim claim1 = null, claim2 = null;
+		claim1 = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
+		claim2 = new Claim("name3", new Date(2), new Date(4), "Des3t", new TravelItineraryList());
+
 		oldClaims.add(claim1);
 		oldClaims.add(claim2);
 
@@ -68,7 +72,7 @@ public class ClaimItemListTest extends
 	
 	
 	
-	public void testAddRemove(){
+	public void testAddRemove() throws InvalidDateException, InvalidNameException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
@@ -100,7 +104,7 @@ public class ClaimItemListTest extends
 		assertFalse("Claim list contains claim 2", claimList.contains(claim2));
 	}
 
-	public void testIndexing(){
+	public void testIndexing() throws InvalidDateException, InvalidNameException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
