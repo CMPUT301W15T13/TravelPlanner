@@ -22,11 +22,14 @@ package ca.ualberta.cmput301w15t13.Models;
 import java.util.Date;
 
 public class Claim {
+	
+	
 	protected String userName = null;
 	protected Date startDate = null; 
 	protected Date endDate = null;
 	protected String description = null;
 	protected TravelItineraryList travelList = null;
+	
 	protected ClaimStatus status = null;
 	
 	
@@ -40,24 +43,44 @@ public class Claim {
 	 * @param description
 	 * @param travelList
 	 */
-	public Claim(String name, Date startDate, Date endDate, String description,TravelItineraryList travelList) {
+	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) {
 
-		this.userName = name;
+		this.userName = username;
 		this.startDate = startDate;
 		this.endDate= endDate;
 		this.description = description;
-		this.travelList = travelList;
+		
+		//inits the claim status to INPROGRESS (and editable)
 		this.status = new ClaimStatus();
+		
+		
+		//This makes sure that the travel List is not null
+		if (travelList == null)
+			this.travelList = new TravelItineraryList();
+		else
+			this.travelList = travelList;
 		
 	}
 
+	
+	
 
 	public String getUserName() {
 		return userName;
 	}
 
 
-	public void setUserName(String userName) {
+	/**
+	 * This sets the user Name
+	 * @param userName = Username for claim
+	 * @throws InvalidNameException = Exception that is thrown for invalid user names
+	 */
+	public void setUserName(String userName) throws InvalidNameException {
+		
+		//This checks to see that the username is not empty or null
+		if (userName.isEmpty() || userName == null)
+			throw new InvalidNameException("Invalid UserName Entered");
+		else
 		this.userName = userName;
 	}
 
@@ -98,7 +121,13 @@ public class Claim {
 
 
 	public void setTravelList(TravelItineraryList travelList) {
-		this.travelList = travelList;
+		
+		//if null list is entered, clear the current list
+		if (travelList == null)
+			this.travelList = new TravelItineraryList();
+		//else save the list
+		else
+			this.travelList = travelList;
 	}
 
 

@@ -88,14 +88,14 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		ClaimList claimList = new ClaimList();
 		
 		//Claim constructor with string name, Date startDate, Date endDate
-		Claim claim = new Claim(name, startDate, endDate);
+		Claim claim = new Claim(name, startDate, endDate, "", null);
 	
 		//Add description to claim
-		claim.addDescription("Trip to Rome");
+		claim.setDescription("Trip to Rome");
 
 		
 		assertNotNull("Claim is null", claim);
-		assertEquals("Claim name is wrong", name, claim.getName());
+		assertEquals("Claim name is wrong", name, claim.getUserName());
 		assertEquals("Claim startDate is wrong", startDate, claim.getStartDate());
 		assertEquals("Claim endDate is wrong", endDate, claim.getEndDate());
 		assertEquals("Claim description is wrong", "Trip to Rome",  claim.getDescription());
@@ -357,7 +357,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		String description = "Claim for trip to Rome", description2 = "trip to Italy";
 		
 		Claim claim = new Claim(name, startDate, endDate);
-		claim.addDescription(description);
+		claim.setDescription(description);
 		
 		claim.editName(name2);
 		claim.editStartDate(startDate2);
@@ -367,7 +367,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertNotNull("Edited claim is null", claim);
 		
 
-		assertEquals("Edited claim name is wrong",  name2, claim.getName());
+		assertEquals("Edited claim name is wrong",  name2, claim.getUserName());
 		assertEquals("Edited claim startDate is wrong" , startDate2, claim.getStartDate());
 		assertEquals("Edited claim name is wrong", endDate2, claim.getEndDate());
 		assertEquals("Edited claim description is wrong", description2, claim.getDescription());
@@ -387,7 +387,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		String description = "Claim for trip to Rome";
 		
 		Claim claim = new Claim(name, startDate, endDate);
-		claim.addDescription(description);
+		claim.setDescription(description);
 		
 		try {
 			//If this works properly, it will throw an InvalidNameException
