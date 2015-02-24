@@ -32,33 +32,39 @@ public class Claim {
 	
 	protected ClaimStatus status = null;
 	
+	protected ExpenseItemList expenseList = null;
 	
 	
 	
-	/**
-	 * 
-	 * @param name
-	 * @param startDate
-	 * @param endDate
-	 * @param description
-	 * @param travelList
-	 */
-	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) {
+/**
+ * 
+ * @param username
+ * @param startDate
+ * @param endDate
+ * @param description
+ * @param travelList
+ * @throws InvalidDateException 
+ * @throws InvalidNameException 
+ */
+	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws InvalidDateException, InvalidNameException {
 
-		this.userName = username;
-		this.startDate = startDate;
-		this.endDate= endDate;
-		this.description = description;
+		//this checks the user Name for errs and sets the user name
+		this.setUserName(username);
 		
+		//this checks the dates for errs and sets the dates
+		this.setClaimDates(startDate, endDate);
+
+		//this sets the description
+		this.setDescription(description);
+			
+		this.expenseList = new ExpenseItemList();
+			
 		//inits the claim status to INPROGRESS (and editable)
 		this.status = new ClaimStatus();
 		
-		
-		//This makes sure that the travel List is not null
-		if (travelList == null)
-			this.travelList = new TravelItineraryList();
-		else
-			this.travelList = travelList;
+		//this sets the travel List. If null, it makes an empty list
+		this.setTravelList(travelList);
+
 		
 	}
 
@@ -85,6 +91,27 @@ public class Claim {
 	}
 
 
+	/**
+	 * This sets up the claim dates. This does the error checking to make sure that startDate < EndDate
+	 * This method is prefered over setStartDate and SetEndDate as this one checks for possible exceptions.
+	 * @param startDate
+	 * @param endDate
+	 * @throws InvalidDateException
+	 */
+	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException{
+		
+		//this checks to see that the entered start date is not after the entered end date
+		if (startDate.after(endDate))
+			 throw new InvalidDateException("Start Date is after End Date");
+		else
+		{
+			this.setStartDate(startDate);
+			this.setEndDate(endDate);
+		}
+		
+		
+	}
+	
 	public Date getStartDate() {
 		return startDate;
 	}
@@ -105,37 +132,63 @@ public class Claim {
 	}
 
 
+	
+	
 	public String getDescription() {
 		return description;
 	}
 
 
+	/**
+	 * This sets the Claim description
+	 * @param description
+	 */
 	public void setDescription(String description) {
-		this.description = description;
+		
+		if (description == null || description.isEmpty())
+			this.description = "";
+		else
+			this.description = description;
 	}
 
 
+	
+	/**
+	 * This sets 
+	 * @return
+	 */
 	public TravelItineraryList getTravelList() {
 		return travelList;
 	}
 
 
+	/**
+	 * This sets up the travel List.
+	 * If null, it makes a new Travel Itenerary List
+	 * @param travelList
+	 */
 	public void setTravelList(TravelItineraryList travelList) {
 		
-		//if null list is entered, clear the current list
+		//This makes sure that the travel List is not null
 		if (travelList == null)
 			this.travelList = new TravelItineraryList();
-		//else save the list
 		else
 			this.travelList = travelList;
-	}
+		}
 
 
+	/**
+	 * Returns the status of a claim
+	 * @return
+	 */
 	public int getStatus() {
 		return this.status.getStatus();
 	}
 
-
+	/**
+	 * This sets the status of a claim
+	 * @param status
+	 */
 	public void setStatus(int status) {
 		this.status.setStatus(status);
 	}
