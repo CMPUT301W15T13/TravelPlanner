@@ -2,31 +2,32 @@ package ca.ualberta.cmput301w15t13.Models;
 
 public class TravelItinerary {
 
-	protected String name = null;
+	protected String destinationName = null;
 	protected String description = null;
 	
 	
 	public TravelItinerary(String destination, String description){
 		
-		this.name = destination;
+		this.destinationName = destination;
 		this.description = description;
 		
 	}
 	
 	
-	public String getName() {
-		return name;
+	public String getDestinationName() {
+		return destinationName;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setDestinationName(String name) {
+		this.destinationName = name;
 	}
-	public String getDescription() {
+	public String getDestinationDescription() {
 		return description;
 	}
-	public void setDescription(String description) {
+	public void setDestinationDescription(String description) {
 		this.description = description;
 	}
-	
+
+
 	
 	
 	

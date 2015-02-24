@@ -23,6 +23,31 @@ public class TravelItineraryList {
 			throw new DuplicateException("Travel Destination already Exists!");
 		
 	}
+
+
+	public int numberofDestinations() {
+		
+		return this.travelList.size();
+	}
+
+
+	public TravelItinerary getTravelDestinationAtIndex(int index) {
+	
+		return this.travelList.get(index);
+	}
+
+
+	public boolean contains(TravelItinerary travelItinerary) {
+
+		for (TravelItinerary destination : this.travelList) {
+			if (destination.getDestinationName().equalsIgnoreCase(travelItinerary.getDestinationName()))
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
 	
 	
 

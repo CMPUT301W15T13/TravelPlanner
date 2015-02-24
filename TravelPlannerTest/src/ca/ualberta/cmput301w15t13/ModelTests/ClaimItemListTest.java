@@ -18,6 +18,7 @@
  * limitations under the License.
  */
 
+
 package ca.ualberta.cmput301w15t13.ModelTests;
 
 import java.util.ArrayList;
@@ -32,6 +33,7 @@ import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 
 public class ClaimItemListTest extends
 		ActivityInstrumentationTestCase2<LoginActivity> {
+
 
 	public ClaimItemListTest() {
 		super(LoginActivity.class);
@@ -134,4 +136,7 @@ public class ClaimItemListTest extends
 	
 		claimList.notifyListeners();
 	}
+	
+	
+
 }

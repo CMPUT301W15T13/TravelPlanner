@@ -117,7 +117,7 @@ public class Claim {
 	}
 
 
-	public void setStartDate(Date startDate) {
+	private void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
@@ -127,7 +127,7 @@ public class Claim {
 	}
 
 
-	public void setEndDate(Date endDate) {
+	private void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -195,8 +195,77 @@ public class Claim {
 	
 	
 	
+	/**
+	 * This adds a travel Itenerary
+	 * @throws DuplicateException 
+	 * @throws InvalidFieldEntryException 
+	 */
+
+	public void addTravelDestination(String destination, String description) throws DuplicateException, InvalidFieldEntryException{
+		
+		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
+		
+		if ((destination.isEmpty() || destination == null))
+			{
+				throw new InvalidFieldEntryException("Travel Destination is null or empty");
+			}
+		
+		if ((description.isEmpty() || description == null))
+				{
+					throw new InvalidFieldEntryException("Travel Description is null or empty");
+				}
+		
+		if (this.travelList.contains(travelItinerary))
+			{
+				throw new DuplicateException("Destination Already Exists in Travel Itenerary");
+			}
+		else
+			this.travelList.addTravelDestination(travelItinerary);
+	}
+	
+	
+	public int numberOfDestinations(){
+		
+		return this.travelList.numberofDestinations();
+	}
+
+	
+	public TravelItinerary getTravelDestination(int index){
+		
+		return this.travelList.getTravelDestinationAtIndex(index);
+	}
 
 
+
+
+	public void editTravelDescription(int i, String destination, String description) throws InvalidFieldEntryException, DuplicateException {
+
+		if ((destination.isEmpty() || destination.isEmpty())){
+			throw new InvalidFieldEntryException("destination at index " +i + " can not be editted. Destination is empty");
+		}
+		if ((description.isEmpty() || description.isEmpty())){
+			throw new InvalidFieldEntryException("description at index " +i + " can not be editted. Description is empty");
+		}
+		
+		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
+		
+		if (travelList.contains(travelItinerary))
+		{
+			throw new DuplicateException("Cann not edit destination. Destination Already Exists");
+			
+		}
+		
+	}
+
+
+
+
+	public void deleteTravelDestionation(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 
 
 }

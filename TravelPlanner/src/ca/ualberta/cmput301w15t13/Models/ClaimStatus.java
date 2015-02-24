@@ -33,7 +33,7 @@ public class ClaimStatus {
 	
 	
 	
-	private int status = null;   //holds the status of the claim
+	private int status ;   //holds the status of the claim
 	
 	
 	/**
