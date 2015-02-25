@@ -2,6 +2,8 @@ package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.Date;
 
+import android.graphics.Bitmap;
+
 
 public class ExpenseItem {
 	protected String ExpenseCategory = null;
@@ -115,11 +117,14 @@ public class ExpenseItem {
 
 
 
-	public void setReceipt(Receipt receipt) {
+	public void addReceipt(Receipt receipt) {
 		this.receipt = receipt;
 	}
 
 
+	public void removeReceipt(Bitmap bitmap) {
+		// TODO Auto-generated method stub
+	}
 
 	public boolean isComplete() {
 		return complete;
@@ -144,6 +149,9 @@ public class ExpenseItem {
 		// TODO Auto-generated method stub
 		
 	}
+
+
+
 
 
 

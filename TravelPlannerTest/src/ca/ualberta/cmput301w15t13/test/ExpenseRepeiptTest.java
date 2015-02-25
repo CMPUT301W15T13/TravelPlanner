@@ -22,10 +22,14 @@ package ca.ualberta.cmput301w15t13.test;
 
 import java.util.Date;
 
+import Expceptions.InvalidDateException;
+import Expceptions.InvalidNameException;
 import android.graphics.Bitmap;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import ca.ualberta.cmput301w15t13.Models.Receipt;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 
 /** 
@@ -44,9 +48,11 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	
 	/**
 	 * Tests for use case F1
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
 	 * 
 	 */
-	public void testBitmap(){
+	public void testBitmap() throws InvalidDateException, InvalidNameException{
 		this.addBitmap();
 		this.largeBitmap();
 	}
@@ -55,14 +61,21 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	/**Part of use case F1
 	 * Test that you can add a bitmap to a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/61
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
 	 */
 	
-	public void addBitmap(){
+	public void addBitmap() throws InvalidDateException, InvalidNameException{
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
+		Receipt receipt = new Receipt(bitmap);
+		
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		
-		claim.addReceipt(bitmap);
-		Bitmap returnedBitmap = claim.getReceipt();
+		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
+		
+		
+		expenseItem.addReceipt(receipt);
+		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
 		assertNotNull("Bitmap is null", returnedBitmap);
 		assertEquals("Bitmap has been changed", bitmap, returnedBitmap);
@@ -73,15 +86,20 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * Test that you bitmaps are compressed before they're stored
 	 * US06.04.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/64
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
 	 */
 	
-	public void largeBitmap(){
+	public void largeBitmap() throws InvalidDateException, InvalidNameException{
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
+		Receipt receipt = new Receipt(bitmapLarge);
 		
-		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		
-		claim.addReceipt(bitmapLarge);
-		Bitmap returnedBitmap = claim.getReceipt();
+		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
+		
+		expenseItem.addReceipt(receipt);
+		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
 		if(returnedBitmap.getByteCount() > 65536){
 			fail("Addded a bitmap too large");
 		}
@@ -92,19 +110,24 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	/**Use case F3
 	 * Test that you can delete a bitmap from a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/63
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
 	 */
 	
-	public void testRemoveBitmap(){
+	public void testRemoveBitmap() throws InvalidDateException, InvalidNameException{
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Bitmap returnedBitmap;
-		Claim claim = new Claim("Name", new Date(1), new Date(2));
+		Receipt receipt = new Receipt(bitmap);
+		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		
-		claim.addReceipt(bitmap);
-		returnedBitmap = claim.getReceipt();
+		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
+		
+		expenseItem.addReceipt(receipt);
+		returnedBitmap = expenseItem.getReceipt().toBitMap();
 		assertEquals("Bitmap has been changed", bitmap ,returnedBitmap);
 
-		claim.removeReceipt(bitmap);
-		returnedBitmap = claim.getReceipt();
+		expenseItem.removeReceipt(bitmap);
+		returnedBitmap = expenseItem.getReceipt().toBitMap();
 		assertNull("Bitmap was not removed", returnedBitmap);
 		
 	}
