@@ -20,8 +20,17 @@
 
 package ca.ualberta.cmput301w15t13.test;
 
+import java.util.Date;
+
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
-import ca.ualberta.cmput301w15t13.Models.ClaimModel;
+import ca.ualberta.cmput301w15t13.Controllers.Claimant;
+import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import Expceptions.ClaimPermissionException;
+import Expceptions.DuplicateException;
+import Expceptions.InvalidDateException;
+import Expceptions.InvalidFieldEntryException;
+import Expceptions.InvalidNameException;
 import android.test.ActivityInstrumentationTestCase2;
 
 
@@ -29,9 +38,9 @@ import android.test.ActivityInstrumentationTestCase2;
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
  */
-public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2<ClaimModel>{
+public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2<LoginActivity>{
 	public ExpenseClaimsStatusesTests() {
-		super(ClaimModel.class);
+		super(LoginActivity.class);
 	}
 	
 	protected void setUp() throws Exception {
@@ -42,37 +51,80 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * 	
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/65
 	 * Claimant submits a claim...claim can no longer edit
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
+	 * @throws InvalidFieldEntryException 
+	 * @throws DuplicateException 
 	 */
-	public void testClaimantSubmit(){
-		LoginActivity.setUserType("claimant"); 
-		Claim claim = new Claim;
-		LoginActivity.submit(claim);
+	public void testClaimantSubmit() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+		//LoginActivity.setUserType("claimant"); 
+		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
+		
+		Claimant claimant = new Claimant("hey");
+		claimant.submitClaim(claim);
+		//LoginActivity.submit(claim);
+	
 		assertEquals("Claim is submitted","Submitted", claim.getStatus() );
-		assertEquals("Claim cannot be editted by claimant", 1, claim.getPermission());
+		assertEquals("Claim cannot be editted by claimant", ClaimStatus.SUBMITTED, claim.getStatus());
+		
+		try{
+			claim.addTravelDestination("hey", "yo");
+			
+			fail("Claim is still editable");
+		}
+		catch(ClaimPermissionException e){
+			
+		}
 	}
 	
 	/**Use case G2
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/67
 	 * Claimant can edit a returned claim
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
+	 * @throws InvalidFieldEntryException 
+	 * @throws DuplicateException 
 	 */
-	public void testClaimantOnReturned(){
-		LoginActivity.setUserType("Claimant");
-		Claim claim = new Claim;
-		claim.setStatus("Returned");
-		assertEquals("Claim can be editted by claimant", 0, claim.getPermission());
+	public void testClaimantOnReturned() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+		//LoginActivity.setUserType("Claimant");
+		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
+		claim.setStatus(ClaimStatus.RETURNED);
+		assertEquals("Claim can be editted by claimant", ClaimStatus.RETURNED, claim.getStatus());
+		
+		try{
+			claim.addTravelDestination("hey", "yo");
+			
+		}
+		catch(ClaimPermissionException e){
+			fail("Claim is not editable");
+		}
 		
 	}
 	
 	/**Use case G3
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/68
 	 * Claim has approved status and can no longer be editted
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
+	 * @throws InvalidFieldEntryException 
+	 * @throws DuplicateException 
 	 */
 
-	public void testClaimStatusApproved(){
-		LoginActivity.setUserType("Claimant");
-		Claim claim = new Claim;
-		claim.setStatus("Approved");
-		assertEquals("Claim is approved and can't be editted",2, claim.getPermission());
+	public void testClaimStatusApproved() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+		//LoginActivity.setUserType("Claimant");
+		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
+		claim.setStatus(ClaimStatus.APPROVED);
+		assertEquals("Claim is approved and can't be editted",ClaimStatus.APPROVED, claim.getStatus());
+		
+		try{
+			claim.addTravelDestination("hey", "yo");
+			
+			fail("Claim is still editable");
+		}
+		catch(ClaimPermissionException e){
+			
+		}
+		
 	}
 
 }

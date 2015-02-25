@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import Expceptions.ClaimPermissionException;
 import Expceptions.DuplicateException;
 import Expceptions.InvalidDateException;
 import Expceptions.InvalidFieldEntryException;
@@ -215,7 +216,7 @@ public class Claim {
 	 * @throws InvalidFieldEntryException 
 	 */
 
-	public void addTravelDestination(String destination, String description) throws DuplicateException, InvalidFieldEntryException{
+	public void addTravelDestination(String destination, String description) throws DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 		
 		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 		

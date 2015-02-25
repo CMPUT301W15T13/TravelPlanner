@@ -25,6 +25,7 @@ import java.util.Date;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import Expceptions.ClaimPermissionException;
 import Expceptions.DuplicateException;
 import Expceptions.InvalidDateException;
 import Expceptions.InvalidFieldEntryException;
@@ -217,8 +218,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
+	 * @throws ClaimPermissionException 
 	 */
-	public void testAddTravelDestination() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	public void testAddTravelDestination() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 		
 		//test valid travel destination
 		this.addTravelDestination();
@@ -236,8 +238,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
+	 * @throws ClaimPermissionException 
 	 */
-	private void addTravelDestination() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	private void addTravelDestination() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 
 		String name = "Bill Smith";
 		Date startDate = new Date(120), endDate = new Date(100);
@@ -265,8 +268,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
+	 * @throws ClaimPermissionException 
 	 */
-	private void addDuplicateTravelDestination() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	private void addDuplicateTravelDestination() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 		
 		String name = "Bill Smith";
 		Date startDate = new Date(120), endDate = new Date(100);
@@ -295,8 +299,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws DuplicateException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws ClaimPermissionException 
 	 */
-	private void addInvalidTravelDestination() throws DuplicateException, InvalidDateException, InvalidNameException{
+	private void addInvalidTravelDestination() throws DuplicateException, InvalidDateException, InvalidNameException, ClaimPermissionException{
 		
 		String name = "Bill Smith";
 		Date startDate = new Date(120), endDate = new Date(100);
@@ -363,8 +368,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
+	 * @throws ClaimPermissionException 
 	 */
-	public void testEditClaim() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	public void testEditClaim() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 		
 		//this test the editability of simple claim items (Name, dates, description)
 		this.editSimpleClaim();
@@ -467,8 +473,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
+	 * @throws ClaimPermissionException 
 	 */
-	private void editTravelDestinations() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	private void editTravelDestinations() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 		
 		Claim claim = new Claim("name", new Date(100), new Date(120), null, null);
 		claim.addTravelDestination("Russia", "Bear hunting");
@@ -525,8 +532,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
+	 * @throws ClaimPermissionException 
 	 */
-	private void deleteTravelDetinations() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	private void deleteTravelDetinations() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 		
 		Claim claim = new Claim("name", new Date(100), new Date(120), null, null);
 		claim.addTravelDestination("Russia", "Bear hunting");
