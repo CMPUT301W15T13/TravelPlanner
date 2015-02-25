@@ -37,6 +37,12 @@ public class TravelItineraryList {
 	
 		return this.travelList.get(index);
 	}
+	
+	public void deleteTravelDestination(int index){
+		
+		if (this.travelList.size() > index)
+			this.travelList.remove(index);
+	}
 
 
 	public boolean contains(TravelItinerary travelItinerary) {

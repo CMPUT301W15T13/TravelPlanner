@@ -532,7 +532,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		claim.addTravelDestination("Russia", "Bear hunting");
 		claim.addTravelDestination("China", "Relic hunting");
 		
-		claim.deleteTravelDestionation(0);
+		claim.deleteTravelDestination(0);
 		
 		assertEquals("Delete Travel Destination is of invalid size",1,  claim.numberOfDestinations());
 		assertEquals("Delete Travel Destination failed: Check Location", "China", claim.getTravelDestination(0).getDestinationName());

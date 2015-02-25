@@ -268,9 +268,8 @@ public class Claim {
 
 
 
-	public void deleteTravelDestionation(int i) {
+	public void deleteTravelDestination(int i) {
 		// TODO Auto-generated method stub
-		
 	}
 
 
