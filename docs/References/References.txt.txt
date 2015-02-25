@@ -1,0 +1,7 @@
+Found random String generator code here:
+http://stackoverflow.com/questions/363681/generating-random-integers-in-a-range-with-java
+Accessed on Feb 24, 2015 @ 7:29pm by Edwin R.
+
+Found code to turn to see if an array contains a value:
+http://stackoverflow.com/questions/1128723/in-java-how-can-i-test-if-an-array-contains-a-certain-value
+Accessed on Feb 24, 2015 @ 7:32pm by Edwin R.

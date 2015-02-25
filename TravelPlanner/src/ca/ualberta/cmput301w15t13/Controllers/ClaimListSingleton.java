@@ -26,4 +26,8 @@ public class ClaimListSingleton {
 		claimList = new ClaimList(claims);
 	}
 	
+	static public void addClaim(Claim claim){
+		claimList.add(claim);
+	}
+	
 }

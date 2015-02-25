@@ -19,6 +19,15 @@
  */
 package ca.ualberta.cmput301w15t13.Controllers;
 
+import java.util.ArrayList;
+
+import ca.ualberta.cmput301w15t13.Models.Tag;
+
 public class TagManager {
+
+	public static ArrayList<Tag> getTagList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

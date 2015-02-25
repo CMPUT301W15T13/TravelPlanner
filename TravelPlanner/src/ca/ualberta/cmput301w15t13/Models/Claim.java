@@ -22,6 +22,7 @@ package ca.ualberta.cmput301w15t13.Models;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.UUID;
 
 import Expceptions.DuplicateException;
 import Expceptions.InvalidDateException;
@@ -39,8 +40,9 @@ public class Claim {
 	protected HashMap<String, String> approverComments = null;
 	
 	protected ClaimStatus status = null;
+
+	protected String claimID = null;
 	
-	protected ExpenseItemList expenseList = null;
 	
 	
 	
@@ -65,7 +67,6 @@ public class Claim {
 		//this sets the description
 		this.setDescription(description);
 			
-		this.expenseList = new ExpenseItemList();
 			
 		//inits the claim status to INPROGRESS (and editable)
 		this.status = new ClaimStatus();
@@ -74,10 +75,15 @@ public class Claim {
 		this.setTravelList(travelList);
 
 		this.approverComments = new HashMap<String,String>();
+		
+		claimID = UUID.randomUUID().toString();
 	}
 
 	
 	
+	public String getclaimID(){
+		return this.claimID;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -300,6 +306,40 @@ public class Claim {
 
 
 	public void clearComments() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	public void addTag(String vtag) throws DuplicateException{
+	
+		Tag newTag = new Tag(vtag, claimID);
+		
+		
+		
+	}
+
+
+
+
+	public String[] getTags() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public Tag getTag(int Index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Tag setTag(int Index, String tag) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void removeTag(String tag) {
 		// TODO Auto-generated method stub
 		
 	}
