@@ -275,4 +275,36 @@ public class Claim {
 
 
 
+	public String getlastApproverName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	public void addComment(String comment) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+	public ArrayList<String> getComments() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
+	public void clearComments() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 }

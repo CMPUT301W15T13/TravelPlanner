@@ -23,6 +23,8 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Expceptions.InvalidDateException;
+import Expceptions.InvalidNameException;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Approver;
@@ -50,15 +52,17 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	/** Test Case H2
 	 * Tests that as an approver you are able to return a claim
 	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
 	 */
-	public void testReturnClaim(){
+	public void testReturnClaim() throws InvalidDateException, InvalidNameException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());;
 		claim.setStatus(ClaimStatus.RETURNED);
 		Approver approver = new Approver("Catbert");
 		
 		approver.returnClaim(claim);
 		assertEquals("Claim status isn't returned", ClaimStatus.RETURNED, claim.getStatus());
-		assertEquals("Approver name not set", "Catbert", claim.lastApproverName());
+		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
 		claim.setStatus(ClaimStatus.INPROGRESS);
 		approver.returnClaim(claim);
@@ -79,8 +83,10 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	/** Test Case H3
 	 * Tests that as an approver you are able to approve a claim
 	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
 	 */
-	public void testClaimApprove(){
+	public void testClaimApprove() throws InvalidDateException, InvalidNameException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		claim.setStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
@@ -108,9 +114,11 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 * Approver can set one or more comments on a claim that is submitted,
 	 * and cannot modify a claim that is not submitted.
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/77
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
 	 */
 	
-	public void testComment(){
+	public void testComment() throws InvalidDateException, InvalidNameException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		Approver approver = new Approver("catbert");
 		String comment = "Test";
