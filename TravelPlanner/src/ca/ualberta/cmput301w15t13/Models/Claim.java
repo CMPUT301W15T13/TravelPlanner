@@ -347,5 +347,36 @@ public class Claim {
 
 
 
+	public void addExpenseItem(ExpenseItem expenseItem) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	public ArrayList<ExpenseItem> getExpenseItems() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+	public boolean isEditable() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+
+	public void removeExpenseItem(ExpenseItem expenseItem) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
+
+
 
 }
