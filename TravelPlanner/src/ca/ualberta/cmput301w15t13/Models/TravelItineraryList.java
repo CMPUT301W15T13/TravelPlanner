@@ -3,6 +3,7 @@ package ca.ualberta.cmput301w15t13.Models;
 import java.util.ArrayList;
 
 import exceptions.DuplicateException;
+import exceptions.InvalidFieldEntryException;
 
 
 public class TravelItineraryList {
@@ -34,14 +35,19 @@ public class TravelItineraryList {
 	}
 
 
-	public TravelItinerary getTravelDestinationAtIndex(int index) {
+	public TravelItinerary getTravelDestinationAtIndex(int index) throws InvalidFieldEntryException {
 	
-		return this.travelList.get(index);
+		if (this.travelList.isEmpty() && (this.travelList.size() > index))
+			throw new InvalidFieldEntryException("Index of Travel Destination is invalid.");
+		else
+			return this.travelList.get(index);
 	}
+	
+	
 	
 	public void deleteTravelDestination(int index){
 		
-		if (this.travelList.size() > index)
+		if (this.travelList.size() >= index)
 			this.travelList.remove(index);
 	}
 

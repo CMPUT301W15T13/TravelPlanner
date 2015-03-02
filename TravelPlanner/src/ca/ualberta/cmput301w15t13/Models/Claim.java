@@ -81,11 +81,18 @@ public class Claim {
 	}
 
 	
-	
+	/**
+	 * This will return the claim ID (UUID and elastic search index)
+	 * @return Claim UUID
+	 */
 	public String getclaimID(){
 		return this.claimID;
 	}
 
+	/**
+	 * This will return the user name associated with the claim
+	 * @return The user who made the claim
+	 */
 	public String getUserName() {
 		return this.userName;
 	}
@@ -173,7 +180,7 @@ public class Claim {
 
 	
 	/**
-	 * This sets 
+	 * This returns the travel Itenerary list of the claim
 	 * @return
 	 */
 	public TravelItineraryList getTravelList() {
@@ -215,7 +222,8 @@ public class Claim {
 	
 	
 	/**
-	 * This adds a travel Itenerary
+	 * This adds a travel Itenerary. 
+	 * It checks to see if a travel destination exists, and if the fields are valid
 	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
 	 */
@@ -224,12 +232,12 @@ public class Claim {
 		
 		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 		
-		if ((destination.isEmpty() || destination == null))
+		if ((destination == null || destination.trim().isEmpty() ))
 			{
 				throw new InvalidFieldEntryException("Travel Destination is null or empty");
 			}
 		
-		if ((description.isEmpty() || description == null))
+		if ((description == null || description.trim().isEmpty()  ))
 				{
 					throw new InvalidFieldEntryException("Travel Description is null or empty");
 				}
@@ -249,7 +257,7 @@ public class Claim {
 	}
 
 	
-	public TravelItinerary getTravelDestination(int index){
+	public TravelItinerary getTravelDestination(int index) throws InvalidFieldEntryException{
 		
 		return this.travelList.getTravelDestinationAtIndex(index);
 	}

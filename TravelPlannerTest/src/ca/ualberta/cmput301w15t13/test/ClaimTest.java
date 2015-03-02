@@ -234,6 +234,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		//test duplicate travel destination
 		this.addDuplicateTravelDestination();
+		
 		//test invalid travel destination
 		this.addInvalidTravelDestination();
 	}
@@ -250,7 +251,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	private void addTravelDestination() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 
 		String name = "Bill Smith";
-		Date startDate = new Date(120), endDate = new Date(100);
+		Date startDate = new Date(100), endDate = new Date(120);
 		Claim claim = new Claim(name, startDate, endDate, null, null);
 		
 		//this method adds the travel destination to a collection (possibly hash table/map)
@@ -280,7 +281,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	private void addDuplicateTravelDestination() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, ClaimPermissionException{
 		
 		String name = "Bill Smith";
-		Date startDate = new Date(120), endDate = new Date(100);
+		Date startDate = new Date(100), endDate = new Date(120);
 		Claim claim = new Claim(name, startDate, endDate, null, null);
 		
 		//this method adds the travel destination to a collection (possibly hash table/map)
@@ -311,7 +312,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	private void addInvalidTravelDestination() throws DuplicateException, InvalidDateException, InvalidNameException, ClaimPermissionException{
 		
 		String name = "Bill Smith";
-		Date startDate = new Date(120), endDate = new Date(100);
+		Date startDate = new Date(100), endDate = new Date(120);
 		Claim claim = new Claim(name, startDate, endDate, null, null);
 		
 		try{
