@@ -40,8 +40,8 @@ public class Claim {
 	protected Date endDate = null;
 	protected String description = null;
 	protected TravelItineraryList travelList = null;
-	protected HashMap<String, String> approverComments = null;
-	
+	protected HashMap<String, ArrayList<String>> approverComments = null;
+	protected String lastApproverName = null;
 	protected ClaimStatus status = null;
 
 	protected String claimID = null;
@@ -77,7 +77,7 @@ public class Claim {
 		//this sets the travel List. If null, it makes an empty list
 		this.setTravelList(travelList);
 
-		this.approverComments = new HashMap<String,String>();
+		this.approverComments = new HashMap<String,ArrayList<String>>();
 		
 		claimID = UUID.randomUUID().toString();
 	}
@@ -341,16 +341,25 @@ public class Claim {
 
 
 	public String getlastApproverName() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.lastApproverName;
 	}
 
 
+	public void setLastApproverName(String name){
+		this.lastApproverName = name;
+	}
 
-
-	public void addComment(String comment) {
-		// TODO Auto-generated method stub
+	public void addComment(String comment, String name) {
+		ArrayList<String> comments;
+		setLastApproverName(name);
 		
+		if(approverComments.containsKey(name)){
+			comments = approverComments.get(name);
+		}else{
+			comments = new ArrayList<String>();
+		}
+		comments.add(comment);
+		this.approverComments.put(name, comments);
 	}
 
 

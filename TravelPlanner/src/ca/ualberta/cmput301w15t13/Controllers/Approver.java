@@ -37,6 +37,7 @@ public class Approver extends User {
 	
 	public void approveClaim(Claim claim) throws InvalidUserPermissionException{
 		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
+			claim.setLastApproverName(this.name);
 			claim.setStatus(ClaimStatus.APPROVED);
 		}
 	}
@@ -49,7 +50,7 @@ public class Approver extends User {
 
 	public void addComment(Claim claim, String comment) {
 		if(claim.getStatus() == ClaimStatus.SUBMITTED && comment != null){
-			claim.addComment(comment);
+			claim.addComment(comment, this.name);
 		}
 	}
 

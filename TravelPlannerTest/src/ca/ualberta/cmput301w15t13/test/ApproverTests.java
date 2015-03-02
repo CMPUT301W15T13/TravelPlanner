@@ -94,9 +94,13 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		claim.setStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
+		
+		assertEquals("Approver name not Catbert", "Catbert", approver.getName());
+		
 		approver.approveClaim(claim);
 		
-		assertEquals("Claim status isn't approved",ClaimStatus.APPROVED, claim.getStatus() );
+		assertEquals("Claim status isn't approved",ClaimStatus.APPROVED, claim.getStatus());
+		
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
 		claim.setStatus(ClaimStatus.INPROGRESS);
