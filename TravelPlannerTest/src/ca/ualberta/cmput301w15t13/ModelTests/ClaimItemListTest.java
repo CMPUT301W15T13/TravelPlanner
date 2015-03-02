@@ -42,6 +42,7 @@ public class ClaimItemListTest extends
 		super(LoginActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
@@ -134,6 +135,7 @@ public class ClaimItemListTest extends
 	public void testListeners(){
 		ClaimList claimList = new ClaimList();
 		claimList.addListener(new Listener(){
+			@Override
 			public void update(){
 				assertTrue("Passed!" , true);
 			}

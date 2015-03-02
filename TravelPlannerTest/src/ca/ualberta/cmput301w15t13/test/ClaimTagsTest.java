@@ -23,7 +23,6 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.UUID;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
@@ -49,6 +48,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		super(LoginActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 	}

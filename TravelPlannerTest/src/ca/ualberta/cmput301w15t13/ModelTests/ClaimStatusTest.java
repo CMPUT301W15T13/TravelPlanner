@@ -31,6 +31,7 @@ public class ClaimStatusTest extends
 		super(LoginActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 	}

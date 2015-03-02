@@ -42,6 +42,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		super(LoginActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 	}

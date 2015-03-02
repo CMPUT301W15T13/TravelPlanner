@@ -39,10 +39,11 @@ import exceptions.InvalidUserPermissionException;
  */
 public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
-	public ExpenseRepeiptTest(String name) {
+	public ExpenseRepeiptTest() {
 		super(LoginActivity.class);
 	}
 
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 	}

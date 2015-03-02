@@ -44,6 +44,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		super(LoginActivity.class);
 	}
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 	}

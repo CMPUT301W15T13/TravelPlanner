@@ -22,6 +22,7 @@ package ca.ualberta.cmput301w15t13.test;
 
 import java.util.Date;
 
+import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -32,7 +33,6 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
-import android.test.ActivityInstrumentationTestCase2;
 
 
 /**
@@ -44,6 +44,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		super(LoginActivity.class);
 	}
 	
+	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
