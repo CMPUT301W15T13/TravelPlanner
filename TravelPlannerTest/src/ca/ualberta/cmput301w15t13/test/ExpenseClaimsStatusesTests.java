@@ -67,7 +67,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		claimant.submitClaim(claim);
 		//LoginActivity.submit(claim);
 	
-		assertEquals("Claim is submitted","Submitted", claim.getStatus() );
+		assertEquals("Claim is submitted",ClaimStatus.SUBMITTED, claim.getStatus());
 		assertEquals("Claim cannot be editted by claimant", ClaimStatus.SUBMITTED, claim.getStatus());
 		
 		try{
@@ -77,6 +77,9 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		}
 		catch(ClaimPermissionException e){
 			
+		}
+		catch(InvalidUserPermissionException e){
+			assertTrue("Claim is unchanged", true); // TODO
 		}
 	}
 	
@@ -123,11 +126,12 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		
 		try{
 			claim.addTravelDestination("hey", "yo");
-			
 			fail("Claim is still editable");
 		}
 		catch(ClaimPermissionException e){
-			
+		
+		}catch(InvalidUserPermissionException e){
+			assertTrue("Claim is unchanged, exception was thrown", true);// TODO
 		}
 		
 	}
