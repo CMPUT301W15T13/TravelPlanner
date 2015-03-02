@@ -25,6 +25,7 @@ import java.util.Date;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import exceptions.ClaimPermissionException;
 import exceptions.DuplicateException;
 import exceptions.InvalidDateException;
@@ -72,16 +73,16 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		this.makeRegularClaim();
 		
 		//test to see if we can make an invalid Claim (no name)
-	//	this.makeInvalidClaimEmpty();
+		this.makeInvalidClaimEmpty();
 		
 	//	//test to see if we can make an invalid Claim (null)
-	//	this.makeInvalidClaimNull();
+		this.makeInvalidClaimNull();
 		
 		//this will test to see if an invalid date is entered
-	//	this.makeInvalidClaimDate();
+		this.makeInvalidClaimDate();
 		
 		//this will check to see if a claim can be added
-	//	this.addClaim();
+		this.addClaim();
 
 	}
 	
@@ -242,10 +243,12 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		//test invalid travel destination
 		this.addInvalidTravelDestination();
+		
 	}
 	
 	/**Use Case A2
 	 * Tests to see if wwe can add a valid travel destination
+	 * 
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -271,7 +274,26 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Claim has invalid Travel Destination", "Russia",claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Claim has invalid Travel Destination", "Bear wrestling",claim.getTravelDestination(0).getDestinationDescription());
 
+		claim.setStatus(ClaimStatus.SUBMITTED);
+		try {
+			claim.addTravelDestination("Poland","Yolo");
+			
+			fail("edited a travel destination when claim was not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
 		
+		
+		claim.setStatus(ClaimStatus.APPROVED);
+		try {
+			claim.addTravelDestination("Poland","Yolo");
+			
+			fail("edited a travel destination when claim was not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
 	}
 	
 	
@@ -375,6 +397,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
 		
 	}
+
 	
 	
 	/** Use case A3
@@ -429,6 +452,27 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Edited claim startDate is wrong" , startDate2, claim.getStartDate());
 		assertEquals("Edited claim name is wrong", endDate2, claim.getEndDate());
 		assertEquals("Edited claim description is wrong", description2, claim.getDescription());
+		
+		claim.setStatus(ClaimStatus.SUBMITTED);
+		try {
+			claim.setUserName("yolo");
+			
+			fail("deleted a claim when not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
+		
+		
+		claim.setStatus(ClaimStatus.APPROVED);
+		try {
+			claim.setUserName("yolo");
+			
+			fail("deleted a claim when not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
 
 	}
 
@@ -543,7 +587,29 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		catch(InvalidFieldEntryException e){
 			
 		}
-
+		
+		
+		claim.setStatus(ClaimStatus.SUBMITTED);
+		try {
+			claim.editTravelDescription(0, "Australia", "Yolo");
+			
+			fail("deleted a claim when not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
+		
+		claim.setStatus(ClaimStatus.APPROVED);
+		try {
+			claim.editTravelDescription(0, "Australia", "Yolo");
+			
+			fail("deleted a claim when not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
+		
+		
 		
 	}
 	
@@ -569,6 +635,26 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Delete Travel Destination failed: Check Location", "China", claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Delete Travel Destination failed: Check Description", "Relic hunting", claim.getTravelDestination(0).getDestinationDescription());
 		
+		
+		claim.setStatus(ClaimStatus.SUBMITTED);
+		try {
+			claim.deleteTravelDestination(0);
+			
+			fail("deleted a claim when not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
+		
+		claim.setStatus(ClaimStatus.APPROVED);
+		try {
+			claim.deleteTravelDestination(0);
+			
+			fail("deleted a claim when not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
 	}
 	
 	
@@ -598,6 +684,28 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertTrue("Claim removed too many claims", claimlist.contains(claim2));
 		
 		assertEquals("Removed wrong claim", "test2", claimlist.getClaimAtIndex(0).getUserName());
+		
+		
+		claim2.setStatus(ClaimStatus.SUBMITTED);
+		try {
+			claimlist.remove(claim2);
+			
+			fail("deleted a claim when not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
+		
+		
+		claim2.setStatus(ClaimStatus.APPROVED);
+		try {
+			claimlist.remove(claim2);
+			
+			fail("deleted a claim when not editable");
+		}
+		catch (InvalidUserPermissionException e){
+			
+		}
 
 	}
 }

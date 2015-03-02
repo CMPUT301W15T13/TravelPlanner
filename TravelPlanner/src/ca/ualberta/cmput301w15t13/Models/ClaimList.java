@@ -26,6 +26,7 @@ import java.util.Collections;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import exceptions.InvalidUserPermissionException;
 
 
 public class ClaimList {
@@ -62,10 +63,15 @@ public class ClaimList {
 		return claimList.contains(claim);
 	}
 
-	public void remove(Claim claim) {
-		if(claimList.contains(claim)){
-			claimList.remove(claim);
+	public void remove(Claim claim) throws InvalidUserPermissionException {
+		if (claim.isEditable())
+		{
+			if(claimList.contains(claim)){
+				claimList.remove(claim);
+			}
 		}
+		else
+			throw new InvalidUserPermissionException("Attempted to remove a claim on a submitted/approved claim");
 	}
 
 	public void add(Claim claim) {

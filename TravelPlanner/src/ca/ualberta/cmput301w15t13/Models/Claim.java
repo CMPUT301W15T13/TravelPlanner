@@ -121,7 +121,7 @@ public class Claim {
 		}
 		
 		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+			throw new InvalidUserPermissionException("Attempted to set user name on a submitted/approved claim");
 	}
 
 
@@ -200,7 +200,7 @@ public class Claim {
 				this.description = description;
 		}
 		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+			throw new InvalidUserPermissionException("Attempted to set claim description on a submitted/approved claim");
 		
 	}
 
@@ -231,7 +231,7 @@ public class Claim {
 				this.travelList = travelList;
 		}
 		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+			throw new InvalidUserPermissionException("Attempted to set travel destinations on a submitted/approved claim");
 		
 	}
 
@@ -288,7 +288,7 @@ public class Claim {
 				this.travelList.addTravelDestination(travelItinerary);
 		}
 		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+			throw new InvalidUserPermissionException("Attempted to add a travel destination on a submitted/approved claim");
 	}
 	
 	
@@ -323,7 +323,7 @@ public class Claim {
 			travelList.editTravelDestination(index, travelItinerary);
 		}
 		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+			throw new InvalidUserPermissionException("Attempted to edit a travel description on a submitted/approved claim");
 		
 	}
 
@@ -334,7 +334,7 @@ public class Claim {
 		if (this.status.isEditable())
 			this.travelList.deleteTravelDestination(i);
 		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+			throw new InvalidUserPermissionException("Attempted to delete a travel destination on a submitted/approved claim");
 	}
 
 
@@ -410,7 +410,7 @@ public class Claim {
 		if (this.status.isEditable())
 			readME = "Not implemented";
 		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+			throw new InvalidUserPermissionException("Attempted to add an expense on a submitted/approved claim");
 		
 	}
 
@@ -437,7 +437,7 @@ public class Claim {
 		if (this.status.isEditable())
 			readME = "Not implemented";
 		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+			throw new InvalidUserPermissionException("Attempted to remove an expense on a submitted/approved claim");
 	}
 
 
