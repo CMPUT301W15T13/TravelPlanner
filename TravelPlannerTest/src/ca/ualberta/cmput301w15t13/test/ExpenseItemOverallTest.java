@@ -22,13 +22,13 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.ArrayList;
 import java.util.Date;
 
-import Expceptions.InvalidDateException;
-import Expceptions.InvalidNameException;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import exceptions.InvalidDateException;
+import exceptions.InvalidNameException;
 
 
 /** 

@@ -26,11 +26,11 @@ import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
-import Expceptions.ClaimPermissionException;
-import Expceptions.DuplicateException;
-import Expceptions.InvalidDateException;
-import Expceptions.InvalidFieldEntryException;
-import Expceptions.InvalidNameException;
+import exceptions.ClaimPermissionException;
+import exceptions.DuplicateException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
+import exceptions.InvalidNameException;
 import android.test.ActivityInstrumentationTestCase2;
 
 

@@ -24,11 +24,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
-import Expceptions.ClaimPermissionException;
-import Expceptions.DuplicateException;
-import Expceptions.InvalidDateException;
-import Expceptions.InvalidFieldEntryException;
-import Expceptions.InvalidNameException;
+import exceptions.ClaimPermissionException;
+import exceptions.DuplicateException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
+import exceptions.InvalidNameException;
+
 
 public class Claim {
 	
@@ -68,8 +69,7 @@ public class Claim {
 		//this sets the description
 		this.setDescription(description);
 			
-			
-		//inits the claim status to INPROGRESS (and editable)
+		//initializes the claim status to INPROGRESS (and editable)
 		this.status = new ClaimStatus();
 		
 		//this sets the travel List. If null, it makes an empty list
@@ -87,7 +87,7 @@ public class Claim {
 	}
 
 	public String getUserName() {
-		return userName;
+		return this.userName;
 	}
 
 
@@ -98,17 +98,22 @@ public class Claim {
 	 */
 	public void setUserName(String userName) throws InvalidNameException {
 		
-		//This checks to see that the username is not empty or null
-		if (userName.isEmpty() || userName == null)
+		//This checks to see that the user-name is not empty or null
+		
+		//userName = "Bill Smith";
+		
+		if (userName.isEmpty() || userName.equals(null)) {
 			throw new InvalidNameException("Invalid UserName Entered");
-		else
-		this.userName = userName;
+		} else {
+			this.userName = userName;
+			
+		}
 	}
 
 
 	/**
 	 * This sets up the claim dates. This does the error checking to make sure that startDate < EndDate
-	 * This method is prefered over setStartDate and SetEndDate as this one checks for possible exceptions.
+	 * This method is preferred over setStartDate and SetEndDate as this one checks for possible exceptions.
 	 * @param startDate
 	 * @param endDate
 	 * @throws InvalidDateException
@@ -123,12 +128,11 @@ public class Claim {
 			this.setStartDate(startDate);
 			this.setEndDate(endDate);
 		}
-		
-		
+				
 	}
 	
 	public Date getStartDate() {
-		return startDate;
+		return this.startDate;
 	}
 
 
@@ -138,7 +142,7 @@ public class Claim {
 
 
 	public Date getEndDate() {
-		return endDate;
+		return this.endDate;
 	}
 
 

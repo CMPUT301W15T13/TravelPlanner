@@ -25,15 +25,15 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.UUID;
 
-import Expceptions.DuplicateException;
-import Expceptions.InvalidDateException;
-import Expceptions.InvalidNameException;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.Tag;
+import exceptions.DuplicateException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidNameException;
 
 
 

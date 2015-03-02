@@ -1,4 +1,4 @@
-package Expceptions;
+package exceptions;
 
 public class ClaimPermissionException extends Exception {
 

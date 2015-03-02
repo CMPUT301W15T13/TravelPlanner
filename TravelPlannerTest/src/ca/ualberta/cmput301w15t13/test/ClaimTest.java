@@ -25,11 +25,11 @@ import java.util.Date;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
-import Expceptions.ClaimPermissionException;
-import Expceptions.DuplicateException;
-import Expceptions.InvalidDateException;
-import Expceptions.InvalidFieldEntryException;
-import Expceptions.InvalidNameException;
+import exceptions.ClaimPermissionException;
+import exceptions.DuplicateException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
+import exceptions.InvalidNameException;
 import android.test.ActivityInstrumentationTestCase2;
 
 
@@ -70,7 +70,10 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		this.makeRegularClaim();
 		
 		//test to see if we can make an invalid Claim (no name)
-		this.makeInvalidClaim();
+		this.makeInvalidClaimEmpty();
+		
+		//test to see if we can make an invalid Claim (null)
+		this.makeInvalidClaimNull();
 		
 		//this will test to see if an invalid date is entered
 		this.makeInvalidClaimDate();
@@ -135,8 +138,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		//add single claim
 		assertEquals("Claimlist size is not 1", 1, claimList.size());
 		
-		
-		
 	
 		//add 2 more claims
 		Claim claim2 = new Claim("Name2", new Date(100), new Date(120), null, null);
@@ -163,7 +164,8 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	private void makeInvalidClaimDate() throws InvalidNameException{
 		
 		String name = "Bill Smith";
-		Date startDate = new Date(120), endDate = new Date(100);
+		Date startDate = new Date(120); 
+		Date endDate = new Date(100);
 		
 		try{
 			//This will throw an InvalidDateException if the claim model is working correctly
@@ -183,19 +185,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 * @throws InvalidDateException 
 	 */
-	private void makeInvalidClaim() throws InvalidDateException{
-	
-		
-		try{
-			//If claim is working properly, it will throw an InvalidNameException
-			Claim claim = new Claim(null, new Date(100), new Date(120), null, null);
-			
-			//if we make it here, we failed the test
-			fail("Invalid Claim: Name is Null");
-		}
-		catch(InvalidNameException e){
-			
-		}
+	private void makeInvalidClaimEmpty() throws InvalidDateException{
 		
 		try{
 			//If claim is working properly, it will throw an InvalidNameException
@@ -206,6 +196,23 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		}
 		catch(InvalidNameException e){
 			
+		}
+		
+	}
+	
+	private void makeInvalidClaimNull() throws InvalidDateException {
+		
+		try{
+		//If claim is working properly, it will throw an InvalidNameException
+		Claim claim = new Claim(null, new Date(100), new Date(120), null, null);
+		
+		//if we make it here, we failed the test
+		fail("Invalid Claim: Name is Null");
+		
+		}
+		
+		catch(InvalidNameException e){
+		
 		}
 		
 	}

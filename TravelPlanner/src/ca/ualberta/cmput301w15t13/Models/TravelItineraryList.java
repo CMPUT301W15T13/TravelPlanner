@@ -2,7 +2,8 @@ package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
 
-import Expceptions.DuplicateException;
+import exceptions.DuplicateException;
+
 
 public class TravelItineraryList {
 

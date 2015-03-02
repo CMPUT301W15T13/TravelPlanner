@@ -22,8 +22,6 @@ package ca.ualberta.cmput301w15t13.test;
 
 import java.util.Date;
 
-import Expceptions.InvalidDateException;
-import Expceptions.InvalidNameException;
 import android.graphics.Bitmap;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
@@ -31,6 +29,8 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.Receipt;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import exceptions.InvalidDateException;
+import exceptions.InvalidNameException;
 
 /** 
  * General use case can be found on the wiki at
@@ -105,6 +105,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		}
 		assertNotSame("Bitmap wasn't modified", bitmapLarge, returnedBitmap);
 	}
+
 	
 	
 	/**Use case F3
