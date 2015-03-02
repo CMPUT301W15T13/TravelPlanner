@@ -265,22 +265,20 @@ public class Claim {
 
 
 
-	public void editTravelDescription(int i, String destination, String description) throws InvalidFieldEntryException, DuplicateException {
+	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException, DuplicateException {
 
-		if ((destination.isEmpty() || destination.isEmpty())){
-			throw new InvalidFieldEntryException("destination at index " +i + " can not be editted. Destination is empty");
+		if ((destination == null) || (destination.trim().isEmpty())){
+			throw new InvalidFieldEntryException("destination at index " +index + " can not be editted. Destination is empty or null");
 		}
-		if ((description.isEmpty() || description.isEmpty())){
-			throw new InvalidFieldEntryException("description at index " +i + " can not be editted. Description is empty");
+		if ((description == null) || (description.trim().isEmpty())){
+			throw new InvalidFieldEntryException("description at index " +index + " can not be editted. Description is empty");
 		}
 		
 		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 		
-		if (travelList.contains(travelItinerary))
-		{
-			throw new DuplicateException("Cann not edit destination. Destination Already Exists");
-			
-		}
+		travelList.editTravelDestination(index, travelItinerary);
+		
+		
 		
 	}
 
@@ -288,7 +286,7 @@ public class Claim {
 
 
 	public void deleteTravelDestination(int i) {
-		// TODO Auto-generated method stub
+		this.travelList.deleteTravelDestination(i);
 	}
 
 

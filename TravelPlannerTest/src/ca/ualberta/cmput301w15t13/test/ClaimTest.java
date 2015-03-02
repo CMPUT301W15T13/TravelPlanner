@@ -410,7 +410,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		claim.setUserName(name2);
 		claim.setClaimDates(startDate2, endDate2);
-		claim.setDescription("Trip to Italy");
+		claim.setDescription(description2);
 		
 		assertNotNull("Edited claim is null", claim);
 		
@@ -445,6 +445,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 			
 			//if we make it here, we failed the test
 			fail("Invalid Name: No name entered");
+			
 		} catch (InvalidNameException e) {
 
 		}
@@ -462,11 +463,12 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		try {
 			
 			//If this works properly, it will throw an InvalidDateException (ie start date is after end date)
-			claim.setClaimDates(new Date(120), new Date(120));
+			claim.setClaimDates(new Date(121), new Date(120));
 
 			
 			//if we make it here, we failed the test
 			fail("Invalid Date: Start date occurs after end Date");
+			
 		} catch (InvalidDateException e) {
 			
 		}
@@ -504,7 +506,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 			//if we make it here, we failed the test
 			fail("Invalid Travel Destination: Duplicate entry");
 		}
-		catch(DuplicateException e){
+	catch(DuplicateException e){
 			
 		}
 		
@@ -519,7 +521,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 			
 		}
 		
-		
 		try{
 			//If this works it will throw an InvalidFieldEntryExeption
 			claim.editTravelDescription(1,  "Canada",null);
@@ -530,6 +531,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		catch(InvalidFieldEntryException e){
 			
 		}
+
 		
 	}
 	

@@ -28,6 +28,19 @@ public class TravelItineraryList {
 		
 	}
 
+	
+	public void editTravelDestination(int index, TravelItinerary travelDestination) throws DuplicateException{
+		
+		if (this.travelList.contains(travelDestination))
+			throw new DuplicateException("Travel Destination already exists");
+		
+		if ((index >= 0) && (index < this.travelList.size()))
+			this.travelList.set(index, travelDestination);
+		else
+			throw new IndexOutOfBoundsException("index is out of range");
+			
+		
+	}
 
 	public int numberofDestinations() {
 		
@@ -37,7 +50,7 @@ public class TravelItineraryList {
 
 	public TravelItinerary getTravelDestinationAtIndex(int index) throws InvalidFieldEntryException {
 	
-		if (this.travelList.isEmpty() && (this.travelList.size() > index))
+		if ((index < 0) && (index >= this.travelList.size() ))
 			throw new InvalidFieldEntryException("Index of Travel Destination is invalid.");
 		else
 			return this.travelList.get(index);
