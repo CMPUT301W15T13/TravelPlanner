@@ -61,7 +61,11 @@ public class ClaimStatus {
 	public boolean isEditable() {
 		// The two status values less 
 		//than 2==SUBMITTED are editable
-		return status < SUBMITTED;
+		//return status < SUBMITTED;
+		if ((this.status == INPROGRESS) || (this.status == RETURNED))
+			return true;
+		else
+			return false;
 	}
 	
 	

@@ -72,16 +72,16 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		this.makeRegularClaim();
 		
 		//test to see if we can make an invalid Claim (no name)
-		this.makeInvalidClaimEmpty();
+	//	this.makeInvalidClaimEmpty();
 		
-		//test to see if we can make an invalid Claim (null)
-		this.makeInvalidClaimNull();
+	//	//test to see if we can make an invalid Claim (null)
+	//	this.makeInvalidClaimNull();
 		
 		//this will test to see if an invalid date is entered
-		this.makeInvalidClaimDate();
+	//	this.makeInvalidClaimDate();
 		
 		//this will check to see if a claim can be added
-		this.addClaim();
+	//	this.addClaim();
 
 	}
 	
@@ -100,11 +100,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		String name = "Bill Smith";
 		Date startDate = new Date(100), endDate = new Date(120);
 		
-		//ClaimList to hold claims
-		ClaimList claimList = new ClaimList();
 		
 		//Claim constructor with string name, Date startDate, Date endDate
-		Claim claim = new Claim(name, startDate, endDate, "", null);
+		Claim claim = new Claim(name, startDate, endDate, null, null);
 	
 		//Add description to claim
 		claim.setDescription("Trip to Rome");

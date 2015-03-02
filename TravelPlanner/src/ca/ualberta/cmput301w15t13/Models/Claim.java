@@ -62,6 +62,9 @@ public class Claim {
  */
 	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws InvalidDateException, InvalidNameException, InvalidUserPermissionException {
 
+		//initializes the claim status to INPROGRESS (and editable)
+		this.status = new ClaimStatus();
+		
 		//this checks the user Name for errs and sets the user name
 		this.setUserName(username);
 		
@@ -71,9 +74,6 @@ public class Claim {
 		//this sets the description
 		this.setDescription(description);
 			
-		//initializes the claim status to INPROGRESS (and editable)
-		this.status = new ClaimStatus();
-		
 		//this sets the travel List. If null, it makes an empty list
 		this.setTravelList(travelList);
 
@@ -113,13 +113,13 @@ public class Claim {
 		//userName = "Bill Smith";
 		if (this.status.isEditable())
 		{
-			if (userName == null ||userName.trim().isEmpty() ) {
+			if (userName == null ||userName.trim().isEmpty() ) 
 				throw new InvalidNameException("Invalid UserName Entered");
-			} else {
+			else
 				this.userName = userName;
 				
-			}
 		}
+		
 		else
 			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
 	}
