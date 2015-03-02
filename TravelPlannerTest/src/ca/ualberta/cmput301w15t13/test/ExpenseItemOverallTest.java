@@ -29,6 +29,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
+import exceptions.InvalidUserPermissionException;
 
 
 /** 
@@ -51,8 +52,9 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * as a claimant.
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void testAddExpense() throws InvalidDateException, InvalidNameException{
+	public void testAddExpense() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		
 		this.addExpenseItem();
 		this.addWrongCategory();
@@ -66,8 +68,9 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * This adds and tests the addition of expense items
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void addExpenseItem() throws InvalidDateException, InvalidNameException{
+	public void addExpenseItem() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String category = "air fare", description = "Desc", currency = "CAD";
 		double price = 12.00;
@@ -100,9 +103,10 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * Test that a category must be one of the proper categories
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addWrongCategory() throws InvalidDateException, InvalidNameException{
+	public void addWrongCategory() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String[] validCategories = {"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking", "registration", "accommodation", "meal",  "supplies"};
 		/*A default constructor which doesn't initialize values */
@@ -120,9 +124,10 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/83
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addWrongCurrency() throws InvalidDateException, InvalidNameException{
+	public void addWrongCurrency() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String[] validCurrencies = {"CAD", "USD", "EUR", "GBP", "CHF", "JPY", "CNY"};
 		/*A default constructor which doesn't initialize values */
@@ -142,9 +147,10 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * Test that you can flag and unflag an expenseItem 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 
-	public void testFlagExpenseItem() throws InvalidDateException, InvalidNameException{
+	public void testFlagExpenseItem() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
 		expenseItem.setIncompletenessIndicator();
@@ -160,9 +166,10 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * the claim is editable
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 
-	public void testEditExpenseItem() throws InvalidDateException, InvalidNameException{
+	public void testEditExpenseItem() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
 		ArrayList<ExpenseItem> expenseList = null;
@@ -189,8 +196,9 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * Test that you can delete an expense Item from a claim
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void testDeleteExpenseItem() throws InvalidDateException, InvalidNameException{
+	public void testDeleteExpenseItem() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
 

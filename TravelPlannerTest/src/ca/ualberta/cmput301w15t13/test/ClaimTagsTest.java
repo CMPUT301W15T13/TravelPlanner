@@ -34,6 +34,7 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
 import exceptions.DuplicateException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
+import exceptions.InvalidUserPermissionException;
 
 
 
@@ -59,8 +60,9 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void testTags() throws InvalidDateException, InvalidNameException, DuplicateException{
+	public void testTags() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 	
 		this.addTag();
 		
@@ -84,9 +86,10 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addTag() throws InvalidDateException, InvalidNameException, DuplicateException{
+	public void addTag() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
 				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
@@ -115,8 +118,9 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void removeTag() throws InvalidDateException, InvalidNameException{
+	public void removeTag() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String tag = "test";
 	
@@ -135,9 +139,10 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void noDuplicates() throws InvalidDateException, InvalidNameException, DuplicateException{
+	public void noDuplicates() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
 		
@@ -160,8 +165,9 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void renameTag() throws InvalidDateException, InvalidNameException, DuplicateException{
+	public void renameTag() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 		
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
@@ -186,8 +192,9 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void testListTags() throws InvalidDateException, InvalidNameException, DuplicateException{
+	public void testListTags() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 		Claim claim = new Claim ("User1", new Date(10), new Date(200), null, null);
 		claim.addTag("yolo");
 		claim.addTag("Gift to self");

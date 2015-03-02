@@ -31,6 +31,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
+import exceptions.InvalidUserPermissionException;
 
 
 /** 
@@ -54,8 +55,9 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void testReturnClaim() throws InvalidDateException, InvalidNameException{
+	public void testReturnClaim() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());;
 		claim.setStatus(ClaimStatus.RETURNED);
 		Approver approver = new Approver("Catbert");
@@ -85,8 +87,9 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void testClaimApprove() throws InvalidDateException, InvalidNameException{
+	public void testClaimApprove() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		claim.setStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
@@ -116,9 +119,10 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/77
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testComment() throws InvalidDateException, InvalidNameException{
+	public void testComment() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		Approver approver = new Approver("catbert");
 		String comment = "Test";

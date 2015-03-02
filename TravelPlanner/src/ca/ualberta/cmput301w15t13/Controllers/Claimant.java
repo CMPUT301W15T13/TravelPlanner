@@ -22,6 +22,7 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import exceptions.InvalidUserPermissionException;
 
 public class Claimant extends User {
 	/*
@@ -35,7 +36,7 @@ public class Claimant extends User {
 		super(name);
 	}
 	
-	public void submitClaim(Claim claim){
+	public void submitClaim(Claim claim) throws InvalidUserPermissionException{
 		if(claim != null && claim.getStatus() == ClaimStatus.INPROGRESS){
 			claim.setStatus(ClaimStatus.SUBMITTED);
 		}

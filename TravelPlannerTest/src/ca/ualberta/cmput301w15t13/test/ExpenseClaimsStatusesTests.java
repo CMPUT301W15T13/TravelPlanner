@@ -31,6 +31,7 @@ import exceptions.DuplicateException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidNameException;
+import exceptions.InvalidUserPermissionException;
 import android.test.ActivityInstrumentationTestCase2;
 
 
@@ -55,8 +56,9 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * @throws InvalidDateException 
 	 * @throws InvalidFieldEntryException 
 	 * @throws DuplicateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void testClaimantSubmit() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	public void testClaimantSubmit() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, InvalidUserPermissionException{
 		//LoginActivity.setUserType("claimant"); 
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		
@@ -84,8 +86,9 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * @throws InvalidDateException 
 	 * @throws InvalidFieldEntryException 
 	 * @throws DuplicateException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void testClaimantOnReturned() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	public void testClaimantOnReturned() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, InvalidUserPermissionException{
 		//LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		claim.setStatus(ClaimStatus.RETURNED);
@@ -108,9 +111,10 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * @throws InvalidDateException 
 	 * @throws InvalidFieldEntryException 
 	 * @throws DuplicateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 
-	public void testClaimStatusApproved() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException{
+	public void testClaimStatusApproved() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, InvalidUserPermissionException{
 		//LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		claim.setStatus(ClaimStatus.APPROVED);

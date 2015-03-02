@@ -32,6 +32,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
+import exceptions.InvalidUserPermissionException;
 
 public class ClaimItemListTest extends
 		ActivityInstrumentationTestCase2<LoginActivity> {
@@ -45,7 +46,7 @@ public class ClaimItemListTest extends
 		super.setUp();
 	}
 	
-	public void testSetUp() throws InvalidDateException, InvalidNameException{
+	public void testSetUp() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		ClaimList itemList = new ClaimList();
 		assertNotNull("Item list is null", itemList);
 		assertEquals("Item list is not empty",0, itemList.size());
@@ -72,7 +73,7 @@ public class ClaimItemListTest extends
 	
 	
 	
-	public void testAddRemove() throws InvalidDateException, InvalidNameException{
+	public void testAddRemove() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
@@ -104,7 +105,7 @@ public class ClaimItemListTest extends
 		assertFalse("Claim list contains claim 2", claimList.contains(claim2));
 	}
 
-	public void testIndexing() throws InvalidDateException, InvalidNameException{
+	public void testIndexing() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());

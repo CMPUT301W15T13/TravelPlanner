@@ -31,6 +31,7 @@ import ca.ualberta.cmput301w15t13.Models.Receipt;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
+import exceptions.InvalidUserPermissionException;
 
 /** 
  * General use case can be found on the wiki at
@@ -50,9 +51,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * Tests for use case F1
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 * 
 	 */
-	public void testBitmap() throws InvalidDateException, InvalidNameException{
+	public void testBitmap() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		this.addBitmap();
 		this.largeBitmap();
 	}
@@ -63,9 +65,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/61
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addBitmap() throws InvalidDateException, InvalidNameException{
+	public void addBitmap() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmap);
 		
@@ -88,9 +91,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/64
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void largeBitmap() throws InvalidDateException, InvalidNameException{
+	public void largeBitmap() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmapLarge);
 		
@@ -113,9 +117,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/63
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testRemoveBitmap() throws InvalidDateException, InvalidNameException{
+	public void testRemoveBitmap() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Bitmap returnedBitmap;
 		Receipt receipt = new Receipt(bitmap);
