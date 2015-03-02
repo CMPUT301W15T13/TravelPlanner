@@ -44,6 +44,7 @@ public class Approver extends User {
 	
 	public void returnClaim(Claim claim) throws InvalidUserPermissionException{
 		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
+			claim.setLastApproverName(this.name);
 			claim.setStatus(ClaimStatus.RETURNED);
 		}
 	}

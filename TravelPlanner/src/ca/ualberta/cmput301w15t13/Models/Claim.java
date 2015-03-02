@@ -364,18 +364,27 @@ public class Claim {
 
 
 
-
+	/**
+	 * Creates a new ArrayList<String>
+	 * of all comments from all approvers
+	 * and returns them all.
+	 */
 	public ArrayList<String> getComments() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<String> comments = new ArrayList<String>();
+		for(String key: approverComments.keySet()){
+			ArrayList<String> tempComments = approverComments.get(key);
+			for(String comment : tempComments){
+				comments.add(comment);
+			}
+		}
+		return comments;
 	}
 
 
 
-
 	public void clearComments() {
-		// TODO Auto-generated method stub
-		
+		this.approverComments = new HashMap<String, ArrayList<String>>();
+		this.lastApproverName = null;
 	}
 
 

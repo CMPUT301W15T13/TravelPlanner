@@ -60,7 +60,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	public void testReturnClaim() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());;
-		claim.setStatus(ClaimStatus.RETURNED);
+		claim.setStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
 		
 		approver.returnClaim(claim);
@@ -129,7 +129,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	public void testComment() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		Approver approver = new Approver("catbert");
+		Approver approver = new Approver("Catbert");
 		String comment = "Test";
 		
 		claim.setStatus(ClaimStatus.SUBMITTED);
@@ -139,7 +139,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		assertNotNull("Claim comments are null", comments);
 		assertEquals("There are no claim comments",1,  comments.size());
 		assertTrue("Comment isn't added", comments.contains(comment));
-		assertEquals("Approver name not set", "Catberg", claim.getlastApproverName());
+		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
 		claim.setStatus(ClaimStatus.INPROGRESS);
 		claim.clearComments();
