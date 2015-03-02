@@ -102,7 +102,7 @@ public class Claim {
 		
 		//userName = "Bill Smith";
 		
-		if (userName.isEmpty() || userName.equals(null)) {
+		if (userName == null ||userName.trim().isEmpty() ) {
 			throw new InvalidNameException("Invalid UserName Entered");
 		} else {
 			this.userName = userName;
