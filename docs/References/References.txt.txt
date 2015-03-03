@@ -5,3 +5,7 @@ Accessed on Feb 24, 2015 @ 7:29pm by Edwin R.
 Found code to turn to see if an array contains a value:
 http://stackoverflow.com/questions/1128723/in-java-how-can-i-test-if-an-array-contains-a-certain-value
 Accessed on Feb 24, 2015 @ 7:32pm by Edwin R.
+
+Found code for enum class
+http://stackoverflow.com/questions/19600684/java-enum-with-multiple-value-types
+Accessed on March 2, 2015 @ 9:42pm by Edwin R.

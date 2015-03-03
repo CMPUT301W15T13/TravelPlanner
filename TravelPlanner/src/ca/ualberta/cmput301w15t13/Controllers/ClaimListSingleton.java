@@ -29,5 +29,12 @@ public class ClaimListSingleton {
 	static public void addClaim(Claim claim){
 		claimList.add(claim);
 	}
+
+	public static boolean isClaimEditable(String claimID) {
+
+		return claimList.isClaimEditable(claimID);
+	
+		
+	}
 	
 }

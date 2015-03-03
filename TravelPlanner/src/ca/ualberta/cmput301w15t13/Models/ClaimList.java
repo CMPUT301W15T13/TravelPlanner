@@ -118,4 +118,16 @@ public class ClaimList {
 	public void sortClaimListByDate(){
 		Collections.sort(claimList, new ClaimDateSorter());
 	}
+
+	public boolean isClaimEditable(String claimID) {
+	
+		for (Claim claim: claimList)
+		{
+			if (claim.getclaimID().equals(claimID))
+				return claim.isEditable();
+		}
+		
+		return false;
+
+	}
 }

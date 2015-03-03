@@ -2,19 +2,27 @@ package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.Date;
 
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import exceptions.InvalidUserPermissionException;
 import android.graphics.Bitmap;
 
 
 public class ExpenseItem {
+	
+	//these are the input fields for the expense
 	protected String ExpenseCategory = null;
 	protected Date purchaseDate = null;
 	protected String ExpenseDescription = null;
 	protected double Amount = 0.00;
-	protected String Currency = null;
+	protected String currency;
+
 	
-	protected String linkedToclaimID = null;
+	protected String ClaimID = null;
+	//this does not need to be initalized
+	protected Currency currencyEnum;
 	
 	public Receipt receipt = null;
+	
 	public boolean complete = false;
 	
 	
@@ -26,16 +34,28 @@ public class ExpenseItem {
 	 * @param purchaseDate
 	 * @param Amount
 	 * @param Currency
+	 * @throws InvalidUserPermissionException 
 	 */
-	public ExpenseItem( String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID){
-		this.ExpenseCategory = Category;
-		this.purchaseDate = purchaseDate;
-		this.ExpenseDescription = ExpenseDescription;
-		this.Amount = Amount;
-		this.Currency = Currency;
+	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID) throws InvalidUserPermissionException{
 		
-		this.linkedToclaimID = ClaimID;
+		//this looks through the singleton list to see if the claim is editable
+		//if so, itr makes the expense
+		if (ClaimListSingleton.isClaimEditable(ClaimID))
+		{
+			this.ClaimID = ClaimID;
+			this.ExpenseCategory = Category;
+			this.purchaseDate = purchaseDate;
+			this.ExpenseDescription = ExpenseDescription;
+			this.Amount = Amount;
+			this.currency = Currency;
+			
+		}
+		else
+			throw new InvalidUserPermissionException("Expense can not be created, Claim is not editable");
+
+		
 	}
+
 
 
 
@@ -88,25 +108,25 @@ public class ExpenseItem {
 
 
 	public String getCurrency() {
-		return Currency;
+		return currency;
 	}
 
 
 
 	public void setCurrency(String currency) {
-		Currency = currency;
+		currency = currency;
 	}
 
 
 
 	public String getLinkedToclaimID() {
-		return linkedToclaimID;
+		return ClaimID;
 	}
 
 
 
 	public void setLinkedToclaimID(String linkedToclaimID) {
-		this.linkedToclaimID = linkedToclaimID;
+		this.ClaimID = linkedToclaimID;
 	}
 
 
