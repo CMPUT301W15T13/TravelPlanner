@@ -24,9 +24,12 @@ import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
@@ -80,13 +83,21 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		/*Constructor for all default items of an expense item */
 		ExpenseItem expenseItem; // = new ExpenseItem(date, category, description, price, currency);
 	
+		ExpenseItemList eList = new ExpenseItemList(claim.getclaimID());
+		
+
+		
 		for(int i = 0; i < 3; i++){
 			expenseItem = new ExpenseItem(category, date, description, price, currency, claim.getclaimID());
 			price ++;
-			claim.addExpenseItem(expenseItem);
+			eList.add(expenseItem);
+			
 		}
 		
-		ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
+
+		ArrayList<ExpenseItem> expenseList = eList.getExpenseList();
+		
+		//ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
 		assertNotNull("Expense list is null", expenseList);
 		assertEquals("Expenselist is empty", 3, expenseList.size() );
 		for(ExpenseItem e : expenseList){

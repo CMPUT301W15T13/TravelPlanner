@@ -23,17 +23,39 @@ public class ClaimListSingleton {
 	}
 	
 	static public void setClaimList(ArrayList<Claim> claims){
+		if(claimList == null){
+			claimList = new ClaimList();
+		}
 		claimList = new ClaimList(claims);
 	}
 	
 	static public void addClaim(Claim claim){
+		if(claimList == null){
+			claimList = new ClaimList();
+		}
 		claimList.add(claim);
 	}
 
 	public static boolean isClaimEditable(String claimID) {
+		if(claimList == null){
+			claimList = new ClaimList();
+		}
 
+		
 		return claimList.isClaimEditable(claimID);
 	
+		
+	}
+	
+	public static boolean isEmpty(){
+		if(claimList == null){
+			claimList = new ClaimList();
+		}
+		
+		if (claimList.size() <0)
+			return true;
+		else
+			return false;
 		
 	}
 	

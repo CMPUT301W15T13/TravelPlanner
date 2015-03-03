@@ -40,7 +40,7 @@ public class ExpenseItem {
 		
 		//this looks through the singleton list to see if the claim is editable
 		//if so, itr makes the expense
-		if (ClaimListSingleton.isClaimEditable(ClaimID))
+		if ((!ClaimListSingleton.isEmpty()) ||   (ClaimListSingleton.isClaimEditable(ClaimID)))
 		{
 			this.ClaimID = ClaimID;
 			this.ExpenseCategory = Category;

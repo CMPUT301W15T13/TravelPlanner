@@ -8,9 +8,18 @@ public class ExpenseItemList {
 	// First assign the array, ExpenseItemList, to be null
 	ArrayList<ExpenseItem> ExpenseItemList = null;
 	
+	String claimID = null;
+	
 	// Initializing the ExpenseItemList
 	public ExpenseItemList()
 	{
+		ExpenseItemList = new ArrayList<ExpenseItem>();
+	}
+	
+	// Initializing the ExpenseItemList
+	public ExpenseItemList(String ClaimID)
+	{
+		claimID =ClaimID; 
 		ExpenseItemList = new ArrayList<ExpenseItem>();
 	}
 	
@@ -33,6 +42,15 @@ public class ExpenseItemList {
 			// if the list is empty, then return
 			return;
 		}
+	}
+	
+	public int size(){
+		return this.ExpenseItemList.size();
+	}
+	
+	
+	public ArrayList<ExpenseItem> getExpenseList(){
+		return this.ExpenseItemList;
 	}
 
 }
