@@ -44,6 +44,7 @@
         android:layout_alignRight="@+id/editTextUsername"
         android:layout_below="@+id/editTextPassword"
         android:textColor="@color/text"
-        android:text="@string/login" />
+        android:text="@string/login" 
+        android:onClick="login"/>
 
 </RelativeLayout>

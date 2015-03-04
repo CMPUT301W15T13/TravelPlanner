@@ -74,7 +74,7 @@ public class LoginActivity extends Activity {
 		EditText usernameEditText;
 		EditText passwordEditText;
 		String username, password;
-		
+
 		usernameEditText = (EditText) findViewById(R.id.editTextUsername);
 		passwordEditText = (EditText) findViewById(R.id.editTextPassword);
 		username = usernameEditText.getText().toString();
@@ -113,10 +113,10 @@ public class LoginActivity extends Activity {
 		//TODO package user in intent
 		//user = getUserByUsername(username);
 		
-		//Intent intent = new Intent(this, ClaimActivity.class);
-		//intent.putExtra(USERID, username);
+		Intent intent = new Intent(this, ClaimActivity.class);
+		intent.putExtra(USERID, username);
 		//TODO start new activity with the user
-		//startActivity(intent);
+		startActivity(intent);
 		
 	}
 	

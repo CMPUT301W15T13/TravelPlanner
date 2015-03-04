@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_dark"
+   >
+		<LinearLayout 
+		    android:layout_height="match_parent"
+		    android:layout_width="match_parent"
+		    android:layout_alignParentTop="true"
+		    android:layout_alignParentLeft="true"
+		    android:orientation="horizontal">
+		    <Spinner
+		        android:id="@+id/spinnerClaimFilter"
+		        android:layout_width="0px"
+		        android:layout_weight="0.5"
+		        android:layout_height="wrap_content"/>
+		    
+		    <LinearLayout
+		        android:layout_width="1dp"
+		        android:layout_height="match_parent"
+		        android:background="@color/background" >
+		        
+		    </LinearLayout>
+		
+		    <EditText
+		        android:id="@+id/editTextSearchClaims"
+		        android:layout_width="0px"
+		        android:layout_weight=".4"
+		        android:layout_height="match_parent"
+		        android:hint="@string/search"
+		        android:textColor="@color/text"
+		        android:maxLines="1"
+		        android:maxLength="255"
+		        android:ems="10" >
+		        <requestFocus />
+		    </EditText>
+
+		    <ImageButton
+		        android:id="@+id/ibuttonSearchClaim"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:src="@android:drawable/ic_menu_search" />
+		    
+    </LinearLayout>
+
+</RelativeLayout>
