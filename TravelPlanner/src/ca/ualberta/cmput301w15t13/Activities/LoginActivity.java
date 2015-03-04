@@ -20,16 +20,20 @@
 
 package ca.ualberta.cmput301w15t13.Activities;
 
-import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.R.id;
-import ca.ualberta.cmput301w15t13.R.layout;
-import ca.ualberta.cmput301w15t13.R.menu;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
+import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.User;
 
 public class LoginActivity extends Activity {
+	
+	public static final String USERID = "ca.ualberta.cmput301w15t13.username";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -54,5 +58,77 @@ public class LoginActivity extends Activity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	/**
+	 * 
+	 * @param view
+	 */
+	public void login(View view){
+		/*
+		 * Needs to:
+		 * validate the user credentials
+		 * send the user identification to the
+		 * next activity, and store it there
+		 */
+		EditText usernameEditText;
+		EditText passwordEditText;
+		String username, password;
+		
+		usernameEditText = (EditText) findViewById(R.id.editTextUsername);
+		passwordEditText = (EditText) findViewById(R.id.editTextPassword);
+		username = usernameEditText.getText().toString();
+		password = passwordEditText.getText().toString();
+		
+		if(username.equals("") || username == null){
+			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();
+		}else if(password.equals("") || password == null){
+			Toast.makeText(this, "Add password before logging in", Toast.LENGTH_SHORT).show();
+		}else{
+			//password and username are filled in
+			
+			//TODO maybe should be User.checkValidLogin(username, password);
+			if(checkValidLogin(username, password)){
+				startClaimActivity(username);
+			}else{
+				Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
+	
+	/**
+	 * 
+	 * @param username
+	 */
+	public void startClaimActivity(String username){
+		/*
+		 * Get the user from the server now, since 
+		 * it's less frustrating to wait for the server
+		 * when you hit login (before you go to the 
+		 * next screen) rather than in a transition phase
+		 * between layouts.
+		 * But you can't pass non-primitive objects. hmm.
+		 */
+		//User user;
+		//TODO package user in intent
+		//user = getUserByUsername(username);
+		
+		//Intent intent = new Intent(this, ClaimActivity.class);
+		//intent.putExtra(USERID, username);
+		//TODO start new activity with the user
+		//startActivity(intent);
+		
+	}
+	
+	/**
+	 * 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public boolean checkValidLogin(String username, String password){
+		//Should this be a static method in the user class?
+		//TODO check the proper username and password
+		return true;
 	}
 }
