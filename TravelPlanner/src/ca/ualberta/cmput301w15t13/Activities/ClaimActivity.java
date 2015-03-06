@@ -150,4 +150,14 @@ public class ClaimActivity extends Activity {
 		setFragementToClaimManager();
 	}
 	
+	/**
+	 * Create a new claim object,
+	 * then return to the viewing fragment. 
+	 */
+	public void finishClaim(View v){
+		//TODO
+		//ClaimManagerFragment.manageClaim();
+		setFragmentToClaimViewer();
+	}
+	
 }

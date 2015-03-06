@@ -147,7 +147,7 @@
 	    android:layout_alignParentBottom="true"
 	    android:text="@string/create_claim"
 	    android:textColor="@color/text"
-	    android:onClick="setFragmentToClaimViewer"
+	    android:onClick="finishClaim"
 	    />
 	
 </RelativeLayout>
