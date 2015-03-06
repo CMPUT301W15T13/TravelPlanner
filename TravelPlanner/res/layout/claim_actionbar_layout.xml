@@ -14,7 +14,7 @@
 		        android:id="@+id/spinnerClaimFilter"
 		        android:layout_width="0px"
 		        android:layout_weight="0.5"
-		        android:layout_height="wrap_content"/>
+		        android:layout_height="match_parent"/>
 		    
 		    <LinearLayout
 		        android:layout_width="1dp"

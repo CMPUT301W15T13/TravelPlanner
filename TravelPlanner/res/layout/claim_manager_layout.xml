@@ -1,8 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+<RelativeLayout
+    	xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="@color/background">
 
-</LinearLayout>
+	<ScrollView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_alignParentTop="true"
+	    android:layout_above="@+id/buttonFinishClaim">
+	    
+		<LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+	
+			<EditText
+			    android:id="@+id/editTextClaimName"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:textColor="@color/text"
+			    android:hint="@string/claim_name"
+			    android:ems="10" >
+	
+			    <requestFocus />
+			</EditText>
+			
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:textColor="@color/text"
+			    android:text="@string/start_date"
+			    />
+			
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+		    	android:layout_marginBottom="6dp"
+		    	android:background="@color/background_dark">    
+			    
+				<TextView
+				    android:id="@+id/textViewStartDate"
+				    android:textColor="@color/text"
+				    android:layout_width="0px"
+				    android:layout_weight="0.8"
+				    android:layout_height="wrap_content"
+				    />
+				
+				<ImageButton
+				    android:id="@+id/buttonStartDate"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.2"
+				    android:src="@android:drawable/ic_menu_my_calendar" />
+				
+			</LinearLayout>
+			
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:textColor="@color/text"
+			    android:text="@string/end_date"
+			    />
+			
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+		    	android:background="@color/background_dark"
+		    	android:layout_marginBottom="6dp"
+		    	>    
+			    
+				<TextView
+				    android:id="@+id/textViewEndDate"
+				    android:textColor="@color/text"
+				    android:layout_width="0px"
+				    android:layout_weight="0.8"
+				    android:layout_height="wrap_content"
+				    />
+				
+				<ImageButton
+				    android:id="@+id/buttonEndDate"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.2"
+				    android:src="@android:drawable/ic_menu_my_calendar" />
+				
+			</LinearLayout>
+			
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:textColor="@color/text"
+			    android:text="@string/destinations"
+			    />
+			
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+		    	android:layout_marginBottom="6dp"
+		    	android:background="@color/background_dark">    
+			    
+				<TextView
+				    android:id="@+id/textViewDestinationsList"
+				    android:textColor="@color/text"
+				    android:layout_marginBottom="3dp"
+				    android:layout_marginTop="3dp"
+				    android:layout_width="0px"
+				    android:layout_weight="0.8"
+				    android:layout_height="match_parent"
+				    android:color="@color/text"
+				    />
+
+				<Button
+				    android:id="@+id/buttonNewDestination"
+				    style="?android:attr/buttonStyleSmall"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.2"
+				    android:textColor="@color/text"
+				    android:text="@string/new_word" />
+				
+			</LinearLayout>
+			
+
+			
+			<EditText 
+			    android:id="@+id/editTextClaimDescription"
+			    android:inputType="textMultiLine"
+			    android:maxLines="5"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:textColor="@color/text"
+			    android:hint="@string/description"
+			    />	
+		</LinearLayout>
+	</ScrollView>
+
+	<Button
+	    android:id="@+id/buttonFinishClaim"
+	    android:layout_height="wrap_content"
+	    android:layout_width="match_parent"
+	    android:layout_alignParentBottom="true"
+	    android:text="@string/create_claim"
+	    android:textColor="@color/text"
+	    android:onClick="setFragmentToClaimViewer"
+	    />
+	
+</RelativeLayout>

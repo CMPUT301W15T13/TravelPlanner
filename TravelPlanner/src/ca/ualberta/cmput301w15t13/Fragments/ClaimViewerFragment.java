@@ -25,13 +25,20 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 
 public class ClaimViewerFragment extends Fragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
+		/*
+		 *  DO NOT do any layout work in here. The layout
+		 *  is only initialized by onStart()
+		 */
+		
 		super.onCreate(savedInstanceState);
 	}
 
@@ -44,8 +51,9 @@ public class ClaimViewerFragment extends Fragment {
 
 	@Override
 	public void onStart() {
-		// TODO Auto-generated method stub
 		super.onStart();
 	}
+	
+
 
 }

@@ -26,6 +26,7 @@
         android:layout_centerHorizontal="true"
         android:padding="0px"
         android:textColor="@color/text"
-        android:text="@string/new_claim" />
+        android:text="@string/new_claim" 
+        android:onClick="newClaim"/>
    
 </RelativeLayout>

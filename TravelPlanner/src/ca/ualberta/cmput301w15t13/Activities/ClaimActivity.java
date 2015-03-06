@@ -42,12 +42,14 @@ public class ClaimActivity extends Activity {
 	private FragmentTransaction ft;
 	private ClaimViewerFragment claimViewerFragment;
 	private ClaimManagerFragment claimManagerFragment;
+	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claim_activity_layout);
 		setActionBar();
+		this.actionBar = getActionBar();
 		
 		this.fm = getFragmentManager();
 		claimViewerFragment = new ClaimViewerFragment();
@@ -56,6 +58,11 @@ public class ClaimActivity extends Activity {
 		// TODO load data
 	}
 	
+	/**
+	 * Set the action bar
+	 * to the corresponding search and
+	 * sort settings for claim viewing.
+	 */
 	private void setActionBar(){
 		//Based on http://stackoverflow.com/questions/6746665/accessing-a-font-under-assets-folder-from-xml-file-in-android Jan 25 2015
 		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.claim_actionbar_layout, null);
@@ -82,6 +89,8 @@ public class ClaimActivity extends Activity {
 		});
 	}
  
+	
+	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -113,6 +122,8 @@ public class ClaimActivity extends Activity {
 	 * to the claim viewer.
 	 */
 	public void setFragmentToClaimViewer(){
+		actionBar.show();
+		
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, this.claimViewerFragment);
 		ft.commit();
@@ -123,10 +134,20 @@ public class ClaimActivity extends Activity {
 	 * fragment/layout
 	 */
 	public void setFragementToClaimManager(){
+		actionBar.hide();
+		
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, this.claimManagerFragment);
 		ft.commit();
 	}
 	
+	/**
+	 * Starts a new claim and switches
+	 * the fragment layout to the 
+	 * Claim Manager Layout
+	 */
+	public void newClaim(View v){
+		setFragementToClaimManager();
+	}
 	
 }
