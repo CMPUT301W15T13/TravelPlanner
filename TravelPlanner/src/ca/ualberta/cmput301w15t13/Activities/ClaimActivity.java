@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
@@ -159,5 +160,26 @@ public class ClaimActivity extends Activity {
 		//ClaimManagerFragment.manageClaim();
 		setFragmentToClaimViewer();
 	}
+	
+	/**
+	 * Will open a datepicker dialog
+	 * but passes the proper startdate textview id
+	 * such that it can be updtated.
+	 */
+	public void openStartDateDialog(View v){
+		TextView textId = (TextView) findViewById(R.id.textViewStartDate);
+		claimManagerFragment.openDateDialog(textId);
+	}
+	
+	/**
+	 * Will open a datepicker dialog
+	 * but passes the proper end date textview id
+	 * such that it can be updtated.
+	 */
+	public void openEndDateDialog(View v){
+		TextView textId = (TextView) findViewById(R.id.textViewEndDate);
+		claimManagerFragment.openDateDialog(textId);
+	}
+	
 	
 }

@@ -20,12 +20,20 @@
 
 package ca.ualberta.cmput301w15t13.Fragments;
 
-import ca.ualberta.cmput301w15t13.R;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
+import android.widget.TextView;
+import ca.ualberta.cmput301w15t13.R;
 
 public class ClaimManagerFragment extends Fragment{
 
@@ -46,6 +54,38 @@ public class ClaimManagerFragment extends Fragment{
 	public void onStart() {
 		// TODO Auto-generated method stub
 		super.onStart();
+	}
+
+	
+	/**
+	 * Opens a new date picker dialog to set the 
+	 * start and end dates of a claim. It will parse
+	 * the date selected and update the corresponding
+	 * text view, passed as textId
+	 * @param textId
+	 */
+	public void openDateDialog(TextView textId) {
+		// Based on http://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext March 06 2015
+		final Calendar myCalendar = Calendar.getInstance();
+		
+		DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+		    @Override
+		    public void onDateSet(DatePicker view, int year, int monthOfYear,
+		            int dayOfMonth) {
+		        myCalendar.set(Calendar.YEAR, year);
+		        myCalendar.set(Calendar.MONTH, monthOfYear);
+		        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+		        //updateLabel();
+		    }
+
+		};
+
+
+		new DatePickerDialog(getActivity(), date, myCalendar
+                .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+		        
 	}
 	
 	

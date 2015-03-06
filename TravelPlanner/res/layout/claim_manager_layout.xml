@@ -22,6 +22,7 @@
 			    android:layout_height="wrap_content"
 			    android:textColor="@color/text"
 			    android:hint="@string/claim_name"
+			    android:layout_marginBottom="6dp"
 			    android:ems="10" >
 	
 			    <requestFocus />
@@ -54,6 +55,7 @@
 				    android:layout_width="0dp"
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
+				    android:onClick="openStartDateDialog"
 				    android:src="@android:drawable/ic_menu_my_calendar" />
 				
 			</LinearLayout>
@@ -86,6 +88,7 @@
 				    android:layout_width="0dp"
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
+				    android:onClick="openEndDateDialog"
 				    android:src="@android:drawable/ic_menu_my_calendar" />
 				
 			</LinearLayout>
@@ -131,7 +134,7 @@
 			<EditText 
 			    android:id="@+id/editTextClaimDescription"
 			    android:inputType="textMultiLine"
-			    android:maxLines="5"
+			    android:maxLines="10"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:textColor="@color/text"
