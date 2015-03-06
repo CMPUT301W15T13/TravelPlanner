@@ -1,24 +1,59 @@
+/*
+ * Copyright 2015 James Devito
+ * Copyright 2015 Matthew Fritze
+ * Copyright 2015 Ben Hunter
+ * Copyright 2015 Ji Hwan Kim
+ * Copyright 2015 Edwin Rodriguez
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ca.ualberta.cmput301w15t13.Activities;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.graphics.Typeface;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 
 public class ClaimActivity extends Activity {
+	
+	private FragmentManager fm;
+	private FragmentTransaction ft;
+	private ClaimViewerFragment claimViewerFragment;
+	private ClaimManagerFragment claimManagerFragment;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.claim_viewer_layout);
+		setContentView(R.layout.claim_activity_layout);
 		setActionBar();
+		
+		this.fm = getFragmentManager();
+		claimViewerFragment = new ClaimViewerFragment();
+		claimManagerFragment = new ClaimManagerFragment();
+		
+		// TODO load data
 	}
 	
 	private void setActionBar(){
@@ -29,8 +64,24 @@ public class ClaimActivity extends Activity {
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
+		
+		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
+		searchButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				EditText searchBar = (EditText) findViewById(R.id.editTextSearchClaims);
+				String searchMessage = searchBar.getText().toString();
+				
+				// TODO test for not null and not empty throw exception thing
+				
+				//TODO actually search
+				
+				Toast.makeText(getBaseContext(), searchMessage, Toast.LENGTH_SHORT).show();
+			}
+		});
 	}
-
+ 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -49,4 +100,33 @@ public class ClaimActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		setFragmentToClaimViewer();
+	}
+
+	/**
+	 * Switches the fragment/layout
+	 * to the claim viewer.
+	 */
+	public void setFragmentToClaimViewer(){
+		ft = fm.beginTransaction();
+		ft.replace(R.id.mainFragmentHolder, this.claimViewerFragment);
+		ft.commit();
+	}
+	
+	/**
+	 * Switch to the claim manager
+	 * fragment/layout
+	 */
+	public void setFragementToClaimManager(){
+		ft = fm.beginTransaction();
+		ft.replace(R.id.mainFragmentHolder, this.claimManagerFragment);
+		ft.commit();
+	}
+	
+	
 }

@@ -1,0 +1,15 @@
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="ca.ualberta.cmput301w15t13.Activities.LoginActivity" >
+    
+    <FrameLayout
+        android:id="@+id/mainFragmentHolder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+    
+
+</RelativeLayout>
