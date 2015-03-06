@@ -33,12 +33,14 @@
 			    android:layout_height="wrap_content"
 			    android:textColor="@color/text"
 			    android:text="@string/start_date"
+			    android:layout_marginLeft="3dp"
 			    />
 			
 			<LinearLayout
 			    android:layout_width="match_parent"
 		    	android:layout_height="wrap_content"
 		    	android:orientation="horizontal"
+		    	android:layout_marginLeft="3dp"
 		    	android:layout_marginBottom="6dp"
 		    	android:background="@color/background_dark">    
 			    
@@ -65,6 +67,7 @@
 			    android:layout_height="wrap_content"
 			    android:textColor="@color/text"
 			    android:text="@string/end_date"
+			    android:layout_marginLeft="3dp"
 			    />
 			
 			<LinearLayout
@@ -73,6 +76,7 @@
 		    	android:orientation="horizontal"
 		    	android:background="@color/background_dark"
 		    	android:layout_marginBottom="6dp"
+		    	android:layout_marginLeft="3dp"
 		    	>    
 			    
 				<TextView
@@ -98,6 +102,7 @@
 			    android:layout_height="wrap_content"
 			    android:textColor="@color/text"
 			    android:text="@string/destinations"
+			    android:layout_marginLeft="3dp"
 			    />
 			
 			<LinearLayout
@@ -105,6 +110,7 @@
 		    	android:layout_height="wrap_content"
 		    	android:orientation="horizontal"
 		    	android:layout_marginBottom="6dp"
+		    	android:layout_marginLeft="3dp"
 		    	android:background="@color/background_dark">    
 			    
 				<TextView
@@ -148,7 +154,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_width="match_parent"
 	    android:layout_alignParentBottom="true"
-	    android:text="@string/create_claim"
+	    android:text="@string/finish"
 	    android:textColor="@color/text"
 	    android:onClick="finishClaim"
 	    />

@@ -17,5 +17,6 @@
     <string name="claim_name">Claim Name</string>
     <string name="end_date">End Date</string>
     <string name="start_date">Start Date</string>
+    <string name="finish">Finish</string>
 
 </resources>
