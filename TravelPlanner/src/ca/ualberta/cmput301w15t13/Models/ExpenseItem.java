@@ -114,7 +114,7 @@ public class ExpenseItem {
 
 
 	public void setCurrency(String currency) {
-		currency = currency;
+		this.currency = currency;
 	}
 
 
