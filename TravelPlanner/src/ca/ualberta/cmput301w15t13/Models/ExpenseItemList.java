@@ -48,9 +48,29 @@ public class ExpenseItemList {
 		return this.ExpenseItemList.size();
 	}
 	
+	public boolean isempty(){
+		// this will check if the list is empty or not, return true iff empty else false
+		if (this.ExpenseItemList.size() == 0){
+			return true;
+		} else {
+			return false;
+		}
+	}
 	
 	public ArrayList<ExpenseItem> getExpenseList(){
 		return this.ExpenseItemList;
 	}
+	
+	public ExpenseItem findExpenseItem(int index){
+		// this method might be trimmed down a bit, little help will be nice if want to modify this
+		// check index is valid, this automatically check if list is empty too
+		if (this.ExpenseItemList.size() > index && index >= 0){
+			return(this.ExpenseItemList.get(index));
+		} else {
+			// input index is wrong or the list is empty
+			return null;
+		}
+	}
+	
 
 }
