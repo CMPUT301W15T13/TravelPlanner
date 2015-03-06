@@ -37,6 +37,17 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 
+/**
+ * This activity is used to manage claims for all users.
+ * You can view all claims you have permission to see,
+ * whether thats your own claims or submitted claims.
+ * From this activity you can also create, edit, and 
+ * approve claims which are supported by corresponding 
+ * fragments.
+ * @author mfritze
+ *
+ */
+
 public class ClaimActivity extends Activity {
 	
 	private FragmentManager fm;
@@ -179,6 +190,15 @@ public class ClaimActivity extends Activity {
 	public void openEndDateDialog(View v){
 		TextView textId = (TextView) findViewById(R.id.textViewEndDate);
 		claimManagerFragment.openDateDialog(textId);
+	}
+	
+	/**
+	 * Opens a destination dialog
+	 * for adding the location and reason
+	 * for travel.
+	 */
+	public void addDestination(View v){
+		claimManagerFragment.openDestinationDialog();
 	}
 	
 	

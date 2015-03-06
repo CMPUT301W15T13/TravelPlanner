@@ -35,6 +35,15 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 
+/**
+ * This fragment is used for creating and editing claims.
+ * Both functions use the same layout, so it's more familiar
+ * to the user. When creating, all fields are empty, and 
+ * when editting, they're populated by existing data.
+ * @author mfritze
+ *
+ */
+
 public class ClaimManagerFragment extends Fragment{
 
 	@Override

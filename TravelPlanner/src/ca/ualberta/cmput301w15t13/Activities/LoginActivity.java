@@ -30,6 +30,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 
+/**
+ * This activity is used only for login in and authentication.
+ * It will identify what kind of user is attempting to log in
+ * and direct them to a page to view claims specific to 
+ * their access rights.
+ * @author mfritze
+ *
+ */
+
 public class LoginActivity extends Activity {
 	
 	public static final String USERID = "ca.ualberta.cmput301w15t13.username";

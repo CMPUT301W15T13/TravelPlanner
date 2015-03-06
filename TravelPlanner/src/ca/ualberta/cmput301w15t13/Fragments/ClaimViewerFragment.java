@@ -27,6 +27,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import ca.ualberta.cmput301w15t13.R;
 
+/**
+ * This fragment is used to view claims and 
+ * surface level details, including name, cost, 
+ * status and dates. These fields are prone to change
+ * or grow. 
+ * @author mfritze
+ *
+ */
+
 public class ClaimViewerFragment extends Fragment {
 
 	@Override

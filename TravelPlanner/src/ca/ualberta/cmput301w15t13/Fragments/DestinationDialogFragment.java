@@ -27,6 +27,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import ca.ualberta.cmput301w15t13.R;
 
+/**
+ * This is a custom dialog fragment for 
+ * adding a destination-reason pair to a
+ * claim. It provides two edit text fields
+ * and a submit button. No cancel button is
+ * available because clicking outside the
+ * dialog will automatically close it.
+ * @author mfritze
+ *
+ */
+
 public class DestinationDialogFragment extends DialogFragment {
 	// Based on http://developer.android.com/guide/topics/ui/dialogs.html March 06 2015
     
