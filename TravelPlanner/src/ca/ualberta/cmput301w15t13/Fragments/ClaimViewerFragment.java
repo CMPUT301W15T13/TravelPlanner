@@ -25,10 +25,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 
 public class ClaimViewerFragment extends Fragment {
 
