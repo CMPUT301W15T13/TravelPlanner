@@ -8,9 +8,7 @@ public class Tag {
 	
 	String tagName = "";
 
-	SortedSet relatedClaimID = null;
-
-	
+	SortedSet<Tag> relatedClaimID = null;
 
 	
 	public Tag(String tagName, String claimID){

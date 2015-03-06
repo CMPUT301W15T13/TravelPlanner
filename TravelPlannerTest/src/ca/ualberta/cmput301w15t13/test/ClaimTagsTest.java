@@ -64,7 +64,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	public void testTags() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 	
-		this.addTag();
+		this.testAddTag();
 		
 		this.removeTag();
 		
@@ -73,8 +73,6 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		//tests to see if there are any duplicates
 		this.noDuplicates();
 	}
-	
-	
 	
 	/**Part of Use Case C1
 	 * Tests that you're able to add a tag to a claim
@@ -89,14 +87,18 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addTag() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	public void testAddTag() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
+		
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
 				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
 		
+		String claimID = claim.getclaimID();
+		
 		for(String vtag: validTags){
-			claim.addTag(vtag);
-			assertTrue("Valid tag wasn't added", Arrays.asList(claim.getTags()).contains(vtag));
+			Tag tag = new Tag(vtag, claimID);
+			claim.addTag(tag);
+			assertTrue("Valid tag wasn't added", Arrays.asList(claim.getTags()).contains(tag));
 		}
 		String[] tags = claim.getTags();
 		assertNotNull("Tags is null", tags);

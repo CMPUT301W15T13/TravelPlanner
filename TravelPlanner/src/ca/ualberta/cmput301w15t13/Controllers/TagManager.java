@@ -20,10 +20,22 @@
 package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
 public class TagManager {
+	
+	public HashMap hm = new HashMap();
+	
+	public TagManager() {
+		
+	}
+	
+	public void addTag(Tag tag, String claimID) {
+		hm.put(tag, claimID);
+		
+	}
 
 	public static ArrayList<Tag> getTagList() {
 		// TODO Auto-generated method stub

@@ -43,7 +43,8 @@ public class Claim {
 	protected HashMap<String, ArrayList<String>> approverComments = null;
 	protected String lastApproverName = null;
 	protected ClaimStatus status = null;
-
+	
+	public ArrayList<Tag> tags = null;
 	protected String claimID = null;
 	
 	
@@ -390,9 +391,12 @@ public class Claim {
 
 
 
-	public void addTag(String vtag) throws DuplicateException{
+	public void addTag(Tag tag) throws DuplicateException{
+		tags.add(tag);
+		TagManager.
 	
 		Tag newTag = new Tag(vtag, claimID);
+		
 		
 		
 		
@@ -401,7 +405,7 @@ public class Claim {
 
 
 
-	public String[] getTags() {
+	public ArrayList<Tag> getTags() {
 		// TODO Auto-generated method stub
 		return null;
 	}
