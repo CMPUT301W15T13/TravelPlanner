@@ -20,16 +20,16 @@
 
 package ca.ualberta.cmput301w15t13.Fragments;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.TextView;
@@ -81,11 +81,15 @@ public class ClaimManagerFragment extends Fragment{
 
 		};
 
-
 		new DatePickerDialog(getActivity(), date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 		        
+	}
+
+	public void openDestinationDialog() {
+		DestinationDialogFragment dialog = new DestinationDialogFragment();
+		dialog.show(getFragmentManager(), "TEST TAG");
 	}
 	
 	

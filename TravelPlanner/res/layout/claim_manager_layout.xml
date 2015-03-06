@@ -131,6 +131,7 @@
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
 				    android:textColor="@color/text"
+				    android:onClick="addDestination"
 				    android:text="@string/new_word" />
 				
 			</LinearLayout>

@@ -3,5 +3,6 @@
 	<color name="background">#333333</color>
 	<color name="background_dark">#222222</color>
 	<color name="text">#eeeeee</color>
-	<color name="incomplete">#ff0000</color>    
+	<color name="incomplete">#ff0000</color>
+	<color name="background_highlight">#888888</color>    
 </resources>
