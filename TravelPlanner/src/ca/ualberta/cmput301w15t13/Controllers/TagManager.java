@@ -26,20 +26,25 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
 
 public class TagManager {
 	
-	public HashMap hm = new HashMap();
+	public static HashMap<Tag, ArrayList<String>> manager = new HashMap<Tag, ArrayList<String>>();
 	
 	public TagManager() {
 		
 	}
 	
 	public void addTag(Tag tag, String claimID) {
-		hm.put(tag, claimID);
+		
+		ArrayList<String> relatedClaimIds = new ArrayList<String>();
+		relatedClaimIds.add(claimID);
+		manager.put(tag, relatedClaimIds);
+		
 		
 	}
 
-	public static ArrayList<Tag> getTagList() {
-		// TODO Auto-generated method stub
-		return null;
+	public static ArrayList<String> getTagList(Tag tag) {
+		
+		ArrayList<String> claims = manager.get(tag);
+		return claims;
 	}
 
 }
