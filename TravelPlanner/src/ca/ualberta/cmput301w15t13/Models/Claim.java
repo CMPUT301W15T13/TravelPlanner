@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+
 import exceptions.ClaimPermissionException;
 import exceptions.DuplicateException;
 import exceptions.InvalidDateException;
@@ -392,22 +394,17 @@ public class Claim {
 
 
 	public void addTag(Tag tag) throws DuplicateException{
-		tags.add(tag);
-		TagManager.
-	
-		Tag newTag = new Tag(vtag, claimID);
-		
-		
-		
+		if (tags.contains(tag)) {
+			throw new DuplicateException("Duplicate Tag Added");
+		} else {
+			tags.add(tag);
+		}
 		
 	}
 
-
-
-
 	public ArrayList<Tag> getTags() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.tags;
 	}
 	
 	public Tag getTag(int Index) {
@@ -415,10 +412,11 @@ public class Claim {
 		return null;
 	}
 
-	public Tag setTag(int Index, String tag) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public void setTag(int index, String tname) {
+		Tag tag = tags.get(index);
+		tag.setTagName("hello");
+}
+
 
 	public void removeTag(String tag) {
 		// TODO Auto-generated method stub

@@ -32,19 +32,26 @@ public class TagManager {
 		
 	}
 	
-	public void addTag(Tag tag, String claimID) {
-		
-		ArrayList<String> relatedClaimIds = new ArrayList<String>();
-		relatedClaimIds.add(claimID);
-		manager.put(tag, relatedClaimIds);
+	public void add(Tag tag, String claimID) {
+		if (manager.containsKey(tag)) {
+			manager.get(tag).add(claimID);
+		}else {
+			ArrayList<String> relatedClaimIds = new ArrayList<String>();
+			relatedClaimIds.add(claimID);
+			manager.put(tag, relatedClaimIds);
+		}
 		
 		
 	}
 
-	public static ArrayList<String> getTagList(Tag tag) {
+	public static ArrayList<String> getAssociatedClaims(Tag tag) {
 		
 		ArrayList<String> claims = manager.get(tag);
 		return claims;
+	}
+	
+	public HashMap<Tag, ArrayList<String>> getManager() {
+		return TagManager.manager;
 	}
 
 }

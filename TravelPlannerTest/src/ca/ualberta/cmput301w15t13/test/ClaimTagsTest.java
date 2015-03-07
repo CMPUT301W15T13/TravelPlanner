@@ -23,6 +23,7 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
@@ -56,7 +57,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	/**Use Case C1
 	 * 
-	 * Test that we can add ,edit and del
+	 * Test that we can add ,edit and delete
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws DuplicateException 
@@ -64,14 +65,21 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	public void testTags() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 	
-		this.testAddTag();
+		this.addTagTest();
 		
-		this.removeTag();
+		this.removeTagTest();
 		
-		this.renameTag();
+		this.renameTagTest();
+		
+		this.tagManagerTest();
 		
 		//tests to see if there are any duplicates
-		this.noDuplicates();
+		this.noDuplicatesTest();
+	}
+	
+	
+	public void tagManagerTest() {
+		
 	}
 	
 	/**Part of Use Case C1
@@ -87,27 +95,28 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testAddTag() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	@SuppressWarnings("unchecked")
+	public void addTagTest() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
-		
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
 				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
 		
 		String claimID = claim.getclaimID();
 		
 		for(String vtag: validTags){
-			Tag tag = new Tag(vtag, claimID);
+			Tag tag = new Tag(vtag);
 			claim.addTag(tag);
 			assertTrue("Valid tag wasn't added", Arrays.asList(claim.getTags()).contains(tag));
 		}
-		String[] tags = claim.getTags();
+		ArrayList<Tag> tags = claim.getTags();
 		assertNotNull("Tags is null", tags);
-		assertEquals("Not all tags added",validTags.length, tags.length );
+		assertEquals("Not all tags added",validTags.length, tags.size() );
 		
 		claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		for(String itag: invalidTags){
-			claim.addTag(itag);
-			assertFalse("inValid tag was added", Arrays.asList(claim.getTags()).contains(itag));
+			Tag tag = new Tag(itag);
+			claim.addTag(tag);
+			assertFalse("inValid tag was added", Arrays.asList(claim.getTags()).contains(tag));
 		}
 
 	}
@@ -122,7 +131,8 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void removeTag() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	@SuppressWarnings("unchecked")
+	public void removeTagTest() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String tag = "test";
 	
@@ -144,14 +154,15 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void noDuplicates() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	public void noDuplicatesTest() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
 		
 		for(String vtag: validTags){
-			claim.addTag(vtag);
+			Tag tag = new Tag(vtag);
+			claim.addTag(tag);
 			try{
-				claim.addTag(vtag);
+				claim.addTag(tag);
 				fail("Tag added twice");
 			}	catch (DuplicateException e){
 				
@@ -169,16 +180,16 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void renameTag() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	public void renameTagTest() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
 		
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
 				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
 		
 		for(String vtag: validTags){
-			claim.addTag(vtag);
+			Tag tag = new Tag(vtag);
+			claim.addTag(tag);
 		}
-
 		//Renames tags
 		claim.setTag(1, "Hello");
 		assertEquals("Claim has the new name", "Hello", claim.getTag(1));
@@ -188,7 +199,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	
 	/**
-	 * Test listing available tags
+	 * Test listing available tags as well as the TagManager
 	 * US03.02.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
@@ -197,28 +208,52 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidUserPermissionException 
 	 */
 	public void testListTags() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
-		Claim claim = new Claim ("User1", new Date(10), new Date(200), null, null);
-		claim.addTag("yolo");
-		claim.addTag("Gift to self");
-		ClaimListSingleton.addClaim(claim);
+		TagManager tm = new TagManager();
+		Tag tag1 = new Tag("yolo");
+		Tag tag2 = new Tag("Gift to self");
+		Tag tag3 = new Tag("On Sale");
+		Tag tag4 = new Tag("Aniversary gift");
 		
-		claim = new Claim ("User2", new Date(10), new Date(200), null, null);
-		claim.addTag("yolo");
-		claim.addTag("On Sale");
-		ClaimListSingleton.addClaim(claim);
+		Claim claim1 = new Claim ("User1", new Date(10), new Date(200), null, null);
+		String c1ID = claim1.getclaimID();
 		
-		claim = new Claim ("User3", new Date(10), new Date(200), null, null);
-		claim.addTag("Aniversary gift");
-		claim.addTag("On Sale");
-		ClaimListSingleton.addClaim(claim);
+		claim1.addTag(tag1);
+		tm.add(tag1, c1ID);
 		
-		ArrayList<Tag> tagList = TagManager.getTagList();
+		claim1.addTag(tag2);
+		tm.add(tag2, c1ID);
 		
-		assertEquals("Contains more or less than 4 tags",4, tagList.size());
-		assertTrue("yolo Tag not found", tagList.contains("yolo"));
-		assertTrue("Gift to self Tag not found", tagList.contains("Gift to self"));
-		assertTrue("On Sale Tag not found",  tagList.contains("On Sale"));
-		assertTrue("Aniversary gift Tag not found",  tagList.contains("Aniversary gift"));
+		ClaimListSingleton.addClaim(claim1);
+		
+		Claim claim2 = new Claim ("User2", new Date(10), new Date(200), null, null);
+		String c2ID = claim2.getclaimID();
+		
+		claim2.addTag(tag1);
+		tm.add(tag1, c2ID);
+		
+		claim2.addTag(tag3);
+		tm.add(tag3, c2ID);
+		
+		ClaimListSingleton.addClaim(claim2);
+		
+		Claim claim3 = new Claim ("User3", new Date(10), new Date(200), null, null);
+		String c3ID = claim3.getclaimID();
+		
+		claim3.addTag(tag4);
+		tm.add(tag4, c3ID);
+		
+		claim3.addTag(tag3);
+		tm.add(tag3, c3ID);
+		
+		ClaimListSingleton.addClaim(claim3);
+		
+		HashMap<Tag, ArrayList<String>> manager = tm.getManager();
+		
+		assertEquals("Contains more or less than 4 tags",4, manager.size());
+		assertTrue("yolo Tag not found", manager.containsValue("yolo"));
+		assertTrue("Gift to self Tag not found", manager.containsValue("Gift to self"));
+		assertTrue("On Sale Tag not found", manager.containsValue("On Sale"));
+		assertTrue("Aniversary gift Tag not found", manager.containsValue("Aniversary gift"));
 	}
 	
 }

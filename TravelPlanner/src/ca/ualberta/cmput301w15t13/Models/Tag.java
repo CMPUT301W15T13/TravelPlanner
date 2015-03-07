@@ -8,13 +8,16 @@ public class Tag {
 	
 	String tagName = "";
 
-	SortedSet<Tag> relatedClaimID = null;
-
 	
-	public Tag(String tagName, String claimID){
-		tagName = tagName;
-		relatedClaimID.add(claimID);
-				
+	public Tag(String tagName){
+		this.tagName = tagName;
 	}
 	
+	public String getTagName() {
+		return this.tagName;
+	}
+	
+	public void setTagName(String name) {
+		this.tagName = name;
+	}
 }
