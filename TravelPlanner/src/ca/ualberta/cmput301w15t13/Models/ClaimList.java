@@ -48,6 +48,7 @@ public class ClaimList {
 			claimList = new ArrayList<Claim>();
 		}
 		listenerList = new ArrayList<Listener>();
+		this.tagManager = new TagManager();
 	}
 
 	public ClaimList() {

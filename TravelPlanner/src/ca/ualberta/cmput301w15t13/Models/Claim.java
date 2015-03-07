@@ -383,21 +383,17 @@ public class Claim {
 		return comments;
 	}
 
-
-
 	public void clearComments() {
 		this.approverComments = new HashMap<String, ArrayList<String>>();
 		this.lastApproverName = null;
 	}
 
 
-
-
-	public void addTag(Tag tag) throws DuplicateException{
-		if (tags.contains(tag)) {
+	public void addTag(Tag tag) throws DuplicateException{	
+		if (this.tags.contains(tag)) {
 			throw new DuplicateException("Duplicate Tag Added");
 		} else {
-			tags.add(tag);
+			this.tags.add(tag);
 		}
 		
 	}

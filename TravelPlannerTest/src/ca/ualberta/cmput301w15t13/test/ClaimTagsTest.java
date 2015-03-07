@@ -71,16 +71,10 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		
 		this.renameTagTest();
 		
-		this.tagManagerTest();
-		
 		//tests to see if there are any duplicates
 		this.noDuplicatesTest();
 	}
 	
-	
-	public void tagManagerTest() {
-		
-	}
 	
 	/**Part of Use Case C1
 	 * Tests that you're able to add a tag to a claim
