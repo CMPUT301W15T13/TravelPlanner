@@ -144,6 +144,9 @@ public class ClaimItemListTest extends
 		claimList.notifyListeners();
 	}
 	
+	public void testFilter() {
+	
+	}
 	
 
 }

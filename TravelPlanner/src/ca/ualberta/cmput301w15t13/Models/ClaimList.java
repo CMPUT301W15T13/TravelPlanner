@@ -131,4 +131,9 @@ public class ClaimList {
 		return false;
 
 	}
+	
+	public ArrayList<String> filter(Tag tag) {
+		return tagManager.getAssociatedClaims(tag);
+		
+	}
 }
