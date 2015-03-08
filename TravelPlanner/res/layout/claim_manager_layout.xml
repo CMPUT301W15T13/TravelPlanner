@@ -41,15 +41,16 @@
 		    	android:layout_height="wrap_content"
 		    	android:orientation="horizontal"
 		    	android:layout_marginLeft="3dp"
-		    	android:layout_marginBottom="6dp"
-		    	android:background="@color/background_dark">    
+		    	android:layout_marginBottom="6dp">    
 			    
 				<TextView
 				    android:id="@+id/textViewStartDate"
 				    android:textColor="@color/text"
 				    android:layout_width="0px"
 				    android:layout_weight="0.8"
-				    android:layout_height="wrap_content"
+				    android:textAppearance="?android:attr/textAppearanceLarge"
+				    android:layout_height="match_parent"
+				    android:background="@color/background_dark"
 				    />
 				
 				<ImageButton
@@ -74,7 +75,6 @@
 			    android:layout_width="match_parent"
 		    	android:layout_height="wrap_content"
 		    	android:orientation="horizontal"
-		    	android:background="@color/background_dark"
 		    	android:layout_marginBottom="6dp"
 		    	android:layout_marginLeft="3dp"
 		    	>    
@@ -84,7 +84,9 @@
 				    android:textColor="@color/text"
 				    android:layout_width="0px"
 				    android:layout_weight="0.8"
-				    android:layout_height="wrap_content"
+				    android:textAppearance="?android:attr/textAppearanceLarge"
+				    android:background="@color/background_dark"
+				    android:layout_height="match_parent"
 				    />
 				
 				<ImageButton
@@ -111,7 +113,7 @@
 		    	android:orientation="horizontal"
 		    	android:layout_marginBottom="6dp"
 		    	android:layout_marginLeft="3dp"
-		    	android:background="@color/background_dark">    
+				>    
 			    
 				<TextView
 				    android:id="@+id/textViewDestinationsList"
@@ -121,6 +123,7 @@
 				    android:layout_width="0px"
 				    android:layout_weight="0.8"
 				    android:layout_height="match_parent"
+				    android:background="@color/background_dark"
 				    android:color="@color/text"
 				    />
 

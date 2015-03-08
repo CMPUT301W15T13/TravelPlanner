@@ -76,6 +76,7 @@ public class ClaimManagerFragment extends Fragment{
 	public void openDateDialog(TextView textId) {
 		// Based on http://stackoverflow.com/questions/14933330/datepicker-how-to-popup-datepicker-when-click-on-edittext March 06 2015
 		final Calendar myCalendar = Calendar.getInstance();
+		final TextView dateTextView = textId;
 		
 		DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
 
@@ -85,11 +86,13 @@ public class ClaimManagerFragment extends Fragment{
 		        myCalendar.set(Calendar.YEAR, year);
 		        myCalendar.set(Calendar.MONTH, monthOfYear);
 		        myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-		        //updateLabel();
+		        String dateText = Integer.toString(dayOfMonth) + "/" + Integer.toString(monthOfYear)
+		        		+ "/" + Integer.toString(year);
+		        dateTextView.setText(dateText);
 		    }
 
 		};
-
+		
 		new DatePickerDialog(getActivity(), date, myCalendar
                 .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH)).show();
