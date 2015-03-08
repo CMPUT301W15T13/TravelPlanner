@@ -42,11 +42,11 @@ public class Claim {
 	protected Date endDate = null;
 	protected String description = null;
 	protected TravelItineraryList travelList = null;
-	protected HashMap<String, ArrayList<String>> approverComments = null;
+	protected HashMap<String, ArrayList<String>> approverComments = new HashMap<String, ArrayList<String>>();
 	protected String lastApproverName = null;
 	protected ClaimStatus status = null;
 	
-	public ArrayList<Tag> tags = null;
+	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected String claimID = null;
 	
 	
@@ -405,12 +405,12 @@ public class Claim {
 	
 	public Tag getTag(int Index) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.tags.get(Index);
 	}
 
 	public void setTag(int index, String tname) {
 		Tag tag = tags.get(index);
-		tag.setTagName("hello");
+		tag.setTagName(tname);
 }
 
 

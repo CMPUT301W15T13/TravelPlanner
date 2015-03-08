@@ -100,7 +100,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		for(String vtag: validTags){
 			Tag tag = new Tag(vtag);
 			claim.addTag(tag);
-			assertTrue("Valid tag wasn't added", Arrays.asList(claim.getTags()).contains(tag));
+			assertTrue("Valid tag wasn't added", claim.getTags().contains(tag));
 		}
 		ArrayList<Tag> tags = claim.getTags();
 		assertNotNull("Tags is null", tags);
@@ -186,7 +186,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		}
 		//Renames tags
 		claim.setTag(1, "Hello");
-		assertEquals("Claim has the new name", "Hello", claim.getTag(1));
+		assertEquals("Claim has the new name", "Hello", claim.getTag(1).getTagName());
 		
 	}
 
