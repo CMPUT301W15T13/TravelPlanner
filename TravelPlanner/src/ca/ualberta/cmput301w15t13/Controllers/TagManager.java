@@ -44,7 +44,7 @@ public class TagManager {
 		
 	}
 
-	public static ArrayList<String> getAssociatedClaims(Tag tag) {
+	public ArrayList<String> getAssociatedClaims(Tag tag) {
 		
 		ArrayList<String> claims = manager.get(tag);
 		return claims;
