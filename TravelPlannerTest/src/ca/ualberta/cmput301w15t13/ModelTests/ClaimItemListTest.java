@@ -27,9 +27,12 @@ import java.util.Date;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import exceptions.DuplicateException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
@@ -144,8 +147,73 @@ public class ClaimItemListTest extends
 		claimList.notifyListeners();
 	}
 	
-	public void testFilter() {
-	
+	public void testFilter() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException, DuplicateException {
+		TagManager tm = new TagManager();
+		
+		Tag tag1 = new Tag("Ugent");
+		Tag tag2 = new Tag("Money");
+		Tag tag3 = new Tag("To do");
+		Tag tag4 = new Tag("Souvenir");
+		
+		ClaimList claimList = new ClaimList();
+		
+		ArrayList<Tag> filterTags = new ArrayList<Tag>();
+		
+		ArrayList<String> test1 = new ArrayList<String>();
+		ArrayList<String> test2 = new ArrayList<String>();
+		ArrayList<String> test3 = new ArrayList<String>();
+		
+		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
+		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), null, null);
+		
+		claim.addTag(tag1);
+		tm.add(tag1, claim.getclaimID());
+		
+		claimList.add(claim);
+		claimList.setTagMan(tm);
+		
+		
+		filterTags.add(tag1);
+		test1.add(claim.getclaimID());
+		
+		//filter by tag1
+		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
+		assertEquals(1, claimList.filter(filterTags).size());
+		
+		claim.addTag(tag2);
+		tm.add(tag2, claim.getclaimID());
+		claimList.setTagMan(tm);
+		
+		//filter by tag1 again
+		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
+		assertEquals(1, claimList.filter(filterTags).size());
+		
+		//filter by new tag (tag2)
+		filterTags.set(0, tag2);
+		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
+		assertEquals(1, claimList.filter(filterTags).size());
+		
+		//filter by both tags
+		filterTags.add(tag1);
+		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
+		assertEquals(1, claimList.filter(filterTags).size());
+		
+		//filter multiple tags
+		claim2.addTag(tag2);
+		tm.add(tag2, claim2.getclaimID());
+		
+		claimList.add(claim2);
+		claimList.setTagMan(tm);
+		// claim1 -- tag1, tag2
+		// claim2 -- tag2
+		filterTags.remove(1);
+		// filterTags = (tag2)
+		test1.add(claim2.getclaimID());
+		// test1 = (claim1 id, claim2 id)
+		assertEquals("Claim1 and Claim2 not filtered", test1 , claimList.filter(filterTags));
+		assertEquals(2, claimList.filter(filterTags).size());
+		
+		
 	}
 	
 

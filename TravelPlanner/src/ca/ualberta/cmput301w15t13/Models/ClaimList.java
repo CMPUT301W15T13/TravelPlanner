@@ -39,7 +39,7 @@ public class ClaimList {
 	 */
 	ArrayList<Claim> claimList = null;
 	ArrayList<Listener> listenerList = null;
-	TagManager tagManager = null;
+	public TagManager tagManager = null;
 
 	public ClaimList(ArrayList<Claim> oldClaims) {
 		if(oldClaims != null){
@@ -160,6 +160,10 @@ public class ClaimList {
 		}
 		
 		return claimIds;
+	}
+	
+	public void setTagMan(TagManager tm) {
+		this.tagManager = tm;
 	}
 	
 }
