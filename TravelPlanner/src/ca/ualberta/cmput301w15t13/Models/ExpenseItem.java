@@ -1,3 +1,23 @@
+/*
+ * Copyright 2015 James Devito
+ * Copyright 2015 Matthew Fritze
+ * Copyright 2015 Ben Hunter
+ * Copyright 2015 Ji Hwan Kim
+ * Copyright 2015 Edwin Rodriguez
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.Date;
@@ -15,6 +35,8 @@ public class ExpenseItem {
 	protected String ExpenseDescription = null;
 	protected double Amount = 0.00;
 	protected String currency;
+	// description for expense item
+	protected String TextDescription;
 
 	
 	protected String ClaimID = null;
@@ -36,7 +58,7 @@ public class ExpenseItem {
 	 * @param Currency
 	 * @throws InvalidUserPermissionException 
 	 */
-	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID) throws InvalidUserPermissionException{
+	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID, String TextDescription) throws InvalidUserPermissionException{
 		
 		//this looks through the singleton list to see if the claim is editable
 		//if so, itr makes the expense
@@ -48,6 +70,7 @@ public class ExpenseItem {
 			this.ExpenseDescription = ExpenseDescription;
 			this.Amount = Amount;
 			this.currency = Currency;
+			this.TextDescription = TextDescription;
 			
 		}
 		else
@@ -116,7 +139,14 @@ public class ExpenseItem {
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
+	
+	public void setDescription(String TextDescription) {
+		this.TextDescription = TextDescription;
+	}
 
+	public String getDescription() {
+		return TextDescription;
+	}
 
 
 	public String getLinkedToclaimID() {
