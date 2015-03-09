@@ -35,8 +35,6 @@ public class ExpenseItem {
 	protected String ExpenseDescription = null;
 	protected double Amount = 0.00;
 	protected String currency;
-	// description for expense item
-	protected String TextDescription;
 
 	
 	protected String ClaimID = null;
@@ -58,7 +56,7 @@ public class ExpenseItem {
 	 * @param Currency
 	 * @throws InvalidUserPermissionException 
 	 */
-	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID, String TextDescription) throws InvalidUserPermissionException{
+	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID) throws InvalidUserPermissionException{
 		
 		//this looks through the singleton list to see if the claim is editable
 		//if so, itr makes the expense
@@ -70,7 +68,6 @@ public class ExpenseItem {
 			this.ExpenseDescription = ExpenseDescription;
 			this.Amount = Amount;
 			this.currency = Currency;
-			this.TextDescription = TextDescription;
 			
 		}
 		else
@@ -140,14 +137,6 @@ public class ExpenseItem {
 		this.currency = currency;
 	}
 	
-	public void setDescription(String TextDescription) {
-		this.TextDescription = TextDescription;
-	}
-
-	public String getDescription() {
-		return TextDescription;
-	}
-
 
 	public String getLinkedToclaimID() {
 		return ClaimID;
