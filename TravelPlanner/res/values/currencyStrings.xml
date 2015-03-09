@@ -14,7 +14,7 @@ This resource can be used for spinners on selecting categories
 The value can be saved and passed to the model from the activity
 Example of code to be used
 -> LAYOUT XML
-Set entries of the spinner to reference the name in this case it is category array ie entries : @array/category_array
+Set entries of the spinner to reference the name in this case it is currency_array ie entries : @array/category_array
 
 On the activity/listener end of the code the value can simply be extracted simply by 
 SpinnerObject.getSelectedItem().toString()
