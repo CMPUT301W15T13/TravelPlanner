@@ -9,7 +9,7 @@
 	    android:layout_width="match_parent"
 	    android:layout_height="match_parent"
 	    android:layout_alignParentTop="true"
-	    android:layout_above="@+id/buttonFinishClaim">
+	    android:layout_above="@+id/layoutButtons">
 	    
 		<LinearLayout 
 		    android:layout_width="match_parent"
@@ -152,15 +152,32 @@
 			    />	
 		</LinearLayout>
 	</ScrollView>
-
-	<Button
-	    android:id="@+id/buttonFinishClaim"
-	    android:layout_height="wrap_content"
-	    android:layout_width="match_parent"
-	    android:layout_alignParentBottom="true"
-	    android:text="@string/finish"
-	    android:textColor="@color/text"
-	    android:onClick="finishClaim"
-	    />
 	
+	<LinearLayout
+	    android:id="@+id/layoutButtons"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true">
+
+	  	<Button
+		    android:id="@+id/buttonLeaveClaim"
+		    android:layout_width="0px"
+		    android:layout_weight="0.5"
+		    android:layout_height="wrap_content"
+		    android:text="@string/cancel"
+		    android:textColor="@color/text" />
+	    		
+		<Button
+		    android:id="@+id/buttonFinishClaim"
+		    android:layout_width="0px"
+		    android:layout_weight="0.5"
+		    android:layout_height="wrap_content"
+		    android:onClick="finishClaim"
+		    android:text="@string/finish"
+		    android:textColor="@color/text" />
+		
+	</LinearLayout>
+		
 </RelativeLayout>
