@@ -73,11 +73,11 @@ public class TravelItineraryList {
 				return true;
 			}
 		}
-		
 		return false;
 	}
 	
-	
-
+	public int size() {
+		return travelList.size(); 
+	}
 	
 }
