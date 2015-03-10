@@ -31,11 +31,13 @@
         android:layout_width="match_parent"
         android:layout_below="@+id/title_buffer"
         android:hint="@string/destination_singular"
+        android:singleLine="true"
         android:textColor="@color/text" />
     
     
     <EditText
         android:id="@+id/editTextReasonName"
+        android:singleLine="true"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_below="@+id/editTextDestinationName"

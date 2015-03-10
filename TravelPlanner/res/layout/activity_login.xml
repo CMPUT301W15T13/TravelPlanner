@@ -47,4 +47,14 @@
         android:text="@string/login" 
         android:onClick="login"/>
 
+    <Button
+        android:id="@+id/approverLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/buttonLogin"
+        android:layout_alignRight="@+id/buttonLogin"
+        android:layout_below="@+id/buttonLogin"
+        android:text="@string/approverLogin"
+        android:textColor="@color/text" />
+
 </RelativeLayout>
