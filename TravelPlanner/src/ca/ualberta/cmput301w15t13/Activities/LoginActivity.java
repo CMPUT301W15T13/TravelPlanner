@@ -42,7 +42,8 @@ import ca.ualberta.cmput301w15t13.R;
 public class LoginActivity extends Activity {
 	
 	public static final String USERID = "ca.ualberta.cmput301w15t13.username";
-
+	public static final String ISCLAIMANT = "ca.ualberta.cmput301w15t13.isclaimant";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -55,18 +56,6 @@ public class LoginActivity extends Activity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
-
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		// Handle action bar item clicks here. The action bar will
-//		// automatically handle clicks on the Home/Up button, so long
-//		// as you specify a parent activity in AndroidManifest.xml.
-//		int id = item.getItemId();
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
 
 	/**
 	 * 
@@ -123,6 +112,7 @@ public class LoginActivity extends Activity {
 		
 		Intent intent = new Intent(this, ClaimActivity.class);
 		intent.putExtra(USERID, username);
+		intent.putExtra(ISCLAIMANT, true);
 		//TODO start new activity with the user
 		startActivity(intent);
 		
@@ -138,5 +128,19 @@ public class LoginActivity extends Activity {
 		//Should this be a static method in the user class?
 		//TODO check the proper username and password
 		return true;
+	}
+	
+	/**
+	 * A temporary method that will allow us to set
+	 * the functionality of the approvers, but without
+	 * dealing with login authentication
+	 */
+	public void loginAsApprover(View v){
+		//TODO remove this for project part 5
+		Intent intent = new Intent(this, ClaimActivity.class);
+		intent.putExtra(USERID, "TESTUSERNAME");
+		intent.putExtra(ISCLAIMANT, false);
+		startActivity(intent);
+		
 	}
 }

@@ -55,6 +55,7 @@
         android:layout_alignRight="@+id/buttonLogin"
         android:layout_below="@+id/buttonLogin"
         android:text="@string/approverLogin"
+        android:onClick="loginAsApprover"
         android:textColor="@color/text" />
 
 </RelativeLayout>

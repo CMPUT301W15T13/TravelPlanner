@@ -24,9 +24,9 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -58,17 +58,23 @@ public class ClaimActivity extends Activity {
 	private ClaimViewerFragment claimViewerFragment;
 	private ClaimManagerFragment claimManagerFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
+	private boolean isClaimant;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claim_activity_layout);
+		
 		setActionBar();
 		this.actionBar = getActionBar();
 		
 		this.fm = getFragmentManager();
 		claimViewerFragment = new ClaimViewerFragment();
 		claimManagerFragment = new ClaimManagerFragment();
+		
+		Intent intent = getIntent();
+		this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
+		Toast.makeText(this, Boolean.toString(isClaimant), Toast.LENGTH_SHORT).show();
 		
 		// TODO load data
 	}
@@ -104,8 +110,6 @@ public class ClaimActivity extends Activity {
 		});
 	}
  
-	
-	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -113,7 +117,6 @@ public class ClaimActivity extends Activity {
 		return true;
 	}
 
-	
 	@Override
 	protected void onStart() {
 		super.onStart();
