@@ -23,6 +23,7 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.app.ActionBar.LayoutParams;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -37,7 +38,9 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import exceptions.DuplicateException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
@@ -53,8 +56,8 @@ import exceptions.InvalidUserPermissionException;
 
 public class ClaimManagerFragment extends Fragment{
 	EditText claimName, description;
-	TextView startDateView, endDateView;
-	String nameText, descriptionText;
+	TextView startDateView, endDateView, destinationView;
+	String nameText, descriptionText, startDateText, endDateText;
 	TravelItineraryList itineraryList;
 	Date startDate, endDate;
 	boolean completeFields;
@@ -86,6 +89,7 @@ public class ClaimManagerFragment extends Fragment{
 		super.onStart();
 		claimName = (EditText) getView().findViewById(R.id.editTextClaimName);
 		description = (EditText) getView().findViewById(R.id.editTextClaimDescription);
+		destinationView = (TextView) getView().findViewById(R.id.textViewDestinationsList);
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
 	}
@@ -158,10 +162,12 @@ public class ClaimManagerFragment extends Fragment{
 	
 
 	public void createClaim() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
-		if(true){ // TODO change to check that all fields are filled, maybe in the update Ref function
+		if(this.completeFields){
 			Claim newClaim = new Claim(this.nameText, startDate, endDate, 
 				this.descriptionText, itineraryList);
 			ClaimListSingleton.getClaimList().add(newClaim);
+			ClaimListSingleton.getClaimList().notifyListeners();
+			
 			((ClaimActivity) getActivity()).setFragmentToClaimViewer();
 		}else{
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();
@@ -173,17 +179,31 @@ public class ClaimManagerFragment extends Fragment{
 	 * fields in the layout.
 	 */
 	public void updateReferences(){
-		// TODO check fields are not empty
 		nameText = claimName.getText().toString().trim() + ""; //add the "" to check for an empty field
-		descriptionText = description.getText().toString().trim() + ""; 
-		
-		
-		// for loop to parse the destinations and their reasons
-		
+		descriptionText = description.getText().toString().trim() + "";
+		startDateText = startDateView.getText().toString().trim() + "";
+		endDateText = endDateView.getText().toString().trim() + "";
+				
 		//TODO should we assert they fill in all fields?
-		if(!nameText.equals("") && descriptionText.equals("") &&
-				startDate != null && endDate != null && itineraryList.size() == 0){
+		if(!nameText.equals("") && !descriptionText.equals("") &&
+				!startDateText.equals("") && !endDateText.equals("") && itineraryList.size() != 0){
 			this.completeFields = true;
+		}
+	}
+
+	public void addTravelItenerarItem(TravelItinerary item) throws DuplicateException{
+		this.itineraryList.addTravelDestination(item);
+		String dest_list = destinationView.getText().toString();
+		
+		if(!dest_list.equals("")) dest_list += "\n";
+		dest_list += "  " + item.getDestinationName() + " : " + item.getDestinationDescription();
+		destinationView.setText(dest_list);
+
+		// TODO this needs to change the layout size
+		if(itineraryList.size() > 2){
+			//If the text view is set to wrap content too early,
+			//it looks like the field is too small
+			destinationView.setHeight(LayoutParams.WRAP_CONTENT); 
 		}
 	}
 }

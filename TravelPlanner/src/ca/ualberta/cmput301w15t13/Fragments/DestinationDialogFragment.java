@@ -22,10 +22,16 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.EditText;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
+import exceptions.DuplicateException;
 
 /**
  * This is a custom dialog fragment for 
@@ -44,7 +50,6 @@ public class DestinationDialogFragment extends DialogFragment {
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-	    // Get the layout inflater
 	    LayoutInflater inflater = getActivity().getLayoutInflater();
 
 	    // Inflate and set the layout for the dialog
@@ -54,14 +59,26 @@ public class DestinationDialogFragment extends DialogFragment {
 	           .setPositiveButton(R.string.finish, new DialogInterface.OnClickListener() {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
-	                   // sign in the user ...
+	                   EditText destinationView = (EditText) ((AlertDialog) dialog).findViewById(R.id.editTextDestinationName);
+	                   EditText reasonView = (EditText)  ((AlertDialog) dialog).findViewById(R.id.editTextReasonName);
+	                   String destination, reason;
+	                   
+	                   destination = destinationView.getText().toString().trim();
+	                   reason = reasonView.getText().toString().trim();
+	                   
+	                   TravelItinerary item = new TravelItinerary(destination, reason);
+	                   
+	                   try {
+	                	   // Add the destination fields and update the textview
+	                	   FragmentManager fm = getFragmentManager();
+	                	   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
+	                	   fragment.addTravelItenerarItem(item);
+					} catch (DuplicateException e) {
+						e.printStackTrace();
+					}
 	               }
 	           });
-//	           .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-//	               public void onClick(DialogInterface dialog, int id) {
-//	                   //this.getDialog().cancel();
-//	               }
-//	           });      
+     
 	    return builder.create();
 	}
 	

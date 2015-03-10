@@ -36,6 +36,9 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
+import exceptions.InvalidDateException;
+import exceptions.InvalidNameException;
+import exceptions.InvalidUserPermissionException;
 
 /**
  * This activity is used to manage claims for all users.
@@ -110,18 +113,6 @@ public class ClaimActivity extends Activity {
 		return true;
 	}
 
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		// Handle action bar item clicks here. The action bar will
-//		// automatically handle clicks on the Home/Up button, so long
-//		// as you specify a parent activity in AndroidManifest.xml.
-//		int id = item.getItemId();
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
-//		return super.onOptionsItemSelected(item);
-//	}
-
 	
 	@Override
 	protected void onStart() {
@@ -137,7 +128,7 @@ public class ClaimActivity extends Activity {
 		actionBar.show();
 		
 		ft = fm.beginTransaction();
-		ft.replace(R.id.mainFragmentHolder, this.claimViewerFragment);
+		ft.replace(R.id.mainFragmentHolder, this.claimViewerFragment, "ClaimViewer");
 		ft.commit();
 	}
 	
@@ -149,7 +140,7 @@ public class ClaimActivity extends Activity {
 		actionBar.hide();
 		
 		ft = fm.beginTransaction();
-		ft.replace(R.id.mainFragmentHolder, this.claimManagerFragment);
+		ft.replace(R.id.mainFragmentHolder, this.claimManagerFragment, "ClaimManager");
 		ft.commit();
 	}
 	
@@ -165,17 +156,25 @@ public class ClaimActivity extends Activity {
 	/**
 	 * Create a new claim object,
 	 * then return to the viewing fragment. 
+	 * @throws InvalidUserPermissionException 
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
 	 */
-	public void finishClaim(View v){
+	public void finishClaim(View v) throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		//TODO
-		//ClaimManagerFragment.manageClaim();
-		setFragmentToClaimViewer();
+		claimManagerFragment.updateReferences();
+		if(true){ //TODO check if we're updating a claim or creating a claim
+			claimManagerFragment.createClaim();
+		}
+		/*else{
+			claimManagerFragment.updateClaim(claimIndex);
+		} */
 	}
 	
 	/**
 	 * Will open a datepicker dialog
 	 * but passes the proper startdate textview id
-	 * such that it can be updtated.
+	 * such that it can be updated.
 	 */
 	public void openStartDateDialog(View v){
 		TextView textId = (TextView) findViewById(R.id.textViewStartDate);
@@ -185,7 +184,7 @@ public class ClaimActivity extends Activity {
 	/**
 	 * Will open a datepicker dialog
 	 * but passes the proper end date textview id
-	 * such that it can be updtated.
+	 * such that it can be updated.
 	 */
 	public void openEndDateDialog(View v){
 		TextView textId = (TextView) findViewById(R.id.textViewEndDate);
