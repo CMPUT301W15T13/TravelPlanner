@@ -60,8 +60,8 @@ public class ExpenseItem {
 		
 		//this looks through the singleton list to see if the claim is editable
 		//if so, itr makes the expense
-		if ((!ClaimListSingleton.isEmpty()) ||   (ClaimListSingleton.isClaimEditable(ClaimID)))
-		{
+		//if ((!ClaimListSingleton.isEmpty()))){
+
 			this.ClaimID = ClaimID;
 			this.ExpenseCategory = Category;
 			this.purchaseDate = purchaseDate;
@@ -69,9 +69,7 @@ public class ExpenseItem {
 			this.Amount = Amount;
 			this.currency = Currency;
 			
-		}
-		else
-			throw new InvalidUserPermissionException("Expense can not be created, Claim is not editable");
+	//}
 
 		
 	}
