@@ -19,20 +19,25 @@ public class TravelItineraryList {
 	}
 	
 	
-	public void addTravelDestination(TravelItinerary travelDestination) throws DuplicateException{
+	/**
+	 * This will add a Travel Destination
+	 * @param travelDestination
+
+	 */
+	public void addTravelDestination(TravelItinerary travelDestination){
 		
-		if (!travelList.contains(travelDestination))
+
 			this.travelList.add(travelDestination);
-		else
-			throw new DuplicateException("Travel Destination already Exists!");
+
 		
 	}
 
-	
-	public void editTravelDestination(int index, TravelItinerary travelDestination) throws DuplicateException{
-		
-		if (this.travelList.contains(travelDestination))
-			throw new DuplicateException("Travel Destination already exists");
+	/**
+	 * This will edit the travel Destination if index is within bounds
+	 * @param index
+	 * @param travelDestination
+	 */
+	public void editTravelDestination(int index, TravelItinerary travelDestination){
 		
 		if ((index >= 0) && (index < this.travelList.size()))
 			this.travelList.set(index, travelDestination);
@@ -42,12 +47,22 @@ public class TravelItineraryList {
 		
 	}
 
+	/**
+	 * This will return the number of destinations
+	 * @return
+	 */
 	public int numberofDestinations() {
 		
 		return this.travelList.size();
 	}
 
 
+	/**
+	 * This will return a travel itinerary based on a selected index
+	 * @param index
+	 * @return
+	 * @throws InvalidFieldEntryException
+	 */
 	public TravelItinerary getTravelDestinationAtIndex(int index) throws InvalidFieldEntryException {
 	
 		if ((index < 0) && (index >= this.travelList.size() ))
@@ -57,7 +72,10 @@ public class TravelItineraryList {
 	}
 	
 	
-	
+	/**
+	 * This will delete a travel destination at the specifed index
+	 * @param index
+	 */
 	public void deleteTravelDestination(int index){
 		
 		if (this.travelList.size() >= index)
@@ -65,6 +83,11 @@ public class TravelItineraryList {
 	}
 
 
+	/**
+	 * This will check to see if the travel Itinerary exists
+	 * @param travelItinerary
+	 * @return
+	 */
 	public boolean contains(TravelItinerary travelItinerary) {
 
 		for (TravelItinerary destination : this.travelList) {
@@ -76,6 +99,11 @@ public class TravelItineraryList {
 		return false;
 	}
 	
+	
+	/**
+	 * this will return the size of the list
+	 * @return
+	 */
 	public int size() {
 		return travelList.size(); 
 	}

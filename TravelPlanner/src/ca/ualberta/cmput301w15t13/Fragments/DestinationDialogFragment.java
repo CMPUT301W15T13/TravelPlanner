@@ -32,6 +32,7 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import exceptions.DuplicateException;
+import exceptions.EmptyFieldException;
 
 /**
  * This is a custom dialog fragment for 
@@ -66,14 +67,18 @@ public class DestinationDialogFragment extends DialogFragment {
 	                   destination = destinationView.getText().toString().trim();
 	                   reason = reasonView.getText().toString().trim();
 	                   
-	                   TravelItinerary item = new TravelItinerary(destination, reason);
+	                   
+	                   
 	                   
 	                   try {
+	                	   
+	                	   TravelItinerary item = new TravelItinerary(destination, reason);
 	                	   // Add the destination fields and update the textview
 	                	   FragmentManager fm = getFragmentManager();
 	                	   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
 	                	   fragment.addTravelItenerarItem(item);
-					} catch (DuplicateException e) {
+					} catch (EmptyFieldException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 	               }

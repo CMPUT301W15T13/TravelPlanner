@@ -4,7 +4,7 @@ public class ExceptionHandler {
 
 	
 	public enum FIELD{
-		USERNAME, DATE
+		USERNAME, DATE, TRAVEL_DESTINATION,TRAVEL_DESCRIPTION
 	}
 	
 
@@ -28,10 +28,26 @@ public class ExceptionHandler {
 	
 	private String getMessage(FIELD field){
 		
-		if (field == FIELD.USERNAME){
-			return "Invalid User Name";
+		String message = null;
+		
+		switch (field){
+		case USERNAME:
+			message = "Invalid User Name";
+			break;
+		case TRAVEL_DESCRIPTION:
+			message = "Invalid Travel Description";
+			break;
+		case TRAVEL_DESTINATION:
+			message = "Invalid Travel Destination";
+			break;
+		default:
+			message = "Unspecified Message";
+			break;
+			
 		}
-		return "";
+
+
+		return message;
 	}
 	
 	

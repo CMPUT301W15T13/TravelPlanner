@@ -32,7 +32,6 @@ import exceptions.ExceptionHandler;
 import exceptions.ExceptionHandler.FIELD;
 import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
-import exceptions.InvalidFieldException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
@@ -126,11 +125,9 @@ public class Claim {
 	 * @param startDate
 	 * @param endDate
 	 * @throws InvalidDateException
-	 * @throws InvalidUserPermissionException 
 	 */
 	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException{
 
-		
 			//this checks to see that the entered start date is not after the entered end date
 			if (startDate.after(endDate))
 				 throw new InvalidDateException("Start Date is after End Date");
@@ -143,22 +140,34 @@ public class Claim {
 		
 	}
 	
+	/**
+	 * This will return the start Date for the claim
+	 * @return
+	 */
 	public Date getStartDate() {
 		return this.startDate;
 	}
 
 
+	/**
+	 * This will set the start Date for the claim
+	 */
 	private void setStartDate(Date startDate) {
 			this.startDate = startDate;
 
 	}
 
-
+	/**
+	 * This will return the end Date for the claim
+	 * @return
+	 */
 	public Date getEndDate() {
 		return this.endDate;
 	}
 
-
+	/**
+	 * This will set the end Date for the claim
+	 */
 	private void setEndDate(Date endDate) {
 			this.endDate = endDate;
 
@@ -166,7 +175,10 @@ public class Claim {
 
 
 	
-	
+	/**
+	 * This will return the description of the claim
+	 * @return
+	 */
 	public String getDescription() {
 		return description;
 	}
@@ -181,15 +193,10 @@ public class Claim {
 			if (description == null || description.trim().isEmpty())
 				this.description = "";
 			else
-				this.description = description;
-
-		
+				this.description = description;	
 	}
 	
 	
-	
-
-
 	
 	/**
 	 * This returns the travel Itenerary list of the claim
@@ -239,32 +246,36 @@ public class Claim {
 	 * This adds a travel Itenerary. 
 	 * It checks to see if a travel destination exists, and if the fields are valid
 	 * @throws DuplicateException 
-	 * @throws InvalidFieldEntryException 
-	 * @throws InvalidUserPermissionException 
+	 * @throws EmptyFieldException 
 	 */
 
-	public void addTravelDestination(String destination, String description) throws DuplicateException, InvalidFieldEntryException, ClaimPermissionException, InvalidUserPermissionException{
+	public void addTravelDestination(String destination, String description) throws  EmptyFieldException{
 
 			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 			
-			if (this.travelList.contains(travelItinerary))
-				{
-					throw new DuplicateException("Destination Already Exists in Travel Itenerary");
-				}
-			else
-				this.travelList.addTravelDestination(travelItinerary);
+			this.travelList.addTravelDestination(travelItinerary);
 		
 
 	
 	}
 	
 	
+	/**
+	 * THis will return the number of travel destinations
+	 * @return
+	 */
 	public int numberOfDestinations(){
 		
 		return this.travelList.numberofDestinations();
 	}
 
 	
+	/**
+	 * This will return the Travel Itinerary based on the index specfied
+	 * @param index
+	 * @return
+	 * @throws InvalidFieldEntryException
+	 */
 	public TravelItinerary getTravelDestination(int index) throws InvalidFieldEntryException{
 		
 		return this.travelList.getTravelDestinationAtIndex(index);
@@ -272,8 +283,15 @@ public class Claim {
 
 
 
-
-	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException {
+	/**
+	 * This will edit the Travel Itinerary based on the index, and data passed in
+	 * @param index
+	 * @param destination
+	 * @param description
+	 * @throws InvalidFieldEntryException
+	 * @throws EmptyFieldException 
+	 */
+	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException, EmptyFieldException {
 		
 			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 			
@@ -284,7 +302,10 @@ public class Claim {
 
 
 
-
+/**
+ * This will delete a travel Itinerary at the specified index
+ * @param i
+ */
 	public void deleteTravelDestination(int i) {
 			this.travelList.deleteTravelDestination(i);
 
@@ -292,16 +313,28 @@ public class Claim {
 
 
 
-
+/**
+ * This will get the name of the last approver
+ * @return
+ */
 	public String getlastApproverName() {
 		return this.lastApproverName;
 	}
 
 
+	/**
+	 * This will set the name of the last approver
+	 * @param name
+	 */
 	public void setLastApproverName(String name){
 		this.lastApproverName = name;
 	}
 
+	/**
+	 * This will add a comment
+	 * @param comment
+	 * @param name
+	 */
 	public void addComment(String comment, String name) {
 		ArrayList<String> comments;
 		setLastApproverName(name);
@@ -333,12 +366,20 @@ public class Claim {
 		return comments;
 	}
 
+	/**
+	 * This will clear the comments from a claim
+	 */
 	public void clearComments() {
 		this.approverComments = new HashMap<String, ArrayList<String>>();
 		this.lastApproverName = null;
 	}
 
 
+	/**
+	 * This will add a specified tag to a class?
+	 * @param tag
+	 * @throws DuplicateException
+	 */
 	public void addTag(Tag tag) throws DuplicateException{	
 		if (this.tags.contains(tag)) {
 			throw new DuplicateException("Duplicate Tag Added");
@@ -386,6 +427,10 @@ public class Claim {
 
 
 
+	/**
+	 * This will return the editability of the claim
+	 * @return
+	 */
 	public boolean isEditable() {
 		// TODO Auto-generated method stub
 		return this.status.isEditable();

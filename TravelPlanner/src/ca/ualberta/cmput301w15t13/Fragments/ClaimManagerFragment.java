@@ -256,7 +256,7 @@ public class ClaimManagerFragment extends Fragment{
 	 * @param item
 	 * @throws DuplicateException
 	 */
-	public void addTravelItenerarItem(TravelItinerary item) throws DuplicateException{
+	public void addTravelItenerarItem(TravelItinerary item) {
 		this.itineraryList.addTravelDestination(item);
 		String dest_list = destinationView.getText().toString();
 		

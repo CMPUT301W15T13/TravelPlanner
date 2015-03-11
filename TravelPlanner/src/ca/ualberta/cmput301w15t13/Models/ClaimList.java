@@ -65,14 +65,11 @@ public class ClaimList {
 	}
 
 	public void remove(Claim claim) throws InvalidUserPermissionException {
-		if (claim.isEditable())
-		{
+
 			if(claimList.contains(claim)){
 				claimList.remove(claim);
 			}
-		}
-		else
-			throw new InvalidUserPermissionException("Attempted to remove a claim on a submitted/approved claim");
+
 	}
 
 	public void add(Claim claim) {
