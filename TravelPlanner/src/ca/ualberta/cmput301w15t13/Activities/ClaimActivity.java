@@ -161,6 +161,21 @@ public class ClaimActivity extends Activity {
 	 */
 	public void newClaim(View v){
 		setFragementToClaimManager();
+		claimManagerFragment.setStateAsEditing(false);
+	}
+	
+	/**
+	 * Opens the claim manager fragment
+	 * sets the claim index to the corresponding
+	 * position in the array adapter and
+	 * tells the claim manager that it should edit,
+	 * not create.
+	 * @param index
+	 */
+	public void editClaim(int index) {
+		setFragementToClaimManager();
+		claimManagerFragment.setStateAsEditing(true);
+		claimManagerFragment.setClaimIndex(index);
 	}
 	
 	/**
@@ -173,12 +188,24 @@ public class ClaimActivity extends Activity {
 	public void finishClaim(View v) throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		//TODO
 		claimManagerFragment.updateReferences();
-		if(true){ //TODO check if we're updating a claim or creating a claim
-			claimManagerFragment.createClaim();
+		if(claimManagerFragment.isEditing()){ //TODO check if we're updating a claim or creating a claim
+			claimManagerFragment.updateClaim();
 		}
-		/*else{
-			claimManagerFragment.updateClaim(claimIndex);
-		} */
+		else{
+			claimManagerFragment.createClaim();
+
+		} 
+		
+		ClaimListSingleton.getClaimList().notifyListeners();
+		setFragmentToClaimViewer();
+	}
+	
+	/**
+	 * Cancels the claim creation/editing
+	 * and returns back to the viewing screen.
+	 */
+	public void cancelClaim(View v){
+		setFragmentToClaimViewer();
 	}
 	
 	/**
@@ -209,6 +236,6 @@ public class ClaimActivity extends Activity {
 	public void addDestination(View v){
 		claimManagerFragment.openDestinationDialog();
 	}
-	
+
 	
 }

@@ -33,6 +33,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
@@ -114,6 +115,8 @@ public class ClaimViewerFragment extends Fragment {
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Toast.makeText(getActivity(), "Long Click", Toast.LENGTH_SHORT).show();
+				//TODO make a popup open, and have edit as an option. Later
+				((ClaimActivity) getActivity()).editClaim(position);
 				return true;
 			}
 		});

@@ -54,15 +54,13 @@ import exceptions.InvalidUserPermissionException;
  */
 
 public class ClaimManagerFragment extends Fragment{
-	EditText claimName, description;
-	TextView startDateView, endDateView, destinationView;
-	String nameText, descriptionText, startDateText, endDateText;
-	TravelItineraryList itineraryList;
-	Date startDate, endDate;
-	boolean completeFields;
-	
-	//final Calendar startDateCal = Calendar.getInstance(), endDateCal = Calendar.getInstance();
-	
+	private EditText nameView, descriptionView;
+	private TextView startDateView, endDateView, destinationView;
+	private String name, description, startDateText, endDateText;
+	private TravelItineraryList itineraryList;
+	private Date startDate, endDate;
+	private boolean areFieldsComplete, isEditing;
+	private int claimIndex;	
 	
 	//TODO add a back button, in the case they don't want to submit a claim? And maybe
 	//force change what the back button does from this screen, in that it moves to the old fragment
@@ -71,7 +69,7 @@ public class ClaimManagerFragment extends Fragment{
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		itineraryList = new TravelItineraryList();
-		completeFields = false;
+		areFieldsComplete = false;
 		startDate = new Date();
 		endDate = new Date();
 	}
@@ -86,13 +84,48 @@ public class ClaimManagerFragment extends Fragment{
 	@Override
 	public void onStart() {
 		super.onStart();
-		claimName = (EditText) getView().findViewById(R.id.editTextClaimName);
-		description = (EditText) getView().findViewById(R.id.editTextClaimDescription);
+		nameView = (EditText) getView().findViewById(R.id.editTextClaimName);
+		descriptionView = (EditText) getView().findViewById(R.id.editTextClaimDescription);
 		destinationView = (TextView) getView().findViewById(R.id.textViewDestinationsList);
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
+		
+		setFields();
+	}
+	
+	/**
+	 * Sets the "Mode" of the fragment to edit or create, 
+	 * depending where it's called from
+	 */
+	public void setStateAsEditing(boolean isEditing){
+		this.isEditing = isEditing;
 	}
 
+	/**
+	 * If the claim is going to be edited,
+	 * set the fields to the values to match the claim
+	 * else clear the fields of old values. 
+	 */
+	private void setFields(){
+		if(isEditing){
+			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+			this.name = editClaim.getUserName();
+			this.description = editClaim.getDescription();
+			this.startDate = editClaim.getStartDate();
+			this.endDate = editClaim.getEndDate();
+			this.itineraryList = editClaim.getTravelList();
+			
+			this.nameView.setText(this.name);
+			this.descriptionView.setText(this.description);
+			
+			// TODO add the text views for dates and itenerary
+			
+		}else{
+			this.nameView.setText("");
+			this.descriptionView.setText("");
+		}
+	}
+	
 	/**
 	 * Opens a new date picker dialog to set the 
 	 * start and end dates of a claim. It will parse
@@ -170,16 +203,30 @@ public class ClaimManagerFragment extends Fragment{
 	 * @throws InvalidUserPermissionException
 	 */
 	public void createClaim() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
-		if(this.completeFields){
-			Claim newClaim = new Claim(this.nameText, startDate, endDate, 
-				this.descriptionText, itineraryList);
+		if(this.areFieldsComplete){
+			Claim newClaim = new Claim(this.name, startDate, endDate, 
+				this.description, itineraryList);
 			ClaimListSingleton.getClaimList().add(newClaim);
-			ClaimListSingleton.getClaimList().notifyListeners();
 			
-			((ClaimActivity) getActivity()).setFragmentToClaimViewer();
 		}else{
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();
 		}
+	}
+
+	/**
+	 * Create a new claim and replace the old one 
+	 * with it.
+	 * @throws InvalidUserPermissionException 
+	 * @throws InvalidNameException 
+	 * @throws InvalidDateException 
+	 */
+	public void updateClaim() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException {
+		updateReferences();
+		Claim newClaim = new Claim(this.name, startDate, endDate, 
+				this.description, itineraryList);
+		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
+		ClaimListSingleton.getClaimList().add(newClaim);
+		//TODO needs a sort method
 	}
 	
 	/**
@@ -187,15 +234,15 @@ public class ClaimManagerFragment extends Fragment{
 	 * fields in the layout.
 	 */
 	public void updateReferences(){
-		nameText = claimName.getText().toString().trim() + ""; //add the "" to check for an empty field
-		descriptionText = description.getText().toString().trim() + "";
+		name = nameView.getText().toString().trim() + ""; //add the "" to check for an empty field
+		description = descriptionView.getText().toString().trim() + "";
 		startDateText = startDateView.getText().toString().trim() + "";
 		endDateText = endDateView.getText().toString().trim() + "";
 				
 		//TODO should we assert they fill in all fields?
-		if(!nameText.equals("") && !descriptionText.equals("") &&
+		if(!name.equals("") && !description.equals("") &&
 				!startDateText.equals("") && !endDateText.equals("") && itineraryList.size() != 0){
-			this.completeFields = true;
+			this.areFieldsComplete = true;
 		}
 	}
 
@@ -221,4 +268,19 @@ public class ClaimManagerFragment extends Fragment{
 			destinationView.setHeight(LayoutParams.WRAP_CONTENT); 
 		}
 	}
+
+	public void setClaimIndex(int index){
+		this.claimIndex = index;
+	}
+
+	/**
+	 * Returns if the claim is new or 
+	 * a modification.
+	 * @return
+	 */
+	public boolean isEditing(){
+		return this.isEditing;
+	}
+
+
 }
