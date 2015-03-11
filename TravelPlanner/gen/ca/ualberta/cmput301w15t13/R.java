@@ -51,15 +51,15 @@ public final class R {
         public static final int editTextReasonName=0x7f0a001d;
         public static final int editTextSearchClaims=0x7f0a0005;
         public static final int editTextUsername=0x7f0a0001;
+        public static final int imageViewAdapterStatus=0x7f0a000b;
         public static final int incompletenessIndicator=0x7f0a0008;
         public static final int layoutButtons=0x7f0a000d;
         public static final int listViewClaim=0x7f0a0018;
         public static final int mainFragmentHolder=0x7f0a0007;
         public static final int spinnerClaimFilter=0x7f0a0004;
-        public static final int statusImage=0x7f0a000b;
-        public static final int textViewClaimCost=0x7f0a000c;
-        public static final int textViewClaimDate=0x7f0a000a;
-        public static final int textViewClaimTitle=0x7f0a0009;
+        public static final int textViewAdapterClaimCost=0x7f0a000c;
+        public static final int textViewAdapterClaimDate=0x7f0a000a;
+        public static final int textViewAdapterClaimTitle=0x7f0a0009;
         public static final int textViewDestinationDialogTitle=0x7f0a001a;
         public static final int textViewDestinationsList=0x7f0a0013;
         public static final int textViewEndDate=0x7f0a0011;
@@ -82,6 +82,7 @@ public final class R {
     }
     public static final class string {
         public static final int action_settings=0x7f070002;
+        public static final int adapter_status_description=0x7f070016;
         public static final int app_name=0x7f070000;
         public static final int approverLogin=0x7f070015;
         public static final int cancel=0x7f070012;
@@ -94,6 +95,7 @@ public final class R {
         public static final int end_date=0x7f07000e;
         public static final int finish=0x7f070010;
         public static final int hello_world=0x7f070001;
+        public static final int holder=0x7f070017;
         public static final int login=0x7f070005;
         public static final int new_claim=0x7f070007;
         public static final int new_word=0x7f07000c;

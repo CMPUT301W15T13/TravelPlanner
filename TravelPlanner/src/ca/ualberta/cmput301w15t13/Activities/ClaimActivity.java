@@ -37,6 +37,7 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
+import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
@@ -184,8 +185,9 @@ public class ClaimActivity extends Activity {
 	 * @throws InvalidUserPermissionException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws EmptyFieldException 
 	 */
-	public void finishClaim(View v) throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException{
 		//TODO
 		claimManagerFragment.updateReferences();
 		if(claimManagerFragment.isEditing()){ //TODO check if we're updating a claim or creating a claim

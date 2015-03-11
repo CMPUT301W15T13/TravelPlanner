@@ -41,6 +41,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.DuplicateException;
+import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
@@ -201,8 +202,9 @@ public class ClaimManagerFragment extends Fragment{
 	 * @throws InvalidDateException
 	 * @throws InvalidNameException
 	 * @throws InvalidUserPermissionException
+	 * @throws EmptyFieldException 
 	 */
-	public void createClaim() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void createClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
 		if(this.areFieldsComplete){
 			Claim newClaim = new Claim(this.name, startDate, endDate, 
 				this.description, itineraryList);
@@ -219,8 +221,9 @@ public class ClaimManagerFragment extends Fragment{
 	 * @throws InvalidUserPermissionException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws EmptyFieldException 
 	 */
-	public void updateClaim() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException {
+	public void updateClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException {
 		updateReferences();
 		Claim newClaim = new Claim(this.name, startDate, endDate, 
 				this.description, itineraryList);

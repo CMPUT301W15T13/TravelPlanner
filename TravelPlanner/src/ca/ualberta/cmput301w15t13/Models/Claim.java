@@ -25,11 +25,14 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
-
 import exceptions.ClaimPermissionException;
 import exceptions.DuplicateException;
+import exceptions.EmptyFieldException;
+import exceptions.ExceptionHandler;
+import exceptions.ExceptionHandler.FIELD;
 import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
+import exceptions.InvalidFieldException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
@@ -62,8 +65,9 @@ public class Claim {
  * @throws InvalidDateException 
  * @throws InvalidNameException 
  * @throws InvalidUserPermissionException 
+ * @throws EmptyFieldException 
  */
-	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws InvalidDateException, InvalidNameException, InvalidUserPermissionException {
+	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws InvalidDateException, EmptyFieldException {
 
 		//initializes the claim status to INPROGRESS (and editable)
 		this.status = new ClaimStatus();
@@ -106,27 +110,15 @@ public class Claim {
 	/**
 	 * This sets the user Name
 	 * @param userName = Username for claim
-	 * @throws InvalidNameException = Exception that is thrown for invalid user names
-	 * @throws InvalidUserPermissionException 
+	 * @throws EmptyFieldException 
 	 */
-	public void setUserName(String userName) throws InvalidNameException, InvalidUserPermissionException {
-		
-		//This checks to see that the user-name is not empty or null
-		
-		//userName = "Bill Smith";
-		if (this.status.isEditable())
-		{
-			if (userName == null ||userName.trim().isEmpty() ) 
-				throw new InvalidNameException("Invalid UserName Entered");
-			else
-				this.userName = userName;
-				
-		}
-		
-		else
-			throw new InvalidUserPermissionException("Attempted to set user name on a submitted/approved claim");
-	}
+	public void setUserName(String userName) throws EmptyFieldException {
 
+		new ExceptionHandler().throwExeptionIfEmpty(userName, FIELD.USERNAME);
+		//userName = "Bill Smith";
+
+		this.userName = userName;
+	}
 
 	/**
 	 * This sets up the claim dates. This does the error checking to make sure that startDate < EndDate
@@ -136,10 +128,8 @@ public class Claim {
 	 * @throws InvalidDateException
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException, InvalidUserPermissionException{
-		
-		if (this.status.isEditable())
-		{
+	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException{
+
 		
 			//this checks to see that the entered start date is not after the entered end date
 			if (startDate.after(endDate))
@@ -149,10 +139,7 @@ public class Claim {
 				this.setStartDate(startDate);
 				this.setEndDate(endDate);
 			}
-		}
-		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
-		
+
 		
 	}
 	
@@ -161,11 +148,9 @@ public class Claim {
 	}
 
 
-	private void setStartDate(Date startDate) throws InvalidUserPermissionException {
-		if (this.status.isEditable())
+	private void setStartDate(Date startDate) {
 			this.startDate = startDate;
-		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+
 	}
 
 
@@ -174,11 +159,9 @@ public class Claim {
 	}
 
 
-	private void setEndDate(Date endDate) throws InvalidUserPermissionException {
-		if (this.status.isEditable())
+	private void setEndDate(Date endDate) {
 			this.endDate = endDate;
-		else
-			throw new InvalidUserPermissionException("Attempted to set claim dates on a submitted/approved claim");
+
 	}
 
 
@@ -191,21 +174,20 @@ public class Claim {
 
 	/**
 	 * This sets the Claim description
-	 * @param description
-	 * @throws InvalidUserPermissionException 
+	 * @param description 
 	 */
-	public void setDescription(String description) throws InvalidUserPermissionException {
-		if (this.status.isEditable())
-		{
-			if (description == null || description.isEmpty())
+	public void setDescription(String description)  {
+
+			if (description == null || description.trim().isEmpty())
 				this.description = "";
 			else
 				this.description = description;
-		}
-		else
-			throw new InvalidUserPermissionException("Attempted to set claim description on a submitted/approved claim");
+
 		
 	}
+	
+	
+	
 
 
 	
@@ -222,20 +204,14 @@ public class Claim {
 	 * This sets up the travel List.
 	 * If null, it makes a new Travel Itenerary List
 	 * @param travelList
-	 * @throws InvalidUserPermissionException 
 	 */
-	public void setTravelList(TravelItineraryList travelList) throws InvalidUserPermissionException {
-		if (this.status.isEditable())
-		{
+	public void setTravelList(TravelItineraryList travelList) {
 			//This makes sure that the travel List is not null
 			if (travelList == null)
 				this.travelList = new TravelItineraryList();
 			else
 				this.travelList = travelList;
-		}
-		else
-			throw new InvalidUserPermissionException("Attempted to set travel destinations on a submitted/approved claim");
-		
+
 	}
 
 
@@ -252,7 +228,7 @@ public class Claim {
 	 * @param status
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void setStatus(int status) throws InvalidUserPermissionException {
+	public void setStatus(int status)  {
 			this.status.setStatus(status);
 
 	}
@@ -268,20 +244,8 @@ public class Claim {
 	 */
 
 	public void addTravelDestination(String destination, String description) throws DuplicateException, InvalidFieldEntryException, ClaimPermissionException, InvalidUserPermissionException{
-		
-		if (this.status.isEditable())
-		{
+
 			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
-			
-			if ((destination == null || destination.trim().isEmpty() ))
-				{
-					throw new InvalidFieldEntryException("Travel Destination is null or empty");
-				}
-			
-			if ((description == null || description.trim().isEmpty()  ))
-					{
-						throw new InvalidFieldEntryException("Travel Description is null or empty");
-					}
 			
 			if (this.travelList.contains(travelItinerary))
 				{
@@ -289,9 +253,9 @@ public class Claim {
 				}
 			else
 				this.travelList.addTravelDestination(travelItinerary);
-		}
-		else
-			throw new InvalidUserPermissionException("Attempted to add a travel destination on a submitted/approved claim");
+		
+
+	
 	}
 	
 	
@@ -309,35 +273,21 @@ public class Claim {
 
 
 
-	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException, DuplicateException, InvalidUserPermissionException {
-
-		if (this.status.isEditable())
-		{
+	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException {
 		
-			if ((destination == null) || (destination.trim().isEmpty())){
-				throw new InvalidFieldEntryException("destination at index " +index + " can not be editted. Destination is empty or null");
-			}
-			if ((description == null) || (description.trim().isEmpty())){
-				throw new InvalidFieldEntryException("description at index " +index + " can not be editted. Description is empty");
-			}
-			
 			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 			
 			travelList.editTravelDestination(index, travelItinerary);
-		}
-		else
-			throw new InvalidUserPermissionException("Attempted to edit a travel description on a submitted/approved claim");
+
 		
 	}
 
 
 
 
-	public void deleteTravelDestination(int i) throws InvalidUserPermissionException {
-		if (this.status.isEditable())
+	public void deleteTravelDestination(int i) {
 			this.travelList.deleteTravelDestination(i);
-		else
-			throw new InvalidUserPermissionException("Attempted to delete a travel destination on a submitted/approved claim");
+
 	}
 
 
@@ -421,12 +371,9 @@ public class Claim {
 
 
 
-	public void addExpenseItem(ExpenseItem expenseItem) throws InvalidUserPermissionException {
+	public void addExpenseItem(ExpenseItem expenseItem) {
 		String readME;
-		if (this.status.isEditable())
-			readME = "Not implemented";
-		else
-			throw new InvalidUserPermissionException("Attempted to add an expense on a submitted/approved claim");
+
 		
 	}
 
@@ -446,14 +393,11 @@ public class Claim {
 
 
 
-	public void removeExpenseItem(ExpenseItem expenseItem) throws InvalidUserPermissionException {
+	public void removeExpenseItem(ExpenseItem expenseItem) {
 		// TODO Auto-generated method stub
 		
 		String readME;
-		if (this.status.isEditable())
-			readME = "Not implemented";
-		else
-			throw new InvalidUserPermissionException("Attempted to remove an expense on a submitted/approved claim");
+
 	}
 
 
