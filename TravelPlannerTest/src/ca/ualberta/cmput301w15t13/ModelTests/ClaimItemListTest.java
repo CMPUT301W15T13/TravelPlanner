@@ -110,7 +110,7 @@ public class ClaimItemListTest extends
 		assertFalse("Claim list contains claim 2", claimList.contains(claim2));
 	}
 
-	public void testIndexing() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void testIndexing() throws InvalidDateException, EmptyFieldException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
@@ -148,7 +148,7 @@ public class ClaimItemListTest extends
 		claimList.notifyListeners();
 	}
 	
-	public void testFilter() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException, DuplicateException {
+	public void testFilter() throws InvalidDateException,DuplicateException, EmptyFieldException {
 		TagManager tm = new TagManager();
 		
 		Tag tag1 = new Tag("Ugent");

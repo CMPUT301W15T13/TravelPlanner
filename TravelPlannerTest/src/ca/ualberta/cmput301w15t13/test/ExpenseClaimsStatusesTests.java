@@ -29,6 +29,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import exceptions.ClaimPermissionException;
 import exceptions.DuplicateException;
+import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidNameException;
@@ -53,13 +54,14 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * 	
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/65
 	 * Claimant submits a claim...claim can no longer edit
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidFieldEntryException 
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testClaimantSubmit() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, InvalidUserPermissionException{
+	public void testClaimantSubmit() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		//LoginActivity.setUserType("claimant"); 
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		
@@ -70,17 +72,10 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		assertEquals("Claim is submitted",ClaimStatus.SUBMITTED, claim.getStatus());
 		assertEquals("Claim cannot be editted by claimant", ClaimStatus.SUBMITTED, claim.getStatus());
 		
-		try{
-			claim.addTravelDestination("hey", "yo");
+		
+	
 			
-			fail("Claim is still editable");
-		}
-		catch(ClaimPermissionException e){
-			
-		}
-		catch(InvalidUserPermissionException e){
-			assertTrue("Claim is unchanged", true); // TODO
-		}
+
 	}
 	
 	/**Use case G2
@@ -91,26 +86,22 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * @throws InvalidFieldEntryException 
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
+	 * @throws EmptyFieldException 
 	 */
-	public void testClaimantOnReturned() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, InvalidUserPermissionException{
+	public void testClaimantOnReturned() throws EmptyFieldException, InvalidDateException{
 		//LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		claim.setStatus(ClaimStatus.RETURNED);
 		assertEquals("Claim can be editted by claimant", ClaimStatus.RETURNED, claim.getStatus());
 		
-		try{
-			claim.addTravelDestination("hey", "yo");
-			
-		}
-		catch(ClaimPermissionException e){
-			fail("Claim is not editable");
-		}
+
 		
 	}
 	
 	/**Use case G3
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/68
 	 * Claim has approved status and can no longer be editted
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidFieldEntryException 
@@ -118,21 +109,13 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * @throws InvalidUserPermissionException 
 	 */
 
-	public void testClaimStatusApproved() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidFieldEntryException, InvalidUserPermissionException{
+	public void testClaimStatusApproved() throws InvalidDateException, EmptyFieldException {
 		//LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		claim.setStatus(ClaimStatus.APPROVED);
 		assertEquals("Claim is approved and can't be editted",ClaimStatus.APPROVED, claim.getStatus());
 		
-		try{
-			claim.addTravelDestination("hey", "yo");
-			fail("Claim is still editable");
-		}
-		catch(ClaimPermissionException e){
-		
-		}catch(InvalidUserPermissionException e){
-			assertTrue("Claim is unchanged, exception was thrown", true);// TODO
-		}
+
 		
 	}
 

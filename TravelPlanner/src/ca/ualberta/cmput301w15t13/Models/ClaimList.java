@@ -64,7 +64,7 @@ public class ClaimList {
 		return claimList.contains(claim);
 	}
 
-	public void remove(Claim claim) throws InvalidUserPermissionException {
+	public void remove(Claim claim) {
 
 			if(claimList.contains(claim)){
 				claimList.remove(claim);

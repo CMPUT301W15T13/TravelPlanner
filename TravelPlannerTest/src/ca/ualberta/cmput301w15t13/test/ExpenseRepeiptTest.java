@@ -29,6 +29,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.Receipt;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
@@ -50,12 +51,13 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	
 	/**
 	 * Tests for use case F1
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 * 
 	 */
-	public void testBitmap() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void testBitmap() throws InvalidDateException, EmptyFieldException {
 		this.addBitmap();
 		this.largeBitmap();
 	}
@@ -64,12 +66,13 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	/**Part of use case F1
 	 * Test that you can add a bitmap to a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/61
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addBitmap() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void addBitmap() throws InvalidDateException, EmptyFieldException {
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmap);
 		
@@ -90,12 +93,13 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * Test that you bitmaps are compressed before they're stored
 	 * US06.04.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/64
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void largeBitmap() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void largeBitmap() throws InvalidDateException, EmptyFieldException {
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmapLarge);
 		
@@ -116,12 +120,13 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	/**Use case F3
 	 * Test that you can delete a bitmap from a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/63
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testRemoveBitmap() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void testRemoveBitmap() throws InvalidDateException, EmptyFieldException {
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Bitmap returnedBitmap;
 		Receipt receipt = new Receipt(bitmap);

@@ -339,9 +339,12 @@ public class Claim {
 		ArrayList<String> comments;
 		setLastApproverName(name);
 		
-		if(approverComments.containsKey(name)){
+		if(approverComments.containsKey(name))
+		{
 			comments = approverComments.get(name);
-		}else{
+		}
+		else
+		{
 			comments = new ArrayList<String>();
 		}
 		comments.add(comment);
@@ -357,9 +360,13 @@ public class Claim {
 	 */
 	public ArrayList<String> getComments() {
 		ArrayList<String> comments = new ArrayList<String>();
-		for(String key: approverComments.keySet()){
+		
+		for(String key: approverComments.keySet())
+		{
 			ArrayList<String> tempComments = approverComments.get(key);
-			for(String comment : tempComments){
+			
+			for(String comment : tempComments)
+			{
 				comments.add(comment);
 			}
 		}

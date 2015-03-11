@@ -56,7 +56,7 @@ public class ExpenseItem {
 	 * @param Currency
 	 * @throws InvalidUserPermissionException 
 	 */
-	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID) throws InvalidUserPermissionException{
+	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID){
 		
 		//this looks through the singleton list to see if the claim is editable
 		//if so, itr makes the expense

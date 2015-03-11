@@ -32,6 +32,7 @@ import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import exceptions.DuplicateException;
+import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
@@ -60,10 +61,11 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * Test that we can add ,edit and delete
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws EmptyFieldException 
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testTags() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	public void testTags() throws InvalidDateException, EmptyFieldException, DuplicateException{
 	
 		this.addTagTest();
 		
@@ -85,12 +87,13 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws EmptyFieldException 
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
 	@SuppressWarnings("unchecked")
-	public void addTagTest() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	public void addTagTest() throws InvalidDateException, EmptyFieldException, DuplicateException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
 				invalidTags = {"",  " ", "aoeu ", "a-", "-*&", "1.23"};
@@ -123,10 +126,11 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	@SuppressWarnings("unchecked")
-	public void removeTagTest() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void removeTagTest() throws InvalidDateException, EmptyFieldException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String tag = "test";
 	
@@ -144,11 +148,12 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws EmptyFieldException 
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void noDuplicatesTest() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	public void noDuplicatesTest() throws InvalidDateException, EmptyFieldException, DuplicateException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
 		
@@ -171,10 +176,11 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws EmptyFieldException 
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void renameTagTest() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	public void renameTagTest() throws InvalidDateException, EmptyFieldException, DuplicateException{
 		
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"},
@@ -198,10 +204,11 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws EmptyFieldException 
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testListTags() throws InvalidDateException, InvalidNameException, DuplicateException, InvalidUserPermissionException{
+	public void testListTags() throws InvalidDateException, EmptyFieldException, DuplicateException{
 		TagManager tm = new TagManager();
 		Tag tag1 = new Tag("yolo");
 		Tag tag2 = new Tag("Gift to self");

@@ -35,14 +35,14 @@ public class Approver extends User {
 		super(name);
 	}
 	
-	public void approveClaim(Claim claim) throws InvalidUserPermissionException{
+	public void approveClaim(Claim claim) {
 		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
 			claim.setLastApproverName(this.name);
 			claim.setStatus(ClaimStatus.APPROVED);
 		}
 	}
 	
-	public void returnClaim(Claim claim) throws InvalidUserPermissionException{
+	public void returnClaim(Claim claim) {
 		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
 			claim.setLastApproverName(this.name);
 			claim.setStatus(ClaimStatus.RETURNED);

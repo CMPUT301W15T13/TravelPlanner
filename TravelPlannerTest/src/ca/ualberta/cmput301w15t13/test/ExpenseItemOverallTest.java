@@ -30,6 +30,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
+import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
@@ -54,11 +55,12 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/81
 	 * Test that you can add one or more expense items to an existing claim
 	 * as a claimant.
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testAddExpense() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void testAddExpense() throws InvalidDateException, EmptyFieldException, InvalidNameException, InvalidUserPermissionException {
 		
 		this.addExpenseItem();
 		this.addWrongCategory();
@@ -70,11 +72,12 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * This is part of Use case D1
 	 * 
 	 * This adds and tests the addition of expense items
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void addExpenseItem() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void addExpenseItem() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String category = "air fare", description = "Desc", currency = "CAD";
 		double price = 12.00;
@@ -113,12 +116,13 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	/** This is part of Use case D1
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/82
 	 * Test that a category must be one of the proper categories
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addWrongCategory() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void addWrongCategory() throws InvalidDateException, EmptyFieldException {
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String[] validCategories = {"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking", "registration", "accommodation", "meal",  "supplies"};
 		/*A default constructor which doesn't initialize values */
@@ -134,12 +138,13 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	/** This is part of Use case D1
 	 * Test that you can only add the valid currencies
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/83
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addWrongCurrency() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void addWrongCurrency() throws InvalidDateException, EmptyFieldException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String[] validCurrencies = {"CAD", "USD", "EUR", "GBP", "CHF", "JPY", "CNY"};
 		/*A default constructor which doesn't initialize values */
@@ -160,9 +165,10 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
+	 * @throws EmptyFieldException 
 	 */
 
-	public void testFlagExpenseItem() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void testFlagExpenseItem() throws InvalidDateException, EmptyFieldException {
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
 		expenseItem.setIncompletenessIndicator();
@@ -176,12 +182,13 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/85
 	 * Test that you're only allowed to manage an expenseItem when 
 	 * the claim is editable
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
 
-	public void testEditExpenseItem() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void testEditExpenseItem() throws InvalidDateException, EmptyFieldException {
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
 		ArrayList<ExpenseItem> expenseList = null;
@@ -206,11 +213,12 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	/** Use case D4
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/86
 	 * Test that you can delete an expense Item from a claim
+	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testDeleteExpenseItem() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
+	public void testDeleteExpenseItem() throws InvalidDateException, EmptyFieldException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
 

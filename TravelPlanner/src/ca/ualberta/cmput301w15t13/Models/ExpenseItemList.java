@@ -53,13 +53,8 @@ public class ExpenseItemList {
 		if (ExpenseItemList.contains(Expense)==true){
 			// there is an Expense in a list we can delete, then delete
 			ExpenseItemList.remove(Expense);
-		} else if (ExpenseItemList.contains(Expense)==false){
-			// there is no item Expense in the list we can delete
-			return;
-		} else if (ExpenseItemList.isEmpty()==true){
-			// if the list is empty, then return
-			return;
 		}
+		
 	}
 	
 	public int size(){
