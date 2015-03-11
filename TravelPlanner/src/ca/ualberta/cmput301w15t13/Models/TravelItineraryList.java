@@ -108,4 +108,23 @@ public class TravelItineraryList {
 		return travelList.size(); 
 	}
 	
+	/**
+	 * This will turn the list into a string
+	 */
+	@Override
+	public String toString(){
+		
+		String travelListString = "";
+		
+		for (TravelItinerary ti: travelList)
+		{
+			travelListString = ti.getDestinationName() + " : " + ti.getDestinationDescription() + "/n";
+		}
+		
+		
+		return travelListString;
+		
+	
+		
+	}
 }

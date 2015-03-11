@@ -24,6 +24,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import android.text.format.DateFormat;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import exceptions.ClaimPermissionException;
 import exceptions.DuplicateException;
@@ -452,7 +453,48 @@ public class Claim {
 
 	}
 
-
+	/**
+	 * This will format a the start date as a string
+	 * 
+	 * Code taken from Eorodrig Travel Logger (Claim class)
+	 * @return
+	 */
+	public String getStartDateAsString(){
+		
+		//we need this item to format our dates
+		DateFormat dateFormat = new DateFormat();
+		
+		Date newDate = this.startDate;
+		newDate.setYear(this.startDate.getYear()-1900);
+		
+		//this is where we format the start and end dates
+		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
+	}
+	
+	
+	/**
+	 * This will format a the end date as a string
+	 * 
+	 * Code taken from Eorodrig Travel Logger (Claim class)
+	 * @return
+	 */
+	public String getEndDateAsString(){
+		
+		//we need this item to format our dates
+		DateFormat dateFormat = new DateFormat();
+		
+		Date newDate = this.endDate;
+		newDate.setYear(this.endDate.getYear()-1900);
+		
+		//this is where we format the start and end dates
+		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
+	}
+	
+	
+	public String getTravelItineraryAsString(){
+		
+		return travelList.toString();
+	}
 
 
 
