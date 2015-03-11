@@ -23,5 +23,7 @@
     <string name="destination_singular">Destination</string>
     <string name="reason">Reason for Travel</string>
     <string name="approverLogin">Login as Approver</string>
+    <string name="adapter_status_description">Status</string>
+    <string name="holder">Holder</string>
 
 </resources>

@@ -11,43 +11,53 @@
         android:orientation="horizontal"
         android:background="@color/incomplete"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         >
     </LinearLayout>
-    
-    <TextView
-        android:id="@+id/textViewClaimTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/incompletenessIndicator"
-        android:layout_alignParentTop="true"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <TextView
-        android:id="@+id/textViewClaimDate"
+   	<TextView
+        android:id="@+id/textViewAdapterClaimTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textViewClaimTitle"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/incompletenessIndicator"
+        android:text="@string/holder"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text" />
+        
+    <TextView
+        android:id="@+id/textViewAdapterClaimDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewAdapterClaimTitle"
+        android:layout_below="@+id/textViewAdapterClaimTitle"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/holder"
+        android:textColor="@color/text"
+         />
 
     <ImageView
-        android:id="@+id/statusImage"
+        android:id="@+id/imageViewAdapterStatus"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_above="@+id/textViewClaimDate"
+        android:layout_above="@+id/textViewAdapterClaimDate"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_menu_edit" />
+        android:src="@android:drawable/ic_menu_edit" 
+        android:contentDescription="@string/adapter_status_description"
+        />
 
     <TextView
-        android:id="@+id/textViewClaimCost"
+        android:id="@+id/textViewAdapterClaimCost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/statusImage"
+        android:layout_toLeftOf="@+id/imageViewAdapterStatus"
         android:gravity="right"
+        android:text="@string/holder"
+        android:textColor="@color/text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
 
 </RelativeLayout>

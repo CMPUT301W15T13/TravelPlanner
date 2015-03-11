@@ -49,8 +49,7 @@ import exceptions.InvalidUserPermissionException;
  * This fragment is used for creating and editing claims.
  * Both functions use the same layout, so it's more familiar
  * to the user. When creating, all fields are empty, and 
- * when editting, they're populated by existing data.
- * @author mfritze
+ * when editing, they're populated by existing data.
  *
  */
 
@@ -94,7 +93,6 @@ public class ClaimManagerFragment extends Fragment{
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
 	}
 
-	
 	/**
 	 * Opens a new date picker dialog to set the 
 	 * start and end dates of a claim. It will parse
@@ -140,7 +138,6 @@ public class ClaimManagerFragment extends Fragment{
 	 * @param day
 	 * @param text
 	 */
-	
 	@SuppressWarnings("deprecation")
 	public void addDateData(int year, int month, int day, TextView text){
 		Date date;
@@ -152,15 +149,26 @@ public class ClaimManagerFragment extends Fragment{
 		date.setDate(day);
 		date.setMonth(month);
 		date.setYear(year);
-		Toast.makeText(getActivity(), Integer.toString(day) + "/" + Integer.toString(month) + "/" + Integer.toString(year), Toast.LENGTH_SHORT).show();
 	}
 
+	/**
+	 * Opens the custom dialog to get a new
+	 * destination ond it's purpose from the user
+	 */
 	public void openDestinationDialog() {
 		DestinationDialogFragment dialog = new DestinationDialogFragment();
 		dialog.show(getFragmentManager(), "TEST TAG");
 	}
 	
-
+	/**
+	 * Creates a new claim based on the fields
+	 * that have been updated by updateReferences.
+	 * Then adds it to the CLaimlist and updates the
+	 * ArrayAdapter
+	 * @throws InvalidDateException
+	 * @throws InvalidNameException
+	 * @throws InvalidUserPermissionException
+	 */
 	public void createClaim() throws InvalidDateException, InvalidNameException, InvalidUserPermissionException{
 		if(this.completeFields){
 			Claim newClaim = new Claim(this.nameText, startDate, endDate, 
@@ -191,6 +199,13 @@ public class ClaimManagerFragment extends Fragment{
 		}
 	}
 
+	/**
+	 * Method of subverting the locality issues within
+	 * a custom AlertDialog. It gets creates a new TravelItenerary item
+	 * and adds it to the local list. 
+	 * @param item
+	 * @throws DuplicateException
+	 */
 	public void addTravelItenerarItem(TravelItinerary item) throws DuplicateException{
 		this.itineraryList.addTravelDestination(item);
 		String dest_list = destinationView.getText().toString();

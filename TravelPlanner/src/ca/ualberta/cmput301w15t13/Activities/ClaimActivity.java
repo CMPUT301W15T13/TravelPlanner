@@ -34,6 +34,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import exceptions.InvalidDateException;
@@ -74,11 +75,23 @@ public class ClaimActivity extends Activity {
 		
 		Intent intent = getIntent();
 		this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
-		Toast.makeText(this, Boolean.toString(isClaimant), Toast.LENGTH_SHORT).show();
 		
 		// TODO load data
+		// TODO add a save file listener
 	}
 	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		setFragmentToClaimViewer();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		ClaimListSingleton.getClaimList().notifyListeners();
+	}
+
 	/**
 	 * Set the action bar
 	 * to the corresponding search and
@@ -115,12 +128,6 @@ public class ClaimActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.claim, menu);
 		return true;
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		setFragmentToClaimViewer();
 	}
 
 	/**
