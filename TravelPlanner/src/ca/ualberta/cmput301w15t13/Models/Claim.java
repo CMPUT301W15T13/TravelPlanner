@@ -326,10 +326,18 @@ public class Claim {
 /**
  * This will delete a travel Itinerary at the specified index
  * @param i
+ * @throws InvalidUserPermissionException 
  */
-	public void deleteTravelDestination(int i) {
+	public void deleteTravelDestination(int i) throws InvalidUserPermissionException {
+		
+	if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
+			
+			throw new InvalidUserPermissionException("Non-Editable");
+			
+		} else {
+			
 			this.travelList.deleteTravelDestination(i);
-
+		}
 	}
 
 /**

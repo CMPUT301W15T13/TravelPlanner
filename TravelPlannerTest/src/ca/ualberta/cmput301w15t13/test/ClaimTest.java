@@ -628,17 +628,31 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		
 		claim.giveStatus(ClaimStatus.SUBMITTED);
 
-			claim.deleteTravelDestination(0);
+		try {
 			
-			//this will always fail
-			fail("deleted a claim when not editable");
+			claim.deleteTravelDestination(0);
+		
+		} catch (InvalidUserPermissionException e) {
+			
+		}
+		
+		assertEquals("deleted a submitted claim", 1, claim.numberOfDestinations());
+			
 
 		
 		claim.giveStatus(ClaimStatus.APPROVED);
+		
 
+		try {
+			
 			claim.deleteTravelDestination(0);
-			//this will always fail
-			fail("deleted a claim when not editable");
+		
+		} catch (InvalidUserPermissionException e) {
+			
+		}
+		
+		assertEquals("deleted an approved claim", 1, claim.numberOfDestinations());
+
 
 	}
 	
