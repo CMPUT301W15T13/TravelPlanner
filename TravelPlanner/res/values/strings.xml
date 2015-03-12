@@ -25,5 +25,10 @@
     <string name="approverLogin">Login as Approver</string>
     <string name="adapter_status_description">Status</string>
     <string name="holder">Holder</string>
-
+    <string name="new_expense">New Expense</string>
+    <string name="expense_name">Expense Name</string>
+	<string name="receipt">Receipt</string>
+	<string name="Amount">Amount</string>
+	<string name="date">Date</string>
+	<string name="Category">Category</string>
 </resources>

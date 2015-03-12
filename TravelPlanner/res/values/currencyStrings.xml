@@ -3,10 +3,11 @@
     <string-array name="currency_array">
         <item>CAD</item>
         <item>USD</item>
+        <item>GBP</item>
         <item>EUR</item>
-        <item>INR</item>
-        <item>AUS</item>
-        <item>ILS</item>
+        <item>CHF</item>
+        <item>JPY</item>
+        <item>CNY</item>
     </string-array>
 </resources>
 <!-- 
