@@ -26,9 +26,11 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
 
 public class TagManager {
 	
-	public static HashMap<Tag, ArrayList<String>> manager = new HashMap<Tag, ArrayList<String>>();
+	public static HashMap<Tag, ArrayList<String>> manager;
 	
 	public TagManager() {
+		
+		this.manager = new HashMap<Tag, ArrayList<String>>();
 		
 	}
 	
@@ -40,8 +42,6 @@ public class TagManager {
 			relatedClaimIds.add(claimID);
 			manager.put(tag, relatedClaimIds);
 		}
-		
-		
 	}
 
 	public ArrayList<String> getAssociatedClaims(Tag tag) {

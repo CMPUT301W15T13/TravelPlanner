@@ -250,11 +250,13 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		
 		HashMap<Tag, ArrayList<String>> manager = tm.getManager();
 		
-		assertEquals("Contains more or less than 4 tags",4, manager.size());
+		assertEquals("Contains more or less than 4 tags",4, manager.keySet().size());
 		assertTrue("yolo Tag not found", manager.containsKey(tag1));
 		assertTrue("Gift to self Tag not found", manager.containsKey(tag2));
 		assertTrue("On Sale Tag not found", manager.containsKey(tag3));
 		assertTrue("Aniversary gift Tag not found", manager.containsKey(tag4));
+		assertEquals("Incorrect number of tags for claim1",2, claim1.tags.size());
+		assertEquals("Incorrect number of claims for tag1", 2, tm.getAssociatedClaims(tag1).size());
 	}
 	
 }
