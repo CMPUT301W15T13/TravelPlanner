@@ -116,20 +116,7 @@ public class Claim {
 	 * @throws EmptyFieldException 
 	 */
 	public void setUserName(String userName) throws EmptyFieldException {
-		new ExceptionHandler().throwExeptionIfEmpty(userName, FIELD.USERNAME);
-		//userName = "Bill Smith";
-		
-		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			
-			throw new EmptyFieldException("Non-Editable");
-			
-		} else {
-			
-			this.userName = userName;
-			
-		}
-
-
+		this.userName = userName;
 	}
 
 	/**
@@ -142,15 +129,13 @@ public class Claim {
 	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException{
 
 			//this checks to see that the entered start date is not after the entered end date
-			if (startDate.after(endDate))
+			if (startDate.after(endDate)){
 				 throw new InvalidDateException("Start Date is after End Date");
-			else
-			{
+			}
+			else {
 				this.setStartDate(startDate);
 				this.setEndDate(endDate);
 			}
-
-		
 	}
 	
 	/**

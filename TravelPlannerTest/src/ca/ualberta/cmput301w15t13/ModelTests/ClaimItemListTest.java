@@ -139,13 +139,18 @@ public class ClaimItemListTest extends
 	public void testListeners(){
 		ClaimList claimList = new ClaimList();
 		claimList.addListener(new Listener(){
+			public boolean called = false;
+			
 			@Override
 			public void update(){
+				called = true;
 				assertTrue("Passed!" , true);
 			}
 		});
 	
 		claimList.notifyListeners();
+
+		assertTrue("listener called", listener.called);
 	}
 	
 	public void testFilter() throws InvalidDateException,DuplicateException, EmptyFieldException {

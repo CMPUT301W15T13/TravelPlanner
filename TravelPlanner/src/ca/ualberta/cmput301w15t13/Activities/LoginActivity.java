@@ -77,6 +77,7 @@ public class LoginActivity extends Activity {
 		username = usernameEditText.getText().toString();
 		password = passwordEditText.getText().toString();
 		
+		
 		if(username.equals("") || username == null){
 			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();
 		}else if(password.equals("") || password == null){
