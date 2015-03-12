@@ -38,7 +38,7 @@ public class Claimant extends User {
 	
 	public void submitClaim(Claim claim) throws InvalidUserPermissionException{
 		if(claim != null && claim.getStatus() == ClaimStatus.INPROGRESS){
-			claim.setStatus(ClaimStatus.SUBMITTED);
+			claim.giveStatus(ClaimStatus.SUBMITTED);
 		}
 	}
 

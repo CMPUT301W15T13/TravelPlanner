@@ -62,24 +62,24 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	public void testReturnClaim() throws InvalidDateException, EmptyFieldException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());;
-		claim.setStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
 		
 		approver.returnClaim(claim);
 		assertEquals("Claim status isn't returned", ClaimStatus.RETURNED, claim.getStatus());
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.setStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(ClaimStatus.INPROGRESS);
 		approver.returnClaim(claim);
 		assertEquals("Approver was able to return an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
 		
 		
 		//Is this one necessary?
-		claim.setStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(ClaimStatus.RETURNED);
 		approver.returnClaim(claim);
 		assertEquals("Approver was able to return a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus() );
 		
-		claim.setStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(ClaimStatus.APPROVED);
 		approver.returnClaim(claim);
 		assertEquals("Approver was able to return an APPROVED claim",ClaimStatus.APPROVED, claim.getStatus());
 	}
@@ -95,7 +95,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	public void testClaimApprove() throws InvalidDateException, EmptyFieldException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		claim.setStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
 		
 		assertEquals("Approver name not Catbert", "Catbert", approver.getName());
@@ -106,16 +106,16 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.setStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(ClaimStatus.INPROGRESS);
 		approver.approveClaim(claim);
 		assertEquals("Approver was able to approve an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
 		
-		claim.setStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(ClaimStatus.RETURNED);
 		approver.approveClaim(claim);
 		assertEquals("Approver was able to approve a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus());
 		
 		//Is this one needed?
-		claim.setStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(ClaimStatus.APPROVED);
 		approver.approveClaim(claim);
 		assertEquals("Approver was able to approve an APPROVED claim",ClaimStatus.APPROVED, claim.getStatus());
 		
@@ -136,7 +136,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		Approver approver = new Approver("Catbert");
 		String comment = "Test";
 		
-		claim.setStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 		
 		approver.addComment(claim, comment);
 		ArrayList<String> comments = claim.getComments();
@@ -145,19 +145,19 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		assertTrue("Comment isn't added", comments.contains(comment));
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.setStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(ClaimStatus.INPROGRESS);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();
 		assertEquals("A comment was added to an inprogress claim",0 , comments.size());
 		
-		claim.setStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(ClaimStatus.RETURNED);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();
 		assertEquals("A comment was added to a returned claim",0 , comments.size());
 		
-		claim.setStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(ClaimStatus.APPROVED);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();

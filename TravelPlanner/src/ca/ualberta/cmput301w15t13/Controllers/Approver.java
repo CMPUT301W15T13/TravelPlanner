@@ -38,14 +38,14 @@ public class Approver extends User {
 	public void approveClaim(Claim claim) {
 		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
 			claim.setLastApproverName(this.name);
-			claim.setStatus(ClaimStatus.APPROVED);
+			claim.giveStatus(ClaimStatus.APPROVED);
 		}
 	}
 	
 	public void returnClaim(Claim claim) {
 		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
 			claim.setLastApproverName(this.name);
-			claim.setStatus(ClaimStatus.RETURNED);
+			claim.giveStatus(ClaimStatus.RETURNED);
 		}
 	}
 

@@ -239,7 +239,7 @@ public class Claim {
 	 * @param status
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void setStatus(int status)  {
+	public void giveStatus(int status)  {
 			this.status.setStatus(status);
 
 	}
@@ -254,11 +254,14 @@ public class Claim {
 	 */
 
 	public void addTravelDestination(String destination, String description) throws  EmptyFieldException{
-
-			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
-			
-			this.travelList.addTravelDestination(travelItinerary);
 		
+		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
+			throw new EmptyFieldException("Non-Editable");
+		} else {
+			
+			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
+			this.travelList.addTravelDestination(travelItinerary);
+		}
 
 	
 	}
@@ -286,7 +289,6 @@ public class Claim {
 	}
 
 
-
 	/**
 	 * This will edit the Travel Itinerary based on the index, and data passed in
 	 * @param index
@@ -304,8 +306,6 @@ public class Claim {
 		
 	}
 
-
-
 /**
  * This will delete a travel Itinerary at the specified index
  * @param i
@@ -314,8 +314,6 @@ public class Claim {
 			this.travelList.deleteTravelDestination(i);
 
 	}
-
-
 
 /**
  * This will get the name of the last approver

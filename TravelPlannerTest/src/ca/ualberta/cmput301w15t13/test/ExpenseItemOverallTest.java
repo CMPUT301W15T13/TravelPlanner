@@ -194,18 +194,18 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		ArrayList<ExpenseItem> expenseList = null;
 		claim.addExpenseItem(expenseItem);
 
-		claim.setStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 		
 		assertFalse("Expense is editable while submitted", claim.isEditable());
 		
-		claim.setStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(ClaimStatus.APPROVED);
 		
 		assertFalse("Expense is editable while approved", claim.isEditable());
 		
-		claim.setStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(ClaimStatus.INPROGRESS);
 		assertTrue("Expense is not editable while in progress", claim.isEditable());
 
-		claim.setStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(ClaimStatus.RETURNED);
 		assertTrue("Expense is not editable while returned", claim.isEditable());
 
 	}

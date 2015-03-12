@@ -278,27 +278,36 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Claim has invalid Travel Destination", "Russia",claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Claim has invalid Travel Destination", "Bear wrestling",claim.getTravelDestination(0).getDestinationDescription());
 
-		claim.setStatus(ClaimStatus.SUBMITTED);
-
+		claim.giveStatus(ClaimStatus.SUBMITTED);
+		
+		assertEquals("status unchanged", 2, claim.getStatus());
+		
+		try {
+			
+			claim.addTravelDestination("Poland","Yolo");
+		} catch (EmptyFieldException e) {
+			
+			assertEquals("Added Travel Destination when claim was submitted", 1, claim.numberOfDestinations());
+			
+		}
+		
+		claim.giveStatus(ClaimStatus.APPROVED);
+		
+		assertEquals("status unchanged", 3, claim.getStatus());
+		
+		try {
+			
 			claim.addTravelDestination("Poland","Yolo");
 			
-			//this will fail always
-			fail("edited a travel destination when claim was not editable");
-
-		
-		
-		claim.setStatus(ClaimStatus.APPROVED);
-
-			claim.addTravelDestination("Poland","Yolo");
+		} catch (EmptyFieldException e) {
 			
-			//this will fail always
-			fail("edited a travel destination when claim was not editable");
+			assertEquals("Added Travel Destination when claim was approved", 1, claim.numberOfDestinations());
+
+		}
+
 
 	}
-	
-	
 
-	
 	/**Use Case A2
 	 * Tests to see if the travel destination entry is valid
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
@@ -425,7 +434,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Edited claim name is wrong", endDate2, claim.getEndDate());
 		assertEquals("Edited claim description is wrong", description2, claim.getDescription());
 		
-		claim.setStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 
 			claim.setUserName("yolo");
 			
@@ -433,7 +442,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 			fail("deleted a claim when not editable");
 
 		
-		claim.setStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(ClaimStatus.APPROVED);
 
 			claim.setUserName("yolo");
 			//this will always fail
@@ -547,7 +556,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		}
 		
 		
-		claim.setStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 
 			claim.editTravelDescription(0, "Australia", "Yolo");
 			
@@ -555,7 +564,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 			fail("deleted a claim when not editable");
 
 		
-		claim.setStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(ClaimStatus.APPROVED);
 	
 			claim.editTravelDescription(0, "Australia", "Yolo");
 			// this will always fail
@@ -590,7 +599,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Delete Travel Destination failed: Check Description", "Relic hunting", claim.getTravelDestination(0).getDestinationDescription());
 		
 		
-		claim.setStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 
 			claim.deleteTravelDestination(0);
 			
@@ -598,7 +607,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 			fail("deleted a claim when not editable");
 
 		
-		claim.setStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(ClaimStatus.APPROVED);
 
 			claim.deleteTravelDestination(0);
 			//this will always fail
@@ -636,14 +645,14 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Removed wrong claim", "test2", claimlist.getClaimAtIndex(0).getUserName());
 		
 		
-		claim2.setStatus(ClaimStatus.SUBMITTED);
+		claim2.giveStatus(ClaimStatus.SUBMITTED);
 
 		//this will always fail
 			fail("deleted a claim when not editable");
 
 		
 		
-		claim2.setStatus(ClaimStatus.APPROVED);
+		claim2.giveStatus(ClaimStatus.APPROVED);
 
 			claimlist.remove(claim2);
 			//this will always fail

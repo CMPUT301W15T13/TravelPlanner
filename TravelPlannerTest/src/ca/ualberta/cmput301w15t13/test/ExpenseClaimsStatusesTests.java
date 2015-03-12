@@ -91,7 +91,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	public void testClaimantOnReturned() throws EmptyFieldException, InvalidDateException{
 		//LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
-		claim.setStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(ClaimStatus.RETURNED);
 		assertEquals("Claim can be editted by claimant", ClaimStatus.RETURNED, claim.getStatus());
 		
 
@@ -112,7 +112,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	public void testClaimStatusApproved() throws InvalidDateException, EmptyFieldException {
 		//LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
-		claim.setStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(ClaimStatus.APPROVED);
 		assertEquals("Claim is approved and can't be editted",ClaimStatus.APPROVED, claim.getStatus());
 		
 
