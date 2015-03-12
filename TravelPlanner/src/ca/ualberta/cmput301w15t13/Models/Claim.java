@@ -116,11 +116,20 @@ public class Claim {
 	 * @throws EmptyFieldException 
 	 */
 	public void setUserName(String userName) throws EmptyFieldException {
-
 		new ExceptionHandler().throwExeptionIfEmpty(userName, FIELD.USERNAME);
 		//userName = "Bill Smith";
+		
+		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
+			
+			throw new EmptyFieldException("Non-Editable");
+			
+		} else {
+			
+			this.userName = userName;
+			
+		}
 
-		this.userName = userName;
+
 	}
 
 	/**
@@ -299,9 +308,17 @@ public class Claim {
 	 */
 	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException, EmptyFieldException {
 		
+		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
+			
+			throw new EmptyFieldException("Non-Editable");
+			
+		} else {
+			
 			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 			
 			travelList.editTravelDestination(index, travelItinerary);
+		}
+			
 
 		
 	}

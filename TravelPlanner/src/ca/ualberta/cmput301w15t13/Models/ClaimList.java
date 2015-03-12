@@ -26,6 +26,7 @@ import java.util.Collections;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import exceptions.EmptyFieldException;
 import exceptions.InvalidUserPermissionException;
 
 
@@ -79,10 +80,20 @@ public class ClaimList {
 		}
 	}
 
-	public void removeClaimAtIndex(int i) {
+	public void removeClaimAtIndex(int i) { 
 		//make sure the index is valid
 		if(!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)){
 			claimList.remove(i);
+		}
+	}
+	
+	public void claimRemove(Claim c) throws InvalidUserPermissionException {
+		
+		if( c.status.getStatus() == ClaimStatus.SUBMITTED || c.status.getStatus() == ClaimStatus.APPROVED){
+			throw new InvalidUserPermissionException("Non-Editable");
+		} else {
+			
+			this.claimList.remove(c);
 		}
 	}
 
