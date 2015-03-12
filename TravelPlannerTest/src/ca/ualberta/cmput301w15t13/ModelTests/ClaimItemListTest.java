@@ -18,7 +18,6 @@
  * limitations under the License.
  */
 
-
 package ca.ualberta.cmput301w15t13.ModelTests;
 
 import java.util.ArrayList;
@@ -38,6 +37,14 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
+
+/* This tests the functionality of the claim List. 
+ * 
+ * It tests the claimList's ability to add claims, remove claims, filter by tags, 
+ * index the list, remove claims at a specific index, that the listener interacts 
+ * with it, and that it can be created.
+ */
+
 public class ClaimItemListTest extends
 		ActivityInstrumentationTestCase2<LoginActivity> {
 
@@ -51,19 +58,21 @@ public class ClaimItemListTest extends
 		super.setUp();
 	}
 	
+	// This tests that a claimList can be constructed correctly either from scratch
+	// or from an existing ArrayList
 	public void testSetUp() throws InvalidDateException, EmptyFieldException{
 		ClaimList itemList = new ClaimList();
 		assertNotNull("Item list is null", itemList);
 		assertEquals("Item list is not empty",0, itemList.size());
 		
+		// Create an ArrayList of 2 claims
 		ArrayList<Claim> oldClaims = new ArrayList<Claim>();
-		Claim claim1 = null, claim2 = null;
-		claim1 = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		claim2 = new Claim("name3", new Date(2), new Date(4), "Des3t", new TravelItineraryList());
-
+		Claim claim1 = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
+		Claim claim2 = new Claim("name3", new Date(2), new Date(4), "Des3t", new TravelItineraryList());
 		oldClaims.add(claim1);
 		oldClaims.add(claim2);
 
+		// Make the claim list with ArrayList
 		ClaimList claimList = new ClaimList(oldClaims);
 		assertNotNull("Item list is null", claimList);
 		assertEquals("Item list is not empty", 2,  claimList.size());
@@ -77,15 +86,16 @@ public class ClaimItemListTest extends
 	}
 	
 	
-	
+	// This tests the claim list's ability to add and remove it's Claims
 	public void testAddRemove() throws InvalidDateException, EmptyFieldException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
 		
+		// Add claims and test
 		claimList.add(claim);
 		assertEquals("ClaimList length is not 1", 1,claimList.size());
-		assertTrue("Claim list doesn't containt claim 1", claimList.contains(claim));
+		assertTrue("Claim list doesn't contain claim 1", claimList.contains(claim));
 		assertFalse("Claim list thinks it has claim 2", claimList.contains(claim2));
 		
 		claimList.add(claim2);
@@ -94,9 +104,10 @@ public class ClaimItemListTest extends
 		assertTrue("Claim list doesn't containt claim 2", claimList.contains(claim2));
 		
 		claimList.add(claim);
-		assertEquals("Claim length reperesents the duplicate claim",2, claimList.size());
-		assertTrue("Claim was added twice", claimList.contains(claim));
+		assertEquals("Claim length represents the duplicate claim",2, claimList.size());
+		assertTrue("Original claim was removed", claimList.contains(claim));
 		
+		// Test removing the same claim twice
 		claimList.remove(claim);
 		assertEquals("ClaimList length is not 1", 1, claimList.size());
 		assertFalse("Claim list contains claim 1", claimList.contains(claim));
@@ -110,7 +121,9 @@ public class ClaimItemListTest extends
 		assertFalse("Claim list contains claim 2", claimList.contains(claim2));
 	}
 
-	public void testIndexing() throws InvalidDateException, EmptyFieldException{
+	// Tests that a specific claim can be removed or accessed from the claim 
+	// list via index without error.
+	public void testIndexRemoval() throws InvalidDateException, EmptyFieldException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
@@ -118,9 +131,11 @@ public class ClaimItemListTest extends
 		claimList.add(claim);
 		claimList.add(claim2);
 		
+		// Test accessing the added claims.
 		assertEquals("Claim index is not 0",claim,  claimList.getClaimAtIndex(0));
 		assertEquals("Claim2 index is not 1", claim2, claimList.getClaimAtIndex(1));
 		
+		// Test removing the claims
 		claimList.removeClaimAtIndex(0);
 		assertFalse("Claimlist still has claim 1", claimList.contains(claim));
 		
@@ -136,6 +151,7 @@ public class ClaimItemListTest extends
 
 	}
 
+	// Tests that the listener interacts with the claim list.
 	public void testListeners(){
 		ClaimList claimList = new ClaimList();
 		claimList.addListener(new Listener(){
