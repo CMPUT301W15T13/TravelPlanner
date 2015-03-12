@@ -38,7 +38,7 @@ public class ExpenseItem {
 
 	
 	protected String ClaimID = null;
-	//this does not need to be initalized
+	//this does not need to be initialized
 	protected Currency currencyEnum;
 	
 	public Receipt receipt = null;

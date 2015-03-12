@@ -24,46 +24,46 @@ import java.util.ArrayList;
 
 public class ExpenseItemList {
 	// First assign the array, ExpenseItemList, to be null
-	ArrayList<ExpenseItem> ExpenseItemList = null;
+	ArrayList<ExpenseItem> expenseItemList = null;
 	
 	String claimID = null;
 	
 	// Initializing the ExpenseItemList
 	public ExpenseItemList()
 	{
-		ExpenseItemList = new ArrayList<ExpenseItem>();
+		expenseItemList = new ArrayList<ExpenseItem>();
 	}
 	
 	// Initializing the ExpenseItemList
 	public ExpenseItemList(String ClaimID)
 	{
 		claimID =ClaimID; 
-		ExpenseItemList = new ArrayList<ExpenseItem>();
+		expenseItemList = new ArrayList<ExpenseItem>();
 	}
 	
 	// some methods used to control ExpenseItemList. i.e. add, delete, update, etc
 	public void add(ExpenseItem Expense)
 	{
 		// No need to check for duplicate as there could be multiple identical expenses in a claim
-		ExpenseItemList.add(Expense);
+		expenseItemList.add(Expense);
 	}
 	
 	public void delete(ExpenseItem Expense)
 	{
-		if (ExpenseItemList.contains(Expense)==true){
+		if (expenseItemList.contains(Expense)==true){
 			// there is an Expense in a list we can delete, then delete
-			ExpenseItemList.remove(Expense);
+			expenseItemList.remove(Expense);
 		}
 		
 	}
 	
 	public int size(){
-		return this.ExpenseItemList.size();
+		return this.expenseItemList.size();
 	}
 	
 	public boolean isempty(){
 		// this will check if the list is empty or not, return true iff empty else false
-		if (this.ExpenseItemList.size() == 0){
+		if (this.expenseItemList.size() == 0){
 			return true;
 		} else {
 			return false;
@@ -71,14 +71,14 @@ public class ExpenseItemList {
 	}
 	
 	public ArrayList<ExpenseItem> getExpenseList(){
-		return this.ExpenseItemList;
+		return this.expenseItemList;
 	}
 	
 	public ExpenseItem findExpenseItem(int index){
 		// this method might be trimmed down a bit, little help will be nice if want to modify this
 		// check index is valid, this automatically check if list is empty too
-		if (this.ExpenseItemList.size() > index && index >= 0){
-			return(this.ExpenseItemList.get(index));
+		if (this.expenseItemList.size() > index && index >= 0){
+			return(this.expenseItemList.get(index));
 		} else {
 			// input index is wrong or the list is empty
 			return null;

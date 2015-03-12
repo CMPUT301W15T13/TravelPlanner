@@ -225,7 +225,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		claim.addExpenseItem(expenseItem);
 		assertTrue("EXpense item was not added", claim.getExpenseItems().contains(expenseItem));
 		
-		//  (ER) Added - We need to check to see if we delete too many claims
+		// (ER) Added - We need to check to see if we delete too many claims
 		claim.addExpenseItem(new ExpenseItem("taxi", new Date(100), "Swag" , 50.50, "USD", claim.getclaimID()));
 		claim.addExpenseItem(new ExpenseItem("hotel", new Date(110), "Swagger" , 150.50, "USD", claim.getclaimID()));
 
@@ -233,7 +233,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		claim.removeExpenseItem(expenseItem);
 		assertFalse("Expense item was not removed", claim.getExpenseItems().contains(expenseItem));
 		
-	//  (ER) Assert for Tests
+		//(ER) Assert for Tests
 		assertEquals("Too many expenses deleted", 2, claim.getExpenseItems().size());
 		
 		

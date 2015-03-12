@@ -49,6 +49,8 @@ public class Claim {
 	protected String lastApproverName = null;
 	protected ClaimStatus status = null;
 	
+	protected ExpenseItemList expenseItems = null;
+	
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected String claimID = null;
 	
@@ -87,6 +89,7 @@ public class Claim {
 		this.approverComments = new HashMap<String,ArrayList<String>>();
 		
 		claimID = UUID.randomUUID().toString();
+		this.expenseItems = new ExpenseItemList();
 	}
 
 	
@@ -388,6 +391,7 @@ public class Claim {
 	 * @param tag
 	 * @throws DuplicateException
 	 */
+	//adds a tag to  the instances arrayList of tags, but only if new
 	public void addTag(Tag tag) throws DuplicateException{	
 		if (this.tags.contains(tag)) {
 			throw new DuplicateException("Duplicate Tag Added");
@@ -398,39 +402,33 @@ public class Claim {
 	}
 
 	public ArrayList<Tag> getTags() {
-		// TODO Auto-generated method stub
 		return this.tags;
 	}
 	
 	public Tag getTag(int Index) {
-		// TODO Auto-generated method stub
 		return this.tags.get(Index);
 	}
 
 	public void setTag(int index, String tname) {
 		Tag tag = tags.get(index);
 		tag.setTagName(tname);
-}
+	}
 
 
 	public void removeTag(String tag) {
-		// TODO Auto-generated method stub
+		this.tags.remove(tag);
 		
 	}
 
 
-
 	public void addExpenseItem(ExpenseItem expenseItem) {
-		String readME;
-
-		
+		this.expenseItems.add(expenseItem);
 	}
 
 
 
 	public ArrayList<ExpenseItem> getExpenseItems() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.expenseItems.getExpenseList();
 	}
 
 
@@ -447,9 +445,7 @@ public class Claim {
 
 
 	public void removeExpenseItem(ExpenseItem expenseItem) {
-		// TODO Auto-generated method stub
-		
-		String readME;
+		this.expenseItems.delete(expenseItem);
 
 	}
 
