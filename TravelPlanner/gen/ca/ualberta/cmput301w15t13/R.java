@@ -9,16 +9,17 @@ package ca.ualberta.cmput301w15t13;
 
 public final class R {
     public static final class array {
-        public static final int currency_array=0x7f050000;
+        public static final int category_array=0x7f040000;
+        public static final int currency_array=0x7f040001;
     }
     public static final class attr {
     }
     public static final class color {
-        public static final int background=0x7f040000;
-        public static final int background_dark=0x7f040001;
-        public static final int background_highlight=0x7f040004;
-        public static final int incomplete=0x7f040003;
-        public static final int text=0x7f040002;
+        public static final int background=0x7f050000;
+        public static final int background_dark=0x7f050001;
+        public static final int background_highlight=0x7f050004;
+        public static final int incomplete=0x7f050003;
+        public static final int text=0x7f050002;
     }
     public static final class dimen {
         /**  Default screen margins, per the Android Design guidelines. 
@@ -37,24 +38,38 @@ public final class R {
     public static final class id {
         public static final int approverLogin=0x7f0a0003;
         public static final int buttonEndDate=0x7f0a0012;
+        public static final int buttonEndDateExpense=0x7f0a0023;
         public static final int buttonFinishClaim=0x7f0a0017;
+        public static final int buttonFinishExpense=0x7f0a0029;
         public static final int buttonLeaveClaim=0x7f0a0016;
+        public static final int buttonLeaveExpense=0x7f0a0028;
         public static final int buttonLogin=0x7f0a0002;
         public static final int buttonNewClaim=0x7f0a0019;
         public static final int buttonNewDestination=0x7f0a0014;
+        public static final int buttonNewExpense=0x7f0a002a;
         public static final int buttonSearchClaim=0x7f0a0006;
         public static final int buttonStartDate=0x7f0a0010;
+        public static final int categorySpinner=0x7f0a0021;
+        public static final int currencySpinner=0x7f0a0026;
+        public static final int editTextAmount=0x7f0a0025;
         public static final int editTextClaimDescription=0x7f0a0015;
         public static final int editTextClaimName=0x7f0a000e;
         public static final int editTextDestinationName=0x7f0a001c;
+        public static final int editTextExpenseDescription=0x7f0a0027;
+        public static final int editTextExpenseName=0x7f0a0020;
         public static final int editTextPassword=0x7f0a0000;
         public static final int editTextReasonName=0x7f0a001d;
         public static final int editTextSearchClaims=0x7f0a0005;
         public static final int editTextUsername=0x7f0a0001;
+        public static final int expenseMainFragmentHolder=0x7f0a001e;
+        public static final int expenseParentClaimName=0x7f0a002c;
+        public static final int imageButton1=0x7f0a0024;
         public static final int imageViewAdapterStatus=0x7f0a000b;
         public static final int incompletenessIndicator=0x7f0a0008;
         public static final int layoutButtons=0x7f0a000d;
+        public static final int layoutButtonsExpense=0x7f0a001f;
         public static final int listViewClaim=0x7f0a0018;
+        public static final int listViewExpense=0x7f0a002b;
         public static final int mainFragmentHolder=0x7f0a0007;
         public static final int spinnerClaimFilter=0x7f0a0004;
         public static final int textViewAdapterClaimCost=0x7f0a000c;
@@ -63,6 +78,7 @@ public final class R {
         public static final int textViewDestinationDialogTitle=0x7f0a001a;
         public static final int textViewDestinationsList=0x7f0a0013;
         public static final int textViewEndDate=0x7f0a0011;
+        public static final int textViewEndDateExpense=0x7f0a0022;
         public static final int textViewStartDate=0x7f0a000f;
         public static final int title_buffer=0x7f0a001b;
     }
@@ -75,12 +91,17 @@ public final class R {
         public static final int claim_manager_layout=0x7f030005;
         public static final int claim_viewer_layout=0x7f030006;
         public static final int destination_dialog_layout=0x7f030007;
+        public static final int expense_item_activity=0x7f030008;
+        public static final int expense_item_manager=0x7f030009;
+        public static final int expense_item_viewer_layout=0x7f03000a;
     }
     public static final class menu {
         public static final int claim=0x7f090000;
         public static final int login=0x7f090001;
     }
     public static final class string {
+        public static final int Amount=0x7f07001b;
+        public static final int Category=0x7f07001d;
         public static final int action_settings=0x7f070002;
         public static final int adapter_status_description=0x7f070016;
         public static final int app_name=0x7f070000;
@@ -88,19 +109,23 @@ public final class R {
         public static final int cancel=0x7f070012;
         public static final int claim_name=0x7f07000d;
         public static final int create_claim=0x7f070009;
+        public static final int date=0x7f07001c;
         public static final int description=0x7f07000a;
         public static final int destination_singular=0x7f070013;
         public static final int destination_title=0x7f070011;
         public static final int destinations=0x7f07000b;
         public static final int end_date=0x7f07000e;
+        public static final int expense_name=0x7f070019;
         public static final int finish=0x7f070010;
         public static final int hello_world=0x7f070001;
         public static final int holder=0x7f070017;
         public static final int login=0x7f070005;
         public static final int new_claim=0x7f070007;
+        public static final int new_expense=0x7f070018;
         public static final int new_word=0x7f07000c;
         public static final int password=0x7f070003;
         public static final int reason=0x7f070014;
+        public static final int receipt=0x7f07001a;
         public static final int search=0x7f070008;
         public static final int start_date=0x7f07000f;
         public static final int title_activity_claim=0x7f070006;

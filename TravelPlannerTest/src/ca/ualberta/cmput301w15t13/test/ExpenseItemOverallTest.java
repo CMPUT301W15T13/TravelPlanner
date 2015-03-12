@@ -32,6 +32,7 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
@@ -59,8 +60,9 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
+	 * @throws InvalidFieldEntryException 
 	 */
-	public void testAddExpense() throws InvalidDateException, EmptyFieldException, InvalidNameException, InvalidUserPermissionException {
+	public void testAddExpense() throws InvalidDateException, EmptyFieldException, InvalidNameException, InvalidUserPermissionException, InvalidFieldEntryException {
 		
 		this.addExpenseItem();
 		this.addWrongCategory();
@@ -119,20 +121,33 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidFieldEntryException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addWrongCategory() throws InvalidDateException, EmptyFieldException {
+	public void addWrongCategory() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException {
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
-		String[] validCategories = {"air fare", "ground transport", "vehicle rental", "private automobile", "fuel", "parking", "registration", "accommodation", "meal",  "supplies"};
+		String[] validCategories = {"Air Fare", "Ground Transport", "Vehicle Rental", "Fuel", "Parking", "Registration", "Accommodation"};
 		/*A default constructor which doesn't initialize values */
+		
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
-		expenseItem.setExpenseCategory("NONVALID");
-		assertNull("Category was set to a nonValid item", expenseItem.getExpenseCategory());
+		
+		try {
+			
+			expenseItem.setExpenseCategory("NONVALID");
+			
+		} catch (InvalidFieldEntryException e) {
+			
+		}
+		assertEquals("Category was set to a nonValid item", "air", expenseItem.getExpenseCategory());
 		
 		for(String cat: validCategories){
-			expenseItem.setExpenseCategory(cat);
-			assertEquals("Valid category wasn't added",cat, expenseItem.getExpenseCategory());
+			try {
+				expenseItem.setExpenseCategory(cat);
+			} catch (InvalidFieldEntryException e) {
+				
+			}
+			assertEquals("Valid category wasn't set",cat, expenseItem.getExpenseCategory());
 		}
 	}
 	/** This is part of Use case D1
@@ -141,20 +156,32 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
+	 * @throws InvalidFieldEntryException 
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addWrongCurrency() throws InvalidDateException, EmptyFieldException{
+	public void addWrongCurrency() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException{
+		
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String[] validCurrencies = {"CAD", "USD", "EUR", "GBP", "CHF", "JPY", "CNY"};
 		/*A default constructor which doesn't initialize values */
-		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
-		expenseItem.setCurrency("NONVALID");
-		assertNull("Currency was set to a nonValid item", expenseItem.getExpenseCategory());
+		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "CAD", claim.getclaimID());
+		
+		try {
+			expenseItem.setCurrency("NONVALID");
+		} catch (InvalidFieldEntryException e) {
+			
+		}
+		assertEquals("Currency was set to a nonValid item", "CAD", expenseItem.getCurrency());
 		
 		for(String cur: validCurrencies){
-			expenseItem.setCurrency(cur);
-			assertEquals("Valid currency wasn't added", cur ,expenseItem.getCurrency());
+			try {
+				expenseItem.setCurrency(cur);
+				
+			} catch (InvalidFieldEntryException e) {
+				
+			}
+			assertEquals("Valid currency wasn't changed", cur ,expenseItem.getCurrency());
 		}
 	}
 

@@ -20,14 +20,23 @@
 
 package ca.ualberta.cmput301w15t13.Models;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
+import java.util.ResourceBundle;
 
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
+import android.R;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 
 
 public class ExpenseItem {
+	
+	private static ArrayList<String> allowedCategories = new ArrayList<String>();
+	private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
 	
 	//these are the input fields for the expense
 	protected String ExpenseCategory = null;
@@ -59,7 +68,7 @@ public class ExpenseItem {
 	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID){
 		
 		//this looks through the singleton list to see if the claim is editable
-		//if so, itr makes the expense
+		//if so, it makes the expense
 		//if ((!ClaimListSingleton.isEmpty()))){
 
 			this.ClaimID = ClaimID;
@@ -69,8 +78,11 @@ public class ExpenseItem {
 			this.Amount = Amount;
 			this.currency = Currency;
 			
-	//}
-
+			this.allowedCategories.add("Air Fare"); this.allowedCategories.add("Ground Transport"); this.allowedCategories.add("Vehicle Rental");
+			this.allowedCategories.add("Fuel"); this.allowedCategories.add("Parking"); this.allowedCategories.add("Registration"); this.allowedCategories.add("Accommodation");
+			
+			this.allowedCurrencies.add("USD"); this.allowedCurrencies.add("GBP"); this.allowedCurrencies.add("EUR");
+			this.allowedCurrencies.add("CHF"); this.allowedCurrencies.add("JPY"); this.allowedCurrencies.add("CNY"); 
 		
 	}
 
@@ -78,15 +90,17 @@ public class ExpenseItem {
 
 
 	public String getExpenseCategory() {
-		return ExpenseCategory;
+		return this.ExpenseCategory;
+
 	}
-
-
-
-	public void setExpenseCategory(String expenseCategory) {
-		ExpenseCategory = expenseCategory;
+	public void setExpenseCategory(String expenseCategory) throws InvalidFieldEntryException {
+	
+		if (!this.allowedCategories.contains(expenseCategory)){
+			throw new InvalidFieldEntryException("Not a valid Category");
+		} else {
+			this.ExpenseCategory = expenseCategory;
+		}
 	}
-
 
 
 	public Date getPurchaseDate() {
@@ -131,8 +145,12 @@ public class ExpenseItem {
 
 
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
+	public void setCurrency(String currency) throws InvalidFieldEntryException {
+		if (!allowedCurrencies.contains(currency)) {
+			throw new InvalidFieldEntryException("Unsupported Currency");
+		} else {
+			this.currency = currency;
+		}
 	}
 	
 
