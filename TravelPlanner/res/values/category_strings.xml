@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string-array name="category_array">
+        <item>Air Fare</item>
+        <item>Ground Transport</item>
+        <item>Vehicle Rental</item>
+        <item>Fuel</item>
+        <item>Parking</item>
+        <item>Registration</item>
+        <item>Accommodation</item>
+    </string-array>
+</resources>
+
+<!-- 
+Code inspiration to use a string resource and instructions taken from
+http://developer.android.com/guide/topics/resources/string-resource.html
+-->
