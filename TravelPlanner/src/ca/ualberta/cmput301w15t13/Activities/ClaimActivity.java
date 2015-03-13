@@ -190,9 +190,8 @@ public class ClaimActivity extends Activity {
 	 * @throws EmptyFieldException 
 	 */
 	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException{
-		//TODO
 		claimManagerFragment.updateReferences();
-		if(claimManagerFragment.isEditing()){ //TODO check if we're updating a claim or creating a claim
+		if(claimManagerFragment.isEditing()){ //check if we're updating a claim or creating a claim
 			claimManagerFragment.updateClaim();
 		}
 		else{

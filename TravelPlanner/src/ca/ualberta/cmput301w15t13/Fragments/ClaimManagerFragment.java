@@ -63,8 +63,7 @@ public class ClaimManagerFragment extends Fragment{
 	private boolean areFieldsComplete, isEditing;
 	private int claimIndex;	
 	
-	//TODO add a back button, in the case they don't want to submit a claim? And maybe
-	//force change what the back button does from this screen, in that it moves to the old fragment
+	//TODO force change what the back button does from this screen, in that it moves to the old fragment
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -118,7 +117,6 @@ public class ClaimManagerFragment extends Fragment{
 			this.startDateView.setText(editClaim.getStartDateAsString());
 			this.endDateView.setText(editClaim.getEndDateAsString());
 			this.destinationView.setText(editClaim.getTravelItineraryAsString());
-			// TODO add the text views for dates and itenerary
 			
 		}else{
 			this.descriptionView.setText("");
