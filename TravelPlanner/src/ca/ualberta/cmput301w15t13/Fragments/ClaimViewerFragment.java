@@ -77,7 +77,6 @@ public class ClaimViewerFragment extends Fragment {
 		return v;
 	}
 
-
 	/**
 	 * Adds the Listeners for the ArrayAdapter that 
 	 * holds all of the claims. Other standard listeners
@@ -105,7 +104,11 @@ public class ClaimViewerFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
-				Toast.makeText(getActivity(), "Short Click", Toast.LENGTH_SHORT).show();
+				if(((ClaimActivity) getActivity()).isClaimant()){
+					Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
+				}else{
+					Toast.makeText(getActivity(), "View Claim details", Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 		

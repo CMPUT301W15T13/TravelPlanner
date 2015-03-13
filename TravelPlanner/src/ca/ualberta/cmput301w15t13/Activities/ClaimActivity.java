@@ -61,6 +61,7 @@ public class ClaimActivity extends Activity {
 	private ClaimManagerFragment claimManagerFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 	private boolean isClaimant;
+	private String username;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +77,7 @@ public class ClaimActivity extends Activity {
 		
 		Intent intent = getIntent();
 		this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
+		this.username = intent.getStringExtra(LoginActivity.USERID);
 		
 		// TODO load data
 		// TODO add a save file listener
@@ -239,5 +241,11 @@ public class ClaimActivity extends Activity {
 		claimManagerFragment.openDestinationDialog();
 	}
 
-	
+	public String getUsername(){
+		return this.username;
+	}
+
+	public boolean isClaimant(){
+		return isClaimant;
+	}
 }

@@ -55,9 +55,9 @@ import exceptions.InvalidUserPermissionException;
  */
 
 public class ClaimManagerFragment extends Fragment{
-	private EditText nameView, descriptionView;
+	private EditText descriptionView;
 	private TextView startDateView, endDateView, destinationView;
-	private String name, description, startDateText, endDateText;
+	private String description, startDateText, endDateText;
 	private TravelItineraryList itineraryList;
 	private Date startDate, endDate;
 	private boolean areFieldsComplete, isEditing;
@@ -85,7 +85,6 @@ public class ClaimManagerFragment extends Fragment{
 	@Override
 	public void onStart() {
 		super.onStart();
-		nameView = (EditText) getView().findViewById(R.id.editTextClaimName);
 		descriptionView = (EditText) getView().findViewById(R.id.editTextClaimDescription);
 		destinationView = (TextView) getView().findViewById(R.id.textViewDestinationsList);
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
@@ -110,19 +109,18 @@ public class ClaimManagerFragment extends Fragment{
 	private void setFields(){
 		if(isEditing){
 			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-			this.name = editClaim.getUserName();
 			this.description = editClaim.getDescription();
 			this.startDate = editClaim.getStartDate();
 			this.endDate = editClaim.getEndDate();
 			this.itineraryList = editClaim.getTravelList();
-			
-			this.nameView.setText(this.name);
 			this.descriptionView.setText(this.description);
 			
+			this.startDateView.setText(editClaim.getStartDateAsString());
+			this.endDateView.setText(editClaim.getEndDateAsString());
+			this.destinationView.setText(editClaim.getTravelItineraryAsString());
 			// TODO add the text views for dates and itenerary
 			
 		}else{
-			this.nameView.setText("");
 			this.descriptionView.setText("");
 		}
 	}
@@ -206,7 +204,7 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	public void createClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
 		if(this.areFieldsComplete){
-			Claim newClaim = new Claim(this.name, startDate, endDate, 
+			Claim newClaim = new Claim(((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
 				this.description, itineraryList);
 			ClaimListSingleton.getClaimList().add(newClaim);
 			
@@ -225,7 +223,7 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	public void updateClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException {
 		updateReferences();
-		Claim newClaim = new Claim(this.name, startDate, endDate, 
+		Claim newClaim = new Claim( ((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
 				this.description, itineraryList);
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().add(newClaim);
@@ -237,14 +235,12 @@ public class ClaimManagerFragment extends Fragment{
 	 * fields in the layout.
 	 */
 	public void updateReferences(){
-		name = nameView.getText().toString().trim() + ""; //add the "" to check for an empty field
 		description = descriptionView.getText().toString().trim() + "";
 		startDateText = startDateView.getText().toString().trim() + "";
 		endDateText = endDateView.getText().toString().trim() + "";
 				
 		//TODO should we assert they fill in all fields?
-		if(!name.equals("") && !description.equals("") &&
-				!startDateText.equals("") && !endDateText.equals("") && itineraryList.size() != 0){
+		if(	!startDateText.equals("") && !endDateText.equals("") && itineraryList.size() != 0){
 			this.areFieldsComplete = true;
 		}
 	}
