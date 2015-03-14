@@ -25,6 +25,7 @@ import java.util.Collections;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.Tag;
 
 public class ClaimListSingleton {
 	/*
@@ -78,5 +79,37 @@ public class ClaimListSingleton {
 			return false;
 		
 	}
+	
+	// FilterClaimList works with use of tagManagers getAssociatedClaims method
+	// which returns an ArrayList of claimIds (strings) associated with a given tag.
+	// Input an arrayList of tags and it creates a new arrayList of tags, adding only
+	// the common claimIds
+	public ArrayList<String> filterClaimList(ArrayList<Tag> tags, TagManager tm) {
+		ArrayList<String> claimIds = new ArrayList<String>();
+		
+		claimIds.addAll(tm.getAssociatedClaims(tags.get(0)));
+		
+		if (tags.size() > 1) {
+			
+			for (int i = 0; i < tags.size(); i++) {
+				
+				ArrayList<String> tmp = tm.getAssociatedClaims(tags.get(i));
+							
+				for (String object : claimIds) {
+					if (tmp.contains(object)) { // this means the claimId is associated with all tags
+						continue;
+					} else {						  
+						claimIds.remove(object);
+					}
+					
+				}
+				
+			}
+		
+		}
+		
+		return claimIds;
+	}
+	
 	
 }

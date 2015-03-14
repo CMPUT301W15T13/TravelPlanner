@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import exceptions.EmptyFieldException;
@@ -139,36 +140,18 @@ public class ClaimList {
 		return false;
 
 	}
+	
 	// Filter works with use of tagManagers getAssociatedClaims method
 	// which returns an ArrayList of claimIds (strings) associated with a given tag.
 	// Input an arrayList of tags and it creates a new arrayList of tags, adding only
 	// the common claimIds
 	public ArrayList<String> filter(ArrayList<Tag> tags) {
-		ArrayList<String> claimIds = new ArrayList<String>();
+		ClaimListSingleton control = new ClaimListSingleton();
+		ArrayList<String> result = control.filterClaimList(tags, this.tagManager);
+		return result;
 		
-		claimIds.addAll(tagManager.getAssociatedClaims(tags.get(0)));
-		
-		if (tags.size() > 1) {
-			
-			for (int i = 1; i < tags.size(); i++) {
-				
-				ArrayList<String> tmp = tagManager.getAssociatedClaims(tags.get(i));
-				
-				for (String claimId : tmp) {
-					if (claimIds.contains(claimId)) { // this means the claimId is associated with all tags
-						continue;
-					} else {						  
-						claimIds.remove(claimId);
-					}
-					
-				}
-				
-			}
-		}
-		
-		return claimIds;
 	}
-	
+
 	public void setTagMan(TagManager tm) {
 		this.tagManager = tm;
 	}
