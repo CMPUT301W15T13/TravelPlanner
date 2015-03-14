@@ -141,10 +141,7 @@ public class ClaimList {
 
 	}
 	
-	// Filter works with use of tagManagers getAssociatedClaims method
-	// which returns an ArrayList of claimIds (strings) associated with a given tag.
-	// Input an arrayList of tags and it creates a new arrayList of tags, adding only
-	// the common claimIds
+
 	public ArrayList<String> filter(ArrayList<Tag> tags) {
 		ClaimListSingleton control = new ClaimListSingleton();
 		ArrayList<String> result = control.filterClaimList(tags, this.tagManager);
