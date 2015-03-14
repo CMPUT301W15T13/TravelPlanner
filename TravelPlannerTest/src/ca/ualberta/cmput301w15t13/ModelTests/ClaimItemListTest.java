@@ -174,7 +174,6 @@ public class ClaimItemListTest extends
 		TagManager tm = new TagManager();
 		Tag tag1 = new Tag("Ugent");
 		Tag tag2 = new Tag("Money");
-		Tag tag3 = new Tag("To do");
 		
 		ClaimList claimList = new ClaimList();
 		Claim claim1 = new Claim("Name", new Date(1), new Date(2), null, null);
@@ -238,14 +237,7 @@ public class ClaimItemListTest extends
 		filterTags.add(tag1);
 		
 		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
-		assertEquals(1, claimList.filter(filterTags).size());
-		
-		//Filtering by a tag not associated with any claims
-//		filterTags.set(0, tag3);
-//		assertEquals("Result not empty", 0 , claimList.filter(filterTags).);
-		
-		
-		
+		assertEquals(1, claimList.filter(filterTags).size());		
 		
 		
 	}
