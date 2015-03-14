@@ -18,8 +18,17 @@
  * limitations under the License.
  */
 
-package ca.ualberta.cmput301w15t13.Controllers;
+package ca.ualberta.cmput301w15t13.test;
 
-public interface Listener {
-	public void update();
+// This is a mock Listener class used to simulate a listener.
+// We test whether this is called or not
+
+public class MockListener {
+	
+	public boolean called = false;
+	
+	public MockListener() {
+		this.called = true;
+	}
+	
 }

@@ -31,6 +31,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import ca.ualberta.cmput301w15t13.test.MockListener;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
@@ -38,11 +39,13 @@ import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 
-/* This tests the functionality of the claim List. 
+/* Tests the functionality of the claim List. 
  * 
  * It tests the claimList's ability to add claims, remove claims, filter by tags, 
  * index the list, remove claims at a specific index, that the listener interacts 
  * with it, and that it can be created.
+ * 
+ * All tests should pass
  */
 
 public class ClaimItemListTest extends
@@ -154,51 +157,49 @@ public class ClaimItemListTest extends
 	// Tests that the listener interacts with the claim list.
 	public void testListeners(){
 		ClaimList claimList = new ClaimList();
+		MockListener l = new MockListener();
 		claimList.addListener(new Listener(){
 			@Override
 			public void update(){
 				assertTrue("Passed!" , true);
 			}
 		});
-	
 		claimList.notifyListeners();
+		assertTrue("Listener Called", l.called);
 	}
 	
+	// These are tests for the filtering of claims via user selected tags
 	public void testFilter() throws InvalidDateException,DuplicateException, EmptyFieldException {
+		// Create a tag manager and tags
 		TagManager tm = new TagManager();
-		
 		Tag tag1 = new Tag("Ugent");
 		Tag tag2 = new Tag("Money");
 		Tag tag3 = new Tag("To do");
-		Tag tag4 = new Tag("Souvenir");
 		
 		ClaimList claimList = new ClaimList();
-		
-		ArrayList<Tag> filterTags = new ArrayList<Tag>();
-		
-		ArrayList<String> test1 = new ArrayList<String>();
-		ArrayList<String> test2 = new ArrayList<String>();
-		ArrayList<String> test3 = new ArrayList<String>();
-		
-		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
+		Claim claim1 = new Claim("Name", new Date(1), new Date(2), null, null);
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), null, null);
 		
-		claim.addTag(tag1);
-		tm.add(tag1, claim.getclaimID());
+		// filterTags is used for testing, and the other arrayList simulates the tags a claim would have
+		ArrayList<Tag> filterTags = new ArrayList<Tag>();
+		ArrayList<String> test1 = new ArrayList<String>();
 		
-		claimList.add(claim);
-		claimList.setTagMan(tm);
-		
-		
+		//Will make the claim list contain 1 claim with 1 tag
+		claim1.addTag(tag1); 
 		filterTags.add(tag1);
-		test1.add(claim.getclaimID());
+		test1.add(claim1.getclaimID());
+		tm.add(tag1, claim1.getclaimID());
+		
+		claimList.add(claim1);
+		claimList.setTagMan(tm);
 		
 		//filter by tag1
 		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
 		assertEquals(1, claimList.filter(filterTags).size());
 		
-		claim.addTag(tag2);
-		tm.add(tag2, claim.getclaimID());
+		//Now claim list contains 1 claim with 2 tags
+		claim1.addTag(tag2);
+		tm.add(tag2, claim1.getclaimID());
 		claimList.setTagMan(tm);
 		
 		//filter by tag1 again
@@ -215,20 +216,36 @@ public class ClaimItemListTest extends
 		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
 		assertEquals(1, claimList.filter(filterTags).size());
 		
-		//filter multiple tags
 		claim2.addTag(tag2);
 		tm.add(tag2, claim2.getclaimID());
 		
 		claimList.add(claim2);
 		claimList.setTagMan(tm);
+		// claimList now contains 2 claims
 		// claim1 -- tag1, tag2
 		// claim2 -- tag2
-		filterTags.remove(1);
-		// filterTags = (tag2)
-		test1.add(claim2.getclaimID());
-		// test1 = (claim1 id, claim2 id)
+		
+		filterTags.remove(1);		// filterTags now is (tag2)
+		test1.add(claim2.getclaimID());		// test1 = (claim1 id, claim2 id)
+		
+		//filter by 2 tags
 		assertEquals("Claim1 and Claim2 not filtered", test1 , claimList.filter(filterTags));
 		assertEquals(2, claimList.filter(filterTags).size());
+		
+		test1.clear();
+		test1.add(claim1.getclaimID());
+		filterTags.clear();
+		filterTags.add(tag1);
+		
+		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
+		assertEquals(1, claimList.filter(filterTags).size());
+		
+		//Filtering by a tag not associated with any claims
+//		filterTags.set(0, tag3);
+//		assertEquals("Result not empty", 0 , claimList.filter(filterTags).);
+		
+		
+		
 		
 		
 	}
