@@ -37,16 +37,18 @@ import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 
-/**
- * These are the JUnit tests for the claim class
- * @author eorodrig
+/* 
+ * These are the JUnit tests for the claim class, testing
+ * the general functionality of a claim.
  *
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ * 
+ * All tests should pass
  */
 
-//This is the test for claims
-//the LoginActivity value used will have to change once the classes are finalized
+
+// the LoginActivity value used will have to change once the classes are finalized
 public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
 	public ClaimTest() {
@@ -59,11 +61,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	}
 
 	
-	
-	/**  Use Case A1
-	 * 
-	 * Test a regular name and a starting date preceding an end date is accepted 
-	 * 
+	/** 
+	 * Use Case A1 
+	 * This will test to see if we can make a regular claim correctly 
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -71,59 +71,25 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testAddClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
-			
-		//this will test the creation of 1 claim
-		this.makeRegularClaim();
-		
-		//test to see if we can make an invalid Claim (no name)
-		this.makeInvalidClaimEmpty();
-		
-	//	//test to see if we can make an invalid Claim (null)
-		this.makeInvalidClaimNull();
-		
-		//this will test to see if an invalid date is entered
-		this.makeInvalidClaimDate();
-		
-		//this will check to see if a claim can be added
-		this.addClaim();
-
-	}
-	
-	
-	/** Use Case A1
-	 * 
-	 * This will test to see if we can make a regular claim
-	 * 	 * Test that you can't add an end date that occurs after the start date. 
-	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
-	 * @throws InvalidNameException 
-	 * @throws InvalidDateException 
-	 * @throws EmptyFieldException 
-	 * @throws InvalidUserPermissionException 
-	 */
-	private void makeRegularClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
-		
+	public void testMakeRegularClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		String name = "Bill Smith";
 		Date startDate = new Date(100), endDate = new Date(120);
 		
-		
-		//Claim constructor with string name, Date startDate, Date endDate
+		// Claim constructor with string name, Date startDate, Date endDate
 		Claim claim = new Claim(name, startDate, endDate, null, null);
-	
-		//Add description to claim
+		// Add description to claim
 		claim.setDescription("Trip to Rome");
 
-		
+		// Ensure the claim was made correctly
 		assertNotNull("Claim is null", claim);
 		assertEquals("Claim name is wrong", name, claim.getUserName());
 		assertEquals("Claim startDate is wrong", startDate, claim.getStartDate());
 		assertEquals("Claim endDate is wrong", endDate, claim.getEndDate());
 		assertEquals("Claim description is wrong", "Trip to Rome",  claim.getDescription());
-
-		
 	}
 	
-	/**Use Case A1
+	/**
+	 * Use Case A1
 	 * This will test to see if we can add 1-3 claims to a claim list 
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 * @throws InvalidNameException 
@@ -131,106 +97,83 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	private void addClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
-		
-
-		//ClaimList to hold claims
+	public void testAddClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+		// ClaimList to hold claims
 		ClaimList claimList = new ClaimList();
-		
-
-			//Claim constructor with string name, Date startDate, Date endDate
-			Claim claim1 = new Claim("Name1", new Date(100), new Date(120),null, null );
-			
-			
+		Claim claim1 = new Claim("Name1", new Date(100), new Date(120),null, null );
 		claimList.add(claim1);
 		
-		//add single claim
+		// Test claim was added
 		assertEquals("Claimlist size is not 1", 1, claimList.size());
-		
-	
-		//add 2 more claims
+		// add 2 more claims
 		Claim claim2 = new Claim("Name2", new Date(100), new Date(120), null, null);
 		Claim claim3 = new Claim("Name3", new Date(100), new Date(120), null, null);
-
-		
 		claimList.add(claim2);
 		claimList.add(claim3);
-		
-		//check to see that 3 items were added
+		// check to see that all items were added
 		assertEquals("Claimlist size is not 3 ", 3, claimList.size());
-		
-
 	}
 		
-	
-	
-
-	/**Use Case A1
+	/**
+	 * Use Case A1
 	 * Test that you can't add an end date that occurs after the start date. 
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	private void makeInvalidClaimDate() throws EmptyFieldException, InvalidUserPermissionException {
-		
+	public void testMakeInvalidClaimDate() throws EmptyFieldException, InvalidUserPermissionException {
 		String name = "Bill Smith";
+		Claim claim = null;
+		// Start date intentionally after end date
 		Date startDate = new Date(120); 
 		Date endDate = new Date(100);
 		
-		try{
-			//This will throw an InvalidDateException if the claim model is working correctly
-			Claim claim = new Claim(name, startDate, endDate, null, null);
-			
-			//if we make it here, we failed the test
-			fail("Invalid Claim: Start date occures after end date");
-		}
-		catch(InvalidDateException e){
+		try {
+			// This will throw an InvalidDateException if the claim model is working correctly
+			claim = new Claim(name, startDate, endDate, null, null);	
+		} catch (InvalidDateException e) {
 			
 		}
-		
+		assertNull("Claim with invalid dates was added",claim);	
 	}
 	
-	/**Use Case A1
-	 * Test that you can't add an end date that occurs after the start date. 
+	/**
+	 * Use Case A1
+	 * The following 2 methods Test that you can't add a claim with an invalid name
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/48
 	 * @throws InvalidDateException 
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	private void makeInvalidClaimEmpty() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
-		
-		try{
-			//If claim is working properly, it will throw an InvalidNameException
-			Claim claim = new Claim("   ", new Date(100), new Date(120), null, null);
-			
-			//if we make it here, we failed the test
-			fail("Invalid Claim: Name is empty");
-		}catch(EmptyFieldException e){
+	public void testMakeInvalidClaimEmpty() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+		Claim claim = null;
+		try {
+			// If claim is working properly, it will throw an InvalidNameException
+			claim = new Claim("   ", new Date(100), new Date(120), null, null);
+		} catch (EmptyFieldException e) {
 			
 		}
-
-		
+		// Ensure claim is unchanged
+		assertNull("Claim made with invalid name", claim);
 	}
 	
-	private void makeInvalidClaimNull() throws InvalidDateException, InvalidUserPermissionException {
-		
-		try{
-		//If claim is working properly, it will throw an InvalidNameException
-		Claim claim = new Claim(null, new Date(100), new Date(120), null, null);
-		
-		//if we make it here, we failed the test
-		fail("Invalid Claim: Name is Null");
-		
-		}catch(EmptyFieldException e){
+	public void testMakeInvalidClaimNull() throws InvalidDateException, InvalidUserPermissionException {
+		Claim claim = null;
+		try {
+			// If claim is working properly, it will throw an InvalidNameException
+			claim = new Claim(null, new Date(100), new Date(120), null, null);
+		} catch(EmptyFieldException e) {
 			
 		}
-		
+		// Ensure claim is unchanged
+		assertNull("Claim made with invalid name", claim);
 	}
-	
-	
-	/**Use Case A2
-	 * Tests that the claim can add travelDestination 
+		
+	/**
+	 * Use Case A2
+	 * Tests to see if we can add a valid travel destination
+	 * 
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
 	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
@@ -241,55 +184,25 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidUserPermissionException 
 	 */
 	public void testAddTravelDestination() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException, InvalidUserPermissionException {
-		
-		//test valid travel destination
-		this.addTravelDestination();
-		
-		//test invalid travel destination
-		this.addInvalidTravelDestination();
-		
-	}
-	
-	/**Use Case A2
-	 * Tests to see if wwe can add a valid travel destination
-	 * 
-	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/49
-	 * @throws EmptyFieldException 
-	 * @throws InvalidNameException 
-	 * @throws InvalidDateException 
-	 * @throws DuplicateException 
-	 * @throws InvalidFieldEntryException 
-	 * @throws ClaimPermissionException 
-	 * @throws InvalidUserPermissionException 
-	 */
-	private void addTravelDestination() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException, InvalidUserPermissionException{
-
 		String name = "Bill Smith";
 		Date startDate = new Date(100), endDate = new Date(120);
 		Claim claim = new Claim(name, startDate, endDate, null, null);
-		
-		//this method adds the travel destination to a collection (possibly hash table/map)
 		claim.addTravelDestination("Russia","Bear wrestling");
-		
-		//look to see if destination collection is larger than 0
+		// look to see if destination was added
 		assertEquals("Claim has has no Travel Destinations",1, claim.numberOfDestinations());
-
-		
-		//test to see if the contents of the destination collection are correct
+		// test to see if the contents of the destination collection are correct
 		assertEquals("Claim has invalid Travel Destination", "Russia",claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Claim has invalid Travel Destination", "Bear wrestling",claim.getTravelDestination(0).getDestinationDescription());
 
+		// The following tests giving a claim a status, and that adding 
+		// a travel destination acts correctly according to it's status
 		claim.giveStatus(ClaimStatus.SUBMITTED);
-		
 		assertEquals("status unchanged", 2, claim.getStatus());
 		
 		try {
-			
 			claim.addTravelDestination("Poland","Yolo");
 		} catch (EmptyFieldException e) {
-			
 			assertEquals("Added Travel Destination when claim was submitted", 1, claim.numberOfDestinations());
-			
 		}
 		
 		claim.giveStatus(ClaimStatus.APPROVED);
@@ -319,7 +232,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws ClaimPermissionException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	private void addInvalidTravelDestination() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+	public void testAddInvalidTravelDestination() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		
 		String name = "Bill Smith";
 		Date startDate = new Date(100), endDate = new Date(120);
