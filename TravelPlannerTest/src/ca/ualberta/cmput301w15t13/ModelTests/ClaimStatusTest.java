@@ -29,6 +29,11 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
  * Specifically, it tests that a claimStatus can be
  * made, that certain claimStatus' affect edit-ability, 
  * and that a claim cannot be given an invalid status
+ * 
+ * General use case can be found on the wiki at
+ * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ *
+ * All tests should pass
  */
 public class ClaimStatusTest extends
 		ActivityInstrumentationTestCase2<LoginActivity> {

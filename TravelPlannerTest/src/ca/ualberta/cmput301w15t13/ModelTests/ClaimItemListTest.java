@@ -45,6 +45,9 @@ import exceptions.InvalidUserPermissionException;
  * index the list, remove claims at a specific index, that the listener interacts 
  * with it, and that it can be created.
  * 
+ *  General use case can be found on the wiki at
+ * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ *
  * All tests should pass
  */
 

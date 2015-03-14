@@ -34,11 +34,17 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
-
-/** 
+/*
+ * This test suite tests the functionality of the application
+ * when the user is an approver. Specifically, that an approver
+ * can approve claims, comment on claims, and return claims.
+ *
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ * 
+ * All Tests should pass
  */
+
 public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivity>{
 
 	public ApproverTests() {
@@ -50,11 +56,10 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		super.setUp();
 	}
 	
-
 	
 	/** Test Case H2
 	 * Tests that as an approver you are able to return a claim
-	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws EmptyFieldException 
@@ -62,9 +67,10 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	public void testReturnClaim() throws InvalidDateException, EmptyFieldException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());;
-		claim.giveStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
 		
+		// Test the approvers ability to return claims based on their status
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 		approver.returnClaim(claim);
 		assertEquals("Claim status isn't returned", ClaimStatus.RETURNED, claim.getStatus());
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
@@ -73,21 +79,20 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		approver.returnClaim(claim);
 		assertEquals("Approver was able to return an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
 		
-		
-		//Is this one necessary?
-		claim.giveStatus(ClaimStatus.RETURNED);
-		approver.returnClaim(claim);
-		assertEquals("Approver was able to return a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus() );
-		
 		claim.giveStatus(ClaimStatus.APPROVED);
 		approver.returnClaim(claim);
 		assertEquals("Approver was able to return an APPROVED claim",ClaimStatus.APPROVED, claim.getStatus());
+		
+		// Perhaps redundant
+		claim.giveStatus(ClaimStatus.RETURNED);
+		approver.returnClaim(claim);
+		assertEquals("Approver was able to return a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus() );
 	}
 	
 	
 	/** Test Case H3
 	 * Tests that as an approver you are able to approve a claim
-	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws EmptyFieldException 
@@ -95,15 +100,12 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	public void testClaimApprove() throws InvalidDateException, EmptyFieldException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		claim.giveStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
+		assertEquals("Approver name incorrect", "Catbert", approver.getName());
 		
-		assertEquals("Approver name not Catbert", "Catbert", approver.getName());
-		
+		claim.giveStatus(ClaimStatus.SUBMITTED);
 		approver.approveClaim(claim);
-		
 		assertEquals("Claim status isn't approved",ClaimStatus.APPROVED, claim.getStatus());
-		
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
 		claim.giveStatus(ClaimStatus.INPROGRESS);
@@ -114,7 +116,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		approver.approveClaim(claim);
 		assertEquals("Approver was able to approve a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus());
 		
-		//Is this one needed?
+		// Also may be redundant
 		claim.giveStatus(ClaimStatus.APPROVED);
 		approver.approveClaim(claim);
 		assertEquals("Approver was able to approve an APPROVED claim",ClaimStatus.APPROVED, claim.getStatus());

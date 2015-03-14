@@ -438,7 +438,7 @@ public class Claim {
 	}
 
 
-	public void removeTag(String tag) {
+	public void removeTag(Tag tag) {
 		this.tags.remove(tag);
 		
 	}
@@ -453,8 +453,6 @@ public class Claim {
 	public ArrayList<ExpenseItem> getExpenseItems() {
 		return this.expenseItems.getExpenseList();
 	}
-
-
 
 	/**
 	 * This will return the editability of the claim
