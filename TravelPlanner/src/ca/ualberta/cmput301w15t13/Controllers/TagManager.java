@@ -29,9 +29,7 @@ public class TagManager {
 	public static HashMap<Tag, ArrayList<String>> manager;
 	
 	public TagManager() {
-		
-		this.manager = new HashMap<Tag, ArrayList<String>>();
-		
+		TagManager.manager = new HashMap<Tag, ArrayList<String>>();
 	}
 	
 	public void add(Tag tag, String claimID) {
@@ -45,13 +43,19 @@ public class TagManager {
 	}
 
 	public ArrayList<String> getAssociatedClaims(Tag tag) {
-		
 		ArrayList<String> claims = manager.get(tag);
 		return claims;
 	}
 	
 	public HashMap<Tag, ArrayList<String>> getManager() {
 		return TagManager.manager;
+	}
+	
+	public void remove(Tag tag, String claimID) {
+		if (manager.containsKey(tag)) {
+			manager.get(tag).remove(claimID);
+		}
+
 	}
 
 }

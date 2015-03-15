@@ -29,16 +29,23 @@ import ca.ualberta.cmput301w15t13.Controllers.Approver;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
-
-/** 
+/*
+ * This test suite tests the functionality of the application
+ * when the user is an approver. Specifically, that an approver
+ * can approve claims, comment on claims, and return claims.
+ *
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ * 
+ * All Tests should pass
  */
+
 public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivity>{
 
 	public ApproverTests() {
@@ -50,74 +57,70 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		super.setUp();
 	}
 	
-
 	
 	/** Test Case H2
 	 * Tests that as an approver you are able to return a claim
-	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testReturnClaim() throws InvalidDateException, EmptyFieldException{
+	public void testReturnClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());;
-		claim.giveStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
 		
+		// Test the approvers ability to return claims based on their status
+		claim.giveStatus(statusEnum.SUBMITTED);
 		approver.returnClaim(claim);
-		assertEquals("Claim status isn't returned", ClaimStatus.RETURNED, claim.getStatus());
+		assertEquals("Claim status isn't returned", statusEnum.RETURNED, claim.getStatus());
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.giveStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(statusEnum.INPROGRESS);
 		approver.returnClaim(claim);
-		assertEquals("Approver was able to return an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
+		assertEquals("Approver was able to return an INPROGRESS claim",statusEnum.INPROGRESS, claim.getStatus());
 		
-		
-		//Is this one necessary?
-		claim.giveStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(statusEnum.APPROVED);
 		approver.returnClaim(claim);
-		assertEquals("Approver was able to return a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus() );
+		assertEquals("Approver was able to return an APPROVED claim",statusEnum.APPROVED, claim.getStatus());
 		
-		claim.giveStatus(ClaimStatus.APPROVED);
+		// Perhaps redundant
+		claim.giveStatus(statusEnum.RETURNED);
 		approver.returnClaim(claim);
-		assertEquals("Approver was able to return an APPROVED claim",ClaimStatus.APPROVED, claim.getStatus());
+		assertEquals("Approver was able to return a RETURNED claim",statusEnum.RETURNED, claim.getStatus() );
 	}
 	
 	
 	/** Test Case H3
 	 * Tests that as an approver you are able to approve a claim
-	* https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
+	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testClaimApprove() throws InvalidDateException, EmptyFieldException{
+	public void testClaimApprove() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		claim.giveStatus(ClaimStatus.SUBMITTED);
 		Approver approver = new Approver("Catbert");
+		assertEquals("Approver name incorrect", "Catbert", approver.getName());
 		
-		assertEquals("Approver name not Catbert", "Catbert", approver.getName());
-		
+		claim.giveStatus(statusEnum.SUBMITTED);
 		approver.approveClaim(claim);
-		
-		assertEquals("Claim status isn't approved",ClaimStatus.APPROVED, claim.getStatus());
-		
+		assertEquals("Claim status isn't approved",statusEnum.APPROVED, claim.getStatus());
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.giveStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(statusEnum.INPROGRESS);
 		approver.approveClaim(claim);
-		assertEquals("Approver was able to approve an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
+		assertEquals("Approver was able to approve an INPROGRESS claim",statusEnum.INPROGRESS, claim.getStatus());
 		
-		claim.giveStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(statusEnum.RETURNED);
 		approver.approveClaim(claim);
-		assertEquals("Approver was able to approve a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus());
+		assertEquals("Approver was able to approve a RETURNED claim",ClaimStatus.statusEnum.RETURNED, claim.getStatus());
 		
-		//Is this one needed?
-		claim.giveStatus(ClaimStatus.APPROVED);
+		// Also may be redundant
+		claim.giveStatus(statusEnum.APPROVED);
 		approver.approveClaim(claim);
-		assertEquals("Approver was able to approve an APPROVED claim",ClaimStatus.APPROVED, claim.getStatus());
+		assertEquals("Approver was able to approve an APPROVED claim",statusEnum.APPROVED, claim.getStatus());
 		
 	}
 	
@@ -131,12 +134,12 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testComment() throws InvalidDateException, EmptyFieldException{
+	public void testComment() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		Approver approver = new Approver("Catbert");
 		String comment = "Test";
 		
-		claim.giveStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(statusEnum.SUBMITTED);
 		
 		approver.addComment(claim, comment);
 		ArrayList<String> comments = claim.getComments();
@@ -145,19 +148,19 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		assertTrue("Comment isn't added", comments.contains(comment));
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.giveStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(statusEnum.INPROGRESS);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();
 		assertEquals("A comment was added to an inprogress claim",0 , comments.size());
 		
-		claim.giveStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(statusEnum.RETURNED);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();
 		assertEquals("A comment was added to a returned claim",0 , comments.size());
 		
-		claim.giveStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(statusEnum.APPROVED);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();

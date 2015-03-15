@@ -25,19 +25,17 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import android.text.format.DateFormat;
-import ca.ualberta.cmput301w15t13.Controllers.TagManager;
-import exceptions.ClaimPermissionException;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
 import exceptions.ExceptionHandler;
 import exceptions.ExceptionHandler.FIELD;
 import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
-import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 
-public class Claim {
+public class Claim implements Comparable<Claim>, ExpenseClaim {
 	
 	
 	protected String userName = null;
@@ -53,9 +51,7 @@ public class Claim {
 	
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected String claimID = null;
-	
-	
-	
+
 	
 /**
  * 
@@ -64,20 +60,15 @@ public class Claim {
  * @param endDate
  * @param description
  * @param travelList
- * @throws InvalidDateException 
- * @throws InvalidNameException 
- * @throws InvalidUserPermissionException 
- * @throws EmptyFieldException 
+ * @throws InvalidDateException
+ * @throws EmptyFieldException
  */
-	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws InvalidDateException, EmptyFieldException {
+	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws EmptyFieldException, InvalidDateException {
 
 		//initializes the claim status to INPROGRESS (and editable)
 		this.status = new ClaimStatus();
 		
-		//this checks the user Name for errs and sets the user name
 		this.setUserName(username);
-		
-		//this checks the dates for errs and sets the dates
 		this.setClaimDates(startDate, endDate);
 
 		//this sets the description
@@ -88,7 +79,9 @@ public class Claim {
 
 		this.approverComments = new HashMap<String,ArrayList<String>>();
 		
+		//this sets the UUID for the claim (identifier for saving/loading)
 		claimID = UUID.randomUUID().toString();
+		
 		this.expenseItems = new ExpenseItemList();
 	}
 
@@ -97,9 +90,19 @@ public class Claim {
 	 * This will return the claim ID (UUID and elastic search index)
 	 * @return Claim UUID
 	 */
-	public String getclaimID(){
+	public String getclaimID() {
 		return this.claimID;
 	}
+	
+	/**
+	 * This will return the claim ID (UUID and elastic search index)
+	 * @return Claim UUID
+	 */
+	public String getID() {
+		return this.claimID;
+	}
+	
+	
 
 	/**
 	 * This will return the user name associated with the claim
@@ -114,22 +117,13 @@ public class Claim {
 	 * This sets the user Name
 	 * @param userName = Username for claim
 	 * @throws EmptyFieldException 
+	 * @throws InvalidUserPermissionException 
 	 */
 	public void setUserName(String userName) throws EmptyFieldException {
+		//this throws an empty field exception if user name is empty
 		new ExceptionHandler().throwExeptionIfEmpty(userName, FIELD.USERNAME);
-		//userName = "Bill Smith";
-		
-		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			
-			throw new EmptyFieldException("Non-Editable");
-			
-		} else {
-			
-			this.userName = userName;
-			
-		}
 
-
+		this.userName = userName;	
 	}
 
 	/**
@@ -141,16 +135,14 @@ public class Claim {
 	 */
 	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException{
 
-			//this checks to see that the entered start date is not after the entered end date
-			if (startDate.after(endDate))
-				 throw new InvalidDateException("Start Date is after End Date");
-			else
-			{
-				this.setStartDate(startDate);
-				this.setEndDate(endDate);
-			}
-
-		
+		//this checks to see that the entered start date is not after the entered end date
+		if (startDate.after(endDate)){
+			 throw new InvalidDateException("Start Date is after End Date");
+		}
+			
+		//set the dates
+		this.setStartDate(startDate);
+		this.setEndDate(endDate);
 	}
 	
 	/**
@@ -166,8 +158,7 @@ public class Claim {
 	 * This will set the start Date for the claim
 	 */
 	private void setStartDate(Date startDate) {
-			this.startDate = startDate;
-
+		this.startDate = startDate;
 	}
 
 	/**
@@ -182,12 +173,9 @@ public class Claim {
 	 * This will set the end Date for the claim
 	 */
 	private void setEndDate(Date endDate) {
-			this.endDate = endDate;
-
+		this.endDate = endDate;
 	}
 
-
-	
 	/**
 	 * This will return the description of the claim
 	 * @return
@@ -201,12 +189,13 @@ public class Claim {
 	 * This sets the Claim description
 	 * @param description 
 	 */
-	public void setDescription(String description)  {
-
-			if (description == null || description.trim().isEmpty())
-				this.description = "";
-			else
-				this.description = description;	
+	public void setDescription(String description) {
+		if (description == null || description.trim().isEmpty()){
+			this.description = "";
+		}
+		else{
+			this.description = description;	
+		}
 	}
 	
 	
@@ -226,12 +215,13 @@ public class Claim {
 	 * @param travelList
 	 */
 	public void setTravelList(TravelItineraryList travelList) {
-			//This makes sure that the travel List is not null
-			if (travelList == null)
-				this.travelList = new TravelItineraryList();
-			else
-				this.travelList = travelList;
-
+		//This makes sure that the travel List is not null
+		if (travelList == null){
+			this.travelList = new TravelItineraryList();
+		}
+		else{
+			this.travelList = travelList;
+		}
 	}
 
 
@@ -239,7 +229,7 @@ public class Claim {
 	 * Returns the status of a claim
 	 * @return
 	 */
-	public int getStatus() {
+	public statusEnum getStatus() {
 		return this.status.getStatus();
 	}
 
@@ -248,31 +238,20 @@ public class Claim {
 	 * @param status
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void giveStatus(int status)  {
-			this.status.setStatus(status);
-
+	public void giveStatus(statusEnum status) {
+		this.status.setStatus(status);
 	}
-	
-	
-	
+		
 	/**
-	 * This adds a travel Itenerary. 
+	 * This adds a travel Itinerary. 
 	 * It checks to see if a travel destination exists, and if the fields are valid
-	 * @throws DuplicateException 
 	 * @throws EmptyFieldException 
 	 */
 
-	public void addTravelDestination(String destination, String description) throws  EmptyFieldException{
-		
-		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			throw new EmptyFieldException("Non-Editable");
-		} else {
-			
-			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
-			this.travelList.addTravelDestination(travelItinerary);
-		}
-
-	
+	public void addTravelDestination(String destination, String description) throws EmptyFieldException {
+		//this line will make the Travel Itinerary.. if the fields are invalid, it will throw an Empty Field Exception
+		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
+		this.travelList.addTravelDestination(travelItinerary);
 	}
 	
 	
@@ -280,64 +259,39 @@ public class Claim {
 	 * THis will return the number of travel destinations
 	 * @return
 	 */
-	public int numberOfDestinations(){
-		
+	public int numberOfDestinations() {
 		return this.travelList.numberofDestinations();
 	}
 
 	
 	/**
-	 * This will return the Travel Itinerary based on the index specfied
+	 * This will return the Travel Itinerary based on the index specified
 	 * @param index
 	 * @return
 	 * @throws InvalidFieldEntryException
 	 */
-	public TravelItinerary getTravelDestination(int index) throws InvalidFieldEntryException{
-		
+	public TravelItinerary getTravelDestination(int index) throws InvalidFieldEntryException {
 		return this.travelList.getTravelDestinationAtIndex(index);
 	}
-
 
 	/**
 	 * This will edit the Travel Itinerary based on the index, and data passed in
 	 * @param index
 	 * @param destination
 	 * @param description
-	 * @throws InvalidFieldEntryException
 	 * @throws EmptyFieldException 
 	 */
-	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException, EmptyFieldException {
-		
-		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			
-			throw new EmptyFieldException("Non-Editable");
-			
-		} else {
-			
-			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
-			
-			travelList.editTravelDestination(index, travelItinerary);
-		}
-			
-
-		
+	public void editTravelDescription(int index, String destination, String description) throws EmptyFieldException {
+		TravelItinerary travelItinerary = new TravelItinerary(destination, description);	
+		travelList.editTravelDestination(index, travelItinerary);
 	}
 
 /**
  * This will delete a travel Itinerary at the specified index
  * @param i
- * @throws InvalidUserPermissionException 
  */
-	public void deleteTravelDestination(int i) throws InvalidUserPermissionException {
-		
-	if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			
-			throw new InvalidUserPermissionException("Non-Editable");
-			
-		} else {
-			
-			this.travelList.deleteTravelDestination(i);
-		}
+	public void deleteTravelDestination(int i) {
+		this.travelList.deleteTravelDestination(i);
 	}
 
 /**
@@ -366,12 +320,10 @@ public class Claim {
 		ArrayList<String> comments;
 		setLastApproverName(name);
 		
-		if(approverComments.containsKey(name))
-		{
+		if(approverComments.containsKey(name)){
 			comments = approverComments.get(name);
 		}
-		else
-		{
+		else{
 			comments = new ArrayList<String>();
 		}
 		comments.add(comment);
@@ -388,10 +340,9 @@ public class Claim {
 	public ArrayList<String> getComments() {
 		ArrayList<String> comments = new ArrayList<String>();
 		
-		for(String key: approverComments.keySet())
-		{
+		for(String key: approverComments.keySet()){
 			ArrayList<String> tempComments = approverComments.get(key);
-			
+
 			for(String comment : tempComments)
 			{
 				comments.add(comment);
@@ -438,7 +389,7 @@ public class Claim {
 	}
 
 
-	public void removeTag(String tag) {
+	public void removeTag(Tag tag) {
 		this.tags.remove(tag);
 		
 	}
@@ -453,8 +404,6 @@ public class Claim {
 	public ArrayList<ExpenseItem> getExpenseItems() {
 		return this.expenseItems.getExpenseList();
 	}
-
-
 
 	/**
 	 * This will return the editability of the claim
@@ -478,7 +427,7 @@ public class Claim {
 	 * Code taken from Eorodrig Travel Logger (Claim class)
 	 * @return
 	 */
-	public String getStartDateAsString(){
+	public String getStartDateAsString() {
 		
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
@@ -497,7 +446,7 @@ public class Claim {
 	 * Code taken from Eorodrig Travel Logger (Claim class)
 	 * @return
 	 */
-	public String getEndDateAsString(){
+	public String getEndDateAsString() {
 		
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
@@ -510,13 +459,39 @@ public class Claim {
 	}
 	
 	
-	public String getTravelItineraryAsString(){
+	public String getTravelItineraryAsString() {
 		
 		return travelList.toString();
 	}
 
 
+	/**
+	 * This is the compare method required by the Collections.sort method	
+	 * Claim will return -1 if:
+	 * 		Caller is before the parameter
+	 * 	Claim will return 1 if:
+	 * 		Caller is after the parameter
+	 * else it will return 0 if both start date and end dates are the same
+	 * 
+	 * Used eorodrig code on "Claim.java"
+	 */
+	@Override
+	public int compareTo(Claim rhs) {
+		if (this.getStartDate().before(rhs.getStartDate())) {
+			return -1;
+		} else if (this.getStartDate().after(rhs.getStartDate())) {
+			return 1;
+		} else if (this.getStartDate().equals(rhs.getStartDate())) {
+			if (this.getEndDate().before(rhs.getEndDate())) {
+				return -1;
+			}else if (this.getEndDate().after(rhs.getEndDate())) {
+				return -1;
+			}
+		}
+		return 0;
+	}
 
 
+	
 
 }

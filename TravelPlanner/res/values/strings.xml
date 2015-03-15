@@ -27,11 +27,15 @@
     <string name="holder">Holder</string>
     <string name="new_expense">New Expense</string>
     <string name="expense_name">Expense Name</string>
-	<string name="receipt">Receipt</string>
-	<string name="Amount">Amount</string>
-	<string name="date">Date</string>
-	<string name="Category">Category</string>
-	<string name="edit">Edit</string>
-	<string name="submit">Submit</string>
-	<string name="delete">Delete</string>
+    <string name="receipt">Receipt</string>
+    <string name="Amount">Amount</string>
+    <string name="date">Date</string>
+    <string name="Category">Category</string>
+    <string name="edit">Edit</string>
+    <string name="submit">Submit</string>
+    <string name="delete">Delete</string>
+    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_expense_viewer">ExpenseViewerActivity</string>
+
 </resources>

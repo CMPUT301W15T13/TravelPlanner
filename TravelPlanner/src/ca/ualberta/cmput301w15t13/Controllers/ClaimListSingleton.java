@@ -25,58 +25,81 @@ import java.util.Collections;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.Tag;
+
+/*
+ * Singleton pattern for the ClaimList 
+ * class. It provides sorting method
+ * which sorts the claims and their nested
+ * ExpenseLists by start date
+ */
 
 public class ClaimListSingleton {
-	/*
-	 * Singleton pattern for the ClaimList 
-	 * class. It provides sorting method
-	 * which sorts the claims and their nested
-	 * ExpenseLists by start date
-	 */
+	
 	private static ClaimList claimList; 
 	
-	static public ClaimList getClaimList(){
-		if(claimList == null){
+	static public ClaimList getClaimList() {
+		if (claimList == null) {
 			claimList = new ClaimList();
 		}
 		return claimList;
 	}
 	
-	static public void setClaimList(ArrayList<Claim> claims){
-		if(claimList == null){
+	static public void setClaimList(ArrayList<Claim> claims) {
+		if (claimList == null) { 
 			claimList = new ClaimList();
 		}
 		claimList = new ClaimList(claims);
 	}
 	
-	static public void addClaim(Claim claim){
-		if(claimList == null){
+	static public void addClaim(Claim claim) {
+		if (claimList == null) {
 			claimList = new ClaimList();
 		}
 		claimList.add(claim);
 	}
 
 	public static boolean isClaimEditable(String claimID) {
-		if(claimList == null){
+		if (claimList == null) {
 			claimList = new ClaimList();
 		}
-
-		
 		return claimList.isClaimEditable(claimID);
-	
-		
 	}
 	
 	public static boolean isEmpty(){
-		if(claimList == null){
+		if (claimList == null) {
 			claimList = new ClaimList();
 		}
-		
-		if (claimList.size() <0)
+	
+		if (claimList.size() <0) {
 			return true;
-		else
-			return false;
-		
+		} 
+		return false;
 	}
+	
+	// FilterClaimList works with use of tagManagers getAssociatedClaims method
+	// which returns an ArrayList of claimIds (strings) associated with a given tag.
+	// Input an arrayList of tags and it returns a new arrayList of claimIds, keeping only
+	// the common claimIds
+	public ArrayList<String> filterClaimList(ArrayList<Tag> tags, TagManager tm) {
+		// make an array of all claimIds associated with first tag
+		ArrayList<String> claimIds = new ArrayList<String>();
+		claimIds.addAll(tm.getAssociatedClaims(tags.get(0)));
+		
+		if (tags.size() > 1) {
+			for (int i = 0; i < tags.size(); i++) {
+				ArrayList<String> tmp = tm.getAssociatedClaims(tags.get(i));		
+				for (String object : claimIds) {
+					if (tmp.contains(object)) { // this means the claimId is associated with all tags
+						continue;
+					} else {						  
+						claimIds.remove(object);
+					}		
+				}
+			}
+		}
+		return claimIds;
+	}
+	
 	
 }

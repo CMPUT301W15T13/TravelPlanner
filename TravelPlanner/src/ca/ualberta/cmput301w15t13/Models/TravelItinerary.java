@@ -17,10 +17,8 @@ public class TravelItinerary {
 	 * @throws EmptyFieldException 
 	 */
 	public TravelItinerary(String destination, String description) throws EmptyFieldException{
-		
 		this.setDestinationName(destination);
 		this.setDestinationDescription(description);
-		
 	}
 	
 	
@@ -66,12 +64,10 @@ public class TravelItinerary {
 		
 		String rhsDestination = ((TravelItinerary) rhs).getDestinationName().trim().toLowerCase();
 		
-		if (this.destinationName.trim().toLowerCase().equals(rhsDestination))
-		{
+		if (this.destinationName.trim().toLowerCase().equals(rhsDestination)){
 			return true;
 		}
 		return false;
-		
 	}
 	
 	

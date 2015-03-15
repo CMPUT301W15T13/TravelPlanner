@@ -21,6 +21,7 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.InvalidUserPermissionException;
 
 public class Approver extends User {
@@ -36,21 +37,21 @@ public class Approver extends User {
 	}
 	
 	public void approveClaim(Claim claim) {
-		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
+		if(claim != null && claim.getStatus() == statusEnum.SUBMITTED){
 			claim.setLastApproverName(this.name);
-			claim.giveStatus(ClaimStatus.APPROVED);
+			claim.giveStatus(statusEnum.APPROVED);
 		}
 	}
 	
 	public void returnClaim(Claim claim) {
-		if(claim != null && claim.getStatus() == ClaimStatus.SUBMITTED){
+		if(claim != null && claim.getStatus() == statusEnum.SUBMITTED){
 			claim.setLastApproverName(this.name);
-			claim.giveStatus(ClaimStatus.RETURNED);
+			claim.giveStatus(statusEnum.RETURNED);
 		}
 	}
 
 	public void addComment(Claim claim, String comment) {
-		if(claim.getStatus() == ClaimStatus.SUBMITTED && comment != null){
+		if(claim.getStatus() == statusEnum.SUBMITTED && comment != null){
 			claim.addComment(comment, this.name);
 		}
 	}

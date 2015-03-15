@@ -49,8 +49,6 @@ import exceptions.InvalidUserPermissionException;
  * From this activity you can also create, edit, and 
  * approve claims which are supported by corresponding 
  * fragments.
- * @author mfritze
- *
  */
 
 public class ClaimActivity extends Activity {

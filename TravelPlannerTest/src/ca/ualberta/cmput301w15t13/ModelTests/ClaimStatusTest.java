@@ -23,7 +23,19 @@ package ca.ualberta.cmput301w15t13.ModelTests;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 
+/* 
+ * This test suite tests the claimStatus functionality.
+ * Specifically, it tests that a claimStatus can be
+ * made, that certain claimStatus' affect edit-ability, 
+ * and that a claim cannot be given an invalid status
+ * 
+ * General use case can be found on the wiki at
+ * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ *
+ * All tests should pass
+ */
 public class ClaimStatusTest extends
 		ActivityInstrumentationTestCase2<LoginActivity> {
 
@@ -36,34 +48,28 @@ public class ClaimStatusTest extends
 		super.setUp();
 	}
 	
+	// This tests that a claimStatus can be made without error
 	public void testSetUp(){
 		ClaimStatus status = new ClaimStatus();
 		assertTrue("ClaimStatus is null", status!=null);
-		assertEquals("Claim status is not inprogress", ClaimStatus.INPROGRESS, status.getStatus());
+		assertEquals("Claim status is not inprogress", statusEnum.INPROGRESS, status.getStatus());
 	}
 	
+	// This tests that claimStatus affects edit-ability appropriately
 	public void testEditable(){
 		ClaimStatus status = new ClaimStatus();
 		assertTrue("Claim Status should be editable", status.isEditable());
 		
-		status.setStatus(ClaimStatus.RETURNED);
+		status.setStatus(statusEnum.RETURNED);
 		assertTrue("Claim Status should be editable", status.isEditable());
 		
-		status.setStatus(ClaimStatus.SUBMITTED);
+		status.setStatus(statusEnum.SUBMITTED);
 		assertFalse("Claim Status shouldnt be editable", status.isEditable());
 		
-		status.setStatus(ClaimStatus.APPROVED);
+		status.setStatus(statusEnum.APPROVED);
 		assertFalse("Claim Status shouldnt be editable", status.isEditable());
 		
 	}
 
-	public void testInvalidSet(){
-		ClaimStatus status = new ClaimStatus();
-		status.setStatus(-1);
-		assertEquals("Claim status was changed to -1", 0, status.getStatus());
-		
-		status.setStatus(4);
-		assertEquals("Claim status was changed to 4", 0, status.getStatus());
-		
-	}
+
 }

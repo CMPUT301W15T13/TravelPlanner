@@ -24,8 +24,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidUserPermissionException;
 
@@ -66,7 +68,6 @@ public class ClaimList {
 	}
 
 	public void remove(Claim claim) {
-
 			if(claimList.contains(claim)){
 				claimList.remove(claim);
 			}
@@ -87,14 +88,8 @@ public class ClaimList {
 		}
 	}
 	
-	public void claimRemove(Claim c) throws InvalidUserPermissionException {
-		
-		if( c.status.getStatus() == ClaimStatus.SUBMITTED || c.status.getStatus() == ClaimStatus.APPROVED){
-			throw new InvalidUserPermissionException("Non-Editable");
-		} else {
-			
+	public void claimRemove(Claim c) {
 			this.claimList.remove(c);
-		}
 	}
 
 	public ArrayList<Claim> getClaimArrayList() {
@@ -129,47 +124,23 @@ public class ClaimList {
 	}
 
 	public boolean isClaimEditable(String claimID) {
-	
 		for (Claim claim: claimList)
 		{
 			if (claim.getclaimID().equals(claimID))
 				return claim.isEditable();
 		}
-		
 		return false;
 
 	}
-	// Filter works with use of tagManagers getAssociatedClaims method
-	// which returns an ArrayList of claimIds (strings) associated with a given
-	// tag
-	// Input an arrayList of tags and it creates a new arrayList of tags, adding only
-	// the common claimIds
-	public ArrayList<String> filter(ArrayList<Tag> tags) {
-		ArrayList<String> claimIds = new ArrayList<String>();
-		
-		claimIds.addAll(tagManager.getAssociatedClaims(tags.get(0)));
-		
-		if (tags.size() > 1) {
-			
-			for (int i = 1; i < tags.size(); i++) {
-				
-				ArrayList<String> tmp = tagManager.getAssociatedClaims(tags.get(i));
-				
-				for (String claimId : tmp) {
-					if (claimIds.contains(claimId)) { // this means the claimId is associated with all tags
-						continue;
-					} else {						  
-						claimIds.remove(claimId);
-					}
-					
-				}
-				
-			}
-		}
-		
-		return claimIds;
-	}
 	
+
+	public ArrayList<String> filter(ArrayList<Tag> tags) {
+		ClaimListSingleton control = new ClaimListSingleton();
+		ArrayList<String> result = control.filterClaimList(tags, this.tagManager);
+		return result;
+		
+	}
+
 	public void setTagMan(TagManager tm) {
 		this.tagManager = tm;
 	}
