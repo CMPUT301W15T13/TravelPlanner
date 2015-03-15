@@ -21,6 +21,7 @@
 package ca.ualberta.cmput301w15t13.Activities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -56,7 +57,7 @@ public class LoginActivity extends Activity {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
-
+	
 	/**
 	 * 
 	 * @param view

@@ -111,7 +111,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	
   public void testaddWrongCategory() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException, InvalidUserPermissionException {
     Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
-    String[] validCategories = {"Air Fare", "Ground Transport", "Vehicle Rental", "Fuel", "Parking", "Registration", "Accommodation"};
+    String[] validCategories = {"Air Fare", "Ground Transport", "Vehicle Rental", "Private Automobile", "Fuel", "Parking", "Registration", "Accommodation", "Meal", "Supplies"};
     /*A default constructor which doesn't initialize values */
     ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
 		

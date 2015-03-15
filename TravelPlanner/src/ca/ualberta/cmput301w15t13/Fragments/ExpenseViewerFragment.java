@@ -49,8 +49,8 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
  */
 
 public class ExpenseViewerFragment extends Fragment {
-	private ExpenseAdapter ExpenseAdapter;
-	private ArrayList<ExpenseItem> expenses;
+	private ClaimAdapter ExpenseAdapter;
+	private ArrayList<Claim> expenses;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -59,8 +59,10 @@ public class ExpenseViewerFragment extends Fragment {
 		 *  is only initialized by onStart()
 		 */
 		super.onCreate(savedInstanceState);
-		expenses = ClaimListSingleton.getExpenseItemList();
-		this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
+		expenses = ClaimListSingleton.getClaimList().getClaimArrayList();
+		this.ExpenseAdapter = new ClaimAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
+		//expenses = ClaimListSingleton.getExpenseItemList();
+		//this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
 		
 	}
 	
@@ -89,7 +91,8 @@ public class ExpenseViewerFragment extends Fragment {
 			@Override
 			public void update() {
 //				claims.clear();
-				expenses = ClaimListSingleton.getExpenseItemList();
+				expenses = ClaimListSingleton.getClaimList().getClaimArrayList();
+				//expenses = ClaimListSingleton.getExpenseItemList();
 				ExpenseAdapter.notifyDataSetChanged();
 			}
 			

@@ -60,6 +60,8 @@ public class ExpenseActivity extends Activity {
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 	private boolean isClaimant;
 	private String username;
+	private int claimIndex;
+	private long claimID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class ExpenseActivity extends Activity {
 		ExpenseManagerFragment = new ExpenseManagerFragment();
 		
 		Intent intent = getIntent();
+		intent.getExtras();
 		//this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
 		//this.username = intent.getStringExtra(LoginActivity.USERID);
 		
