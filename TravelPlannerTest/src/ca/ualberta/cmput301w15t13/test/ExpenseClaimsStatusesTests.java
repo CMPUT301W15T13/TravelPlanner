@@ -88,7 +88,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * @throws InvalidUserPermissionException 
 	 * @throws EmptyFieldException 
 	 */
-	public void testClaimantOnReturned() throws EmptyFieldException, InvalidDateException{
+	public void testClaimantOnReturned() throws EmptyFieldException, InvalidDateException, InvalidUserPermissionException{
 		//LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		claim.giveStatus(ClaimStatus.RETURNED);
@@ -109,7 +109,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 * @throws InvalidUserPermissionException 
 	 */
 
-	public void testClaimStatusApproved() throws InvalidDateException, EmptyFieldException {
+	public void testClaimStatusApproved() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		//LoginActivity.setUserType("Claimant");
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		claim.giveStatus(ClaimStatus.APPROVED);

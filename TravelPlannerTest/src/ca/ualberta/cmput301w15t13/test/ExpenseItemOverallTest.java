@@ -125,7 +125,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addWrongCategory() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException {
+	public void addWrongCategory() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException, InvalidUserPermissionException {
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String[] validCategories = {"Air Fare", "Ground Transport", "Vehicle Rental", "Fuel", "Parking", "Registration", "Accommodation"};
 		/*A default constructor which doesn't initialize values */
@@ -160,7 +160,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addWrongCurrency() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException{
+	public void addWrongCurrency() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException, InvalidUserPermissionException{
 		
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		String[] validCurrencies = {"CAD", "USD", "EUR", "GBP", "CHF", "JPY", "CNY"};
@@ -195,7 +195,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws EmptyFieldException 
 	 */
 
-	public void testFlagExpenseItem() throws InvalidDateException, EmptyFieldException {
+	public void testFlagExpenseItem() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
 		expenseItem.setIncompletenessIndicator();
@@ -215,7 +215,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws InvalidUserPermissionException 
 	 */
 
-	public void testEditExpenseItem() throws InvalidDateException, EmptyFieldException {
+	public void testEditExpenseItem() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
 		ArrayList<ExpenseItem> expenseList = null;
@@ -245,7 +245,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testDeleteExpenseItem() throws InvalidDateException, EmptyFieldException{
+	public void testDeleteExpenseItem() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
 

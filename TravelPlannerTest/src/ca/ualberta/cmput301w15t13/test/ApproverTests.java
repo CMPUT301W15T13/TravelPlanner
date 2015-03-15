@@ -65,7 +65,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testReturnClaim() throws InvalidDateException, EmptyFieldException{
+	public void testReturnClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());;
 		Approver approver = new Approver("Catbert");
 		
@@ -98,7 +98,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testClaimApprove() throws InvalidDateException, EmptyFieldException{
+	public void testClaimApprove() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		Approver approver = new Approver("Catbert");
 		assertEquals("Approver name incorrect", "Catbert", approver.getName());
@@ -133,7 +133,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testComment() throws InvalidDateException, EmptyFieldException{
+	public void testComment() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		Approver approver = new Approver("Catbert");
 		String comment = "Test";

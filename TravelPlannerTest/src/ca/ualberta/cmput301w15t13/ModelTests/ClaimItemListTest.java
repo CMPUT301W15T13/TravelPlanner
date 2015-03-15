@@ -66,7 +66,7 @@ public class ClaimItemListTest extends
 	
 	// This tests that a claimList can be constructed correctly either from scratch
 	// or from an existing ArrayList
-	public void testSetUp() throws InvalidDateException, EmptyFieldException{
+	public void testSetUp() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		ClaimList itemList = new ClaimList();
 		assertNotNull("Item list is null", itemList);
 		assertEquals("Item list is not empty",0, itemList.size());
@@ -93,7 +93,7 @@ public class ClaimItemListTest extends
 	
 	
 	// This tests the claim list's ability to add and remove it's Claims
-	public void testAddRemove() throws InvalidDateException, EmptyFieldException{
+	public void testAddRemove() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
@@ -129,7 +129,7 @@ public class ClaimItemListTest extends
 
 	// Tests that a specific claim can be removed or accessed from the claim 
 	// list via index without error.
-	public void testIndexRemoval() throws InvalidDateException, EmptyFieldException{
+	public void testIndexRemoval() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
@@ -172,7 +172,7 @@ public class ClaimItemListTest extends
 	}
 	
 	// These are tests for the filtering of claims via user selected tags
-	public void testFilter() throws InvalidDateException,DuplicateException, EmptyFieldException {
+	public void testFilter() throws InvalidDateException,DuplicateException, EmptyFieldException, InvalidUserPermissionException {
 		// Create a tag manager and tags
 		TagManager tm = new TagManager();
 		Tag tag1 = new Tag("Ugent");

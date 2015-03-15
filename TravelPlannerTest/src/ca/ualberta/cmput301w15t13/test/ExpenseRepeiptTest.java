@@ -57,7 +57,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * @throws InvalidUserPermissionException 
 	 * 
 	 */
-	public void testBitmap() throws InvalidDateException, EmptyFieldException {
+	public void testBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		this.addBitmap();
 		this.largeBitmap();
 	}
@@ -72,7 +72,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addBitmap() throws InvalidDateException, EmptyFieldException {
+	public void addBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmap);
 		
@@ -99,7 +99,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void largeBitmap() throws InvalidDateException, EmptyFieldException {
+	public void largeBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmapLarge);
 		
@@ -126,7 +126,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testRemoveBitmap() throws InvalidDateException, EmptyFieldException {
+	public void testRemoveBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Bitmap returnedBitmap;
 		Receipt receipt = new Receipt(bitmap);

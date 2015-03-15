@@ -75,7 +75,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 */
 	
 	@SuppressWarnings("unchecked")
-	public void testaddTags() throws InvalidDateException, EmptyFieldException, DuplicateException{
+	public void testaddTags() throws InvalidDateException, EmptyFieldException, DuplicateException, InvalidUserPermissionException{
 		Claim claim1 = new Claim("Name", new Date(1), new Date(2), null, null);
 		Claim claim2 = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
@@ -113,7 +113,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidUserPermissionException 
 	 */
 	@SuppressWarnings("unchecked")
-	public void testRemoveTags() throws InvalidDateException, EmptyFieldException, DuplicateException{
+	public void testRemoveTags() throws InvalidDateException, EmptyFieldException, DuplicateException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		Tag t1 = new Tag("test");
 		claim.addTag(t1);
@@ -135,7 +135,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testNoDuplicates() throws InvalidDateException, EmptyFieldException, DuplicateException{
+	public void testNoDuplicates() throws InvalidDateException, EmptyFieldException, DuplicateException, InvalidUserPermissionException{
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
 		
@@ -166,7 +166,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testRenameTags() throws InvalidDateException, EmptyFieldException, DuplicateException{	
+	public void testRenameTags() throws InvalidDateException, EmptyFieldException, DuplicateException, InvalidUserPermissionException{	
 		Claim claim = new Claim("Name", new Date(1), new Date(2), null, null);
 		String[] validTags = {"valid","VALID", "a1", "HOr3to"};
 		int i = 0;
@@ -192,7 +192,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * @throws DuplicateException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testTagManager() throws InvalidDateException, EmptyFieldException, DuplicateException{
+	public void testTagManager() throws InvalidDateException, EmptyFieldException, DuplicateException, InvalidUserPermissionException{
 		TagManager tm = new TagManager();
 		Tag tag1 = new Tag("yolo");
 		Tag tag2 = new Tag("Gift to self");

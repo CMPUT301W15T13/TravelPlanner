@@ -10,8 +10,6 @@ public class TravelItineraryList {
 
 	protected ArrayList<TravelItinerary> travelList = null;
 	
-	
-	
 	public TravelItineraryList(){
 		
 		this.travelList = new ArrayList<TravelItinerary>();
@@ -69,7 +67,6 @@ public class TravelItineraryList {
 		else
 			return this.travelList.get(index);
 	}
-	
 	
 	/**
 	 * This will delete a travel destination at the specifed index

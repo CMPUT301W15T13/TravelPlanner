@@ -53,12 +53,9 @@ public class Claim {
 	
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected String claimID = null;
-	
-	
-	
+
 	
 /**
- * 
  * @param username
  * @param startDate
  * @param endDate
@@ -69,7 +66,7 @@ public class Claim {
  * @throws InvalidUserPermissionException 
  * @throws EmptyFieldException 
  */
-	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws InvalidDateException, EmptyFieldException {
+	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 
 		//initializes the claim status to INPROGRESS (and editable)
 		this.status = new ClaimStatus();
@@ -114,22 +111,16 @@ public class Claim {
 	 * This sets the user Name
 	 * @param userName = Username for claim
 	 * @throws EmptyFieldException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void setUserName(String userName) throws EmptyFieldException {
+	public void setUserName(String userName) throws EmptyFieldException, InvalidUserPermissionException {
 		new ExceptionHandler().throwExeptionIfEmpty(userName, FIELD.USERNAME);
-		//userName = "Bill Smith";
-		
-		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			
-			throw new EmptyFieldException("Non-Editable");
-			
-		} else {
-			
-			this.userName = userName;
-			
+		if (this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED) {
+			throw new InvalidUserPermissionException("Non-Editable");
+		} else if (userName == null || userName == "") {
+			throw new EmptyFieldException("None-Editable");
 		}
-
-
+		this.userName = userName;	
 	}
 
 	/**
@@ -148,9 +139,7 @@ public class Claim {
 			{
 				this.setStartDate(startDate);
 				this.setEndDate(endDate);
-			}
-
-		
+			}	
 	}
 	
 	/**
@@ -186,8 +175,6 @@ public class Claim {
 
 	}
 
-
-	
 	/**
 	 * This will return the description of the claim
 	 * @return
@@ -252,27 +239,26 @@ public class Claim {
 			this.status.setStatus(status);
 
 	}
-	
-	
-	
+		
 	/**
-	 * This adds a travel Itenerary. 
+	 * This adds a travel Itinerary. 
 	 * It checks to see if a travel destination exists, and if the fields are valid
 	 * @throws DuplicateException 
 	 * @throws EmptyFieldException 
+	 * @throws InvalidUserPermissionException 
+	 * @throws InvalidFieldEntryException 
 	 */
 
-	public void addTravelDestination(String destination, String description) throws  EmptyFieldException{
-		
-		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			throw new EmptyFieldException("Non-Editable");
-		} else {
-			
-			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
-			this.travelList.addTravelDestination(travelItinerary);
+	public void addTravelDestination(String destination, String description) throws EmptyFieldException, InvalidUserPermissionException, InvalidFieldEntryException {
+		if (this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED) {
+			throw new InvalidUserPermissionException("Non-Editable");
+		} else if (description == null || description == "") {
+			throw new InvalidFieldEntryException("Invalid entry for this description");
+		} else if (destination == null || destination == "") {
+			throw new InvalidFieldEntryException("Invalid entry for this destination");
 		}
-
-	
+		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
+		this.travelList.addTravelDestination(travelItinerary);
 	}
 	
 	
@@ -287,7 +273,7 @@ public class Claim {
 
 	
 	/**
-	 * This will return the Travel Itinerary based on the index specfied
+	 * This will return the Travel Itinerary based on the index specified
 	 * @param index
 	 * @return
 	 * @throws InvalidFieldEntryException
@@ -297,7 +283,6 @@ public class Claim {
 		return this.travelList.getTravelDestinationAtIndex(index);
 	}
 
-
 	/**
 	 * This will edit the Travel Itinerary based on the index, and data passed in
 	 * @param index
@@ -305,22 +290,19 @@ public class Claim {
 	 * @param description
 	 * @throws InvalidFieldEntryException
 	 * @throws EmptyFieldException 
+	 * @throws InvalidUserPermissionException 
 	 */
-	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException, EmptyFieldException {
+	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException, EmptyFieldException, InvalidUserPermissionException {
 		
-		if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			
-			throw new EmptyFieldException("Non-Editable");
-			
-		} else {
-			
-			TravelItinerary travelItinerary = new TravelItinerary(destination, description);
-			
-			travelList.editTravelDestination(index, travelItinerary);
+		if (this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
+			throw new InvalidUserPermissionException("Non-Editable");
+		} else if (destination == null || destination == "") {
+			throw new InvalidFieldEntryException("Destination cannot be empty");
+		} else if (description == null || description == "") {
+			throw new InvalidFieldEntryException("Description cannot be empty");
 		}
-			
-
-		
+		TravelItinerary travelItinerary = new TravelItinerary(destination, description);	
+		travelList.editTravelDestination(index, travelItinerary);
 	}
 
 /**
