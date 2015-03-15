@@ -46,7 +46,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 /**
- * This fragment is used to view claims and 
+ * This fragment is used to view expenses and 
  * surface level details, including name, cost, 
  * status and dates. These fields are prone to change
  * or grow. 
