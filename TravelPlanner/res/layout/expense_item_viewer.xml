@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:onClick="newClaim"
+        android:onClick="newExpenseItem"
         android:padding="0px"
         android:text="@string/new_expense"
         android:textColor="@color/text" />

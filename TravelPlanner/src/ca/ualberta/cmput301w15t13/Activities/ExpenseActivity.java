@@ -160,7 +160,7 @@ public class ExpenseActivity extends Activity {
 	 * the fragment layout to the 
 	 * Claim Manager Layout
 	 */
-	public void newClaim(View v){
+	public void newExpenseItem(View v){
 		setFragementToExpenseManager();
 		ExpenseManagerFragment.setStateAsEditing(false);
 	}
