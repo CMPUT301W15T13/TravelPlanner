@@ -34,7 +34,10 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
 
-
+/*
+ * Class for claim.
+ * Defines data and overall functionality
+ */
 public class Claim implements Comparable<Claim>, ExpenseClaim {
 	
 	
@@ -46,13 +49,10 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	protected HashMap<String, ArrayList<String>> approverComments = new HashMap<String, ArrayList<String>>();
 	protected String lastApproverName = null;
 	protected ClaimStatus status = null;
-	
 	protected ExpenseItemList expenseItems = null;
-	
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected String claimID = null;
 
-	
 /**
  * 
  * @param username
@@ -64,27 +64,18 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
  * @throws EmptyFieldException
  */
 	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws EmptyFieldException, InvalidDateException {
-
-		//initializes the claim status to INPROGRESS (and editable)
+		//initializes the claim status to INPROGRESS (and edit-able)
 		this.status = new ClaimStatus();
-		
 		this.setUserName(username);
 		this.setClaimDates(startDate, endDate);
-
-		//this sets the description
 		this.setDescription(description);
-			
 		//this sets the travel List. If null, it makes an empty list
 		this.setTravelList(travelList);
-
 		this.approverComments = new HashMap<String,ArrayList<String>>();
-		
 		//this sets the UUID for the claim (identifier for saving/loading)
 		claimID = UUID.randomUUID().toString();
-		
 		this.expenseItems = new ExpenseItemList();
 	}
-
 	
 	/**
 	 * This will return the claim ID (UUID and elastic search index)
@@ -101,8 +92,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public String getID() {
 		return this.claimID;
 	}
-	
-	
 
 	/**
 	 * This will return the user name associated with the claim
@@ -111,7 +100,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public String getUserName() {
 		return this.userName;
 	}
-
 
 	/**
 	 * This sets the user Name
@@ -122,7 +110,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public void setUserName(String userName) throws EmptyFieldException {
 		//this throws an empty field exception if user name is empty
 		new ExceptionHandler().throwExeptionIfEmpty(userName, FIELD.USERNAME);
-
 		this.userName = userName;	
 	}
 
@@ -133,13 +120,11 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 * @param endDate
 	 * @throws InvalidDateException
 	 */
-	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException{
-
+	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException {
 		//this checks to see that the entered start date is not after the entered end date
-		if (startDate.after(endDate)){
+		if (startDate.after(endDate)) {
 			 throw new InvalidDateException("Start Date is after End Date");
 		}
-			
 		//set the dates
 		this.setStartDate(startDate);
 		this.setEndDate(endDate);
@@ -152,7 +137,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public Date getStartDate() {
 		return this.startDate;
 	}
-
 
 	/**
 	 * This will set the start Date for the claim
@@ -184,46 +168,40 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		return description;
 	}
 
-
 	/**
 	 * This sets the Claim description
 	 * @param description 
 	 */
 	public void setDescription(String description) {
-		if (description == null || description.trim().isEmpty()){
+		if (description == null || description.trim().isEmpty()) {
 			this.description = "";
 		}
-		else{
+		else {
 			this.description = description;	
 		}
 	}
 	
-	
-	
 	/**
-	 * This returns the travel Itenerary list of the claim
+	 * This returns the travel Itinerary list of the claim
 	 * @return
 	 */
 	public TravelItineraryList getTravelList() {
 		return travelList;
 	}
 
-
 	/**
 	 * This sets up the travel List.
-	 * If null, it makes a new Travel Itenerary List
+	 * If null, it makes a new Travel Itinerary List
 	 * @param travelList
 	 */
 	public void setTravelList(TravelItineraryList travelList) {
 		//This makes sure that the travel List is not null
-		if (travelList == null){
+		if (travelList == null) {
 			this.travelList = new TravelItineraryList();
-		}
-		else{
+		} else {
 			this.travelList = travelList;
 		}
 	}
-
 
 	/**
 	 * Returns the status of a claim
@@ -249,11 +227,11 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 */
 
 	public void addTravelDestination(String destination, String description) throws EmptyFieldException {
-		//this line will make the Travel Itinerary.. if the fields are invalid, it will throw an Empty Field Exception
+		// This line will make the Travel Itinerary instance
+		// if the fields are invalid, it will throw an Empty Field Exception
 		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 		this.travelList.addTravelDestination(travelItinerary);
 	}
-	
 	
 	/**
 	 * THis will return the number of travel destinations
@@ -263,7 +241,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		return this.travelList.numberofDestinations();
 	}
 
-	
 	/**
 	 * This will return the Travel Itinerary based on the index specified
 	 * @param index
@@ -286,28 +263,27 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		travelList.editTravelDestination(index, travelItinerary);
 	}
 
-/**
- * This will delete a travel Itinerary at the specified index
- * @param i
- */
+	/**
+	 * This will delete a travel Itinerary at the specified index
+	 * @param i
+	 */
 	public void deleteTravelDestination(int i) {
 		this.travelList.deleteTravelDestination(i);
 	}
 
-/**
- * This will get the name of the last approver
- * @return
- */
+	/**
+	 * This will get the name of the last approver
+	 * @return
+	 */
 	public String getlastApproverName() {
 		return this.lastApproverName;
 	}
-
 
 	/**
 	 * This will set the name of the last approver
 	 * @param name
 	 */
-	public void setLastApproverName(String name){
+	public void setLastApproverName(String name) {
 		this.lastApproverName = name;
 	}
 
@@ -319,18 +295,14 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public void addComment(String comment, String name) {
 		ArrayList<String> comments;
 		setLastApproverName(name);
-		
-		if(approverComments.containsKey(name)){
+		if (approverComments.containsKey(name)) {
 			comments = approverComments.get(name);
-		}
-		else{
+		} else {
 			comments = new ArrayList<String>();
 		}
 		comments.add(comment);
 		this.approverComments.put(name, comments);
 	}
-
-
 
 	/**
 	 * Creates a new ArrayList<String>
@@ -340,11 +312,10 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public ArrayList<String> getComments() {
 		ArrayList<String> comments = new ArrayList<String>();
 		
-		for(String key: approverComments.keySet()){
+		for (String key: approverComments.keySet()) { 
 			ArrayList<String> tempComments = approverComments.get(key);
 
-			for(String comment : tempComments)
-			{
+			for(String comment : tempComments) {
 				comments.add(comment);
 			}
 		}
@@ -359,26 +330,31 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		this.lastApproverName = null;
 	}
 
-
 	/**
-	 * This will add a specified tag to a class?
+	 * adds a tag to  the instances arrayList of tags, but only if new
 	 * @param tag
 	 * @throws DuplicateException
 	 */
-	//adds a tag to  the instances arrayList of tags, but only if new
-	public void addTag(Tag tag) throws DuplicateException{	
+	public void addTag(Tag tag) throws DuplicateException {	
 		if (this.tags.contains(tag)) {
 			throw new DuplicateException("Duplicate Tag Added");
 		} else {
 			this.tags.add(tag);
 		}
-		
 	}
 
+	/**
+	 * gets list of tags
+	 * @param tag
+	 */
 	public ArrayList<Tag> getTags() {
 		return this.tags;
 	}
 	
+	/**
+	 * Gets a specific tag at an index
+	 * @param index
+	 */
 	public Tag getTag(int Index) {
 		return this.tags.get(Index);
 	}
@@ -388,37 +364,29 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		tag.setTagName(tname);
 	}
 
-
 	public void removeTag(Tag tag) {
-		this.tags.remove(tag);
-		
+		this.tags.remove(tag);	
 	}
-
 
 	public void addExpenseItem(ExpenseItem expenseItem) {
 		this.expenseItems.add(expenseItem);
 	}
-
-
 
 	public ArrayList<ExpenseItem> getExpenseItems() {
 		return this.expenseItems.getExpenseList();
 	}
 
 	/**
-	 * This will return the editability of the claim
+	 * This will return the edit-ability of the claim
 	 * @return
 	 */
 	public boolean isEditable() {
 		// TODO Auto-generated method stub
 		return this.status.isEditable();
 	}
-
-
-
+	
 	public void removeExpenseItem(ExpenseItem expenseItem) {
 		this.expenseItems.delete(expenseItem);
-
 	}
 
 	/**
@@ -428,17 +396,14 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 * @return
 	 */
 	public String getStartDateAsString() {
-		
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
-		
 		Date newDate = this.startDate;
 		newDate.setYear(this.startDate.getYear()-1900);
 		
 		//this is where we format the start and end dates
 		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
 	}
-	
 	
 	/**
 	 * This will format a the end date as a string
@@ -447,10 +412,8 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 * @return
 	 */
 	public String getEndDateAsString() {
-		
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
-		
 		Date newDate = this.endDate;
 		newDate.setYear(this.endDate.getYear()-1900);
 		
@@ -459,11 +422,9 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	}
 	
 	
-	public String getTravelItineraryAsString() {
-		
+	public String getTravelItineraryAsString() {		
 		return travelList.toString();
 	}
-
 
 	/**
 	 * This is the compare method required by the Collections.sort method	
@@ -490,8 +451,4 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		}
 		return 0;
 	}
-
-
-	
-
 }
