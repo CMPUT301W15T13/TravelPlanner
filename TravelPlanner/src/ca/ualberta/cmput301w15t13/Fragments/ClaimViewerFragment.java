@@ -110,6 +110,8 @@ public class ClaimViewerFragment extends Fragment {
 				if(((ClaimActivity) getActivity()).isClaimant()){
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(getActivity(), ExpenseActivity.class);
+					intent.putExtra("claimIndex", position);
+					intent.putExtra("claimID", id);
 					startActivity(intent);
 					
 				}else{

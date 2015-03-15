@@ -77,7 +77,13 @@ public class ClaimListSingleton {
 		} 
 		return false;
 	}
-	
+	//This is temporary
+	//TODO Send the expense list instead
+	public static ArrayList<ExpenseItem> getExpenseItemList() {
+		ArrayList<ExpenseItem> expenselist = new ArrayList<ExpenseItem>();
+		return expenselist;
+	}
+		
 	// FilterClaimList works with use of tagManagers getAssociatedClaims method
 	// which returns an ArrayList of claimIds (strings) associated with a given tag.
 	// Input an arrayList of tags and it returns a new arrayList of claimIds, keeping only
@@ -100,15 +106,5 @@ public class ClaimListSingleton {
 			}
 		}
 		return claimIds;
-	}
-
-	
-//This is temporary
-	//TODO Send the expense list instead
-	public static ArrayList<ExpenseItem> getExpenseItemList() {
-		ArrayList<ExpenseItem> expenselist = new ArrayList<ExpenseItem>();
-		return expenselist;
-	}
-
-	
+	}	
 }
