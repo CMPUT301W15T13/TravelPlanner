@@ -85,7 +85,7 @@ public class ExpenseItem implements ExpenseClaim {
 			
 	this.allowedCurrencies.add("CAD"); this.allowedCurrencies.add("USD"); this.allowedCurrencies.add("EUR");
 	this.allowedCurrencies.add("GBP"); this.allowedCurrencies.add("CHF"); this.allowedCurrencies.add("JPY");
-	this.allowedCategories.add("CNY");
+	this.allowedCurrencies.add("CNY");
 		
   }
 
