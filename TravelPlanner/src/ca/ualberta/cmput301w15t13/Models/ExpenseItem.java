@@ -79,11 +79,13 @@ public class ExpenseItem implements ExpenseClaim {
     this.Amount = Amount;
     this.currency = Currency;
 
-    this.allowedCategories.add("Air Fare");  this.allowedCategories.add("Ground Transport");  this.allowedCategories.add("Vehicle Rental");
+    this.allowedCategories.add("Air Fare");  this.allowedCategories.add("Ground Transport");  this.allowedCategories.add("Vehicle Rental");  this.allowedCategories.add("Private Automobile");
 	this.allowedCategories.add("Fuel"); this.allowedCategories.add("Parking"); this.allowedCategories.add("Registration"); this.allowedCategories.add("Accommodation");
+	this.allowedCategories.add("Meal"); this.allowedCategories.add("Supplies");
 			
-	this.allowedCurrencies.add("USD"); this.allowedCurrencies.add("GBP"); this.allowedCurrencies.add("EUR");
-	this.allowedCurrencies.add("CHF"); this.allowedCurrencies.add("JPY"); this.allowedCurrencies.add("CNY"); 
+	this.allowedCurrencies.add("CAD"); this.allowedCurrencies.add("USD"); this.allowedCurrencies.add("EUR");
+	this.allowedCurrencies.add("GBP"); this.allowedCurrencies.add("CHF"); this.allowedCurrencies.add("JPY");
+	this.allowedCategories.add("CNY");
 		
   }
 
