@@ -84,6 +84,11 @@ public class ExpenseItemList {
 			return null;
 		}
 	}
+
+	public void notifyListeners() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 }

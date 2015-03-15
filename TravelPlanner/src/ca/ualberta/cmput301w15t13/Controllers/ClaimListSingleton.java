@@ -25,6 +25,7 @@ import java.util.Collections;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
 /*
@@ -100,6 +101,14 @@ public class ClaimListSingleton {
 		}
 		return claimIds;
 	}
+
 	
+//This is temporary
+	//TODO Send the expense list instead
+	public static ArrayList<ExpenseItem> getExpenseItemList() {
+		ArrayList<ExpenseItem> expenselist = new ArrayList<ExpenseItem>();
+		return expenselist;
+	}
+
 	
 }
