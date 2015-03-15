@@ -2,12 +2,9 @@ package ca.ualberta.cmput301w15t13.Fragments;
 
 import java.util.Calendar;
 import java.util.Date;
-import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Controllers.SpinnerSelectedListener;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidUserPermissionException;
@@ -122,7 +119,8 @@ public class ExpenseManagerFragment extends Fragment {
 		String currencySet = currencySpinner.getSelectedItem().toString();
 		
 		//TODO should we assert they fill in all fields?
-		if(	!dateText.equals("") && !description.equals("") && !expenseName.equals("") && amount > 0){
+		//Toast.makeText(getActivity(), description, Toast.LENGTH_SHORT).show();
+		if(	!dateText.equals("") && !description.equals("") && !expenseName.equals("")){
 			this.areFieldsComplete = true;
 		}
 	}
