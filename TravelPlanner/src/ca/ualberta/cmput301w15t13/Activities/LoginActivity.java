@@ -114,7 +114,6 @@ public class LoginActivity extends Activity {
 		intent.putExtra(ISCLAIMANT, true);
 		//TODO start new activity with the user
 		startActivity(intent);
-		
 	}
 	
 	/**
@@ -139,7 +138,6 @@ public class LoginActivity extends Activity {
 		Intent intent = new Intent(this, ClaimActivity.class);
 		intent.putExtra(USERID, "TESTUSERNAME");
 		intent.putExtra(ISCLAIMANT, false);
-		startActivity(intent);
-		
+		startActivity(intent);	
 	}
 }
