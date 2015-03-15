@@ -23,6 +23,7 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.ArrayList;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,6 +35,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
+import ca.ualberta.cmput301w15t13.Activities.TestActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
@@ -105,7 +107,10 @@ public class ClaimViewerFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
 				if(((ClaimActivity) getActivity()).isClaimant()){
-					Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
+					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
+					Intent intent = new Intent(getActivity(), TestActivity.class);
+					startActivity(intent);
+					
 				}else{
 					Toast.makeText(getActivity(), "View Claim details", Toast.LENGTH_SHORT).show();
 				}

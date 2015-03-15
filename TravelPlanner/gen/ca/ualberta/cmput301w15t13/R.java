@@ -28,6 +28,10 @@ public final class R {
          (such as screen margins) for screens with more than 820dp of available width. This
          would include 7" and 10" devices in landscape (~960dp and ~1280dp respectively).
     
+
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
+    
          */
         public static final int activity_horizontal_margin=0x7f060000;
         public static final int activity_vertical_margin=0x7f060001;
@@ -36,6 +40,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
+        public static final int action_settings=0x7f0a0035;
         public static final int approverLogin=0x7f0a0003;
         public static final int button=0x7f0a000c;
         public static final int buttonDeleteClaim=0x7f0a000b;
@@ -75,6 +80,9 @@ public final class R {
         public static final int listViewExpense=0x7f0a0030;
         public static final int mainFragmentHolder=0x7f0a0007;
         public static final int spinnerClaimFilter=0x7f0a0004;
+        public static final int textView1=0x7f0a0032;
+        public static final int textView2=0x7f0a0033;
+        public static final int textView3=0x7f0a0034;
         public static final int textViewAdapterClaimCost=0x7f0a0011;
         public static final int textViewAdapterClaimDate=0x7f0a000f;
         public static final int textViewAdapterClaimTitle=0x7f0a000e;
@@ -102,10 +110,13 @@ public final class R {
         public static final int expense_item_activity=0x7f03000b;
         public static final int expense_item_manager=0x7f03000c;
         public static final int expense_item_viewer_layout=0x7f03000d;
+        public static final int take_a_photo=0x7f03000e;
     }
     public static final class menu {
         public static final int claim=0x7f090000;
         public static final int login=0x7f090001;
+        public static final int main=0x7f090002;
+        public static final int test=0x7f090003;
     }
     public static final class string {
         public static final int Amount=0x7f07001b;
@@ -140,6 +151,8 @@ public final class R {
         public static final int start_date=0x7f07000f;
         public static final int submit=0x7f07001f;
         public static final int title_activity_claim=0x7f070006;
+        public static final int title_activity_main=0x7f070022;
+        public static final int title_activity_test=0x7f070021;
         public static final int username=0x7f070004;
     }
     public static final class style {

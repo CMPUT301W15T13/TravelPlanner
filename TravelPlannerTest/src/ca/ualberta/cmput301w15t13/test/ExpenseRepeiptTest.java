@@ -54,19 +54,6 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		super.setUp();
 	}
 	
-	/**
-	 * Tests for use case F1
-	 * @throws EmptyFieldException 
-	 * @throws InvalidNameException 
-	 * @throws InvalidDateException 
-	 * @throws InvalidUserPermissionException 
-	 * 
-	 */
-	public void testBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
-		this.addBitmap();
-		this.largeBitmap();
-	}
-
 	/**Part of use case F1
 	 * Test that you can add a bitmap to a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/61
@@ -76,7 +63,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void addBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+	public void testAddBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmap);
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
@@ -98,7 +85,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void largeBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+	public void testLargeBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmapLarge);
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());

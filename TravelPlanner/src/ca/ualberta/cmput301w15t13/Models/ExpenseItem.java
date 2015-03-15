@@ -65,11 +65,10 @@ public class ExpenseItem {
 	 * @param Currency
 	 * @throws InvalidUserPermissionException 
 	 */
-	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID){
-		
-		//this looks through the singleton list to see if the claim is editable
-		//if so, it makes the expense
-		//if ((!ClaimListSingleton.isEmpty()))){
+	public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID) {
+		// this looks through the singleton list to see if the claim is edit-able
+		// if so, it makes the expense
+		// if ((!ClaimListSingleton.isEmpty()))){
 
 			this.ClaimID = ClaimID;
 			this.ExpenseCategory = Category;
@@ -86,13 +85,11 @@ public class ExpenseItem {
 		
 	}
 
-
-
-
 	public String getExpenseCategory() {
 		return this.ExpenseCategory;
 
 	}
+	
 	public void setExpenseCategory(String expenseCategory) throws InvalidFieldEntryException {
 	
 		if (!this.allowedCategories.contains(expenseCategory)){
@@ -107,43 +104,29 @@ public class ExpenseItem {
 		return purchaseDate;
 	}
 
-
-
 	public void setPurchaseDate(Date purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
-
-
 
 	public String getExpenseDescription() {
 		return ExpenseDescription;
 	}
 
-
-
 	public void setExpenseDescription(String expenseDescription) {
 		ExpenseDescription = expenseDescription;
 	}
-
-
 
 	public double getAmount() {
 		return Amount;
 	}
 
-
-
 	public void setAmount(double amount) {
 		Amount = amount;
 	}
 
-
-
 	public String getCurrency() {
 		return currency;
 	}
-
-
 
 	public void setCurrency(String currency) throws InvalidFieldEntryException {
 		if (!allowedCurrencies.contains(currency)) {
@@ -153,24 +136,17 @@ public class ExpenseItem {
 		}
 	}
 	
-
 	public String getLinkedToclaimID() {
 		return ClaimID;
 	}
-
-
 
 	public void setLinkedToclaimID(String linkedToclaimID) {
 		this.ClaimID = linkedToclaimID;
 	}
 
-
-
 	public Receipt getReceipt() {
 		return receipt;
 	}
-
-
 
 	public void addReceipt(Receipt receipt) {
 		this.receipt = receipt;

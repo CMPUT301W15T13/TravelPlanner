@@ -8,6 +8,12 @@
         android:minSdkVersion="17"
         android:targetSdkVersion="17" />
 
+    <!-- Add permission for camera (android.permission.CAMERA) -->
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Add permission for writing to external storage (android.permission.WRITE_EXTERNAL_STORAGE) -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -22,7 +28,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.ClaimActivity"></activity>
+        <activity android:name="ca.ualberta.cmput301w15t13.Activities.ClaimActivity" >
+        </activity>
+        <activity
+            android:name="ca.ualberta.cmput301w15t13.Activities.TestActivity"
+            android:label="@string/title_activity_test" >
+        </activity>
+        <activity
+            android:name="ca.ualberta.cmput301w15t13.Activities.MainActivity"
+            android:label="@string/title_activity_main" >
+        </activity>
     </application>
 
 </manifest>
