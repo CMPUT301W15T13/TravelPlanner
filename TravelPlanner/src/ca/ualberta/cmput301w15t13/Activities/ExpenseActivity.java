@@ -216,18 +216,8 @@ public class ExpenseActivity extends Activity {
 	 * but passes the proper startdate textview id
 	 * such that it can be updated.
 	 */
-	public void openStartDateDialog(View v){
-		TextView textId = (TextView) findViewById(R.id.textViewStartDate);
-		ExpenseManagerFragment.openDateDialog(textId);
-	}
-	
-	/**
-	 * Will open a datepicker dialog
-	 * but passes the proper end date textview id
-	 * such that it can be updated.
-	 */
-	public void openEndDateDialog(View v){
-		TextView textId = (TextView) findViewById(R.id.textViewEndDate);
+	public void openDateDialog(View v){
+		TextView textId = (TextView) findViewById(R.id.textViewDateExpense);
 		ExpenseManagerFragment.openDateDialog(textId);
 	}
 	

@@ -19,19 +19,17 @@
  */
 package ca.ualberta.cmput301w15t13.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
-import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
-import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
 
 /**
@@ -48,6 +46,7 @@ import exceptions.EmptyFieldException;
 public class DestinationDialogFragment extends DialogFragment {
 	// Based on http://developer.android.com/guide/topics/ui/dialogs.html March 06 2015
     
+	@SuppressLint("InflateParams")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -67,9 +66,6 @@ public class DestinationDialogFragment extends DialogFragment {
 	                   destination = destinationView.getText().toString().trim();
 	                   reason = reasonView.getText().toString().trim();
 	                   
-	                   
-	                   
-	                   
 	                   try {
 	                	   
 	                	   TravelItinerary item = new TravelItinerary(destination, reason);
@@ -77,10 +73,9 @@ public class DestinationDialogFragment extends DialogFragment {
 	                	   FragmentManager fm = getFragmentManager();
 	                	   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
 	                	   fragment.addTravelItenerarItem(item);
-					} catch (EmptyFieldException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+	                   } catch (EmptyFieldException e) {
+	                	   e.printStackTrace();
+	                   }
 	               }
 	           });
      
