@@ -61,7 +61,7 @@ public class LoginActivity extends Activity {
 	 * 
 	 * @param view
 	 */
-	public void login(View view){
+	public void login(View view) {
 		/*
 		 * Needs to:
 		 * validate the user credentials
@@ -77,17 +77,16 @@ public class LoginActivity extends Activity {
 		username = usernameEditText.getText().toString();
 		password = passwordEditText.getText().toString();
 		
-		if(username.equals("") || username == null){
+		if (username.equals("") || username == null) {
 			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();
-		}else if(password.equals("") || password == null){
+		} else if (password.equals("") || password == null) {
 			Toast.makeText(this, "Add password before logging in", Toast.LENGTH_SHORT).show();
-		}else{
+		} else {
 			//password and username are filled in
-			
 			//TODO maybe should be User.checkValidLogin(username, password);
-			if(checkValidLogin(username, password)){
+			if (checkValidLogin(username, password)) {
 				startClaimActivity(username);
-			}else{
+			} else {
 				Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
 			}
 		}
