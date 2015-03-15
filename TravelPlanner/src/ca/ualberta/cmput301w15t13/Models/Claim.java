@@ -37,7 +37,7 @@ import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 
-public class Claim {
+public class Claim implements Comparable<Claim> {
 	
 	
 	protected String userName = null;
@@ -457,7 +457,33 @@ public class Claim {
 	}
 
 
+	/**
+	 * This is the compare method required by the Collections.sort method	
+	 * Claim will return -1 if:
+	 * 		Caller is before the parameter
+	 * 	Claim will return 1 if:
+	 * 		Caller is after the parameter
+	 * else it will return 0 if both start date and end dates are the same
+	 * 
+	 * Used eorodrig code on "Claim.java"
+	 */
+	@Override
+	public int compareTo(Claim rhs) {
+		if (this.getStartDate().before(rhs.getStartDate())) {
+			return -1;
+		} else if (this.getStartDate().after(rhs.getStartDate())) {
+			return 1;
+		} else if (this.getStartDate().equals(rhs.getStartDate())) {
+			if (this.getEndDate().before(rhs.getEndDate())) {
+				return -1;
+			}else if (this.getEndDate().after(rhs.getEndDate())) {
+				return -1;
+			}
+		}
+		return 0;
+	}
 
 
+	
 
 }
