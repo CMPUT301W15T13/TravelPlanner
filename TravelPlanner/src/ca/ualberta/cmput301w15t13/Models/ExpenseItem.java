@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.UUID;
 
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import exceptions.InvalidFieldEntryException;
@@ -33,7 +34,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 
 
-public class ExpenseItem {
+public class ExpenseItem implements ExpenseClaim {
 	
 	private static ArrayList<String> allowedCategories = new ArrayList<String>();
 	private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
@@ -47,6 +48,7 @@ public class ExpenseItem {
 
 	
 	protected String ClaimID = null;
+	protected String ExpenseID = null;
 	//this does not need to be initialized
 	protected Currency currencyEnum;
 	
@@ -71,11 +73,13 @@ public class ExpenseItem {
 		// if ((!ClaimListSingleton.isEmpty()))){
 
 			this.ClaimID = ClaimID;
+			this.ExpenseID = UUID.randomUUID().toString();
 			this.ExpenseCategory = Category;
 			this.purchaseDate = purchaseDate;
 			this.ExpenseDescription = ExpenseDescription;
 			this.Amount = Amount;
 			this.currency = Currency;
+
 			
 			this.allowedCategories.add("Air Fare"); this.allowedCategories.add("Ground Transport"); this.allowedCategories.add("Vehicle Rental");
 			this.allowedCategories.add("Fuel"); this.allowedCategories.add("Parking"); this.allowedCategories.add("Registration"); this.allowedCategories.add("Accommodation");
@@ -135,8 +139,12 @@ public class ExpenseItem {
 		}
 	}
 	
-	public String getLinkedToclaimID() {
+	public String getclaimID()  {
 		return ClaimID;
+	}
+	
+	public String getID(){
+		return ExpenseID;
 	}
 
 	public void setLinkedToclaimID(String linkedToclaimID) {

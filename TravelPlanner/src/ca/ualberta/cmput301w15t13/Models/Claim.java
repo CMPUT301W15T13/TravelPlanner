@@ -35,7 +35,7 @@ import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
 
 
-public class Claim implements Comparable<Claim> {
+public class Claim implements Comparable<Claim>, ExpenseClaim {
 	
 	
 	protected String userName = null;
@@ -93,6 +93,16 @@ public class Claim implements Comparable<Claim> {
 	public String getclaimID() {
 		return this.claimID;
 	}
+	
+	/**
+	 * This will return the claim ID (UUID and elastic search index)
+	 * @return Claim UUID
+	 */
+	public String getID() {
+		return this.claimID;
+	}
+	
+	
 
 	/**
 	 * This will return the user name associated with the claim
