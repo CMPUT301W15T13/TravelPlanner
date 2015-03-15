@@ -24,34 +24,36 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.InvalidUserPermissionException;
 
+/*
+ * Approver child class.
+ * Currently only approves and 
+ * returns, but as more details
+ * are released, as will more
+ * functionality
+ */
+
 public class Approver extends User {
-	/*
-	 * Approver child class.
-	 * Currently only approves and 
-	 * returns, but as more details
-	 * are released, as will more
-	 * functionality
-	 */
+
 	public Approver(String name) {
 		super(name);
 	}
 	
 	public void approveClaim(Claim claim) {
-		if(claim != null && claim.getStatus() == statusEnum.SUBMITTED){
+		if (claim != null && claim.getStatus() == statusEnum.SUBMITTED) {
 			claim.setLastApproverName(this.name);
 			claim.giveStatus(statusEnum.APPROVED);
 		}
 	}
 	
 	public void returnClaim(Claim claim) {
-		if(claim != null && claim.getStatus() == statusEnum.SUBMITTED){
+		if (claim != null && claim.getStatus() == statusEnum.SUBMITTED) {
 			claim.setLastApproverName(this.name);
 			claim.giveStatus(statusEnum.RETURNED);
 		}
 	}
 
 	public void addComment(Claim claim, String comment) {
-		if(claim.getStatus() == statusEnum.SUBMITTED && comment != null){
+		if (claim.getStatus() == statusEnum.SUBMITTED && comment != null) {
 			claim.addComment(comment, this.name);
 		}
 	}
