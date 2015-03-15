@@ -107,16 +107,18 @@ public final class R {
         public static final int destination_dialog_layout=0x7f030008;
         public static final int expense_actionbar_layout=0x7f030009;
         public static final int expense_adapter_layout=0x7f03000a;
-        public static final int expense_item_activity=0x7f03000b;
+        public static final int expense_item_layout=0x7f03000b;
         public static final int expense_item_manager=0x7f03000c;
-        public static final int expense_item_viewer_layout=0x7f03000d;
-        public static final int take_a_photo=0x7f03000e;
+        public static final int expense_item_viewer=0x7f03000d;
+        public static final int expense_item_viewer_layout=0x7f03000e;
+        public static final int take_a_photo=0x7f03000f;
     }
     public static final class menu {
         public static final int claim=0x7f090000;
-        public static final int login=0x7f090001;
-        public static final int main=0x7f090002;
-        public static final int test=0x7f090003;
+        public static final int expense_viewer=0x7f090001;
+        public static final int login=0x7f090002;
+        public static final int main=0x7f090003;
+        public static final int test=0x7f090004;
     }
     public static final class string {
         public static final int Amount=0x7f07001b;
@@ -151,6 +153,7 @@ public final class R {
         public static final int start_date=0x7f07000f;
         public static final int submit=0x7f07001f;
         public static final int title_activity_claim=0x7f070006;
+        public static final int title_activity_expense_viewer=0x7f070023;
         public static final int title_activity_main=0x7f070022;
         public static final int title_activity_test=0x7f070021;
         public static final int username=0x7f070004;

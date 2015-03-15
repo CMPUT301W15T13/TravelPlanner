@@ -25,22 +25,23 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.InvalidUserPermissionException;
 
+/*
+ * Claimant child class.
+ * Currently only submits but 
+ * as more details
+ * are released, as will more
+ * functionality
+ */
+
 public class Claimant extends User {
-	/*
-	 * Claimant child class.
-	 * Currently only submits but 
-	 * as more details
-	 * are released, as will more
-	 * functionality
-	 */
+	
 	public Claimant(String name) {
 		super(name);
 	}
 	
 	public void submitClaim(Claim claim) throws InvalidUserPermissionException{
-		if(claim != null && claim.getStatus() == statusEnum.INPROGRESS){
+		if (claim != null && claim.getStatus() == statusEnum.INPROGRESS) {
 			claim.giveStatus(statusEnum.SUBMITTED);
 		}
 	}
-
 }
