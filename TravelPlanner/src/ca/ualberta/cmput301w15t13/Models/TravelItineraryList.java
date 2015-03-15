@@ -11,9 +11,7 @@ public class TravelItineraryList {
 	protected ArrayList<TravelItinerary> travelList = null;
 	
 	public TravelItineraryList(){
-		
 		this.travelList = new ArrayList<TravelItinerary>();
-		
 	}
 	
 	
@@ -24,7 +22,6 @@ public class TravelItineraryList {
 	 */
 	public void addTravelDestination(TravelItinerary travelDestination){
 			this.travelList.add(travelDestination);
-
 	}
 
 	/**
@@ -34,12 +31,10 @@ public class TravelItineraryList {
 	 */
 	public void editTravelDestination(int index, TravelItinerary travelDestination){
 		
-		if ((index >= 0) && (index < this.travelList.size()))
-			this.travelList.set(index, travelDestination);
-		else
+		if ((index < 0) || (index > this.travelList.size())){
 			throw new IndexOutOfBoundsException("index is out of range");
-			
-		
+		}
+			this.travelList.set(index, travelDestination);
 	}
 
 	/**
@@ -60,10 +55,10 @@ public class TravelItineraryList {
 	 */
 	public TravelItinerary getTravelDestinationAtIndex(int index) throws InvalidFieldEntryException {
 	
-		if ((index < 0) && (index >= this.travelList.size() ))
+		if ((index < 0) && (index >= this.travelList.size() )){
 			throw new InvalidFieldEntryException("Index of Travel Destination is invalid.");
-		else
-			return this.travelList.get(index);
+		}
+		return this.travelList.get(index);
 	}
 	
 	/**
@@ -72,8 +67,9 @@ public class TravelItineraryList {
 	 */
 	public void deleteTravelDestination(int index){
 		
-		if (this.travelList.size() >= index)
+		if (this.travelList.size() >= index){
 			this.travelList.remove(index);
+		}
 	}
 
 
@@ -85,8 +81,7 @@ public class TravelItineraryList {
 	public boolean contains(TravelItinerary travelItinerary) {
 
 		for (TravelItinerary destination : this.travelList) {
-			if (destination.getDestinationName().equalsIgnoreCase(travelItinerary.getDestinationName()))
-			{
+			if (destination.getDestinationName().equalsIgnoreCase(travelItinerary.getDestinationName())){
 				return true;
 			}
 		}
@@ -110,12 +105,9 @@ public class TravelItineraryList {
 		
 		String travelListString = "";
 		
-		for (TravelItinerary ti: travelList)
-		{
+		for (TravelItinerary ti: travelList){
 			travelListString = ti.getDestinationName() + " : " + ti.getDestinationDescription() + "/n";
 		}
-		
-		
 		return travelListString;
 		
 	

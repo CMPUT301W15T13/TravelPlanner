@@ -92,7 +92,7 @@ public class Claim {
 	 * This will return the claim ID (UUID and elastic search index)
 	 * @return Claim UUID
 	 */
-	public String getclaimID(){
+	public String getclaimID() {
 		return this.claimID;
 	}
 
@@ -127,14 +127,14 @@ public class Claim {
 	 */
 	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException{
 
-			//this checks to see that the entered start date is not after the entered end date
-			if (startDate.after(endDate)){
-				 throw new InvalidDateException("Start Date is after End Date");
-			}
+		//this checks to see that the entered start date is not after the entered end date
+		if (startDate.after(endDate)){
+			 throw new InvalidDateException("Start Date is after End Date");
+		}
 			
-			//set the dates
-			this.setStartDate(startDate);
-			this.setEndDate(endDate);
+		//set the dates
+		this.setStartDate(startDate);
+		this.setEndDate(endDate);
 	}
 	
 	/**
@@ -150,7 +150,7 @@ public class Claim {
 	 * This will set the start Date for the claim
 	 */
 	private void setStartDate(Date startDate) {
-			this.startDate = startDate;
+		this.startDate = startDate;
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class Claim {
 	 * This will set the end Date for the claim
 	 */
 	private void setEndDate(Date endDate) {
-			this.endDate = endDate;
+		this.endDate = endDate;
 	}
 
 	/**
@@ -181,13 +181,13 @@ public class Claim {
 	 * This sets the Claim description
 	 * @param description 
 	 */
-	public void setDescription(String description)  {
-			if (description == null || description.trim().isEmpty()){
-				this.description = "";
-			}
-			else{
-				this.description = description;	
-			}
+	public void setDescription(String description) {
+		if (description == null || description.trim().isEmpty()){
+			this.description = "";
+		}
+		else{
+			this.description = description;	
+		}
 	}
 	
 	
@@ -207,13 +207,13 @@ public class Claim {
 	 * @param travelList
 	 */
 	public void setTravelList(TravelItineraryList travelList) {
-			//This makes sure that the travel List is not null
-			if (travelList == null){
-				this.travelList = new TravelItineraryList();
-			}
-			else{
-				this.travelList = travelList;
-			}
+		//This makes sure that the travel List is not null
+		if (travelList == null){
+			this.travelList = new TravelItineraryList();
+		}
+		else{
+			this.travelList = travelList;
+		}
 	}
 
 
@@ -230,8 +230,8 @@ public class Claim {
 	 * @param status
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void giveStatus(int status)  {
-			this.status.setStatus(status);
+	public void giveStatus(int status) {
+		this.status.setStatus(status);
 	}
 		
 	/**
@@ -251,7 +251,7 @@ public class Claim {
 	 * THis will return the number of travel destinations
 	 * @return
 	 */
-	public int numberOfDestinations(){
+	public int numberOfDestinations() {
 		return this.travelList.numberofDestinations();
 	}
 
@@ -262,7 +262,7 @@ public class Claim {
 	 * @return
 	 * @throws InvalidFieldEntryException
 	 */
-	public TravelItinerary getTravelDestination(int index) throws InvalidFieldEntryException{
+	public TravelItinerary getTravelDestination(int index) throws InvalidFieldEntryException {
 		return this.travelList.getTravelDestinationAtIndex(index);
 	}
 
@@ -283,7 +283,7 @@ public class Claim {
  * @param i
  */
 	public void deleteTravelDestination(int i) {
-			this.travelList.deleteTravelDestination(i);
+		this.travelList.deleteTravelDestination(i);
 	}
 
 /**
@@ -419,7 +419,7 @@ public class Claim {
 	 * Code taken from Eorodrig Travel Logger (Claim class)
 	 * @return
 	 */
-	public String getStartDateAsString(){
+	public String getStartDateAsString() {
 		
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
@@ -438,7 +438,7 @@ public class Claim {
 	 * Code taken from Eorodrig Travel Logger (Claim class)
 	 * @return
 	 */
-	public String getEndDateAsString(){
+	public String getEndDateAsString() {
 		
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
@@ -451,7 +451,7 @@ public class Claim {
 	}
 	
 	
-	public String getTravelItineraryAsString(){
+	public String getTravelItineraryAsString() {
 		
 		return travelList.toString();
 	}

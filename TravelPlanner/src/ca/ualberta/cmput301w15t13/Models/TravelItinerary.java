@@ -64,12 +64,10 @@ public class TravelItinerary {
 		
 		String rhsDestination = ((TravelItinerary) rhs).getDestinationName().trim().toLowerCase();
 		
-		if (this.destinationName.trim().toLowerCase().equals(rhsDestination))
-		{
+		if (this.destinationName.trim().toLowerCase().equals(rhsDestination)){
 			return true;
 		}
 		return false;
-		
 	}
 	
 	
