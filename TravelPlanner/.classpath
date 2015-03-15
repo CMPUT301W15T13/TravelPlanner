@@ -5,7 +5,7 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
-	<classpathentry exported="true" kind="lib" path="D:/programming/gson/gson-2.3.1.jar"/>
-	<classpathentry kind="lib" path="D:/programming/gson/gson-2.3.1-javadoc.jar"/>
+	<classpathentry kind="lib" path="/cshome/devito/Mydesk/2014-2015/C301/project/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/cshome/devito/Mydesk/2014-2015/C301/project/gson-2.3.1-javadoc.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
