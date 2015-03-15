@@ -47,6 +47,7 @@
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
 				    android:onClick="openStartDateDialog"
+				    android:contentDescription="StartDate"
 				    android:src="@android:drawable/ic_menu_my_calendar" />
 				
 			</LinearLayout>
@@ -83,6 +84,7 @@
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
 				    android:onClick="openEndDateDialog"
+				    android:contentDescription="End Date"
 				    android:src="@android:drawable/ic_menu_my_calendar" />
 				
 			</LinearLayout>
