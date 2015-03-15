@@ -31,7 +31,7 @@ public class TravelItineraryList {
 	 */
 	public void editTravelDestination(int index, TravelItinerary travelDestination){
 		
-		if ((index < 0) || (index > this.travelList.size())){
+		if ((index < 0) || (index >= this.travelList.size())) {
 			throw new IndexOutOfBoundsException("index is out of range");
 		}
 			this.travelList.set(index, travelDestination);
