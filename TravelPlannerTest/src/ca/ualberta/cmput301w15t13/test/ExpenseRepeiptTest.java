@@ -71,6 +71,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		expenseItem.addReceipt(receipt);
 		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
+		// these tests are meant to fail as this will be implemented for project 5
 		assertNotNull("Bitmap is null", returnedBitmap);
 		assertEquals("Bitmap has been changed", bitmap, returnedBitmap);
 	}	
@@ -93,13 +94,12 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		expenseItem.addReceipt(receipt);
 		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
+		// these tests are meant to fail as this will be implemented for project 5
 		if (returnedBitmap.getByteCount() > 65536) {
 			fail("Addded a bitmap too large");
 		}
 		assertNotSame("Bitmap wasn't modified", bitmapLarge, returnedBitmap);
 	}
-
-	
 	
 	/**Use case F3
 	 * Test that you can delete a bitmap from a claim
@@ -119,6 +119,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		expenseItem.addReceipt(receipt);
 		returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
+		// these tests are meant to fail as this will be implemented for project 5
 		assertEquals("Bitmap has been changed", bitmap ,returnedBitmap);
 
 		expenseItem.removeReceipt(bitmap);

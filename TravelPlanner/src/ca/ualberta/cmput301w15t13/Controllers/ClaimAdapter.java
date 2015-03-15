@@ -41,7 +41,7 @@ public class ClaimAdapter extends ArrayAdapter{
 	
 	//based on http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view Jan 24th 2015
 	// and http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter Jan 25 2015
-	ArrayList<Claim> claims;
+	public ArrayList<Claim> claims;
 	
 	@SuppressWarnings("unchecked")
 	public ClaimAdapter(Context context, int textViewResourceId, List<Claim> claims) {
@@ -53,7 +53,7 @@ public class ClaimAdapter extends ArrayAdapter{
 	public View getView(int position, View convertView, ViewGroup parent) {		
 		View view = convertView;
 		
-		if(view == null){
+		if (view == null) {
 			LayoutInflater inflater;
 			inflater = LayoutInflater.from(getContext());
 			view = inflater.inflate(R.layout.claim_adapter_layout, null);
@@ -61,7 +61,7 @@ public class ClaimAdapter extends ArrayAdapter{
 		
 		Claim claim = claims.get(position);
 		
-		if(claim != null){
+		if (claim != null) {
 			TextView titleView = (TextView) view.findViewById(R.id.textViewAdapterClaimTitle);
 			TextView dateView = (TextView) view.findViewById(R.id.textViewAdapterClaimDate);
 			TextView costView = (TextView) view.findViewById(R.id.textViewAdapterClaimCost);
@@ -82,7 +82,6 @@ public class ClaimAdapter extends ArrayAdapter{
 //				statusView.setImageResource(android.R.drawable.ic_menu_myplaces);
 //			}
 		}
-		
 		return view;
 	}
 }

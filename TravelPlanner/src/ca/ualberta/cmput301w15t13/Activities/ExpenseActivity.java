@@ -173,6 +173,8 @@ public class ExpenseActivity extends Activity {
 	 * not create.
 	 * @param index
 	 */
+	
+	// may not be necessary
 	public void editClaim(int index) {
 		setFragementToExpenseManager();
 		ExpenseManagerFragment.setStateAsEditing(true);

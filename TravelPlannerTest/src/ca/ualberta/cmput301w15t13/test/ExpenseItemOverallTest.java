@@ -58,6 +58,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
      * Test that you can add one or more expense items to an existing claim
 	 * as a claimant.
 	 * @throws EmptyFieldException
+	 * @throws InvalidNameException
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 * @throws InvalidFieldEntryException 
@@ -68,6 +69,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * 
 	 * This adds and tests the addition of expense items
 	 * @throws EmptyFieldException
+	 * @throws InvalidNameException
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
@@ -129,7 +131,8 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	/** This is part of Use case D1
 	 * Test that you can only add the valid currencies
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/83
-	 * @throws EmptyFieldException 
+	 * @throws EmptyFieldException
+	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidFieldEntryException 
 	 * @throws InvalidUserPermissionException 
@@ -158,7 +161,8 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 *
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/84
 	 * Test that you can flag and unflag an expenseItem 
-	 * @throws InvalidDateException 
+	 * @throws InvalidDateException
+	 * @throws InvalidNameException 
 	 * @throws InvalidUserPermissionException 
 	 * @throws EmptyFieldException 
 	 */
@@ -182,7 +186,8 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/85
 	 * Test that you're only allowed to manage an expenseItem when 
 	 * the claim is editable
-	 * @throws EmptyFieldException 
+	 * @throws EmptyFieldException
+	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
@@ -211,6 +216,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/86
 	 * Test that you can delete an expense Item from a claim
 	 * @throws EmptyFieldException
+	 * @throws InvalidNameException
 	 * @throws InvalidDateException 
 	 * @throws InvalidUserPermissionException 
 	 */
