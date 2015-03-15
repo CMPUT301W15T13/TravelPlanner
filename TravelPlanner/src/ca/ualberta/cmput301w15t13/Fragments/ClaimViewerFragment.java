@@ -52,6 +52,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 public class ClaimViewerFragment extends Fragment {
 	private ClaimAdapter claimAdapter;
 	private ArrayList<Claim> claims;
+	private int claimIndex;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -89,7 +90,6 @@ public class ClaimViewerFragment extends Fragment {
 
 			@Override
 			public void update() {
-//				claims.clear();
 				claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 				claimAdapter.notifyDataSetChanged();
 			}
@@ -122,12 +122,23 @@ public class ClaimViewerFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(getActivity(), "Long Click", Toast.LENGTH_SHORT).show();
-				//TODO make a popup open, and have edit as an option. Later
-				((ClaimActivity) getActivity()).editClaim(position);
+				//((ClaimActivity) getActivity()).editClaim(position);
+				claimIndex = position;
+				new ClaimChoiceDialog().show(getFragmentManager(), "Long Click Pop-Up");
 				return true;
 			}
 		});
 	}
-
+	
+	public void editClaim(){
+		((ClaimActivity) getActivity()).editClaim(claimIndex);
+	}
+	
+	public void deleteClaim(){
+		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
+		ClaimListSingleton.getClaimList().notifyListeners();
+	}
+	
+	public void submitClaim(){
+	}
 }

@@ -262,7 +262,7 @@ public class ClaimManagerFragment extends Fragment{
 		if(itineraryList.size() > 2){
 			//If the text view is set to wrap content too early,
 			//it looks like the field is too small
-			destinationView.setHeight(LayoutParams.WRAP_CONTENT); 
+			destinationView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT); 
 		}
 	}
 
