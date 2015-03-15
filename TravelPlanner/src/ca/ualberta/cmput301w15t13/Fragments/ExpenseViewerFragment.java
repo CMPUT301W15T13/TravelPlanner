@@ -35,10 +35,10 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Controllers.ExpenseAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
-import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 
 /**
  * This fragment is used to view expenses and 

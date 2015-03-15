@@ -132,7 +132,7 @@ public class ClaimViewerFragment extends Fragment {
 				claimIndex = position;
 
 				if(((ClaimActivity) getActivity()).isClaimant()){
-					new ClaimChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
+					new ClaimantChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
 				}
 				return true;
 			}
@@ -178,5 +178,23 @@ public class ClaimViewerFragment extends Fragment {
 	 */
 	public void viewClaim(){
 			((ClaimActivity) getActivity()).setFragmentToDetailViewer(claimIndex);
+	}
+	
+	/**
+	 * TODO
+	 */
+	public void returnClaim(){
+		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		submitClaim.giveStatus(ClaimStatus.statusEnum.RETURNED);
+		ClaimListSingleton.getClaimList().notifyListeners();
+	}
+	
+	/**
+	 * TODO
+	 */
+	public void approveClaim(){
+		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		submitClaim.giveStatus(ClaimStatus.statusEnum.APPROVED);
+		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 }

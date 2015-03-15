@@ -36,7 +36,7 @@ import ca.ualberta.cmput301w15t13.R;
  * TODO
  */
 
-public class ClaimChoiceDialogFragment extends DialogFragment{
+public class ClaimantChoiceDialogFragment extends DialogFragment{
 	// Based on http://martin.cubeactive.com/android-onclicklitener-tutorial/ March 15 2015
     final OnClickListener editClaim = new OnClickListener() {
         @Override
