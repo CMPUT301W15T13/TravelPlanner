@@ -4,25 +4,22 @@ import exceptions.EmptyFieldException;
 import exceptions.ExceptionHandler;
 import exceptions.ExceptionHandler.FIELD;
 
+/*
+ * This class represents a place the user wants to
+ * visit. It contains a destination, an
+ * associated reason for travel, and operations
+ * on it's data.
+ */
 public class TravelItinerary {
 
 	protected String destinationName = null;
 	protected String description = null;
 	
-	
-	/**
-	 * This will make a new Itinerary based on the info passed in.
-	 * @param destination
-	 * @param description
-	 * @throws EmptyFieldException 
-	 */
 	public TravelItinerary(String destination, String description) throws EmptyFieldException{
 		this.setDestinationName(destination);
 		this.setDestinationDescription(description);
 	}
 	
-	
-	//////////Travel Destionation getter/setter
 	/**
 	 * This will get the destination Name
 	 * @return
@@ -40,7 +37,6 @@ public class TravelItinerary {
 		this.destinationName = name;
 	}
 	
-	///////////Travel Description getter/setter
 	/**
 	 * This will get the destination description
 	 * @return
@@ -48,6 +44,7 @@ public class TravelItinerary {
 	public String getDestinationDescription() {
 		return description;
 	}
+	
 	/**
 	 * This will set the destination description
 	 * @param description
@@ -58,17 +55,12 @@ public class TravelItinerary {
 		this.description = description;
 	}
 
-
 	@Override
-	public boolean equals(Object rhs){
-		
+	public boolean equals(Object rhs) {
 		String rhsDestination = ((TravelItinerary) rhs).getDestinationName().trim().toLowerCase();
-		
-		if (this.destinationName.trim().toLowerCase().equals(rhsDestination)){
+		if (this.destinationName.trim().toLowerCase().equals(rhsDestination)) {
 			return true;
 		}
 		return false;
 	}
-	
-	
 }
