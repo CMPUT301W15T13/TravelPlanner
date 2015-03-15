@@ -27,7 +27,6 @@
  * 
  */
 
-
 package ca.ualberta.cmput301w15t13.test;
 
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;

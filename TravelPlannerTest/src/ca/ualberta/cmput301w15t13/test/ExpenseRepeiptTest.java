@@ -35,8 +35,13 @@ import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 /** 
+ * This test suite tests the functionality of the applications
+ * photographic receipt functionality
+ * 
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
+ * 
+ * Not implemented for Project Part 4, should fail
  */
 public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 
@@ -61,8 +66,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		this.addBitmap();
 		this.largeBitmap();
 	}
-	
-	
+
 	/**Part of use case F1
 	 * Test that you can add a bitmap to a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/61
@@ -75,18 +79,13 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	public void addBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmap);
-		
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
-		
-		
 		expenseItem.addReceipt(receipt);
 		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
 		assertNotNull("Bitmap is null", returnedBitmap);
 		assertEquals("Bitmap has been changed", bitmap, returnedBitmap);
-		
 	}	
 	
 	/**Part of Use Case F1
@@ -102,14 +101,12 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	public void largeBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
 		Receipt receipt = new Receipt(bitmapLarge);
-		
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
-		
 		expenseItem.addReceipt(receipt);
 		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
-		if(returnedBitmap.getByteCount() > 65536){
+		
+		if (returnedBitmap.getByteCount() > 65536) {
 			fail("Addded a bitmap too large");
 		}
 		assertNotSame("Bitmap wasn't modified", bitmapLarge, returnedBitmap);
@@ -131,17 +128,16 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		Bitmap returnedBitmap;
 		Receipt receipt = new Receipt(bitmap);
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
-		
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
-		
 		expenseItem.addReceipt(receipt);
 		returnedBitmap = expenseItem.getReceipt().toBitMap();
+		
 		assertEquals("Bitmap has been changed", bitmap ,returnedBitmap);
 
 		expenseItem.removeReceipt(bitmap);
 		returnedBitmap = expenseItem.getReceipt().toBitMap();
-		assertNull("Bitmap was not removed", returnedBitmap);
 		
+		assertNull("Bitmap was not removed", returnedBitmap);
 	}
 	
 

@@ -235,7 +235,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		try {
 			// if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination(null, "Reason for travel");
-		} catch(InvalidFieldEntryException e) {
+		} catch (InvalidFieldEntryException e) {
 		}
 		assertEquals("Null destination added", "Aruba", claim.getTravelDestination(0).getDestinationName());
 		
@@ -249,14 +249,14 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		try {
 			//if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination("London", null);
-		} catch(InvalidFieldEntryException e){
+		} catch (InvalidFieldEntryException e){
 		}
 		assertEquals("Null destination added", "Jamaica", claim.getTravelDestination(0).getDestinationDescription());	
 
 		try {
 			//if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination("London", "");
-		} catch(InvalidFieldEntryException e) {
+		} catch (InvalidFieldEntryException e) {
 		}
 		assertEquals("Null destination added", "Jamaica", claim.getTravelDestination(0).getDestinationDescription());			
 	}
@@ -374,7 +374,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		try{
 			//If this works it will throw an InvalidFieldEntryExeption
 			claim.editTravelDescription(1,  null, "Relic hunting");
-		} catch(InvalidFieldEntryException e){	
+		} catch (InvalidFieldEntryException e) {	
 		}
 		assertNotSame("Null name was added", null, claim.getTravelDestination(1).getDestinationName());
 
@@ -383,7 +383,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 			//If this works it will throw an InvalidFieldEntryExeption
 			claim.editTravelDescription(1,  "Canada",null);
 		}
-		catch(InvalidFieldEntryException e){
+		catch (InvalidFieldEntryException e) {
 		}
 		assertNotSame("Null description was added", null, claim.getTravelDestination(1).getDestinationDescription());
 
