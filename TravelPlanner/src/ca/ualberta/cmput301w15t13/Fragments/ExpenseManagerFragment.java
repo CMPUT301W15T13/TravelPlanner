@@ -2,11 +2,9 @@ package ca.ualberta.cmput301w15t13.Fragments;
 
 import java.util.Calendar;
 import java.util.Date;
-
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.SpinnerSelectedListener;
-
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
@@ -27,7 +25,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class ExpenseManagerFragment extends Fragment {
-	private EditText expenseName;
+	private EditText expenseNameView;
+	private String expenseName;
 	private Spinner categorySpinner;
 	private TextView dateView;
 	private Date Date;
@@ -60,6 +59,7 @@ public class ExpenseManagerFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
+		expenseNameView = (EditText) getView().findViewById(R.id.editTextExpenseName);
 		descriptionView = (EditText) getView().findViewById(R.id.editTextExpenseDescription);
 		dateView = (TextView) getView().findViewById(R.id.textViewDateExpense);
 		categorySpinner = (Spinner) getView().findViewById(R.id.categorySpinner);
@@ -98,25 +98,48 @@ public class ExpenseManagerFragment extends Fragment {
 		
 	}
 
-	public void setStateAsEditing(boolean b) {
-		// TODO Auto-generated method stub
-		
+	/**
+	 * Sets the "Mode" of the fragment to edit or create, 
+	 * depending where it's called from
+	 */
+	public void setStateAsEditing(boolean isEditing){
+		this.isEditing = isEditing;
 	}
+	
 	public void setExpenseIndex(int index) {
 		// TODO Auto-generated method stub
 		
 	}
-	public void updateReferences() {
-		// TODO Auto-generated method stub
+	/**
+	 * Updates the class level variables to reflect what's in the
+	 * fields in the layout.
+	 */
+	public void updateReferences(){
+		expenseName = expenseNameView.getText().toString().trim() + "";
+		description = descriptionView.getText().toString().trim() + "";
+		dateText = dateView.getText().toString().trim() + "";
+		String categorySet = categorySpinner.getSelectedItem().toString();
+		String currencySet = currencySpinner.getSelectedItem().toString();
 		
+		//TODO should we assert they fill in all fields?
+		if(	!dateText.equals("") && !description.equals("") && !expenseName.equals("") && amount > 0){
+			this.areFieldsComplete = true;
+		}
 	}
-	public boolean isEditing() {
-		// TODO Auto-generated method stub
-		return false;
+	
+	/**
+	 * Returns if the expense is new or 
+	 * a modification.
+	 * @return
+	 */
+	public boolean isEditing(){
+		return this.isEditing;
 	}
+	
 	public void updateClaim() {
 		// TODO May still need this (update the claim for the new info in expense)
 	}
+	
 	public void createExpenseItem() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
 		if(this.areFieldsComplete){
 			//TODO add to our list of expenses for the claim
@@ -128,7 +151,6 @@ public class ExpenseManagerFragment extends Fragment {
 		}
 	}		
 
-	
 	/**
 	 * Opens a new date picker dialog to set the 
 	 * start and end dates of a claim. It will parse
