@@ -61,7 +61,7 @@ public class ExpenseItemList {
 	}
 	
 	public boolean isempty() {
-		// this will check if the list is empty or not, return true iff empty else false
+		// this will check if the list is empty or not, return true iff empty, else false
 		if (this.expenseItemList.size() == 0) {
 			return true;
 		}
