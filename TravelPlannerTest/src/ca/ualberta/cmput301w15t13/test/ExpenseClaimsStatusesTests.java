@@ -27,6 +27,7 @@ import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.ClaimPermissionException;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
@@ -71,8 +72,8 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		Claimant claimant = new Claimant("hey");
 		claimant.submitClaim(claim);
 		
-		assertEquals("Claim is submitted",ClaimStatus.SUBMITTED, claim.getStatus());
-		assertEquals("Claim cannot be editted by claimant", ClaimStatus.SUBMITTED, claim.getStatus());
+		assertEquals("Claim is submitted",statusEnum.SUBMITTED, claim.getStatus());
+		assertEquals("Claim cannot be editted by claimant", statusEnum.SUBMITTED, claim.getStatus());
 		
 		// LoginActivity.setUserType("claimant"); 
 		// LoginActivity.submit(claim);
@@ -91,9 +92,9 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	 */
 	public void testClaimantOnReturned() throws EmptyFieldException, InvalidDateException, InvalidUserPermissionException {
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
-		claim.giveStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(statusEnum.RETURNED);
 		
-		assertEquals("Claim can be editted by claimant", ClaimStatus.RETURNED, claim.getStatus());
+		assertEquals("Claim can be editted by claimant", statusEnum.RETURNED, claim.getStatus());
 		
 		//LoginActivity.setUserType("Claimant");
 	}
@@ -112,9 +113,9 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 
 	public void testClaimStatusApproved() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
-		claim.giveStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(statusEnum.APPROVED);
 		
-		assertEquals("Claim is approved and can't be editted",ClaimStatus.APPROVED, claim.getStatus());
+		assertEquals("Claim is approved and can't be editted",statusEnum.APPROVED, claim.getStatus());
 		
 		//LoginActivity.setUserType("Claimant");
 	}

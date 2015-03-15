@@ -27,6 +27,7 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidUserPermissionException;
 
@@ -67,7 +68,6 @@ public class ClaimList {
 	}
 
 	public void remove(Claim claim) {
-
 			if(claimList.contains(claim)){
 				claimList.remove(claim);
 			}
@@ -88,14 +88,8 @@ public class ClaimList {
 		}
 	}
 	
-	public void claimRemove(Claim c) throws InvalidUserPermissionException {
-		
-		if( c.status.getStatus() == ClaimStatus.SUBMITTED || c.status.getStatus() == ClaimStatus.APPROVED){
-			throw new InvalidUserPermissionException("Non-Editable");
-		} else {
-			
+	public void claimRemove(Claim c) {
 			this.claimList.remove(c);
-		}
 	}
 
 	public ArrayList<Claim> getClaimArrayList() {
@@ -130,13 +124,11 @@ public class ClaimList {
 	}
 
 	public boolean isClaimEditable(String claimID) {
-	
 		for (Claim claim: claimList)
 		{
 			if (claim.getclaimID().equals(claimID))
 				return claim.isEditable();
 		}
-		
 		return false;
 
 	}

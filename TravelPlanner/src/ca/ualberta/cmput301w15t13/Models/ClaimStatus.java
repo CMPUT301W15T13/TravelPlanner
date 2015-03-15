@@ -28,44 +28,44 @@ public class ClaimStatus {
 	 * and provides the public constants
 	 * for consistency and readability.
 	 */
-	public final static int INPROGRESS = 0, RETURNED = 1, 
-			SUBMITTED = 2, APPROVED = 3;
+	
+	public enum statusEnum {
+		INPROGRESS, RETURNED, SUBMITTED, APPROVED
+	}
 	
 	
 	
-	private int status ;   //holds the status of the claim
-	
+	protected statusEnum currentStatus;
 	
 	/**
 	 * Constructor for the class. 
 	 * Inits it to be in progress
 	 */
 	public ClaimStatus(){
-		this.status = INPROGRESS;
+		this.currentStatus = statusEnum.INPROGRESS;
 	}
 
 	
 	
-	public int getStatus() {
-		return status;
+	public statusEnum getStatus() {
+		return currentStatus;
 	}
 
 	
 
-	public void setStatus(int newStatus) {
-		if(newStatus >= 0 && newStatus <= 3){
-			this.status = newStatus;
-		}
+	public void setStatus(statusEnum newStatus) {
+			this.currentStatus = newStatus;
 	}
 
+	/**
+	 * Returns true if the claim is editable
+	 * @return
+	 */
 	public boolean isEditable() {
-		// The two status values less 
-		//than 2==SUBMITTED are editable
-		//return status < SUBMITTED;
-		if ((this.status == INPROGRESS) || (this.status == RETURNED))
+		if((currentStatus == statusEnum.INPROGRESS) && (currentStatus == statusEnum.RETURNED)){
 			return true;
-		else
-			return false;
+		}
+		return false;
 	}
 	
 	

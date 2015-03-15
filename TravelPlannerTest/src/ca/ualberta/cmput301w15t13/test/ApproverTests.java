@@ -29,6 +29,7 @@ import ca.ualberta.cmput301w15t13.Controllers.Approver;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -70,23 +71,23 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		Approver approver = new Approver("Catbert");
 		
 		// Test the approvers ability to return claims based on their status
-		claim.giveStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(statusEnum.SUBMITTED);
 		approver.returnClaim(claim);
-		assertEquals("Claim status isn't returned", ClaimStatus.RETURNED, claim.getStatus());
+		assertEquals("Claim status isn't returned", statusEnum.RETURNED, claim.getStatus());
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.giveStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(statusEnum.INPROGRESS);
 		approver.returnClaim(claim);
-		assertEquals("Approver was able to return an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
+		assertEquals("Approver was able to return an INPROGRESS claim",statusEnum.INPROGRESS, claim.getStatus());
 		
-		claim.giveStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(statusEnum.APPROVED);
 		approver.returnClaim(claim);
-		assertEquals("Approver was able to return an APPROVED claim",ClaimStatus.APPROVED, claim.getStatus());
+		assertEquals("Approver was able to return an APPROVED claim",statusEnum.APPROVED, claim.getStatus());
 		
 		// Perhaps redundant
-		claim.giveStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(statusEnum.RETURNED);
 		approver.returnClaim(claim);
-		assertEquals("Approver was able to return a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus() );
+		assertEquals("Approver was able to return a RETURNED claim",statusEnum.RETURNED, claim.getStatus() );
 	}
 	
 	
@@ -103,23 +104,23 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		Approver approver = new Approver("Catbert");
 		assertEquals("Approver name incorrect", "Catbert", approver.getName());
 		
-		claim.giveStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(statusEnum.SUBMITTED);
 		approver.approveClaim(claim);
-		assertEquals("Claim status isn't approved",ClaimStatus.APPROVED, claim.getStatus());
+		assertEquals("Claim status isn't approved",statusEnum.APPROVED, claim.getStatus());
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.giveStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(statusEnum.INPROGRESS);
 		approver.approveClaim(claim);
-		assertEquals("Approver was able to approve an INPROGRESS claim",ClaimStatus.INPROGRESS, claim.getStatus());
+		assertEquals("Approver was able to approve an INPROGRESS claim",statusEnum.INPROGRESS, claim.getStatus());
 		
-		claim.giveStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(statusEnum.RETURNED);
 		approver.approveClaim(claim);
-		assertEquals("Approver was able to approve a RETURNED claim",ClaimStatus.RETURNED, claim.getStatus());
+		assertEquals("Approver was able to approve a RETURNED claim",ClaimStatus.statusEnum.RETURNED, claim.getStatus());
 		
 		// Also may be redundant
-		claim.giveStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(statusEnum.APPROVED);
 		approver.approveClaim(claim);
-		assertEquals("Approver was able to approve an APPROVED claim",ClaimStatus.APPROVED, claim.getStatus());
+		assertEquals("Approver was able to approve an APPROVED claim",statusEnum.APPROVED, claim.getStatus());
 		
 	}
 	
@@ -138,7 +139,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		Approver approver = new Approver("Catbert");
 		String comment = "Test";
 		
-		claim.giveStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(statusEnum.SUBMITTED);
 		
 		approver.addComment(claim, comment);
 		ArrayList<String> comments = claim.getComments();
@@ -147,19 +148,19 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		assertTrue("Comment isn't added", comments.contains(comment));
 		assertEquals("Approver name not set", "Catbert", claim.getlastApproverName());
 		
-		claim.giveStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(statusEnum.INPROGRESS);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();
 		assertEquals("A comment was added to an inprogress claim",0 , comments.size());
 		
-		claim.giveStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(statusEnum.RETURNED);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();
 		assertEquals("A comment was added to a returned claim",0 , comments.size());
 		
-		claim.giveStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(statusEnum.APPROVED);
 		claim.clearComments();
 		approver.addComment(claim, comment);
 		comments = claim.getComments();

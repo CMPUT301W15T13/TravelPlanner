@@ -28,6 +28,7 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 import exceptions.EmptyFieldException;
@@ -221,18 +222,18 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		ArrayList<ExpenseItem> expenseList = null;
 		claim.addExpenseItem(expenseItem);
 
-		claim.giveStatus(ClaimStatus.SUBMITTED);
+		claim.giveStatus(statusEnum.SUBMITTED);
 		
 		assertFalse("Expense is editable while submitted", claim.isEditable());
 		
-		claim.giveStatus(ClaimStatus.APPROVED);
+		claim.giveStatus(statusEnum.APPROVED);
 		
 		assertFalse("Expense is editable while approved", claim.isEditable());
 		
-		claim.giveStatus(ClaimStatus.INPROGRESS);
+		claim.giveStatus(statusEnum.INPROGRESS);
 		assertTrue("Expense is not editable while in progress", claim.isEditable());
 
-		claim.giveStatus(ClaimStatus.RETURNED);
+		claim.giveStatus(statusEnum.RETURNED);
 		assertTrue("Expense is not editable while returned", claim.isEditable());
 
 	}

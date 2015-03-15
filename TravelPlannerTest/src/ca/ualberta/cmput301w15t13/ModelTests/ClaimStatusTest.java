@@ -23,6 +23,7 @@ package ca.ualberta.cmput301w15t13.ModelTests;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 
 /* 
  * This test suite tests the claimStatus functionality.
@@ -51,7 +52,7 @@ public class ClaimStatusTest extends
 	public void testSetUp(){
 		ClaimStatus status = new ClaimStatus();
 		assertTrue("ClaimStatus is null", status!=null);
-		assertEquals("Claim status is not inprogress", ClaimStatus.INPROGRESS, status.getStatus());
+		assertEquals("Claim status is not inprogress", statusEnum.INPROGRESS, status.getStatus());
 	}
 	
 	// This tests that claimStatus affects edit-ability appropriately
@@ -59,26 +60,16 @@ public class ClaimStatusTest extends
 		ClaimStatus status = new ClaimStatus();
 		assertTrue("Claim Status should be editable", status.isEditable());
 		
-		status.setStatus(ClaimStatus.RETURNED);
+		status.setStatus(statusEnum.RETURNED);
 		assertTrue("Claim Status should be editable", status.isEditable());
 		
-		status.setStatus(ClaimStatus.SUBMITTED);
+		status.setStatus(statusEnum.SUBMITTED);
 		assertFalse("Claim Status shouldnt be editable", status.isEditable());
 		
-		status.setStatus(ClaimStatus.APPROVED);
+		status.setStatus(statusEnum.APPROVED);
 		assertFalse("Claim Status shouldnt be editable", status.isEditable());
 		
 	}
 
-	// Tests that a status cannot be set to something invalid
-	public void testInvalidSet(){
-		ClaimStatus status = new ClaimStatus();
-		
-		status.setStatus(-1);
-		assertEquals("Claim status was changed to -1", 0, status.getStatus());
-		
-		status.setStatus(4);
-		assertEquals("Claim status was changed to 4", 0, status.getStatus());
-		
-	}
+
 }
