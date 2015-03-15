@@ -31,23 +31,24 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidUserPermissionException;
 
+/* 
+ * A wrapper class for ArrayList<Claim>
+ * with standard ArrayList methods.
+ * Also contains a list of listeners such that 
+ * on updates, the appropriate lists are
+ * updated all at once.
+ */
 
 public class ClaimList {
-	/* A wrapper class for ArrayList<Claim>
-	 * with standard ArrayList methods.
-	 * Also contains a list of listeners such that 
-	 * on updates, the appropriate lists are
-	 * updated all at once.
-	 * 
-	 */
-	ArrayList<Claim> claimList = null;
-	ArrayList<Listener> listenerList = null;
+	
+	private ArrayList<Claim> claimList = null;
+	private ArrayList<Listener> listenerList = null;
 	public TagManager tagManager = null;
 
 	public ClaimList(ArrayList<Claim> oldClaims) {
-		if(oldClaims != null){
+		if (oldClaims != null) {
 			claimList = oldClaims;
-		}else{
+		} else {
 			claimList = new ArrayList<Claim>();
 		}
 		listenerList = new ArrayList<Listener>();
@@ -68,32 +69,27 @@ public class ClaimList {
 	}
 
 	public void remove(Claim claim) {
-			if(claimList.contains(claim)){
+			if (claimList.contains(claim)) {
 				claimList.remove(claim);
 			}
-
 	}
 
 	public void add(Claim claim) {
 		//Check for duplicates
-		if(!claimList.contains(claim)){
+		if (!claimList.contains(claim)) {
 			claimList.add(claim);
 		}
 	}
 
 	public void removeClaimAtIndex(int i) { 
 		//make sure the index is valid
-		if(!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)){
+		if (!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)) {
 			claimList.remove(i);
 		}
 	}
 	
-	public void claimRemove(Claim c) {
-			this.claimList.remove(c);
-	}
-
 	public ArrayList<Claim> getClaimArrayList() {
-		if(claimList == null){
+		if (claimList == null) {
 			this.claimList = new ArrayList<Claim>();
 		}
 		return claimList;
@@ -101,20 +97,20 @@ public class ClaimList {
 
 	public Claim getClaimAtIndex(int i) {
 		//make sure the index is valid
-		if(this.claimList.isEmpty() || (this.claimList.size() <= i) || (i < 0)){
+		if (this.claimList.isEmpty() || (this.claimList.size() <= i) || (i < 0)) {
 			return null;
 		}
 		return this.claimList.get(i);
 	}
 
 	public void addListener(Listener listener) {
-		if(listener != null){
+		if (listener != null) {
 			listenerList.add(listener);
 		}
 	}
 
 	public void notifyListeners() {
-		for(Listener l : listenerList){
+		for (Listener l : listenerList) {
 			l.update();
 		}
 	}
@@ -124,21 +120,18 @@ public class ClaimList {
 	}
 
 	public boolean isClaimEditable(String claimID) {
-		for (Claim claim: claimList)
-		{
-			if (claim.getclaimID().equals(claimID))
+		for (Claim claim: claimList) {
+			if (claim.getclaimID().equals(claimID)) {
 				return claim.isEditable();
+			}
 		}
 		return false;
-
 	}
 	
-
 	public ArrayList<String> filter(ArrayList<Tag> tags) {
 		ClaimListSingleton control = new ClaimListSingleton();
 		ArrayList<String> result = control.filterClaimList(tags, this.tagManager);
 		return result;
-		
 	}
 
 	public void setTagMan(TagManager tm) {
