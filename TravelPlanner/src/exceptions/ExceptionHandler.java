@@ -1,26 +1,40 @@
 package exceptions;
 
+
+/**
+ * This is a handler that checks for empty fields. If found it throws an emptyFieldException
+ * @author eorod_000
+ *
+ */
 public class ExceptionHandler {
 
-	
+	/**
+	 * Enums for the types of empty fields
+	 * @author eorod_000
+	 *
+	 */
 	public enum FIELD{
 		USERNAME, DATE, TRAVEL_DESTINATION,TRAVEL_DESCRIPTION
 	}
 	
 
-
+	/**
+	 * This will do 2 things:
+	 * 1: format the message based on the field
+	 * 2: throw an emptyfieldexception
+	 * 
+	 * @param fieldContents
+	 * @param field
+	 * @throws EmptyFieldException
+	 */
 	public void throwExeptionIfEmpty(String fieldContents, FIELD field) throws EmptyFieldException {
 
 		String message = null;
 		
 		if (this.fieldIsEmpty(fieldContents)){
-			
 			message = this.getMessage(field);
 			throw new EmptyFieldException(message);
-	
 		}
-
-		FIELD.USERNAME.toString();
 	}
 	
 	
@@ -42,23 +56,18 @@ public class ExceptionHandler {
 			break;
 		default:
 			message = "Unspecified Message";
-			break;
-			
+			break;	
 		}
-
-
 		return message;
 	}
 	
 	
 
 	private boolean fieldIsEmpty(String field){
-		
-		if (field == null ||field.trim().isEmpty() ) 
+		if (field == null ||field.trim().isEmpty()) {
 			return true;
-		else 
+		}
 			return false;
 	}
-	
 	
 }

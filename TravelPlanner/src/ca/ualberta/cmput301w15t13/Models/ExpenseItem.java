@@ -90,8 +90,7 @@ public class ExpenseItem {
 
 	}
 	
-	public void setExpenseCategory(String expenseCategory) throws InvalidFieldEntryException {
-	
+	public void setExpenseCategory(String expenseCategory) throws InvalidFieldEntryException  {
 		if (!this.allowedCategories.contains(expenseCategory)){
 			throw new InvalidFieldEntryException("Not a valid Category");
 		} else {

@@ -25,16 +25,13 @@ import java.util.HashMap;
 import java.util.UUID;
 
 import android.text.format.DateFormat;
-import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
-import exceptions.ClaimPermissionException;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
 import exceptions.ExceptionHandler;
 import exceptions.ExceptionHandler.FIELD;
 import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
-import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 
