@@ -36,11 +36,11 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
-import ca.ualberta.cmput301w15t13.Activities.TestActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 
 /**
  * This fragment is used to view claims and 
@@ -113,7 +113,7 @@ public class ClaimViewerFragment extends Fragment {
 					startActivity(intent);
 					
 				}else{
-					Toast.makeText(getActivity(), "View Claim details", Toast.LENGTH_SHORT).show();
+					viewClaim();
 				}
 			}
 		});
@@ -123,23 +123,41 @@ public class ClaimViewerFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				//((ClaimActivity) getActivity()).editClaim(position);
-				claimIndex = position;
-				new ClaimChoiceDialog().show(getFragmentManager(), "Long Click Pop-Up");
+				if(((ClaimActivity) getActivity()).isClaimant()){
+					claimIndex = position;
+					new ClaimChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
+				}
 				return true;
 			}
 		});
 	}
 	
 	public void editClaim(){
-		((ClaimActivity) getActivity()).editClaim(claimIndex);
+		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		if(submitClaim.isEditable()){
+			((ClaimActivity) getActivity()).editClaim(claimIndex);
+		} else{
+			Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
+		}
 	}
 	
 	public void deleteClaim(){
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().notifyListeners();
+		// TODO should have a save listener, else save here
 	}
 	
 	public void submitClaim(){
+		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		if(submitClaim.getStatus() == ClaimStatus.statusEnum.INPROGRESS){
+			submitClaim.giveStatus(ClaimStatus.statusEnum.SUBMITTED);
+			ClaimListSingleton.getClaimList().notifyListeners();
+		} else{
+			Toast.makeText(getActivity(), "Cannot submit this claim.", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	public void viewClaim(){
+			Toast.makeText(getActivity(), "View", Toast.LENGTH_SHORT).show();
 	}
 }
