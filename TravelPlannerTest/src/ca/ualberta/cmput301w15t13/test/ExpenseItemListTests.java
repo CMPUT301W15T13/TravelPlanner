@@ -35,11 +35,13 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 
 public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<LoginActivity> {
-
-	public ExpenseItemListTests(Class<LoginActivity> activityClass) {
-		super(activityClass);
-		// TODO Auto-generated constructor stub
-	}
-
-
+  public ExpenseItemListTests() {
+    super(LoginActivity.class);
+  }
+  
+  @Override
+  protected void setUp() throws Exception{
+	  super.setUp();
+  }
+  // TODO project 5 
 }
