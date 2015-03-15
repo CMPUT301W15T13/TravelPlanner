@@ -77,7 +77,7 @@ public class ClaimViewerFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.claim_viewer_layout, container, false);
+		View v = inflater.inflate(R.layout.claimlist_viewer_layout, container, false);
 		return v;
 	}
 
@@ -98,6 +98,9 @@ public class ClaimViewerFragment extends Fragment {
 		});
 	}
 	
+	/**
+	 * TODO
+	 */
 	private void initializeAdapter(){
 		final ListView claimListView = (ListView) getView().findViewById(R.id.listViewClaim);
 		claimListView.setAdapter(claimAdapter);
@@ -107,6 +110,7 @@ public class ClaimViewerFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
+				claimIndex = position;
 				if(((ClaimActivity) getActivity()).isClaimant()){
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
 					Intent intent = new Intent(getActivity(), ExpenseActivity.class);
@@ -123,8 +127,9 @@ public class ClaimViewerFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				claimIndex = position;
+
 				if(((ClaimActivity) getActivity()).isClaimant()){
-					claimIndex = position;
 					new ClaimChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
 				}
 				return true;
@@ -132,6 +137,9 @@ public class ClaimViewerFragment extends Fragment {
 		});
 	}
 	
+	/**
+	 * TODO
+	 */
 	public void editClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		if(submitClaim.isEditable()){
@@ -141,12 +149,18 @@ public class ClaimViewerFragment extends Fragment {
 		}
 	}
 	
+	/**
+	 * TODO
+	 */
 	public void deleteClaim(){
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().notifyListeners();
 		// TODO should have a save listener, else save here
 	}
 	
+	/**
+	 * TODO
+	 */
 	public void submitClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		if(submitClaim.getStatus() == ClaimStatus.statusEnum.INPROGRESS){
@@ -157,7 +171,10 @@ public class ClaimViewerFragment extends Fragment {
 		}
 	}
 	
+	/**
+	 * TODO
+	 */
 	public void viewClaim(){
-			Toast.makeText(getActivity(), "View", Toast.LENGTH_SHORT).show();
+			((ClaimActivity) getActivity()).setFragmentToDetailViewer(claimIndex);
 	}
 }

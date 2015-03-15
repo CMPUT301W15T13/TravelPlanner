@@ -40,7 +40,8 @@ import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 public class ClaimChoiceDialog extends DialogFragment{
 	// Based on http://martin.cubeactive.com/android-onclicklitener-tutorial/ March 15 2015
     final OnClickListener editClaim = new OnClickListener() {
-        public void onClick(final View v) {
+        @Override
+		public void onClick(final View v) {
      	   FragmentManager fm = getFragmentManager();
      	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
      	   fragment.editClaim();
@@ -50,7 +51,8 @@ public class ClaimChoiceDialog extends DialogFragment{
     };
     
     final OnClickListener submitClaim = new OnClickListener() {
-        public void onClick(final View v) {
+        @Override
+		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
       	   fragment.submitClaim();
@@ -60,7 +62,8 @@ public class ClaimChoiceDialog extends DialogFragment{
     };
     
     final OnClickListener deleteClaim = new OnClickListener() {
-        public void onClick(final View v) {
+        @Override
+		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
       	   fragment.deleteClaim();
@@ -74,7 +77,7 @@ public class ClaimChoiceDialog extends DialogFragment{
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    LayoutInflater inflater = getActivity().getLayoutInflater();
-	    View view = inflater.inflate(R.layout.claim_adapter_dialog, null);
+	    View view = inflater.inflate(R.layout.claimant_adapter_dialog, null);
 
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(view);

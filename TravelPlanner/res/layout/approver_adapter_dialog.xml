@@ -3,7 +3,7 @@
    <LinearLayout
        xmlns:android="http://schemas.android.com/apk/res/android"
        android:id="@+id/topRow"
-       android:layout_width="125dp"
+       android:layout_width="100dp"
        android:layout_height="wrap_content"
        android:layout_alignParentLeft="true"
        android:layout_alignParentTop="true" 
@@ -18,31 +18,15 @@
            android:layout_height="wrap_content"
            android:textSize="12sp"
            android:textColor="@color/text"
-           android:text="@string/edit" />
+           android:text="@string/approve" />
        
        <Button
            android:id="@+id/buttonViewClaim"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
-           android:text="@string/view"
+           android:text="@string/return_claim"
            android:textColor="@color/text"
            android:textSize="12sp" />
-
-       <Button
-           android:id="@+id/buttonSubmitClaim"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textSize="12sp"
-           android:text="@string/submit"
-           android:textColor="@color/text" />
-
-       <Button
-           android:id="@+id/buttonDeleteClaim"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textSize="12sp"
-           android:text="@string/delete"
-           android:textColor="@color/text" />
 
 
 

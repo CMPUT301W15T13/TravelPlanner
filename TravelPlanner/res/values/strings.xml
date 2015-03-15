@@ -38,5 +38,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_expense_viewer">ExpenseViewerActivity</string>
     <string name="view">View</string>
+    <string name="done">Done</string>
+    <string name="approve">Approve</string>
+    <string name="return_claim">Return</string>
+    <string name="tags">Tags</string>
 
 </resources>

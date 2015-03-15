@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import exceptions.EmptyFieldException;
@@ -57,6 +58,7 @@ public class ClaimActivity extends Activity {
 	private FragmentTransaction ft;
 	private ClaimViewerFragment claimViewerFragment;
 	private ClaimManagerFragment claimManagerFragment;
+	private ClaimDetailViewerFragment claimDetailViewerFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 	private boolean isClaimant;
 	private String username;
@@ -72,6 +74,7 @@ public class ClaimActivity extends Activity {
 		this.fm = getFragmentManager();
 		claimViewerFragment = new ClaimViewerFragment();
 		claimManagerFragment = new ClaimManagerFragment();
+		claimDetailViewerFragment = new ClaimDetailViewerFragment();
 		
 		Intent intent = getIntent();
 		this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
@@ -156,6 +159,20 @@ public class ClaimActivity extends Activity {
 	}
 	
 	/**
+	 * Switch to the fragment
+	 * that views claim details
+	 */
+	public void setFragmentToDetailViewer(int index){
+		actionBar.hide();
+		
+		ft = fm.beginTransaction();
+		ft.replace(R.id.mainFragmentHolder, this.claimDetailViewerFragment, "ClaimDetailsViewer");
+		ft.commit();
+		
+		claimDetailViewerFragment.setClaim(index);
+	}
+	
+	/**
 	 * Starts a new claim and switches
 	 * the fragment layout to the 
 	 * Claim Manager Layout
@@ -210,8 +227,8 @@ public class ClaimActivity extends Activity {
 	}
 	
 	/**
-	 * Will open a datepicker dialog
-	 * but passes the proper startdate textview id
+	 * Will open a date picker dialog
+	 * but passes the proper start date text view id
 	 * such that it can be updated.
 	 */
 	public void openStartDateDialog(View v){
@@ -220,8 +237,8 @@ public class ClaimActivity extends Activity {
 	}
 	
 	/**
-	 * Will open a datepicker dialog
-	 * but passes the proper end date textview id
+	 * Will open a date picker dialog
+	 * but passes the proper end date text view id
 	 * such that it can be updated.
 	 */
 	public void openEndDateDialog(View v){

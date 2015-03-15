@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    >
+    
+    <ScrollView 
+           android:layout_height="wrap_content"
+           android:layout_width="match_parent"
+        >
+        <LinearLayout 
+           android:layout_height="wrap_content"
+           android:layout_width="match_parent"
+           android:orientation="vertical"
+            >
+
+		    <TextView
+		        android:id="@+id/textViewClaimName"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="9dp"
+		        android:textColor="@color/text"
+		        android:text="@string/claim_name"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		
+		    <TextView
+		        android:id="@+id/textViewStartDateTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/start_date"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <LinearLayout
+		        	android:id="@+id/layoutStartDate"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewStartDate"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:text="@string/holder"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    />
+						
+			</LinearLayout>
+			
+		    <TextView
+		        android:id="@+id/textViewEndDateTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/end_date"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <LinearLayout
+		        	android:id="@+id/layoutEndDate"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewEndDate"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:text="@string/holder"
+					    />
+						
+			</LinearLayout>
+			
+		   <TextView
+		        android:id="@+id/textViewDestinationTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/destinations"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <LinearLayout
+		        	android:id="@+id/layoutDestinations"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewDestinationList"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:text="@string/holder"
+					    />
+						
+			</LinearLayout>
+			
+		    <TextView
+		        android:id="@+id/textViewDescriptionTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/description"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <LinearLayout
+		        	android:id="@+id/layoutDescription"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="6dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewDescription"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:text="@string/holder"
+					    />
+						
+			</LinearLayout>
+			
+		    <TextView
+		        android:id="@+id/textViewTagsTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/tags"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+			
+		    <LinearLayout
+		        	android:id="@+id/layoutTags"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewTagsList"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:text="@string/holder"
+					    />
+						
+			</LinearLayout>
+	    </LinearLayout>
+	</ScrollView>
+	
+    <Button
+        android:id="@+id/buttonDone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/done"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/text" />
+</RelativeLayout>

@@ -87,7 +87,7 @@ public class ClaimChoiceDialogFragment extends DialogFragment{
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    LayoutInflater inflater = getActivity().getLayoutInflater();
-	    View view = inflater.inflate(R.layout.claim_adapter_dialog, null);
+	    View view = inflater.inflate(R.layout.claimant_adapter_dialog, null);
 
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(view);
