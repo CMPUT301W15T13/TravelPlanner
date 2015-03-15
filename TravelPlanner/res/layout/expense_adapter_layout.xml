@@ -1,9 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" 
-    android:background="@color/background"
-    >
+    android:layout_height="wrap_content" 
+    android:background="@color/background">
     
+    <LinearLayout
+        android:id="@+id/incompletenessIndicator"
+        android:layout_width="3dp"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/incomplete"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        >
+    </LinearLayout>
+
+   	<TextView
+        android:id="@+id/textViewAdapterExpenseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/incompletenessIndicator"
+        android:text="@string/holder"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/text" />
+        
+    <TextView
+        android:id="@+id/textViewAdapterExpenseDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewAdapterClaimTitle"
+        android:layout_below="@+id/textViewAdapterClaimTitle"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="@string/holder"
+        android:textColor="@color/text"
+         />
+
+    <ImageView
+        android:id="@+id/imageViewExpenseAdapterStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/textViewAdapterClaimDate"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_menu_edit" 
+        android:contentDescription="@string/adapter_status_description"
+        />
+
+    <TextView
+        android:id="@+id/textViewAdapterExpenseAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/imageViewAdapterStatus"
+        android:gravity="right"
+        android:text="@string/holder"
+        android:textColor="@color/text"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+
 
 </RelativeLayout>

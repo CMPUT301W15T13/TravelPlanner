@@ -19,21 +19,20 @@
  */
 package ca.ualberta.cmput301w15t13.Models;
 
+/*
+ * This class is used to model
+ * the status of an expense claim.
+ * It provides the functionality of 
+ * knowing if the claim is editable
+ * and provides the public constants
+ * for consistency and readability.
+ */
+
 public class ClaimStatus {	
-	/*
-	 * This class is used to model
-	 * the status of an expense claim.
-	 * It provides the functionality of 
-	 * knowing if the claim is editable
-	 * and provides the public constants
-	 * for consistency and readability.
-	 */
 	
 	public enum statusEnum {
 		INPROGRESS, RETURNED, SUBMITTED, APPROVED
 	}
-	
-	
 	
 	protected statusEnum currentStatus;
 	
@@ -41,17 +40,14 @@ public class ClaimStatus {
 	 * Constructor for the class. 
 	 * Inits it to be in progress
 	 */
+	
 	public ClaimStatus(){
 		this.currentStatus = statusEnum.INPROGRESS;
 	}
 
-	
-	
 	public statusEnum getStatus() {
 		return currentStatus;
 	}
-
-	
 
 	public void setStatus(statusEnum newStatus) {
 			this.currentStatus = newStatus;
@@ -62,13 +58,9 @@ public class ClaimStatus {
 	 * @return
 	 */
 	public boolean isEditable() {
-		if((currentStatus == statusEnum.INPROGRESS) && (currentStatus == statusEnum.RETURNED)){
+		if ((currentStatus == statusEnum.INPROGRESS) || (currentStatus == statusEnum.RETURNED)) {
 			return true;
 		}
 		return false;
 	}
-	
-	
-	
-	
 }
