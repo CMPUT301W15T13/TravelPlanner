@@ -115,15 +115,13 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 		
     try {
       expenseItem.setExpenseCategory("NONVALID");	
-    } catch (InvalidFieldEntryException e) {
-    }
+    } catch (InvalidFieldEntryException e) {}
     assertEquals("Category was set to a nonValid item", "air", expenseItem.getExpenseCategory());
 		
     for(String cat: validCategories){
       try {
         expenseItem.setExpenseCategory(cat);
-      } catch (InvalidFieldEntryException e) {	
-      }
+      } catch (InvalidFieldEntryException e) {}
       assertEquals("Valid category wasn't set",cat, expenseItem.getExpenseCategory());
     }
   }
@@ -145,15 +143,13 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
     
     try {
       expenseItem.setCurrency("NONVALID");
-    } catch (InvalidFieldEntryException e) {	
-    }
+    } catch (InvalidFieldEntryException e) {}	
     assertEquals("Currency was set to a nonValid item", "CAD", expenseItem.getCurrency());
 		
     for(String cur: validCurrencies){
       try {
         expenseItem.setCurrency(cur);		
-      } catch (InvalidFieldEntryException e) {		
-      }
+      } catch (InvalidFieldEntryException e) {}
       assertEquals("Valid currency wasn't changed", cur ,expenseItem.getCurrency());
     }
   }

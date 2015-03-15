@@ -58,7 +58,7 @@ public class ClaimStatus {
 	 * @return
 	 */
 	public boolean isEditable() {
-		if ((currentStatus == statusEnum.INPROGRESS) && (currentStatus == statusEnum.RETURNED)) {
+		if ((currentStatus == statusEnum.INPROGRESS) || (currentStatus == statusEnum.RETURNED)) {
 			return true;
 		}
 		return false;
