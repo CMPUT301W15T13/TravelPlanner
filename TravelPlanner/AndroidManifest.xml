@@ -38,6 +38,10 @@
             android:name="ca.ualberta.cmput301w15t13.Activities.MainActivity"
             android:label="@string/title_activity_main" >
         </activity>
+        <activity
+            android:name="ca.ualberta.cmput301w15t13.Activities.ExpenseActivity"
+            android:label="@string/title_activity_expense_viewer" >
+        </activity>
     </application>
 
 </manifest>

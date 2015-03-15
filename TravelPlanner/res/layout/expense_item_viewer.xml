@@ -1,42 +1,178 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/background"
-    tools:context="ca.ualberta.cmput301w15t13.Activities.ClaimActivity" >
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    	xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:background="@color/background">
 
-    <Button
-        android:id="@+id/buttonNewExpense"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:padding="0px"
-        android:textColor="@color/text"
-        android:text="@string/new_expense" 
-        android:onClick="newExpense"/>
+	<ScrollView 
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_alignParentTop="true"
+	    android:layout_above="@+id/layoutButtonsExpense">
+	    
+		<LinearLayout 
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" >
+	
+			<EditText
+			    android:id="@+id/editTextExpenseName"
+			    android:singleLine="true"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:textColor="@color/text"
+			    android:hint="@string/expense_name"
+			    android:layout_marginBottom="6dp"
+			    android:ems="10" >
 
-    <ListView
-        android:id="@+id/listViewExpense"
-        android:layout_width="match_parent"
-        android:layout_above="@+id/buttonNewExpense"
-        android:layout_alignLeft="@+id/buttonNewExpense"
-        android:layout_below="@+id/expenseParentClaimName" >
+			    <requestFocus />
+			</EditText>
+			
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="3dp"
+			    android:text="@string/Category"
+			    android:textColor="@color/text" />
+			
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+		    	android:layout_marginLeft="3dp"
+		    	android:layout_marginBottom="6dp">
 
-    </ListView>
+				<Spinner
+				    android:id="@+id/categorySpinner"
+				    android:layout_width="123dp"
+				    android:layout_height="34dp"
+				    android:layout_weight="1"
+				    android:entries="@array/category_array" />
+				
+			</LinearLayout>
+			
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="3dp"
+			    android:text="@string/date"
+			    android:textColor="@color/text" />
+			
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+		    	android:layout_marginBottom="6dp"
+		    	android:layout_marginLeft="3dp"
+		    	>    
+			    
+				<TextView
+				    android:id="@+id/textViewEndDateExpense"
+				    android:textColor="@color/text"
+				    android:layout_width="0px"
+				    android:layout_weight="0.8"
+				    android:textAppearance="?android:attr/textAppearanceLarge"
+				    android:background="@color/background_dark"
+				    android:layout_height="match_parent"
+				    />
+				
+			</LinearLayout>
+			
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="3dp"
+			    android:text="@string/receipt"
+			    android:textColor="@color/text" />
+			
+			<LinearLayout
+			    android:layout_width="match_parent"
+		    	android:layout_height="wrap_content"
+		    	android:orientation="horizontal"
+		    	android:layout_marginBottom="6dp"
+		    	android:layout_marginLeft="3dp"
+				>
 
-    <TextView
-        android:id="@+id/expenseParentClaimName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="Temp-GetClaimName"
-        android:textColor="@color/text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
-   
+				<ImageButton
+				    android:id="@+id/imageButton1"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.2"
+				    android:src="@android:drawable/btn_star" />
+				
+			</LinearLayout>
+
+			<TextView
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:layout_marginLeft="3dp"
+			    android:layout_weight="1"
+			    android:text="@string/Amount"
+			    android:textColor="@color/text" />
+
+			<LinearLayout
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content" >
+
+				<EditText
+				    android:id="@+id/editTextAmount"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1"
+				    android:ems="10"
+				    android:hint="@string/Amount"
+				    android:inputType="numberDecimal"
+				    android:maxLength="255"
+				    android:singleLine="true"
+				    android:textColor="@color/text" />
+
+				<Spinner
+				    android:id="@+id/currencySpinner"
+				    android:layout_width="123dp"
+				    android:layout_height="34dp"
+				    android:entries="@array/currency_array" />
+
+			</LinearLayout>
+			
+			<EditText 
+			    android:id="@+id/editTextExpenseDescription"
+			    android:inputType="textMultiLine"
+			    android:maxLines="10"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:textColor="@color/text"
+			    android:hint="@string/description"
+			    />	
+		</LinearLayout>
+	</ScrollView>
+	
+	<LinearLayout
+	    android:id="@+id/layoutButtonsExpense"
+	    android:layout_width="match_parent"
+    	android:layout_height="wrap_content"
+    	android:orientation="horizontal"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true">
+
+	  	<Button
+		    android:id="@+id/buttonLeaveExpense"
+		    android:layout_width="0px"
+		    android:layout_weight="0.5"
+		    android:layout_height="wrap_content"
+		    android:text="@string/cancel"
+		    android:onClick="cancelClaim"
+		    android:textColor="@color/text" />
+	    		
+		<Button
+		    android:id="@+id/buttonFinishExpense"
+		    android:layout_width="0px"
+		    android:layout_height="wrap_content"
+		    android:layout_weight="0.5"
+		    android:onClick="finishClaim"
+		    android:text="@string/edit"
+		    android:textColor="@color/text" />
+		
+	</LinearLayout>
+		
 </RelativeLayout>

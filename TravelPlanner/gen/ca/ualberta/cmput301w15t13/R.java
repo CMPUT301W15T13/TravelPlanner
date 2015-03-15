@@ -40,7 +40,7 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0035;
+        public static final int action_settings=0x7f0a0032;
         public static final int approverLogin=0x7f0a0003;
         public static final int button=0x7f0a000c;
         public static final int buttonDeleteClaim=0x7f0a000b;
@@ -54,7 +54,6 @@ public final class R {
         public static final int buttonLogin=0x7f0a0002;
         public static final int buttonNewClaim=0x7f0a001d;
         public static final int buttonNewDestination=0x7f0a0018;
-        public static final int buttonNewExpense=0x7f0a002f;
         public static final int buttonSearchClaim=0x7f0a0006;
         public static final int buttonStartDate=0x7f0a0014;
         public static final int buttonSubmitClaim=0x7f0a000a;
@@ -70,19 +69,17 @@ public final class R {
         public static final int editTextSearchClaims=0x7f0a0005;
         public static final int editTextUsername=0x7f0a0001;
         public static final int expenseMainFragmentHolder=0x7f0a0023;
-        public static final int expenseParentClaimName=0x7f0a0031;
         public static final int imageButton1=0x7f0a0029;
         public static final int imageViewAdapterStatus=0x7f0a0010;
         public static final int incompletenessIndicator=0x7f0a000d;
         public static final int layoutButtons=0x7f0a0012;
         public static final int layoutButtonsExpense=0x7f0a0024;
         public static final int listViewClaim=0x7f0a001c;
-        public static final int listViewExpense=0x7f0a0030;
         public static final int mainFragmentHolder=0x7f0a0007;
         public static final int spinnerClaimFilter=0x7f0a0004;
-        public static final int textView1=0x7f0a0032;
-        public static final int textView2=0x7f0a0033;
-        public static final int textView3=0x7f0a0034;
+        public static final int textView1=0x7f0a002f;
+        public static final int textView2=0x7f0a0030;
+        public static final int textView3=0x7f0a0031;
         public static final int textViewAdapterClaimCost=0x7f0a0011;
         public static final int textViewAdapterClaimDate=0x7f0a000f;
         public static final int textViewAdapterClaimTitle=0x7f0a000e;
@@ -110,6 +107,7 @@ public final class R {
         public static final int expense_item_layout=0x7f03000b;
         public static final int expense_item_manager=0x7f03000c;
         public static final int expense_item_viewer=0x7f03000d;
+<<<<<<< HEAD
         public static final int expense_item_viewer_layout=0x7f03000e;
         public static final int take_a_photo=0x7f03000f;
     }

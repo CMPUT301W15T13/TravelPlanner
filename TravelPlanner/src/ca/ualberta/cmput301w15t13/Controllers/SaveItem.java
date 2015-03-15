@@ -21,7 +21,7 @@ public class SaveItem <Item> {
 		itemToSave = ce;
 	}
 	
-	
+	/*
 	public static <Item extends ExpenseClaim> String saveClaimOrExpense(Item ce){
 		String itemID = ce.getID();
 		Gson gson = new Gson();
@@ -33,9 +33,9 @@ public class SaveItem <Item> {
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			gson.toJson(ce, osw);
 			
-			//this will force it to write
+			this will force it to write
 			osw.flush();
-			//this will close the streams
+			this will close the streams
 			osw.close();
 			fos.close();
 				
@@ -49,7 +49,7 @@ public class SaveItem <Item> {
 		
 		return itemID;
 	}
-	
+	*/
 	
 	
 	/**

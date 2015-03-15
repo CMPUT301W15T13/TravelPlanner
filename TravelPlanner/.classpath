@@ -7,5 +7,10 @@
 	<classpathentry exported="true" kind="lib" path="/cshome/bkhunter/gson-2.3.1-javadoc.jar"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+<<<<<<< HEAD
+=======
+	<classpathentry kind="lib" path="/cshome/devito/Mydesk/2014-2015/C301/project/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="/cshome/devito/Mydesk/2014-2015/C301/project/gson-2.3.1-javadoc.jar"/>
+>>>>>>> babb2431201efabcac6f89f0fb82336661a9176d
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
