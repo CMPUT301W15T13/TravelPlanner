@@ -68,7 +68,7 @@
 		    	>    
 			    
 				<TextView
-				    android:id="@+id/textViewEndDateExpense"
+				    android:id="@+id/textViewDateExpense"
 				    android:textColor="@color/text"
 				    android:layout_width="0px"
 				    android:layout_weight="0.8"
@@ -78,11 +78,11 @@
 				    />
 				
 				<ImageButton
-				    android:id="@+id/buttonEndDateExpense"
+				    android:id="@+id/buttonDateExpense"
 				    android:layout_width="0dp"
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
-				    android:onClick="openEndDateDialog"
+				    android:onClick="openDateDialog"
 				    android:src="@android:drawable/ic_menu_my_calendar" />
 				
 			</LinearLayout>
