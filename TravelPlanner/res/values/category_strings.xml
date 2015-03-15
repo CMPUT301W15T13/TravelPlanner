@@ -4,10 +4,13 @@
         <item>Air Fare</item>
         <item>Ground Transport</item>
         <item>Vehicle Rental</item>
+        <item>Private Automobile</item>
         <item>Fuel</item>
         <item>Parking</item>
         <item>Registration</item>
         <item>Accommodation</item>
+        <item>Meal</item>
+        <item>Supplies</item>
     </string-array>
 </resources>
 

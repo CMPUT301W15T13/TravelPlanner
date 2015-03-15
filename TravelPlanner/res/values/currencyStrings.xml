@@ -3,8 +3,8 @@
     <string-array name="currency_array">
         <item>CAD</item>
         <item>USD</item>
-        <item>GBP</item>
         <item>EUR</item>
+        <item>GBP</item>
         <item>CHF</item>
         <item>JPY</item>
         <item>CNY</item>
