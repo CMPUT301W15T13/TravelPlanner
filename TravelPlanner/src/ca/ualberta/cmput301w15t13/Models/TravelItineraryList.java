@@ -23,10 +23,8 @@ public class TravelItineraryList {
 
 	 */
 	public void addTravelDestination(TravelItinerary travelDestination){
-
 			this.travelList.add(travelDestination);
 
-		
 	}
 
 	/**

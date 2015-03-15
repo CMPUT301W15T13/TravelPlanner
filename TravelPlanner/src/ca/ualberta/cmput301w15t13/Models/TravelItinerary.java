@@ -17,10 +17,8 @@ public class TravelItinerary {
 	 * @throws EmptyFieldException 
 	 */
 	public TravelItinerary(String destination, String description) throws EmptyFieldException{
-		
 		this.setDestinationName(destination);
 		this.setDestinationDescription(description);
-		
 	}
 	
 	

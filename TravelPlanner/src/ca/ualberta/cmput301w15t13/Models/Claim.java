@@ -56,25 +56,21 @@ public class Claim {
 
 	
 /**
+ * 
  * @param username
  * @param startDate
  * @param endDate
  * @param description
  * @param travelList
- * @throws InvalidDateException 
- * @throws InvalidNameException 
- * @throws InvalidUserPermissionException 
- * @throws EmptyFieldException 
+ * @throws InvalidDateException
+ * @throws EmptyFieldException
  */
-	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws EmptyFieldException, InvalidDateException {
 
 		//initializes the claim status to INPROGRESS (and editable)
 		this.status = new ClaimStatus();
 		
-		//this checks the user Name for errs and sets the user name
 		this.setUserName(username);
-		
-		//this checks the dates for errs and sets the dates
 		this.setClaimDates(startDate, endDate);
 
 		//this sets the description
@@ -85,7 +81,9 @@ public class Claim {
 
 		this.approverComments = new HashMap<String,ArrayList<String>>();
 		
+		//this sets the UUID for the claim (identifier for saving/loading)
 		claimID = UUID.randomUUID().toString();
+		
 		this.expenseItems = new ExpenseItemList();
 	}
 
@@ -113,13 +111,10 @@ public class Claim {
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void setUserName(String userName) throws EmptyFieldException, InvalidUserPermissionException {
+	public void setUserName(String userName) throws EmptyFieldException {
+		//this throws an empty field exception if user name is empty
 		new ExceptionHandler().throwExeptionIfEmpty(userName, FIELD.USERNAME);
-		if (this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED) {
-			throw new InvalidUserPermissionException("Non-Editable");
-		} else if (userName == null || userName == "") {
-			throw new EmptyFieldException("None-Editable");
-		}
+
 		this.userName = userName;	
 	}
 
@@ -133,13 +128,13 @@ public class Claim {
 	public void setClaimDates(Date startDate, Date endDate) throws InvalidDateException{
 
 			//this checks to see that the entered start date is not after the entered end date
-			if (startDate.after(endDate))
+			if (startDate.after(endDate)){
 				 throw new InvalidDateException("Start Date is after End Date");
-			else
-			{
-				this.setStartDate(startDate);
-				this.setEndDate(endDate);
-			}	
+			}
+			
+			//set the dates
+			this.setStartDate(startDate);
+			this.setEndDate(endDate);
 	}
 	
 	/**
@@ -156,7 +151,6 @@ public class Claim {
 	 */
 	private void setStartDate(Date startDate) {
 			this.startDate = startDate;
-
 	}
 
 	/**
@@ -172,7 +166,6 @@ public class Claim {
 	 */
 	private void setEndDate(Date endDate) {
 			this.endDate = endDate;
-
 	}
 
 	/**
@@ -189,11 +182,12 @@ public class Claim {
 	 * @param description 
 	 */
 	public void setDescription(String description)  {
-
-			if (description == null || description.trim().isEmpty())
+			if (description == null || description.trim().isEmpty()){
 				this.description = "";
-			else
+			}
+			else{
 				this.description = description;	
+			}
 	}
 	
 	
@@ -214,11 +208,12 @@ public class Claim {
 	 */
 	public void setTravelList(TravelItineraryList travelList) {
 			//This makes sure that the travel List is not null
-			if (travelList == null)
+			if (travelList == null){
 				this.travelList = new TravelItineraryList();
-			else
+			}
+			else{
 				this.travelList = travelList;
-
+			}
 	}
 
 
@@ -237,26 +232,16 @@ public class Claim {
 	 */
 	public void giveStatus(int status)  {
 			this.status.setStatus(status);
-
 	}
 		
 	/**
 	 * This adds a travel Itinerary. 
 	 * It checks to see if a travel destination exists, and if the fields are valid
-	 * @throws DuplicateException 
 	 * @throws EmptyFieldException 
-	 * @throws InvalidUserPermissionException 
-	 * @throws InvalidFieldEntryException 
 	 */
 
-	public void addTravelDestination(String destination, String description) throws EmptyFieldException, InvalidUserPermissionException, InvalidFieldEntryException {
-		if (this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED) {
-			throw new InvalidUserPermissionException("Non-Editable");
-		} else if (description == null || description == "") {
-			throw new InvalidFieldEntryException("Invalid entry for this description");
-		} else if (destination == null || destination == "") {
-			throw new InvalidFieldEntryException("Invalid entry for this destination");
-		}
+	public void addTravelDestination(String destination, String description) throws EmptyFieldException {
+		//this line will make the Travel Itinerary.. if the fields are invalid, it will throw an Empty Field Exception
 		TravelItinerary travelItinerary = new TravelItinerary(destination, description);
 		this.travelList.addTravelDestination(travelItinerary);
 	}
@@ -267,7 +252,6 @@ public class Claim {
 	 * @return
 	 */
 	public int numberOfDestinations(){
-		
 		return this.travelList.numberofDestinations();
 	}
 
@@ -279,7 +263,6 @@ public class Claim {
 	 * @throws InvalidFieldEntryException
 	 */
 	public TravelItinerary getTravelDestination(int index) throws InvalidFieldEntryException{
-		
 		return this.travelList.getTravelDestinationAtIndex(index);
 	}
 
@@ -288,19 +271,9 @@ public class Claim {
 	 * @param index
 	 * @param destination
 	 * @param description
-	 * @throws InvalidFieldEntryException
 	 * @throws EmptyFieldException 
-	 * @throws InvalidUserPermissionException 
 	 */
-	public void editTravelDescription(int index, String destination, String description) throws InvalidFieldEntryException, EmptyFieldException, InvalidUserPermissionException {
-		
-		if (this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			throw new InvalidUserPermissionException("Non-Editable");
-		} else if (destination == null || destination == "") {
-			throw new InvalidFieldEntryException("Destination cannot be empty");
-		} else if (description == null || description == "") {
-			throw new InvalidFieldEntryException("Description cannot be empty");
-		}
+	public void editTravelDescription(int index, String destination, String description) throws EmptyFieldException {
 		TravelItinerary travelItinerary = new TravelItinerary(destination, description);	
 		travelList.editTravelDestination(index, travelItinerary);
 	}
@@ -308,18 +281,9 @@ public class Claim {
 /**
  * This will delete a travel Itinerary at the specified index
  * @param i
- * @throws InvalidUserPermissionException 
  */
-	public void deleteTravelDestination(int i) throws InvalidUserPermissionException {
-		
-	if( this.status.getStatus() == ClaimStatus.SUBMITTED || this.status.getStatus() == ClaimStatus.APPROVED){
-			
-			throw new InvalidUserPermissionException("Non-Editable");
-			
-		} else {
-			
+	public void deleteTravelDestination(int i) {
 			this.travelList.deleteTravelDestination(i);
-		}
 	}
 
 /**
@@ -348,12 +312,10 @@ public class Claim {
 		ArrayList<String> comments;
 		setLastApproverName(name);
 		
-		if(approverComments.containsKey(name))
-		{
+		if(approverComments.containsKey(name)){
 			comments = approverComments.get(name);
 		}
-		else
-		{
+		else{
 			comments = new ArrayList<String>();
 		}
 		comments.add(comment);
@@ -370,12 +332,10 @@ public class Claim {
 	public ArrayList<String> getComments() {
 		ArrayList<String> comments = new ArrayList<String>();
 		
-		for(String key: approverComments.keySet())
-		{
+		for(String key: approverComments.keySet()){
 			ArrayList<String> tempComments = approverComments.get(key);
-			
-			for(String comment : tempComments)
-			{
+
+			for(String comment : tempComments){
 				comments.add(comment);
 			}
 		}
