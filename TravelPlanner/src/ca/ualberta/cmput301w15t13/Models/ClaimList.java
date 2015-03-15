@@ -144,5 +144,10 @@ public class ClaimList {
 	public void setTagMan(TagManager tm) {
 		this.tagManager = tm;
 	}
+
+	public ArrayList<ExpenseItem> getExpenseArrayList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

@@ -35,6 +35,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
+import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
 import ca.ualberta.cmput301w15t13.Activities.TestActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
@@ -108,7 +109,7 @@ public class ClaimViewerFragment extends Fragment {
 					long id) {
 				if(((ClaimActivity) getActivity()).isClaimant()){
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
-					Intent intent = new Intent(getActivity(), TestActivity.class);
+					Intent intent = new Intent(getActivity(), ExpenseActivity.class);
 					startActivity(intent);
 					
 				}else{
