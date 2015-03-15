@@ -71,7 +71,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testMakeRegularClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+	public void testMakeRegularClaim() throws EmptyFieldException, InvalidDateException {
 		String name = "Bill Smith";
 		Date startDate = new Date(100), endDate = new Date(120);
 		
@@ -97,7 +97,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testAddClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+	public void testAddClaim() throws EmptyFieldException, InvalidDateException {
 		// ClaimList to hold claims
 		ClaimList claimList = new ClaimList();
 		Claim claim1 = new Claim("Name1", new Date(100), new Date(120),null, null );
@@ -122,7 +122,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidNameException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testMakeInvalidClaimDate() throws EmptyFieldException, InvalidUserPermissionException {
+	public void testMakeInvalidClaimDate() throws EmptyFieldException  {
 		String name = "Bill Smith";
 		Claim claim = null;
 		// Start date intentionally after end date
@@ -145,7 +145,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws EmptyFieldException 
 	 * @throws InvalidUserPermissionException 
 	 */
-	public void testMakeInvalidClaimEmpty() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+	public void testMakeInvalidClaimEmpty() throws InvalidDateException {
 		Claim claim = null;
 		try {
 			// If claim is working properly, it will throw an InvalidNameException
@@ -156,7 +156,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertNull("Claim made with invalid name", claim);
 	}
 	
-	public void testMakeInvalidClaimNull() throws InvalidDateException, InvalidUserPermissionException {
+	public void testMakeInvalidClaimNull() throws InvalidDateException  {
 		Claim claim = null;
 		try {
 			// If claim is working properly, it will throw an InvalidNameException
@@ -180,7 +180,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testAddTravelDestination() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException, InvalidUserPermissionException {
+	public void testAddTravelDestination() throws EmptyFieldException, InvalidDateException, InvalidFieldEntryException {
 		String name = "Bill Smith";
 		Date startDate = new Date(100), endDate = new Date(120);
 		Claim claim = new Claim(name, startDate, endDate, null, null);
@@ -190,26 +190,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		// test to see if the contents of the destination collection are correct
 		assertEquals("Claim has invalid Travel Destination", "Russia",claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Claim has invalid Travel Destination", "Bear wrestling",claim.getTravelDestination(0).getDestinationDescription());
-
-		// The following tests giving a claim a restrictive status, and that 
-		// adding a travel destination acts correctly according to it's status
-		claim.giveStatus(ClaimStatus.SUBMITTED);
-		assertEquals("status unchanged", 2, claim.getStatus());
-		
-		try {
-			claim.addTravelDestination("Poland","Yolo");
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("Added Travel Destination when claim was submitted", 1, claim.numberOfDestinations());
-		
-		claim.giveStatus(ClaimStatus.APPROVED);
-		assertEquals("status unchanged", 3, claim.getStatus());
-		
-		try {
-			claim.addTravelDestination("Poland","Yolo");	
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("Added Travel Destination when claim was approved", 1, claim.numberOfDestinations());
 
 	}
 
@@ -226,7 +206,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * @throws InvalidFieldEntryException 
 	 */
 	
-	public void testAddInvalidTravelDestination() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException, InvalidFieldEntryException {
+	public void testAddInvalidTravelDestination() throws EmptyFieldException, InvalidDateException, InvalidFieldEntryException {
 		String name = "Bill Smith";
 		Date startDate = new Date(100), endDate = new Date(120);
 		Claim claim = new Claim(name, startDate, endDate, null, null);
@@ -235,28 +215,28 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		try {
 			// if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination(null, "Reason for travel");
-		} catch (InvalidFieldEntryException e) {
+		} catch (EmptyFieldException e) {
 		}
 		assertEquals("Null destination added", "Aruba", claim.getTravelDestination(0).getDestinationName());
 		
 		try {
 			// if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination("", "Vacation");
-		} catch (InvalidFieldEntryException e) {
+		} catch (EmptyFieldException e) {
 		}
 		assertEquals("Empty destination added", "Aruba", claim.getTravelDestination(0).getDestinationName());
 		
 		try {
 			//if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination("London", null);
-		} catch (InvalidFieldEntryException e){
+		} catch (EmptyFieldException e){
 		}
 		assertEquals("Null destination added", "Jamaica", claim.getTravelDestination(0).getDestinationDescription());	
 
 		try {
 			//if this works correctly it will throw an InvalidFieldException
 			claim.addTravelDestination("London", "");
-		} catch (InvalidFieldEntryException e) {
+		} catch (EmptyFieldException e) {
 		}
 		assertEquals("Null destination added", "Jamaica", claim.getTravelDestination(0).getDestinationDescription());			
 	}
@@ -266,11 +246,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * Tests that we can edit a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/51
 	 * @throws EmptyFieldException 
-	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
-	 * @throws InvalidUserPermissionException 
 	 */
-	public void testEditSimpleClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
+	public void testEditSimpleClaim() throws EmptyFieldException, InvalidDateException {
 		String name = "Bill Smith", name2 = "Joe Brown";
 		Date startDate = new Date(100), startDate2 = new Date(200);
 		Date endDate = new Date(120) , endDate2 = new Date(220);
@@ -289,21 +267,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Edited claim startDate is wrong" , startDate2, claim.getStartDate());
 		assertEquals("Edited claim name is wrong", endDate2, claim.getEndDate());
 		assertEquals("Edited claim description is wrong", description2, claim.getDescription());
-		
-		// For the following tests the UserName should remain "Joe Brown"
-		claim.giveStatus(ClaimStatus.SUBMITTED);
-		try {
-			claim.setUserName("yolo");
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("edited a claim when submitted", "Joe Brown", claim.getUserName());
-		
-		claim.giveStatus(ClaimStatus.APPROVED);
-		try {	
-			claim.setUserName("yolo");
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("edited a claim when Approved", "Joe Brown", claim.getUserName());
 	}
 
 	/** 
@@ -311,11 +274,9 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * Tests that we can edit a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/51
 	 * @throws EmptyFieldException 
-	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
-	 * @throws InvalidUserPermissionException 
 	 */
-	public void testEditInvalidClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
+	public void testEditInvalidClaim() throws EmptyFieldException, InvalidDateException{
 		String name = "Bill Smith";
 		Date startDate = new Date(100);
 		Date endDate = new Date(120);
@@ -352,14 +313,10 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * This will test to see if we can edit a travel destination
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
 	 * @throws EmptyFieldException 
-	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
-	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
-	 * @throws ClaimPermissionException 
-	 * @throws InvalidUserPermissionException 
 	 */
-	public void testEditTravelDestinations() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException, InvalidUserPermissionException {
+	public void testEditTravelDestinations() throws EmptyFieldException, InvalidDateException, InvalidFieldEntryException {
 		Claim claim = new Claim("name", new Date(100), new Date(120), null, null);
 		claim.addTravelDestination("Russia", "Bear hunting");
 		claim.addTravelDestination("Japan", "Sushi hunting");
@@ -374,33 +331,17 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		try{
 			//If this works it will throw an InvalidFieldEntryExeption
 			claim.editTravelDescription(1,  null, "Relic hunting");
-		} catch (InvalidFieldEntryException e) {	
+		} catch (EmptyFieldException e) {	
 		}
 		assertNotSame("Null name was added", null, claim.getTravelDestination(1).getDestinationName());
 
-		
 		try{
 			//If this works it will throw an InvalidFieldEntryExeption
 			claim.editTravelDescription(1,  "Canada",null);
 		}
-		catch (InvalidFieldEntryException e) {
+		catch (EmptyFieldException e) {
 		}
 		assertNotSame("Null description was added", null, claim.getTravelDestination(1).getDestinationDescription());
-
-		// Test that restrictive statuses affect editing
-		claim.giveStatus(ClaimStatus.SUBMITTED);
-		try {
-			claim.editTravelDescription(0, "Australia", "Yolo");
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("Submitted claim was editted", "China", claim.getTravelDestination(0).getDestinationName());
-
-		claim.giveStatus(ClaimStatus.APPROVED);	
-		try {
-			claim.editTravelDescription(0, "Australia", "Yolo");
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("Approved claim was editted", "China", claim.getTravelDestination(0).getDestinationName());
 	}
 	
 	/** 
@@ -408,15 +349,11 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 * This will test to see if we can delete a Travel Destination
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
 	 * @throws EmptyFieldException 
-	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
-	 * @throws DuplicateException 
 	 * @throws InvalidFieldEntryException 
-	 * @throws ClaimPermissionException 
-	 * @throws InvalidUserPermissionException 
 	 */
 	
-	public void testDeleteTravelDestinations() throws InvalidDateException, EmptyFieldException, InvalidFieldEntryException, InvalidUserPermissionException {
+	public void testDeleteTravelDestinations() throws EmptyFieldException, InvalidDateException, InvalidFieldEntryException  {
 		Claim claim = new Claim("name", new Date(100), new Date(120), null, null);
 		claim.addTravelDestination("Russia", "Bear hunting");
 		claim.addTravelDestination("China", "Relic hunting");
@@ -426,32 +363,15 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertEquals("Delete Travel Destination is of invalid size",1,  claim.numberOfDestinations());
 		assertEquals("Delete Travel Destination failed: Check Location", "China", claim.getTravelDestination(0).getDestinationName());
 		assertEquals("Delete Travel Destination failed: Check Description", "Relic hunting", claim.getTravelDestination(0).getDestinationDescription());
-		
-		// Test that restrictive statuses affect deletion
-		claim.giveStatus(ClaimStatus.SUBMITTED);
-		try {
-			claim.deleteTravelDestination(0);
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("deleted a submitted claim", 1, claim.numberOfDestinations());
-					
-		claim.giveStatus(ClaimStatus.APPROVED);
-		try {
-			claim.deleteTravelDestination(0);
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("deleted an approved claim", 1, claim.numberOfDestinations());
 	}
 	
 	/** Use Case A4
 	 * Tests that you can delete a claim
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/52
-	 * @throws EmptyFieldException 
-	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
-	 * @throws InvalidUserPermissionException 
+	 * @throws EmptyFieldException 
 	 */
-	public void testDeleteClaim() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
+	public void testDeleteClaim() throws EmptyFieldException, InvalidDateException{
 		// Create a claim List with 2 claims
 		Claim claim = new Claim("test", new Date(1), new Date(2), null, null);
 		Claim claim2 = new Claim("test2", new Date(5), new Date(6), null, null);
@@ -464,20 +384,5 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		assertFalse("Claim was not removed", claimlist.contains(claim));
 		assertTrue("Claim removed too many claims", claimlist.contains(claim2));
 		assertEquals("Removed wrong claim", "test2", claimlist.getClaimAtIndex(0).getUserName());
-		
-		// Test that statuses affect removal
-		claim2.giveStatus(ClaimStatus.SUBMITTED);
-		try {
-			claimlist.claimRemove(claim2);
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("deleted a claim when submitted", 1, claimlist.size());
-		
-		claim2.giveStatus(ClaimStatus.APPROVED);
-		try {
-			claimlist.claimRemove(claim2);
-		} catch (InvalidUserPermissionException e) {
-		}
-		assertEquals("deleted a claim when approved", 1, claimlist.size());
 	}
 }

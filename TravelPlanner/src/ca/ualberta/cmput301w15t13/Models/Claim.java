@@ -335,7 +335,8 @@ public class Claim {
 		for(String key: approverComments.keySet()){
 			ArrayList<String> tempComments = approverComments.get(key);
 
-			for(String comment : tempComments){
+			for(String comment : tempComments)
+			{
 				comments.add(comment);
 			}
 		}
