@@ -107,9 +107,7 @@ public final class R {
         public static final int expense_item_layout=0x7f03000b;
         public static final int expense_item_manager=0x7f03000c;
         public static final int expense_item_viewer=0x7f03000d;
-<<<<<<< HEAD
-        public static final int expense_item_viewer_layout=0x7f03000e;
-        public static final int take_a_photo=0x7f03000f;
+        public static final int take_a_photo=0x7f03000e;
     }
     public static final class menu {
         public static final int claim=0x7f090000;
