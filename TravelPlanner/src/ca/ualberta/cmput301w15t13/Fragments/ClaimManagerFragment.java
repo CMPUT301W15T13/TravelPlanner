@@ -23,7 +23,6 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.Calendar;
 import java.util.Date;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -179,6 +178,7 @@ public class ClaimManagerFragment extends Fragment{
 		date.setDate(day);
 		date.setMonth(month);
 		date.setYear(year);
+		// TODO make sure that this checks the start date is before the end date
 	}
 
 	/**

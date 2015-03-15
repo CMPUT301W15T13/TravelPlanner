@@ -19,6 +19,14 @@
            android:textSize="12sp"
            android:textColor="@color/text"
            android:text="@string/edit" />
+       
+       <Button
+           android:id="@+id/buttonViewClaim"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/view"
+           android:textColor="@color/text"
+           android:textSize="12sp" />
 
        <Button
            android:id="@+id/buttonSubmitClaim"
@@ -35,5 +43,7 @@
            android:textSize="12sp"
            android:text="@string/delete"
            android:textColor="@color/text" />
+
+
 
    </LinearLayout>
