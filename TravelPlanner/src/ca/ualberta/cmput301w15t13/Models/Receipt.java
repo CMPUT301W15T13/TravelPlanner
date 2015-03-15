@@ -5,11 +5,12 @@ import android.graphics.Bitmap;
 public class Receipt {
 
 	public Receipt(Bitmap bitmap) {
-		// TODO Auto-generated constructor stub
+		// TODO for project 
 	}
 
 	public Bitmap toBitMap() {
-		// TODO Auto-generated method stub
+		// TODO for project 5
+		// for now it is returning null
 		return null;
 	}
 
