@@ -36,5 +36,6 @@
     <string name="delete">Delete</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_expense_viewer">ExpenseViewerActivity</string>
 
 </resources>
