@@ -69,7 +69,8 @@ public class ExpenseAdapter extends ArrayAdapter{
 			
 			//titleView.setText(.getUserName());
 			titleView.setText(expense.getID());
-			
+			dateView.setText(expense.getPurchaseDate().toString());
+			costView.setText(String.valueOf(expense.getAmount()));
 			//TODO add a convert date to text method somewhere
 			//dateView.setText(claim.getDateText());
 			//TODO claim cost text
