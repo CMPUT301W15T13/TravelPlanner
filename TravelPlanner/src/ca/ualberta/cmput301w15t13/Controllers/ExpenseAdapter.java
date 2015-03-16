@@ -20,6 +20,8 @@
 
 package ca.ualberta.cmput301w15t13.Controllers;
 
+import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,8 +72,9 @@ public class ExpenseAdapter extends ArrayAdapter{
 			//Will need this for properly handling images
 			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			titleView.setText(expense.getExpenseName());
-			dateView.setText(expense.getPurchaseDate().toString());
-			costView.setText(String.valueOf(expense.getAmount()));
+			dateView.setText(expense.getPurchseDateAsString());
+			DecimalFormat decim = new DecimalFormat("0.00");
+			costView.setText(String.valueOf(decim.format(expense.getAmount())));
 			currView.setText(expense.getCurrency());
 
 		}

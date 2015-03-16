@@ -32,6 +32,7 @@ import exceptions.InvalidUserPermissionException;
 import android.R;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.text.format.DateFormat;
 
 
 /*
@@ -190,4 +191,20 @@ public class ExpenseItem implements ExpenseClaim {
   public void removeIncompletenessIndicator() {
     // TODO for project 5
   }
+  
+  /**
+   * Copied from
+   * http://stackoverflow.com/a/3973886
+   * on March 16 2015
+   */
+	public String getPurchseDateAsString() {
+		//we need this item to format our dates
+		DateFormat dateFormat = new DateFormat();
+		Date newDate = (Date) this.purchaseDate.clone();
+		int year = newDate.getYear();
+		newDate.setYear(year-1900);
+		
+		//this is where we format the start and end dates
+		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
+	}
 }

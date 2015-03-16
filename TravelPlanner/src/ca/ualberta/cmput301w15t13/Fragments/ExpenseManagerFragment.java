@@ -1,22 +1,18 @@
 package ca.ualberta.cmput301w15t13.Fragments;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
-import ca.ualberta.cmput301w15t13.Activities.PrimitivePhotoActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -40,8 +36,9 @@ public class ExpenseManagerFragment extends Fragment {
 	private Spinner currencySpinner; 
 	private String description; 
 	private EditText descriptionView;
-	
-	private boolean areFieldsComplete, isEditing;
+	private boolean areFieldsComplete;
+	private boolean isEditing;
+	private boolean isThisReady;
 	private int claimIndex;
 	private String claimID;
 	private int expenseIndex;
@@ -52,6 +49,7 @@ public class ExpenseManagerFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		areFieldsComplete = false;
+		isThisReady = false;
 		Date = new Date();
 		
 		claimIndex = getArguments().getInt("claimIndex");
@@ -100,11 +98,7 @@ public class ExpenseManagerFragment extends Fragment {
 			ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
 			this.expenseNameView.setText(editExpense.getExpenseName());
 			this.description = editExpense.getExpenseDescription();
-			// Simple formatter to parse the date
-			// Inspired by http://stackoverflow.com/a/18834843
-			// 3/16/2015
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			this.dateView.setText(sdf.format(editExpense.getPurchaseDate()));
+			dateView.setText(editExpense.getPurchseDateAsString());
 			this.descriptionView.setText(editExpense.getExpenseDescription());
 			this.amountView.setText(String.valueOf(editExpense.getAmount()));
 			this.categorySpinner.setSelection(getIndex(categorySpinner,editExpense.getExpenseCategory()));
@@ -144,12 +138,10 @@ public class ExpenseManagerFragment extends Fragment {
 		dateText = dateView.getText().toString().trim() + "";
 		
 		if (amountView.getText().toString().equals("")) {
-			Toast.makeText(getActivity(), "No amount", Toast.LENGTH_SHORT).show();
 			amount = 0;
 		} else { amount = Double.parseDouble(amountView.getText().toString()); }
 		
 		//TODO should we assert they fill in all fields?
-		//Toast.makeText(getActivity(), description, Toast.LENGTH_SHORT).show();
 		if(	!dateText.equals("") && !expenseName.equals("")){
 			this.areFieldsComplete = true;
 		}
@@ -169,19 +161,20 @@ public class ExpenseManagerFragment extends Fragment {
 	 * TODO This solution can be more elegant
 	 * Instead of removing and readding the new expense 
 	 * we should just set the new values to the old expense
+	 * @throws InvalidFieldEntryException 
 	 */
-	public void updateExpense() {
+	public void updateExpense() throws InvalidFieldEntryException {
 		updateReferences();
 		String categorySet = categorySpinner.getSelectedItem().toString();
 		String currencySet = currencySpinner.getSelectedItem().toString();
-		
-		ExpenseItem newExpense = new ExpenseItem(categorySet, Date, 
-					description, amount, currencySet, claimID);
-		newExpense.setExpenseName(expenseName);
-		ExpenseItem removeThis = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).
-								getExpenseItemList().findExpenseItem(expenseIndex);
-		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).removeExpenseItem(removeThis);
-		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
+
+		ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
+		editExpense.setExpenseCategory(categorySet);
+		editExpense.setExpenseDescription(description);
+		editExpense.setAmount(amount);
+		editExpense.setCurrency(currencySet);
+		editExpense.setLinkedToclaimID(claimID);
+		editExpense.setExpenseName(expenseName);
 	}
 	
 	/**
@@ -194,10 +187,6 @@ public class ExpenseManagerFragment extends Fragment {
 		if(this.areFieldsComplete){
 			String categorySet = categorySpinner.getSelectedItem().toString();
 			String currencySet = currencySpinner.getSelectedItem().toString();
-			//TODO add to our list of expenses for the claim
-			//ExpenseItem newExpense = new ExpenseItem(((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
-			//this.description, itineraryList);
-			//ClaimListSingleton.getClaimList().add(newExpense);
 			ExpenseItem newExpense = new ExpenseItem(categorySet, Date, description, amount, currencySet, claimID);
 			newExpense.setExpenseName(expenseName);
 			ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
