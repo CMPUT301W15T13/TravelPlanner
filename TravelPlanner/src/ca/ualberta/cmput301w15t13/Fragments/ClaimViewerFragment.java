@@ -122,6 +122,7 @@ public class ClaimViewerFragment extends Fragment {
 					Bundle bundle = new Bundle();
 					bundle.putInt("claimIndex", position);
 					bundle.putFloat("claimID", id);
+					intent.putExtras(bundle);
 					startActivity(intent);
 					
 				}else{

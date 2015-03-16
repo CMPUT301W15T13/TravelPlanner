@@ -35,11 +35,12 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
-import ca.ualberta.cmput301w15t13.Controllers.ClaimAdapter;
+import ca.ualberta.cmput301w15t13.Controllers.ExpenseAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 /**
  * This fragment is used to view expenses and 
@@ -50,8 +51,8 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
  */
 
 public class ExpenseViewerFragment extends Fragment {
-	private ClaimAdapter ExpenseAdapter;
-	private ArrayList<Claim> expenses;
+	private ExpenseAdapter ExpenseAdapter;
+	private ArrayList<ExpenseItem> expenses;
 	private int claimIndex;
 	private float claimID;
 
@@ -64,8 +65,8 @@ public class ExpenseViewerFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		claimIndex = getArguments().getInt("claimIndex");
 		claimID = getArguments().getFloat("claimID");
-		expenses = ClaimListSingleton.getClaimList().getClaimArrayList();
-		this.ExpenseAdapter = new ClaimAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
+		expenses = ClaimListSingleton.getClaimList().getExpenseList(claimIndex);
+		this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
 		//expenses = ClaimListSingleton.getExpenseItemList();
 		//this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
 		

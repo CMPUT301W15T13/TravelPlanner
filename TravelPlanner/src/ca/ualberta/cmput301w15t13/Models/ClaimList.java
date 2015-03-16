@@ -138,9 +138,8 @@ public class ClaimList {
 		this.tagManager = tm;
 	}
 
-	public ArrayList<ExpenseItem> getExpenseArrayList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ExpenseItem> getExpenseList(int ClaimIndex) {
+		return claimList.get(ClaimIndex).getExpenseItems();
 	}
 	
 }

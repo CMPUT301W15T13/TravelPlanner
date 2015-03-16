@@ -76,8 +76,7 @@ public class ExpenseActivity extends Activity {
 		ExpenseManagerFragment = new ExpenseManagerFragment();
 		
 		//Need to extract passed claim info
-		Intent intent = getIntent();
-		intent.getExtras();
+
 		Bundle bundle = getIntent().getExtras();
 		claimIndex = bundle.getInt("claimIndex");
 		claimID = bundle.getFloat("claimID");
@@ -164,6 +163,14 @@ public class ExpenseActivity extends Activity {
 	 */
 	public void setFragementToExpenseManager(){
 		actionBar.hide();
+		//Inspired by
+		//http://stackoverflow.com/a/16036693
+		//3/15/2015
+		Bundle bundle=new Bundle();
+		bundle.putInt("claimIndex", claimIndex);
+		bundle.putFloat("claimID", claimID);
+		//set Fragmentclass Arguments
+		ExpenseViewerFragment.setArguments(bundle);
 		
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, this.ExpenseManagerFragment, "ExpenseManager");
