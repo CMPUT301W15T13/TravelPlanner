@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import exceptions.DuplicateException;
 import exceptions.InvalidFieldEntryException;
 
-/*
+/**
  * This class is a controller class for TravelItineraries.
  * Essentially, as a claim can have many travel
  * destinations with descriptions, each of those
  * are made into a class instance (a travelItinerary)
- * and managed here
+ * and managed here.
  */
 
 public class TravelItineraryList {
