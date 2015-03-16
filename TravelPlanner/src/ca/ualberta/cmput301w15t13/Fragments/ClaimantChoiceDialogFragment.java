@@ -33,11 +33,16 @@ import android.widget.Button;
 import ca.ualberta.cmput301w15t13.R;
 /**
  * 
- * TODO
+ * This is a custom Alert Dialog for when a claimant
+ * long clicks a claim, giving the abilities to 
+ * edit, view, submit, and delete.
  */
 
 public class ClaimantChoiceDialogFragment extends DialogFragment{
 	// Based on http://martin.cubeactive.com/android-onclicklitener-tutorial/ March 15 2015
+	/* These are all onClickListeners that call the corresponding 
+	 * functions in ClaimViewerFragment.
+	 */
     final OnClickListener editClaim = new OnClickListener() {
         @Override
 		public void onClick(final View v) {

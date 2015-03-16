@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.app.ActionBar.LayoutParams;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class ClaimManagerFragment extends Fragment{
 	private Date startDate, endDate;
 	private boolean incompleteFields, invalidDates, isEditing;
 	private int claimIndex;	
+	private ClaimActivity activity;
 	
 	//TODO force change what the back button does from this screen, in that it moves to the old fragment
 	
@@ -198,7 +200,7 @@ public class ClaimManagerFragment extends Fragment{
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
-			Claim newClaim = new Claim(((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
+			Claim newClaim = new Claim(activity.getUsername(), startDate, endDate, 
 					this.description, itineraryList);
 				ClaimListSingleton.getClaimList().add(newClaim);
 			return true;
@@ -224,7 +226,7 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	public void updateClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException {
 		updateReferences();
-		Claim newClaim = new Claim( ((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
+		Claim newClaim = new Claim(activity.getUsername(), startDate, endDate, 
 				this.description, itineraryList);
 		newClaim.tags = this.tagList;
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
@@ -265,11 +267,12 @@ public class ClaimManagerFragment extends Fragment{
 		destinationView.setText(dest_list);
 
 		// TODO this needs to change the layout size
-		if(itineraryList.size() > 2){
-			//If the text view is set to wrap content too early,
-			//it looks like the field is too small
-			destinationView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT); 
-		}
+//		if(itineraryList.size() > 2){
+//			//If the text view is set to wrap content too early,
+//			//it looks like the field is too small
+//			Toast.makeText(activity, "GROW ME", Toast.LENGTH_SHORT).show();
+//			destinationView.setHeight(LayoutParams.WRAP_CONTENT); 
+//		}
 	}
 
 	public void addTagItem(String tag) {
@@ -316,6 +319,7 @@ public class ClaimManagerFragment extends Fragment{
 		incompleteFields = true;
 		startDate = new Date();
 		endDate = new Date();
+		activity = (ClaimActivity) getActivity();
 	}
 
 	@Override
