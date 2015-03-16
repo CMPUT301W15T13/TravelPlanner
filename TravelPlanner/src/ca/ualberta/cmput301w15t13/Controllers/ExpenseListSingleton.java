@@ -24,13 +24,9 @@ import java.util.ArrayList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 
-/*
- * Singleton pattern for the ClaimList 
- * class. It provides sorting method
- * which sorts the claims and their nested
- * ExpenseLists by start date
+/**
+ * Singleton pattern for the ExpenseList class.
  */
-
 public class ExpenseListSingleton {
 	
 	private static ExpenseItemList ExpenseItemList; 
@@ -46,7 +42,6 @@ public class ExpenseListSingleton {
 		if (ExpenseItemList == null) { 
 			ExpenseItemList = new ExpenseItemList();
 		}
-//		ExpenseItemList = new ExpenseItemList(expenses);
 	}
 	
 	static public void addExpenseItem(ExpenseItem expense) {
