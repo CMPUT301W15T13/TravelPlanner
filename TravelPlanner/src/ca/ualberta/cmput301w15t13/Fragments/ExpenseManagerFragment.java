@@ -140,7 +140,6 @@ public class ExpenseManagerFragment extends Fragment {
 		dateText = dateView.getText().toString().trim() + "";
 		
 		if (amountView.getText().toString().equals("")) {
-			Toast.makeText(getActivity(), "No amount", Toast.LENGTH_SHORT).show();
 			amount = 0;
 		} else { amount = Double.parseDouble(amountView.getText().toString()); }
 		
