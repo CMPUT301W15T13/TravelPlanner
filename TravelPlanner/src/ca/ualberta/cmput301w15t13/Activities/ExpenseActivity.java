@@ -59,6 +59,8 @@ public class ExpenseActivity extends Activity {
 	private ExpenseManagerFragment ExpenseManagerFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 	//Temporary force claimant true
+	//Will most likely need to handle this elegantly in part 5
+	//TODO handle isClaimant properly
 	private boolean isClaimant = true;
 	private String username;
 	private int claimIndex;
@@ -77,10 +79,10 @@ public class ExpenseActivity extends Activity {
 		ExpenseManagerFragment = new ExpenseManagerFragment();
 		
 		//Need to extract passed claim info
-
 		Bundle bundle = getIntent().getExtras();
 		claimIndex = bundle.getInt("claimIndex");
 		claimID = bundle.getString("claimID");
+		//TODO handle isClaimant properly
 		//this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
 		//this.username = intent.getStringExtra(LoginActivity.USERID);
 		
@@ -102,10 +104,9 @@ public class ExpenseActivity extends Activity {
 
 	/**
 	 * Set the action bar
-	 * to the corresponding search and
-	 * sort settings for claim viewing.
+	 * Very simple and planeactionbar
+	 * Useful for screen space economy on expense items
 	 */
-	
 	private void setActionBar(){
 		//Based on http://stackoverflow.com/questions/6746665/accessing-a-font-under-assets-folder-from-xml-file-in-android Jan 25 2015
 		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.expense_actionbar_layout, null);
@@ -114,11 +115,6 @@ public class ExpenseActivity extends Activity {
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
-		
-		//ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
-		//searchButton.setOnClickListener(new View.OnClickListener() {
-			
-
 	}
  
 	@Override
