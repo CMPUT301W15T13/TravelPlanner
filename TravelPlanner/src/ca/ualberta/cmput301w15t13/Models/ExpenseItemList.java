@@ -51,11 +51,8 @@ public class ExpenseItemList {
 	}
 	
 	/**
-<<<<<<< HEAD
 	 *  some methods used to control ExpenseItemList. i.e. add, delete, update, etc
-=======
 	 * some methods used to control ExpenseItemList. i.e. add, delete, update, etc
->>>>>>> 46d59592fed4a8e2e14be48183995b07046844b6
 	 * @param Expense
 	 */
 	public void add(ExpenseItem Expense) {
