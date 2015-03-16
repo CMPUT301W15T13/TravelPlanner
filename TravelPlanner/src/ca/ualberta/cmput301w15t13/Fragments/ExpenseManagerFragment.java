@@ -74,16 +74,17 @@ public class ExpenseManagerFragment extends Fragment {
 		amountView = (TextView) getView().findViewById(R.id.editTextAmount);
 		categorySpinner = (Spinner) getView().findViewById(R.id.categorySpinner);
 		currencySpinner = (Spinner) getView().findViewById(R.id.currencySpinner);
-		
-		//personal reference on get item TODO delete this line 
-		String categorySet = categorySpinner.getSelectedItem().toString();
+
 		setFields();
 	}
+	
+	/** 
+	 * Handle action bar item clicks here. The action bar will
+	 *  automatically handle clicks on the Home/Up button, so long
+	 * as you specify a parent activity in AndroidManifest.xml.
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == R.id.action_settings) {
 			return true;
@@ -129,6 +130,7 @@ public class ExpenseManagerFragment extends Fragment {
 	public void setExpenseIndex(int index) {
 		expenseIndex = index;
 	}
+	
 	/**
 	 * Updates the class level variables to reflect what's in the
 	 * fields in the layout.
@@ -138,8 +140,6 @@ public class ExpenseManagerFragment extends Fragment {
 		description = descriptionView.getText().toString().trim() + "";
 		dateText = dateView.getText().toString().trim() + "";
 		amount = Double.parseDouble(amountView.getText().toString());
-		String categorySet = categorySpinner.getSelectedItem().toString();
-		String currencySet = currencySpinner.getSelectedItem().toString();
 		
 		//TODO should we assert they fill in all fields?
 		//Toast.makeText(getActivity(), description, Toast.LENGTH_SHORT).show();
@@ -157,6 +157,12 @@ public class ExpenseManagerFragment extends Fragment {
 		return this.isEditing;
 	}
 	
+	/**
+	 * Method used to update our expense
+	 * TODO This solution can be more elegant
+	 * Instead of removing and readding the new expense 
+	 * we should just set the new values to the old expense
+	 */
 	public void updateExpense() {
 		updateReferences();
 		String categorySet = categorySpinner.getSelectedItem().toString();
@@ -171,6 +177,12 @@ public class ExpenseManagerFragment extends Fragment {
 		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
 	}
 	
+	/**
+	 * Create the expense from our input values
+	 * @throws InvalidDateException
+	 * @throws InvalidUserPermissionException
+	 * @throws EmptyFieldException
+	 */
 	public void createExpenseItem() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
 		if(this.areFieldsComplete){
 			String categorySet = categorySpinner.getSelectedItem().toString();
@@ -216,11 +228,21 @@ public class ExpenseManagerFragment extends Fragment {
 		    }
 
 	};
+	/**
+	 * Get the date picker
+	 */
 	new DatePickerDialog(getActivity(), date, myCalendar
             .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
             myCalendar.get(Calendar.DAY_OF_MONTH)).show();
 	        
 }
+	/**
+	 * A simple medthod to add date data 
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @param text
+	 */
 	public void addDateData(int year, int month, int day, TextView text){
 		Date date;
 		date = Date;
@@ -230,7 +252,15 @@ public class ExpenseManagerFragment extends Fragment {
 		date.setYear(year);
 	}
 	
-	//Code reuse from James Devito's Assignment 1
+	/**
+	 * This method will search a spinner for the index of a value
+	 * this is usefull for when we want to set the spinner when loading
+	 * an expense to edit
+	 * Code reused from James Devito's Assignment 1
+	 * @param spinner
+	 * @param myString
+	 * @return
+	 */
 	private int getIndex(Spinner spinner, String myString) {
 		  int index = 0;
 		  for (int i=0;i<spinner.getCount();i++){
