@@ -76,8 +76,7 @@ public class ExpenseActivity extends Activity {
 		ExpenseManagerFragment = new ExpenseManagerFragment();
 		
 		//Need to extract passed claim info
-		Intent intent = getIntent();
-		intent.getExtras();
+
 		Bundle bundle = getIntent().getExtras();
 		claimIndex = bundle.getInt("claimIndex");
 		claimID = bundle.getFloat("claimID");
