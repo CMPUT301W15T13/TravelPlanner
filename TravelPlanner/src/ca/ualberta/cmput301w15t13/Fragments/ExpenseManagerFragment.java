@@ -187,10 +187,6 @@ public class ExpenseManagerFragment extends Fragment {
 		if(this.areFieldsComplete){
 			String categorySet = categorySpinner.getSelectedItem().toString();
 			String currencySet = currencySpinner.getSelectedItem().toString();
-			//TODO add to our list of expenses for the claim
-			//ExpenseItem newExpense = new ExpenseItem(((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
-			//this.description, itineraryList);
-			//ClaimListSingleton.getClaimList().add(newExpense);
 			ExpenseItem newExpense = new ExpenseItem(categorySet, Date, description, amount, currencySet, claimID);
 			newExpense.setExpenseName(expenseName);
 			ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
