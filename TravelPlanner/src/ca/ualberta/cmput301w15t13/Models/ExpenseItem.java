@@ -70,7 +70,6 @@ public class ExpenseItem implements ExpenseClaim {
 	 * if so, it makes the expense
 	 * if ((!ClaimListSingleton.isEmpty()))){
 	 */ 
-
     this.ClaimID = ClaimID;
     this.ExpenseID = UUID.randomUUID().toString();
     this.ExpenseCategory = Category;
