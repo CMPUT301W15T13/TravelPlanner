@@ -143,8 +143,9 @@ public class ExpenseManagerFragment extends Fragment {
 		description = descriptionView.getText().toString().trim() + "";
 		dateText = dateView.getText().toString().trim() + "";
 		
-		if (!dateView.getText().equals("")) {
+		if (amountView.getText().toString().equals("")) {
 			Toast.makeText(getActivity(), "No amount", Toast.LENGTH_SHORT).show();
+			amount = 0;
 		} else { amount = Double.parseDouble(amountView.getText().toString()); }
 		
 		//TODO should we assert they fill in all fields?
