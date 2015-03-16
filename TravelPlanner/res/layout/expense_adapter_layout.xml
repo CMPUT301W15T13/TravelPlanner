@@ -23,7 +23,7 @@
         android:layout_toRightOf="@+id/incompletenessIndicator"
         android:text="@string/holder"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/text" />
+        android:textColor="@color/title" />
 
     <ImageView
         android:id="@+id/imageViewExpenseAdapterStatus"
