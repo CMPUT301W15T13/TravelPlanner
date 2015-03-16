@@ -332,7 +332,7 @@ public class ClaimManagerFragment extends Fragment{
 		destinationView = (TextView) getView().findViewById(R.id.textViewDestinationsList);
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
-		tagView = (TextView) getView().findViewById(R.id.textView2);
+		tagView = (TextView) getView().findViewById(R.id.textViewTags);
 		
 		this.tagList = new ArrayList<Tag>();
 		

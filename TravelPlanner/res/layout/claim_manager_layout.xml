@@ -137,7 +137,7 @@
 			    android:textColor="@color/text" />
 
 			<TextView
-			    android:id="@+id/textView2"
+			    android:id="@+id/textViewTags"
 			    android:layout_width="match_parent"
 			    android:layout_height="36dp"
 			    android:textColor="@color/text" />
@@ -147,6 +147,7 @@
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
 			    android:onClick="addTag"
+			    android:textColor="@color/text" 
 			    android:text="Add" />
 
 			<EditText
