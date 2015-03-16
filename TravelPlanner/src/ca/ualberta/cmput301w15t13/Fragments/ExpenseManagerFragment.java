@@ -175,15 +175,6 @@ public class ExpenseManagerFragment extends Fragment {
 		editExpense.setCurrency(currencySet);
 		editExpense.setLinkedToclaimID(claimID);
 		editExpense.setExpenseName(expenseName);
-		/*
-		ExpenseItem newExpense = new ExpenseItem(categorySet, Date, 
-					description, amount, currencySet, claimID);
-		newExpense.setExpenseName(expenseName);
-		ExpenseItem removeThis = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).
-								getExpenseItemList().findExpenseItem(expenseIndex);
-		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).removeExpenseItem(removeThis);
-		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
-		*/
 	}
 	
 	/**
