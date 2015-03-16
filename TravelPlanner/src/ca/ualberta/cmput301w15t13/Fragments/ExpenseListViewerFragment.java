@@ -68,10 +68,7 @@ public class ExpenseListViewerFragment extends Fragment {
 		claimIndex = getArguments().getInt("claimIndex");
 		claimID = getArguments().getString("claimID");
 		expenses = ClaimListSingleton.getClaimList().getExpenseList(claimIndex);
-		this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
-		//expenses = ClaimListSingleton.getExpenseItemList();
-		//this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
-		
+		this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);		
 	}
 	
 	@Override
@@ -98,10 +95,7 @@ public class ExpenseListViewerFragment extends Fragment {
 
 			@Override
 			public void update() {
-//				claims.clear();
 				ExpenseItemList expenses = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItemList();
-				//expenses.getClaimAtIndex(claimIndex);
-				//expenses = ClaimListSingleton.getExpenseItemList();
 				ExpenseAdapter.notifyDataSetChanged();
 			}
 			
