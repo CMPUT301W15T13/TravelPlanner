@@ -245,4 +245,9 @@ public class ExpenseActivity extends Activity {
 		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
 		startActivity(intent);
 	}
+	public void editExpense(int index) {
+		setFragementToExpenseManager();
+		ExpenseManagerFragment.setStateAsEditing(true);
+		ExpenseManagerFragment.setExpenseIndex(index);
+	}
 }

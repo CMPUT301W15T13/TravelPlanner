@@ -120,6 +120,13 @@ public class ExpenseListViewerFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
 				if(((ExpenseActivity) getActivity()).isClaimant()){
+					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+					ExpenseItem ourExpense = ourClaim.getExpenseItems().get(position);
+					if(ourClaim.isEditable()){
+						((ExpenseActivity) getActivity()).editExpense(position);
+					} else{
+						Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
+					}
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
 					//Intent intent = new Intent(getActivity(), ExpenseActivity.class);
 					//startActivity(intent);
