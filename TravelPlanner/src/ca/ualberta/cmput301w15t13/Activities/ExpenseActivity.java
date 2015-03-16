@@ -61,7 +61,7 @@ public class ExpenseActivity extends Activity {
 	private boolean isClaimant;
 	private String username;
 	private int claimIndex;
-	private long claimID;
+	private float claimID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +75,12 @@ public class ExpenseActivity extends Activity {
 		ExpenseViewerFragment = new ExpenseViewerFragment();
 		ExpenseManagerFragment = new ExpenseManagerFragment();
 		
+		//Need to extract passed claim info
 		Intent intent = getIntent();
 		intent.getExtras();
+		Bundle bundle = getIntent().getExtras();
+		claimIndex = bundle.getInt("claimIndex");
+		claimID = bundle.getFloat("claimID");
 		//this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
 		//this.username = intent.getStringExtra(LoginActivity.USERID);
 		

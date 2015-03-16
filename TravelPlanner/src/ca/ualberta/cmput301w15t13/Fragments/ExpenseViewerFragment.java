@@ -126,7 +126,7 @@ public class ExpenseViewerFragment extends Fragment {
 					int position, long id) {
 				Toast.makeText(getActivity(), "Long Click", Toast.LENGTH_SHORT).show();
 				//TODO make a popup open, and have edit as an option. Later
-				((ClaimActivity) getActivity()).editClaim(position);
+				//((ClaimActivity) getActivity()).editClaim(position);
 				return true;
 			}
 		});

@@ -113,9 +113,15 @@ public class ClaimViewerFragment extends Fragment {
 				claimIndex = position;
 				if(((ClaimActivity) getActivity()).isClaimant()){
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
+					/*
+					 * Pass required claim information to the expense portion of the code
+					 * IE: The claim holds our expense list so we need to know which
+					 * claim to get expense items from
+					*/
 					Intent intent = new Intent(getActivity(), ExpenseActivity.class);
-					intent.putExtra("claimIndex", position);
-					intent.putExtra("claimID", id);
+					Bundle bundle = new Bundle();
+					bundle.putInt("claimIndex", position);
+					bundle.putFloat("claimID", id);
 					startActivity(intent);
 					
 				}else{
