@@ -126,18 +126,38 @@
 				    android:text="@string/new_word" />
 				
 			</LinearLayout>
-			
 
-			
-			<EditText 
-			    android:id="@+id/editTextClaimDescription"
-			    android:inputType="textMultiLine"
-			    android:maxLines="10"
+			<TextView
+			    android:id="@+id/textViewTagTitle"
+			    android:layout_width="90dp"
+			    android:layout_height="wrap_content"
+			    android:text="Tags"
+			    android:textColor="@color/text" />
+
+			<TextView
+			    android:id="@+id/textViewTags"
+			    android:layout_width="match_parent"
+			    android:layout_height="36dp"
+			    android:textColor="@color/text" />
+
+			<Button
+			    android:id="@+id/addTags"
 			    android:layout_width="match_parent"
 			    android:layout_height="wrap_content"
-			    android:textColor="@color/text"
+			    android:onClick="addTag"
+			    android:textColor="@color/text" 
+			    android:text="Add" />
+
+			<EditText
+			    android:id="@+id/editTextClaimDescription"
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:ems="10"
 			    android:hint="@string/description"
-			    />	
+			    android:inputType="textMultiLine"
+			    android:maxLines="10"
+			    android:textColor="@color/text" />
+	
 		</LinearLayout>
 	</ScrollView>
 	

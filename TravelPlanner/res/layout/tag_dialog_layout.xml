@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    android:padding="6dp" >
+
+    <LinearLayout
+        android:id="@+id/title_buffer"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/background_highlight"
+        android:orientation="horizontal" />
+
+    <TextView
+        android:id="@+id/textViewTagTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/title_buffer"
+        android:layout_alignRight="@+id/title_buffer"
+        android:text="Add a Tag"
+        android:textColor="@color/text"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/editTagText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewTagTitle"
+        android:layout_alignRight="@+id/title_buffer"
+        android:layout_below="@+id/textViewTagTitle"
+        android:ems="10"
+        android:textColor="@color/text" 
+        android:hint="Enter Tag name" />
+
+</RelativeLayout>

@@ -60,11 +60,11 @@ public class DestinationDialogFragment extends DialogFragment {
 	               public void onClick(DialogInterface dialog, int id) {
 	                   EditText destinationView = (EditText) ((AlertDialog) dialog).findViewById(R.id.editTextDestinationName);
 	                   EditText reasonView = (EditText)  ((AlertDialog) dialog).findViewById(R.id.editTextReasonName);
-	                   String destination, reason;
+	                   String destination;
+	                   String reason;
 	                   
 	                   destination = destinationView.getText().toString().trim();
 	                   reason = reasonView.getText().toString().trim();
-	                   
 	                   try {
 	                	   
 	                	   TravelItinerary item = new TravelItinerary(destination, reason);

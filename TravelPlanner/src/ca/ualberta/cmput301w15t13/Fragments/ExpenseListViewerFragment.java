@@ -137,7 +137,6 @@ public class ExpenseListViewerFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(getActivity(), "Long Click", Toast.LENGTH_SHORT).show();
 				expenses.remove(position);
 				ExpenseAdapter.notifyDataSetChanged();
 				return true;
