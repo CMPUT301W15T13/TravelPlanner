@@ -34,6 +34,9 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 
 
+/*
+ * This is an exense item. It defines the model characteristics of an expense
+ */
 public class ExpenseItem implements ExpenseClaim {
 	
   //these are the allowed variables that will show up on the Activities

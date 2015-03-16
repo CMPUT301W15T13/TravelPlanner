@@ -4,6 +4,9 @@ import java.util.Random;
 import java.util.SortedSet;
 import java.util.UUID;
 
+/*
+ * This defines the basic functionality of a tag
+ */
 public class Tag {
 	
 	String tagName = "";
