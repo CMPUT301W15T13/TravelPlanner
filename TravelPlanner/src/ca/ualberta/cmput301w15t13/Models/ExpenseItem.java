@@ -40,10 +40,22 @@ import android.text.format.DateFormat;
  */
 public class ExpenseItem implements ExpenseClaim {
 	
+<<<<<<< HEAD
+  /**these are the allowed variables that will show up on the Activities
+   * 
+   */
+  private static ArrayList<String> allowedCategories = new ArrayList<String>();
+  private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
+	
+  /**these are the input fields for the expense
+   * 
+   */
+=======
   // These are the allowed variables that will show up on the Activities
   private static ArrayList<String> allowedCategories = new ArrayList<String>();
   private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
 	
+>>>>>>> 46d59592fed4a8e2e14be48183995b07046844b6
   protected String ExpenseName = null;
   protected String ExpenseCategory = null;
   protected Date purchaseDate = null;
@@ -53,8 +65,19 @@ public class ExpenseItem implements ExpenseClaim {
 
   protected String ClaimID = null;
   protected String ExpenseID = null;
+<<<<<<< HEAD
+  /**this does not need to be initialized
+   * 
+   */
   protected Currency currencyEnum;
   public Receipt receipt = null;
+  /** Boolean variable that tells if the expense item is done or not
+   * 
+   */
+=======
+  protected Currency currencyEnum;
+  public Receipt receipt = null;
+>>>>>>> 46d59592fed4a8e2e14be48183995b07046844b6
   public boolean complete = false;
 	
   /**
@@ -67,7 +90,7 @@ public class ExpenseItem implements ExpenseClaim {
    * @throws InvalidUserPermissionException 
    */
   public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID) {
-    /* TODO for project 5
+    /** TODO for project 5
      * this looks through the singleton list to see if the claim is edit-able
 	 * if so, it makes the expense
 	 */ 
@@ -79,10 +102,18 @@ public class ExpenseItem implements ExpenseClaim {
     this.Amount = Amount;
     this.currency = Currency;
 
+    /** 
+     * These variables are the expense item categories that are visible on the activity 
+     * 
+     */
     this.allowedCategories.add("Air Fare");  this.allowedCategories.add("Ground Transport");  this.allowedCategories.add("Vehicle Rental");  this.allowedCategories.add("Private Automobile");
 	this.allowedCategories.add("Fuel"); this.allowedCategories.add("Parking"); this.allowedCategories.add("Registration"); this.allowedCategories.add("Accommodation");
 	this.allowedCategories.add("Meal"); this.allowedCategories.add("Supplies");
 			
+	/**
+	 * These variables are tge expense item currencies that are visible on the activity
+	 * 
+	 */
 	this.allowedCurrencies.add("CAD"); this.allowedCurrencies.add("USD"); this.allowedCurrencies.add("EUR");
 	this.allowedCurrencies.add("GBP"); this.allowedCurrencies.add("CHF"); this.allowedCurrencies.add("JPY");
 	this.allowedCurrencies.add("CNY");
@@ -101,6 +132,11 @@ public class ExpenseItem implements ExpenseClaim {
     return this.ExpenseCategory;
   }
 	
+  /**
+   * this method sets the expenseCategory and if it is not valid then it throws an error
+   * @param expenseCategory
+   * @throws InvalidFieldEntryException
+   */
   public void setExpenseCategory(String expenseCategory) throws InvalidFieldEntryException  {
     if (!this.allowedCategories.contains(expenseCategory)){
       throw new InvalidFieldEntryException("Not a valid Category");
@@ -161,17 +197,29 @@ public class ExpenseItem implements ExpenseClaim {
     return receipt;
   }
 
-  // method for adding a receipt for the expense item
+  /**
+   *  method for adding a receipt for the expense item, this is to be implemented for project 5
+   * @param receipt
+   */
   public void addReceipt(Receipt receipt) {
     this.receipt = receipt;
   }
 
-  // method for removing a receipt for the expense item
+  /**
+   * method for removing a receipt for the expense item, this is to be implemented for project 5
+   * @param bitmap
+   */
   public void removeReceipt(Bitmap bitmap) {
-    // TODO for project 5
+    /**
+     *  TODO for project 5
+     */
   }
 
-  // this method will determine if the expense item is complete or not
+  /**
+   *  this method will determine if the expense item is complete or not
+   * 
+   * @return
+   */
   public boolean isComplete() {
     return complete;
   }
@@ -180,18 +228,31 @@ public class ExpenseItem implements ExpenseClaim {
     this.complete = complete;
   }
 
+  /**
+   * method that is to be implemented for project 5
+   */
   public void setIncompletenessIndicator() {
-    // TODO for project 5
+    /**
+     *  TODO for project 5
+     */
   }
 
+  /**
+   * method that is to be implemented for project 5
+   */
   public void removeIncompletenessIndicator() {
-    // TODO for project 5
+    /**
+     *  TODO for project 5
+     */
   }
   
   /**
    * Copied from
-   * http://stackoverflow.com/a/3973886
+   * James Devito, http://stackoverflow.com/a/3973886
    * on March 16 2015
+   * 
+   * this method translates java date format into the string format
+   * the format is done so that we can analyze as we pass the result as string format
    */
 	public String getPurchseDateAsString() {
 		//we need this item to format our dates
@@ -200,7 +261,9 @@ public class ExpenseItem implements ExpenseClaim {
 		int year = newDate.getYear();
 		newDate.setYear(year-1900);
 		
-		//this is where we format the start and end dates
+		/**this is where we format the start and end dates
+		 * 
+		 */
 		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
 	}
 }
