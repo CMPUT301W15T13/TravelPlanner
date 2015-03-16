@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/buttonNewExpense"
-        android:layout_below="@+id/expenseClaimName" >
+        android:layout_alignParentTop="true" >
 
     </ListView>
 
@@ -26,16 +26,6 @@
         android:onClick="newExpenseItem"
         android:padding="0px"
         android:text="@string/new_expense"
-        android:textColor="@color/text" />
-
-    <TextView
-        android:id="@+id/expenseClaimName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:text="temp-getclaimname"
-        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/text" />
 
 </RelativeLayout>

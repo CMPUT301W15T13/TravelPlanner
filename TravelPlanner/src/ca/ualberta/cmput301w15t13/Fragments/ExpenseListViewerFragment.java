@@ -112,8 +112,11 @@ public class ExpenseListViewerFragment extends Fragment {
 	 * This will initialize the adapter for the expenses
 	 */
 	private void initializeAdapter(){
-		TextView claimName = (TextView) getView().findViewById(R.id.expenseClaimName);
-		claimName.setText(claimID);
+		/**
+		 * TextView claimName = (TextView) getView().findViewById(R.id.expenseClaimName);
+		 * claimName.setText(claimID);
+		 */
+		
 		final ListView ExpenseListView = (ListView) getView().findViewById(R.id.listViewExpenseItems);
 		ExpenseListView.setAdapter(ExpenseAdapter);
 		ExpenseListView.setOnItemClickListener(new OnItemClickListener(){
