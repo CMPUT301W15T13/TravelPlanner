@@ -43,6 +43,6 @@
     <string name="return_claim">Return</string>
     <string name="tags">Tags</string>
     <string name="$">$</string>
-    <string name="newlines">\n\n</string>
+    <string name="add">Add</string>
 
 </resources>
