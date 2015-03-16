@@ -80,7 +80,7 @@ public class ExpenseListViewerFragment extends Fragment {
 		addListeners();
 		initializeAdapter();
 	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -108,37 +108,40 @@ public class ExpenseListViewerFragment extends Fragment {
 		});
 	}
 	
+	/**
+	 * This will initialize the adapter for the expenses
+	 */
 	private void initializeAdapter(){
 		TextView claimName = (TextView) getView().findViewById(R.id.expenseClaimName);
 		claimName.setText(claimID);
 		final ListView ExpenseListView = (ListView) getView().findViewById(R.id.listViewExpenseItems);
 		ExpenseListView.setAdapter(ExpenseAdapter);
-		
 		ExpenseListView.setOnItemClickListener(new OnItemClickListener(){
-
+			/**
+			 * We need to override some portions of onItemClick
+			 * This will pass to the edit expense if we are allowed to edit
+			 * otherwise it will show simple details TODO
+			 */
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
 				if(((ExpenseActivity) getActivity()).isClaimant()){
 					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-					ExpenseItem ourExpense = ourClaim.getExpenseItems().get(position);
 					if(ourClaim.isEditable()){
 						((ExpenseActivity) getActivity()).editExpense(position);
 					} else{
 						Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
 					}
-					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
-					//Intent intent = new Intent(getActivity(), ExpenseActivity.class);
-					//startActivity(intent);
 					
 				} else {
 					Toast.makeText(getActivity(), "View Expense details", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
-		
+		/**
+		 * Similarly for the long click
+		 */
 		ExpenseListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
