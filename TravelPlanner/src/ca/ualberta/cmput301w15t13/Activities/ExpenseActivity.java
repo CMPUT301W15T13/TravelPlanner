@@ -104,30 +104,20 @@ public class ExpenseActivity extends Activity {
 	 * to the corresponding search and
 	 * sort settings for claim viewing.
 	 */
+	
 	private void setActionBar(){
 		//Based on http://stackoverflow.com/questions/6746665/accessing-a-font-under-assets-folder-from-xml-file-in-android Jan 25 2015
-		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.claim_actionbar_layout, null);
+		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.expense_actionbar_layout, null);
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
 		
-		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
-		searchButton.setOnClickListener(new View.OnClickListener() {
+		//ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
+		//searchButton.setOnClickListener(new View.OnClickListener() {
 			
-			@Override
-			public void onClick(View v) {
-				EditText searchBar = (EditText) findViewById(R.id.editTextSearchClaims);
-				String searchMessage = searchBar.getText().toString();
-				
-				// TODO test for not null and not empty throw exception thing
-				
-				//TODO actually search
-				
-				Toast.makeText(getBaseContext(), searchMessage, Toast.LENGTH_SHORT).show();
-			}
-		});
+
 	}
  
 	@Override
@@ -142,7 +132,7 @@ public class ExpenseActivity extends Activity {
 	 * to the claim viewer.
 	 */
 	public void setFragmentToExpenseViewer(){
-		actionBar.show();
+		actionBar.hide();
 		//Inspired by
 		//http://stackoverflow.com/a/16036693
 		//3/15/2015
