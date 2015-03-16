@@ -68,7 +68,7 @@ public class ExpenseAdapter extends ArrayAdapter{
 			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			
 			//titleView.setText(.getUserName());
-			
+			titleView.setText(expense.getID());
 			
 			//TODO add a convert date to text method somewhere
 			//dateView.setText(claim.getDateText());
