@@ -30,8 +30,6 @@ public class PrimitivePhotoActivity extends Activity {
 	
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	private static final int PHOTO_WIDTH = 400;
-	private static final int PHOTO_HEIGHT = 400;
 	
 	
 	@Override
