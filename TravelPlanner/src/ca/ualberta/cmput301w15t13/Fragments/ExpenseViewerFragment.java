@@ -124,7 +124,7 @@ public class ExpenseViewerFragment extends Fragment {
 					//Intent intent = new Intent(getActivity(), ExpenseActivity.class);
 					//startActivity(intent);
 					
-				}else{
+				} else {
 					Toast.makeText(getActivity(), "View Expense details", Toast.LENGTH_SHORT).show();
 				}
 			}
@@ -136,8 +136,8 @@ public class ExpenseViewerFragment extends Fragment {
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Toast.makeText(getActivity(), "Long Click", Toast.LENGTH_SHORT).show();
-				//TODO make a popup open, and have edit as an option. Later
-				//((ClaimActivity) getActivity()).editClaim(position);
+				expenses.remove(position);
+				ExpenseAdapter.notifyDataSetChanged();
 				return true;
 			}
 		});

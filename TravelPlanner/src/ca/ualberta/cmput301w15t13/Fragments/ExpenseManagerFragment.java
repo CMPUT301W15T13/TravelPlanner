@@ -157,6 +157,7 @@ public class ExpenseManagerFragment extends Fragment {
 			//ClaimListSingleton.getClaimList().add(newExpense);
 			ExpenseItem newExpense = new ExpenseItem(categorySet, Date, description, amount, currencySet, claimID);
 			Toast.makeText(getActivity(), String.valueOf(amount), Toast.LENGTH_SHORT).show();
+			newExpense.setExpenseName(expenseName);
 			ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
 		}else {
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();

@@ -44,6 +44,7 @@ public class ExpenseItem implements ExpenseClaim {
   private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
 	
   //these are the input fields for the expense
+  protected String ExpenseName = null;
   protected String ExpenseCategory = null;
   protected Date purchaseDate = null;
   protected String ExpenseDescription = null;
@@ -90,7 +91,15 @@ public class ExpenseItem implements ExpenseClaim {
 	this.allowedCurrencies.add("CNY");
 		
   }
-
+  
+  public String getExpenseName() {
+	  return this.ExpenseName;
+  }
+  
+  public void setExpenseName(String name) {
+	  this.ExpenseName = name;
+  }
+  
   public String getExpenseCategory() {
     return this.ExpenseCategory;
   }
