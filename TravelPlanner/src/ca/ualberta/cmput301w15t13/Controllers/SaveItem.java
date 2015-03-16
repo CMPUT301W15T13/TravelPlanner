@@ -16,7 +16,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
 import ca.ualberta.cmput301w15t13.Models.ExpenseClaim;
-import ca.ualberta.ssrg.movies.es.Movie;
 import android.content.Context;
 import android.util.Log;
 
@@ -25,15 +24,12 @@ import android.util.Log;
  * This function will be the API for saving a claim/expense
  * Uses the Facade Design pattern
  */
-public class SaveItem <Item>  implements SAVELOAD{
+public class SaveItem <Item> implements SAVELOAD {
 
 	protected Item itemToSave;
 	
-	
-	
 	public SaveItem (Item ce){
 		itemToSave = ce;
-		String hey = RESOURCE_URL;
 	}
 	
 	
@@ -41,69 +37,38 @@ public class SaveItem <Item>  implements SAVELOAD{
 		itemToSave = ce;
 	}
 	
-	
-	public static <Item extends ExpenseClaim> String saveClaimOrExpense(Item ce){
+	/**
+	 * This will save the current item on the server
+	 * It is based on the save 
+	 * @param ce
+	 * @return
+	 */
+	public static <Item extends ExpenseClaim> String saveItemOnServer(Item ce){
 		String itemID = ce.getID();
+		Gson gson = new Gson();
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
-			HttpPost addRequest = new HttpPost(movies.getResourceUrl() + movie.getId());
+			HttpPost addRequest = new HttpPost(RESOURCE_URL_TEST + itemID);
 
-			StringEntity stringEntity = new StringEntity(gson.toJson(movie));
-			addRequest.setEntity(stringEntity);
+			StringEntity itemAsString = new StringEntity(gson.toJson(ce));
+			addRequest.setEntity(itemAsString);
 			addRequest.setHeader("Accept", "application/json");
 
 			HttpResponse response = httpClient.execute(addRequest);
 			String status = response.getStatusLine().toString();
-			Log.i(TAG, status);
+			//Log.i(TAG, status);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
-		Gson gson = new Gson();
-		
-		JsonElement claimJson = gson.toJsonTree(ce);
-		
-		
-		//try to save
-		try {	
-			//this will create the new file and use GSON to save the claimlist to it
-			FileOutputStream fos = context.openFileOutput(itemID, 0);
-			OutputStreamWriter osw = new OutputStreamWriter(fos);
-			gson.toJson(ce, osw);
-			
-			this will force it to write
-			osw.flush();
-			this will close the streams
-			osw.close();
-			fos.close();
-				
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+
 		return itemID;
 	}
 	
 	
 	
-	/**
-	 * This will save the current claimList
-	 * @param context
-	 */
-	public void save(Context context){
-		
-		
-		
-		 
-	}
 	
 	
 /* REFERENCE!!!!
