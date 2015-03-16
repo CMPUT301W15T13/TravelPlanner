@@ -3,6 +3,7 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.Calendar;
 import java.util.Date;
 
+import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
 import ca.ualberta.cmput301w15t13.Activities.PrimitivePhotoActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
@@ -91,19 +92,26 @@ public class ExpenseManagerFragment extends Fragment {
 
 	//Will set the fields that we need 
 	private void setFields() {
+		//if we are editing set all field to their proper values
 		if(isEditing){
 			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 			ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
+			this.expenseNameView.setText(editExpense.getExpenseName());
 			this.description = editExpense.getExpenseDescription();
-			this.Date = editExpense.getPurchaseDate();
-			this.descriptionView.setText(this.description);
-			this.amountView.setText(String.valueOf(this.amount));
+			this.dateView.setText(editExpense.getPurchaseDate().toString());
+			this.descriptionView.setText(editExpense.getExpenseDescription());
+			this.amountView.setText(String.valueOf(editExpense.getAmount()));
 			this.categorySpinner.setSelection(getIndex(categorySpinner,editExpense.getExpenseCategory()));
 			this.currencySpinner.setSelection(getIndex(currencySpinner,editExpense.getExpenseCategory()));
-			this.dateView.setText(editClaim.getStartDateAsString());
 			
-		}else{
+		} else {
 			this.descriptionView.setText("");
+			this.expenseNameView.setText("");
+			this.amountView.setText("");
+			this.dateView.setText("");
+			this.categorySpinner.setSelection(0);
+			this.currencySpinner.setSelection(0);
+			
 		}
 		
 	}
@@ -147,8 +155,18 @@ public class ExpenseManagerFragment extends Fragment {
 		return this.isEditing;
 	}
 	
-	public void updateClaim() {
-		// TODO May still need this (update the claim for the new info in expense)
+	public void updateExpense() {
+		updateReferences();
+		String categorySet = categorySpinner.getSelectedItem().toString();
+		String currencySet = currencySpinner.getSelectedItem().toString();
+		
+		ExpenseItem newExpense = new ExpenseItem(categorySet, Date, 
+					description, amount, currencySet, claimID);
+		newExpense.setExpenseName(expenseName);
+		ExpenseItem removeThis = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).
+								getExpenseItemList().findExpenseItem(expenseIndex);
+		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).removeExpenseItem(removeThis);
+		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
 	}
 	
 	public void createExpenseItem() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
