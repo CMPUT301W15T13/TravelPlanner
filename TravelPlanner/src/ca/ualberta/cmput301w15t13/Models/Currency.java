@@ -2,10 +2,9 @@ package ca.ualberta.cmput301w15t13.Models;
 
 public class Currency{
 
-	/**
-	 * This is an enum which contains all of the allowed currencies
-	 * @author eorod_000
-	 *
+	/*
+	 * Currency class
+	 * Defines data and overall functionality
 	 */
 	public enum CurrencyEnum {
 			CAD("Canadian Dollar","CAD"),

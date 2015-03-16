@@ -20,7 +20,11 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class TestActivity extends Activity {
+/**
+ * This activity is a copy of bogopic from the CMPUT 301 lab
+ * Currently its main purpose is demonstration
+ */
+public class PrimitivePhotoActivity extends Activity {
 
 	Uri imageFileUri;
 	
@@ -70,7 +74,7 @@ public class TestActivity extends Activity {
 			if (resultCode == RESULT_OK) {
 				TextView tv = (TextView) findViewById(R.id.textView3);
 				tv.setText("Photo OK");
-				ImageButton ib = (ImageButton) findViewById(R.id.imageButton1);
+				ImageButton ib = (ImageButton) findViewById(R.id.expenseManagerPictureButton);
 			
 				Drawable pic = Drawable.createFromPath(imageFileUri.getPath());
 				pic = resize(pic);

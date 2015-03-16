@@ -102,11 +102,19 @@
 		    	android:layout_marginLeft="3dp"
 				>
 
-				<ImageButton
-				    android:id="@+id/imageButton1"
+				<ImageView
+				    android:id="@+id/receiptImageHolder"
 				    android:layout_width="0dp"
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
+				    android:src="@drawable/ic_ayy" />
+
+				<ImageButton
+				    android:id="@+id/expenseManagerPictureButton"
+				    android:layout_width="0dp"
+				    android:layout_height="wrap_content"
+				    android:layout_weight="0.2"
+				    android:onClick="takePicture"
 				    android:src="@android:drawable/btn_star" />
 				
 			</LinearLayout>

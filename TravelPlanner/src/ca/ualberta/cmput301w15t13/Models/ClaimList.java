@@ -92,6 +92,9 @@ public class ClaimList {
 		if (claimList == null) {
 			this.claimList = new ArrayList<Claim>();
 		}
+		
+		Collections.sort(claimList);
+		
 		return claimList;
 	}
 
@@ -138,9 +141,8 @@ public class ClaimList {
 		this.tagManager = tm;
 	}
 
-	public ArrayList<ExpenseItem> getExpenseArrayList() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<ExpenseItem> getExpenseList(int ClaimIndex) {
+		return claimList.get(ClaimIndex).getExpenseItems();
 	}
 	
 }

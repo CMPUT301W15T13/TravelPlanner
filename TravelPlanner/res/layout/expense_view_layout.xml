@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    >
+    
+    <ScrollView 
+           android:layout_height="wrap_content"
+           android:layout_width="match_parent"
+        >
+        <LinearLayout 
+           android:layout_height="wrap_content"
+           android:layout_width="match_parent"
+           android:orientation="vertical"
+            >
+
+		    <TextView
+		        android:id="@+id/textViewExpenseName"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_marginBottom="9dp"
+		        android:textColor="@color/text"
+		        android:text="@string/expense_name"
+		        android:textAppearance="?android:attr/textAppearanceLarge" />
+		
+		    <TextView
+		        android:id="@+id/textViewCategoryString"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/Category"
+		        android:textAppearance="?android:attr/textAppearanceSmall"
+		        android:textColor="@color/text" />
+		    
+		    <LinearLayout
+		        	android:id="@+id/layoutCategory"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewCategory"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:text="@string/holder"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    />
+						
+			</LinearLayout>
+			
+		    <TextView
+		        android:id="@+id/textViewPurchaseDateTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/date"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <LinearLayout
+		        	android:id="@+id/layoutPurchaseDate"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewPurchaseDate"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:text="@string/holder"
+					    />
+						
+			</LinearLayout>
+			
+		   <TextView
+		        android:id="@+id/textViewAmountTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/Amount"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <LinearLayout
+		        	android:id="@+id/layoutAmount"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>
+				    
+					<TextView
+					    android:id="@+id/moneySignString"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:text="@string/$"
+					    />
+
+					<TextView
+					    android:id="@+id/textViewAmountView"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:text="@string/holder"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:textColor="@color/text" />
+
+					<TextView
+					    android:id="@+id/TextViewCurrencyString"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:text="@string/holder"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:textColor="@color/text" />
+						
+			</LinearLayout>
+			
+		    <TextView
+		        android:id="@+id/textViewDescriptionTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/description"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+		    <LinearLayout
+		        	android:id="@+id/layoutDescription"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="6dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewDescription"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:text="@string/holder"
+					    />
+						
+			</LinearLayout>
+			
+		    <TextView
+		        android:id="@+id/textViewReceiptTitle"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/receipt"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+			
+		    <LinearLayout
+		        	android:id="@+id/layoutReceipt"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>
+
+		        <ImageView
+		            android:id="@+id/receiptViewatAdapter"
+		            android:layout_width="wrap_content"
+		            android:layout_height="wrap_content"
+		            android:src="@drawable/ic_launcher" />
+						
+			</LinearLayout>
+	    </LinearLayout>
+	</ScrollView>
+	
+    <Button
+        android:id="@+id/buttonDoneExpenseItemView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/done"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/text" />
+</RelativeLayout>

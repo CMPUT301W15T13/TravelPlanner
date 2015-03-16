@@ -30,13 +30,14 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 public class ExpenseAdapter extends ArrayAdapter{
 	/* 
 	 * The custom array adapter used to 
-	 * display the necessary info for a claim
+	 * display the necessary info for an expense
 	 */
 	
 	//based on http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view Jan 24th 2015
@@ -65,24 +66,14 @@ public class ExpenseAdapter extends ArrayAdapter{
 			TextView titleView = (TextView) view.findViewById(R.id.textViewAdapterExpenseTitle);
 			TextView dateView = (TextView) view.findViewById(R.id.textViewAdapterExpenseDate);
 			TextView costView = (TextView) view.findViewById(R.id.textViewAdapterExpenseAmount);
+			TextView currView = (TextView) view.findViewById(R.id.textViewAdapterCurrency);
+			//Will need this for properly handling images
 			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
-			
-			//titleView.setText(.getUserName());
-			
-			
-			//TODO add a convert date to text method somewhere
-			//dateView.setText(claim.getDateText());
-			//TODO claim cost text
-			//costView.setText(claim.ge);
-			
-//			int status = claim.getStatus();
-//			if(status == ClaimStatus.INPROGRESS){
-//				statusView.setImageResource(android.R.drawable.ic_menu_edit);
-//			}else if(status == ClaimStatus.SENT){
-//				statusView.setImageResource(android.R.drawable.ic_dialog_email);
-//			}else{ // CLOSED
-//				statusView.setImageResource(android.R.drawable.ic_menu_myplaces);
-//			}
+			titleView.setText(expense.getExpenseName());
+			dateView.setText(expense.getPurchaseDate().toString());
+			costView.setText(String.valueOf(expense.getAmount()));
+			currView.setText(expense.getCurrency());
+
 		}
 		
 		return view;

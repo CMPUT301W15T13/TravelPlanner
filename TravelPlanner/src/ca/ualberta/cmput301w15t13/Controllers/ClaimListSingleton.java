@@ -79,7 +79,7 @@ public class ClaimListSingleton {
 	}
 	//This is temporary
 	//TODO Send the expense list instead
-	public static ArrayList<ExpenseItem> getExpenseItemList() {
+	public static ArrayList<ExpenseItem> getExpenseItemArrayList() {
 		ArrayList<ExpenseItem> expenselist = new ArrayList<ExpenseItem>();
 		return expenselist;
 	}

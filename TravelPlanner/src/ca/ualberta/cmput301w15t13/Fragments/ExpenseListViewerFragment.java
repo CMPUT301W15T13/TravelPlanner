@@ -31,15 +31,18 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
-import ca.ualberta.cmput301w15t13.Controllers.ClaimAdapter;
+import ca.ualberta.cmput301w15t13.Controllers.ExpenseAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 
 /**
  * This fragment is used to view expenses and 
@@ -49,11 +52,11 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
  *
  */
 
-public class ExpenseViewerFragment extends Fragment {
-	private ClaimAdapter ExpenseAdapter;
-	private ArrayList<Claim> expenses;
+public class ExpenseListViewerFragment extends Fragment {
+	private ExpenseAdapter ExpenseAdapter;
+	private ArrayList<ExpenseItem> expenses;
 	private int claimIndex;
-	private float claimID;
+	private String claimID;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -63,12 +66,9 @@ public class ExpenseViewerFragment extends Fragment {
 		 */
 		super.onCreate(savedInstanceState);
 		claimIndex = getArguments().getInt("claimIndex");
-		claimID = getArguments().getFloat("claimID");
-		expenses = ClaimListSingleton.getClaimList().getClaimArrayList();
-		this.ExpenseAdapter = new ClaimAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
-		//expenses = ClaimListSingleton.getExpenseItemList();
-		//this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
-		
+		claimID = getArguments().getString("claimID");
+		expenses = ClaimListSingleton.getClaimList().getExpenseList(claimIndex);
+		this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);		
 	}
 	
 	@Override
@@ -77,11 +77,11 @@ public class ExpenseViewerFragment extends Fragment {
 		addListeners();
 		initializeAdapter();
 	}
-
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.expense_item_viewer, container, false);
+		View v = inflater.inflate(R.layout.expense_list_viewer, container, false);
 		return v;
 	}
 
@@ -95,44 +95,51 @@ public class ExpenseViewerFragment extends Fragment {
 
 			@Override
 			public void update() {
-//				claims.clear();
-				ClaimList expenses = ClaimListSingleton.getClaimList();
-				//expenses.getClaimAtIndex(claimIndex);
-				//expenses = ClaimListSingleton.getExpenseItemList();
+				ExpenseItemList expenses = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItemList();
 				ExpenseAdapter.notifyDataSetChanged();
 			}
 			
 		});
 	}
 	
+	/**
+	 * This will initialize the adapter for the expenses
+	 */
 	private void initializeAdapter(){
+		/**
+		 * TextView claimName = (TextView) getView().findViewById(R.id.expenseClaimName);
+		 * claimName.setText(claimID);
+		 */
+		
 		final ListView ExpenseListView = (ListView) getView().findViewById(R.id.listViewExpenseItems);
 		ExpenseListView.setAdapter(ExpenseAdapter);
-		
 		ExpenseListView.setOnItemClickListener(new OnItemClickListener(){
-
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
 				if(((ExpenseActivity) getActivity()).isClaimant()){
-					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
-					//Intent intent = new Intent(getActivity(), ExpenseActivity.class);
-					//startActivity(intent);
+					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+					if(ourClaim.isEditable()){
+						((ExpenseActivity) getActivity()).editExpense(position);
+					} else{
+						Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
+					}
 					
-				}else{
+				} else {
 					Toast.makeText(getActivity(), "View Expense details", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
-		
+		/**
+		 * Similarly for the long click
+		 */
 		ExpenseListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Toast.makeText(getActivity(), "Long Click", Toast.LENGTH_SHORT).show();
-				//TODO make a popup open, and have edit as an option. Later
-				//((ClaimActivity) getActivity()).editClaim(position);
+				expenses.remove(position);
+				ExpenseAdapter.notifyDataSetChanged();
 				return true;
 			}
 		});

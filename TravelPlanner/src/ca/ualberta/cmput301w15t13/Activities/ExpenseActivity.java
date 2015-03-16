@@ -29,14 +29,11 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ExpenseListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseManagerFragment;
-import ca.ualberta.cmput301w15t13.Fragments.ExpenseViewerFragment;
+import ca.ualberta.cmput301w15t13.Fragments.ExpenseListViewerFragment;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -55,13 +52,16 @@ public class ExpenseActivity extends Activity {
 	
 	private FragmentManager fm;
 	private FragmentTransaction ft;
-	private ExpenseViewerFragment ExpenseViewerFragment;
+	private ExpenseListViewerFragment ExpenseViewerFragment;
 	private ExpenseManagerFragment ExpenseManagerFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
-	private boolean isClaimant;
+	//Temporary force claimant true
+	//Will most likely need to handle this elegantly in part 5
+	//TODO handle isClaimant properly
+	private boolean isClaimant = true;
 	private String username;
 	private int claimIndex;
-	private float claimID;
+	private String claimID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +72,14 @@ public class ExpenseActivity extends Activity {
 		this.actionBar = getActionBar();
 		
 		this.fm = getFragmentManager();
-		ExpenseViewerFragment = new ExpenseViewerFragment();
+		ExpenseViewerFragment = new ExpenseListViewerFragment();
 		ExpenseManagerFragment = new ExpenseManagerFragment();
 		
 		//Need to extract passed claim info
-		Intent intent = getIntent();
-		intent.getExtras();
 		Bundle bundle = getIntent().getExtras();
 		claimIndex = bundle.getInt("claimIndex");
-		claimID = bundle.getFloat("claimID");
+		claimID = bundle.getString("claimID");
+		//TODO handle isClaimant properly
 		//this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
 		//this.username = intent.getStringExtra(LoginActivity.USERID);
 		
@@ -102,33 +101,17 @@ public class ExpenseActivity extends Activity {
 
 	/**
 	 * Set the action bar
-	 * to the corresponding search and
-	 * sort settings for claim viewing.
+	 * Very simple and planeactionbar
+	 * Useful for screen space economy
 	 */
 	private void setActionBar(){
 		//Based on http://stackoverflow.com/questions/6746665/accessing-a-font-under-assets-folder-from-xml-file-in-android Jan 25 2015
-		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.claim_actionbar_layout, null);
+		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.expense_actionbar_layout, null);
 		final ActionBar actionBar = getActionBar();
 		actionBar.setDisplayShowHomeEnabled(false);
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
-		
-		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
-		searchButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				EditText searchBar = (EditText) findViewById(R.id.editTextSearchClaims);
-				String searchMessage = searchBar.getText().toString();
-				
-				// TODO test for not null and not empty throw exception thing
-				
-				//TODO actually search
-				
-				Toast.makeText(getBaseContext(), searchMessage, Toast.LENGTH_SHORT).show();
-			}
-		});
 	}
  
 	@Override
@@ -143,13 +126,13 @@ public class ExpenseActivity extends Activity {
 	 * to the claim viewer.
 	 */
 	public void setFragmentToExpenseViewer(){
-		actionBar.show();
+		actionBar.hide();
 		//Inspired by
 		//http://stackoverflow.com/a/16036693
 		//3/15/2015
 		Bundle bundle=new Bundle();
 		bundle.putInt("claimIndex", claimIndex);
-		bundle.putFloat("claimID", claimID);
+		bundle.putString("claimID", claimID);
 		//set Fragmentclass Arguments
 		ExpenseViewerFragment.setArguments(bundle);
 		
@@ -164,6 +147,14 @@ public class ExpenseActivity extends Activity {
 	 */
 	public void setFragementToExpenseManager(){
 		actionBar.hide();
+		//Inspired by
+		//http://stackoverflow.com/a/16036693
+		//3/15/2015
+		Bundle bundle= new Bundle();
+		bundle.putInt("claimIndex", claimIndex);
+		bundle.putString("claimID", claimID);
+		//set Fragmentclass Arguments
+		ExpenseManagerFragment.setArguments(bundle);
 		
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, this.ExpenseManagerFragment, "ExpenseManager");
@@ -207,7 +198,7 @@ public class ExpenseActivity extends Activity {
 	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException{
 		ExpenseManagerFragment.updateReferences();
 		if(ExpenseManagerFragment.isEditing()){ //check if we're updating a claim or creating a claim
-			ExpenseManagerFragment.updateClaim();
+			ExpenseManagerFragment.updateExpense();
 		}
 		else{
 			ExpenseManagerFragment.createExpenseItem();
@@ -220,7 +211,7 @@ public class ExpenseActivity extends Activity {
 	
 	/**
 	 * Cancels the claim creation/editing
-	 * and returns back to the viewing screen.
+	 * and returns back to the viewing screen
 	 */
 	public void cancelClaim(View v){
 		setFragmentToExpenseViewer();
@@ -235,12 +226,36 @@ public class ExpenseActivity extends Activity {
 		TextView textId = (TextView) findViewById(R.id.textViewDateExpense);
 		ExpenseManagerFragment.openDateDialog(textId);
 	}
-	
+	/**
+	 * Get the username
+	 * @return
+	 */
 	public String getUsername(){
 		return this.username;
 	}
 
+	/**
+	 * return isclaimant status
+	 * @return
+	 */
 	public boolean isClaimant(){
 		return isClaimant;
+	}
+	/**
+	 * Take a picture
+	 * @param v
+	 */
+	public void takePicture(View v) {
+		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
+		startActivity(intent);
+	}
+	/**
+	 * Go to edit the expense
+	 * @param index
+	 */
+	public void editExpense(int index) {
+		setFragementToExpenseManager();
+		ExpenseManagerFragment.setStateAsEditing(true);
+		ExpenseManagerFragment.setExpenseIndex(index);
 	}
 }

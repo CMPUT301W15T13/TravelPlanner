@@ -52,6 +52,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	protected ExpenseItemList expenseItems = null;
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected String claimID = null;
+	protected double totalCost = 0;
 
 /**
  * 
@@ -375,6 +376,10 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public ArrayList<ExpenseItem> getExpenseItems() {
 		return this.expenseItems.getExpenseList();
 	}
+	//Maybe I don't need this, did not realize claims have expense item add methods
+	public ExpenseItemList getExpenseItemList() {
+		return this.expenseItems;
+	}
 
 	/**
 	 * This will return the edit-ability of the claim
@@ -398,8 +403,9 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public String getStartDateAsString() {
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
-		Date newDate = this.startDate;
-		newDate.setYear(this.startDate.getYear()-1900);
+		Date newDate = (Date) this.startDate.clone();
+		int year = newDate.getYear();
+		newDate.setYear(year-1900);
 		
 		//this is where we format the start and end dates
 		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
@@ -414,8 +420,9 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public String getEndDateAsString() {
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
-		Date newDate = this.endDate;
-		newDate.setYear(this.endDate.getYear()-1900);
+		Date newDate = (Date) this.endDate.clone();
+		int year = newDate.getYear();
+		newDate.setYear(year-1900);
 		
 		//this is where we format the start and end dates
 		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
@@ -428,9 +435,9 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 
 	/**
 	 * This is the compare method required by the Collections.sort method	
-	 * Claim will return -1 if:
+	 * Claim will return 1 if:
 	 * 		Caller is before the parameter
-	 * 	Claim will return 1 if:
+	 * 	Claim will return -1 if:
 	 * 		Caller is after the parameter
 	 * else it will return 0 if both start date and end dates are the same
 	 * 
@@ -439,16 +446,27 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	@Override
 	public int compareTo(Claim rhs) {
 		if (this.getStartDate().before(rhs.getStartDate())) {
-			return -1;
-		} else if (this.getStartDate().after(rhs.getStartDate())) {
 			return 1;
+		} else if (this.getStartDate().after(rhs.getStartDate())) {
+			return -1;
 		} else if (this.getStartDate().equals(rhs.getStartDate())) {
 			if (this.getEndDate().before(rhs.getEndDate())) {
 				return -1;
 			}else if (this.getEndDate().after(rhs.getEndDate())) {
-				return -1;
+				return 1;
 			}
 		}
 		return 0;
 	}
+
+	public String getCost() {
+		// TODO Auto-generated method stub
+		return "0.00";
+	}
+	
+	public void addToCost(double newCost){
+	
+		
+	}
+	
 }
