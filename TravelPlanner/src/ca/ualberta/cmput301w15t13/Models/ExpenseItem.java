@@ -40,7 +40,7 @@ import android.text.format.DateFormat;
  */
 public class ExpenseItem implements ExpenseClaim {
 	
-<<<<<<< HEAD
+
   /**these are the allowed variables that will show up on the Activities
    * 
    */
@@ -50,12 +50,12 @@ public class ExpenseItem implements ExpenseClaim {
   /**these are the input fields for the expense
    * 
    */
-=======
+
   // These are the allowed variables that will show up on the Activities
   private static ArrayList<String> allowedCategories = new ArrayList<String>();
   private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
 	
->>>>>>> 46d59592fed4a8e2e14be48183995b07046844b6
+
   protected String ExpenseName = null;
   protected String ExpenseCategory = null;
   protected Date purchaseDate = null;
@@ -65,7 +65,7 @@ public class ExpenseItem implements ExpenseClaim {
 
   protected String ClaimID = null;
   protected String ExpenseID = null;
-<<<<<<< HEAD
+
   /**this does not need to be initialized
    * 
    */
@@ -74,10 +74,10 @@ public class ExpenseItem implements ExpenseClaim {
   /** Boolean variable that tells if the expense item is done or not
    * 
    */
-=======
+
   protected Currency currencyEnum;
   public Receipt receipt = null;
->>>>>>> 46d59592fed4a8e2e14be48183995b07046844b6
+
   public boolean complete = false;
 	
   /**
