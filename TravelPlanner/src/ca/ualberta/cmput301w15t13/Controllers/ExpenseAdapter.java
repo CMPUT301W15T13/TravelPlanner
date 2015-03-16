@@ -20,6 +20,7 @@
 
 package ca.ualberta.cmput301w15t13.Controllers;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -70,7 +71,7 @@ public class ExpenseAdapter extends ArrayAdapter{
 			//Will need this for properly handling images
 			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			titleView.setText(expense.getExpenseName());
-			dateView.setText(expense.getPurchaseDate().toString());
+			dateView.setText(expense.getPurchseDateAsString());
 			costView.setText(String.valueOf(expense.getAmount()));
 			currView.setText(expense.getCurrency());
 

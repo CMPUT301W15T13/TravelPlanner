@@ -100,11 +100,7 @@ public class ExpenseManagerFragment extends Fragment {
 			ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
 			this.expenseNameView.setText(editExpense.getExpenseName());
 			this.description = editExpense.getExpenseDescription();
-			// Simple formatter to parse the date
-			// Inspired by http://stackoverflow.com/a/18834843
-			// 3/16/2015
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-			this.dateView.setText(sdf.format(editExpense.getPurchaseDate()));
+			dateView.setText(editExpense.getPurchseDateAsString());
 			this.descriptionView.setText(editExpense.getExpenseDescription());
 			this.amountView.setText(String.valueOf(editExpense.getAmount()));
 			this.categorySpinner.setSelection(getIndex(categorySpinner,editExpense.getExpenseCategory()));
@@ -174,7 +170,7 @@ public class ExpenseManagerFragment extends Fragment {
 		updateReferences();
 		String categorySet = categorySpinner.getSelectedItem().toString();
 		String currencySet = currencySpinner.getSelectedItem().toString();
-		
+
 		ExpenseItem newExpense = new ExpenseItem(categorySet, Date, 
 					description, amount, currencySet, claimID);
 		newExpense.setExpenseName(expenseName);
