@@ -2,9 +2,11 @@ package ca.ualberta.cmput301w15t13.Fragments;
 
 import java.util.Calendar;
 import java.util.Date;
+
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidUserPermissionException;
@@ -28,14 +30,14 @@ public class ExpenseManagerFragment extends Fragment {
 	private TextView dateView;
 	private Date Date;
 	private String dateText;
-	private float amount;
+	private double amount;
 	private Spinner currencySpinner; 
 	private String description; 
 	private EditText descriptionView;
 	
 	private boolean areFieldsComplete, isEditing;
 	private int claimIndex;
-	private long claimID;
+	private String claimID;
 	private int expenseIndex;
 	
 	//TODO force change what the back button does from this screen, in that it moves to the old fragment
@@ -47,7 +49,7 @@ public class ExpenseManagerFragment extends Fragment {
 		Date = new Date();
 		
 		claimIndex = getArguments().getInt("claimIndex");
-		claimID = getArguments().getLong("claimID");
+		claimID = getArguments().getString("claimID");
 	}
 	
 	@Override
@@ -144,10 +146,14 @@ public class ExpenseManagerFragment extends Fragment {
 	
 	public void createExpenseItem() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
 		if(this.areFieldsComplete){
+			String categorySet = categorySpinner.getSelectedItem().toString();
+			String currencySet = currencySpinner.getSelectedItem().toString();
 			//TODO add to our list of expenses for the claim
 			//ExpenseItem newExpense = new ExpenseItem(((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
 			//this.description, itineraryList);
 			//ClaimListSingleton.getClaimList().add(newExpense);
+			ExpenseItem newExpense = new ExpenseItem(categorySet, Date, description, amount, currencySet, claimID);
+			ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
 		}else {
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();
 		}

@@ -61,7 +61,7 @@ public class ExpenseActivity extends Activity {
 	private boolean isClaimant;
 	private String username;
 	private int claimIndex;
-	private float claimID;
+	private String claimID;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,7 +79,7 @@ public class ExpenseActivity extends Activity {
 
 		Bundle bundle = getIntent().getExtras();
 		claimIndex = bundle.getInt("claimIndex");
-		claimID = bundle.getFloat("claimID");
+		claimID = bundle.getString("claimID");
 		//this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
 		//this.username = intent.getStringExtra(LoginActivity.USERID);
 		
@@ -148,7 +148,7 @@ public class ExpenseActivity extends Activity {
 		//3/15/2015
 		Bundle bundle=new Bundle();
 		bundle.putInt("claimIndex", claimIndex);
-		bundle.putFloat("claimID", claimID);
+		bundle.putString("claimID", claimID);
 		//set Fragmentclass Arguments
 		ExpenseViewerFragment.setArguments(bundle);
 		
@@ -168,7 +168,7 @@ public class ExpenseActivity extends Activity {
 		//3/15/2015
 		Bundle bundle=new Bundle();
 		bundle.putInt("claimIndex", claimIndex);
-		bundle.putFloat("claimID", claimID);
+		bundle.putString("claimID", claimID);
 		//set Fragmentclass Arguments
 		ExpenseViewerFragment.setArguments(bundle);
 		
