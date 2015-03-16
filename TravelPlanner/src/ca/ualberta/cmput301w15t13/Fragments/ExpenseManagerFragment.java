@@ -93,10 +93,13 @@ public class ExpenseManagerFragment extends Fragment {
 	private void setFields() {
 		if(isEditing){
 			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-			this.description = editClaim.getDescription();
-			this.Date = editClaim.getStartDate();
+			ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
+			this.description = editExpense.getExpenseDescription();
+			this.Date = editExpense.getPurchaseDate();
 			this.descriptionView.setText(this.description);
-			
+			this.amountView.setText(String.valueOf(this.amount));
+			this.categorySpinner.setSelection(getIndex(categorySpinner,editExpense.getExpenseCategory()));
+			this.currencySpinner.setSelection(getIndex(currencySpinner,editExpense.getExpenseCategory()));
 			this.dateView.setText(editClaim.getStartDateAsString());
 			
 		}else{
@@ -114,8 +117,7 @@ public class ExpenseManagerFragment extends Fragment {
 	}
 	
 	public void setExpenseIndex(int index) {
-		// TODO Auto-generated method stub
-		
+		expenseIndex = index;
 	}
 	/**
 	 * Updates the class level variables to reflect what's in the
@@ -207,4 +209,15 @@ public class ExpenseManagerFragment extends Fragment {
 		date.setMonth(month);
 		date.setYear(year);
 	}
+	
+	//Code reuse from James Devito's Assignment 1
+	private int getIndex(Spinner spinner, String myString) {
+		  int index = 0;
+		  for (int i=0;i<spinner.getCount();i++){
+		   if (spinner.getItemAtPosition(i).equals(myString)){
+		    index = i;
+		   }
+		  }
+		  return index;
+		 }
 } 
