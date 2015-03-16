@@ -1,5 +1,6 @@
 package ca.ualberta.cmput301w15t13.Fragments;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -98,7 +99,8 @@ public class ExpenseManagerFragment extends Fragment {
 			ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
 			this.expenseNameView.setText(editExpense.getExpenseName());
 			this.description = editExpense.getExpenseDescription();
-			this.dateView.setText(editExpense.getPurchaseDate().toString());
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			this.dateView.setText(sdf.format(editExpense.getPurchaseDate()));
 			this.descriptionView.setText(editExpense.getExpenseDescription());
 			this.amountView.setText(String.valueOf(editExpense.getAmount()));
 			this.categorySpinner.setSelection(getIndex(categorySpinner,editExpense.getExpenseCategory()));
