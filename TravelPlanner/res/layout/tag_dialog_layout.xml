@@ -30,6 +30,7 @@
         android:layout_alignRight="@+id/title_buffer"
         android:layout_below="@+id/textViewTagTitle"
         android:ems="10"
+        android:textColor="@color/text" 
         android:hint="Enter Tag name" />
 
 </RelativeLayout>
