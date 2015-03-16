@@ -214,6 +214,8 @@ public class ClaimActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claim_activity_layout);
+		// TODO make a better method for removing listeners
+		//ClaimListSingleton.getClaimList().clearListeners();
 		
 		setActionBar();
 		this.actionBar = getActionBar();

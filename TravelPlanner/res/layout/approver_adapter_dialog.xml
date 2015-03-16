@@ -13,6 +13,14 @@
        >
 
        <Button
+           android:id="@+id/buttonViewClaim"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textSize="12sp"
+           android:textColor="@color/text"
+           android:text="@string/view" />
+
+       <Button
            android:id="@+id/buttonApproveClaim"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"

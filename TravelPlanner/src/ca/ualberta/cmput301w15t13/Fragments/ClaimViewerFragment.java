@@ -42,6 +42,7 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import exceptions.InvalidUserPermissionException;
 
 /**
@@ -115,7 +116,7 @@ public class ClaimViewerFragment extends Fragment {
 						Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
 					}
 				}else{
-					viewClaim();
+					Toast.makeText(getActivity(), "Open Expense Item View", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
@@ -156,9 +157,11 @@ public class ClaimViewerFragment extends Fragment {
 	 * update the view.
 	 */
 	public void deleteClaim(){
-		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
-		ClaimListSingleton.getClaimList().notifyListeners();
-		// TODO should have a save listener, else save here
+		Claim claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		if(claim.getStatus() != ClaimStatus.statusEnum.SUBMITTED){
+			ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
+			ClaimListSingleton.getClaimList().notifyListeners();
+		}
 	}
 	
 	/**

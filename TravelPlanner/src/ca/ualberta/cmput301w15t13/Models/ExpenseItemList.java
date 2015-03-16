@@ -22,7 +22,7 @@ package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
 
-/*
+/**
  * This class is a container for individual expense
  * items. It is used by a claim to manage it's
  * constituent expense items.
@@ -43,7 +43,10 @@ public class ExpenseItemList {
 		expenseItemList = new ArrayList<ExpenseItem>();
 	}
 	
-	// some methods used to control ExpenseItemList. i.e. add, delete, update, etc
+	/**
+	 * some methods used to control ExpenseItemList. i.e. add, delete, update, etc
+	 * @param Expense
+	 */
 	public void add(ExpenseItem Expense) {
 		// No need to check for duplicate as there could be multiple identical expenses in a claim
 		expenseItemList.add(Expense);

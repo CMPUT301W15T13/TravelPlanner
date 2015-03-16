@@ -34,7 +34,7 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
 
-/*
+/**
  * Class for claim.
  * Defines data and overall functionality
  */

@@ -65,8 +65,17 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
         }
     };
     
-
-	
+    final OnClickListener viewClaim = new OnClickListener() {
+        @Override
+		public void onClick(final View v) {
+      	   FragmentManager fm = getFragmentManager();
+      	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+      	   fragment.viewClaim();
+      	   Dialog d = getDialog();
+      	   d.dismiss();
+        }
+    };
+    
 	@SuppressLint("InflateParams")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -79,9 +88,11 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 	    
 	    Button approve = (Button) view.findViewById(R.id.buttonApproveClaim);
 	    Button returnButton = (Button) view.findViewById(R.id.buttonReturnClaim);
-
+	    Button viewButton = (Button) view.findViewById(R.id.buttonViewClaim);
+	    
 	    approve.setOnClickListener(approveClaim);
 	    returnButton.setOnClickListener(returnClaim);
+	    viewButton.setOnClickListener(viewClaim);
 
 	    
 	    return builder.create();
