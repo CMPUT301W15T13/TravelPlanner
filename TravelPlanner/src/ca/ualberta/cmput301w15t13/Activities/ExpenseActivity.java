@@ -29,10 +29,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ExpenseListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseManagerFragment;
@@ -105,7 +102,7 @@ public class ExpenseActivity extends Activity {
 	/**
 	 * Set the action bar
 	 * Very simple and planeactionbar
-	 * Useful for screen space economy on expense items
+	 * Useful for screen space economy
 	 */
 	private void setActionBar(){
 		//Based on http://stackoverflow.com/questions/6746665/accessing-a-font-under-assets-folder-from-xml-file-in-android Jan 25 2015
@@ -214,7 +211,7 @@ public class ExpenseActivity extends Activity {
 	
 	/**
 	 * Cancels the claim creation/editing
-	 * and returns back to the viewing screen.
+	 * and returns back to the viewing screen
 	 */
 	public void cancelClaim(View v){
 		setFragmentToExpenseViewer();
@@ -229,18 +226,33 @@ public class ExpenseActivity extends Activity {
 		TextView textId = (TextView) findViewById(R.id.textViewDateExpense);
 		ExpenseManagerFragment.openDateDialog(textId);
 	}
-	
+	/**
+	 * Get the username
+	 * @return
+	 */
 	public String getUsername(){
 		return this.username;
 	}
 
+	/**
+	 * return isclaimant status
+	 * @return
+	 */
 	public boolean isClaimant(){
 		return isClaimant;
 	}
+	/**
+	 * Take a picture
+	 * @param v
+	 */
 	public void takePicture(View v) {
 		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
 		startActivity(intent);
 	}
+	/**
+	 * Go to edit the expense
+	 * @param index
+	 */
 	public void editExpense(int index) {
 		setFragementToExpenseManager();
 		ExpenseManagerFragment.setStateAsEditing(true);
