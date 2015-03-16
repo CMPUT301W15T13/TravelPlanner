@@ -52,6 +52,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	protected ExpenseItemList expenseItems = null;
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected String claimID = null;
+	protected double totalCost = 0;
 
 /**
  * 
@@ -455,4 +456,15 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		}
 		return 0;
 	}
+
+	public String getCost() {
+		// TODO Auto-generated method stub
+		return "0.00";
+	}
+	
+	public void addToCost(double newCost){
+	
+		
+	}
+	
 }

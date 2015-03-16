@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
+import android.provider.ContactsContract.DataUsageFeedback;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,8 @@ public class ClaimAdapter extends ArrayAdapter{
 		super(context, textViewResourceId,claims);
 		this.claims = (ArrayList<Claim>) claims;
 	}
-
+	
+	
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {		
 		View view = convertView;
@@ -57,6 +59,7 @@ public class ClaimAdapter extends ArrayAdapter{
 			LayoutInflater inflater;
 			inflater = LayoutInflater.from(getContext());
 			view = inflater.inflate(R.layout.claim_adapter_layout, null);
+			
 		}
 		
 		Claim claim = claims.get(position);
@@ -69,9 +72,9 @@ public class ClaimAdapter extends ArrayAdapter{
 			
 			titleView.setText(claim.getUserName());
 			//TODO add a convert date to text method somewhere
-			//dateView.setText(claim.getDateText());
+			dateView.setText("From: " + claim.getStartDateAsString() + ",  To: " + claim.getEndDateAsString());
 			//TODO claim cost text
-			//costView.setText(claim.ge);
+			costView.setText(claim.getCost());
 			
 //			int status = claim.getStatus();
 //			if(status == ClaimStatus.INPROGRESS){
