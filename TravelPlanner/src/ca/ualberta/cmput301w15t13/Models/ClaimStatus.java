@@ -19,7 +19,7 @@
  */
 package ca.ualberta.cmput301w15t13.Models;
 
-/*
+/**
  * This class is used to model
  * the status of an expense claim.
  * It provides the functionality of 

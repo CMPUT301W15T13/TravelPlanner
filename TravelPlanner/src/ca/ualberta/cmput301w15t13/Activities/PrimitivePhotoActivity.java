@@ -68,6 +68,7 @@ public class PrimitivePhotoActivity extends Activity {
 		
 	}
 		
+	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 			
@@ -83,21 +84,25 @@ public class PrimitivePhotoActivity extends Activity {
 				
 			}else if (resultCode == RESULT_CANCELED) {
 				TextView tv = (TextView) findViewById(R.id.textView3);
-				tv.setText("You Idiot");
+				tv.setText("Photograph Cancelled");
 				
 				
 			}else {
 				
 				TextView tv = (TextView) findViewById(R.id.textView3);
-				tv.setText("HUH?? WHA...");
+				tv.setText("Error");
 			}			
 		}
 	}
 	
-	// take from http://stackoverflow.com/questions/7021578/resize-drawable-in-android
+	/**
+	 * taken from http://stackoverflow.com/questions/7021578/resize-drawable-in-android on March 14 2015
+	 * @param image
+	 * @return
+	 */
 	protected Drawable resize(Drawable image) {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();
-	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 50, 50, false);
+	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 200, 300, false);
 	    return new BitmapDrawable(getResources(), bitmapResized);
 	}
 }

@@ -42,6 +42,7 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import exceptions.InvalidUserPermissionException;
 
 /**
@@ -60,8 +61,17 @@ public class ClaimViewerFragment extends Fragment {
 	private int claimIndex;
 	private String claimID;
 	private ClaimActivity activity;
+	
+	private Listener updateClaimList = new Listener(){
 
-
+		@Override
+		public void update() {
+			claims = ClaimListSingleton.getClaimList().getClaimArrayList();
+			claims = activity.getUser().getPermittableClaims(claims);
+			claimAdapter.notifyDataSetChanged();
+		}
+		
+	};
 
 	/**
 	 * Adds the Listeners for the ArrayAdapter that 
@@ -69,18 +79,8 @@ public class ClaimViewerFragment extends Fragment {
 	 * can be added here.
 	 */
 	private void addListeners(){
-		ClaimListSingleton.getClaimList().addListener(new Listener(){
-
-			@Override
-			public void update() {
-				claims = ClaimListSingleton.getClaimList().getClaimArrayList();
-				claims = activity.getUser().getPermittableClaims(claims);
-				claimAdapter.notifyDataSetChanged();
-			}
-			
-		});
+		ClaimListSingleton.getClaimList().addListener(updateClaimList);
 	}
-	
 	
 	/**
 	 * Binds the array list of claims to the array adapter
@@ -116,7 +116,7 @@ public class ClaimViewerFragment extends Fragment {
 						Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
 					}
 				}else{
-					viewClaim();
+					Toast.makeText(getActivity(), "Open Expense Item View", Toast.LENGTH_SHORT).show();
 				}
 			}
 		});
@@ -139,7 +139,9 @@ public class ClaimViewerFragment extends Fragment {
 	}
 	
 	/**
-	 * TODO
+	 * When permissible for the user and the clicked claim,
+	 * change the fragment to the ClaimManager and fill the
+	 * fields with the existing data.
 	 */
 	public void editClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
@@ -151,35 +153,32 @@ public class ClaimViewerFragment extends Fragment {
 	}
 	
 	/**
-	 * TODO
+	 * Delete the selected claim and 
+	 * update the view.
 	 */
 	public void deleteClaim(){
-		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
-		ClaimListSingleton.getClaimList().notifyListeners();
-		// TODO should have a save listener, else save here
+		Claim claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		if(claim.getStatus() != ClaimStatus.statusEnum.SUBMITTED){
+			ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
+			ClaimListSingleton.getClaimList().notifyListeners();
+		}
 	}
 	
-
-	
 	/**
-	 * TODO
+	 * View the selected claim's claim-level
+	 * details.
 	 */
 	public void viewClaim(){
 			activity.setFragmentToDetailViewer(claimIndex);
 	}
 	
 	/**
-	 * TODO
+	 * Changes the selected claim's status
+	 * to submitted, which allows it to be
+	 * viewed by approvers.
 	 */
 	public void submitClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-//		if(submitClaim.getStatus() == ClaimStatus.statusEnum.INPROGRESS){
-//			submitClaim.giveStatus(ClaimStatus.statusEnum.SUBMITTED);
-//			ClaimListSingleton.getClaimList().notifyListeners();
-//		} else{
-//			Toast.makeText(activity, "Cannot submit this claim.", Toast.LENGTH_SHORT).show();
-//		}
-		//new Approver(activity.getUsername()).approveClaim(submitClaim);
 		try {
 			((Claimant) activity.getUser()).submitClaim(submitClaim);
 			ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
@@ -192,7 +191,12 @@ public class ClaimViewerFragment extends Fragment {
 	}
 	
 	/**
-	 * TODO
+	 * An approver will return the selected
+	 * claim back to the user, with the updated
+	 * information (comments). 
+	 * 
+	 * TODO approver viewer shouldn't be able to see
+	 * the returned and approver claims.
 	 */
 	public void returnClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
@@ -202,8 +206,13 @@ public class ClaimViewerFragment extends Fragment {
 		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 	
-	/**
-	 * TODO
+	/** 
+	 * An approver will approve the selected
+	 * claim back to the user, with the updated
+	 * information (comments). 
+	 * 
+	 * TODO approver viewer shouldn't be able to see
+	 * the returned and approver claims.
 	 */
 	public void approveClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
@@ -214,6 +223,7 @@ public class ClaimViewerFragment extends Fragment {
 	}
 	
 	/* Below this is android stuff */
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		/*

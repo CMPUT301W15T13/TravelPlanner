@@ -28,7 +28,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
-/*
+/**
  * Singleton pattern for the ClaimList 
  * class. It provides sorting method
  * which sorts the claims and their nested
@@ -83,11 +83,13 @@ public class ClaimListSingleton {
 		ArrayList<ExpenseItem> expenselist = new ArrayList<ExpenseItem>();
 		return expenselist;
 	}
-		
-	// FilterClaimList works with use of tagManagers getAssociatedClaims method
-	// which returns an ArrayList of claimIds (strings) associated with a given tag.
-	// Input an arrayList of tags and it returns a new arrayList of claimIds, keeping only
-	// the common claimIds
+	
+	/**
+	 * FilterClaimList works with use of tagManagers getAssociatedClaims method
+	 * which returns an ArrayList of claimIds (strings) associated with a given tag.
+	 * Input an arrayList of tags and it returns a new arrayList of claimIds, keeping only
+	 * the common claimIds
+	 * */
 	public ArrayList<String> filterClaimList(ArrayList<Tag> tags, TagManager tm) {
 		// make an array of all claimIds associated with first tag
 		ArrayList<String> claimIds = new ArrayList<String>();

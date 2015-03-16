@@ -188,19 +188,23 @@ public class ClaimActivity extends Activity {
 	 * for adding the location and reason
 	 * for travel.
 	 */
-	public void addDestination(View v){
+	public void addDestination(View v) {
 		claimManagerFragment.openDestinationDialog();
 	}
+	
+	public void addTag(View v) {
+		claimManagerFragment.openTagDialog();
+	}
 
-	public String getUsername(){
+	public String getUsername() {
 		return this.user.getName();
 	}
 
-	public boolean isClaimant(){
+	public boolean isClaimant() {
 		return isClaimant;
 	}
 	
-	public User getUser(){
+	public User getUser() {
 		return this.user;
 	}
 
@@ -210,6 +214,8 @@ public class ClaimActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claim_activity_layout);
+		// TODO make a better method for removing listeners
+		//ClaimListSingleton.getClaimList().clearListeners();
 		
 		setActionBar();
 		this.actionBar = getActionBar();

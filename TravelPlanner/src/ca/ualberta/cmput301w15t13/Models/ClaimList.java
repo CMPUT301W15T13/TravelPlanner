@@ -31,7 +31,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidUserPermissionException;
 
-/* 
+/**
  * A wrapper class for ArrayList<Claim>
  * with standard ArrayList methods.
  * Also contains a list of listeners such that 
@@ -107,7 +107,7 @@ public class ClaimList {
 	}
 
 	public void addListener(Listener listener) {
-		if (listener != null) {
+		if (listener != null && !listenerList.contains(listener)) {
 			listenerList.add(listener);
 		}
 	}
@@ -143,6 +143,15 @@ public class ClaimList {
 
 	public ArrayList<ExpenseItem> getExpenseList(int ClaimIndex) {
 		return claimList.get(ClaimIndex).getExpenseItems();
+	}
+	
+	
+	/** 
+	 * TEMPORARY METHOD
+	 * TODO REMOVED ME
+	 */
+	public void clearListeners(){
+		this.listenerList.clear();
 	}
 	
 }

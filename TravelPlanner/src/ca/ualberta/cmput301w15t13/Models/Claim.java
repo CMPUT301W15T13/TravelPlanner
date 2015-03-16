@@ -34,7 +34,7 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
 
-/*
+/**
  * Class for claim.
  * Defines data and overall functionality
  */
@@ -446,14 +446,14 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	@Override
 	public int compareTo(Claim rhs) {
 		if (this.getStartDate().before(rhs.getStartDate())) {
-			return 1;
-		} else if (this.getStartDate().after(rhs.getStartDate())) {
 			return -1;
+		} else if (this.getStartDate().after(rhs.getStartDate())) {
+			return 1;
 		} else if (this.getStartDate().equals(rhs.getStartDate())) {
 			if (this.getEndDate().before(rhs.getEndDate())) {
-				return -1;
-			}else if (this.getEndDate().after(rhs.getEndDate())) {
 				return 1;
+			}else if (this.getEndDate().after(rhs.getEndDate())) {
+				return -1;
 			}
 		}
 		return 0;

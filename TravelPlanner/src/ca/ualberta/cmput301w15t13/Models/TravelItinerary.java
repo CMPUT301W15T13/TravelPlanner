@@ -4,7 +4,7 @@ import exceptions.EmptyFieldException;
 import exceptions.ExceptionHandler;
 import exceptions.ExceptionHandler.FIELD;
 
-/*
+/**
  * This class represents a place the user wants to
  * visit. It contains a destination, an
  * associated reason for travel, and operations

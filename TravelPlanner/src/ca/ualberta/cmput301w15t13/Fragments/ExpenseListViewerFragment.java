@@ -105,12 +105,7 @@ public class ExpenseListViewerFragment extends Fragment {
 	/**
 	 * This will initialize the adapter for the expenses
 	 */
-	private void initializeAdapter(){
-		/**
-		 * TextView claimName = (TextView) getView().findViewById(R.id.expenseClaimName);
-		 * claimName.setText(claimID);
-		 */
-		
+	private void initializeAdapter(){	
 		final ListView ExpenseListView = (ListView) getView().findViewById(R.id.listViewExpenseItems);
 		ExpenseListView.setAdapter(ExpenseAdapter);
 		ExpenseListView.setOnItemClickListener(new OnItemClickListener(){
@@ -122,7 +117,7 @@ public class ExpenseListViewerFragment extends Fragment {
 					if(ourClaim.isEditable()){
 						((ExpenseActivity) getActivity()).editExpense(position);
 					} else{
-						Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
+						Toast.makeText(getActivity(), "Cannot edit this expense.", Toast.LENGTH_SHORT).show();
 					}
 					
 				} else {
@@ -137,7 +132,6 @@ public class ExpenseListViewerFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(getActivity(), "Long Click", Toast.LENGTH_SHORT).show();
 				expenses.remove(position);
 				ExpenseAdapter.notifyDataSetChanged();
 				return true;

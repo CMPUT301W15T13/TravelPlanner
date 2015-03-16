@@ -4,12 +4,14 @@ import java.util.Random;
 import java.util.SortedSet;
 import java.util.UUID;
 
-/*
- * This defines the basic functionality of a tag
+/**
+ * This defines the basic functionality of a tag,
+ * currently only including setters and getters
+ * for the tag string.
  */
 public class Tag {
 	
-	String tagName = "";
+	String tagName;
 
 	public Tag(String tagName){
 		this.tagName = tagName;
