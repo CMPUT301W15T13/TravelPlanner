@@ -92,6 +92,9 @@ public class ClaimList {
 		if (claimList == null) {
 			this.claimList = new ArrayList<Claim>();
 		}
+		
+		Collections.sort(claimList);
+		
 		return claimList;
 	}
 
