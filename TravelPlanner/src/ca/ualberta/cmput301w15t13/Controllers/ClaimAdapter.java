@@ -33,6 +33,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 
 public class ClaimAdapter extends ArrayAdapter{
 	/* 
@@ -76,14 +77,14 @@ public class ClaimAdapter extends ArrayAdapter{
 			//TODO claim cost text
 			costView.setText(claim.getCost());
 			
-//			int status = claim.getStatus();
-//			if(status == ClaimStatus.INPROGRESS){
-//				statusView.setImageResource(android.R.drawable.ic_menu_edit);
-//			}else if(status == ClaimStatus.SENT){
-//				statusView.setImageResource(android.R.drawable.ic_dialog_email);
-//			}else{ // CLOSED
-//				statusView.setImageResource(android.R.drawable.ic_menu_myplaces);
-//			}
+			ClaimStatus.statusEnum status = claim.getStatus();
+			if(status == ClaimStatus.statusEnum.INPROGRESS){
+				statusView.setImageResource(android.R.drawable.ic_menu_edit);
+			}else if(status == ClaimStatus.statusEnum.SUBMITTED){
+				statusView.setImageResource(android.R.drawable.ic_dialog_email);
+			}else{ // CLOSED
+				statusView.setImageResource(android.R.drawable.ic_menu_myplaces);
+			}
 		}
 		return view;
 	}

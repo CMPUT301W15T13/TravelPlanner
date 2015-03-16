@@ -403,8 +403,9 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public String getStartDateAsString() {
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
-		Date newDate = this.startDate;
-		newDate.setYear(this.startDate.getYear()-1900);
+		Date newDate = (Date) this.startDate.clone();
+		int year = newDate.getYear();
+		newDate.setYear(year-1900);
 		
 		//this is where we format the start and end dates
 		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
@@ -419,8 +420,9 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public String getEndDateAsString() {
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
-		Date newDate = this.endDate;
-		newDate.setYear(this.endDate.getYear()-1900);
+		Date newDate = (Date) this.endDate.clone();
+		int year = newDate.getYear();
+		newDate.setYear(year-1900);
 		
 		//this is where we format the start and end dates
 		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
