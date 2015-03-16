@@ -41,6 +41,7 @@ import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 
 /**
  * This fragment is used to view expenses and 
@@ -97,7 +98,7 @@ public class ExpenseViewerFragment extends Fragment {
 			@Override
 			public void update() {
 //				claims.clear();
-				ClaimList expenses = ClaimListSingleton.getClaimList();
+				ExpenseItemList expenses = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItemList();
 				//expenses.getClaimAtIndex(claimIndex);
 				//expenses = ClaimListSingleton.getExpenseItemList();
 				ExpenseAdapter.notifyDataSetChanged();

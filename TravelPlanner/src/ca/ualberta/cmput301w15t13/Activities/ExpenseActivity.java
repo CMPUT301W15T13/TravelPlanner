@@ -166,11 +166,11 @@ public class ExpenseActivity extends Activity {
 		//Inspired by
 		//http://stackoverflow.com/a/16036693
 		//3/15/2015
-		Bundle bundle=new Bundle();
+		Bundle bundle= new Bundle();
 		bundle.putInt("claimIndex", claimIndex);
 		bundle.putString("claimID", claimID);
 		//set Fragmentclass Arguments
-		ExpenseViewerFragment.setArguments(bundle);
+		ExpenseManagerFragment.setArguments(bundle);
 		
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, this.ExpenseManagerFragment, "ExpenseManager");
