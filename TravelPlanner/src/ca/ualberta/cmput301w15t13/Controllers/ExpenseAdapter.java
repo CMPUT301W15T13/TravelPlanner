@@ -70,7 +70,7 @@ public class ExpenseAdapter extends ArrayAdapter{
 			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			
 			//titleView.setText(.getUserName());
-			titleView.setText(expense.getID());
+			titleView.setText(expense.getExpenseName());
 			dateView.setText(expense.getPurchaseDate().toString());
 			costView.setText(String.valueOf(expense.getAmount()));
 			currView.setText(expense.getCurrency());
