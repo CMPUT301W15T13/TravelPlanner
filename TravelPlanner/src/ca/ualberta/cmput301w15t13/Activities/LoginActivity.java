@@ -78,8 +78,10 @@ public class LoginActivity extends Activity {
 	}
 	
 	/**
-	 * 
+	 * Passes the username and the type of user to the 
+	 * next activity, ClaimActivity, then starts it.
 	 * @param username
+	 * @param isClaimant
 	 */
 	public void startClaimActivity(String username, boolean isClaimant){		
 		Intent intent = new Intent(this, ClaimActivity.class);

@@ -107,7 +107,7 @@ public class ClaimList {
 	}
 
 	public void addListener(Listener listener) {
-		if (listener != null) {
+		if (listener != null && !listenerList.contains(listener)) {
 			listenerList.add(listener);
 		}
 	}

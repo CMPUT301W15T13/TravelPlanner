@@ -82,6 +82,8 @@ public class ClaimAdapter extends ArrayAdapter{
 				statusView.setImageResource(android.R.drawable.ic_menu_edit);
 			}else if(status == ClaimStatus.statusEnum.SUBMITTED){
 				statusView.setImageResource(android.R.drawable.ic_dialog_email);
+			}else if(status == ClaimStatus.statusEnum.RETURNED){
+				statusView.setImageResource(android.R.drawable.ic_menu_revert);
 			}else{ // CLOSED
 				statusView.setImageResource(android.R.drawable.ic_menu_myplaces);
 			}

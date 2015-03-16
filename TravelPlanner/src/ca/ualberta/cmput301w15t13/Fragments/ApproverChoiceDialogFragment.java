@@ -32,6 +32,16 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import ca.ualberta.cmput301w15t13.R;
 
+
+/**
+ * Custom Alert Dialog for approvers functionality when
+ * he long-clicks a submitted claim, including the ability to
+ * approve and return.
+ * 
+ * Outstanding Issues: Should be able to view claims from this list,
+ * rather than on short click.
+ *
+ */
 public class ApproverChoiceDialogFragment extends DialogFragment{
     final OnClickListener returnClaim = new OnClickListener() {
         @Override

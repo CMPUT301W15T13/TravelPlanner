@@ -39,7 +39,6 @@ import exceptions.EmptyFieldException;
  * and a submit button. No cancel button is
  * available because clicking outside the
  * dialog will automatically close it.
- * @author mfritze
  *
  */
 

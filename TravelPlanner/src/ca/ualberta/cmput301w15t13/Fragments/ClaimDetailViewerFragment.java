@@ -52,6 +52,10 @@ public class ClaimDetailViewerFragment extends Fragment {
 		}
 	}; 
 	
+	/**
+	 * Sets all of the fields in the form to the values set
+	 * by the editing claim claim.
+	 */
 	private void initializeFields(){
 		TextView name = (TextView) getView().findViewById(R.id.textViewClaimName);
 		TextView startDate = (TextView) getView().findViewById(R.id.textViewStartDate);
