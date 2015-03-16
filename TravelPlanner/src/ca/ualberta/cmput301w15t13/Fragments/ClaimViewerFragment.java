@@ -24,6 +24,7 @@ import java.util.ArrayList;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,7 @@ public class ClaimViewerFragment extends Fragment {
 	private ArrayList<Claim> claims;
 	private int claimIndex;
 	private String claimID;
+	private ClaimActivity activity;
 
 
 
@@ -89,14 +91,14 @@ public class ClaimViewerFragment extends Fragment {
 					long id) {
 				claimIndex = position;
 				claimID = claims.get(claimIndex).getclaimID();
-				if(((ClaimActivity) getActivity()).isClaimant()){
+				if(activity.isClaimant()){
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
 					/*
 					 * Pass required claim information to the expense portion of the code
 					 * IE: The claim holds our expense list so we need to know which
 					 * claim to get expense items from
 					*/
-					Intent intent = new Intent(getActivity(), ExpenseActivity.class);
+					Intent intent = new Intent(activity, ExpenseActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putInt("claimIndex", position);
 					bundle.putString("claimID", claimID);
@@ -116,7 +118,7 @@ public class ClaimViewerFragment extends Fragment {
 					int position, long id) {
 				claimIndex = position;
 
-				if(((ClaimActivity) getActivity()).isClaimant()){
+				if(activity.isClaimant()){
 					new ClaimantChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
 				}
 				return true;
@@ -130,7 +132,7 @@ public class ClaimViewerFragment extends Fragment {
 	public void editClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		if(submitClaim.isEditable()){
-			((ClaimActivity) getActivity()).editClaim(claimIndex);
+			activity.editClaim(claimIndex);
 		} else{
 			Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
 		}
@@ -154,7 +156,7 @@ public class ClaimViewerFragment extends Fragment {
 			submitClaim.giveStatus(ClaimStatus.statusEnum.SUBMITTED);
 			ClaimListSingleton.getClaimList().notifyListeners();
 		} else{
-			Toast.makeText(getActivity(), "Cannot submit this claim.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(activity, "Cannot submit this claim.", Toast.LENGTH_SHORT).show();
 		}
 	}
 	
@@ -162,7 +164,7 @@ public class ClaimViewerFragment extends Fragment {
 	 * TODO
 	 */
 	public void viewClaim(){
-			((ClaimActivity) getActivity()).setFragmentToDetailViewer(claimIndex);
+			activity.setFragmentToDetailViewer(claimIndex);
 	}
 	
 	/**
@@ -192,7 +194,8 @@ public class ClaimViewerFragment extends Fragment {
 		 */
 		super.onCreate(savedInstanceState);
 		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
-		this.claimAdapter = new ClaimAdapter(getActivity(), R.layout.claim_adapter_layout, this.claims);
+		activity = (ClaimActivity) getActivity();
+		this.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
 		
 	}
 	
@@ -201,6 +204,10 @@ public class ClaimViewerFragment extends Fragment {
 		super.onStart();
 		addListeners();
 		initializeAdapter();
+		
+		if(!activity.isClaimant()){
+			getView().findViewById(R.id.buttonNewClaim).setVisibility(View.GONE);
+		}
 	}
 
 	@Override
