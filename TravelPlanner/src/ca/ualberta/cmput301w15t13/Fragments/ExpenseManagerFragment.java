@@ -1,12 +1,8 @@
 package ca.ualberta.cmput301w15t13.Fragments;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
-import ca.ualberta.cmput301w15t13.Activities.PrimitivePhotoActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -16,7 +12,6 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidUserPermissionException;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -144,7 +139,6 @@ public class ExpenseManagerFragment extends Fragment {
 		} else { amount = Double.parseDouble(amountView.getText().toString()); }
 		
 		//TODO should we assert they fill in all fields?
-		//Toast.makeText(getActivity(), description, Toast.LENGTH_SHORT).show();
 		if(	!dateText.equals("") && !expenseName.equals("")){
 			this.areFieldsComplete = true;
 		}
