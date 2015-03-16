@@ -30,6 +30,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
@@ -70,6 +71,7 @@ public class ExpenseAdapter extends ArrayAdapter{
 			//titleView.setText(.getUserName());
 			titleView.setText(expense.getID());
 			dateView.setText(expense.getPurchaseDate().toString());
+			Toast.makeText(getContext(), String.valueOf(expense.getAmount()), Toast.LENGTH_SHORT).show();
 			costView.setText(String.valueOf(expense.getAmount()));
 			//TODO add a convert date to text method somewhere
 			//dateView.setText(claim.getDateText());

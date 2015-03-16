@@ -31,6 +31,7 @@ public class ExpenseManagerFragment extends Fragment {
 	private Date Date;
 	private String dateText;
 	private double amount;
+	private TextView amountView;
 	private Spinner currencySpinner; 
 	private String description; 
 	private EditText descriptionView;
@@ -65,6 +66,7 @@ public class ExpenseManagerFragment extends Fragment {
 		expenseNameView = (EditText) getView().findViewById(R.id.editTextExpenseName);
 		descriptionView = (EditText) getView().findViewById(R.id.editTextExpenseDescription);
 		dateView = (TextView) getView().findViewById(R.id.textViewDateExpense);
+		amountView = (TextView) getView().findViewById(R.id.editTextAmount);
 		categorySpinner = (Spinner) getView().findViewById(R.id.categorySpinner);
 		currencySpinner = (Spinner) getView().findViewById(R.id.currencySpinner);
 		
@@ -121,6 +123,7 @@ public class ExpenseManagerFragment extends Fragment {
 		expenseName = expenseNameView.getText().toString().trim() + "";
 		description = descriptionView.getText().toString().trim() + "";
 		dateText = dateView.getText().toString().trim() + "";
+		amount = Double.parseDouble(amountView.getText().toString());
 		String categorySet = categorySpinner.getSelectedItem().toString();
 		String currencySet = currencySpinner.getSelectedItem().toString();
 		
@@ -153,6 +156,7 @@ public class ExpenseManagerFragment extends Fragment {
 			//this.description, itineraryList);
 			//ClaimListSingleton.getClaimList().add(newExpense);
 			ExpenseItem newExpense = new ExpenseItem(categorySet, Date, description, amount, currencySet, claimID);
+			Toast.makeText(getActivity(), String.valueOf(amount), Toast.LENGTH_SHORT).show();
 			ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
 		}else {
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();
