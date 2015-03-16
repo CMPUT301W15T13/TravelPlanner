@@ -124,6 +124,7 @@ public class ClaimViewerFragment extends Fragment {
 					Bundle bundle = new Bundle();
 					bundle.putInt("claimIndex", position);
 					bundle.putString("claimID", claimID);
+					
 					intent.putExtras(bundle);
 					startActivity(intent);
 					

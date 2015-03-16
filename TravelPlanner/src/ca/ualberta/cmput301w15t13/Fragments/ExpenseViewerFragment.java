@@ -84,7 +84,7 @@ public class ExpenseViewerFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.expense_item_viewer, container, false);
+		View v = inflater.inflate(R.layout.expense_list_viewer, container, false);
 		return v;
 	}
 
@@ -119,7 +119,7 @@ public class ExpenseViewerFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
-				if(((ExpenseActivity) getActivity()).isClaimant()){
+				if(((ClaimActivity) getActivity()).isClaimant()){
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
 					//Intent intent = new Intent(getActivity(), ExpenseActivity.class);
 					//startActivity(intent);
