@@ -36,6 +36,7 @@ import ca.ualberta.cmput301w15t13.Fragments.ExpenseManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseListViewerFragment;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
@@ -194,8 +195,9 @@ public class ExpenseActivity extends Activity {
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
 	 * @throws EmptyFieldException 
+	 * @throws InvalidFieldEntryException 
 	 */
-	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException{
+	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException, InvalidFieldEntryException{
 		ExpenseManagerFragment.updateReferences();
 		if(ExpenseManagerFragment.isEditing()){ //check if we're updating a claim or creating a claim
 			ExpenseManagerFragment.updateExpense();

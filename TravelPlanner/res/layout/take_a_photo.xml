@@ -18,6 +18,7 @@
         android:id="@+id/expenseManagerPictureButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/textView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/moneySignText"
@@ -30,17 +31,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/expenseManagerPictureButton"
-        android:layout_below="@+id/expenseManagerPictureButton"
-        android:layout_marginTop="22dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="132dp"
         android:text="Result:" />
 
     <TextView
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="16dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/textView2"
+        android:layout_marginTop="21dp"
         android:text="Waiting..." />
 
 </RelativeLayout>

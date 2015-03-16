@@ -9,6 +9,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
@@ -35,8 +36,9 @@ public class ExpenseManagerFragment extends Fragment {
 	private Spinner currencySpinner; 
 	private String description; 
 	private EditText descriptionView;
-	
-	private boolean areFieldsComplete, isEditing;
+	private boolean areFieldsComplete;
+	private boolean isEditing;
+	private boolean isThisReady;
 	private int claimIndex;
 	private String claimID;
 	private int expenseIndex;
@@ -47,6 +49,7 @@ public class ExpenseManagerFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		areFieldsComplete = false;
+		isThisReady = false;
 		Date = new Date();
 		
 		claimIndex = getArguments().getInt("claimIndex");
@@ -158,12 +161,21 @@ public class ExpenseManagerFragment extends Fragment {
 	 * TODO This solution can be more elegant
 	 * Instead of removing and readding the new expense 
 	 * we should just set the new values to the old expense
+	 * @throws InvalidFieldEntryException 
 	 */
-	public void updateExpense() {
+	public void updateExpense() throws InvalidFieldEntryException {
 		updateReferences();
 		String categorySet = categorySpinner.getSelectedItem().toString();
 		String currencySet = currencySpinner.getSelectedItem().toString();
 
+		ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
+		editExpense.setExpenseCategory(categorySet);
+		editExpense.setExpenseDescription(description);
+		editExpense.setAmount(amount);
+		editExpense.setCurrency(currencySet);
+		editExpense.setLinkedToclaimID(claimID);
+		editExpense.setExpenseName(expenseName);
+		/*
 		ExpenseItem newExpense = new ExpenseItem(categorySet, Date, 
 					description, amount, currencySet, claimID);
 		newExpense.setExpenseName(expenseName);
@@ -171,6 +183,7 @@ public class ExpenseManagerFragment extends Fragment {
 								getExpenseItemList().findExpenseItem(expenseIndex);
 		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).removeExpenseItem(removeThis);
 		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
+		*/
 	}
 	
 	/**
