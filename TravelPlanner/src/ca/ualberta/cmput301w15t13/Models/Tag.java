@@ -9,7 +9,7 @@ import java.util.UUID;
  */
 public class Tag {
 	
-	String tagName = "";
+	String tagName;
 
 	public Tag(String tagName){
 		this.tagName = tagName;

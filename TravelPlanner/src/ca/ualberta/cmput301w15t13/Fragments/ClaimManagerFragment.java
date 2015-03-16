@@ -20,6 +20,7 @@
 
 package ca.ualberta.cmput301w15t13.Fragments;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -37,6 +38,7 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.DuplicateException;
@@ -57,7 +59,8 @@ import exceptions.InvalidUserPermissionException;
 
 public class ClaimManagerFragment extends Fragment{
 	private EditText descriptionView;
-	private TextView startDateView, endDateView, destinationView;
+	private ArrayList<Tag> tagList;
+	private TextView startDateView, endDateView, destinationView, tagView;
 	private String description, startDateText, endDateText;
 	private TravelItineraryList itineraryList;
 	private Date startDate, endDate;
@@ -92,6 +95,7 @@ public class ClaimManagerFragment extends Fragment{
 			this.startDateView.setText(editClaim.getStartDateAsString());
 			this.endDateView.setText(editClaim.getEndDateAsString());
 			this.destinationView.setText(editClaim.getTravelItineraryAsString());
+			this.tagView.setText(editClaim.getTags().toString());
 			
 		}else{
 			this.descriptionView.setText("");
@@ -167,7 +171,7 @@ public class ClaimManagerFragment extends Fragment{
 
 	/**
 	 * Opens the custom dialog to get a new
-	 * destination ond it's purpose from the user
+	 * destination and it's purpose from the user
 	 */
 	public void openDestinationDialog() {
 		DestinationDialogFragment dialog = new DestinationDialogFragment();
@@ -200,7 +204,16 @@ public class ClaimManagerFragment extends Fragment{
 			return true;
 		}
 	}
-
+	
+	/**
+	 * Opens the custom dialog to get a new
+	 * tag from the user
+	 */
+	public void openTagDialog() {
+		tagDialogFragment dialog = new tagDialogFragment();
+		dialog.show(getFragmentManager(), "TEST TAG");
+	}
+	
 	/**
 	 * Create a new claim and replace the old one 
 	 * with it.
@@ -213,6 +226,7 @@ public class ClaimManagerFragment extends Fragment{
 		updateReferences();
 		Claim newClaim = new Claim( ((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
 				this.description, itineraryList);
+		newClaim.tags = this.tagList;
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().add(newClaim);
 		//TODO needs a sort method
@@ -258,6 +272,28 @@ public class ClaimManagerFragment extends Fragment{
 		}
 	}
 
+	public void addTagItem(String tag) {
+		Tag tmp = new Tag(tag);
+		
+		this.tagList.add(tmp);
+		String tag_list = tagView.getText().toString();
+		tagView.setText("Hello");
+		
+		if(!tag_list.equals("")){
+			tag_list += "\n";
+		}
+		tag_list += "  " + tmp.getTagName();
+		tagView.setText(tag_list);
+
+		// TODO this needs to change the layout size
+		if(tagList.size() > 2){
+			//If the text view is set to wrap content too early,
+			//it looks like the field is too small
+			tagView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+		}
+		
+	}
+	
 	public void setClaimIndex(int index){
 		this.claimIndex = index;
 	}
@@ -296,6 +332,9 @@ public class ClaimManagerFragment extends Fragment{
 		destinationView = (TextView) getView().findViewById(R.id.textViewDestinationsList);
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
+		tagView = (TextView) getView().findViewById(R.id.textView2);
+		
+		this.tagList = new ArrayList<Tag>();
 		
 		setFields();
 	}
