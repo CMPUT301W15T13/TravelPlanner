@@ -112,6 +112,7 @@ public class ClaimViewerFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
 				claimIndex = position;
+				claimID = claims.get(claimIndex).getclaimID();
 				if(((ClaimActivity) getActivity()).isClaimant()){
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
 					/*
