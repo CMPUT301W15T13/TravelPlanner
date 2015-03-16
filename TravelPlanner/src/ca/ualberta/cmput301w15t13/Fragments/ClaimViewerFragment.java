@@ -54,6 +54,7 @@ public class ClaimViewerFragment extends Fragment {
 	private ClaimAdapter claimAdapter;
 	private ArrayList<Claim> claims;
 	private int claimIndex;
+	private String claimID;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -121,7 +122,7 @@ public class ClaimViewerFragment extends Fragment {
 					Intent intent = new Intent(getActivity(), ExpenseActivity.class);
 					Bundle bundle = new Bundle();
 					bundle.putInt("claimIndex", position);
-					bundle.putFloat("claimID", id);
+					bundle.putString("claimID", claimID);
 					intent.putExtras(bundle);
 					startActivity(intent);
 					

@@ -54,7 +54,7 @@ public class ExpenseViewerFragment extends Fragment {
 	private ExpenseAdapter ExpenseAdapter;
 	private ArrayList<ExpenseItem> expenses;
 	private int claimIndex;
-	private float claimID;
+	private String claimID;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -64,7 +64,7 @@ public class ExpenseViewerFragment extends Fragment {
 		 */
 		super.onCreate(savedInstanceState);
 		claimIndex = getArguments().getInt("claimIndex");
-		claimID = getArguments().getFloat("claimID");
+		claimID = getArguments().getString("claimID");
 		expenses = ClaimListSingleton.getClaimList().getExpenseList(claimIndex);
 		this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
 		//expenses = ClaimListSingleton.getExpenseItemList();
