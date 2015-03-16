@@ -251,7 +251,7 @@ public class ExpenseActivity extends Activity {
 		return isClaimant;
 	}
 	public void takePicture(View v) {
-		Intent intent = new Intent(this, TestActivity.class);
+		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
 		startActivity(intent);
 	}
 }

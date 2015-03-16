@@ -32,7 +32,7 @@
         <activity android:name="ca.ualberta.cmput301w15t13.Activities.ClaimActivity" >
         </activity>
         <activity
-            android:name="ca.ualberta.cmput301w15t13.Activities.TestActivity"
+            android:name="ca.ualberta.cmput301w15t13.Activities.PrimitivePhotoActivity"
             android:label="@string/title_activity_test" >
         </activity>
         <activity

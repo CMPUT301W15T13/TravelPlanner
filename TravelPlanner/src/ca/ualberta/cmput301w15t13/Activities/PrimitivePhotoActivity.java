@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-public class TestActivity extends Activity {
+public class PrimitivePhotoActivity extends Activity {
 
 	Uri imageFileUri;
 	
