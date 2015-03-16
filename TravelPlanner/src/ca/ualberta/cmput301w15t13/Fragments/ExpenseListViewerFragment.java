@@ -120,11 +120,6 @@ public class ExpenseListViewerFragment extends Fragment {
 		final ListView ExpenseListView = (ListView) getView().findViewById(R.id.listViewExpenseItems);
 		ExpenseListView.setAdapter(ExpenseAdapter);
 		ExpenseListView.setOnItemClickListener(new OnItemClickListener(){
-			/**
-			 * We need to override some portions of onItemClick
-			 * This will pass to the edit expense if we are allowed to edit
-			 * otherwise it will show simple details TODO
-			 */
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
