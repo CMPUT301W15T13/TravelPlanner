@@ -375,6 +375,10 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public ArrayList<ExpenseItem> getExpenseItems() {
 		return this.expenseItems.getExpenseList();
 	}
+	//Maybe I don't need this, did not realize claims have expense item add methods
+	public ExpenseItemList getExpenseItemList() {
+		return this.expenseItems;
+	}
 
 	/**
 	 * This will return the edit-ability of the claim
