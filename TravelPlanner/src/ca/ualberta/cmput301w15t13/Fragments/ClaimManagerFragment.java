@@ -51,6 +51,8 @@ import exceptions.InvalidUserPermissionException;
  * to the user. When creating, all fields are empty, and 
  * when editing, they're populated by existing data.
  *
+ * Outstanding Issues: Change the back button to change fragments, 
+ * not activities.
  */
 
 public class ClaimManagerFragment extends Fragment{
@@ -59,38 +61,12 @@ public class ClaimManagerFragment extends Fragment{
 	private String description, startDateText, endDateText;
 	private TravelItineraryList itineraryList;
 	private Date startDate, endDate;
-	private boolean areFieldsComplete, isEditing;
+	private boolean incompleteFields, invalidDates, isEditing;
 	private int claimIndex;	
 	
 	//TODO force change what the back button does from this screen, in that it moves to the old fragment
 	
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		itineraryList = new TravelItineraryList();
-		areFieldsComplete = false;
-		startDate = new Date();
-		endDate = new Date();
-	}
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.claim_manager_layout, container, false);
-		return v;
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		descriptionView = (EditText) getView().findViewById(R.id.editTextClaimDescription);
-		destinationView = (TextView) getView().findViewById(R.id.textViewDestinationsList);
-		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
-		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
-		
-		setFields();
-	}
-	
 	/**
 	 * Sets the "Mode" of the fragment to edit or create, 
 	 * depending where it's called from
@@ -169,15 +145,23 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	@SuppressWarnings("deprecation")
 	public void addDateData(int year, int month, int day, TextView text){
-		Date date;
-		if(text == startDateView){
-			date = startDate;
-		}else{
-			date = endDate;
-		}
+		Date date = new Date();
 		date.setDate(day);
 		date.setMonth(month);
 		date.setYear(year);
+		
+		if(text == startDateView){
+			startDate = date;
+		}else{
+			endDate = date;
+		}
+		if(startDate != null && endDate != null
+			&& endDate.before(startDate)){
+			invalidDates = true;
+		}else{
+			invalidDates = false;
+		}
+			
 		// TODO make sure that this checks the start date is before the end date
 	}
 
@@ -194,20 +178,26 @@ public class ClaimManagerFragment extends Fragment{
 	 * Creates a new claim based on the fields
 	 * that have been updated by updateReferences.
 	 * Then adds it to the CLaimlist and updates the
-	 * ArrayAdapter
+	 * ArrayAdapter.
+	 * Returns true only when a claim has been created
 	 * @throws InvalidDateException
 	 * @throws InvalidNameException
 	 * @throws InvalidUserPermissionException
-	 * @throws EmptyFieldException 
+	 * @throws EmptyFieldException
+	 * @return valid claim created 
 	 */
-	public void createClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
-		if(this.areFieldsComplete){
-			Claim newClaim = new Claim(((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
-				this.description, itineraryList);
-			ClaimListSingleton.getClaimList().add(newClaim);
-			
-		}else{
+	public boolean createClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
+		if(invalidDates){
+			Toast.makeText(getActivity(), "Start Date must be before End Date", Toast.LENGTH_SHORT).show();
+			return false;
+		}else if(incompleteFields){
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();
+			return false;
+		}else{
+			Claim newClaim = new Claim(((ClaimActivity) getActivity()).getUsername(), startDate, endDate, 
+					this.description, itineraryList);
+				ClaimListSingleton.getClaimList().add(newClaim);
+			return true;
 		}
 	}
 
@@ -239,7 +229,7 @@ public class ClaimManagerFragment extends Fragment{
 				
 		//TODO should we assert they fill in all fields?
 		if(	!startDateText.equals("") && !endDateText.equals("") && itineraryList.size() != 0){
-			this.areFieldsComplete = true;
+			this.incompleteFields = false;
 		}
 	}
 
@@ -254,7 +244,9 @@ public class ClaimManagerFragment extends Fragment{
 		this.itineraryList.addTravelDestination(item);
 		String dest_list = destinationView.getText().toString();
 		
-		if(!dest_list.equals("")) dest_list += "\n";
+		if(!dest_list.equals("")){
+			dest_list += "\n";
+		}
 		dest_list += "  " + item.getDestinationName() + " : " + item.getDestinationDescription();
 		destinationView.setText(dest_list);
 
@@ -279,5 +271,34 @@ public class ClaimManagerFragment extends Fragment{
 		return this.isEditing;
 	}
 
+	/* Below this is android stuff */
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		itineraryList = new TravelItineraryList();
+		incompleteFields = true;
+		startDate = new Date();
+		endDate = new Date();
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.claim_manager_layout, container, false);
+		return v;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		descriptionView = (EditText) getView().findViewById(R.id.editTextClaimDescription);
+		destinationView = (TextView) getView().findViewById(R.id.textViewDestinationsList);
+		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
+		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
+		
+		setFields();
+	}
+	
 
 }

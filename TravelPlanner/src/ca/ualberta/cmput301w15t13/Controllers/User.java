@@ -19,7 +19,7 @@
  */
 package ca.ualberta.cmput301w15t13.Controllers;
 
-/*
+/**
  * Parent class to Approver and Claimant.
  * Currently very bare, because we 
  * need more details on how users
@@ -36,5 +36,31 @@ public abstract class User {
 	
 	public String getName(){
 		return this.name;
+	}
+	
+	/**
+	 * Returns the result of an 
+	 * attempted login. The user if it passed,
+	 * and null if it failed.
+	 * @param username
+	 * @param password
+	 * @return
+	 */
+	public static User login(String username, String password){
+		return new Claimant(username);
+		//return null
+	}
+	
+	/**
+	 * Gets an instance of a User, either a 
+	 * claimant or an approver by their username
+	 * TODO tests will come when the server
+	 * is in use.
+	 */
+	public static User getUserByUsername(String username){
+		if(username.equals("TESTUSER")){
+			return new Approver("Approver name");
+		}
+		return new Claimant(username);
 	}
 }

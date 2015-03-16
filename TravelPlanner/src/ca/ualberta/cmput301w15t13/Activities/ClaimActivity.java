@@ -20,6 +20,7 @@
 
 package ca.ualberta.cmput301w15t13.Activities;
 
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -35,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.User;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
@@ -50,6 +52,8 @@ import exceptions.InvalidUserPermissionException;
  * From this activity you can also create, edit, and 
  * approve claims which are supported by corresponding 
  * fragments.
+ * 
+ * Outstanding Issues: Searching of claims by tag is unimplemented
  */
 
 public class ClaimActivity extends Activity {
@@ -61,78 +65,7 @@ public class ClaimActivity extends Activity {
 	private ClaimDetailViewerFragment claimDetailViewerFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 	private boolean isClaimant;
-	private String username;
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.claim_activity_layout);
-		
-		setActionBar();
-		this.actionBar = getActionBar();
-		
-		this.fm = getFragmentManager();
-		claimViewerFragment = new ClaimViewerFragment();
-		claimManagerFragment = new ClaimManagerFragment();
-		claimDetailViewerFragment = new ClaimDetailViewerFragment();
-		
-		Intent intent = getIntent();
-		this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
-		this.username = intent.getStringExtra(LoginActivity.USERID);
-		
-		// TODO load data
-		// TODO add a save file listener
-	}
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		setFragmentToClaimViewer();
-	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		ClaimListSingleton.getClaimList().notifyListeners();
-	}
-
-	/**
-	 * Set the action bar
-	 * to the corresponding search and
-	 * sort settings for claim viewing.
-	 */
-	private void setActionBar(){
-		//Based on http://stackoverflow.com/questions/6746665/accessing-a-font-under-assets-folder-from-xml-file-in-android Jan 25 2015
-		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.claim_actionbar_layout, null);
-		final ActionBar actionBar = getActionBar();
-		actionBar.setDisplayShowHomeEnabled(false);
-		actionBar.setDisplayShowTitleEnabled(false);
-		actionBar.setDisplayShowCustomEnabled(true);
-		actionBar.setCustomView(actionBarLayout);
-		
-		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
-		searchButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				EditText searchBar = (EditText) findViewById(R.id.editTextSearchClaims);
-				String searchMessage = searchBar.getText().toString();
-				
-				// TODO test for not null and not empty throw exception thing
-				
-				//TODO actually search
-				
-				Toast.makeText(getBaseContext(), searchMessage, Toast.LENGTH_SHORT).show();
-			}
-		});
-	}
- 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claim, menu);
-		return true;
-	}
+	private User user;
 
 	/**
 	 * Switches the fragment/layout
@@ -199,6 +132,9 @@ public class ClaimActivity extends Activity {
 	/**
 	 * Create a new claim object,
 	 * then return to the viewing fragment. 
+	 * Whenever claim details are being set, if it's a new claim,
+	 * you cannot finish until everything is filled, so it will only
+	 * allow you to change fragments when createClaim() returns true.
 	 * @throws InvalidUserPermissionException 
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -206,16 +142,17 @@ public class ClaimActivity extends Activity {
 	 */
 	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException{
 		claimManagerFragment.updateReferences();
+		boolean newData = true;
 		if(claimManagerFragment.isEditing()){ //check if we're updating a claim or creating a claim
 			claimManagerFragment.updateClaim();
 		}
 		else{
-			claimManagerFragment.createClaim();
-
+			newData = claimManagerFragment.createClaim();
 		} 
-		
-		ClaimListSingleton.getClaimList().notifyListeners();
-		setFragmentToClaimViewer();
+		if(newData){
+			ClaimListSingleton.getClaimList().notifyListeners();
+			setFragmentToClaimViewer();
+		}
 	}
 	
 	/**
@@ -256,10 +193,81 @@ public class ClaimActivity extends Activity {
 	}
 
 	public String getUsername(){
-		return this.username;
+		return this.user.getName();
 	}
 
 	public boolean isClaimant(){
 		return isClaimant;
+	}
+
+	/* Below this is android stuff */
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.claim_activity_layout);
+		
+		setActionBar();
+		this.actionBar = getActionBar();
+		
+		this.fm = getFragmentManager();
+		claimViewerFragment = new ClaimViewerFragment();
+		claimManagerFragment = new ClaimManagerFragment();
+		claimDetailViewerFragment = new ClaimDetailViewerFragment();
+		
+		Intent intent = getIntent();
+		this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
+		String username = intent.getStringExtra(LoginActivity.USERID);
+		this.user = User.getUserByUsername(username);
+		// TODO load data
+		// TODO add a save file listener
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		setFragmentToClaimViewer();
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		ClaimListSingleton.getClaimList().notifyListeners();
+	}
+
+	/**
+	 * Set the action bar
+	 * to the corresponding search and
+	 * sort settings for claim viewing.
+	 */
+	@SuppressLint("InflateParams")
+	private void setActionBar(){
+		//Based on http://stackoverflow.com/questions/6746665/accessing-a-font-under-assets-folder-from-xml-file-in-android Jan 25 2015
+		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.claim_actionbar_layout, null);
+		final ActionBar actionBar = getActionBar();
+		actionBar.setDisplayShowHomeEnabled(false);
+		actionBar.setDisplayShowTitleEnabled(false);
+		actionBar.setDisplayShowCustomEnabled(true);
+		actionBar.setCustomView(actionBarLayout);
+		
+		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
+		searchButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				EditText searchBar = (EditText) findViewById(R.id.editTextSearchClaims);
+				String searchMessage = searchBar.getText().toString();
+				// TODO test for not null and not empty throw exception thing
+				//TODO actually search
+				Toast.makeText(getBaseContext(), searchMessage, Toast.LENGTH_SHORT).show();
+			}
+		});
+	}
+ 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.claim, menu);
+		return true;
 	}
 }

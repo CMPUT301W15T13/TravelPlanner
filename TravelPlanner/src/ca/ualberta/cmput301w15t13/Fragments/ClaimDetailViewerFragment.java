@@ -34,7 +34,12 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 
 /**
- * TODO
+ * Gives a detailed, non-editable view 
+ * of a claim. 
+ * 
+ * Outstanding Issues: Approvers should be able
+ * to add comments to a claim, as well as view their 
+ * comments
  */
 public class ClaimDetailViewerFragment extends Fragment {
 	private Claim claim;
@@ -46,6 +51,28 @@ public class ClaimDetailViewerFragment extends Fragment {
 			((ClaimActivity) getActivity()).setFragmentToClaimViewer();
 		}
 	}; 
+	
+	private void initializeFields(){
+		TextView name = (TextView) getView().findViewById(R.id.textViewClaimName);
+		TextView startDate = (TextView) getView().findViewById(R.id.textViewStartDate);
+		TextView endDate = (TextView) getView().findViewById(R.id.textViewEndDate);
+		TextView destination = (TextView) getView().findViewById(R.id.textViewDestinationList);
+		TextView descrption = (TextView) getView().findViewById(R.id.textViewDescription);
+		TextView tags = (TextView) getView().findViewById(R.id.textViewTagsList);
+		
+		name.setText(claim.getUserName());
+		startDate.setText(claim.getStartDateAsString());
+		endDate.setText(claim.getEndDateAsString());
+		destination.setText(claim.getTravelItineraryAsString());
+		descrption.setText(claim.getDescription());
+		tags.setText("tags TEMP");
+	}
+	
+	public void setClaim(int i){
+		this.claim = ClaimListSingleton.getClaimList().getClaimAtIndex(i);
+	}
+
+	/* Below this is android stuff */
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -71,25 +98,4 @@ public class ClaimDetailViewerFragment extends Fragment {
 		View v = inflater.inflate(R.layout.claim_view_layout, container, false);
 		return v;
 	}
-	
-	private void initializeFields(){
-		TextView name = (TextView) getView().findViewById(R.id.textViewClaimName);
-		TextView startDate = (TextView) getView().findViewById(R.id.textViewStartDate);
-		TextView endDate = (TextView) getView().findViewById(R.id.textViewEndDate);
-		TextView destination = (TextView) getView().findViewById(R.id.textViewDestinationList);
-		TextView descrption = (TextView) getView().findViewById(R.id.textViewDescription);
-		TextView tags = (TextView) getView().findViewById(R.id.textViewTagsList);
-		
-		name.setText(claim.getUserName());
-		startDate.setText(claim.getStartDateAsString());
-		endDate.setText(claim.getEndDateAsString());
-		destination.setText(claim.getTravelItineraryAsString());
-		descrption.setText(claim.getDescription());
-		tags.setText("tags TEMP");
-	}
-	
-	public void setClaim(int i){
-		this.claim = ClaimListSingleton.getClaimList().getClaimAtIndex(i);
-	}
-
 }

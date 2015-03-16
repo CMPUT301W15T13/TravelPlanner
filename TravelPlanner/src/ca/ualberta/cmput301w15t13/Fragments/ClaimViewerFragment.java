@@ -55,31 +55,7 @@ public class ClaimViewerFragment extends Fragment {
 	private ArrayList<Claim> claims;
 	private int claimIndex;
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		/*
-		 *  DO NOT do any layout work in here. The layout
-		 *  is only initialized by onStart()
-		 */
-		super.onCreate(savedInstanceState);
-		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
-		this.claimAdapter = new ClaimAdapter(getActivity(), R.layout.claim_adapter_layout, this.claims);
-		
-	}
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-		addListeners();
-		initializeAdapter();
-	}
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.claimlist_viewer_layout, container, false);
-		return v;
-	}
 
 	/**
 	 * Adds the Listeners for the ArrayAdapter that 
@@ -202,5 +178,32 @@ public class ClaimViewerFragment extends Fragment {
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		submitClaim.giveStatus(ClaimStatus.statusEnum.APPROVED);
 		ClaimListSingleton.getClaimList().notifyListeners();
+	}
+	
+	/* Below this is android stuff */
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		/*
+		 *  DO NOT do any layout work in here. The layout
+		 *  is only initialized by onStart()
+		 */
+		super.onCreate(savedInstanceState);
+		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
+		this.claimAdapter = new ClaimAdapter(getActivity(), R.layout.claim_adapter_layout, this.claims);
+		
+	}
+	
+	@Override
+	public void onStart() {
+		super.onStart();
+		addListeners();
+		initializeAdapter();
+	}
+
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		View v = inflater.inflate(R.layout.claimlist_viewer_layout, container, false);
+		return v;
 	}
 }

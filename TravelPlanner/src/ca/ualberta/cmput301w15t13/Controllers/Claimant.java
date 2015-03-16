@@ -21,11 +21,10 @@
 package ca.ualberta.cmput301w15t13.Controllers;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.InvalidUserPermissionException;
 
-/*
+/**
  * Claimant child class.
  * Currently only submits but 
  * as more details

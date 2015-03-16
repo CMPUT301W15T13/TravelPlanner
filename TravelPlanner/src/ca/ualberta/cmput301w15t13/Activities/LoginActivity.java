@@ -21,23 +21,23 @@
 package ca.ualberta.cmput301w15t13.Activities;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.User;
 
 /**
- * This activity is used only for login in and authentication.
+ * This activity is used for getting login information.
  * It will identify what kind of user is attempting to log in
  * and direct them to a page to view claims specific to 
  * their access rights.
- * @author mfritze
  *
+ * Outstanding Issues: Communicate with the server
+ * and actually validate the logins.
  */
 
 public class LoginActivity extends Activity {
@@ -45,30 +45,14 @@ public class LoginActivity extends Activity {
 	public static final String USERID = "ca.ualberta.cmput301w15t13.username";
 	public static final String ISCLAIMANT = "ca.ualberta.cmput301w15t13.isclaimant";
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_login);
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.login, menu);
-		return true;
-	}
-	
 	/**
-	 * 
+	 * Take the username and password inputted by the
+	 * user and attempt to login. For now, this only
+	 * logs in as a Claimant, but will be extended
+	 * to login as either. TODO
 	 * @param view
 	 */
 	public void login(View view) {
-		/*
-		 * Needs to:
-		 * validate the user credentials
-		 * send the user identification to the
-		 * next activity, and store it there
-		 */
 		EditText usernameEditText;
 		EditText passwordEditText;
 		String username, password;
@@ -84,9 +68,9 @@ public class LoginActivity extends Activity {
 			Toast.makeText(this, "Add password before logging in", Toast.LENGTH_SHORT).show();
 		} else {
 			//password and username are filled in
-			//TODO maybe should be User.checkValidLogin(username, password);
-			if (checkValidLogin(username, password)) {
-				startClaimActivity(username);
+			User user= User.login(username, password);
+			if (user != null) {
+				startClaimActivity(username, true);
 			} else {
 				Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
 			}
@@ -97,36 +81,11 @@ public class LoginActivity extends Activity {
 	 * 
 	 * @param username
 	 */
-	public void startClaimActivity(String username){
-		/*
-		 * Get the user from the server now, since 
-		 * it's less frustrating to wait for the server
-		 * when you hit login (before you go to the 
-		 * next screen) rather than in a transition phase
-		 * between layouts.
-		 * But you can't pass non-primitive objects. hmm.
-		 */
-		//User user;
-		//TODO package user in intent
-		//user = getUserByUsername(username);
-		
+	public void startClaimActivity(String username, boolean isClaimant){		
 		Intent intent = new Intent(this, ClaimActivity.class);
 		intent.putExtra(USERID, username);
-		intent.putExtra(ISCLAIMANT, true);
-		//TODO start new activity with the user
+		intent.putExtra(ISCLAIMANT, isClaimant);
 		startActivity(intent);
-	}
-	
-	/**
-	 * 
-	 * @param username
-	 * @param password
-	 * @return
-	 */
-	public boolean checkValidLogin(String username, String password){
-		//Should this be a static method in the user class?
-		//TODO check the proper username and password
-		return true;
 	}
 	
 	/**
@@ -135,10 +94,21 @@ public class LoginActivity extends Activity {
 	 * dealing with login authentication
 	 */
 	public void loginAsApprover(View v){
-		//TODO remove this for project part 5
-		Intent intent = new Intent(this, ClaimActivity.class);
-		intent.putExtra(USERID, "TESTUSERNAME");
-		intent.putExtra(ISCLAIMANT, false);
-		startActivity(intent);	
+		startClaimActivity("TESTUSER", false);
+	}
+	
+	/* Below this is android stuff */
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_login);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.login, menu);
+		return true;
 	}
 }
