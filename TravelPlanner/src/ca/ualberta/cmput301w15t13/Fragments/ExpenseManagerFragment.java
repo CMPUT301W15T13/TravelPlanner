@@ -35,6 +35,7 @@ public class ExpenseManagerFragment extends Fragment {
 	
 	private boolean areFieldsComplete, isEditing;
 	private int claimIndex;
+	private long claimID;
 	private int expenseIndex;
 	
 	//TODO force change what the back button does from this screen, in that it moves to the old fragment
@@ -44,6 +45,9 @@ public class ExpenseManagerFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		areFieldsComplete = false;
 		Date = new Date();
+		
+		claimIndex = getArguments().getInt("claimIndex");
+		claimID = getArguments().getLong("claimID");
 	}
 	
 	@Override
