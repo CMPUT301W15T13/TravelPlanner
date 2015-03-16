@@ -20,6 +20,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+/**
+ * This activity is a copy of bogopic from the CMPUT 301 lab
+ * Currently its main purpose is demonstration
+ */
 public class PrimitivePhotoActivity extends Activity {
 
 	Uri imageFileUri;
