@@ -51,11 +51,6 @@ public class ExpenseItem implements ExpenseClaim {
    * 
    */
 
-  // These are the allowed variables that will show up on the Activities
-  private static ArrayList<String> allowedCategories = new ArrayList<String>();
-  private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
-	
-
   protected String ExpenseName = null;
   protected String ExpenseCategory = null;
   protected Date purchaseDate = null;
@@ -69,12 +64,6 @@ public class ExpenseItem implements ExpenseClaim {
   /**this does not need to be initialized
    * 
    */
-  protected Currency currencyEnum;
-  public Receipt receipt = null;
-  /** Boolean variable that tells if the expense item is done or not
-   * 
-   */
-
   protected Currency currencyEnum;
   public Receipt receipt = null;
 
