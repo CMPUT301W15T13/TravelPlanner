@@ -3,6 +3,8 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.Calendar;
 import java.util.Date;
 
+import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
+import ca.ualberta.cmput301w15t13.Activities.TestActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -12,6 +14,7 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidUserPermissionException;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -86,9 +89,8 @@ public class ExpenseManagerFragment extends Fragment {
 		return super.onOptionsItemSelected(item);
 	}
 
-
+	//Will set the fields that we need 
 	private void setFields() {
-		//TODO change this for expenses 
 		if(isEditing){
 			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 			this.description = editClaim.getDescription();
@@ -156,7 +158,6 @@ public class ExpenseManagerFragment extends Fragment {
 			//this.description, itineraryList);
 			//ClaimListSingleton.getClaimList().add(newExpense);
 			ExpenseItem newExpense = new ExpenseItem(categorySet, Date, description, amount, currencySet, claimID);
-			Toast.makeText(getActivity(), String.valueOf(amount), Toast.LENGTH_SHORT).show();
 			newExpense.setExpenseName(expenseName);
 			ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
 		}else {
@@ -206,4 +207,4 @@ public class ExpenseManagerFragment extends Fragment {
 		date.setMonth(month);
 		date.setYear(year);
 	}
-}
+} 

@@ -70,7 +70,7 @@ public class TestActivity extends Activity {
 			if (resultCode == RESULT_OK) {
 				TextView tv = (TextView) findViewById(R.id.textView3);
 				tv.setText("Photo OK");
-				ImageButton ib = (ImageButton) findViewById(R.id.imageButton1);
+				ImageButton ib = (ImageButton) findViewById(R.id.expenseManagerPictureButton);
 			
 				Drawable pic = Drawable.createFromPath(imageFileUri.getPath());
 				pic = resize(pic);

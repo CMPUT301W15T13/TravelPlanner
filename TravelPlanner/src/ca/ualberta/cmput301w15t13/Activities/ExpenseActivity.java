@@ -250,4 +250,8 @@ public class ExpenseActivity extends Activity {
 	public boolean isClaimant(){
 		return isClaimant;
 	}
+	public void takePicture(View v) {
+		Intent intent = new Intent(this, TestActivity.class);
+		startActivity(intent);
+	}
 }
