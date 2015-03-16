@@ -199,6 +199,10 @@ public class ClaimActivity extends Activity {
 	public boolean isClaimant(){
 		return isClaimant;
 	}
+	
+	public User getUser(){
+		return this.user;
+	}
 
 	/* Below this is android stuff */
 	

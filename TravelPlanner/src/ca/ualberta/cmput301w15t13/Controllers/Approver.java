@@ -19,7 +19,10 @@
  */
 package ca.ualberta.cmput301w15t13.Controllers;
 
+import java.util.ArrayList;
+
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 
 /**
@@ -54,6 +57,17 @@ public class Approver extends User {
 		if (claim.getStatus() == statusEnum.SUBMITTED && comment != null) {
 			claim.addComment(comment, this.name);
 		}
+	}
+	
+	@Override
+	public ArrayList<Claim> getPermittableClaims(ArrayList<Claim> claims) {
+		ArrayList<Claim> newClaims = new ArrayList<Claim>();
+		for(Claim c: claims){
+			if(c.getStatus() == ClaimStatus.statusEnum.SUBMITTED){
+				newClaims.add(c);
+			}
+		}
+		return newClaims;
 	}
 
 }

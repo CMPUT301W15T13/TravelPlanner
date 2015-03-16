@@ -19,6 +19,10 @@
  */
 package ca.ualberta.cmput301w15t13.Controllers;
 
+import java.util.ArrayList;
+
+import ca.ualberta.cmput301w15t13.Models.Claim;
+
 /**
  * Parent class to Approver and Claimant.
  * Currently very bare, because we 
@@ -63,4 +67,10 @@ public abstract class User {
 		}
 		return new Claimant(username);
 	}
+	
+	/**
+	 * Returns the claims that are viewable by either an approver or a 
+	 * claimant. TODO This will be moved to a controller.
+	 */
+	public abstract ArrayList<Claim> getPermittableClaims(ArrayList<Claim> claims);
 }

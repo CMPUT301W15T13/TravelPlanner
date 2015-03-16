@@ -24,7 +24,6 @@ import java.util.ArrayList;
 
 import android.app.Fragment;
 import android.content.Intent;
-import android.opengl.Visibility;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -37,11 +36,13 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
+import ca.ualberta.cmput301w15t13.Controllers.Approver;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import exceptions.InvalidUserPermissionException;
 
 /**
  * This fragment is used to view claims and 
@@ -49,6 +50,8 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
  * status and dates. These fields are prone to change
  * or grow. 
  *
+ * Outstanding Issues: Getting claimant and approver specific
+ * claims should be moved to a controller
  */
 
 public class ClaimViewerFragment extends Fragment {
@@ -71,14 +74,18 @@ public class ClaimViewerFragment extends Fragment {
 			@Override
 			public void update() {
 				claims = ClaimListSingleton.getClaimList().getClaimArrayList();
+				claims = activity.getUser().getPermittableClaims(claims);
 				claimAdapter.notifyDataSetChanged();
 			}
 			
 		});
 	}
 	
+	
 	/**
-	 * TODO
+	 * Binds the array list of claims to the array adapter
+	 * and sets the appropriate onClick and onLongClick for 
+	 * approvers and claimants.
 	 */
 	private void initializeAdapter(){
 		final ListView claimListView = (ListView) getView().findViewById(R.id.listViewClaim);
@@ -98,13 +105,16 @@ public class ClaimViewerFragment extends Fragment {
 					 * IE: The claim holds our expense list so we need to know which
 					 * claim to get expense items from
 					*/
-					Intent intent = new Intent(activity, ExpenseActivity.class);
-					Bundle bundle = new Bundle();
-					bundle.putInt("claimIndex", position);
-					bundle.putString("claimID", claimID);
-					intent.putExtras(bundle);
-					startActivity(intent);
-					
+					if(ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).isEditable()){
+						Intent intent = new Intent(activity, ExpenseActivity.class);
+						Bundle bundle = new Bundle();
+						bundle.putInt("claimIndex", position);
+						bundle.putString("claimID", claimID);
+						intent.putExtras(bundle);
+						startActivity(intent);
+					}else{
+						Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
+					}
 				}else{
 					viewClaim();
 				}
@@ -120,6 +130,8 @@ public class ClaimViewerFragment extends Fragment {
 
 				if(activity.isClaimant()){
 					new ClaimantChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
+				}else{
+					new ApproverChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
 				}
 				return true;
 			}
@@ -147,18 +159,7 @@ public class ClaimViewerFragment extends Fragment {
 		// TODO should have a save listener, else save here
 	}
 	
-	/**
-	 * TODO
-	 */
-	public void submitClaim(){
-		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-		if(submitClaim.getStatus() == ClaimStatus.statusEnum.INPROGRESS){
-			submitClaim.giveStatus(ClaimStatus.statusEnum.SUBMITTED);
-			ClaimListSingleton.getClaimList().notifyListeners();
-		} else{
-			Toast.makeText(activity, "Cannot submit this claim.", Toast.LENGTH_SHORT).show();
-		}
-	}
+
 	
 	/**
 	 * TODO
@@ -170,9 +171,34 @@ public class ClaimViewerFragment extends Fragment {
 	/**
 	 * TODO
 	 */
+	public void submitClaim(){
+		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+//		if(submitClaim.getStatus() == ClaimStatus.statusEnum.INPROGRESS){
+//			submitClaim.giveStatus(ClaimStatus.statusEnum.SUBMITTED);
+//			ClaimListSingleton.getClaimList().notifyListeners();
+//		} else{
+//			Toast.makeText(activity, "Cannot submit this claim.", Toast.LENGTH_SHORT).show();
+//		}
+		//new Approver(activity.getUsername()).approveClaim(submitClaim);
+		try {
+			((Claimant) activity.getUser()).submitClaim(submitClaim);
+			ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
+			ClaimListSingleton.getClaimList().add(submitClaim);
+			ClaimListSingleton.getClaimList().notifyListeners();
+		} catch (InvalidUserPermissionException e) {
+			Toast.makeText(activity, "Cannot submit this claim.", Toast.LENGTH_SHORT).show();
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * TODO
+	 */
 	public void returnClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-		submitClaim.giveStatus(ClaimStatus.statusEnum.RETURNED);
+		((Approver) activity.getUser()).returnClaim(submitClaim);
+		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
+		ClaimListSingleton.getClaimList().add(submitClaim);
 		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 	
@@ -181,7 +207,9 @@ public class ClaimViewerFragment extends Fragment {
 	 */
 	public void approveClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-		submitClaim.giveStatus(ClaimStatus.statusEnum.APPROVED);
+		((Approver) activity.getUser()).approveClaim(submitClaim);
+		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
+		ClaimListSingleton.getClaimList().add(submitClaim);
 		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 	
@@ -193,8 +221,9 @@ public class ClaimViewerFragment extends Fragment {
 		 *  is only initialized by onStart()
 		 */
 		super.onCreate(savedInstanceState);
-		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 		activity = (ClaimActivity) getActivity();
+		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
+		claims = activity.getUser().getPermittableClaims(claims);
 		this.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
 		
 	}

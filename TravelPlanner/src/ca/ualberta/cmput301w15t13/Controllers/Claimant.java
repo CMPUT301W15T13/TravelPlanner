@@ -20,6 +20,8 @@
 
 package ca.ualberta.cmput301w15t13.Controllers;
 
+import java.util.ArrayList;
+
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.InvalidUserPermissionException;
@@ -42,5 +44,16 @@ public class Claimant extends User {
 		if (claim != null && claim.getStatus() == statusEnum.INPROGRESS) {
 			claim.giveStatus(statusEnum.SUBMITTED);
 		}
+	}
+
+	@Override
+	public ArrayList<Claim> getPermittableClaims(ArrayList<Claim> claims) {
+		ArrayList<Claim> newClaims = new ArrayList<Claim>();
+		for(Claim c: claims){
+			if(c.getUserName().equals(this.name)){
+				newClaims.add(c);
+			}
+		}
+		return newClaims;
 	}
 }
