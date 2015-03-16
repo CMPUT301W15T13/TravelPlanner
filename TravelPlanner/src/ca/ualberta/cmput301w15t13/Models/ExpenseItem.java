@@ -191,6 +191,12 @@ public class ExpenseItem implements ExpenseClaim {
   public void removeIncompletenessIndicator() {
     // TODO for project 5
   }
+  
+  /**
+   * Copied from
+   * http://stackoverflow.com/a/3973886
+   * on March 16 2015
+   */
 	public String getPurchseDateAsString() {
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
