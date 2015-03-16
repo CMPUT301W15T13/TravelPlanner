@@ -8,6 +8,11 @@ import com.google.gson.Gson;
 import ca.ualberta.cmput301w15t13.Models.ExpenseClaim;
 import android.content.Context;
 
+
+/*
+ * This function will be the API for saving a claim/expense
+ * Uses the Facade Design pattern
+ */
 public class SaveItem <Item> {
 
 	protected Item itemToSave;
