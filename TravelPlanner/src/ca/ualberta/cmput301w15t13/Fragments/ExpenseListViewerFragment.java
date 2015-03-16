@@ -52,7 +52,7 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
  *
  */
 
-public class ExpenseViewerFragment extends Fragment {
+public class ExpenseListViewerFragment extends Fragment {
 	private ExpenseAdapter ExpenseAdapter;
 	private ArrayList<ExpenseItem> expenses;
 	private int claimIndex;
@@ -119,7 +119,7 @@ public class ExpenseViewerFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
-				if(((ClaimActivity) getActivity()).isClaimant()){
+				if(((ExpenseActivity) getActivity()).isClaimant()){
 					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
 					//Intent intent = new Intent(getActivity(), ExpenseActivity.class);
 					//startActivity(intent);

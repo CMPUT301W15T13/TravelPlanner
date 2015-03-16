@@ -15,11 +15,12 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
-    <application
+    <application        
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:label="@string/app_name" 
+        android:theme="@style/AppTheme"
+        >
         <activity
             android:name="ca.ualberta.cmput301w15t13.Activities.LoginActivity"
             android:label="@string/app_name" >
@@ -43,6 +44,8 @@
             android:name="ca.ualberta.cmput301w15t13.Activities.ExpenseActivity"
             android:label="@string/title_activity_expense_viewer" >
         </activity>
+        
+        
     </application>
 
 </manifest>

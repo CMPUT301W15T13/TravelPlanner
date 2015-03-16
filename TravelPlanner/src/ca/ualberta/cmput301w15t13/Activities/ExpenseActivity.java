@@ -36,7 +36,7 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ExpenseListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseManagerFragment;
-import ca.ualberta.cmput301w15t13.Fragments.ExpenseViewerFragment;
+import ca.ualberta.cmput301w15t13.Fragments.ExpenseListViewerFragment;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -55,10 +55,11 @@ public class ExpenseActivity extends Activity {
 	
 	private FragmentManager fm;
 	private FragmentTransaction ft;
-	private ExpenseViewerFragment ExpenseViewerFragment;
+	private ExpenseListViewerFragment ExpenseViewerFragment;
 	private ExpenseManagerFragment ExpenseManagerFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
-	private boolean isClaimant;
+	//Temporary force claimant true
+	private boolean isClaimant = true;
 	private String username;
 	private int claimIndex;
 	private String claimID;
@@ -72,7 +73,7 @@ public class ExpenseActivity extends Activity {
 		this.actionBar = getActionBar();
 		
 		this.fm = getFragmentManager();
-		ExpenseViewerFragment = new ExpenseViewerFragment();
+		ExpenseViewerFragment = new ExpenseListViewerFragment();
 		ExpenseManagerFragment = new ExpenseManagerFragment();
 		
 		//Need to extract passed claim info
