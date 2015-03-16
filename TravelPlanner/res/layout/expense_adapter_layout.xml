@@ -15,16 +15,6 @@
         >
     </LinearLayout>
 
-   	<TextView
-        android:id="@+id/textViewAdapterExpenseTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/incompletenessIndicator"
-        android:text="@string/holder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/title" />
-
     <ImageView
         android:id="@+id/imageViewExpenseAdapterStatus"
         android:layout_width="wrap_content"
@@ -85,5 +75,25 @@
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/imageViewExpenseAdapterStatus"
         android:src="@drawable/ic_ayy" />
+
+    <TextView
+        android:id="@+id/textViewAdapterExpenseTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/moneySignText"
+        android:layout_alignParentTop="true"
+        android:text="@string/holder"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/title" />
+
+    <TextView
+        android:id="@+id/TextViewExpenseCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/textViewAdapterExpenseDate"
+        android:layout_toRightOf="@+id/textViewAdapterExpenseDate"
+        android:text="@string/holder"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/title" />
 
 </RelativeLayout>

@@ -69,6 +69,7 @@ public class ExpenseAdapter extends ArrayAdapter{
 			TextView dateView = (TextView) view.findViewById(R.id.textViewAdapterExpenseDate);
 			TextView costView = (TextView) view.findViewById(R.id.textViewAdapterExpenseAmount);
 			TextView currView = (TextView) view.findViewById(R.id.textViewAdapterCurrency);
+			TextView catView = (TextView) view.findViewById(R.id.TextViewExpenseCategory);
 			//Will need this for properly handling images
 			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			titleView.setText(expense.getExpenseName());
@@ -76,6 +77,7 @@ public class ExpenseAdapter extends ArrayAdapter{
 			DecimalFormat decim = new DecimalFormat("0.00");
 			costView.setText(String.valueOf(decim.format(expense.getAmount())));
 			currView.setText(expense.getCurrency());
+			catView.setText(expense.getExpenseCategory());
 
 		}
 		
