@@ -4,7 +4,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+
 import ca.ualberta.cmput301w15t13.Models.ExpenseClaim;
 import android.content.Context;
 
@@ -26,10 +29,13 @@ public class SaveItem <Item> {
 		itemToSave = ce;
 	}
 	
-	/*
+	
 	public static <Item extends ExpenseClaim> String saveClaimOrExpense(Item ce){
 		String itemID = ce.getID();
 		Gson gson = new Gson();
+		
+		JsonElement claimJson = gson.toJsonTree(ce);
+		
 		
 		//try to save
 		try {	
@@ -54,7 +60,7 @@ public class SaveItem <Item> {
 		
 		return itemID;
 	}
-	*/
+	
 	
 	
 	/**
