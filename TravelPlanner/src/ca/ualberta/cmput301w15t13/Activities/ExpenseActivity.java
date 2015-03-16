@@ -144,6 +144,14 @@ public class ExpenseActivity extends Activity {
 	 */
 	public void setFragmentToExpenseViewer(){
 		actionBar.show();
+		//Inspired by
+		//http://stackoverflow.com/a/16036693
+		//3/15/2015
+		Bundle bundle=new Bundle();
+		bundle.putInt("claimIndex", claimIndex);
+		bundle.putFloat("claimID", claimID);
+		//set Fragmentclass Arguments
+		ExpenseViewerFragment.setArguments(bundle);
 		
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, this.ExpenseViewerFragment, "ExpenseViewer");
