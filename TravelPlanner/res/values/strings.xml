@@ -42,5 +42,6 @@
     <string name="approve">Approve</string>
     <string name="return_claim">Return</string>
     <string name="tags">Tags</string>
+    <string name="$">$</string>
 
 </resources>

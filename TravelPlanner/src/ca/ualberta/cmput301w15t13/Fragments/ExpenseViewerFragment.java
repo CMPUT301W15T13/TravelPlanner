@@ -31,6 +31,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
@@ -108,6 +109,8 @@ public class ExpenseViewerFragment extends Fragment {
 	}
 	
 	private void initializeAdapter(){
+		TextView claimName = (TextView) getView().findViewById(R.id.expenseClaimName);
+		claimName.setText(claimID);
 		final ListView ExpenseListView = (ListView) getView().findViewById(R.id.listViewExpenseItems);
 		ExpenseListView.setAdapter(ExpenseAdapter);
 		

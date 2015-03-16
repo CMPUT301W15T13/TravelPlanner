@@ -35,7 +35,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="temp-getclaimname"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/text" />
 
 </RelativeLayout>

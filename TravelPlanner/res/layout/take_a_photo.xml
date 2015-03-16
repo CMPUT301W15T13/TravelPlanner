@@ -9,7 +9,7 @@
     tools:context=".TestActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/moneySignText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Take a Photo" />
@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/textView1"
+        android:layout_below="@+id/moneySignText"
         android:layout_marginTop="16dp"
         android:onClick="takeAPhoto"
         android:src="@drawable/ic_launcher" />

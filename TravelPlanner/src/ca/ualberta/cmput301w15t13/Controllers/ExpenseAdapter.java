@@ -66,13 +66,14 @@ public class ExpenseAdapter extends ArrayAdapter{
 			TextView titleView = (TextView) view.findViewById(R.id.textViewAdapterExpenseTitle);
 			TextView dateView = (TextView) view.findViewById(R.id.textViewAdapterExpenseDate);
 			TextView costView = (TextView) view.findViewById(R.id.textViewAdapterExpenseAmount);
+			TextView currView = (TextView) view.findViewById(R.id.textViewAdapterCurrency);
 			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			
 			//titleView.setText(.getUserName());
 			titleView.setText(expense.getID());
 			dateView.setText(expense.getPurchaseDate().toString());
-			Toast.makeText(getContext(), String.valueOf(expense.getAmount()), Toast.LENGTH_SHORT).show();
 			costView.setText(String.valueOf(expense.getAmount()));
+			currView.setText(expense.getCurrency());
 			//TODO add a convert date to text method somewhere
 			//dateView.setText(claim.getDateText());
 			//TODO claim cost text
