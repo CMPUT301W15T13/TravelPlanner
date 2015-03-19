@@ -31,7 +31,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Controllers.ExpenseListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseListViewerFragment;
 import exceptions.EmptyFieldException;
@@ -97,7 +97,7 @@ public class ExpenseActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		ExpenseListSingleton.getExpenseItemList().notifyListeners();
+		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 
 	/**
@@ -207,7 +207,7 @@ public class ExpenseActivity extends Activity {
 
 		} 
 		
-		ExpenseListSingleton.getExpenseItemList().notifyListeners();
+		ClaimListSingleton.getClaimList().notifyListeners();
 		setFragmentToExpenseViewer();
 	}
 	
