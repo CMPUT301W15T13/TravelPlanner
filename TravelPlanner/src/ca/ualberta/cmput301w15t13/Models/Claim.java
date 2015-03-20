@@ -468,5 +468,10 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	
 		
 	}
+
+	public void clearExpenses() {
+		this.expenseItems = new ExpenseItemList();
+		
+	}
 	
 }

@@ -1,5 +1,9 @@
 package Persistance;
 
+import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
+
 
 /**
  * This is the Data Manager class.
@@ -13,8 +17,6 @@ package Persistance;
  */
 public class DataManager {
 
-	LocalPersistance local = new LocalPersistance();
-	NetworkPersistance network = new NetworkPersistance();
 	private static boolean networkAvailable = false;
 	
 	/**
@@ -25,7 +27,6 @@ public class DataManager {
 		return networkAvailable;
 	}
 	
-	
 	public static void setOfflineMode(){
 		networkAvailable = false;
 	}
@@ -34,8 +35,50 @@ public class DataManager {
 		networkAvailable = true;
 	}
 	
+	public static boolean saveClaim(Claim claim){
+		
+		//This will go through a claim and save all the expenses
+		SaveDataHelper helper = new SaveDataHelper();	
+		helper.saveClaim(claim);
+		
+		return false;
+	}
+	
+}
+
+////////////////////////////////////////////////////////////////////////////
+
+
+class SaveDataHelper{
+	
+	LocalPersistance local = new LocalPersistance();
+	NetworkPersistance network = new NetworkPersistance();
+	
+	public void saveClaim(Claim claim) {
+		if (DataManager.isNetworkAvailable()){
+			network.saveClaim(claim);
+		}
+		else{
+			local.saveClaim(claim);
+		}
+	}
 	
 	
+	public void saveClaimExpenses(ExpenseItemList expenseList){
+		
+		for (ExpenseItem expense: expenseList.getExpenseList()){
+			network.saveExpense(expense);
+		}
+		
+		
+	}
+
 	
+
+}
+
+///////////////////////////////////////////////////////////////////
+
+class LoadDataHelper{
 	
 }
