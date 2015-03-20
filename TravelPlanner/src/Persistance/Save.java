@@ -1,29 +1,25 @@
-package ca.ualberta.cmput301w15t13.Controllers;
-
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+package Persistance;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
 
 import ca.ualberta.cmput301w15t13.Models.ExpenseClaim;
-import android.content.Context;
-import android.util.Log;
+
+import com.google.gson.Gson;
+
+public interface Save {
+
+}
 
 
 /*
- * This function will be the API for saving a claim/expense
+* This function will be the API for saving a claim/expense
  * Uses the Facade Design pattern
- */
+
 public class SaveItem <Item> implements SAVELOAD {
 
 	protected Item itemToSave;
@@ -37,12 +33,8 @@ public class SaveItem <Item> implements SAVELOAD {
 		itemToSave = ce;
 	}
 	
-	/**
-	 * This will save the current item on the server
-	 * It is based on the save 
-	 * @param ce
-	 * @return
-	 */
+
+
 	public static <Item extends ExpenseClaim> String saveItemOnServer(Item ce){
 		String itemID = ce.getID();
 		Gson gson = new Gson();
@@ -69,7 +61,7 @@ public class SaveItem <Item> implements SAVELOAD {
 	
 	
 	
-	
+	*/
 	
 /* REFERENCE!!!!
  * FROM LAB!!!
@@ -110,5 +102,3 @@ public class SaveItem <Item> implements SAVELOAD {
 		}
 	}
 	*/
-
-}
