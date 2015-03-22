@@ -1,6 +1,7 @@
 package Persistance;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 
@@ -49,6 +50,12 @@ public class DataManager {
 		helper.DeleteClaim(claimID);
 	}
 	
+	
+	public static int loadClaimsByUserName(String userName){
+		
+		DataHelper helper = new DataHelper();
+		return helper.loadClaimsByUserName(userName);
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -73,6 +80,11 @@ class DataHelper{
 	}
 	
 	
+	public int loadClaimsByUserName(String userName) {
+		return network.loadClaimByUser(userName);
+	}
+
+
 	/**
 	 * This method is for network persistance. It will Save a claim's Expenses.
 	 * @param expenseList
