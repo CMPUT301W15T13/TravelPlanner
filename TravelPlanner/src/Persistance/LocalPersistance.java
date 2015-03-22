@@ -5,7 +5,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 public class LocalPersistance extends Persistance{
 
 	@Override
-	public String LoadClaim(String claimUUID) {
+	public String loadClaim(String claimUUID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -14,6 +14,11 @@ public class LocalPersistance extends Persistance{
 	public String saveClaim(Claim claim) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public void LoadClaim() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

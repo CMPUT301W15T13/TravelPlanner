@@ -2,9 +2,13 @@ package Persistance;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpDelete;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+
+import android.util.Log;
 
 import com.google.gson.Gson;
 
@@ -19,19 +23,19 @@ public class NetworkPersistance extends Persistance{
 	private static final String SEARCH_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/_search";
 	private static final String SEARCH_EXPENSE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/expense/_search";
 	
-	private static final String RESOURCE_URL_TEST = "http://cmput301.softwareprocess.es:8080/testing/";
-	private static final String SEARCH_URL_TEST = "http://cmput301.softwareprocess.es:8080/testing/_search";
+	private static final String SAVE_CLAIM_URL_TEST = "http://cmput301.softwareprocess.es:8080/testing/";
+	private static final String SAVE_EXPENSE_URL_TEST = "http://cmput301.softwareprocess.es:8080/testing/_search";
 	
 	
 	@Override
 	public String saveClaim(Claim claim) {
-		String itemID = claim.getID();
+		String itemID = claim.getclaimID();
 		Gson gson = new Gson();
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
-			HttpPost addRequest = new HttpPost(SAVE_CLAIM_URL + itemID);
+			HttpPut  addRequest = new HttpPut(SAVE_CLAIM_URL + itemID);
 
 			StringEntity itemAsString = new StringEntity(gson.toJson(claim));
 			addRequest.setEntity(itemAsString);
@@ -55,7 +59,7 @@ public class NetworkPersistance extends Persistance{
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		try {
-			HttpPost addRequest = new HttpPost(SAVE_EXPENSE_URL + itemID);
+			HttpPut  addRequest = new HttpPut(SAVE_EXPENSE_URL + itemID);
 
 			StringEntity itemAsString = new StringEntity(gson.toJson(expense));
 			addRequest.setEntity(itemAsString);
@@ -75,15 +79,33 @@ public class NetworkPersistance extends Persistance{
 	
 
 	@Override
-	public String LoadClaim(String claimUUID) {
+	public String loadClaim(String claimUUID) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	
-	private void loadClaimExpenses(String claimUUID){
+	public void loadClaimExpenses(String claimUUID){
 		
 	}
+	
+	public void deleteClaim(String claimID){
+		HttpClient httpClient = new DefaultHttpClient();
+
+		try {
+			HttpDelete deleteRequest = new HttpDelete(SAVE_CLAIM_URL +claimID);
+			deleteRequest.setHeader("Accept", "application/json");
+
+			HttpResponse response = httpClient.execute(deleteRequest);
+			String status = response.getStatusLine().toString();
+			System.out.println(status);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+
 	
 	
 

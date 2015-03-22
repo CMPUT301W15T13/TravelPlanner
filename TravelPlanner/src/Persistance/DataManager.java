@@ -36,12 +36,17 @@ public class DataManager {
 	}
 	
 	public static boolean saveClaim(Claim claim){
-		
 		//This will go through a claim and save all the expenses
-		SaveDataHelper helper = new SaveDataHelper();	
+		DataHelper helper = new DataHelper();	
 		helper.saveClaim(claim);
 		
 		return false;
+	}
+	
+	public static void deleteClaim(String claimID){
+		//This will go through a claim and save all the expenses
+		DataHelper helper = new DataHelper();	
+		helper.DeleteClaim(claimID);
 	}
 	
 }
@@ -49,11 +54,15 @@ public class DataManager {
 ////////////////////////////////////////////////////////////////////////////
 
 
-class SaveDataHelper{
+class DataHelper{
 	
 	LocalPersistance local = new LocalPersistance();
 	NetworkPersistance network = new NetworkPersistance();
 	
+	/**
+	 * This will determine what type of saving method to use depending on the network status.
+	 * @param claim
+	 */
 	public void saveClaim(Claim claim) {
 		if (DataManager.isNetworkAvailable()){
 			network.saveClaim(claim);
@@ -64,21 +73,64 @@ class SaveDataHelper{
 	}
 	
 	
+	/**
+	 * This method is for network persistance. It will Save a claim's Expenses.
+	 * @param expenseList
+	 */
 	public void saveClaimExpenses(ExpenseItemList expenseList){
-		
 		for (ExpenseItem expense: expenseList.getExpenseList()){
 			network.saveExpense(expense);
 		}
+	}
+	
+
+	/**
+	 * This will determine what type of saving method to use depending on the network status.
+	 * @param claim
+	 */
+	public String LoadNetworkClaim(String claimID) {
+		if (DataManager.isNetworkAvailable()){
+			network.loadClaim(claimID);
+		}
+		return null;
+	}
+	
+	/**
+	 * This will determine what type of saving method to use depending on the network status.
+	 * @param claim
+	 */
+	public String LoadLocalClaims() {
+		if (!DataManager.isNetworkAvailable()){
+			local.LoadClaim();
+		}
+		return null;
+	}
+	
+	
+	public void DeleteClaim(String claimID){
+		if (DataManager.isNetworkAvailable()){
+			network.deleteClaim(claimID);
+		}
+	}
+	
+	
+	public void searchClaimsForUserName(String userName){
 		
+	}
+	
+	public void searchClaimsByID(String claimID){
+		
+	}
+	
+	public void searchExepensesByClaimID(String claimID){
+		
+	}
+	
+	public void searchExpenseByExpenseID(String expenseID){
 		
 	}
 
-	
-
 }
 
-///////////////////////////////////////////////////////////////////
 
-class LoadDataHelper{
-	
-}
+

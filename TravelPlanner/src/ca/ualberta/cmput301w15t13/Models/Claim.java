@@ -40,7 +40,7 @@ import exceptions.InvalidUserPermissionException;
  */
 public class Claim implements Comparable<Claim>, ExpenseClaim {
 	
-	
+	protected String claimID = null;
 	protected String userName = null;
 	protected Date startDate = null; 
 	protected Date endDate = null;
@@ -51,7 +51,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	protected ClaimStatus status = null;
 	protected ExpenseItemList expenseItems = null;
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
-	protected String claimID = null;
 	protected double totalCost = 0;
 
 /**
