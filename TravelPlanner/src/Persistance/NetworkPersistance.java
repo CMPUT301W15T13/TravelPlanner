@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -18,11 +19,15 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.HTTP;
 
 
+
+
+
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -40,6 +45,9 @@ public class NetworkPersistance extends Persistance{
 	private static final String SAVE_EXPENSE_URL_TEST = "http://cmput301.softwareprocess.es:8080/testing/_search";
 	
 	
+	/**
+	 * This will save 1 claim to the network
+	 */
 	@Override
 	public String saveClaim(Claim claim) {
 		String itemID = claim.getclaimID();
@@ -65,6 +73,11 @@ public class NetworkPersistance extends Persistance{
 	}
 
 	
+	/**
+	 * This will save 1 Expense to the network
+	 * @param expense
+	 * @return
+	 */
 	public String saveExpense(ExpenseItem expense) {
 		String itemID = expense.getID();
 		Gson gson = new Gson();
@@ -92,17 +105,11 @@ public class NetworkPersistance extends Persistance{
 	
 
 	@Override
-	public String loadClaim(String claimUUID) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
-	public ClaimList testLoad(String userName){
-		SearchHit<ClaimList> sr = null;
+	public Claim loadClaim(String claimUUID) {
 		Gson gson = new Gson();
+		SearchHit<Claim> sr = null;
 		HttpClient httpClient = new DefaultHttpClient();
-		HttpGet httpGet = new HttpGet(SEARCH_CLAIM_URL + "?q=user:"+userName );
+		HttpGet httpGet = new HttpGet(SAVE_CLAIM_URL + claimUUID);
 
 		HttpResponse response = null;
 
@@ -114,7 +121,7 @@ public class NetworkPersistance extends Persistance{
 			throw new RuntimeException(e1);
 		}
 		
-		Type searchHitType = new TypeToken<SearchHit<ClaimList>>() {}.getType();
+		Type searchHitType = new TypeToken<SearchHit<Claim>>() {}.getType();
 
 		try {
 			sr = gson.fromJson(
@@ -132,65 +139,48 @@ public class NetworkPersistance extends Persistance{
 
 		return sr.getSource();
 		
+		
+
 	}
 	
-	public int loadClaimByUser(String userName){
-		ClaimList claimList = new ClaimList();
-		Claim claim;
+	
+
+	private ArrayList<String> getClaimIDList(String userName){
 		Gson gson = new Gson();
 		/**
 		 * Creates a search request from a search string and a field
 		 */
-
 		HttpPost searchRequest = new HttpPost(SEARCH_CLAIM_URL);
-		
-		String[] fields = null;
-		if (fields != null) {
-			throw new UnsupportedOperationException("Not implemented!");
-		}
-
-		SearchCommand command = new SearchCommand("?q=username:"+userName);
-
+		SearchCommand command = new SearchCommand("userName:"+userName);
 		String query = gson.toJson(command);
-
-
 		StringEntity stringEntity = null;
 		try {
 			stringEntity = new StringEntity(query);
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException(e);
 		}
-
 		searchRequest.setHeader("Accept", "application/json");
 		searchRequest.setEntity(stringEntity);
-		
 		HttpClient httpClient = new DefaultHttpClient();
-		
 		HttpResponse response = null;
 		try {
 			response = httpClient.execute(searchRequest);
-			
-		
 		} catch (ClientProtocolException e) {
 			throw new RuntimeException(e);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 		
-		
 		/**
 		 * Parses the response of a search
 		 */
 		Type searchResponseType = new TypeToken<SearchResponse<Claim>>() {
 		}.getType();
-		
-		int test = 0;
+		SearchResponse<Claim> esResponse;
 		try {
-			SearchResponse<Claim> esResponse = gson.fromJson(
+			esResponse = gson.fromJson(
 					new InputStreamReader(response.getEntity().getContent()),
 					searchResponseType);
-			 test = esResponse.getHits().getTotal();
-			
 		} catch (JsonIOException e) {
 			throw new RuntimeException(e);
 		} catch (JsonSyntaxException e) {
@@ -200,18 +190,40 @@ public class NetworkPersistance extends Persistance{
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+		ArrayList<String> claimIDList = new ArrayList<String>();
+		if (esResponse.getHits().getTotal() >0){
+			int totalHits = esResponse.getHits().getTotal();
+			for (int index = 0; index < totalHits; index++){
+				claimIDList.add(esResponse.getHits().getHits().get(index).get_id());
+			}
+		}
+		return claimIDList;
+	}
+	
+	
+	/**
+	 * This will load a claim based on the userName
+	 * @param userName
+	 * @return
+	 */
+	public void loadClaimByUser(String userName){
+
+		ArrayList<String> claimIDList = this.getClaimIDList(userName);
+		ArrayList<Claim> claimList = new ArrayList<Claim>();
 		
-		return test;
-	 
+		for (int index=0; index < claimIDList.size(); index++){
+			String claimID = claimIDList.get(index);
+			Claim fetchedClaim = this.loadClaim(claimID);
+			claimList.add(fetchedClaim);
+		}
+		ClaimListSingleton.setClaimList(claimList);
 	}
 
-	
-	public void loadClaimExpenses(String claimUUID){
-		
-	}
-	
-	
-	
+
+	/**
+	 * This will delete a claim from the network
+	 * @param claimID
+	 */
 	public void deleteClaim(String claimID){
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
@@ -227,6 +239,11 @@ public class NetworkPersistance extends Persistance{
 		}
 	}
 	
+	
+	/**
+	 * This will delete an expense from the network
+	 * @param expenseID
+	 */
 	public void deleteExpense(String expenseID){
 		HttpClient httpClient = new DefaultHttpClient();
 		try {
@@ -243,6 +260,9 @@ public class NetworkPersistance extends Persistance{
 	}
 	
 
+	
+	
+	
 
 	
 	
@@ -253,90 +273,3 @@ public class NetworkPersistance extends Persistance{
 	
 }
 
-
-/*
-* This function will be the API for saving a claim/expense
- * Uses the Facade Design pattern
-
-public class SaveItem <Item> implements SAVELOAD {
-
-	protected Item itemToSave;
-	
-	public SaveItem (Item ce){
-		itemToSave = ce;
-	}
-	
-	
-	private void setItem(Item ce){
-		itemToSave = ce;
-	}
-	
-
-
-	public static <Item extends ExpenseClaim> String saveItemOnServer(Item ce){
-		String itemID = ce.getID();
-		Gson gson = new Gson();
-		
-		HttpClient httpClient = new DefaultHttpClient();
-		
-		try {
-			HttpPost addRequest = new HttpPost(RESOURCE_URL_TEST + itemID);
-
-			StringEntity itemAsString = new StringEntity(gson.toJson(ce));
-			addRequest.setEntity(itemAsString);
-			addRequest.setHeader("Accept", "application/json");
-
-			HttpResponse response = httpClient.execute(addRequest);
-			String status = response.getStatusLine().toString();
-			//Log.i(TAG, status);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		return itemID;
-	}
-	
-	
-	
-	*/
-	
-/* REFERENCE!!!!
- * FROM LAB!!!
- * DO NOT UNCOMMENT!!!!!
- * 
-	public void addMovie(Movie movie) {
-		HttpClient httpClient = new DefaultHttpClient();
-
-		try {
-			HttpPost addRequest = new HttpPost(movies.getResourceUrl() + movie.getId());
-
-			StringEntity stringEntity = new StringEntity(gson.toJson(movie));
-			addRequest.setEntity(stringEntity);
-			addRequest.setHeader("Accept", "application/json");
-
-			HttpResponse response = httpClient.execute(addRequest);
-			String status = response.getStatusLine().toString();
-			Log.i(TAG, status);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public void deleteMovie(int movieId) {
-		HttpClient httpClient = new DefaultHttpClient();
-
-		try {
-			HttpDelete deleteRequest = new HttpDelete(movies.getResourceUrl() + movieId);
-			deleteRequest.setHeader("Accept", "application/json");
-
-			HttpResponse response = httpClient.execute(deleteRequest);
-			String status = response.getStatusLine().toString();
-			Log.i(TAG, status);
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	*/

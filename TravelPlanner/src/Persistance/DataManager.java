@@ -36,6 +36,11 @@ public class DataManager {
 		networkAvailable = true;
 	}
 	
+	/**
+	 * This will save 1 Claim
+	 * @param claim
+	 * @return
+	 */
 	public static boolean saveClaim(Claim claim){
 		//This will go through a claim and save all the expenses
 		DataHelper helper = new DataHelper();	
@@ -44,6 +49,10 @@ public class DataManager {
 		return false;
 	}
 	
+	/**
+	 * This will delete 1 claim
+	 * @param claimID: Claim ID
+	 */
 	public static void deleteClaim(String claimID){
 		//This will go through a claim and save all the expenses
 		DataHelper helper = new DataHelper();	
@@ -51,11 +60,17 @@ public class DataManager {
 	}
 	
 	
-	public static int loadClaimsByUserName(String userName){
-		
+	/**
+	 * This will load all the claims made by a specific User
+	 * @param userName
+	 * @return
+	 */
+	public static void loadClaimsByUserName(String userName){
 		DataHelper helper = new DataHelper();
-		return helper.loadClaimsByUserName(userName);
+		helper.loadClaimsByUserName(userName);
 	}
+	
+
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -80,11 +95,16 @@ class DataHelper{
 	}
 	
 	
-	public int loadClaimsByUserName(String userName) {
-		return network.loadClaimByUser(userName);
+	/**
+	 * This will delete a claim from the network
+	 * @param claimID
+	 */
+	public void DeleteClaim(String claimID){
+		if (DataManager.isNetworkAvailable()){
+			network.deleteClaim(claimID);
+		}
 	}
-
-
+	
 	/**
 	 * This method is for network persistance. It will Save a claim's Expenses.
 	 * @param expenseList
@@ -95,18 +115,18 @@ class DataHelper{
 		}
 	}
 	
-
 	/**
-	 * This will determine what type of saving method to use depending on the network status.
-	 * @param claim
+	 * This will load a user's claimList from the network
+	 * @param userName
+	 * @return
 	 */
-	public String LoadNetworkClaim(String claimID) {
+	public void loadClaimsByUserName(String userName) {
 		if (DataManager.isNetworkAvailable()){
-			network.loadClaim(claimID);
+			network.loadClaimByUser(userName);
 		}
-		return null;
 	}
-	
+
+
 	/**
 	 * This will determine what type of saving method to use depending on the network status.
 	 * @param claim
@@ -118,12 +138,7 @@ class DataHelper{
 		return null;
 	}
 	
-	
-	public void DeleteClaim(String claimID){
-		if (DataManager.isNetworkAvailable()){
-			network.deleteClaim(claimID);
-		}
-	}
+
 	
 	
 	public void searchClaimsForUserName(String userName){
