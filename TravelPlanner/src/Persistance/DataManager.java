@@ -1,5 +1,7 @@
 package Persistance;
 
+import java.util.ArrayList;
+
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -47,6 +49,12 @@ public class DataManager {
 		helper.saveClaim(claim);
 		
 		return false;
+	}
+	
+	public static void saveClaims(ArrayList<Claim> claimList){
+		for(Claim claim: claimList){
+			saveClaim(claim);
+		}
 	}
 	
 	/**

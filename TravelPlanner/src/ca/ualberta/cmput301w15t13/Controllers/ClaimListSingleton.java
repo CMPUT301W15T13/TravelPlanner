@@ -114,4 +114,8 @@ public class ClaimListSingleton {
 		claimList.clearListeners();
 		claimList.clearList();
 	}
+	
+	public static Claim getClaimByID(String ID){
+		return claimList.getClaimByID(ID);
+	}
 }

@@ -1,6 +1,8 @@
 package Persistance;
 
+
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 import android.os.AsyncTask;
 
 /**
@@ -10,16 +12,16 @@ import android.os.AsyncTask;
  * @author eorod_000
  *
  */
-public class DataManagerASyncTask extends AsyncTask<String, Void, String> {
+public class SaveASyncTask extends AsyncTask<String, Void, String> {
 
     private Exception exception;
 
-    protected String doInBackground(String... users) {
-        try {
-        	String name = users[0];
+    protected String doInBackground(String... claimID) {
+        	String name = claimID[0];
         	
-        	ClaimListSingleton.clearList();
-        	DataManager.loadClaimsByUserName(name);
+        	try{
+        	Claim claim = ClaimListSingleton.getClaimByID(name);
+        	DataManager.saveClaim(claim);
         	//ClaimListSingleton.getClaimList().notifyListeners();
             return "";
         } catch (Exception e) {

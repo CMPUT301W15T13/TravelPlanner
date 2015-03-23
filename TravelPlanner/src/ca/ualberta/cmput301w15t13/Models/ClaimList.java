@@ -23,6 +23,9 @@ package ca.ualberta.cmput301w15t13.Models;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import Persistance.DataManager;
+import Persistance.LoadASyncTask;
+import Persistance.SaveASyncTask;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
@@ -78,6 +81,8 @@ public class ClaimList {
 		//Check for duplicates
 		if (!claimList.contains(claim)) {
 			claimList.add(claim);
+			new SaveASyncTask().execute(claim.getclaimID());
+			
 		}
 	}
 
@@ -156,6 +161,16 @@ public class ClaimList {
 
 	public void clearList() {
 		this.claimList.clear();
+		
+	}
+
+	public Claim getClaimByID(String iD) {
+		for (Claim claim: claimList){
+			if (claim.getclaimID().equals(iD)){
+				return claim;
+			}
+		}
+		return null;
 		
 	}
 	
