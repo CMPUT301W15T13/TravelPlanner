@@ -214,9 +214,9 @@ public class NetworkPersistance extends Persistance{
 		for (int index=0; index < claimIDList.size(); index++){
 			String claimID = claimIDList.get(index);
 			Claim fetchedClaim = this.loadClaim(claimID);
-			claimList.add(fetchedClaim);
+			ClaimListSingleton.addClaim(fetchedClaim);
 		}
-		ClaimListSingleton.setClaimList(claimList);
+	//	ClaimListSingleton.setClaimList(claimList);
 	}
 
 

@@ -20,6 +20,8 @@
 
 package ca.ualberta.cmput301w15t13.Activities;
 
+import Persistance.DataManager;
+import Persistance.DataManagerASyncTask;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -27,6 +29,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
@@ -230,6 +233,14 @@ public class ClaimActivity extends Activity {
 		String username = intent.getStringExtra(LoginActivity.USERID);
 		this.user = User.getUserByUsername(username);
 		// TODO load data
+		//StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+		//StrictMode.setThreadPolicy(policy); 
+		DataManager.setOnlineMode();
+		//DataManager.loadClaimsByUserName("group13");
+		new DataManagerASyncTask().execute(username);
+		
+		//this.notifyAll();
 		// TODO add a save file listener
 	}
 	

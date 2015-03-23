@@ -108,5 +108,10 @@ public class ClaimListSingleton {
 			}
 		}
 		return claimIds;
-	}	
+	}
+	
+	public static void clearList(){
+		claimList.clearListeners();
+		claimList.clearList();
+	}
 }

@@ -153,5 +153,10 @@ public class ClaimList {
 	public void clearListeners(){
 		this.listenerList.clear();
 	}
+
+	public void clearList() {
+		this.claimList.clear();
+		
+	}
 	
 }
