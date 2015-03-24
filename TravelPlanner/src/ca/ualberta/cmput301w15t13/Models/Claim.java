@@ -367,6 +367,20 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public void removeTag(Tag tag) {
 		this.tags.remove(tag);	
 	}
+	
+	public String getTagsAsString(){
+		String stringTags = "";
+		
+		if (this.tags.size() > 0)
+		{
+			stringTags = this.tags.get(0).getTagName();
+		}
+		for (int index = 1; index < this.tags.size(); index ++) {
+			stringTags = stringTags +  "," + this.tags.get(index).getTagName();
+		}
+		return stringTags;
+
+	}
 
 	public void addExpenseItem(ExpenseItem expenseItem) {
 		this.expenseItems.add(expenseItem);

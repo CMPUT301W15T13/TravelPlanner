@@ -97,7 +97,7 @@ public class ClaimManagerFragment extends Fragment{
 			this.startDateView.setText(editClaim.getStartDateAsString());
 			this.endDateView.setText(editClaim.getEndDateAsString());
 			this.destinationView.setText(editClaim.getTravelItineraryAsString());
-			this.tagView.setText(editClaim.getTags().toString());
+			this.tagView.setText(editClaim.getTagsAsString());
 			
 		}else{
 			this.descriptionView.setText("");

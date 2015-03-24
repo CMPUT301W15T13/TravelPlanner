@@ -102,8 +102,12 @@ public class TravelItineraryList {
 	@Override
 	public String toString() {
 		String travelListString = "";
-		for (TravelItinerary ti: travelList) {
-			travelListString = ti.getDestinationName() + " : " + ti.getDestinationDescription() + "/n";
+		if (this.travelList.size() > 0)
+		{
+			travelListString = this.travelList.get(0).getDestinationName()  + " : " + this.travelList.get(0).getDestinationDescription();
+		}
+		for (int index = 1; index < this.travelList.size(); index ++) {
+			travelListString = travelListString +  "\n" + this.travelList.get(index).getDestinationName()  + " : " + this.travelList.get(index).getDestinationDescription();
 		}
 		return travelListString;
 	}

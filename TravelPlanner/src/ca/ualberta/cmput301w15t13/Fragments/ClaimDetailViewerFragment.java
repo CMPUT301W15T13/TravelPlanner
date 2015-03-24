@@ -69,7 +69,7 @@ public class ClaimDetailViewerFragment extends Fragment {
 		endDate.setText(claim.getEndDateAsString());
 		destination.setText(claim.getTravelItineraryAsString());
 		descrption.setText(claim.getDescription());
-		tags.setText("tags TEMP");
+		tags.setText(claim.getTagsAsString());
 	}
 	
 	public void setClaim(int i){
