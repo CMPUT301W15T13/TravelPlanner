@@ -23,9 +23,10 @@ package ca.ualberta.cmput301w15t13.Models;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import Persistance.DataManager;
-import Persistance.LoadASyncTask;
-import Persistance.SaveASyncTask;
+import persistanceController.DataManager;
+import persistanceModel.LoadASyncTask;
+import persistanceModel.NetworkPersistance;
+import persistanceModel.SaveASyncTask;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
@@ -81,7 +82,9 @@ public class ClaimList {
 		//Check for duplicates
 		if (!claimList.contains(claim)) {
 			claimList.add(claim);
-			new SaveASyncTask().execute(claim.getclaimID());
+			//
+			DataManager.saveClaim(claim);
+			//new SaveASyncTask().execute(claim.getclaimID());
 			
 		}
 	}

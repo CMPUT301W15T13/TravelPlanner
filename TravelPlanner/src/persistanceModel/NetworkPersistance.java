@@ -1,4 +1,4 @@
-package Persistance;
+package persistanceModel;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -21,6 +21,14 @@ import org.apache.http.protocol.HTTP;
 
 
 
+
+
+
+
+
+import persistanceData.SearchCommand;
+import persistanceData.SearchHit;
+import persistanceData.SearchResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -216,7 +224,7 @@ public class NetworkPersistance extends Persistance{
 			Claim fetchedClaim = this.loadClaim(claimID);
 			ClaimListSingleton.addClaim(fetchedClaim);
 		}
-	//	ClaimListSingleton.setClaimList(claimList);
+
 	}
 
 

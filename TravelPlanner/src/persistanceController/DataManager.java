@@ -1,7 +1,11 @@
-package Persistance;
+package persistanceController;
 
 import java.util.ArrayList;
 
+import persistanceModel.LoadASyncTask;
+import persistanceModel.LocalPersistance;
+import persistanceModel.NetworkPersistance;
+import persistanceModel.SaveASyncTask;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -95,7 +99,7 @@ class DataHelper{
 	 */
 	public void saveClaim(Claim claim) {
 		if (DataManager.isNetworkAvailable()){
-			network.saveClaim(claim);
+			new SaveASyncTask().execute(claim.getclaimID());
 		}
 		else{
 			local.saveClaim(claim);
@@ -130,7 +134,8 @@ class DataHelper{
 	 */
 	public void loadClaimsByUserName(String userName) {
 		if (DataManager.isNetworkAvailable()){
-			network.loadClaimByUser(userName);
+			//Start an Async task to load claims
+			new LoadASyncTask().execute(userName);
 		}
 	}
 

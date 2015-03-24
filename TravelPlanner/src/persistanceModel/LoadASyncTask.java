@@ -1,8 +1,7 @@
-package Persistance;
+package persistanceModel;
 
-
+import persistanceController.DataManager;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Models.Claim;
 import android.os.AsyncTask;
 
 /**
@@ -12,16 +11,19 @@ import android.os.AsyncTask;
  * @author eorod_000
  *
  */
-public class SaveASyncTask extends AsyncTask<String, Void, String> {
+public class LoadASyncTask extends AsyncTask<String, Void, String> {
 
     private Exception exception;
 
-    protected String doInBackground(String... claimID) {
-        	String name = claimID[0];
+    protected String doInBackground(String... users) {
+        try {
+        	String name = users[0];
         	
-        	try{
-        	Claim claim = ClaimListSingleton.getClaimByID(name);
-        	DataManager.saveClaim(claim);
+        	ClaimListSingleton.clearList();
+        	
+        	NetworkPersistance networkPersistance = new NetworkPersistance();
+        	networkPersistance.loadClaimByUser(name);
+        	
         	//ClaimListSingleton.getClaimList().notifyListeners();
             return "";
         } catch (Exception e) {

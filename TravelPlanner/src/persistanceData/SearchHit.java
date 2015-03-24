@@ -1,4 +1,4 @@
-package Persistance;
+package persistanceData;
 
 public class SearchHit<T> {
 	private String _index;
