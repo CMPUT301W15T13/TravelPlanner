@@ -2,6 +2,7 @@ package persistanceController;
 
 import java.util.ArrayList;
 
+import persistanceModel.DeleteASyncTask;
 import persistanceModel.LoadASyncTask;
 import persistanceModel.LocalPersistance;
 import persistanceModel.NetworkPersistance;
@@ -113,7 +114,7 @@ class DataHelper{
 	 */
 	public void DeleteClaim(String claimID){
 		if (DataManager.isNetworkAvailable()){
-			network.deleteClaim(claimID);
+			new DeleteASyncTask().execute(claimID);
 		}
 	}
 	
