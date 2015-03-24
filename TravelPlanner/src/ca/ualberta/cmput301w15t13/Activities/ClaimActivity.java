@@ -228,15 +228,17 @@ public class ClaimActivity extends Activity {
 		claimManagerFragment = new ClaimManagerFragment();
 		claimDetailViewerFragment = new ClaimDetailViewerFragment();
 		
+		DataManager.setCurrentContext(this.getApplicationContext());
+		
 		Intent intent = getIntent();
 		this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
 		String username = intent.getStringExtra(LoginActivity.USERID);
 		this.user = User.getUserByUsername(username);
 		
 		//load data
-		DataManager.setOnlineMode();
+		DataManager.setOfflineMode();
 		DataManager.loadClaimsByUserName(username);
-		//new LoadASyncTask().execute(username);
+		
 		
 		//this.notifyAll();
 		// TODO add a save file listener

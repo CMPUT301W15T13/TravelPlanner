@@ -111,8 +111,7 @@ public class ClaimListSingleton {
 	}
 	
 	public static void clearList(){
-		claimList.clearListeners();
-		claimList.clearList();
+		claimList = new ClaimList();
 	}
 	
 	public static Claim getClaimByID(String ID){

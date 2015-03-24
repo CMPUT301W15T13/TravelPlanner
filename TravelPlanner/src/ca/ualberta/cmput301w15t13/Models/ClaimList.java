@@ -82,7 +82,8 @@ public class ClaimList {
 		//Check for duplicates
 		if (!claimList.contains(claim)) {
 			claimList.add(claim);
-			//
+			
+			//DataManager.setOfflineMode();
 			DataManager.saveClaim(claim);
 			//new SaveASyncTask().execute(claim.getclaimID());
 			
@@ -159,11 +160,11 @@ public class ClaimList {
 	 * TODO REMOVED ME
 	 */
 	public void clearListeners(){
-		this.listenerList.clear();
+		this.listenerList = new ArrayList<Listener>();
 	}
 
 	public void clearList() {
-		this.claimList.clear();
+		this.claimList = new ArrayList<Claim>();
 		
 	}
 

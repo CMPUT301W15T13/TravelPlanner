@@ -2,11 +2,13 @@ package persistanceController;
 
 import java.util.ArrayList;
 
+import android.content.Context;
 import persistanceModel.DeleteASyncTask;
 import persistanceModel.LoadASyncTask;
 import persistanceModel.LocalPersistance;
 import persistanceModel.NetworkPersistance;
 import persistanceModel.SaveASyncTask;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -26,6 +28,7 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 public class DataManager {
 
 	private static boolean networkAvailable = false;
+	private static Context currentContext;
 	
 	/**
 	 * This returns the status of the network
@@ -52,9 +55,10 @@ public class DataManager {
 		//This will go through a claim and save all the expenses
 		DataHelper helper = new DataHelper();	
 		helper.saveClaim(claim);
-		
 		return false;
 	}
+	
+
 	
 	public static void saveClaims(ArrayList<Claim> claimList){
 		for(Claim claim: claimList){
@@ -83,7 +87,13 @@ public class DataManager {
 		helper.loadClaimsByUserName(userName);
 	}
 	
-
+	public static void setCurrentContext(Context context){
+		currentContext = context;
+	}
+	
+	public static Context getCurrentContext(){
+		return currentContext ;
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -98,16 +108,17 @@ class DataHelper{
 	 * This will determine what type of saving method to use depending on the network status.
 	 * @param claim
 	 */
+
+	
 	public void saveClaim(Claim claim) {
 		if (DataManager.isNetworkAvailable()){
 			new SaveASyncTask().execute(claim.getclaimID());
-		}
-		else{
-			local.saveClaim(claim);
+		}else{
+			local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
 		}
 	}
-	
-	
+
+
 	/**
 	 * This will delete a claim from the network
 	 * @param claimID
@@ -123,8 +134,10 @@ class DataHelper{
 	 * @param expenseList
 	 */
 	public void saveClaimExpenses(ExpenseItemList expenseList){
-		for (ExpenseItem expense: expenseList.getExpenseList()){
-			network.saveExpense(expense);
+		if (DataManager.isNetworkAvailable()){
+			for (ExpenseItem expense: expenseList.getExpenseList()){
+				network.saveExpense(expense);
+			}
 		}
 	}
 	
@@ -137,6 +150,8 @@ class DataHelper{
 		if (DataManager.isNetworkAvailable()){
 			//Start an Async task to load claims
 			new LoadASyncTask().execute(userName);
+		}else{
+			local.LoadClaims(userName, DataManager.getCurrentContext());
 		}
 	}
 
@@ -147,7 +162,7 @@ class DataHelper{
 	 */
 	public String LoadLocalClaims() {
 		if (!DataManager.isNetworkAvailable()){
-			local.LoadClaim();
+			local.LoadClaims();
 		}
 		return null;
 	}

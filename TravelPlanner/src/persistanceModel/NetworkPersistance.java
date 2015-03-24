@@ -41,7 +41,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 
-public class NetworkPersistance extends Persistance{
+public class NetworkPersistance{
 
 	private static final String SAVE_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/";
 	private static final String SAVE_EXPENSE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/expense/";
@@ -56,7 +56,6 @@ public class NetworkPersistance extends Persistance{
 	/**
 	 * This will save 1 claim to the network
 	 */
-	@Override
 	public String saveClaim(Claim claim) {
 		String itemID = claim.getclaimID();
 		Gson gson = new Gson();
@@ -112,7 +111,6 @@ public class NetworkPersistance extends Persistance{
 
 	
 
-	@Override
 	public Claim loadClaim(String claimUUID) {
 		Gson gson = new Gson();
 		SearchHit<Claim> sr = null;
