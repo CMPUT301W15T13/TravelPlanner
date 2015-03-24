@@ -31,9 +31,8 @@ public class LocalPersistance {
 		Gson gson = new Gson();
 		//try to save
 		try {
-			String userName = claimArrayList.get(0).getUserName();
 			//this will create the new file and use GSON to save the claimlist to it
-			FileOutputStream fos = context.openFileOutput(userName+ "_" +FILE_NAME, 0);//context.openFileOutput(FILE_NAME, 0);
+			FileOutputStream fos = context.openFileOutput(FILE_NAME, 0);//context.openFileOutput(FILE_NAME, 0);
 			OutputStreamWriter osw = new OutputStreamWriter(fos);
 			gson.toJson(claimArrayList, osw);
 			
@@ -51,13 +50,13 @@ public class LocalPersistance {
 		}
 	}
 
-	public void LoadClaims(String userName,Context context){
+	public void LoadClaims(Context context){
 		Gson gson = new Gson();
 		
 		try {
 			
 			//This will open the Save file
-			FileInputStream fis = context.openFileInput(userName+ "_" +FILE_NAME);
+			FileInputStream fis = context.openFileInput(FILE_NAME);
 			InputStreamReader isr = new InputStreamReader(fis);
 			
 			//this will get the type of the claimList

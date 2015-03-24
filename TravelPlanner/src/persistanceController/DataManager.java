@@ -151,7 +151,7 @@ class DataHelper{
 			//Start an Async task to load claims
 			new LoadASyncTask().execute(userName);
 		}else{
-			local.LoadClaims(userName, DataManager.getCurrentContext());
+			local.LoadClaims(DataManager.getCurrentContext());
 		}
 	}
 
