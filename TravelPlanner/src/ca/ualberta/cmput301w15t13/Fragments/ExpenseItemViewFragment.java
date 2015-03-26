@@ -62,19 +62,19 @@ import exceptions.InvalidUserPermissionException;
  */
 
 public class ExpenseItemViewFragment extends Fragment {
-	private EditText expenseNameView;
+	private TextView expenseNameView;
 	private String expenseName;
-	private EditText categoryView;
+	private TextView categoryView;
 	private String categoryString;
 	private TextView dateView;
 	private Date Date;
 	private String dateText;
 	private double amount;
 	private TextView amountView;
-	private EditText currencyView;
+	private TextView currencyView;
 	private String currencyString;
 	private String description; 
-	private EditText descriptionView;
+	private TextView descriptionView;
 	private int claimIndex;
 	private String claimID;
 	private int expenseIndex;
@@ -96,12 +96,12 @@ public class ExpenseItemViewFragment extends Fragment {
 	@Override
 	public void onStart() {
 		super.onStart();
-		expenseNameView = (EditText) getView().findViewById(R.id.textViewExpenseName);
-		descriptionView = (EditText) getView().findViewById(R.id.textViewDescription);
+		expenseNameView = (TextView) getView().findViewById(R.id.textViewExpenseName);
+		descriptionView = (TextView) getView().findViewById(R.id.textViewDescription);
 		dateView = (TextView) getView().findViewById(R.id.textViewPurchaseDate);
 		amountView = (TextView) getView().findViewById(R.id.textViewAmountView);
-		categoryView = (EditText) getView().findViewById(R.id.textViewCategory);
-		currencyView = (EditText) getView().findViewById(R.id.currencySpinner);
+		categoryView = (TextView) getView().findViewById(R.id.textViewCategory);
+		currencyView = (TextView) getView().findViewById(R.id.TextViewCurrencyString);
 
 		setFields();
 	}
@@ -116,7 +116,7 @@ public class ExpenseItemViewFragment extends Fragment {
 		this.descriptionView.setText(editExpense.getExpenseDescription());
 		this.amountView.setText(String.valueOf(editExpense.getAmount()));
 		this.categoryView.setText(editExpense.getExpenseCategory());
-		this.currencyView.setText(editExpense.getExpenseCategory());
+		this.currencyView.setText(editExpense.getCurrency());
 		
 	}
 	public void setExpenseIndex(int index) {
