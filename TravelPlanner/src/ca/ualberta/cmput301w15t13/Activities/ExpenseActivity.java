@@ -77,6 +77,7 @@ public class ExpenseActivity extends Activity {
 		this.fm = getFragmentManager();
 		ExpenseViewerFragment = new ExpenseListViewerFragment();
 		ExpenseManagerFragment = new ExpenseManagerFragment();
+		ExpenseItemViewFragment = new ExpenseItemViewFragment();
 		
 		//Need to extract passed claim info
 		Bundle bundle = getIntent().getExtras();
@@ -180,7 +181,7 @@ public class ExpenseActivity extends Activity {
 		ExpenseItemViewFragment.setArguments(bundle);
 		
 		ft = fm.beginTransaction();
-		ft.replace(R.id.mainFragmentHolder, this.ExpenseViewerFragment, "ExpenseItemViewer");
+		ft.replace(R.id.mainFragmentHolder, this.ExpenseItemViewFragment, "ExpenseItemViewer");
 		ft.commit();
 	}
 	
@@ -283,7 +284,7 @@ public class ExpenseActivity extends Activity {
 		ExpenseManagerFragment.setExpenseIndex(index);
 	}
 	public void viewExpense(int index) {
-		setFragmentToExpenseViewer();
+		setFragmentToExpenseItemViewer();
 		ExpenseItemViewFragment.setExpenseIndex(index);
 	}
 }
