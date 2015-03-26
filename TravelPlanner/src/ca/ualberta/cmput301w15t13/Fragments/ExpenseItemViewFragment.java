@@ -119,6 +119,11 @@ public class ExpenseItemViewFragment extends Fragment {
 		this.currencyView.setText(editExpense.getCurrency());
 		
 	}
+	/**
+	 * This is the index corresponding to the index of the item selected
+	 * from the expense item list
+	 * @param index
+	 */
 	public void setExpenseIndex(int index) {
 		expenseIndex = index;
 	}
