@@ -115,7 +115,7 @@ public class ExpenseListViewerFragment extends Fragment {
 					long id) {
 				if(((ExpenseActivity) getActivity()).isClaimant()){
 					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-				((ExpenseActivity) getActivity()).viewExpense(claimIndex);
+				((ExpenseActivity) getActivity()).viewExpense(position);
 				}
 			}
 		});
@@ -161,6 +161,7 @@ public class ExpenseListViewerFragment extends Fragment {
 	}
 
 	public void viewExpenseItem() {		
+		((ExpenseActivity) getActivity()).viewExpense(expenseIndex);
 	}
 
 }
