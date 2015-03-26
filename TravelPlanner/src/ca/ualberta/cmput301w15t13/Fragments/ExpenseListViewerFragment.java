@@ -114,6 +114,11 @@ public class ExpenseListViewerFragment extends Fragment {
 					long id) {
 				if(((ExpenseActivity) getActivity()).isClaimant()){
 					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+				((ExpenseActivity) getActivity()).viewExpense(claimIndex);
+				}
+				/*TEMP--THIS WILL BE REUSED IN THE CONTEXT MENU
+				if(((ExpenseActivity) getActivity()).isClaimant()){
+					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 					if(ourClaim.isEditable()){
 						((ExpenseActivity) getActivity()).editExpense(position);
 					} else{
@@ -123,6 +128,7 @@ public class ExpenseListViewerFragment extends Fragment {
 				} else {
 					Toast.makeText(getActivity(), "View Expense details", Toast.LENGTH_SHORT).show();
 				}
+			*/	
 			}
 		});
 		/**

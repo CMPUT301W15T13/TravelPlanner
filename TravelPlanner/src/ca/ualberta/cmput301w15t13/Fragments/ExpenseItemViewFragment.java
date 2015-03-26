@@ -107,7 +107,6 @@ public class ExpenseItemViewFragment extends Fragment {
 	}
 	
 	private void setFields() {
-		//if we are editing set all field to their proper values
 		Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
 			
@@ -119,5 +118,8 @@ public class ExpenseItemViewFragment extends Fragment {
 		this.categoryView.setText(editExpense.getExpenseCategory());
 		this.currencyView.setText(editExpense.getExpenseCategory());
 		
+	}
+	public void setExpenseIndex(int index) {
+		expenseIndex = index;
 	}
 }

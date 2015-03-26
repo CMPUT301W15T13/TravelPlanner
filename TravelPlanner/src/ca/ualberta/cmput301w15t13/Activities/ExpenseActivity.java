@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Fragments.ExpenseItemViewFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseListViewerFragment;
 import exceptions.EmptyFieldException;
@@ -55,6 +56,7 @@ public class ExpenseActivity extends Activity {
 	private FragmentTransaction ft;
 	private ExpenseListViewerFragment ExpenseViewerFragment;
 	private ExpenseManagerFragment ExpenseManagerFragment;
+	private ExpenseItemViewFragment ExpenseItemViewFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 	//Temporary force claimant true
 	//Will most likely need to handle this elegantly in part 5
@@ -124,7 +126,7 @@ public class ExpenseActivity extends Activity {
 
 	/**
 	 * Switches the fragment/layout
-	 * to the claim viewer.
+	 * to the expense viewer.
 	 */
 	public void setFragmentToExpenseViewer(){
 		actionBar.hide();
@@ -143,7 +145,7 @@ public class ExpenseActivity extends Activity {
 	}
 	
 	/**
-	 * Switch to the claim manager
+	 * Switch to the expense manager
 	 * fragment/layout
 	 */
 	public void setFragementToExpenseManager(){
@@ -159,6 +161,26 @@ public class ExpenseActivity extends Activity {
 		
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, this.ExpenseManagerFragment, "ExpenseManager");
+		ft.commit();
+	}
+	
+	/**
+	 * Switches the fragment/layout
+	 * to the expense item viewer.
+	 */
+	public void setFragmentToExpenseItemViewer(){
+		actionBar.hide();
+		//Inspired by
+		//http://stackoverflow.com/a/16036693
+		//3/15/2015
+		Bundle bundle=new Bundle();
+		bundle.putInt("claimIndex", claimIndex);
+		bundle.putString("claimID", claimID);
+		//set Fragmentclass Arguments
+		ExpenseItemViewFragment.setArguments(bundle);
+		
+		ft = fm.beginTransaction();
+		ft.replace(R.id.mainFragmentHolder, this.ExpenseViewerFragment, "ExpenseItemViewer");
 		ft.commit();
 	}
 	
@@ -259,5 +281,9 @@ public class ExpenseActivity extends Activity {
 		setFragementToExpenseManager();
 		ExpenseManagerFragment.setStateAsEditing(true);
 		ExpenseManagerFragment.setExpenseIndex(index);
+	}
+	public void viewExpense(int index) {
+		setFragmentToExpenseViewer();
+		ExpenseItemViewFragment.setExpenseIndex(index);
 	}
 }
