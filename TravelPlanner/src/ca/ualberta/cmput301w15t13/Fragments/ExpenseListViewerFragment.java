@@ -117,9 +117,6 @@ public class ExpenseListViewerFragment extends Fragment {
 					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 				((ExpenseActivity) getActivity()).viewExpense(claimIndex);
 				}
-				/*TEMP--THIS WILL BE REUSED IN THE CONTEXT MENU
-				
-			*/	
 			}
 		});
 		/**
@@ -135,18 +132,12 @@ public class ExpenseListViewerFragment extends Fragment {
 				if(((ExpenseActivity) getActivity()).isClaimant()){
 					new ClaimantExpenseDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
 				}else{
+					//TEMP THIS IS FOR THE APPROVER
 					//new ApproverExpenseDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
 				}
 				return true;
 			}
-		});/*
-			
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-
-			}
-		});*/
+		});
 	}
 
 	public void editExpenseItem() {
@@ -165,14 +156,11 @@ public class ExpenseListViewerFragment extends Fragment {
 	}
 
 	public void deleteExpenseItem() {
-		// TODO Auto-generated method stub
 		expenses.remove(expenseIndex);
 		ExpenseAdapter.notifyDataSetChanged();		
 	}
 
-	public void viewExpenseItem() {
-		// TODO Auto-generated method stub
-		
+	public void viewExpenseItem() {		
 	}
 
 }
