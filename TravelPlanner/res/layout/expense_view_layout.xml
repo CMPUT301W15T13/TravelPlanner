@@ -189,7 +189,9 @@
         android:id="@+id/buttonDoneExpenseItemView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/done"
         android:layout_alignParentBottom="true"
+        android:onClick="cancelClaim"
+        android:text="@string/done"
         android:textColor="@color/text" />
+
 </RelativeLayout>

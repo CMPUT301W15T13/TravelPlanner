@@ -57,6 +57,7 @@ public class ExpenseListViewerFragment extends Fragment {
 	private ArrayList<ExpenseItem> expenses;
 	private int claimIndex;
 	private String claimID;
+	private int expenseIndex;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -114,29 +115,64 @@ public class ExpenseListViewerFragment extends Fragment {
 					long id) {
 				if(((ExpenseActivity) getActivity()).isClaimant()){
 					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-					if(ourClaim.isEditable()){
-						((ExpenseActivity) getActivity()).editExpense(position);
-					} else{
-						Toast.makeText(getActivity(), "Cannot edit this expense.", Toast.LENGTH_SHORT).show();
-					}
-					
-				} else {
-					Toast.makeText(getActivity(), "View Expense details", Toast.LENGTH_SHORT).show();
+				((ExpenseActivity) getActivity()).viewExpense(claimIndex);
 				}
+				/*TEMP--THIS WILL BE REUSED IN THE CONTEXT MENU
+				
+			*/	
 			}
 		});
 		/**
 		 * Similarly for the long click
-		 */
+		 *
+		 */	
 		ExpenseListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				expenses.remove(position);
-				ExpenseAdapter.notifyDataSetChanged();
+				Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+				expenseIndex = position;
+				if(((ExpenseActivity) getActivity()).isClaimant()){
+					new ClaimantExpenseDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
+				}else{
+					//new ApproverExpenseDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
+				}
 				return true;
 			}
-		});
+		});/*
+			
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+
+			}
+		});*/
+	}
+
+	public void editExpenseItem() {
+		if(((ExpenseActivity) getActivity()).isClaimant()){
+			Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+			if(ourClaim.isEditable()){
+				((ExpenseActivity) getActivity()).editExpense(expenseIndex);
+			} else{
+				Toast.makeText(getActivity(), "Cannot edit this expense.", Toast.LENGTH_SHORT).show();
+			}
+			
+		} else {
+			Toast.makeText(getActivity(), "View Expense details", Toast.LENGTH_SHORT).show();
+		}
+		
+	}
+
+	public void deleteExpenseItem() {
+		// TODO Auto-generated method stub
+		expenses.remove(expenseIndex);
+		ExpenseAdapter.notifyDataSetChanged();		
+	}
+
+	public void viewExpenseItem() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
