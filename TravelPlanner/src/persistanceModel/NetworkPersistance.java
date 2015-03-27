@@ -26,6 +26,8 @@ import org.apache.http.protocol.HTTP;
 
 
 
+
+
 import persistanceData.SearchCommand;
 import persistanceData.SearchHit;
 import persistanceData.SearchResponse;
@@ -35,6 +37,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
@@ -223,6 +226,7 @@ public class NetworkPersistance{
 			ClaimListSingleton.addClaim(fetchedClaim);
 		}
 
+		LoginActivity.available.release();
 	}
 
 
@@ -263,6 +267,76 @@ public class NetworkPersistance{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+
+	private ArrayList<String> loadAllClaimID() {
+		Gson gson = new Gson();
+		/**
+		 * Creates a search request from a search string and a field
+		 */
+		HttpPost searchRequest = new HttpPost(SEARCH_CLAIM_URL);
+	//	SearchCommand command = new SearchCommand("userName:"+userName);
+		//String query = gson.toJson(command);
+		//StringEntity stringEntity = null;
+		//try {
+		//	stringEntity = new StringEntity(query);
+		//} catch (UnsupportedEncodingException e) {
+		//	throw new RuntimeException(e);
+	//	}
+		searchRequest.setHeader("Accept", "application/json");
+		//searchRequest.setEntity(stringEntity);
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpResponse response = null;
+		try {
+			response = httpClient.execute(searchRequest);
+		} catch (ClientProtocolException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		
+		/**
+		 * Parses the response of a search
+		 */
+		Type searchResponseType = new TypeToken<SearchResponse<Claim>>() {
+		}.getType();
+		SearchResponse<Claim> esResponse;
+		try {
+			esResponse = gson.fromJson(
+					new InputStreamReader(response.getEntity().getContent()),
+					searchResponseType);
+		} catch (JsonIOException e) {
+			throw new RuntimeException(e);
+		} catch (JsonSyntaxException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		ArrayList<String> claimIDList = new ArrayList<String>();
+		if (esResponse.getHits().getTotal() >0){
+			int totalHits = esResponse.getHits().getTotal();
+			for (int index = 0; index < totalHits; index++){
+				claimIDList.add(esResponse.getHits().getHits().get(index).get_id());
+			}
+		}
+		return claimIDList;
+		
+	}
+
+
+	public void loadAll() {
+		ArrayList<String> claimIDList = this.loadAllClaimID();
+		ArrayList<Claim> claimList = new ArrayList<Claim>();
+		
+		for (int index=0; index < claimIDList.size(); index++){
+			String claimID = claimIDList.get(index);
+			Claim fetchedClaim = this.loadClaim(claimID);
+			ClaimListSingleton.addClaim(fetchedClaim);
+		}
+		 LoginActivity.available.release();
 	}
 	
 

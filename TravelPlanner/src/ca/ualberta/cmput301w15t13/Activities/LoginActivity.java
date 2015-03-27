@@ -20,6 +20,10 @@
 
 package ca.ualberta.cmput301w15t13.Activities;
 
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Semaphore;
+
+import persistanceController.DataManager;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -45,14 +49,21 @@ public class LoginActivity extends Activity {
 	public static final String USERID = "ca.ualberta.cmput301w15t13.username";
 	public static final String ISCLAIMANT = "ca.ualberta.cmput301w15t13.isclaimant";
 	
+	public static String LOAD_ALL_RESULT = "not loaded";
+	
+	private static final int MAX_AVAILABLE = 1;
+	public static final Semaphore available = new Semaphore(0, true);
+	
 	/**
 	 * Take the username and password inputted by the
 	 * user and attempt to login. For now, this only
 	 * logs in as a Claimant, but will be extended
 	 * to login as either. TODO
 	 * @param view
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
 	 */
-	public void login(View view) {
+	public void login(View view) throws InterruptedException, ExecutionException {
 		EditText usernameEditText;
 		EditText passwordEditText;
 		String username, password;
@@ -62,6 +73,10 @@ public class LoginActivity extends Activity {
 		username = usernameEditText.getText().toString();
 		password = passwordEditText.getText().toString();
 		
+		//load data
+		DataManager.setOnlineMode();
+		//DataManager.loadClaimsByUserName(usernameEditText.toString());
+		
 		if (username.equals("") || username == null) {
 			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();
 		} else if (password.equals("") || password == null) {
@@ -70,6 +85,9 @@ public class LoginActivity extends Activity {
 			//password and username are filled in
 			User user= User.login(username, password);
 			if (user != null) {
+				Toast.makeText(this, "Searching Server for past claims", Toast.LENGTH_SHORT).show();
+				DataManager.loadClaimsByUserName(username);
+				available.acquire();
 				startClaimActivity(username, true);
 			} else {
 				Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();

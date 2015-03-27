@@ -1,10 +1,12 @@
 package persistanceController;
 
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
 import android.content.Context;
 import persistanceModel.DeleteASyncTask;
 import persistanceModel.LoadASyncTask;
+import persistanceModel.LoadAllASyncTask;
 import persistanceModel.LocalPersistance;
 import persistanceModel.NetworkPersistance;
 import persistanceModel.SaveASyncTask;
@@ -94,6 +96,11 @@ public class DataManager {
 	public static Context getCurrentContext(){
 		return currentContext ;
 	}
+	
+	public static void loadAllClaims() throws InterruptedException, ExecutionException{
+		DataHelper helper = new DataHelper();
+		helper.loadAllClaims();
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -115,6 +122,13 @@ class DataHelper{
 			new SaveASyncTask().execute(claim.getclaimID());
 		}else{
 			local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
+		}
+	}
+
+
+	public void loadAllClaims() throws InterruptedException, ExecutionException {
+		if (DataManager.isNetworkAvailable()){
+			String hey  = new LoadAllASyncTask().execute("").get();
 		}
 	}
 

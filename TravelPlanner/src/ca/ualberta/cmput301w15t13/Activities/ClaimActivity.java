@@ -236,8 +236,8 @@ public class ClaimActivity extends Activity {
 		this.user = User.getUserByUsername(username);
 		
 		//load data
-		DataManager.setOfflineMode();
-		DataManager.loadClaimsByUserName(username);
+		//DataManager.setOfflineMode();
+		//DataManager.loadClaimsByUserName(username);
 		
 		
 		//this.notifyAll();
