@@ -30,6 +30,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView.FindListener;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -100,6 +102,8 @@ public class ClaimManagerFragment extends Fragment{
 			this.destinationView.setText(editClaim.getTravelItineraryAsString());
 			this.tagView.setText(editClaim.getTagsAsString());
 			
+			Button tagButton = (Button) getView().findViewById(R.id.addTags);
+			tagButton.setText("Edit");
 		}else{
 			this.descriptionView.setText("");
 		}
@@ -369,6 +373,8 @@ public class ClaimManagerFragment extends Fragment{
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
 		tagView = (TextView) getView().findViewById(R.id.textViewTags);
+		Button tagButton = (Button) getView().findViewById(R.id.addTags);
+		tagButton.setText("Add");
 		
 		this.tagList = new ArrayList<Tag>();
 		
