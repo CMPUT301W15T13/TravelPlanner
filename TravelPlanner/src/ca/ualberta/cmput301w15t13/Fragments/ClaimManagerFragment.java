@@ -204,6 +204,7 @@ public class ClaimManagerFragment extends Fragment{
 		}else{
 			Claim newClaim = new Claim(activity.getUsername(), startDate, endDate, 
 					this.description, itineraryList);
+			newClaim.tags = tagList;
 			ClaimList claimlist = ClaimListSingleton.getClaimList();
 			claimlist.add(newClaim);
 			
@@ -304,21 +305,26 @@ public class ClaimManagerFragment extends Fragment{
 	*/
 	public void addTagItem(String tag) {
 		Tag tmp = new Tag(tag);
-		this.tagList.add(tmp);
-		String tag_list = tagView.getText().toString();
 		
-		if(!tag_list.equals("")){
-			tag_list += "\n";
-		}
-		tag_list += "  " + tmp.getTagName();
-		tagView.setText(tag_list);
-
-		 //TODO this needs to change the layout size
-		if(tagList.size() > 2){
-			//If the text view is set to wrap content too early,
-			//it looks like the field is too small
+		if (tagList.contains(tmp)) {
+			Toast.makeText(activity, "Tag has already been added", Toast.LENGTH_SHORT).show();
+		} else {
+			this.tagList.add(tmp);
+			String tag_list = tagView.getText().toString();
 			
-			tagView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+			if(!tag_list.equals("")){
+				tag_list += "\n";
+			}
+			tag_list += "  " + tmp.getTagName();
+			tagView.setText(tag_list);
+	
+			 //TODO this needs to change the layout size
+			if(tagList.size() > 2){
+				//If the text view is set to wrap content too early,
+				//it looks like the field is too small
+				
+				tagView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+			}
 		}	
 		
 	}
