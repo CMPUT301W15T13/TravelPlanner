@@ -24,13 +24,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -38,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
+import ca.ualberta.cmput301w15t13.Activities.EditTag;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -104,6 +106,7 @@ public class ClaimManagerFragment extends Fragment{
 			this.destinationView.setText(editClaim.getTravelItineraryAsString());
 			this.tagView.setText(editClaim.getTagsAsString());
 			
+			//changes the tag button text
 			Button tagButton = (Button) getView().findViewById(R.id.addTags);
 			tagButton.setText("Edit");
 		}else{
@@ -242,8 +245,17 @@ public class ClaimManagerFragment extends Fragment{
 	 * tag from the user
 	 */
 	public void openTagDialog() {
-		TagDialogFragment dialog = new TagDialogFragment();
-		dialog.show(getFragmentManager(), "TEST TAG");
+		if (isEditing) {
+			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+			Intent intent = new Intent(activity, EditTag.class);
+			Bundle bundle = new Bundle();
+			bundle.putString("ID", editClaim.getclaimID());
+			intent.putExtras(bundle);
+			startActivity(intent);
+		} else {
+			TagDialogFragment dialog = new TagDialogFragment();
+			dialog.show(getFragmentManager(), "TEST TAG");
+		}
 	}
 	
 	/**
@@ -307,7 +319,8 @@ public class ClaimManagerFragment extends Fragment{
 
 	/** uses the addTravelItenerarItem function as a template,
 	* adds a tag to the tagList, and sets the text so the 
-	* user can see it
+	* user can see it. If the claim is being edited, starts
+	* a new edit tag activity
 	*/
 	public void addTagItem(String tag) {
 		Tag tmp = new Tag(tag);

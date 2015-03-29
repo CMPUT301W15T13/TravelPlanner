@@ -44,5 +44,7 @@
     <string name="tags">Tags</string>
     <string name="$">$</string>
     <string name="add">Add</string>
+    <string name="title_activity_edit_tag">Edit Tags</string>
+    <string name="eTag">Edit Tags</string>
 
 </resources>
