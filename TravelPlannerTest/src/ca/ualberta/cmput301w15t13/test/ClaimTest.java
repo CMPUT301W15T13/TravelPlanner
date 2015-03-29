@@ -23,11 +23,9 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.AssertionFailedError;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
-import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import exceptions.ClaimPermissionException;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;

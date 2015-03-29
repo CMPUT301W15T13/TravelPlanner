@@ -6,7 +6,6 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
@@ -16,32 +15,19 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.HTTP;
-
-
-
-
-
-
-
-
-
-
 
 import persistanceData.SearchCommand;
 import persistanceData.SearchHit;
 import persistanceData.SearchResponse;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
-
-import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.ClaimList;
-import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 
 public class NetworkPersistance{

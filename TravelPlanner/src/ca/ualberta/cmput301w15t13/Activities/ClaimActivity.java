@@ -21,7 +21,6 @@
 package ca.ualberta.cmput301w15t13.Activities;
 
 import persistanceController.DataManager;
-import persistanceModel.LoadASyncTask;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -29,7 +28,6 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;

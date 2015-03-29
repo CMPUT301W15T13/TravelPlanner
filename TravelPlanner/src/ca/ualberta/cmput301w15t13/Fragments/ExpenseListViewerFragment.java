@@ -31,16 +31,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
-import ca.ualberta.cmput301w15t13.Controllers.ExpenseAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.ExpenseAdapter;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 

@@ -3,14 +3,6 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.Calendar;
 import java.util.Date;
 
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
-import exceptions.EmptyFieldException;
-import exceptions.InvalidDateException;
-import exceptions.InvalidFieldEntryException;
-import exceptions.InvalidUserPermissionException;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -23,6 +15,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import exceptions.EmptyFieldException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
+import exceptions.InvalidUserPermissionException;
 
 public class ExpenseManagerFragment extends Fragment {
 	private EditText expenseNameView;

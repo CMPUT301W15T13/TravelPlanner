@@ -1,8 +1,5 @@
 package ca.ualberta.cmput301w15t13.Models;
 
-import java.util.Random;
-import java.util.SortedSet;
-import java.util.UUID;
 
 /**
  * This defines the basic functionality of a tag,

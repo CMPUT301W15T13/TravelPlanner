@@ -29,10 +29,8 @@
 
 package ca.ualberta.cmput301w15t13.test;
 
-import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import android.test.ActivityInstrumentationTestCase2;
-import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
-import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 
 public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<LoginActivity> {
   public ExpenseItemListTests() {

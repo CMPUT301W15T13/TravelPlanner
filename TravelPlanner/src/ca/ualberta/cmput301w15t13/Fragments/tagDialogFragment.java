@@ -29,9 +29,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Models.Tag;
-import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
-import exceptions.EmptyFieldException;
 
 /**
  * This is a custom dialog fragment for 

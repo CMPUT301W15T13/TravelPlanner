@@ -24,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import android.app.ActionBar.LayoutParams;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -38,7 +37,9 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
@@ -192,6 +193,7 @@ public class ClaimManagerFragment extends Fragment{
 	 * @throws EmptyFieldException
 	 * @return valid claim created 
 	 */
+	
 	public boolean createClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
 		if(invalidDates){
 			Toast.makeText(getActivity(), "Start Date must be before End Date", Toast.LENGTH_SHORT).show();
@@ -202,7 +204,28 @@ public class ClaimManagerFragment extends Fragment{
 		}else{
 			Claim newClaim = new Claim(activity.getUsername(), startDate, endDate, 
 					this.description, itineraryList);
-				ClaimListSingleton.getClaimList().add(newClaim);
+			ClaimList claimlist = ClaimListSingleton.getClaimList();
+			claimlist.add(newClaim);
+			
+			// Get the tagManager for the claimList or make a new one
+			// update it with all the added tags and the related claimId
+			if (claimlist.getTagMan() == null) {
+				TagManager tm = new TagManager();
+				String claimId = newClaim.getclaimID();
+				
+				for (int i = 0; i < tagList.size(); i++) {
+					tm.add(tagList.get(i), claimId);
+				}
+				claimlist.setTagMan(tm);
+			} else { 
+				TagManager tm = claimlist.getTagMan();
+				String claimId = newClaim.getclaimID();
+				
+				for (int i = 0; i < tagList.size(); i++) {
+					tm.add(tagList.get(i), claimId);
+				}
+				claimlist.setTagMan(tm);	
+			}
 			return true;
 		}
 	}
@@ -267,20 +290,22 @@ public class ClaimManagerFragment extends Fragment{
 		destinationView.setText(dest_list);
 
 		// TODO this needs to change the layout size
-//		if(itineraryList.size() > 2){
-//			//If the text view is set to wrap content too early,
-//			//it looks like the field is too small
-//			Toast.makeText(activity, "GROW ME", Toast.LENGTH_SHORT).show();
-//			destinationView.setHeight(LayoutParams.WRAP_CONTENT); 
-//		}
+		//if(itineraryList.size() > 2){
+			//If the text view is set to wrap content too early,
+			//it looks like the field is too small
+			//Toast.makeText(activity, "GROW ME", Toast.LENGTH_SHORT).show();
+			//destinationView.setHeight(LayoutParams.WRAP_CONTENT); 
+		//}
 	}
 
+	/** uses the addTravelItenerarItem function as a template,
+	* adds a tag to the tagList, and sets the text so the 
+	* user can see it
+	*/
 	public void addTagItem(String tag) {
 		Tag tmp = new Tag(tag);
-		
 		this.tagList.add(tmp);
 		String tag_list = tagView.getText().toString();
-		tagView.setText("Hello");
 		
 		if(!tag_list.equals("")){
 			tag_list += "\n";
@@ -288,12 +313,13 @@ public class ClaimManagerFragment extends Fragment{
 		tag_list += "  " + tmp.getTagName();
 		tagView.setText(tag_list);
 
-		// TODO this needs to change the layout size
+		 //TODO this needs to change the layout size
 		if(tagList.size() > 2){
 			//If the text view is set to wrap content too early,
 			//it looks like the field is too small
+			
 			tagView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-		}
+		}	
 		
 	}
 	

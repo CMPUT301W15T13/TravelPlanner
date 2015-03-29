@@ -1,10 +1,9 @@
 package persistanceModel;
 
 
-import persistanceController.DataManager;
+import android.os.AsyncTask;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
-import android.os.AsyncTask;
 
 /**
  * Required class for network load

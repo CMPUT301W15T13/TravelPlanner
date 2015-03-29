@@ -35,7 +35,6 @@ import ca.ualberta.cmput301w15t13.test.MockListener;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
-import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 

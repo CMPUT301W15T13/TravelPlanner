@@ -1,9 +1,8 @@
 package persistanceModel;
 
-import persistanceController.DataManager;
+import android.os.AsyncTask;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import android.os.AsyncTask;
 
 /**
  * Required class for network load

@@ -21,7 +21,6 @@
 package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;

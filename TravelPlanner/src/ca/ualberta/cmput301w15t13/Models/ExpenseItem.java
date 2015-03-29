@@ -21,18 +21,13 @@
 package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
-import java.util.ResourceBundle;
 import java.util.UUID;
 
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import exceptions.InvalidFieldEntryException;
-import exceptions.InvalidUserPermissionException;
-import android.R;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.text.format.DateFormat;
+import exceptions.InvalidFieldEntryException;
+import exceptions.InvalidUserPermissionException;
 
 
 /**

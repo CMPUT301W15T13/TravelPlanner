@@ -24,16 +24,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import persistanceController.DataManager;
-import persistanceModel.LoadASyncTask;
-import persistanceModel.NetworkPersistance;
-import persistanceModel.SaveASyncTask;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimDateSorter;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
-import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
-import exceptions.EmptyFieldException;
-import exceptions.InvalidUserPermissionException;
 
 /**
  * A wrapper class for ArrayList<Claim>
@@ -142,12 +136,15 @@ public class ClaimList {
 	
 	public ArrayList<String> filter(ArrayList<Tag> tags) {
 		ClaimListSingleton control = new ClaimListSingleton();
-		ArrayList<String> result = control.filterClaimList(tags, this.tagManager);
-		return result;
+		return control.filterClaimList(tags, this.tagManager);
 	}
 
 	public void setTagMan(TagManager tm) {
 		this.tagManager = tm;
+	}
+	
+	public TagManager getTagMan() {
+		return this.tagManager;
 	}
 
 	public ArrayList<ExpenseItem> getExpenseList(int ClaimIndex) {

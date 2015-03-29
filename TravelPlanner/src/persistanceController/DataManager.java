@@ -3,16 +3,15 @@ package persistanceController;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
-import android.content.Context;
 import persistanceModel.DeleteASyncTask;
 import persistanceModel.LoadASyncTask;
 import persistanceModel.LoadAllASyncTask;
 import persistanceModel.LocalPersistance;
 import persistanceModel.NetworkPersistance;
 import persistanceModel.SaveASyncTask;
+import android.content.Context;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 

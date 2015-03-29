@@ -6,13 +6,11 @@ import persistanceController.DataManager;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
-import junit.framework.TestCase;
 
 public class Persistance extends ActivityInstrumentationTestCase2<LoginActivity> {
 	  public Persistance() {

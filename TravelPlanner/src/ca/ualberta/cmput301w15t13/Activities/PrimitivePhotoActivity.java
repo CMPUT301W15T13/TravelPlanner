@@ -2,23 +2,20 @@ package ca.ualberta.cmput301w15t13.Activities;
 
 import java.io.File;
 
-import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.R.layout;
-import ca.ualberta.cmput301w15t13.R.menu;
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.app.Activity;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import ca.ualberta.cmput301w15t13.R;
 
 /**
  * This activity is a copy of bogopic from the CMPUT 301 lab

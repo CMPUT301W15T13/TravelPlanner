@@ -1,6 +1,5 @@
 package ca.ualberta.cmput301w15t13.Fragments;
 
-import ca.ualberta.cmput301w15t13.R;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -11,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import ca.ualberta.cmput301w15t13.R;
 
 public class ClaimantExpenseDialogFragment extends DialogFragment{
 

@@ -10,12 +10,11 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import android.content.Context;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Models.Claim;
 
 
 public class LocalPersistance {
