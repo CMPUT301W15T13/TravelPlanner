@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package ca.ualberta.cmput301w15t13.Fragments;
+package dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -31,46 +31,36 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import ca.ualberta.cmput301w15t13.R;
-/**
- * 
- * This is a custom Alert Dialog for when a claimant
- * long clicks a claim, giving the abilities to 
- * edit, view, submit, and delete.
- */
+import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 
-public class ClaimantChoiceDialogFragment extends DialogFragment{
-	// Based on http://martin.cubeactive.com/android-onclicklitener-tutorial/ March 15 2015
-	/* These are all onClickListeners that call the corresponding 
-	 * functions in ClaimViewerFragment.
-	 */
-    final OnClickListener editClaim = new OnClickListener() {
+
+/**
+ * Custom Alert Dialog for approvers functionality when
+ * he long-clicks a submitted claim, including the ability to
+ * approve and return.
+ * 
+ * Outstanding Issues: Should be able to view claims from this list,
+ * rather than on short click.
+ *
+ */
+public class ApproverChoiceDialogFragment extends DialogFragment{
+    final OnClickListener returnClaim = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
      	   FragmentManager fm = getFragmentManager();
      	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-     	   fragment.editClaim();
+     	   fragment.returnClaim();
      	   Dialog d = getDialog();
      	   d.dismiss();
         }
     };
     
-    final OnClickListener submitClaim = new OnClickListener() {
+    final OnClickListener approveClaim = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.submitClaim();
-      	   Dialog d = getDialog();
-      	   d.dismiss();
-        }
-    };
-    
-    final OnClickListener deleteClaim = new OnClickListener() {
-        @Override
-		public void onClick(final View v) {
-      	   FragmentManager fm = getFragmentManager();
-      	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.deleteClaim();
+      	   fragment.approveClaim();
       	   Dialog d = getDialog();
       	   d.dismiss();
         }
@@ -86,27 +76,27 @@ public class ClaimantChoiceDialogFragment extends DialogFragment{
       	   d.dismiss();
         }
     };
-	
+    
 	@SuppressLint("InflateParams")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    LayoutInflater inflater = getActivity().getLayoutInflater();
-	    View view = inflater.inflate(R.layout.claimant_adapter_dialog, null);
+	    View view = inflater.inflate(R.layout.approver_adapter_dialog, null);
 
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(view);
 	    
-	    Button edit = (Button) view.findViewById(R.id.buttonEditClaim);
-	    Button submit = (Button) view.findViewById(R.id.buttonSubmitClaim);
-	    Button delete = (Button) view.findViewById(R.id.buttonDeleteClaim);
+	    Button approve = (Button) view.findViewById(R.id.buttonApproveClaim);
+	    Button returnButton = (Button) view.findViewById(R.id.buttonReturnClaim);
 	    Button viewButton = (Button) view.findViewById(R.id.buttonViewClaim);
 	    
-	    edit.setOnClickListener(editClaim);
-	    submit.setOnClickListener(submitClaim);
-	    delete.setOnClickListener(deleteClaim);
+	    approve.setOnClickListener(approveClaim);
+	    returnButton.setOnClickListener(returnClaim);
 	    viewButton.setOnClickListener(viewClaim);
+
 	    
 	    return builder.create();
 	}
 }
+

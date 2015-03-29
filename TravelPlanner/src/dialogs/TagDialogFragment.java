@@ -17,7 +17,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package ca.ualberta.cmput301w15t13.Fragments;
+package dialogs;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -29,8 +29,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
-import exceptions.EmptyFieldException;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 
 /**
  * This is a custom dialog fragment for 
@@ -39,10 +38,11 @@ import exceptions.EmptyFieldException;
  * and a submit button. No cancel button is
  * available because clicking outside the
  * dialog will automatically close it.
+ * @author mfritze
  *
  */
 
-public class DestinationDialogFragment extends DialogFragment {
+public class TagDialogFragment extends DialogFragment {
 	// Based on http://developer.android.com/guide/topics/ui/dialogs.html March 06 2015
     
 	@SuppressLint("InflateParams")
@@ -53,28 +53,21 @@ public class DestinationDialogFragment extends DialogFragment {
 
 	    // Inflate and set the layout for the dialog
 	    // Pass null as the parent view because its going in the dialog layout
-	    builder.setView(inflater.inflate(R.layout.destination_dialog_layout, null))
+	    builder.setView(inflater.inflate(R.layout.tag_dialog_layout, null))
 	    // Add action buttons
 	           .setPositiveButton(R.string.finish, new DialogInterface.OnClickListener() {
+	        	   
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
-	                   EditText destinationView = (EditText) ((AlertDialog) dialog).findViewById(R.id.editTextDestinationName);
-	                   EditText reasonView = (EditText)  ((AlertDialog) dialog).findViewById(R.id.editTextReasonName);
-	                   String destination;
-	                   String reason;
+	                   EditText tView = (EditText) ((AlertDialog) dialog).findViewById(R.id.editTagText);
+	                   String tagText;
+	                   tagText = tView.getText().toString().trim();
+					   // Add the tag field and update the textview
 	                   
-	                   destination = destinationView.getText().toString().trim();
-	                   reason = reasonView.getText().toString().trim();
-	                   try {
-	                	   
-	                	   TravelItinerary item = new TravelItinerary(destination, reason);
-	                	   // Add the destination fields and update the textview
-	                	   FragmentManager fm = getFragmentManager();
-	                	   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
-	                	   fragment.addTravelItenerarItem(item);
-	                   } catch (EmptyFieldException e) {
-	                	   e.printStackTrace();
-	                   }
+					   FragmentManager fm = getFragmentManager();
+					   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
+					   
+					   fragment.addTagItem(tagText);
 	               }
 	           });
      

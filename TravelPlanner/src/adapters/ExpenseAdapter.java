@@ -18,7 +18,7 @@
  * limitations under the License.
  */
 
-package ca.ualberta.cmput301w15t13.Controllers;
+package adapters;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;

@@ -45,6 +45,8 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import dialogs.DestinationDialogFragment;
+import dialogs.TagDialogFragment;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
@@ -240,7 +242,7 @@ public class ClaimManagerFragment extends Fragment{
 	 * tag from the user
 	 */
 	public void openTagDialog() {
-		tagDialogFragment dialog = new tagDialogFragment();
+		TagDialogFragment dialog = new TagDialogFragment();
 		dialog.show(getFragmentManager(), "TEST TAG");
 	}
 	
