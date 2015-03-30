@@ -1,0 +1,16 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	modified:   TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/LoginActivity.java
+#	modified:   TravelPlanner/src/ca/ualberta/cmput301w15t13/Controllers/ClaimListSingleton.java
+#	modified:   TravelPlanner/src/ca/ualberta/cmput301w15t13/Models/ClaimList.java
+#	modified:   TravelPlanner/src/persistanceController/DataManager.java
+#	modified:   TravelPlanner/src/persistanceModel/LoadASyncTask.java
+#	modified:   TravelPlanner/src/persistanceModel/LoadAllASyncTask.java
+#	modified:   TravelPlanner/src/persistanceModel/NetworkPersistance.java
+#
+

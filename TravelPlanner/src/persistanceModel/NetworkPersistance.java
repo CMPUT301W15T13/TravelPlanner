@@ -51,6 +51,14 @@ public class NetworkPersistance{
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
+		//This will save all the expenses associated with the claim
+		ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
+		for (ExpenseItem expenseItem: expenseList){
+			this.saveExpense(expenseItem);
+		}
+		//this will clear all expenses from the claim
+		claim.clearExpenses();
+		
 		try {
 			HttpPut  addRequest = new HttpPut(SAVE_CLAIM_URL + itemID);
 
@@ -133,13 +141,45 @@ public class NetworkPersistance{
 		}
 
 		return sr.getSource();
-		
-		
-
 	}
 	
 	
+	public ExpenseItem loadExpense(String expenseUUID) {
+		Gson gson = new Gson();
+		SearchHit<ExpenseItem> sr = null;
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpGet httpGet = new HttpGet(SAVE_CLAIM_URL + expenseUUID);
 
+		HttpResponse response = null;
+
+		try {
+			response = httpClient.execute(httpGet);
+		} catch (ClientProtocolException e1) {
+			throw new RuntimeException(e1);
+		} catch (IOException e1) {
+			throw new RuntimeException(e1);
+		}
+		
+		Type searchHitType = new TypeToken<SearchHit<ExpenseItem>>() {}.getType();
+
+		try {
+			sr = gson.fromJson(
+					new InputStreamReader(response.getEntity().getContent()),
+					searchHitType);
+		} catch (JsonIOException e) {
+			throw new RuntimeException(e);
+		} catch (JsonSyntaxException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+
+		return sr.getSource();
+	}
+	
+	
 	private ArrayList<String> getClaimIDList(String userName){
 		Gson gson = new Gson();
 		/**
@@ -193,6 +233,84 @@ public class NetworkPersistance{
 			}
 		}
 		return claimIDList;
+	}
+	
+	
+	private ArrayList<String> getExpenseIDList(String claimID){
+		Gson gson = new Gson();
+		/**
+		 * Creates a search request from a search string and a field
+		 */
+		HttpPost searchRequest = new HttpPost(SEARCH_CLAIM_URL);
+		SearchCommand command = new SearchCommand("claimID:"+claimID);
+		String query = gson.toJson(command);
+		StringEntity stringEntity = null;
+		try {
+			stringEntity = new StringEntity(query);
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+		searchRequest.setHeader("Accept", "application/json");
+		searchRequest.setEntity(stringEntity);
+		HttpClient httpClient = new DefaultHttpClient();
+		HttpResponse response = null;
+		try {
+			response = httpClient.execute(searchRequest);
+		} catch (ClientProtocolException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		
+		/**
+		 * Parses the response of a search
+		 */
+		Type searchResponseType = new TypeToken<SearchResponse<ExpenseItem>>() {
+		}.getType();
+		SearchResponse<Claim> esResponse;
+		try {
+			esResponse = gson.fromJson(
+					new InputStreamReader(response.getEntity().getContent()),
+					searchResponseType);
+		} catch (JsonIOException e) {
+			throw new RuntimeException(e);
+		} catch (JsonSyntaxException e) {
+			throw new RuntimeException(e);
+		} catch (IllegalStateException e) {
+			throw new RuntimeException(e);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		ArrayList<String> expenseIDList = new ArrayList<String>();
+		if (esResponse.getHits().getTotal() >0){
+			int totalHits = esResponse.getHits().getTotal();
+			for (int index = 0; index < totalHits; index++){
+				expenseIDList.add(esResponse.getHits().getHits().get(index).get_id());
+			}
+		}
+		return expenseIDList;
+	}
+	
+	
+	
+	/**
+	 * This will load a claim based on the userName
+	 * @param userName
+	 * @return
+	 */
+	public void loadExpenseByClaimID(String claimID){
+
+		ArrayList<String> expenseIDList = this.getExpenseIDList(claimID);
+		ArrayList<ExpenseItem> expenseList = new ArrayList<ExpenseItem>();
+		
+		for (int index=0; index < expenseIDList.size(); index++){
+			String expenseID = expenseIDList.get(index);
+			ExpenseItem expense = this.loadExpense(expenseID);
+			ClaimListSingleton.addExpenseToClaim(claimID, expense);
+			
+		}
+
+		LoginActivity.available.release();
 	}
 	
 	

@@ -174,5 +174,11 @@ public class ClaimList {
 		return null;
 		
 	}
+
+	public void replaceClaimAtIndex(int currentClaimIndex, Claim newClaim) {
+		this.claimList.add(currentClaimIndex, newClaim);
+		this.removeClaimAtIndex(currentClaimIndex+1);
+		
+	}
 	
 }

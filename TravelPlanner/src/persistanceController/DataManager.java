@@ -119,16 +119,18 @@ class DataHelper{
 	public void saveClaim(Claim claim) {
 		if (DataManager.isNetworkAvailable()){
 			new SaveASyncTask().execute(claim.getclaimID());
-		}else{
-			local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
 		}
+		local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
 	}
 
 
 	public void loadAllClaims() throws InterruptedException, ExecutionException {
 		if (DataManager.isNetworkAvailable()){
-			String hey  = new LoadAllASyncTask().execute("").get();
+			new LoadAllASyncTask().execute("");
+		}else{
+			local.LoadClaims(DataManager.getCurrentContext());
 		}
+		
 	}
 
 

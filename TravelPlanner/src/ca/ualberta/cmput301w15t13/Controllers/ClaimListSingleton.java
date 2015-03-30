@@ -116,4 +116,22 @@ public class ClaimListSingleton {
 	public static Claim getClaimByID(String ID){
 		return claimList.getClaimByID(ID);
 	}
+
+
+	public static void addExpenseToClaim(String claimID, ExpenseItem expense) {
+		
+		int currentClaimIndex = 0;
+		Claim newClaim;
+		for (int index = 0; index < claimList.size(); index++){
+			newClaim = claimList.getClaimAtIndex(index);
+			if (newClaim.getclaimID().equals(claimID)){
+				newClaim.addExpenseItem(expense);
+				currentClaimIndex = index;
+				claimList.replaceClaimAtIndex(0, newClaim);
+			}
+		}
+
+		}
+		
+	
 }

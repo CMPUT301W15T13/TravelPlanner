@@ -1,6 +1,8 @@
 package persistanceModel;
 
+import persistanceController.DataManager;
 import android.os.AsyncTask;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 
 public class LoadAllASyncTask extends AsyncTask<String, Void, String> {
@@ -10,6 +12,7 @@ public class LoadAllASyncTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... users) {
         try {
 
+        	//Toast.makeText(DataManager.getCurrentContext(), "Searching for user Claims", Toast.LENGTH_SHORT).show();
         	
         	ClaimListSingleton.clearList();
         	

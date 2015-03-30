@@ -25,6 +25,7 @@ import java.util.concurrent.Semaphore;
 
 import persistanceController.DataManager;
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -72,10 +73,9 @@ public class LoginActivity extends Activity {
 		passwordEditText = (EditText) findViewById(R.id.editTextPassword);
 		username = usernameEditText.getText().toString();
 		password = passwordEditText.getText().toString();
-		
+			
 		//load data
 		DataManager.setOnlineMode();
-		//DataManager.loadClaimsByUserName(usernameEditText.toString());
 		
 		if (username.equals("") || username == null) {
 			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();
@@ -85,7 +85,6 @@ public class LoginActivity extends Activity {
 			//password and username are filled in
 			User user= User.login(username, password);
 			if (user != null) {
-				Toast.makeText(this, "Searching Server for past claims", Toast.LENGTH_SHORT).show();
 				DataManager.loadClaimsByUserName(username);
 				available.acquire();
 				startClaimActivity(username, true);
