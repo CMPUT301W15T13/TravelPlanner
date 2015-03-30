@@ -21,4 +21,9 @@ public class Tag {
 	public void setTagName(String name) {
 		this.tagName = name;
 	}
+	
+	@Override
+	public String toString() {
+		return (tagName);
+	}
 }
