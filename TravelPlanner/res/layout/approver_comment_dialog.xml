@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ApproverCommentDialog"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentTop="true" 
+    android:orientation="vertical"
+    android:background="@color/background_dark"
+    android:padding="1dp" >
+
+    <EditText
+        android:id="@+id/ApproverCommentEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:textColor="@color/text"
+        android:hint="@string/ApproverCommentHint" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/ButtonCommitApproverComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ApproverCommentEditText"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/ApproverCommentEditText"
+        android:text="@string/ButtonCommitApproverComment" />
+
+</RelativeLayout>

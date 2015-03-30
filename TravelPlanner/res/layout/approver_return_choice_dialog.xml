@@ -20,22 +20,24 @@
         android:textColor="@color/text" />
 
     <Button
-        android:id="@+id/ButtonReturnCancel"
+        android:id="@+id/ButtonReturnOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/ApproverReturnChoiceText"
         android:layout_below="@+id/ApproverReturnChoiceText"
-        android:text="@string/ReturnCancel"
+        android:text="@string/ReturnOk"
         android:textColor="@color/text"
         android:textSize="12sp" />
 
     <Button
-        android:id="@+id/ButtonReturnOk"
+        android:id="@+id/ButtonReturnCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/ApproverReturnChoiceText"
-        android:layout_below="@+id/ApproverReturnChoiceText"
-        android:text="@string/ReturnOk"
+        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/ButtonReturnOk"
+        android:layout_below="@+id/ButtonReturnOk"
+        android:text="@string/ReturnCancel"
         android:textColor="@color/text"
         android:textSize="12sp" />
 

@@ -49,5 +49,7 @@
     <string name="ApproverReturnText">Do you want to Add Comments</string>
     <string name="ReturnCancel">Cancel</string>
     <string name="ReturnOk">Ok</string>
+    <string name="ApproverCommentHint">Input Comments</string>
+    <string name="ButtonCommitApproverComment">Commit</string>
 
 </resources>
