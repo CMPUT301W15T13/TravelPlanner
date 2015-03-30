@@ -251,7 +251,15 @@ public class ClaimActivity extends Activity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		DataManager.setCurrentContext(getApplicationContext());
+	
 		ClaimListSingleton.getClaimList().notifyListeners();
+		Toast.makeText(getApplicationContext(), "synchronizing with server", Toast.LENGTH_SHORT).show();
+
+			DataManager.loadClaimsByUserName(this.user.getName());
+			ClaimListSingleton.getClaimList().notifyListeners();
+
+
 	}
 
 	/**

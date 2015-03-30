@@ -125,11 +125,11 @@ class DataHelper{
 
 
 	public void loadAllClaims() throws InterruptedException, ExecutionException {
-		if (DataManager.isNetworkAvailable()){
-			new LoadAllASyncTask().execute("");
-		}else{
+		//if (DataManager.isNetworkAvailable()){
+	//		new LoadAllASyncTask().execute("");
+	//	}else{
 			local.LoadClaims(DataManager.getCurrentContext());
-		}
+		//}
 		
 	}
 

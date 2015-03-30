@@ -16,11 +16,20 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
+import persistanceController.DataManager;
 import persistanceData.SearchCommand;
 import persistanceData.SearchHit;
 import persistanceData.SearchResponse;
+import adapters.ClaimAdapter;
+import android.R;
+import android.app.Application;
+import android.view.View;
+import android.webkit.WebView.FindListener;
+import android.widget.AnalogClock;
+import android.widget.ListView;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
@@ -310,7 +319,8 @@ public class NetworkPersistance{
 			
 		}
 
-		LoginActivity.available.release();
+		//LoginActivity.available.release();
+		
 	}
 	
 	
@@ -329,8 +339,12 @@ public class NetworkPersistance{
 			Claim fetchedClaim = this.loadClaim(claimID);
 			ClaimListSingleton.addClaim(fetchedClaim);
 		}
-
-		LoginActivity.available.release();
+	
+		
+		//LoginActivity.available.release();
+		//ClaimListSingleton.getClaimList().notifyListeners();
+		//ClaimViewerFragment.claimAdapter.update();
+		
 	}
 
 

@@ -58,7 +58,7 @@ import exceptions.InvalidUserPermissionException;
  */
 
 public class ClaimViewerFragment extends Fragment {
-	private ClaimAdapter claimAdapter;
+	public static ClaimAdapter claimAdapter;
 	private ArrayList<Claim> claims;
 	private int claimIndex;
 	private String claimID;

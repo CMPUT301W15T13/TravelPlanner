@@ -64,7 +64,7 @@ public class LoginActivity extends Activity {
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 */
-	public void login(View view) throws InterruptedException, ExecutionException {
+	public void login(View view) throws  ExecutionException, InterruptedException {
 		EditText usernameEditText;
 		EditText passwordEditText;
 		String username, password;
@@ -85,9 +85,12 @@ public class LoginActivity extends Activity {
 			//password and username are filled in
 			User user= User.login(username, password);
 			if (user != null) {
-				DataManager.loadClaimsByUserName(username);
-				available.acquire();
+				DataManager.loadAllClaims();
+				
+				//available.acquire();
 				startClaimActivity(username, true);
+				
+
 			} else {
 				Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
 			}
@@ -129,5 +132,11 @@ public class LoginActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
+	}
+	
+	@Override
+	public void onResume(){
+		super.onResume();
+		DataManager.setCurrentContext(getApplicationContext());
 	}
 }
