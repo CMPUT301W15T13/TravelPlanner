@@ -46,5 +46,8 @@
     <string name="add">Add</string>
     <string name="title_activity_edit_tag">Edit Tags</string>
     <string name="eTag">Edit Tags</string>
+    <string name="ApproverReturnText">Do you want to Add Comments</string>
+    <string name="ReturnCancel">Cancel</string>
+    <string name="ReturnOk">Ok</string>
 
 </resources>
