@@ -22,7 +22,9 @@ package ca.ualberta.cmput301w15t13.Controllers;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 
 /**
@@ -82,4 +84,6 @@ public abstract class User {
 	 * @return The OnItemClickListener defined for the specific user.
 	 */
 	public abstract OnItemClickListener getClaimAdapterShortClickListener(Activity activity);
+	
+	public abstract OnItemLongClickListener getClaimAdapterLongClickListener(FragmentManager fm);
 }

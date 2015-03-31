@@ -24,29 +24,21 @@ import java.util.ArrayList;
 
 import adapters.ClaimAdapter;
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Approver;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
-import dialogs.ApproverChoiceDialogFragment;
 import dialogs.ApproverCommentDialogFragment;
-import dialogs.ClaimantChoiceDialogFragment;
-import dialogs.DestinationDialogFragment;
 import exceptions.InvalidUserPermissionException;
 
 /**
@@ -63,7 +55,6 @@ public class ClaimViewerFragment extends Fragment {
 	public static ClaimAdapter claimAdapter;
 	private ArrayList<Claim> claims;
 	private int claimIndex;
-	private String claimID;
 	private ClaimActivity activity;
 	
 	private Listener updateClaimList = new Listener(){
@@ -97,21 +88,7 @@ public class ClaimViewerFragment extends Fragment {
 		
 		claimListView.setOnItemClickListener(activity.getUser().getClaimAdapterShortClickListener(getActivity()));
 		
-		claimListView.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				claimIndex = position;
-
-				if(activity.isClaimant()){
-					new ClaimantChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
-				}else{
-					new ApproverChoiceDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
-				}
-				return true;
-			}
-		});
+		claimListView.setOnItemLongClickListener(activity.getUser().getClaimAdapterLongClickListener(getFragmentManager()));
 	}
 	
 	/**
@@ -119,7 +96,7 @@ public class ClaimViewerFragment extends Fragment {
 	 * change the fragment to the ClaimManager and fill the
 	 * fields with the existing data.
 	 */
-	public void editClaim(){
+	public void editClaim(int claimIndex){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		if(submitClaim.isEditable()){
 			activity.editClaim(claimIndex);
@@ -132,7 +109,7 @@ public class ClaimViewerFragment extends Fragment {
 	 * Delete the selected claim and 
 	 * update the view.
 	 */
-	public void deleteClaim(){
+	public void deleteClaim(int claimIndex){
 		Claim claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		if(claim.getStatus() != ClaimStatus.statusEnum.SUBMITTED){
 			ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
@@ -144,7 +121,7 @@ public class ClaimViewerFragment extends Fragment {
 	 * View the selected claim's claim-level
 	 * details.
 	 */
-	public void viewClaim(){
+	public void viewClaim(int claimIndex){
 			activity.setFragmentToDetailViewer(claimIndex);
 	}
 	

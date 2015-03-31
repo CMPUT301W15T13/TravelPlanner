@@ -44,6 +44,14 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
  *
  */
 public class ApproverChoiceDialogFragment extends DialogFragment{
+	int claimIndex;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    claimIndex = getArguments().getInt("index");
+	}
+	
 	/**
 	 * Upon returning, Approver will be asked if he/she wants to input comment for the reason
 	 */
@@ -59,15 +67,6 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
         	Dialog d = getDialog();
         	d.dismiss();
         }
-        /* prev codes for return Claim
-		public void onClick(final View v) {
-     	   FragmentManager fm = getFragmentManager();
-     	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-     	   fragment.returnClaim();
-     	   Dialog d = getDialog();
-     	   d.dismiss();
-        }
-        */
     };
     
     final OnClickListener approveClaim = new OnClickListener() {
@@ -86,7 +85,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.viewClaim();
+      	   fragment.viewClaim(claimIndex); // TODO
       	   Dialog d = getDialog();
       	   d.dismiss();
         }
