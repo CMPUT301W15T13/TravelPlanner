@@ -24,8 +24,6 @@ import persistanceController.DataManager;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -36,11 +34,9 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.User;
-import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
-import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
-import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -58,52 +54,42 @@ import exceptions.InvalidUserPermissionException;
  */
 
 public class ClaimActivity extends Activity {
-	
-	private FragmentManager fm;
-	private FragmentTransaction ft;
-	private ClaimViewerFragment claimViewerFragment;
-	private ClaimManagerFragment claimManagerFragment;
-	private ClaimDetailViewerFragment claimDetailViewerFragment;
-	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 	private boolean isClaimant;
 	private User user;
+	
+	public User getUser() {
+		return this.user;
+	}
 
+	/* OnClick button methods */ 
+	
 	/**
-	 * Switches the fragment/layout
-	 * to the claim viewer.
+	 * Will open a date picker dialog
+	 * but passes the proper start date text view id
+	 * such that it can be updated.
 	 */
-	public void setFragmentToClaimViewer(){
-		actionBar.show();
-		
-		ft = fm.beginTransaction();
-		ft.replace(R.id.mainFragmentHolder, this.claimViewerFragment, "ClaimViewer");
-		ft.commit();
+	public void openStartDateDialog(View v){
+		TextView textId = (TextView) findViewById(R.id.textViewStartDate);
+		ClaimFragmentNavigator.openStartDateDialog(textId);
 	}
 	
 	/**
-	 * Switch to the claim manager
-	 * fragment/layout
+	 * Will open a date picker dialog
+	 * but passes the proper end date text view id
+	 * such that it can be updated.
 	 */
-	public void setFragementToClaimManager(){
-		actionBar.hide();
-		
-		ft = fm.beginTransaction();
-		ft.replace(R.id.mainFragmentHolder, this.claimManagerFragment, "ClaimManager");
-		ft.commit();
+	public void openEndDateDialog(View v){
+		TextView textId = (TextView) findViewById(R.id.textViewEndDate);
+		ClaimFragmentNavigator.openEndDateDialog(textId);
 	}
 	
 	/**
-	 * Switch to the fragment
-	 * that views claim details
+	 * Opens a destination dialog
+	 * for adding the location and reason
+	 * for travel.
 	 */
-	public void setFragmentToDetailViewer(int index){
-		actionBar.hide();
-		
-		ft = fm.beginTransaction();
-		ft.replace(R.id.mainFragmentHolder, this.claimDetailViewerFragment, "ClaimDetailsViewer");
-		ft.commit();
-		
-		claimDetailViewerFragment.setClaim(index);
+	public void addDestination(View v) {
+		ClaimFragmentNavigator.addDestination();
 	}
 	
 	/**
@@ -112,22 +98,7 @@ public class ClaimActivity extends Activity {
 	 * Claim Manager Layout
 	 */
 	public void newClaim(View v){
-		setFragementToClaimManager();
-		claimManagerFragment.setStateAsEditing(false);
-	}
-	
-	/**
-	 * Opens the claim manager fragment
-	 * sets the claim index to the corresponding
-	 * position in the array adapter and
-	 * tells the claim manager that it should edit,
-	 * not create.
-	 * @param index
-	 */
-	public void editClaim(int index) {
-		setFragementToClaimManager();
-		claimManagerFragment.setStateAsEditing(true);
-		claimManagerFragment.setClaimIndex(index);
+		ClaimFragmentNavigator.newClaim();
 	}
 	
 	/**
@@ -142,18 +113,7 @@ public class ClaimActivity extends Activity {
 	 * @throws EmptyFieldException 
 	 */
 	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException{
-		claimManagerFragment.updateReferences();
-		boolean newData = true;
-		if(claimManagerFragment.isEditing()){ //check if we're updating a claim or creating a claim
-			claimManagerFragment.updateClaim();
-		}
-		else{
-			newData = claimManagerFragment.createClaim();
-		} 
-		if(newData){
-			ClaimListSingleton.getClaimList().notifyListeners();
-			setFragmentToClaimViewer();
-		}
+		ClaimFragmentNavigator.finishClaim();
 	}
 	
 	/**
@@ -161,54 +121,13 @@ public class ClaimActivity extends Activity {
 	 * and returns back to the viewing screen.
 	 */
 	public void cancelClaim(View v){
-		setFragmentToClaimViewer();
-	}
-	
-	/**
-	 * Will open a date picker dialog
-	 * but passes the proper start date text view id
-	 * such that it can be updated.
-	 */
-	public void openStartDateDialog(View v){
-		TextView textId = (TextView) findViewById(R.id.textViewStartDate);
-		claimManagerFragment.openDateDialog(textId);
-	}
-	
-	/**
-	 * Will open a date picker dialog
-	 * but passes the proper end date text view id
-	 * such that it can be updated.
-	 */
-	public void openEndDateDialog(View v){
-		TextView textId = (TextView) findViewById(R.id.textViewEndDate);
-		claimManagerFragment.openDateDialog(textId);
-	}
-	
-	/**
-	 * Opens a destination dialog
-	 * for adding the location and reason
-	 * for travel.
-	 */
-	public void addDestination(View v) {
-		claimManagerFragment.openDestinationDialog();
+		ClaimFragmentNavigator.showClaimViewer();
 	}
 	
 	public void addTag(View v) {
-		claimManagerFragment.openTagDialog();
-	}
-
-	public String getUsername() {
-		return this.user.getName();
-	}
-
-	public boolean isClaimant() {
-		return isClaimant;
+		ClaimFragmentNavigator.openTag();
 	}
 	
-	public User getUser() {
-		return this.user;
-	}
-
 	/* Below this is android stuff */
 	
 	@Override
@@ -219,13 +138,8 @@ public class ClaimActivity extends Activity {
 		//ClaimListSingleton.getClaimList().clearListeners();
 		
 		setActionBar();
-		this.actionBar = getActionBar();
 		
-		this.fm = getFragmentManager();
-		claimViewerFragment = new ClaimViewerFragment();
-		claimManagerFragment = new ClaimManagerFragment();
-		claimDetailViewerFragment = new ClaimDetailViewerFragment();
-		
+		ClaimFragmentNavigator.createInstance(getFragmentManager());
 		
 		DataManager.setCurrentContext(this.getApplicationContext());
 		
@@ -246,7 +160,7 @@ public class ClaimActivity extends Activity {
 	@Override
 	protected void onStart() {
 		super.onStart();
-		setFragmentToClaimViewer();
+		ClaimFragmentNavigator.showClaimViewer();
 	}
 	
 	@Override

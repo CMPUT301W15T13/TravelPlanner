@@ -33,6 +33,7 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Approver;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
@@ -98,7 +99,8 @@ public class ClaimViewerFragment extends Fragment {
 	public void editClaim(int claimIndex){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		if(submitClaim.isEditable()){
-			activity.editClaim(claimIndex);
+			//activity.editClaim(claimIndex);
+			ClaimFragmentNavigator.editClaim(claimIndex);
 		} else{
 			Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
 		}
@@ -121,7 +123,7 @@ public class ClaimViewerFragment extends Fragment {
 	 * details.
 	 */
 	public void viewClaim(int claimIndex){
-			activity.setFragmentToDetailViewer(claimIndex);
+		ClaimFragmentNavigator.showClaimDetails(claimIndex);
 	}
 	
 	/**
@@ -206,9 +208,8 @@ public class ClaimViewerFragment extends Fragment {
 		addListeners();
 		initializeAdapter();
 		
-		if(!activity.isClaimant()){
-			getView().findViewById(R.id.buttonNewClaim).setVisibility(View.GONE);
-		}
+		int visibility = activity.getUser().getButtonVisibility();
+		getView().findViewById(R.id.buttonNewClaim).setVisibility(visibility);
 	}
 
 	@Override

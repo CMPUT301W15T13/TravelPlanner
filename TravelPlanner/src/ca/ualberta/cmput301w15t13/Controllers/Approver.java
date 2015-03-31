@@ -99,7 +99,6 @@ public class Approver extends User {
 		return listener;
 	}
 
-	
 	@Override
 	public OnItemLongClickListener getClaimAdapterLongClickListener(final FragmentManager fm) {
 		final OnItemLongClickListener listener = new OnItemLongClickListener() {
@@ -118,4 +117,10 @@ public class Approver extends User {
 		return listener;
 	}
 
+	
+	@Override
+	public int getButtonVisibility() {
+		return View.GONE;
+	}
+	
 }

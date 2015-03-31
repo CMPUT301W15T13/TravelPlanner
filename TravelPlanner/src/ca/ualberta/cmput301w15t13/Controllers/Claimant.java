@@ -104,7 +104,6 @@ public class Claimant extends User {
 		
 		return listener;
 	}
-
 	
 	@Override
 	public OnItemLongClickListener getClaimAdapterLongClickListener(final FragmentManager fm) {
@@ -122,6 +121,12 @@ public class Claimant extends User {
 			}
 		};
 		return listener;
+	}
+
+
+	@Override
+	public int getButtonVisibility() {
+		return View.VISIBLE;
 	}
 	
 }

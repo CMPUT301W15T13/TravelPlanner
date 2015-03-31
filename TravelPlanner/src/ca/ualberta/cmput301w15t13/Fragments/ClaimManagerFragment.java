@@ -86,10 +86,7 @@ public class ClaimManagerFragment extends Fragment{
 	/**
 	 *  approverComments will have type ArrayList<String> after the getComments() method
 	 */
-	private ArrayList<String> approverComments;
-	
-	//TODO force change what the back button does from this screen, in that it moves to the old fragment
-	
+	private ArrayList<String> approverComments;	
 
 	/**
 	 * Sets the "Mode" of the fragment to edit or create, 
@@ -225,7 +222,7 @@ public class ClaimManagerFragment extends Fragment{
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();
 			return false;
 		}else{
-			Claim newClaim = new Claim(activity.getUsername(), startDate, endDate, 
+			Claim newClaim = new Claim(activity.getUser().getName(), startDate, endDate, 
 					this.description, itineraryList);
 			newClaim.tags = tagList;
 			ClaimList claimlist = ClaimListSingleton.getClaimList();
@@ -282,7 +279,7 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	public void updateClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException {
 		updateReferences();
-		Claim newClaim = new Claim(activity.getUsername(), startDate, endDate, 
+		Claim newClaim = new Claim(activity.getUser().getName(), startDate, endDate, 
 				this.description, itineraryList);
 		newClaim.tags = this.tagList;
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);

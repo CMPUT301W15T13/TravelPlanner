@@ -29,7 +29,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 
@@ -48,7 +48,7 @@ public class ClaimDetailViewerFragment extends Fragment {
 		
 		@Override
 		public void onClick(View v) {
-			((ClaimActivity) getActivity()).setFragmentToClaimViewer();
+			ClaimFragmentNavigator.showClaimViewer();
 		}
 	}; 
 	
@@ -113,4 +113,6 @@ public class ClaimDetailViewerFragment extends Fragment {
 		View v = inflater.inflate(R.layout.claim_view_layout, container, false);
 		return v;
 	}
+
+
 }
