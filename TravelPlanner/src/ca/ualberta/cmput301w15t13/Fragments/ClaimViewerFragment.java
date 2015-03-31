@@ -95,35 +95,7 @@ public class ClaimViewerFragment extends Fragment {
 		final ListView claimListView = (ListView) getView().findViewById(R.id.listViewClaim);
 		claimListView.setAdapter(claimAdapter);
 		
-		claimListView.setOnItemClickListener(new OnItemClickListener(){
-
-			@Override
-			public void onItemClick(AdapterView<?> arg0, View view, int position,
-					long id) {
-				claimIndex = position;
-				claimID = claims.get(claimIndex).getclaimID();
-				if(activity.isClaimant()){
-					//Toast.makeText(getActivity(), "Open expense edit", Toast.LENGTH_SHORT).show();
-					/*
-					 * Pass required claim information to the expense portion of the code
-					 * IE: The claim holds our expense list so we need to know which
-					 * claim to get expense items from
-					*/
-					if(ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).isEditable()){
-						Intent intent = new Intent(activity, ExpenseActivity.class);
-						Bundle bundle = new Bundle();
-						bundle.putInt("claimIndex", position);
-						bundle.putString("claimID", claimID);
-						intent.putExtras(bundle);
-						startActivity(intent);
-					}else{
-						Toast.makeText(getActivity(), "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
-					}
-				}else{
-					Toast.makeText(getActivity(), "Open Expense Item View", Toast.LENGTH_SHORT).show();
-				}
-			}
-		});
+		claimListView.setOnItemClickListener(activity.getUser().getClaimAdapterShortClickListener(getActivity()));
 		
 		claimListView.setOnItemLongClickListener(new OnItemLongClickListener() {
 

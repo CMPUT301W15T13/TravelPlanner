@@ -21,6 +21,8 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.widget.AdapterView.OnItemClickListener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 
 /**
@@ -73,4 +75,11 @@ public abstract class User {
 	 * claimant. TODO This will be moved to a controller.
 	 */
 	public abstract ArrayList<Claim> getPermittableClaims(ArrayList<Claim> claims);
+	
+	/**
+	 * Allows for abstraction in defining the array adapters between different users.
+	 * @param activity
+	 * @return The OnItemClickListener defined for the specific user.
+	 */
+	public abstract OnItemClickListener getClaimAdapterShortClickListener(Activity activity);
 }

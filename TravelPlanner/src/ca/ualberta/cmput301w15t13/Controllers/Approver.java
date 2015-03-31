@@ -21,6 +21,15 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Toast;
+import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
+import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
@@ -69,6 +78,26 @@ public class Approver extends User {
 			}
 		}
 		return newClaims;
+	}
+
+	/**
+	 * Returns the OnItemClickListener for the approver,
+	 * such that the Approver can only view the details of
+	 * the expense items, not edit them.
+	 */
+	@Override
+	public OnItemClickListener getClaimAdapterShortClickListener(Activity activity) {
+		final ClaimActivity context = (ClaimActivity) activity;
+		final OnItemClickListener listener = new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int position,
+					long id) {
+				Toast.makeText(context, "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
+			}
+		};
+		
+		return listener;
 	}
 
 }
