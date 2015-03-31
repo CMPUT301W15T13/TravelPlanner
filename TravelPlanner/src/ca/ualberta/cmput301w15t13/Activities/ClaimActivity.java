@@ -54,7 +54,6 @@ import exceptions.InvalidUserPermissionException;
  */
 
 public class ClaimActivity extends Activity {
-	private boolean isClaimant;
 	private User user;
 	
 	public User getUser() {
@@ -128,6 +127,12 @@ public class ClaimActivity extends Activity {
 		ClaimFragmentNavigator.openTag();
 	}
 	
+	/**
+	 * This method is used for approver comment
+	 */
+	public void openApproverComment() {
+		
+	}
 	/* Below this is android stuff */
 	
 	@Override

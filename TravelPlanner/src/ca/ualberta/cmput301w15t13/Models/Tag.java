@@ -19,7 +19,11 @@ public class Tag {
 	}
 	
 	public void setTagName(String name) {
-		this.tagName = name;
+		if (name == "") {
+			this.tagName = "Unnamed";
+		} else {
+			this.tagName = name;
+		}
 	}
 	
 	@Override

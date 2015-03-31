@@ -38,15 +38,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.EditTag;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import dialogs.ApproverCommentDialogFragment;
 import dialogs.DestinationDialogFragment;
+import dialogs.EditTagFragment;
+import dialogs.TagChoiceFragment;
 import dialogs.TagDialogFragment;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
@@ -257,16 +260,38 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	public void openTagDialog() {
 		if (isEditing) {
-			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-			Intent intent = new Intent(activity, EditTag.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("ID", editClaim.getclaimID());
-			intent.putExtras(bundle);
-			startActivity(intent);
+			TagChoiceFragment dialog = new TagChoiceFragment();
+			dialog.show(getFragmentManager(), "TAG CHOICE");
 		} else {
 			TagDialogFragment dialog = new TagDialogFragment();
 			dialog.show(getFragmentManager(), "TEST TAG");
 		}
+	}
+	
+	public void openEditTagDialog(int tagIndex) {
+		if (ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags().size() > 0) {
+			EditTagFragment dialog = new EditTagFragment();
+			dialog.setClaimIndex(claimIndex);
+			dialog.setTagIndex(tagIndex);
+			dialog.show(getFragmentManager(),"EDIT TAG");
+		}
+	}
+	
+	/**
+	 * This method is subjected to be changed Ji Hwan Kim
+	 * 
+	 * This method is called for approver to return a claim with comments
+	 * I'm not sure where the transaction of the approver's comment going to be
+	 * Whether in ClaimManagerFragment or at ClaimViewerFragment
+	 */
+	public void openApproverCommentDialog() {
+		// check if the user is an approver
+		// check the status of claim as non-editable, submitted
+		Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment();
+		//ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment(editClaim);
+		dialog.show(getFragmentManager(), "Approver Comment Dialog");
+
 	}
 	
 	/**
@@ -281,6 +306,9 @@ public class ClaimManagerFragment extends Fragment{
 		updateReferences();
 		Claim newClaim = new Claim(activity.getUser().getName(), startDate, endDate, 
 				this.description, itineraryList);
+		for (Tag tag : ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags()) {
+			tagList.add(tag);
+		}
 		newClaim.tags = this.tagList;
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().add(newClaim);
@@ -343,7 +371,7 @@ public class ClaimManagerFragment extends Fragment{
 			String tag_list = tagView.getText().toString();
 			
 			if(!tag_list.equals("")){
-				tag_list += "\n";
+				tag_list += ",";
 			}
 			tag_list += "  " + tmp.getTagName();
 			tagView.setText(tag_list);
@@ -357,6 +385,28 @@ public class ClaimManagerFragment extends Fragment{
 			}
 		}	
 		
+	}
+	
+	public void editTagItem(String tag, int tagIndex) {
+		//Tag tmp = this.tagList.get(tagIndex);
+		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();
+		Tag tmp = claimTags.get(tagIndex);
+		tmp.setTagName(tag);
+		String tag_list = "";
+		for (Tag tagItem : claimTags) {
+			tag_list += tagItem.getTagName()+", ";
+		}
+		tagView.setText(tag_list);
+	}
+	
+	public void removeTagItem(int tagIndex) {
+		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();
+		claimTags.remove(tagIndex);
+		String tag_list = "";
+		for (Tag tagItem : claimTags) {
+			tag_list += tagItem.getTagName()+", ";
+		}
+		tagView.setText(tag_list);
 	}
 		
 	public void setClaimIndex(int index){

@@ -154,13 +154,18 @@ public class ClaimViewerFragment extends Fragment {
 	 */
 	public void returnClaim(int claimIndex){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-		
 		((Approver) activity.getUser()).returnClaim(submitClaim);
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().add(submitClaim);
 		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 		
+	/**
+	 * Upon returning a claim, an approver must write comments for reason why
+	 * This method will call comment fragment for approver to comment
+	 * returnClaim method will be called once an approver has finished commenting
+	 * @param index
+	 */
 	public void approverComment(int index) {
 		// shows the approver comment dialog fragment
 		ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment();
