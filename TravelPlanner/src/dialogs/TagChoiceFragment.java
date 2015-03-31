@@ -33,13 +33,9 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 
 /**
  * This is a custom dialog fragment for 
- * adding a destination-reason pair to a
- * claim. It provides two edit text fields
- * and a submit button. No cancel button is
- * available because clicking outside the
- * dialog will automatically close it.
- * @author mfritze
- *
+ * Editing tags. It uses the same layout as the
+ * tag dialog layout, but adds an "edit existing"
+ * button.
  */
 
 public class TagChoiceFragment extends DialogFragment {

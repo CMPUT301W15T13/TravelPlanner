@@ -13,13 +13,13 @@
         android:orientation="horizontal" />
 
     <EditText
-        android:id="@+id/editTagText"
+        android:id="@+id/updatedTagText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignRight="@+id/title_buffer"
         android:ems="10"
-        android:hint="Enter Edited Tag Name"
+        android:hint="Enter Updated Tag Name"
         android:textColor="@color/text" >
 
         <requestFocus />

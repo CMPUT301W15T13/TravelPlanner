@@ -376,8 +376,17 @@ public class ClaimManagerFragment extends Fragment{
 		
 	}
 	
-	public void editTagItem(int tagIndex){
-		
+	public void editTagItem(String tag, int tagIndex) {
+		//Tag tmp = this.tagList.get(tagIndex);
+		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();
+		Tag tmp = claimTags.get(tagIndex);
+		tmp.setTagName(tag);
+		String tag_list = "";
+		for (Tag tagItem : claimTags) {
+			this.tagList.add(tagItem);
+			tag_list += tagItem.getTagName()+", ";
+		}
+		tagView.setText(tag_list);
 	}
 	
 	public void removeTagItem(int tagIndex) {

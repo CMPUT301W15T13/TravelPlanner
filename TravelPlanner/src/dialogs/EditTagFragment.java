@@ -89,11 +89,11 @@ public class EditTagFragment extends DialogFragment {
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(inflater.inflate(R.layout.edit_tag_layout, null))
 	    // Add action buttons
-	           .setNegativeButton(R.string.finish, new DialogInterface.OnClickListener() {
+	           .setNegativeButton(R.string.update, new DialogInterface.OnClickListener() {
 	        	   
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
-	                   EditText tView = (EditText) ((AlertDialog) dialog).findViewById(R.id.editTagText);
+	                   EditText tView = (EditText) ((AlertDialog) dialog).findViewById(R.id.updatedTagText);
 	                   String tagText;
 	                   tagText = tView.getText().toString().trim();
 					   // Add the tag field and update the textview
@@ -101,7 +101,7 @@ public class EditTagFragment extends DialogFragment {
 					   FragmentManager fm = getFragmentManager();
 					   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
 					   
-					   fragment.addTagItem(tagText);
+					   fragment.editTagItem(tagText, getTagIndex());
 	               }
 	           });
 	    
