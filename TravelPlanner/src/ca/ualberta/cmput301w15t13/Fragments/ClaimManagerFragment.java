@@ -40,7 +40,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.EditTag;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -49,6 +48,8 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import dialogs.DestinationDialogFragment;
+import dialogs.EditTagFragment;
+import dialogs.TagChoiceFragment;
 import dialogs.TagDialogFragment;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
@@ -262,15 +263,26 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	public void openTagDialog() {
 		if (isEditing) {
-			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-			Intent intent = new Intent(activity, EditTag.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("ID", editClaim.getclaimID());
-			intent.putExtras(bundle);
-			startActivity(intent);
+//			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+//			Intent intent = new Intent(activity, EditTag.class);
+//			Bundle bundle = new Bundle();
+//			bundle.putString("ID", editClaim.getclaimID());
+//			intent.putExtras(bundle);
+//			startActivity(intent);
+			TagChoiceFragment dialog = new TagChoiceFragment();
+			dialog.show(getFragmentManager(), "TAG CHOICE");
 		} else {
 			TagDialogFragment dialog = new TagDialogFragment();
 			dialog.show(getFragmentManager(), "TEST TAG");
+		}
+	}
+	
+	public void openEditTagDialog(int tagIndex) {
+		if (ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags().size() > 0) {
+			EditTagFragment dialog = new EditTagFragment();
+			dialog.setClaimIndex(claimIndex);
+			dialog.setTagIndex(tagIndex);
+			dialog.show(getFragmentManager(),"EDIT TAG");
 		}
 	}
 	
@@ -361,6 +373,14 @@ public class ClaimManagerFragment extends Fragment{
 				tagView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
 			}
 		}	
+		
+	}
+	
+	public void editTagItem(int tagIndex){
+		
+	}
+	
+	public void removeTagItem(int tagIndex) {
 		
 	}
 		
