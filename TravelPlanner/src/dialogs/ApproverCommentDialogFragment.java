@@ -24,6 +24,8 @@ import android.view.View.OnClickListener;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
@@ -47,47 +49,29 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		@Override
 		public void onClick(final View v) {
 			Toast.makeText(getActivity(), "Commit was clicked", Toast.LENGTH_SHORT).show();
+			FragmentManager fm = getFragmentManager();
+	     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+	     	fragment.returnClaim();
 			Dialog d = getDialog();
 			d.dismiss();
 		}
 	};
 	
+	@SuppressLint("InflateParams")
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		/*
-		 *  DO NOT do any layout work in here. The layout
-		 *  is only initialized by onStart()
-		 */
-		super.onCreate(savedInstanceState);
-		
-	}
-	
-	@Override
-	public void onStart() {
-		super.onStart();
-		/**
-		 * Upon clicking commit by approver, the fragment will call returnClaim
-		 * and comments will be saved
-		 */
-		// first, assume the comment is not complete
-		//complete = false;
-		Button Commit = (Button) getView().findViewById(R.id.ButtonCommitApproverComment);
-		
-		/*
-		// we call fillComment, which will force the approver to fill the comment
-		fillComment();
-		// after clicking commit, we will check if the comment field was filled or not
-		Commit.setOnClickListener(commitComment);
-		*/
-		
-		Commit.setOnClickListener(commitComment);
-	}
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+	    LayoutInflater inflater = getActivity().getLayoutInflater();
+	    View view = inflater.inflate(R.layout.approver_comment_dialog, null);
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.approver_comment_dialog, container, false);
-		return v;
+	    // Pass null as the parent view because its going in the dialog layout
+	    builder.setView(view);
+	    
+	    Button commit = (Button) view.findViewById(R.id.ButtonCommitApproverComment);
+	    
+	    commit.setOnClickListener(commitComment);
+	    
+	    return builder.create();
 	}
 
 }

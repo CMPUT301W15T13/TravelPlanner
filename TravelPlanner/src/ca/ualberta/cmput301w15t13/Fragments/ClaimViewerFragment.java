@@ -213,7 +213,7 @@ public class ClaimViewerFragment extends Fragment {
 		
 	public void approverComment() {
 		// shows the approver comment dialog fragment
-		new ApproverCommentDialogFragment().show(getFragmentManager(), "Approver Comment Is mandatory for returning a claim");
+		new ApproverCommentDialogFragment().show(getFragmentManager(), "Approver Comment");
 	}
 	
 	/** 
