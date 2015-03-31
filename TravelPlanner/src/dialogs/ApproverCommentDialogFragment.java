@@ -22,7 +22,7 @@ package dialogs;
 
 import android.view.View.OnClickListener;
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -31,10 +31,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.EditText;
 import android.widget.Toast;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 
 public class ApproverCommentDialogFragment extends DialogFragment {
 
@@ -46,15 +46,12 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		 */
 		@Override
 		public void onClick(final View v) {
-			//((ClaimActivity) getActivity()).setFragmentToApproverComments();
-			FragmentManager fm = getFragmentManager();
-			ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentById(R.id.ApproverCommentDialog);
-			fragment.approverComment();
+			Toast.makeText(getActivity(), "Commit was clicked", Toast.LENGTH_SHORT).show();
 			Dialog d = getDialog();
 			d.dismiss();
 		}
 	};
-		
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		/*
@@ -72,10 +69,17 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		 * Upon clicking commit by approver, the fragment will call returnClaim
 		 * and comments will be saved
 		 */
-		
-		
+		// first, assume the comment is not complete
+		//complete = false;
 		Button Commit = (Button) getView().findViewById(R.id.ButtonCommitApproverComment);
+		
+		/*
+		// we call fillComment, which will force the approver to fill the comment
+		fillComment();
 		// after clicking commit, we will check if the comment field was filled or not
+		Commit.setOnClickListener(commitComment);
+		*/
+		
 		Commit.setOnClickListener(commitComment);
 	}
 

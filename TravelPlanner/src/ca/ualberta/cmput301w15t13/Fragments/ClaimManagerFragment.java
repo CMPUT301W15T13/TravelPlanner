@@ -23,6 +23,7 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -68,13 +69,26 @@ import exceptions.InvalidUserPermissionException;
 public class ClaimManagerFragment extends Fragment{
 	private EditText descriptionView;
 	private ArrayList<Tag> tagList;
-	private TextView startDateView, endDateView, destinationView, tagView, approverCommentView;
-	private String description, startDateText, endDateText, Comment;
+	/**
+	 * commentView is used to show the comments written by approver
+	 * commentView will be showed in pair
+	 * ex)
+	 * John, "This claim is not completed"
+	 * Doe, "This claim lacks information"
+	 * Susan, "This claim needs more description"
+	 * and will be showed in order of entry
+	 */
+	private TextView startDateView, endDateView, destinationView, tagView, commentView;
+	private String description, startDateText, endDateText;
 	private TravelItineraryList itineraryList;
 	private Date startDate, endDate;
 	private boolean incompleteFields, invalidDates, isEditing;
 	private int claimIndex;	
 	private ClaimActivity activity;
+	/**
+	 *  approverComments will have type ArrayList<String> after the getComments() method
+	 */
+	private ArrayList<String> approverComments;
 	
 	//TODO force change what the back button does from this screen, in that it moves to the old fragment
 	
@@ -100,6 +114,7 @@ public class ClaimManagerFragment extends Fragment{
 			this.endDate = editClaim.getEndDate();
 			this.itineraryList = editClaim.getTravelList();
 			this.descriptionView.setText(this.description);
+			this.approverComments = editClaim.getComments();
 			
 			this.startDateView.setText(editClaim.getStartDateAsString());
 			this.endDateView.setText(editClaim.getEndDateAsString());
@@ -113,6 +128,7 @@ public class ClaimManagerFragment extends Fragment{
 			this.descriptionView.setText("");
 		}
 	}
+	
 	
 	/**
 	 * Opens a new date picker dialog to set the 
@@ -347,20 +363,7 @@ public class ClaimManagerFragment extends Fragment{
 		}	
 		
 	}
-	
-	/**
-	 * this method adds approver's comment when approver returns and fills in comment
-	 */
-	public void addApproverComment() {
-		// for now this doens't do anything as I didn't implement anything yet
-		if (Comment!=null) {
-			// if the comment is not null, then we update
-			approverCommentView.setText(Comment);
-		} else { // else if comment is null, approver didn't write anything or claim is not returned
-			
-		}
-	}
-	
+		
 	public void setClaimIndex(int index){
 		this.claimIndex = index;
 	}
@@ -401,14 +404,11 @@ public class ClaimManagerFragment extends Fragment{
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
 		tagView = (TextView) getView().findViewById(R.id.textViewTags);
+		// approver comment will be shown in this textView
+		commentView = (TextView) getView().findViewById(R.id.ApproverCommentView);
 		Button tagButton = (Button) getView().findViewById(R.id.addTags);
 		tagButton.setText("Add");
-		
-		/**
-		 * Comments view for approver comment
-		 */
-		approverCommentView = (TextView) getView().findViewById(R.id.textViewComments);
-		
+				
 		this.tagList = new ArrayList<Tag>();
 		
 		setFields();

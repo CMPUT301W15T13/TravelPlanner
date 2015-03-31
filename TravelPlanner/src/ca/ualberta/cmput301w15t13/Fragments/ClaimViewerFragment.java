@@ -212,9 +212,8 @@ public class ClaimViewerFragment extends Fragment {
 	}
 		
 	public void approverComment() {
-		// Toast message to show to let approver know what comment is mandatory
-		Toast.makeText(getActivity(), "Please Input Comments for reason for returning", Toast.LENGTH_SHORT).show();
-		new ApproverCommentDialogFragment().show(getFragmentManager(), "Approver Comment Is here ");
+		// shows the approver comment dialog fragment
+		new ApproverCommentDialogFragment().show(getFragmentManager(), "Approver Comment Is mandatory for returning a claim");
 	}
 	
 	/** 

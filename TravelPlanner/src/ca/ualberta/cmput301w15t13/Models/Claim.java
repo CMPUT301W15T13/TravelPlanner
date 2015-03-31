@@ -46,6 +46,9 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	protected Date endDate = null;
 	protected String description = null;
 	protected TravelItineraryList travelList = null;
+	/**
+	 *  this HashMap approverComments will contain, <"name of an approver", "Array list of comments">
+	 */
 	protected HashMap<String, ArrayList<String>> approverComments = new HashMap<String, ArrayList<String>>();
 	protected String lastApproverName = null;
 	protected ClaimStatus status = null;
