@@ -39,6 +39,14 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 	private String comment;
 	private EditText commentField;
 	
+	/**
+	 * Ji Hwan Kim
+	 * I need to pass the approver's name as well as his/her comment
+	 * Also, the comment should not be in the form of comment but rather in ArrayList<String>
+	 * 
+	 * HashMap<String,ArrayList<String>> is the format of how approver comment is stored
+	 */
+	
 	/*
 	public ApproverCommentDialogFragment(Claim editClaim) {
 		// TODO Auto-generated constructor stub
@@ -59,7 +67,7 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		public void onClick(final View v) {
 			comment = commentField.getText().toString().trim();
 			
-			Toast.makeText(getActivity(), "Commit was clicked ", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getActivity(), "Commit was clicked", Toast.LENGTH_SHORT).show();
 						
 	     	/**
 	     	 * Here I think the return claim shoudn't be called maybe
@@ -69,27 +77,15 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 	     	if (comment.matches("") || comment==null) {
 		        Toast.makeText(getActivity(), "You did not enter comments", Toast.LENGTH_SHORT).show();
 		    } else {
+		    	Toast.makeText(getActivity(), "Comment was :"+comment, Toast.LENGTH_SHORT).show();
 		    	FragmentManager fm = getFragmentManager();
 		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");    	
 		     	fragment.returnClaim(claimIndex);
 				Dialog d = getDialog();
 				d.dismiss();
 		    }
-	     	/*
-			Toast.makeText(getActivity(), "Commit was clicked", Toast.LENGTH_SHORT).show();
-			FragmentManager fm = getFragmentManager();
-	     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-	     	fragment.returnClaim(claimIndex);
-			Dialog d = getDialog();
-			d.dismiss();
-			*/
 		}
 	};
-
-	
-	/** Im thinking I need a listener so that it can check if the comment was
-	 * empty or not, also it can pass the comment once it is written
-	 */
 	
 	@SuppressLint("InflateParams")
 	@Override
@@ -100,20 +96,10 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(view);
-	    commentField = (EditText) view.findViewById(R.id.ApproverCommentEditText);
-	    
-	    /**
-	     * Can't let the approver commit without writing anything on the edit text
-	     * Thus, I have to make sure that the user has input something then proceed to commitComment
-	     */
-	    
-	    Button commit = (Button) view.findViewById(R.id.ButtonCommitApproverComment);
-	    
-	    comment = commentField.getText().toString();   
-	    	    
-	    commit.setOnClickListener(commitComment);
-	    
+	    commentField = (EditText) view.findViewById(R.id.ApproverCommentEditText);	    	    
+	    Button commit = (Button) view.findViewById(R.id.ButtonCommitApproverComment);	    
+	    comment = commentField.getText().toString();
+	    commit.setOnClickListener(commitComment);	    
 	    return builder.create();
 	}
-
 }
