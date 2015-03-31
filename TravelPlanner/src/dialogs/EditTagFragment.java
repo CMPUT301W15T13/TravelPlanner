@@ -131,6 +131,10 @@ public class EditTagFragment extends DialogFragment {
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
 	            	   
+	            	   FragmentManager fm = getFragmentManager();
+					   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
+					   
+					   fragment.removeTagItem(getTagIndex());
 	            	
 	               }
 	                 

@@ -44,6 +44,7 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
@@ -264,12 +265,6 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	public void openTagDialog() {
 		if (isEditing) {
-//			Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-//			Intent intent = new Intent(activity, EditTag.class);
-//			Bundle bundle = new Bundle();
-//			bundle.putString("ID", editClaim.getclaimID());
-//			intent.putExtras(bundle);
-//			startActivity(intent);
 			TagChoiceFragment dialog = new TagChoiceFragment();
 			dialog.show(getFragmentManager(), "TAG CHOICE");
 		} else {
@@ -316,6 +311,9 @@ public class ClaimManagerFragment extends Fragment{
 		updateReferences();
 		Claim newClaim = new Claim(activity.getUsername(), startDate, endDate, 
 				this.description, itineraryList);
+		for (Tag tag : ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags()) {
+			tagList.add(tag);
+		}
 		newClaim.tags = this.tagList;
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().add(newClaim);
@@ -378,7 +376,7 @@ public class ClaimManagerFragment extends Fragment{
 			String tag_list = tagView.getText().toString();
 			
 			if(!tag_list.equals("")){
-				tag_list += "\n";
+				tag_list += ",";
 			}
 			tag_list += "  " + tmp.getTagName();
 			tagView.setText(tag_list);
@@ -401,14 +399,19 @@ public class ClaimManagerFragment extends Fragment{
 		tmp.setTagName(tag);
 		String tag_list = "";
 		for (Tag tagItem : claimTags) {
-			this.tagList.add(tagItem);
 			tag_list += tagItem.getTagName()+", ";
 		}
 		tagView.setText(tag_list);
 	}
 	
 	public void removeTagItem(int tagIndex) {
-		
+		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();
+		claimTags.remove(tagIndex);
+		String tag_list = "";
+		for (Tag tagItem : claimTags) {
+			tag_list += tagItem.getTagName()+", ";
+		}
+		tagView.setText(tag_list);
 	}
 		
 	public void setClaimIndex(int index){

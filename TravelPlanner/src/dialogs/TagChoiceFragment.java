@@ -49,8 +49,8 @@ public class TagChoiceFragment extends DialogFragment {
 
 	    // Inflate and set the layout for the dialog
 	    // Pass null as the parent view because its going in the dialog layout
+	    // Also add buttons
 	    builder.setView(inflater.inflate(R.layout.tag_dialog_layout, null))
-	    // Add action buttons
 	           .setNegativeButton(R.string.add, new DialogInterface.OnClickListener() {
 	        	   
 	               @Override
@@ -67,7 +67,6 @@ public class TagChoiceFragment extends DialogFragment {
 	           });
 	    
 	    builder.setView(inflater.inflate(R.layout.tag_dialog_layout, null))
-	    // Add action buttons
 	           .setPositiveButton(R.string.editExisting, new DialogInterface.OnClickListener() {
 	        	   
 	               @Override
