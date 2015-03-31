@@ -208,6 +208,13 @@ public class ClaimActivity extends Activity {
 	public User getUser() {
 		return this.user;
 	}
+	
+	/**
+	 * This method is used for approver comment
+	 */
+	public void openApproverComment() {
+		
+	}
 
 	/* Below this is android stuff */
 	

@@ -30,11 +30,29 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 
 public class ApproverCommentDialogFragment extends DialogFragment {
+	private String comment;
+	private EditText commentField;
+	
+	/**
+	 * Ji Hwan Kim
+	 * I need to pass the approver's name as well as his/her comment
+	 * Also, the comment should not be in the form of comment but rather in ArrayList<String>
+	 * 
+	 * HashMap<String,ArrayList<String>> is the format of how approver comment is stored
+	 */
+	
+	/*
+	public ApproverCommentDialogFragment(Claim editClaim) {
+		// TODO Auto-generated constructor stub
+		
+	}
+	*/
 	
 	int claimIndex;
 	
@@ -45,19 +63,27 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 	}
 
 	final OnClickListener commitComment = new OnClickListener() {
-		/**
-		 * There will be if statements to check if the comment field is empty or not
-		 * If empty then Toast error message
-		 * Else we submit the change and return the claim
-		 */
 		@Override
 		public void onClick(final View v) {
+			comment = commentField.getText().toString().trim();
+			
 			Toast.makeText(getActivity(), "Commit was clicked", Toast.LENGTH_SHORT).show();
-			FragmentManager fm = getFragmentManager();
-	     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-	     	fragment.returnClaim(claimIndex);
-			Dialog d = getDialog();
-			d.dismiss();
+						
+	     	/**
+	     	 * Here I think the return claim shoudn't be called maybe
+	     	 * THIS IS WHERE THE APPROVER COMMENT TRANSACTION WILL BE MADE
+	     	 */
+			
+	     	if (comment.matches("") || comment==null) {
+		        Toast.makeText(getActivity(), "You did not enter comments", Toast.LENGTH_SHORT).show();
+		    } else {
+		    	Toast.makeText(getActivity(), "Comment was :"+comment, Toast.LENGTH_SHORT).show();
+		    	FragmentManager fm = getFragmentManager();
+		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");    	
+		     	fragment.returnClaim(claimIndex);
+				Dialog d = getDialog();
+				d.dismiss();
+		    }
 		}
 	};
 	
@@ -70,12 +96,10 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(view);
-	    
-	    Button commit = (Button) view.findViewById(R.id.ButtonCommitApproverComment);
-	    
-	    commit.setOnClickListener(commitComment);
-	    
+	    commentField = (EditText) view.findViewById(R.id.ApproverCommentEditText);	    	    
+	    Button commit = (Button) view.findViewById(R.id.ButtonCommitApproverComment);	    
+	    comment = commentField.getText().toString();
+	    commit.setOnClickListener(commitComment);	    
 	    return builder.create();
 	}
-
 }
