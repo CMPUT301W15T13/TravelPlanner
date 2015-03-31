@@ -23,9 +23,7 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Intent;
