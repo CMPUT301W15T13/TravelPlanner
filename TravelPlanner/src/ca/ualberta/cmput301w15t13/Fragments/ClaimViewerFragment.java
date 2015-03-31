@@ -204,7 +204,6 @@ public class ClaimViewerFragment extends Fragment {
 	 */
 	public void returnClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-		
 		((Approver) activity.getUser()).returnClaim(submitClaim);
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().add(submitClaim);
@@ -212,8 +211,7 @@ public class ClaimViewerFragment extends Fragment {
 	}
 		
 	public void approverComment() {
-		// shows the approver comment dialog fragment
-		new ApproverCommentDialogFragment().show(getFragmentManager(), "Approver Comment");
+		
 	}
 	
 	/** 

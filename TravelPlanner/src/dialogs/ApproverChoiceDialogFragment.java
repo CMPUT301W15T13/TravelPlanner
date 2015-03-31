@@ -31,6 +31,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 
 
@@ -46,15 +47,19 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 public class ApproverChoiceDialogFragment extends DialogFragment{
 	/**
 	 * Upon returning, Approver will be asked if he/she wants to input comment for the reason
+	 * Comment is mandatory for returning, thus approver must comment before returning
 	 */
-    final OnClickListener returnChoice = new OnClickListener() {
+    final OnClickListener returnWithComment = new OnClickListener() {
         @Override
         /**
          * upon returning a claim, the comment is mandatory, thus it will ask the approver to make comment
+         * This is where Approver's comment will be triggered
+         * 
+         * SO THIS ISN'T A PLACE WHERE APPROVER COMMENT IS BEING TRANSACTIONED
          */
         public void onClick(final View v) {
         	FragmentManager fm = getFragmentManager();
-        	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+        	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimManager");
         	fragment.approverComment();
         	Dialog d = getDialog();
         	d.dismiss();
@@ -107,7 +112,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 	    Button viewButton = (Button) view.findViewById(R.id.buttonViewClaim);
 	    
 	    approve.setOnClickListener(approveClaim);
-	    returnButton.setOnClickListener(returnChoice);
+	    returnButton.setOnClickListener(returnWithComment);
 	    viewButton.setOnClickListener(viewClaim);
 
 	    

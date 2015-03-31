@@ -39,23 +39,44 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 
 public class ApproverCommentDialogFragment extends DialogFragment {
+	private String comment;
+	private EditText commentField;
+	
+	/*
+	public ApproverCommentDialogFragment(Claim editClaim) {
+		// TODO Auto-generated constructor stub
+		
+	}
+	*/
 
 	final OnClickListener commitComment = new OnClickListener() {
-		/**
-		 * There will be if statements to check if the comment field is empty or not
-		 * If empty then Toast error message
-		 * Else we submit the change and return the claim
-		 */
 		@Override
 		public void onClick(final View v) {
-			Toast.makeText(getActivity(), "Commit was clicked", Toast.LENGTH_SHORT).show();
-			FragmentManager fm = getFragmentManager();
-	     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-	     	fragment.returnClaim();
-			Dialog d = getDialog();
-			d.dismiss();
+			comment = commentField.getText().toString().trim();
+			
+			Toast.makeText(getActivity(), "Commit was clicked ", Toast.LENGTH_SHORT).show();
+						
+	     	/**
+	     	 * Here I think the return claim shoudn't be called maybe
+	     	 * THIS IS WHERE THE APPROVER COMMENT TRANSACTION WILL BE MADE
+	     	 */
+			
+	     	if (comment.matches("") || comment==null) {
+		        Toast.makeText(getActivity(), "You did not enter comments", Toast.LENGTH_SHORT).show();
+		    } else {
+		    	FragmentManager fm = getFragmentManager();
+		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");    	
+		     	fragment.returnClaim();
+				Dialog d = getDialog();
+				d.dismiss();
+		    }
 		}
 	};
+
+	
+	/** Im thinking I need a listener so that it can check if the comment was
+	 * empty or not, also it can pass the comment once it is written
+	 */
 	
 	@SuppressLint("InflateParams")
 	@Override
@@ -66,9 +87,17 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(view);
+	    commentField = (EditText) view.findViewById(R.id.ApproverCommentEditText);
+	    
+	    /**
+	     * Can't let the approver commit without writing anything on the edit text
+	     * Thus, I have to make sure that the user has input something then proceed to commitComment
+	     */
 	    
 	    Button commit = (Button) view.findViewById(R.id.ButtonCommitApproverComment);
 	    
+	    comment = commentField.getText().toString();   
+	    	    
 	    commit.setOnClickListener(commitComment);
 	    
 	    return builder.create();

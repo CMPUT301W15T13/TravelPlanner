@@ -48,6 +48,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import dialogs.ApproverCommentDialogFragment;
 import dialogs.DestinationDialogFragment;
 import dialogs.TagDialogFragment;
 import exceptions.DuplicateException;
@@ -272,6 +273,21 @@ public class ClaimManagerFragment extends Fragment{
 			TagDialogFragment dialog = new TagDialogFragment();
 			dialog.show(getFragmentManager(), "TEST TAG");
 		}
+	}
+	
+	/**
+	 * This method is called for approver to return a claim with comments
+	 * I'm not sure where the transaction of the approver's comment going to be
+	 * Whether in ClaimManagerFragment or at ClaimViewerFragment
+	 */
+	public void openApproverCommentDialog() {
+		// check if the user is an approver
+		// check the status of claim as non-editable, submitted
+		Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment();
+		//ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment(editClaim);
+		dialog.show(getFragmentManager(), "Approver Comment Dialog");
+
 	}
 	
 	/**
