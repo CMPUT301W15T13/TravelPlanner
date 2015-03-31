@@ -174,9 +174,6 @@ public class ClaimViewerFragment extends Fragment {
 	 * An approver will approve the selected
 	 * claim back to the user, with the updated
 	 * information (comments). 
-	 * 
-	 * TODO approver viewer shouldn't be able to see
-	 * the returned and approver claims.
 	 */
 	public void approveClaim(int claimIndex){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
