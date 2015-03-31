@@ -44,8 +44,22 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
  *
  */
 public class ApproverChoiceDialogFragment extends DialogFragment{
-    final OnClickListener returnClaim = new OnClickListener() {
+	/**
+	 * Upon returning, Approver will be asked if he/she wants to input comment for the reason
+	 */
+    final OnClickListener returnChoice = new OnClickListener() {
         @Override
+        /**
+         * upon returning a claim, the comment is mandatory, thus it will ask the approver to make comment
+         */
+        public void onClick(final View v) {
+        	FragmentManager fm = getFragmentManager();
+        	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+        	fragment.approverComment();
+        	Dialog d = getDialog();
+        	d.dismiss();
+        }
+        /* prev codes for return Claim
 		public void onClick(final View v) {
      	   FragmentManager fm = getFragmentManager();
      	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
@@ -53,6 +67,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
      	   Dialog d = getDialog();
      	   d.dismiss();
         }
+        */
     };
     
     final OnClickListener approveClaim = new OnClickListener() {
@@ -92,7 +107,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 	    Button viewButton = (Button) view.findViewById(R.id.buttonViewClaim);
 	    
 	    approve.setOnClickListener(approveClaim);
-	    returnButton.setOnClickListener(returnClaim);
+	    returnButton.setOnClickListener(returnChoice);
 	    viewButton.setOnClickListener(viewClaim);
 
 	    

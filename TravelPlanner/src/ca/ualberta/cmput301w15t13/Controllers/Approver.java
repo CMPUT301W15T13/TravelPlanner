@@ -47,7 +47,8 @@ public class Approver extends User {
 	}
 	
 	public void returnClaim(Claim claim) {
-		if (claim != null && claim.getStatus() == statusEnum.SUBMITTED) {
+		// claim can only be returned if comments are written by an approver
+		if (claim != null && claim.getStatus() == statusEnum.SUBMITTED && claim.getComments()!=null) {
 			claim.setLastApproverName(this.name);
 			claim.giveStatus(statusEnum.RETURNED);
 		}

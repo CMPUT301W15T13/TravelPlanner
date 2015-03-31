@@ -63,6 +63,7 @@ public class ClaimDetailViewerFragment extends Fragment {
 		TextView destination = (TextView) getView().findViewById(R.id.textViewDestinationList);
 		TextView descrption = (TextView) getView().findViewById(R.id.textViewDescription);
 		TextView tags = (TextView) getView().findViewById(R.id.textViewTagsList);
+		TextView comments = (TextView) getView().findViewById(R.id.textViewComments);
 		
 		name.setText(claim.getUserName());
 		startDate.setText(claim.getStartDateAsString());
@@ -70,12 +71,22 @@ public class ClaimDetailViewerFragment extends Fragment {
 		destination.setText(claim.getTravelItineraryAsString());
 		descrption.setText(claim.getDescription());
 		tags.setText(claim.getTagsAsString());
+		
+		/**
+		 * Currently our claim class has addcomment method that takes multiple approver's comment
+		 * this seems to be conflicting from what I know, which is that only one approver can
+		 * comment upon the returning
+		 * It's not possible that multiple approver comments and return at the same time
+		 * 
+		 * I need to come up with the way to setText to the comment TextView
+		 * Perhaps I need to change the claim class addcomment & getcomment methods
+		 */
 	}
 	
 	public void setClaim(int i){
 		this.claim = ClaimListSingleton.getClaimList().getClaimAtIndex(i);
 	}
-
+	
 	/* Below this is android stuff */
 	
 	@Override

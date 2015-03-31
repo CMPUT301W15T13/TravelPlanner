@@ -169,6 +169,36 @@
 					    />
 						
 			</LinearLayout>
+			
+		    <TextView
+		        android:id="@+id/ApproverCommentView"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:textColor="@color/text"
+		        android:text="@string/ApproverCommentView"
+		        android:textAppearance="?android:attr/textAppearanceSmall" />
+		    
+			
+		    <LinearLayout
+		        	android:id="@+id/layoutComments"
+				    android:layout_width="match_parent"
+			    	android:layout_height="wrap_content"
+			    	android:orientation="horizontal"
+			    	android:layout_marginLeft="3dp"
+			    	android:layout_marginBottom="9dp"
+			    	android:background="@color/background_dark"
+			    	>    
+				    
+					<TextView
+					    android:id="@+id/textViewComments"
+					    android:textColor="@color/text"
+					    android:layout_width="wrap_content"
+					    android:layout_height="match_parent"
+					    android:textAppearance="?android:attr/textAppearanceLarge"
+					    android:text="@string/holder"
+					    />
+						
+			</LinearLayout>
 	    </LinearLayout>
 	</ScrollView>
 	

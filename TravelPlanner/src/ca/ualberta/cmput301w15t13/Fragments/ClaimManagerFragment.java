@@ -68,8 +68,8 @@ import exceptions.InvalidUserPermissionException;
 public class ClaimManagerFragment extends Fragment{
 	private EditText descriptionView;
 	private ArrayList<Tag> tagList;
-	private TextView startDateView, endDateView, destinationView, tagView;
-	private String description, startDateText, endDateText;
+	private TextView startDateView, endDateView, destinationView, tagView, approverCommentView;
+	private String description, startDateText, endDateText, Comment;
 	private TravelItineraryList itineraryList;
 	private Date startDate, endDate;
 	private boolean incompleteFields, invalidDates, isEditing;
@@ -348,6 +348,19 @@ public class ClaimManagerFragment extends Fragment{
 		
 	}
 	
+	/**
+	 * this method adds approver's comment when approver returns and fills in comment
+	 */
+	public void addApproverComment() {
+		// for now this doens't do anything as I didn't implement anything yet
+		if (Comment!=null) {
+			// if the comment is not null, then we update
+			approverCommentView.setText(Comment);
+		} else { // else if comment is null, approver didn't write anything or claim is not returned
+			
+		}
+	}
+	
 	public void setClaimIndex(int index){
 		this.claimIndex = index;
 	}
@@ -390,6 +403,11 @@ public class ClaimManagerFragment extends Fragment{
 		tagView = (TextView) getView().findViewById(R.id.textViewTags);
 		Button tagButton = (Button) getView().findViewById(R.id.addTags);
 		tagButton.setText("Add");
+		
+		/**
+		 * Comments view for approver comment
+		 */
+		approverCommentView = (TextView) getView().findViewById(R.id.textViewComments);
 		
 		this.tagList = new ArrayList<Tag>();
 		

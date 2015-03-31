@@ -44,7 +44,9 @@ import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import dialogs.ApproverChoiceDialogFragment;
+import dialogs.ApproverCommentDialogFragment;
 import dialogs.ClaimantChoiceDialogFragment;
+import dialogs.DestinationDialogFragment;
 import exceptions.InvalidUserPermissionException;
 
 /**
@@ -202,10 +204,17 @@ public class ClaimViewerFragment extends Fragment {
 	 */
 	public void returnClaim(){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		
 		((Approver) activity.getUser()).returnClaim(submitClaim);
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
 		ClaimListSingleton.getClaimList().add(submitClaim);
 		ClaimListSingleton.getClaimList().notifyListeners();
+	}
+		
+	public void approverComment() {
+		// Toast message to show to let approver know what comment is mandatory
+		Toast.makeText(getActivity(), "Please Input Comments for reason for returning", Toast.LENGTH_SHORT).show();
+		new ApproverCommentDialogFragment().show(getFragmentManager(), "Approver Comment Is here ");
 	}
 	
 	/** 
