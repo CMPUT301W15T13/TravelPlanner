@@ -158,10 +158,6 @@ public class ClaimViewerFragment extends Fragment {
 		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 		
-<<<<<<< HEAD
-	public void approverComment() {
-		
-=======
 	public void approverComment(int index) {
 		// shows the approver comment dialog fragment
 		ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment();
@@ -169,7 +165,6 @@ public class ClaimViewerFragment extends Fragment {
 	    args.putInt("index", index);
 	    dialog.setArguments(args);
 		dialog.show(getFragmentManager(), "Approver Comment");
->>>>>>> 2ebc2f312466543308dc317d484a4bc4cfe1778d
 	}
 	
 	/** 

@@ -67,13 +67,8 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
          */
         public void onClick(final View v) {
         	FragmentManager fm = getFragmentManager();
-<<<<<<< HEAD
-        	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimManager");
-        	fragment.approverComment();
-=======
         	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
         	fragment.approverComment(claimIndex);
->>>>>>> 2ebc2f312466543308dc317d484a4bc4cfe1778d
         	Dialog d = getDialog();
         	d.dismiss();
         }

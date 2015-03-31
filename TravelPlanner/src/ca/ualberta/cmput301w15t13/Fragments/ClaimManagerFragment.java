@@ -288,6 +288,8 @@ public class ClaimManagerFragment extends Fragment{
 	}
 	
 	/**
+	 * This method is subjected to be changed Ji Hwan Kim
+	 * 
 	 * This method is called for approver to return a claim with comments
 	 * I'm not sure where the transaction of the approver's comment going to be
 	 * Whether in ClaimManagerFragment or at ClaimViewerFragment
