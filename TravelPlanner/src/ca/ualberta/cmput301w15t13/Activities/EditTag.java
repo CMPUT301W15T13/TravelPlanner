@@ -1,20 +1,27 @@
 package ca.ualberta.cmput301w15t13.Activities;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.view.Menu;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 import android.app.AlertDialog;
@@ -27,9 +34,8 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class EditTag extends Activity {
 	
-	
-
 	String ID = null;
+	int index = 0;
 
 
 	@Override
@@ -38,7 +44,8 @@ public class EditTag extends Activity {
 		setContentView(R.layout.edit_tag_layout);
 		
 		Bundle bundle = getIntent().getExtras();
-		this.ID = bundle.getString("ID");	
+		this.ID = bundle.getString("ID");
+		this.index = bundle.getInt("index");
 		
 		ListView listView = (ListView)findViewById(R.id.tagListView);
 		
@@ -56,10 +63,11 @@ public class EditTag extends Activity {
 			
 			@Override
 			public void update() {
-				//claimTags.clear();
-				ClaimList cl = ClaimListSingleton.getClaimList();
-				Claim c = cl.getClaimByID(ID);
-				ArrayList<Tag> claimTags = c.getTags();
+				//Collection<Tag> cTags = ClaimListSingleton.getClaimList().getClaimByID(ID).getTagsAsCollection();
+				//ArrayList<Tag> tags = ClaimListSingleton.getClaimList().getClaimByID(ID).getTags();		
+				claimTags.clear();
+				//claimTags.addAll(cTags);
+				claimTags.add(new Tag("Test"));
 				tagAdapter.notifyDataSetChanged();
 			}
 		});
@@ -90,16 +98,15 @@ public class EditTag extends Activity {
 				adb.setNegativeButton("Remove", new OnClickListener() {
 					
 					public void onClick(DialogInterface dialog, int which) {
-						
 						Tag tag = claimTags.get(pos);
 						ClaimListSingleton.getClaimList().getClaimByID(ID).removeTag(tag);
+						ClaimListSingleton.getClaimList().notifyListeners();
 						
 //						Claim c = cl.getClaimByID(ID);
 //						ArrayList<Tag> claimTags = c.getTags();
 //						claimTags.remove(tag);
 //						c.tags = claimTags;
 						//tm.remove(tag, c.getclaimID());
-						
 						
 					}
 					
@@ -120,5 +127,4 @@ public class EditTag extends Activity {
 		getMenuInflater().inflate(R.menu.edit_tag, menu);
 		return true;
 	}
-
 }
