@@ -35,6 +35,7 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseItemViewFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseListViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseManagerFragment;
+import ca.ualberta.cmput301w15t13.Fragments.TakePictureFragment;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
@@ -57,6 +58,7 @@ public class ExpenseActivity extends Activity {
 	private ExpenseListViewerFragment ExpenseViewerFragment;
 	private ExpenseManagerFragment ExpenseManagerFragment;
 	private ExpenseItemViewFragment ExpenseItemViewFragment;
+	private TakePictureFragment TakePictureFragment;
 	private ActionBar actionBar; //Based on http://stackoverflow.com/questions/19545370/android-how-to-hide-actionbar-on-certain-activities March 06 2015
 	//Temporary force claimant true
 	//Will most likely need to handle this elegantly in part 5
@@ -78,6 +80,7 @@ public class ExpenseActivity extends Activity {
 		ExpenseViewerFragment = new ExpenseListViewerFragment();
 		ExpenseManagerFragment = new ExpenseManagerFragment();
 		ExpenseItemViewFragment = new ExpenseItemViewFragment();
+		TakePictureFragment = new TakePictureFragment();
 		
 		//Need to extract passed claim info
 		Bundle bundle = getIntent().getExtras();
@@ -149,7 +152,7 @@ public class ExpenseActivity extends Activity {
 	 * Switch to the expense manager
 	 * fragment/layout
 	 */
-	public void setFragementToExpenseManager(){
+	public void setFragmentToExpenseManager(){
 		actionBar.hide();
 		//Inspired by
 		//http://stackoverflow.com/a/16036693
@@ -191,7 +194,7 @@ public class ExpenseActivity extends Activity {
 	 * Claim Manager Layout
 	 */
 	public void newExpenseItem(View v){
-		setFragementToExpenseManager();
+		setFragmentToExpenseManager();
 		ExpenseManagerFragment.setStateAsEditing(false);
 	}
 	
@@ -206,7 +209,7 @@ public class ExpenseActivity extends Activity {
 	
 	// may not be necessary
 	public void editClaim(int index) {
-		setFragementToExpenseManager();
+		setFragmentToExpenseManager();
 		ExpenseManagerFragment.setStateAsEditing(true);
 		ExpenseManagerFragment.setExpenseIndex(index);
 	}
@@ -271,15 +274,33 @@ public class ExpenseActivity extends Activity {
 	 * @param v
 	 */
 	public void takePicture(View v) {
+		setFragmentToTakePic();
 		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
 		startActivity(intent);
 	}
+	private void setFragmentToTakePic() {
+		actionBar.hide();
+		//Inspired by
+		//http://stackoverflow.com/a/16036693
+		//3/15/2015
+		Bundle bundle=new Bundle();
+		bundle.putInt("claimIndex", claimIndex);
+		bundle.putString("claimID", claimID);
+		//set Fragmentclass Arguments
+		TakePictureFragment.setArguments(bundle);
+		
+		ft = fm.beginTransaction();
+		ft.replace(R.id.mainFragmentHolder, this.TakePictureFragment, "TakePicture");
+		ft.commit();
+		
+	}
+
 	/**
 	 * Go to edit the expense
 	 * @param index
 	 */
 	public void editExpense(int index) {
-		setFragementToExpenseManager();
+		setFragmentToExpenseManager();
 		ExpenseManagerFragment.setStateAsEditing(true);
 		ExpenseManagerFragment.setExpenseIndex(index);
 	}

@@ -49,5 +49,8 @@
     <string name="ApproverCommentHint">Input Comments</string>
     <string name="ButtonCommitApproverComment">Commit</string>
     <string name="ApproverCommentView">Comment</string>
+    <string name="title_activity_tag_choice_frgament">Add or Edit</string>
+    <string name="editExisting">Edit Existing</string>
+    <string name="next">Next</string>
 
 </resources>

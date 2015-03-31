@@ -21,9 +21,18 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
+import dialogs.ApproverChoiceDialogFragment;
 
 /**
  * Approver child class.
@@ -69,6 +78,44 @@ public class Approver extends User {
 			}
 		}
 		return newClaims;
+	}
+
+	/**
+	 * Returns the OnItemClickListener for the approver,
+	 * such that the Approver can only view the details of
+	 * the expense items, not edit them.
+	 */
+	@Override
+	public OnItemClickListener getClaimAdapterShortClickListener(final Activity claimActivity) {
+		final OnItemClickListener listener = new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int position,
+					long id) {
+				Toast.makeText(claimActivity, "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
+			}
+		};
+		
+		return listener;
+	}
+
+	
+	@Override
+	public OnItemLongClickListener getClaimAdapterLongClickListener(final FragmentManager fm) {
+		final OnItemLongClickListener listener = new OnItemLongClickListener() {
+			
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ApproverChoiceDialogFragment dialog = new ApproverChoiceDialogFragment();
+			    Bundle args = new Bundle();
+			    args.putInt("index", position);
+			    dialog.setArguments(args);
+			    dialog.show(fm, "Long Click Pop-Up");
+				return true;
+			}
+		};
+		return listener;
 	}
 
 }

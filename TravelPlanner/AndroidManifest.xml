@@ -48,6 +48,10 @@
             android:name="ca.ualberta.cmput301w15t13.Activities.EditTag"
             android:label="@string/title_activity_edit_tag" >
         </activity>
+        <activity
+            android:name="dialogs.TagChoiceFrgament"
+            android:label="@string/title_activity_tag_choice_frgament" >
+        </activity>
     </application>
 
 </manifest>

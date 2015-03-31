@@ -20,10 +20,6 @@
 
 package dialogs;
 
-import android.view.View.OnClickListener;
-import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -32,13 +28,14 @@ import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
-import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 
 public class ApproverCommentDialogFragment extends DialogFragment {
+<<<<<<< HEAD
 	private String comment;
 	private EditText commentField;
 	
@@ -48,10 +45,21 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		
 	}
 	*/
+=======
+	
+	int claimIndex;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    claimIndex = getArguments().getInt("index");
+	}
+>>>>>>> 2ebc2f312466543308dc317d484a4bc4cfe1778d
 
 	final OnClickListener commitComment = new OnClickListener() {
 		@Override
 		public void onClick(final View v) {
+<<<<<<< HEAD
 			comment = commentField.getText().toString().trim();
 			
 			Toast.makeText(getActivity(), "Commit was clicked ", Toast.LENGTH_SHORT).show();
@@ -70,6 +78,14 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 				Dialog d = getDialog();
 				d.dismiss();
 		    }
+=======
+			Toast.makeText(getActivity(), "Commit was clicked", Toast.LENGTH_SHORT).show();
+			FragmentManager fm = getFragmentManager();
+	     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+	     	fragment.returnClaim(claimIndex);
+			Dialog d = getDialog();
+			d.dismiss();
+>>>>>>> 2ebc2f312466543308dc317d484a4bc4cfe1778d
 		}
 	};
 

@@ -45,6 +45,14 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
  *
  */
 public class ApproverChoiceDialogFragment extends DialogFragment{
+	int claimIndex;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    claimIndex = getArguments().getInt("index");
+	}
+	
 	/**
 	 * Upon returning, Approver will be asked if he/she wants to input comment for the reason
 	 * Comment is mandatory for returning, thus approver must comment before returning
@@ -59,20 +67,16 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
          */
         public void onClick(final View v) {
         	FragmentManager fm = getFragmentManager();
+<<<<<<< HEAD
         	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimManager");
         	fragment.approverComment();
+=======
+        	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+        	fragment.approverComment(claimIndex);
+>>>>>>> 2ebc2f312466543308dc317d484a4bc4cfe1778d
         	Dialog d = getDialog();
         	d.dismiss();
         }
-        /* prev codes for return Claim
-		public void onClick(final View v) {
-     	   FragmentManager fm = getFragmentManager();
-     	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-     	   fragment.returnClaim();
-     	   Dialog d = getDialog();
-     	   d.dismiss();
-        }
-        */
     };
     
     final OnClickListener approveClaim = new OnClickListener() {
@@ -80,7 +84,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.approveClaim();
+      	   fragment.approveClaim(claimIndex);
       	   Dialog d = getDialog();
       	   d.dismiss();
         }
@@ -91,7 +95,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.viewClaim();
+      	   fragment.viewClaim(claimIndex); // TODO
       	   Dialog d = getDialog();
       	   d.dismiss();
         }

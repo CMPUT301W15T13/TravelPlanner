@@ -22,8 +22,19 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.Toast;
+import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
+import dialogs.ClaimantChoiceDialogFragment;
 import exceptions.InvalidUserPermissionException;
 
 /**
@@ -56,4 +67,61 @@ public class Claimant extends User {
 		}
 		return newClaims;
 	}
+
+	/**
+	 * Returns the OnItemClickListener for the Claimant such that it will
+	 * open the ExpenseItem creator activity.
+	*/
+	@Override
+	public OnItemClickListener getClaimAdapterShortClickListener(final Activity claimActivity) {
+		final OnItemClickListener listener = new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View view, int position,
+					long id) {
+				/*
+				 * Pass required claim information to the expense portion of the code
+				 * IE: The claim holds our expense list so we need to know which
+				 * claim to get expense items from
+				 */
+				int claimIndex = position;
+				ArrayList<Claim> claims = ClaimListSingleton.getClaimList().getClaimArrayList();
+				String claimID = claims.get(claimIndex).getclaimID();
+				if(ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).isEditable()){
+					Intent intent = new Intent(claimActivity, ExpenseActivity.class);
+					Bundle bundle = new Bundle();
+					bundle.putInt("claimIndex", position);
+					bundle.putString("claimID", claimID);
+					intent.putExtras(bundle);
+					// allow a new activity to be started outside an activity
+					intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK); 
+					claimActivity.getApplication().startActivity(intent);
+				}else{
+					Toast.makeText(claimActivity, "Cannot edit this claim.", Toast.LENGTH_SHORT).show();
+				}
+			}
+		};
+		
+		return listener;
+	}
+
+	
+	@Override
+	public OnItemLongClickListener getClaimAdapterLongClickListener(final FragmentManager fm) {
+		final OnItemLongClickListener listener = new OnItemLongClickListener() {
+			
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				ClaimantChoiceDialogFragment dialog = new ClaimantChoiceDialogFragment();
+			    Bundle args = new Bundle();
+			    args.putInt("index", position);
+			    dialog.setArguments(args);
+			    dialog.show(fm, "Long Click Pop-Up");
+				return true;
+			}
+		};
+		return listener;
+	}
+	
 }

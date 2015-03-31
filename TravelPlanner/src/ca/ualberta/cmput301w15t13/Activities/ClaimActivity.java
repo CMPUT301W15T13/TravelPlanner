@@ -41,7 +41,6 @@ import ca.ualberta.cmput301w15t13.Controllers.User;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
-import dialogs.ApproverChoiceDialogFragment;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
