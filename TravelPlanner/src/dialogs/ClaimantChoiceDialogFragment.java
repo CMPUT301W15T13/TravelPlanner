@@ -44,12 +44,20 @@ public class ClaimantChoiceDialogFragment extends DialogFragment{
 	/* These are all onClickListeners that call the corresponding 
 	 * functions in ClaimViewerFragment.
 	 */
+	private int claimIndex;
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    claimIndex = getArguments().getInt("index");
+	}
+	
     final OnClickListener editClaim = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
      	   FragmentManager fm = getFragmentManager();
      	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-     	   fragment.editClaim();
+     	   fragment.editClaim(claimIndex);
      	   Dialog d = getDialog();
      	   d.dismiss();
         }
@@ -60,7 +68,7 @@ public class ClaimantChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.submitClaim();
+      	   fragment.submitClaim(claimIndex);
       	   Dialog d = getDialog();
       	   d.dismiss();
         }
@@ -71,7 +79,7 @@ public class ClaimantChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.deleteClaim();
+      	   fragment.deleteClaim(claimIndex);
       	   Dialog d = getDialog();
       	   d.dismiss();
         }
@@ -82,7 +90,7 @@ public class ClaimantChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.viewClaim();
+      	   fragment.viewClaim(claimIndex);
       	   Dialog d = getDialog();
       	   d.dismiss();
         }
