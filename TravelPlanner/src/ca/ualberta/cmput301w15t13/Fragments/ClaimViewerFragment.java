@@ -54,7 +54,6 @@ import exceptions.InvalidUserPermissionException;
 public class ClaimViewerFragment extends Fragment {
 	public static ClaimAdapter claimAdapter;
 	private ArrayList<Claim> claims;
-	private int claimIndex;
 	private ClaimActivity activity;
 	
 	private Listener updateClaimList = new Listener(){
@@ -130,7 +129,7 @@ public class ClaimViewerFragment extends Fragment {
 	 * to submitted, which allows it to be
 	 * viewed by approvers.
 	 */
-	public void submitClaim(){
+	public void submitClaim(int claimIndex){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		try {
 			((Claimant) activity.getUser()).submitClaim(submitClaim);
@@ -151,7 +150,7 @@ public class ClaimViewerFragment extends Fragment {
 	 * TODO approver viewer shouldn't be able to see
 	 * the returned and approver claims.
 	 */
-	public void returnClaim(){
+	public void returnClaim(int claimIndex){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		
 		((Approver) activity.getUser()).returnClaim(submitClaim);
@@ -160,9 +159,13 @@ public class ClaimViewerFragment extends Fragment {
 		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 		
-	public void approverComment() {
+	public void approverComment(int index) {
 		// shows the approver comment dialog fragment
-		new ApproverCommentDialogFragment().show(getFragmentManager(), "Approver Comment");
+		ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment();
+	    Bundle args = new Bundle();
+	    args.putInt("index", index);
+	    dialog.setArguments(args);
+		dialog.show(getFragmentManager(), "Approver Comment");
 	}
 	
 	/** 
@@ -173,7 +176,7 @@ public class ClaimViewerFragment extends Fragment {
 	 * TODO approver viewer shouldn't be able to see
 	 * the returned and approver claims.
 	 */
-	public void approveClaim(){
+	public void approveClaim(int claimIndex){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		((Approver) activity.getUser()).approveClaim(submitClaim);
 		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
@@ -193,7 +196,7 @@ public class ClaimViewerFragment extends Fragment {
 		activity = (ClaimActivity) getActivity();
 		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 		claims = activity.getUser().getPermittableClaims(claims);
-		this.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
+		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
 		
 	}
 	

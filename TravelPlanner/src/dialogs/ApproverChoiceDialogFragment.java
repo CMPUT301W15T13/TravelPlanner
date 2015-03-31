@@ -63,7 +63,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
         public void onClick(final View v) {
         	FragmentManager fm = getFragmentManager();
         	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-        	fragment.approverComment();
+        	fragment.approverComment(claimIndex);
         	Dialog d = getDialog();
         	d.dismiss();
         }
@@ -74,7 +74,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.approveClaim();
+      	   fragment.approveClaim(claimIndex);
       	   Dialog d = getDialog();
       	   d.dismiss();
         }

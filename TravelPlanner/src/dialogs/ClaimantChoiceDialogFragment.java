@@ -68,7 +68,7 @@ public class ClaimantChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.submitClaim();
+      	   fragment.submitClaim(claimIndex);
       	   Dialog d = getDialog();
       	   d.dismiss();
         }
