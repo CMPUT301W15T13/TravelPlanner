@@ -34,23 +34,27 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 
-public class ClaimAdapter extends ArrayAdapter{
-	/* 
+public class ClaimAdapter extends ArrayAdapter<Claim>{
+	/** 
 	 * The custom array adapter used to 
-	 * display the necessary info for a claim
+	 * display the necessary info for a claim.
 	 */
 	
 	//based on http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view Jan 24th 2015
 	// and http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter Jan 25 2015
 	public ArrayList<Claim> claims;
 	
-	@SuppressWarnings("unchecked")
 	public ClaimAdapter(Context context, int textViewResourceId, List<Claim> claims) {
 		super(context, textViewResourceId,claims);
 		this.claims = (ArrayList<Claim>) claims;
 	}
 	
 	
+	/**
+	 * Sets up the details in the custom array
+	 * elements, including the claim details
+	 * and an image to describe it's status.
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {		
 		View view = convertView;
@@ -71,9 +75,7 @@ public class ClaimAdapter extends ArrayAdapter{
 			ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			
 			titleView.setText(claim.getUserName());
-			//TODO add a convert date to text method somewhere
 			dateView.setText("From: " + claim.getStartDateAsString() + ",  To: " + claim.getEndDateAsString());
-			//TODO claim cost text
 			costView.setText(claim.getCost());
 			
 			ClaimStatus.statusEnum status = claim.getStatus();

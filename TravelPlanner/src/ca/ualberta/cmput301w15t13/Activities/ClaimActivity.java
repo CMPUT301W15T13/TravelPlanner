@@ -149,7 +149,6 @@ public class ClaimActivity extends Activity {
 		DataManager.setCurrentContext(this.getApplicationContext());
 		
 		Intent intent = getIntent();
-		this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
 		String username = intent.getStringExtra(LoginActivity.USERID);
 		this.user = User.getUserByUsername(username);
 		

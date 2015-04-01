@@ -33,8 +33,8 @@ import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
-public class ExpenseAdapter extends ArrayAdapter{
-	/* 
+public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
+	/** 
 	 * The custom array adapter used to 
 	 * display the necessary info for an expense
 	 */
@@ -43,12 +43,16 @@ public class ExpenseAdapter extends ArrayAdapter{
 	// and http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter Jan 25 2015
 	ArrayList<ExpenseItem> expenses;
 	
-	@SuppressWarnings("unchecked")
 	public ExpenseAdapter(Context context, int textViewResourceId, List<ExpenseItem> expenses) {
 		super(context, textViewResourceId,expenses);
 		this.expenses = (ArrayList<ExpenseItem>) expenses;
 	}
 
+	
+	/**
+	 * Sets up the view for the custom array item 
+	 * including Expense Item details.
+	 */
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {		
 		View view = convertView;
