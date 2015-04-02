@@ -21,6 +21,8 @@
 package ca.ualberta.cmput301w15t13.Fragments;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import adapters.ClaimAdapter;
 import android.app.Fragment;
@@ -28,7 +30,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
@@ -37,8 +41,11 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.Tag;
 import dialogs.ApproverCommentDialogFragment;
 import exceptions.InvalidUserPermissionException;
 
@@ -56,6 +63,7 @@ public class ClaimViewerFragment extends Fragment {
 	public static ClaimAdapter claimAdapter;
 	private ArrayList<Claim> claims;
 	private ClaimActivity activity;
+	private ArrayList<String> filterTags = new ArrayList<String>();
 	
 	private Listener updateClaimList = new Listener(){
 
@@ -204,7 +212,38 @@ public class ClaimViewerFragment extends Fragment {
 		activity = (ClaimActivity) getActivity();
 		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 		claims = activity.getUser().getPermittableClaims(claims);
+<<<<<<< HEAD
 		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);		
+=======
+		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
+		
+		// taken from http://developer.android.com/guide/topics/ui/controls/spinner.html on April 2nd, 2015
+		// And also http://stackoverflow.com/questions/2160518/how-to-add-items-to-the-spinner-dynamically-in-android
+		
+		// initialize tag filter spinner
+		Spinner filterSpinner = (Spinner) activity.findViewById(R.id.spinnerClaimFilter);
+		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(activity, android.R.layout.simple_spinner_item, android.R.id.text1);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		filterSpinner.setAdapter(spinnerAdapter);
+		
+		try {
+			filterTags.clear();
+			ClaimList cl = ClaimListSingleton.getClaimList();
+			TagManager tm = cl.getTagMan();
+			HashMap<Tag, ArrayList<String>> map = tm.getManager();
+			for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+				filterTags.add(entry.getKey().getTagName());
+			}
+		} catch (RuntimeException e) {
+				// TODO: handle exception
+		}
+		
+		for (String tag : filterTags) {
+			spinnerAdapter.add(tag);
+		}
+		spinnerAdapter.notifyDataSetChanged();
+		
+>>>>>>> c910c81b27bc5f790a452b5f06ff840c575d35f4
 	}
 	
 	@Override

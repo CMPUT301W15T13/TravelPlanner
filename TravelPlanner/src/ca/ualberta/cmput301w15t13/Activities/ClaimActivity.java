@@ -200,33 +200,6 @@ public class ClaimActivity extends Activity  {
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
 		ArrayList<String> tags = new ArrayList<String>();
-		
-		
-		// taken from http://developer.android.com/guide/topics/ui/controls/spinner.html on April 2nd, 2015
-		// And also http://stackoverflow.com/questions/2160518/how-to-add-items-to-the-spinner-dynamically-in-android
-		
-		// initialize tag filter spinner
-		Spinner filterSpinner = (Spinner) findViewById(R.id.spinnerClaimFilter);
-		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, android.R.id.text1);
-		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		filterSpinner.setAdapter(spinnerAdapter);
-		
-		try {
-			ClaimList cl = ClaimListSingleton.getClaimList();
-			TagManager tm = cl.getTagMan();
-			HashMap<Tag, ArrayList<String>> map = tm.getManager();
-			for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
-				tags.add(entry.getKey().getTagName());
-			}
-		} catch (RuntimeException e) {
-				// TODO: handle exception
-		}
-		
-		for (String tag : tags) {
-			spinnerAdapter.add(tag);
-		}
-		spinnerAdapter.notifyDataSetChanged();
-	
 			
 		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
 		searchButton.setOnClickListener(new View.OnClickListener() {
