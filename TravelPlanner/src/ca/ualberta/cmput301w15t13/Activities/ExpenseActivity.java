@@ -215,6 +215,8 @@ public class ExpenseActivity extends Activity {
 	}
 	
 	/**
+	 * TODO THIS IS CALLED WHEN THE FINISH BUTTEN IS PRESSED
+	 * IT WTILL CREATE/UPDATE THE EXPENSE
 	 * Create a new claim object,
 	 * then return to the viewing fragment. 
 	 * @throws InvalidUserPermissionException 

@@ -158,9 +158,7 @@ public class ExpenseManagerFragment extends Fragment {
 	
 	/**
 	 * Method used to update our expense
-	 * TODO This solution can be more elegant
-	 * Instead of removing and readding the new expense 
-	 * we should just set the new values to the old expense
+	 * TODO THIS IS CALLED WHEN WE ARE EDITTING
 	 * @throws InvalidFieldEntryException 
 	 */
 	public void updateExpense() throws InvalidFieldEntryException {
@@ -179,6 +177,7 @@ public class ExpenseManagerFragment extends Fragment {
 	
 	/**
 	 * Create the expense from our input values
+	 * TODO THE EXPENSE IS CREATED HERE IF WE ARE NOT EDITTING 
 	 * @throws InvalidDateException
 	 * @throws InvalidUserPermissionException
 	 * @throws EmptyFieldException
