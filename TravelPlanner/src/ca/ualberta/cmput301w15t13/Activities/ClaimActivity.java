@@ -29,8 +29,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
@@ -196,6 +198,16 @@ public class ClaimActivity extends Activity {
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
 		
+		
+		// taken from http://developer.android.com/guide/topics/ui/controls/spinner.html on April 2nd, 2015
+		// And also http://stackoverflow.com/questions/2160518/how-to-add-items-to-the-spinner-dynamically-in-android
+		
+		// initialize tag filter spinner
+		Spinner filterSpinner = (Spinner) findViewById(R.id.spinnerClaimFilter);
+		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, android.R.id.text1);
+		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		filterSpinner.setAdapter(spinnerAdapter);
+			
 		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
 		searchButton.setOnClickListener(new View.OnClickListener() {
 			
@@ -208,6 +220,7 @@ public class ClaimActivity extends Activity {
 				Toast.makeText(getBaseContext(), searchMessage, Toast.LENGTH_SHORT).show();
 			}
 		});
+	
 	}
  
 	@Override

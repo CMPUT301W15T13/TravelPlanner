@@ -75,6 +75,8 @@ public class TagChoiceFragment extends DialogFragment {
 	            	   FragmentManager fm = getFragmentManager();
 					   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
 					   
+					   //This opens a edit tag dialog with an index 0
+					   //This should always be passed with 0!
 					   fragment.openEditTagDialog(0);
 	               }
 	           });

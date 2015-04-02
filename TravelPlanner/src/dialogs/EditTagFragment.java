@@ -36,14 +36,13 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
 /**
- * This is a custom dialog fragment for 
- * adding a destination-reason pair to a
- * claim. It provides two edit text fields
- * and a submit button. No cancel button is
- * available because clicking outside the
- * dialog will automatically close it.
- * @author mfritze
- *
+ * This is a custom UI-fragment for editing 
+ * a tag. It gives 3 options, to update, to delete
+ * or to proceed to the next tag. Note that before
+ * it is called the claimIndex should be set
+ * (so it can reference the correct claim's tags)
+ * and an index should be passed (so it knows
+ * which tag to edit).
  */
 
 public class EditTagFragment extends DialogFragment {
