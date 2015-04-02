@@ -43,6 +43,7 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Controllers.User;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
@@ -63,7 +64,7 @@ import exceptions.InvalidUserPermissionException;
  * Outstanding Issues: Searching of claims by tag is unimplemented
  */
 
-public class ClaimActivity extends Activity {
+public class ClaimActivity extends Activity  {
 	private User user;
 	
 	public User getUser() {
@@ -137,6 +138,7 @@ public class ClaimActivity extends Activity {
 		ClaimFragmentNavigator.openTag();
 	}
 	
+
 	/**
 	 * This method is used for approver comment
 	 */
@@ -150,7 +152,6 @@ public class ClaimActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claim_activity_layout);
 		// TODO make a better method for removing listeners
-		//ClaimListSingleton.getClaimList().clearListeners();
 		
 		setActionBar();
 		
@@ -161,14 +162,6 @@ public class ClaimActivity extends Activity {
 		Intent intent = getIntent();
 		String username = intent.getStringExtra(LoginActivity.USERID);
 		this.user = User.getUserByUsername(username);
-		
-		//load data
-		//DataManager.setOfflineMode();
-		//DataManager.loadClaimsByUserName(username);
-		
-		
-		//this.notifyAll();
-		// TODO add a save file listener
 	}
 	
 	@Override

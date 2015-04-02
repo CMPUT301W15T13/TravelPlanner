@@ -1,0 +1,121 @@
+diff --git a/TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/ClaimActivity.java b/TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/ClaimActivity.java
+index def536b..d76356e 100644
+--- a/TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/ClaimActivity.java
++++ b/TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/ClaimActivity.java
+@@ -43,6 +43,7 @@ import android.widget.Toast;
+ import ca.ualberta.cmput301w15t13.R;
+ import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
+ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
++import ca.ualberta.cmput301w15t13.Controllers.Listener;
+ import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+ import ca.ualberta.cmput301w15t13.Controllers.User;
+ import ca.ualberta.cmput301w15t13.Models.ClaimList;
+@@ -63,7 +64,7 @@ import exceptions.InvalidUserPermissionException;
+  * Outstanding Issues: Searching of claims by tag is unimplemented
+  */
+ 
+-public class ClaimActivity extends Activity {
++public class ClaimActivity extends Activity implements Listener {
+ 	private User user;
+ 	
+ 	public User getUser() {
+@@ -138,6 +139,14 @@ public class ClaimActivity extends Activity {
+ 	}
+ 	
+ 	/**
++	 * Implements Listener pattern. We listen to ClaimsList
++	 */
++	@Override
++	public void update() {
++	
++	}
++	
++	/**
+ 	 * This method is used for approver comment
+ 	 */
+ 	public void openApproverComment() {
+@@ -150,7 +159,7 @@ public class ClaimActivity extends Activity {
+ 		super.onCreate(savedInstanceState);
+ 		setContentView(R.layout.claim_activity_layout);
+ 		// TODO make a better method for removing listeners
+-		//ClaimListSingleton.getClaimList().clearListeners();
++		ClaimListSingleton.getClaimList().addListener(this);
+ 		
+ 		setActionBar();
+ 		
+@@ -161,14 +170,6 @@ public class ClaimActivity extends Activity {
+ 		Intent intent = getIntent();
+ 		String username = intent.getStringExtra(LoginActivity.USERID);
+ 		this.user = User.getUserByUsername(username);
+-		
+-		//load data
+-		//DataManager.setOfflineMode();
+-		//DataManager.loadClaimsByUserName(username);
+-		
+-		
+-		//this.notifyAll();
+-		// TODO add a save file listener
+ 	}
+ 	
+ 	@Override
+diff --git a/TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/LoginActivity.java b/TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/LoginActivity.java
+index 7bf3196..9ae49dd 100644
+--- a/TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/LoginActivity.java
++++ b/TravelPlanner/src/ca/ualberta/cmput301w15t13/Activities/LoginActivity.java
+@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
+ 			//password and username are filled in
+ 			User user= User.login(username, password);
+ 			if (user != null) {
+-				DataManager.loadAllClaims();
++				DataManager.loadClaimsByUserName(username);
+ 				
+ 				//available.acquire();
+ 				startClaimActivity(username, true);
+diff --git a/TravelPlanner/src/ca/ualberta/cmput301w15t13/Fragments/ClaimViewerFragment.java b/TravelPlanner/src/ca/ualberta/cmput301w15t13/Fragments/ClaimViewerFragment.java
+index 94b9ac8..9b876fe 100644
+--- a/TravelPlanner/src/ca/ualberta/cmput301w15t13/Fragments/ClaimViewerFragment.java
++++ b/TravelPlanner/src/ca/ualberta/cmput301w15t13/Fragments/ClaimViewerFragment.java
+@@ -63,6 +63,10 @@ public class ClaimViewerFragment extends Fragment {
+ 		public void update() {
+ 			claims = ClaimListSingleton.getClaimList().getClaimArrayList();
+ 			claims = activity.getUser().getPermittableClaims(claims);
++			
++			// claims arraylist is a new instance, the adapter is using some other arraylist
++			claimAdapter.clear();
++			claimAdapter.addAll(claims);
+ 			claimAdapter.notifyDataSetChanged();
+ 		}
+ 		
+@@ -200,8 +204,7 @@ public class ClaimViewerFragment extends Fragment {
+ 		activity = (ClaimActivity) getActivity();
+ 		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
+ 		claims = activity.getUser().getPermittableClaims(claims);
+-		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
+-		
++		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);		
+ 	}
+ 	
+ 	@Override
+diff --git a/TravelPlanner/src/persistanceModel/LoadASyncTask.java b/TravelPlanner/src/persistanceModel/LoadASyncTask.java
+index f419484..522c5be 100644
+--- a/TravelPlanner/src/persistanceModel/LoadASyncTask.java
++++ b/TravelPlanner/src/persistanceModel/LoadASyncTask.java
+@@ -24,8 +24,6 @@ public class LoadASyncTask extends AsyncTask<String, Void, String> {
+         	
+         	String name = users[0];
+         	
+-        	ClaimListSingleton.clearList();
+-        	
+         	NetworkPersistance networkPersistance = new NetworkPersistance();
+         	networkPersistance.loadClaimByUser(name);
+         	
+@@ -40,6 +38,8 @@ public class LoadASyncTask extends AsyncTask<String, Void, String> {
+     protected void onPostExecute(String feed) {
+         // TODO: check this.exception 
+         // TODO: do something with the feed
++
++    	ClaimListSingleton.getClaimList().notifyListeners();
+     	LoginActivity.LOAD_ALL_RESULT = "done";
+     }
+ }
+\ No newline at end of file
