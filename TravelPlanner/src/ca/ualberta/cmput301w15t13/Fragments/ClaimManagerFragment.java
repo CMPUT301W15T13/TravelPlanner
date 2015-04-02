@@ -310,8 +310,18 @@ public class ClaimManagerFragment extends Fragment{
 			tagList.add(tag);
 		}
 		newClaim.tags = this.tagList;
-		ClaimListSingleton.getClaimList().removeClaimAtIndex(claimIndex);
-		ClaimListSingleton.getClaimList().add(newClaim);
+		
+		ClaimList claimlist = ClaimListSingleton.getClaimList();
+		claimlist.removeClaimAtIndex(claimIndex);
+		claimlist.add(newClaim);
+		
+		TagManager tm = claimlist.getTagMan();
+		String claimId = newClaim.getclaimID();
+		
+		for (int i = 0; i < tagList.size(); i++) {
+			tm.add(tagList.get(i), claimId);
+		}
+		claimlist.setTagMan(tm);
 		//TODO needs a sort method
 	}
 	
