@@ -85,7 +85,7 @@ public class LoginActivity extends Activity {
 			//password and username are filled in
 			User user= User.login(username, password);
 			if (user != null) {
-				DataManager.loadAllClaims();
+				DataManager.loadClaimsByUserName(username);
 				
 				//available.acquire();
 				startClaimActivity(username, true);

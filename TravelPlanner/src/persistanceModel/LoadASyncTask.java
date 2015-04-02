@@ -24,8 +24,6 @@ public class LoadASyncTask extends AsyncTask<String, Void, String> {
         	
         	String name = users[0];
         	
-        	ClaimListSingleton.clearList();
-        	
         	NetworkPersistance networkPersistance = new NetworkPersistance();
         	networkPersistance.loadClaimByUser(name);
         	
@@ -40,6 +38,8 @@ public class LoadASyncTask extends AsyncTask<String, Void, String> {
     protected void onPostExecute(String feed) {
         // TODO: check this.exception 
         // TODO: do something with the feed
+
+    	ClaimListSingleton.getClaimList().notifyListeners();
     	LoginActivity.LOAD_ALL_RESULT = "done";
     }
 }

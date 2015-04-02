@@ -63,6 +63,10 @@ public class ClaimViewerFragment extends Fragment {
 		public void update() {
 			claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 			claims = activity.getUser().getPermittableClaims(claims);
+			
+			// claims arraylist is a new instance, the adapter is using some other arraylist
+			claimAdapter.clear();
+			claimAdapter.addAll(claims);
 			claimAdapter.notifyDataSetChanged();
 		}
 		
@@ -200,8 +204,7 @@ public class ClaimViewerFragment extends Fragment {
 		activity = (ClaimActivity) getActivity();
 		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 		claims = activity.getUser().getPermittableClaims(claims);
-		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
-		
+		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);		
 	}
 	
 	@Override
