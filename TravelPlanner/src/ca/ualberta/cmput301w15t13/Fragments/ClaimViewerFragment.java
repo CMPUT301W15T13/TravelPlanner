@@ -212,9 +212,7 @@ public class ClaimViewerFragment extends Fragment {
 		activity = (ClaimActivity) getActivity();
 		claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 		claims = activity.getUser().getPermittableClaims(claims);
-<<<<<<< HEAD
-		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);		
-=======
+
 		ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
 		
 		// taken from http://developer.android.com/guide/topics/ui/controls/spinner.html on April 2nd, 2015
@@ -243,7 +241,6 @@ public class ClaimViewerFragment extends Fragment {
 		}
 		spinnerAdapter.notifyDataSetChanged();
 		
->>>>>>> c910c81b27bc5f790a452b5f06ff840c575d35f4
 	}
 	
 	@Override
