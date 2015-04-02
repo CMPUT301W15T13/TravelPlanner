@@ -20,6 +20,11 @@
 
 package ca.ualberta.cmput301w15t13.Activities;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import persistanceController.DataManager;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -38,7 +43,10 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Controllers.User;
+import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.Tag;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -197,6 +205,7 @@ public class ClaimActivity extends Activity {
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
+		ArrayList<String> tags = new ArrayList<String>();
 		
 		
 		// taken from http://developer.android.com/guide/topics/ui/controls/spinner.html on April 2nd, 2015
@@ -207,6 +216,23 @@ public class ClaimActivity extends Activity {
 		ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, android.R.id.text1);
 		spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		filterSpinner.setAdapter(spinnerAdapter);
+		
+		try {
+			ClaimList cl = ClaimListSingleton.getClaimList();
+			TagManager tm = cl.getTagMan();
+			HashMap<Tag, ArrayList<String>> map = tm.getManager();
+			for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+				tags.add(entry.getKey().getTagName());
+			}
+		} catch (RuntimeException e) {
+				// TODO: handle exception
+		}
+		
+		for (String tag : tags) {
+			spinnerAdapter.add(tag);
+		}
+		spinnerAdapter.notifyDataSetChanged();
+	
 			
 		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
 		searchButton.setOnClickListener(new View.OnClickListener() {
