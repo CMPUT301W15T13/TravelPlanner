@@ -138,13 +138,6 @@ public class ClaimActivity extends Activity  {
 		ClaimFragmentNavigator.openTag();
 	}
 	
-
-	/**
-	 * This method is used for approver comment
-	 */
-	public void openApproverComment() {
-		
-	}
 	/* Below this is android stuff */
 	
 	@Override

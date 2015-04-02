@@ -178,11 +178,11 @@ public class ClaimViewerFragment extends Fragment {
 	 * returnClaim method will be called once an approver has finished commenting
 	 * @param index
 	 */
-	public void approverComment(int index) {
+	public void approverComment(int claimIndex) {
 		// shows the approver comment dialog fragment
 		ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment();
 	    Bundle args = new Bundle();
-	    args.putInt("index", index);
+	    args.putInt("index", claimIndex);
 	    dialog.setArguments(args);
 		dialog.show(getFragmentManager(), "Approver Comment");
 	}

@@ -54,16 +54,12 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 	}
 	
 	/**
-	 * Upon returning, Approver will be asked if he/she wants to input comment for the reason
-	 * Comment is mandatory for returning, thus approver must comment before returning
+	 * Upon returning, Comment is mandatory; Thus, approver must comment before returning
 	 */
     final OnClickListener returnWithComment = new OnClickListener() {
         @Override
         /**
-         * upon returning a claim, the comment is mandatory, thus it will ask the approver to make comment
-         * This is where Approver's comment will be triggered
-         * 
-         * SO THIS ISN'T A PLACE WHERE APPROVER COMMENT IS BEING TRANSACTIONED
+         * This will call ApproverComment dialog fragment
          */
         public void onClick(final View v) {
         	FragmentManager fm = getFragmentManager();
