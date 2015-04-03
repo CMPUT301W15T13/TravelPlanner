@@ -44,6 +44,9 @@ public class NetworkPersistance{
 	private static final String SAVE_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/";
 	private static final String SAVE_EXPENSE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/expense/";
 	
+	private static final String UPDATE_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/_update";
+	private static final String UPDATE_EXPENSE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/expense/_update";
+	
 	private static final String SEARCH_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/_search";
 	private static final String SEARCH_EXPENSE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/expense/_search";
 	
@@ -61,12 +64,12 @@ public class NetworkPersistance{
 		HttpClient httpClient = new DefaultHttpClient();
 		
 		//This will save all the expenses associated with the claim
-		ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
-		for (ExpenseItem expenseItem: expenseList){
-			this.saveExpense(expenseItem);
-		}
+	//	ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
+	//	for (ExpenseItem expenseItem: expenseList){
+	//		this.saveExpense(expenseItem);
+	//	}
 		//this will clear all expenses from the claim
-		claim.clearExpenses();
+		//claim.clearExpenses();
 		
 		try {
 			HttpPut  addRequest = new HttpPut(SAVE_CLAIM_URL + itemID);
@@ -441,6 +444,41 @@ public class NetworkPersistance{
 			Claim fetchedClaim = this.loadClaim(claimID);
 			ClaimListSingleton.addClaim(fetchedClaim);
 		}
+	}
+
+
+	public void updateClaim(Claim claim) {
+		
+		String itemID = claim.getclaimID();
+		Gson gson = new Gson();
+		
+		HttpClient httpClient = new DefaultHttpClient();
+		
+		//This will save all the expenses associated with the claim
+	//	ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
+		
+//		for (ExpenseItem expenseItem: expenseList){
+//			this.saveExpense(expenseItem);
+	//	}
+		//this will clear all expenses from the claim
+//		claim.clearExpenses();
+		
+		try {
+			HttpPut  addRequest = new HttpPut(SAVE_CLAIM_URL + itemID + "/_update");
+
+			StringEntity itemAsString = new StringEntity(gson.toJson(claim));
+			addRequest.setEntity(itemAsString);
+			addRequest.setHeader("Accept", "application/json");
+
+			HttpResponse response = httpClient.execute(addRequest);
+			String status = response.getStatusLine().toString();
+			//Log.i(TAG, status);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		//return itemID;
+		
 	}
 	
 

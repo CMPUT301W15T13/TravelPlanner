@@ -69,6 +69,7 @@ public class ClaimList {
 	public void remove(Claim claim) {
 			if (claimList.contains(claim)) {
 				claimList.remove(claim);
+				DataManager.deleteClaim(claim.getclaimID());
 			}
 	}
 
@@ -181,9 +182,16 @@ public class ClaimList {
 		
 	}
 
+	/**
+	 * Replaces a claim at the specified index. This updates the claimlist and saves the edits
+	 * @param currentClaimIndex
+	 * @param newClaim
+	 */
 	public void replaceClaimAtIndex(int currentClaimIndex, Claim newClaim) {
 		this.claimList.add(currentClaimIndex, newClaim);
 		this.removeClaimAtIndex(currentClaimIndex+1);
+		
+		DataManager.updateClaim(newClaim.getclaimID());
 		
 	}
 	

@@ -9,6 +9,7 @@ import persistanceModel.LoadAllASyncTask;
 import persistanceModel.LocalPersistance;
 import persistanceModel.NetworkPersistance;
 import persistanceModel.SaveASyncTask;
+import persistanceModel.UpdateASyncTask;
 import android.content.Context;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -100,6 +101,12 @@ public class DataManager {
 		DataHelper helper = new DataHelper();
 		helper.loadAllClaims();
 	}
+
+	public static void updateClaim(String claimID) {
+		DataHelper helper = new DataHelper();
+		helper.updateClaim(claimID);
+		
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -124,12 +131,20 @@ class DataHelper{
 	}
 
 
+	public void updateClaim(String claimID) {
+		if (DataManager.isNetworkAvailable()){
+			new UpdateASyncTask().execute(claimID);
+		}
+		
+	}
+
+
 	public void loadAllClaims() throws InterruptedException, ExecutionException {
-		//if (DataManager.isNetworkAvailable()){
-	//		new LoadAllASyncTask().execute("");
-	//	}else{
+		if (DataManager.isNetworkAvailable()){
+			new LoadAllASyncTask().execute("");
+		}else{
 			local.LoadClaims(DataManager.getCurrentContext());
-		//}
+		}
 		
 	}
 
@@ -184,22 +199,8 @@ class DataHelper{
 	
 
 	
+
 	
-	public void searchClaimsForUserName(String userName){
-		
-	}
-	
-	public void searchClaimsByID(String claimID){
-		
-	}
-	
-	public void searchExepensesByClaimID(String claimID){
-		
-	}
-	
-	public void searchExpenseByExpenseID(String expenseID){
-		
-	}
 
 }
 

@@ -22,6 +22,7 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
 
+import persistanceController.DataManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -76,6 +77,7 @@ public class ClaimListSingleton {
 		} 
 		return false;
 	}
+	
 	//This is temporary
 	//TODO Send the expense list instead
 	public static ArrayList<ExpenseItem> getExpenseItemArrayList() {
@@ -119,7 +121,6 @@ public class ClaimListSingleton {
 
 
 	public static void addExpenseToClaim(String claimID, ExpenseItem expense) {
-		
 		int currentClaimIndex = 0;
 		Claim newClaim;
 		for (int index = 0; index < claimList.size(); index++){
@@ -128,8 +129,11 @@ public class ClaimListSingleton {
 				newClaim.addExpenseItem(expense);
 				currentClaimIndex = index;
 				claimList.replaceClaimAtIndex(0, newClaim);
+				
 			}
 		}
+		
+	
 
 		}
 		
