@@ -369,6 +369,7 @@ public class ClaimManagerFragment extends Fragment{
 		
 	}
 	
+	
 	public void editTagItem(String tag, int tagIndex) {
 		//Tag tmp = this.tagList.get(tagIndex);
 		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();

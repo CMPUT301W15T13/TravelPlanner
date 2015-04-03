@@ -27,13 +27,19 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckedTextView;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
@@ -49,66 +55,92 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
  */
 
 public class FilterFragmentDialog extends DialogFragment {
-	// Based on http://developer.android.com/guide/topics/ui/dialogs.html March 06 2015
+	// based on http://www.101apps.co.za/articles/making-a-list-coding-multiple-choice-list-dialogs.html on April 2nd, 2015
     
-	@SuppressLint("InflateParams")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		boolean[] isSelected = {true,false,true,false};
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-	    LayoutInflater inflater = getActivity().getLayoutInflater();
+	    String[] test = {"tag1", "tag2", "tag3", "tag4"};
+	    final ArrayList<Integer> indexList = new ArrayList<Integer>();
 	    
+	    builder.setTitle(R.string.filterMenu)
 	    
-	    final ArrayAdapter<String> tagAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_multichoice);
-	    
-	    ClaimList cl = ClaimListSingleton.getClaimList();
-	    TagManager tm = cl.getTagMan();
-	    
-	    try {
-	    	HashMap<Tag, ArrayList<String>> map = tm.getManager();
-	    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
-	    		tagAdapter.add(entry.getKey().getTagName());
-	    	}
-		} catch (NullPointerException e) {
+	    	.setMultiChoiceItems(test,isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+					// TODO Auto-generated method stub
+					if (isChecked) {
+						indexList.add(which);
+					} else if (indexList.contains(which)) {
+						indexList.remove(Integer.valueOf(which));
+					}
+					
+				}
+			})
 			
-		}
+			.setPositiveButton(R.string.filter, new DialogInterface.OnClickListener() {
+				
+				@SuppressLint("ShowToast")
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+					FragmentManager fm = getFragmentManager();
+					ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+					
+					fragment.filterByTag(indexList);
+				}
+
+			});
 	    
-	    tagAdapter.add("All Tags");
-	    
-	    builder.setAdapter(tagAdapter,new DialogInterface.OnClickListener() {
-
-          @Override
-          public void onClick(DialogInterface dialog, int which) {
-        	  String strName = tagAdapter.getItem(which);
-              AlertDialog.Builder builderInner = new AlertDialog.Builder(getActivity());
-              builderInner.setMessage(strName);
-              builderInner.setTitle("Your Selected Item is");
-              builderInner.setPositiveButton("Ok",
-                      new DialogInterface.OnClickListener() {
-
-                          @Override
-                          public void onClick(
-                                  DialogInterface dialog,
-                                  int which) {
-                              dialog.dismiss();
-                          }
-                      });
-              builderInner.show();
-          }
-      });
-		
-
-	    // Inflate and set the layout for the dialog
-	    // Pass null as the parent view because its going in the dialog layout
-	    builder.setPositiveButton(R.string.filter, new DialogInterface.OnClickListener() {
-	        	   
-	               @Override
-	               public void onClick(DialogInterface dialog, int id) {}
-	           });
-     
+	    	
 	    return builder.create();
 	}
-	
 }
+	    
+//	    LayoutInflater inflater = getActivity().getLayoutInflater();
+//	    
+//	    final ArrayAdapter<String> tagAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_multichoice);
+//	    
+//	    ClaimList cl = ClaimListSingleton.getClaimList();
+//	    TagManager tm = cl.getTagMan();
+//	    
+//	    try {
+//	    	HashMap<Tag, ArrayList<String>> map = tm.getManager();
+//	    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+//	    		tagAdapter.add(entry.getKey().getTagName());
+//	    	}
+//		} catch (NullPointerException e) {
+//			
+//		}
+//	    
+//	    tagAdapter.add("All Tags");
+//	    
+//	    
+//	    builder.setAdapter(tagAdapter,new DialogInterface.OnClickListener() {
+//
+//          @Override
+//          public void onClick(DialogInterface dialog, int which) {
+//        	  String strName = tagAdapter.getItem(which);
+//          
+//          }
+//      });
+//	    
+//		
+//
+//	    // Inflate and set the layout for the dialog
+//	    // Pass null as the parent view because its going in the dialog layout
+//	    builder.setPositiveButton(R.string.filter, new DialogInterface.OnClickListener() {
+//	        	   
+//	               @Override
+//	               public void onClick(DialogInterface dialog, int id) {}
+//	           });
+//     
+//	    return builder.create();
+//	}
+//	
+//}
 
 //AlertDialog.Builder builderSingle = new AlertDialog.Builder(
 //        DialogActivity.this);
@@ -128,3 +160,7 @@ public class FilterFragmentDialog extends DialogFragment {
 //            }
 //        });
 //
+
+
+
+

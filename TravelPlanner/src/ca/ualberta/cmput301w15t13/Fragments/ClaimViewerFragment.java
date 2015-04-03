@@ -21,19 +21,14 @@
 package ca.ualberta.cmput301w15t13.Fragments;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
 import adapters.ClaimAdapter;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
@@ -42,14 +37,10 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
-import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
-import ca.ualberta.cmput301w15t13.Models.Tag;
 import dialogs.ApproverCommentDialogFragment;
 import dialogs.FilterFragmentDialog;
-import dialogs.TagDialogFragment;
 import exceptions.InvalidUserPermissionException;
 
 /**
@@ -174,10 +165,27 @@ public class ClaimViewerFragment extends Fragment {
 		ClaimListSingleton.getClaimList().notifyListeners();
 	}
 	
+	/**
+	 * Opens a dialog letting the user select which
+	 * Tags they want to filter by
+	 */
+	
 	public void openFilterDialog() {
 		FilterFragmentDialog dialog = new FilterFragmentDialog();
 		dialog.show(getFragmentManager(), "TEST TAG");
 	}
+	
+	/**
+	 * TODO given the tag indices, make an array of
+	 * tag names and pass it to the filter function,
+	 * and finally filte
+	 * @param tagIndexes
+	 */
+	
+	public void filterByTag(ArrayList<Integer> tagIndexes) {
+		return;
+	}
+	
 	/**
 	 * Upon returning a claim, an approver must write comments for reason why
 	 * This method will call comment fragment for approver to comment
