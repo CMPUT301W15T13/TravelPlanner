@@ -71,6 +71,7 @@ import exceptions.InvalidUserPermissionException;
 public class ClaimManagerFragment extends Fragment{
 	private EditText descriptionView;
 	private ArrayList<Tag> tagList;
+	private ArrayList<String> tagNameList;
 	private ArrayList<String> commentList;
 	private TextView startDateView, endDateView, destinationView, tagView, commentView;
 	private String description, startDateText, endDateText;
@@ -106,6 +107,10 @@ public class ClaimManagerFragment extends Fragment{
 			this.endDateView.setText(editClaim.getEndDateAsString());
 			this.destinationView.setText(editClaim.getTravelItineraryAsString());
 			this.tagView.setText(editClaim.getTagsAsString());
+			
+			for (Tag t : editClaim.tags) {
+				this.tagNameList.add(t.getTagName());
+			}
 			
 			getApproverComments();
 					
@@ -349,35 +354,40 @@ public class ClaimManagerFragment extends Fragment{
 	public void addTagItem(String tag) {
 		Tag tmp = new Tag(tag);
 		
-		if (tagList.contains(tmp)) {
+		if (tagNameList.contains(tag)) {
 			Toast.makeText(activity, "Tag has already been added", Toast.LENGTH_SHORT).show();
-		} else {
-			this.tagList.add(tmp);
-			String tag_list = tagView.getText().toString();
-			
-			if(!tag_list.equals("")){
-				tag_list += ",";
-			}
-			tag_list += "  " + tmp.getTagName();
-			tagView.setText(tag_list);
-	
-			 //TODO this needs to change the layout size
-			if(tagList.size() > 2){
-				//If the text view is set to wrap content too early,
-				//it looks like the field is too small
-				
-				tagView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
-			}
-		}	
+			return;
+		} 
+		this.tagList.add(tmp);
+		this.tagNameList.add(tag);
+		String tag_list = tagView.getText().toString();
 		
+		if(!tag_list.equals("")){
+			tag_list += ",";
+		}
+		tag_list += "  " + tmp.getTagName();
+		tagView.setText(tag_list);
+
+		 //TODO this needs to change the layout size
+		if(tagList.size() > 2){
+			//If the text view is set to wrap content too early,
+			//it looks like the field is too small
+			
+			tagView.setHeight(android.view.ViewGroup.LayoutParams.WRAP_CONTENT);
+		}
+	
 	}
 	
 	
 	public void editTagItem(String tag, int tagIndex) {
-		//Tag tmp = this.tagList.get(tagIndex);
+		if (tagNameList.contains(tag)) {
+			Toast.makeText(activity, "Tag already associated with claim", Toast.LENGTH_SHORT).show();
+			return;
+		} 
 		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();
 		Tag tmp = claimTags.get(tagIndex);
 		tmp.setTagName(tag);
+		this.tagNameList.add(tag);
 		String tag_list = "";
 		for (Tag tagItem : claimTags) {
 			tag_list += tagItem.getTagName()+", ";
@@ -387,6 +397,7 @@ public class ClaimManagerFragment extends Fragment{
 	
 	public void removeTagItem(int tagIndex) {
 		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();
+		this.tagNameList.remove(claimTags.get(tagIndex).getTagName());
 		claimTags.remove(tagIndex);
 		String tag_list = "";
 		for (Tag tagItem : claimTags) {
@@ -457,6 +468,8 @@ public class ClaimManagerFragment extends Fragment{
 		tagButton.setText("Add");
 				
 		this.tagList = new ArrayList<Tag>();
+		this.tagNameList = new ArrayList<String>();
+		this.tagNameList.add("");
 		
 		setFields();
 	}

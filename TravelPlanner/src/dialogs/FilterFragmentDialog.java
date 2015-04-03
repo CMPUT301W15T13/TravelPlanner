@@ -20,10 +20,7 @@
 package dialogs;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
@@ -32,13 +29,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Controllers.TagManager;
-import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
-import ca.ualberta.cmput301w15t13.Models.ClaimList;
-import ca.ualberta.cmput301w15t13.Models.Tag;
-
 /**
  * This is a custom dialog fragment for 
  * adding a destination-reason pair to a
@@ -79,7 +70,6 @@ public class FilterFragmentDialog extends DialogFragment {
 			
 			.setPositiveButton(R.string.filter, new DialogInterface.OnClickListener() {
 				
-				@SuppressLint("ShowToast")
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
 					
@@ -118,60 +108,7 @@ public class FilterFragmentDialog extends DialogFragment {
 		this.isSelected = isSelected;
 	}
 }
-	    
-//	    LayoutInflater inflater = getActivity().getLayoutInflater();
-//	    
-//	    final ArrayAdapter<String> tagAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_multichoice);
-//	    
-//	    
-//		}
-//	    
-//	    tagAdapter.add("All Tags");
-//	    
-//	    
-//	    builder.setAdapter(tagAdapter,new DialogInterface.OnClickListener() {
-//
-//          @Override
-//          public void onClick(DialogInterface dialog, int which) {
-//        	  String strName = tagAdapter.getItem(which);
-//          
-//          }
-//      });
-//	    
-//		
-//
-//	    // Inflate and set the layout for the dialog
-//	    // Pass null as the parent view because its going in the dialog layout
-//	    builder.setPositiveButton(R.string.filter, new DialogInterface.OnClickListener() {
-//	        	   
-//	               @Override
-//	               public void onClick(DialogInterface dialog, int id) {}
-//	           });
-//     
-//	    return builder.create();
-//	}
-//	
-//}
-
-//AlertDialog.Builder builderSingle = new AlertDialog.Builder(
-//        DialogActivity.this);
-//builderSingle.setTitle("Select One Name:-");
-
-
-//final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-//        DialogActivity.this,
-//        android.R.layout.select_dialog_singlechoice);
-
-//builderSingle.setNegativeButton("cancel",
-//        new DialogInterface.OnClickListener() {
-//
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//
-
+	   
 
 
 

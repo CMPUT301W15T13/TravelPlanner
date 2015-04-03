@@ -177,6 +177,11 @@ public class ClaimItemListTest extends
 		Tag tag1 = new Tag("Ugent");
 		Tag tag2 = new Tag("Money");
 		
+		//acts as tagList for claim
+		ArrayList<Tag> tags1 = new  ArrayList<Tag>();
+		ArrayList<Tag> tags2 = new  ArrayList<Tag>();
+		tags1.add(tag1);
+
 		ClaimList claimList = new ClaimList();
 		Claim claim1 = new Claim("Name", new Date(1), new Date(2), null, null);
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), null, null);
@@ -186,11 +191,11 @@ public class ClaimItemListTest extends
 		ArrayList<String> test1 = new ArrayList<String>();
 		
 		//Will make the claim list contain 1 claim with 1 tag
-		claim1.addTag(tag1); 
 		filterTags.add(tag1);
 		test1.add(claim1.getclaimID());
-		tm.add(tag1, claim1.getclaimID());
 		
+		tm.add(tag1, claim1.getclaimID());
+		claim1.tags = tags1;
 		claimList.add(claim1);
 		claimList.setTagMan(tm);
 		
@@ -199,7 +204,8 @@ public class ClaimItemListTest extends
 		assertEquals(1, claimList.filter(filterTags).size());
 		
 		//Now claim list contains 1 claim with 2 tags
-		claim1.addTag(tag2);
+		tags1.add(tag2);
+		claim1.tags = tags1;
 		tm.add(tag2, claim1.getclaimID());
 		claimList.setTagMan(tm);
 		
@@ -217,7 +223,8 @@ public class ClaimItemListTest extends
 		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
 		assertEquals(1, claimList.filter(filterTags).size());
 		
-		claim2.addTag(tag2);
+		tags2.add(tag2);
+		claim2.tags = tags2;
 		tm.add(tag2, claim2.getclaimID());
 		
 		claimList.add(claim2);
@@ -226,7 +233,9 @@ public class ClaimItemListTest extends
 		// claim1 -- tag1, tag2
 		// claim2 -- tag2
 		
-		filterTags.remove(1);		// filterTags now is (tag2)
+		// filterTags now is (tag2)
+		filterTags.clear();
+		filterTags.add(tag2);
 		test1.add(claim2.getclaimID());		// test1 = (claim1 id, claim2 id)
 		
 		//filter by 2 tags

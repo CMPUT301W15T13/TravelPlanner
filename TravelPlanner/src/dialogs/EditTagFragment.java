@@ -115,7 +115,6 @@ public class EditTagFragment extends DialogFragment {
 					   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
 					   
 					   if ((getTagIndex()+1) < getSize()) {
-						   //Toast.makeText(getActivity(), getTagIndex(), Toast.LENGTH_SHORT);
 						   fragment.openEditTagDialog(getTagIndex()+1); 
 					   } 
 					   
