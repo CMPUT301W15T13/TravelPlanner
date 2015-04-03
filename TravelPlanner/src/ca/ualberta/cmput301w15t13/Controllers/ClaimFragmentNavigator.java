@@ -128,6 +128,10 @@ public class ClaimFragmentNavigator {
 		claimManagerFragment.openDateDialog(textId);
 	}
 	
+	public static void filterClaim() {
+		claimViewerFragment.openFilterDialog();
+	}
+	
 	/**
 	 * Opens a destination dialog
 	 * for adding the location and reason

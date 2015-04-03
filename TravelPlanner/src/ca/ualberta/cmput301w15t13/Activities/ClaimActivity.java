@@ -35,6 +35,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -109,6 +110,10 @@ public class ClaimActivity extends Activity  {
 	 */
 	public void newClaim(View v){
 		ClaimFragmentNavigator.newClaim();
+	}
+	
+	public void filterClaim() {
+		ClaimFragmentNavigator.filterClaim();
 	}
 	
 	/**
@@ -198,7 +203,6 @@ public class ClaimActivity extends Activity  {
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
-		ArrayList<String> tags = new ArrayList<String>();
 			
 		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
 		searchButton.setOnClickListener(new View.OnClickListener() {
@@ -210,6 +214,15 @@ public class ClaimActivity extends Activity  {
 				// TODO test for not null and not empty throw exception thing
 				//TODO actually search
 				Toast.makeText(getBaseContext(), searchMessage, Toast.LENGTH_SHORT).show();
+			}
+		});
+		
+		Button filterButton = (Button) findViewById(R.id.ButtonClaimFilter);
+		filterButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				filterClaim();
 			}
 		});
 	

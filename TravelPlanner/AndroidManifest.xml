@@ -52,6 +52,10 @@
             android:name="dialogs.TagChoiceFrgament"
             android:label="@string/title_activity_tag_choice_frgament" >
         </activity>
+        <activity
+            android:name="dialogs.FilterFragmentDialog"
+            android:label="@string/title_activity_filter_fragment_dialog" >
+        </activity>
     </application>
 
 </manifest>
