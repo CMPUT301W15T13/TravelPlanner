@@ -34,27 +34,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 
 public class ApproverCommentDialogFragment extends DialogFragment {
 	private String comment;
 	private EditText commentField;
-	
-	/**
-	 * Ji Hwan Kim
-	 * I need to pass the approver's name as well as his/her comment
-	 * Also, the comment should not be in the form of comment but rather in ArrayList<String>
-	 * 
-	 * HashMap<String,ArrayList<String>> is the format of how approver comment is stored
-	 */
-	
-	/*
-	public ApproverCommentDialogFragment(Claim editClaim) {
-		// TODO Auto-generated constructor stub
-		
-	}
-	*/
-	
-	int claimIndex;
+	private int claimIndex;
+	private Claim claim;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,21 +52,27 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 	final OnClickListener commitComment = new OnClickListener() {
 		@Override
 		public void onClick(final View v) {
+			/**
+			 * Upon clicking on commit button it will verify if the user wrote anything 
+			 */
 			comment = commentField.getText().toString().trim();
 			
 			Toast.makeText(getActivity(), "Commit was clicked", Toast.LENGTH_SHORT).show();
 						
-	     	/**
-	     	 * Here I think the return claim shoudn't be called maybe
-	     	 * THIS IS WHERE THE APPROVER COMMENT TRANSACTION WILL BE MADE
-	     	 */
-			
 	     	if (comment.matches("") || comment==null) {
 		        Toast.makeText(getActivity(), "You did not enter comments", Toast.LENGTH_SHORT).show();
 		    } else {
 		    	Toast.makeText(getActivity(), "Comment was :"+comment, Toast.LENGTH_SHORT).show();
+		    	// This will return the claim that is currently being working on
+		    	claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		    	/*
+		    	 * TODO Ji Hwan Kim
+		    	 * claim.getlastApproverName method currently is not implemented
+		    	 */
+		    	claim.addComment(comment, claim.getlastApproverName());
+		    	
 		    	FragmentManager fm = getFragmentManager();
-		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");    	
+		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");	
 		     	fragment.returnClaim(claimIndex);
 				Dialog d = getDialog();
 				d.dismiss();

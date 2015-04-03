@@ -70,26 +70,14 @@ import exceptions.InvalidUserPermissionException;
 public class ClaimManagerFragment extends Fragment{
 	private EditText descriptionView;
 	private ArrayList<Tag> tagList;
-	/**
-	 * commentView is used to show the comments written by approver
-	 * commentView will be showed in pair
-	 * ex)
-	 * John, "This claim is not completed"
-	 * Doe, "This claim lacks information"
-	 * Susan, "This claim needs more description"
-	 * and will be showed in order of entry
-	 */
+	private ArrayList<String> commentList;
 	private TextView startDateView, endDateView, destinationView, tagView, commentView;
 	private String description, startDateText, endDateText;
 	private TravelItineraryList itineraryList;
 	private Date startDate, endDate;
 	private boolean incompleteFields, invalidDates, isEditing;
 	private int claimIndex;	
-	private ClaimActivity activity;
-	/**
-	 *  approverComments will have type ArrayList<String> after the getComments() method
-	 */
-	private ArrayList<String> approverComments;	
+	private ClaimActivity activity;	
 
 	/**
 	 * Sets the "Mode" of the fragment to edit or create, 
@@ -112,13 +100,14 @@ public class ClaimManagerFragment extends Fragment{
 			this.endDate = editClaim.getEndDate();
 			this.itineraryList = editClaim.getTravelList();
 			this.descriptionView.setText(this.description);
-			this.approverComments = editClaim.getComments();
 			
 			this.startDateView.setText(editClaim.getStartDateAsString());
 			this.endDateView.setText(editClaim.getEndDateAsString());
 			this.destinationView.setText(editClaim.getTravelItineraryAsString());
 			this.tagView.setText(editClaim.getTagsAsString());
 			
+			getApproverComments();
+					
 			//changes the tag button text
 			Button tagButton = (Button) getView().findViewById(R.id.addTags);
 			tagButton.setText("Edit");
@@ -278,23 +267,6 @@ public class ClaimManagerFragment extends Fragment{
 	}
 	
 	/**
-	 * This method is subjected to be changed Ji Hwan Kim
-	 * 
-	 * This method is called for approver to return a claim with comments
-	 * I'm not sure where the transaction of the approver's comment going to be
-	 * Whether in ClaimManagerFragment or at ClaimViewerFragment
-	 */
-	public void openApproverCommentDialog() {
-		// check if the user is an approver
-		// check the status of claim as non-editable, submitted
-		Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-		ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment();
-		//ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment(editClaim);
-		dialog.show(getFragmentManager(), "Approver Comment Dialog");
-
-	}
-	
-	/**
 	 * Create a new claim and replace the old one 
 	 * with it.
 	 * @throws InvalidUserPermissionException 
@@ -430,6 +402,22 @@ public class ClaimManagerFragment extends Fragment{
 	 */
 	public boolean isEditing(){
 		return this.isEditing;
+	}
+	
+	/*
+	 * Ji Hwan Kim
+	 * TODO the claim's getComments method is returning an ArrayList<String> of all the comments
+	 * from most recent to oldest
+	 * But setText only takes String
+	 * So I need to come up with the method that will take Strings
+	 */
+	
+	public void getApproverComments() {
+		Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		commentList = editClaim.getComments();
+		for (int i = 0; i < commentList.size(); i++) {
+			commentView.setText(commentList.get(i));
+		}
 	}
 
 	/* Below this is android stuff */
