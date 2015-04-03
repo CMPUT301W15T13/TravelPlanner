@@ -11,6 +11,9 @@ import persistanceModel.NetworkPersistance;
 import persistanceModel.SaveASyncTask;
 import persistanceModel.UpdateASyncTask;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -107,6 +110,7 @@ public class DataManager {
 		helper.updateClaim(claimID);
 		
 	}
+
 }
 
 ////////////////////////////////////////////////////////////////////////////
@@ -117,13 +121,36 @@ class DataHelper{
 	LocalPersistance local = new LocalPersistance();
 	NetworkPersistance network = new NetworkPersistance();
 	
+
+	/**
+	 * This will check to see if the phone has a network signal
+	 * Taken from: http://developer.android.com/training/monitoring-device-state/connectivity-monitoring.html
+	 * @return: true if its connected to the internet
+	 */
+	private void isNetworkConnected(){
+		ConnectivityManager cm =
+		        (ConnectivityManager)DataManager.getCurrentContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+		 
+		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+		boolean isConnected = activeNetwork != null &&
+		                      activeNetwork.isConnectedOrConnecting();
+		
+		if(isConnected){
+			DataManager.setOnlineMode();
+			Toast.makeText(DataManager.getCurrentContext(), "Is connected", Toast.LENGTH_SHORT).show();
+		}else{
+			DataManager.setOfflineMode();
+			Toast.makeText(DataManager.getCurrentContext(), "Is NOT connected", Toast.LENGTH_SHORT).show();
+		}
+	}
+	
+	
 	/**
 	 * This will determine what type of saving method to use depending on the network status.
 	 * @param claim
 	 */
-
-	
 	public void saveClaim(Claim claim) {
+		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new SaveASyncTask().execute(claim.getclaimID());
 		}
@@ -132,6 +159,7 @@ class DataHelper{
 
 
 	public void updateClaim(String claimID) {
+		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new UpdateASyncTask().execute(claimID);
 		}
@@ -140,6 +168,7 @@ class DataHelper{
 
 
 	public void loadAllClaims() throws InterruptedException, ExecutionException {
+		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new LoadAllASyncTask().execute("");
 		}else{
@@ -154,6 +183,7 @@ class DataHelper{
 	 * @param claimID
 	 */
 	public void DeleteClaim(String claimID){
+		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new DeleteASyncTask().execute(claimID);
 		}
@@ -164,6 +194,7 @@ class DataHelper{
 	 * @param expenseList
 	 */
 	public void saveClaimExpenses(ExpenseItemList expenseList){
+		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			for (ExpenseItem expense: expenseList.getExpenseList()){
 				network.saveExpense(expense);
@@ -177,6 +208,7 @@ class DataHelper{
 	 * @return
 	 */
 	public void loadClaimsByUserName(String userName) {
+		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			//Start an Async task to load claims
 			new LoadASyncTask().execute(userName);
@@ -191,6 +223,7 @@ class DataHelper{
 	 * @param claim
 	 */
 	public String LoadLocalClaims() {
+		this.isNetworkConnected();
 		if (!DataManager.isNetworkAvailable()){
 			local.LoadClaims();
 		}
