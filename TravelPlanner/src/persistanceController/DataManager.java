@@ -152,7 +152,7 @@ class DataHelper{
 	 * @param claim
 	 */
 	public void saveClaim(Claim claim) {
-		this.isNetworkConnected();
+	//	this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new SaveASyncTask().execute(claim.getclaimID());
 		}
@@ -171,7 +171,7 @@ class DataHelper{
 
 
 	public void loadAllClaims() throws InterruptedException, ExecutionException {
-		this.isNetworkConnected();
+		//this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new LoadAllASyncTask().execute("");
 		}else{
@@ -186,7 +186,7 @@ class DataHelper{
 	 * @param claimID
 	 */
 	public void DeleteClaim(String claimID){
-		this.isNetworkConnected();
+	//	this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new DeleteASyncTask().execute(claimID);
 		}
@@ -198,7 +198,7 @@ class DataHelper{
 	 * @param expenseList
 	 */
 	public void saveClaimExpenses(ExpenseItemList expenseList){
-		this.isNetworkConnected();
+	//	this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			for (ExpenseItem expense: expenseList.getExpenseList()){
 				network.saveExpense(expense);
@@ -213,7 +213,7 @@ class DataHelper{
 	 * @return
 	 */
 	public void loadClaimsByUserName(String userName) {
-		this.isNetworkConnected();
+		//this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			//Start an Async task to load claims
 			new LoadASyncTask().execute(userName);
@@ -228,7 +228,7 @@ class DataHelper{
 	 * @param claim
 	 */
 	public String LoadLocalClaims() {
-		this.isNetworkConnected();
+		//this.isNetworkConnected();
 		if (!DataManager.isNetworkAvailable()){
 			local.LoadClaims();
 		}

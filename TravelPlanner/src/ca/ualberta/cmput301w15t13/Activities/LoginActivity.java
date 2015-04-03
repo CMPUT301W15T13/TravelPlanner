@@ -73,7 +73,7 @@ public class LoginActivity extends Activity {
 		ClaimListSingleton.getClaimList().clearListeners();
 			
 		//load data
-		//DataManager.setOnlineMode();
+		DataManager.setOnlineMode();
 		
 		if (username.equals("") || username == null) {
 			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();
