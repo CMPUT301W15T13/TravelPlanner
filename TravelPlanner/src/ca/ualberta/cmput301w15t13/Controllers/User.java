@@ -47,19 +47,6 @@ public abstract class User {
 	}
 	
 	/**
-	 * Returns the result of an 
-	 * attempted login. The user if it passed,
-	 * and null if it failed.
-	 * @param username
-	 * @param password
-	 * @return
-	 */
-	public static User login(String username, String password){
-		return new Claimant(username);
-		//return null
-	}
-	
-	/**
 	 * Gets an instance of a User, either a 
 	 * claimant or an approver by their username
 	 * TODO tests will come when the server

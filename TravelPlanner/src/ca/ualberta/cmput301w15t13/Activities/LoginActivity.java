@@ -21,11 +21,9 @@
 package ca.ualberta.cmput301w15t13.Activities;
 
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Semaphore;
 
 import persistanceController.DataManager;
 import android.app.Activity;
-import android.app.Application;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -34,16 +32,14 @@ import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Controllers.User;
 
 /**
  * This activity is used for getting login information.
  * It will identify what kind of user is attempting to log in
  * and direct them to a page to view claims specific to 
- * their access rights.
- *
- * Outstanding Issues: Communicate with the server
- * and actually validate the logins.
+ * their access rights. The server set up happens before
+ * the users login, so that the claims are ready
+ * before the next activity starts.
  */
 
 public class LoginActivity extends Activity {
@@ -55,69 +51,75 @@ public class LoginActivity extends Activity {
 	 * Take the username and password inputted by the
 	 * user and attempt to login. For now, this only
 	 * logs in as a Claimant, but will be extended
-	 * to login as either. TODO
+	 * to login as either. 
 	 * @param view
 	 * @throws ExecutionException 
 	 * @throws InterruptedException 
 	 */
-	public void login(View view) throws  ExecutionException, InterruptedException {
+	public String getLoginCredentials() throws  ExecutionException, InterruptedException {
 		EditText usernameEditText;
-		EditText passwordEditText;
-		String username, password;
+		String username;
 
 		usernameEditText = (EditText) findViewById(R.id.editTextUsername);
-		passwordEditText = (EditText) findViewById(R.id.editTextPassword);
 		username = usernameEditText.getText().toString();
-		password = passwordEditText.getText().toString();
-		
-		ClaimListSingleton.getClaimList().clearListeners();
-			
-		//load data
-		DataManager.setOnlineMode();
 		
 		if (username.equals("") || username == null) {
 			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();
-		} else if (password.equals("") || password == null) {
-			Toast.makeText(this, "Add password before logging in", Toast.LENGTH_SHORT).show();
-		} else {
-			//password and username are filled in
-			User user= User.login(username, password);
-			if (user != null) {
-				Toast.makeText(getApplicationContext(), "synchronizing with server", Toast.LENGTH_SHORT).show();
+			return null;
+		}
 
-				DataManager.loadClaimsByUserName(username);
-			
-				startClaimActivity(username, true);
-				
-
-			} else {
-				Toast.makeText(this, "Invalid username or password", Toast.LENGTH_SHORT).show();
-			}
+		return username;
+	}
+	
+	/**
+	 * Gets the user's username and if
+	 * valid, login as an approver.
+	 * @param v
+	 * @throws ExecutionException
+	 * @throws InterruptedException
+	 */
+	public void approverLogin(View v) throws ExecutionException, InterruptedException{
+		String username = getLoginCredentials();
+		if(username != null){
+			startClaimActivity(username, false);
 		}
 	}
 	
 	/**
+	 * Gets the user's name and if valid,
+	 * login as an approver.
+	 * @param v
+	 * @throws ExecutionException
+	 * @throws InterruptedException
+	 */
+	public void claimantLogin(View v) throws ExecutionException, InterruptedException{
+		String username = getLoginCredentials();
+		if(username != null){
+			startClaimActivity(username, true);
+		}
+	}
+	/**
+	 * Takes the user's name and the type of user.
+	 * Starts the communication with the server.
 	 * Passes the username and the type of user to the 
 	 * next activity, ClaimActivity, then starts it.
 	 * @param username
 	 * @param isClaimant
 	 */
-	public void startClaimActivity(String username, boolean isClaimant){		
+	public void startClaimActivity(String username, boolean isClaimant){	
+		ClaimListSingleton.getClaimList().clearListeners();
+		//load data
+		DataManager.setOnlineMode();
+		Toast.makeText(getApplicationContext(), "synchronizing with server", Toast.LENGTH_SHORT).show();
+		DataManager.loadClaimsByUserName(username);
+		
 		Intent intent = new Intent(this, ClaimActivity.class);
 		intent.putExtra(USERID, username);
 		intent.putExtra(ISCLAIMANT, isClaimant);
 		startActivity(intent);
 	}
 	
-	/**
-	 * A temporary method that will allow us to set
-	 * the functionality of the approvers, but without
-	 * dealing with login authentication
-	 */
-	public void loginAsApprover(View v){
-		startClaimActivity("TESTUSER", false);
-	}
-	
+
 	/* Below this is android stuff */
 	
 	@Override
