@@ -110,7 +110,7 @@ public class ClaimListSingleton {
 	}
 	
 	public static void clearList(){
-		claimList = new ClaimList();
+		claimList.clearList();
 	}
 	
 	public static Claim getClaimByID(String ID){

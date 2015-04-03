@@ -319,7 +319,6 @@ public class NetworkPersistance{
 			
 		}
 
-		//LoginActivity.available.release();
 		
 	}
 	
@@ -339,12 +338,7 @@ public class NetworkPersistance{
 			Claim fetchedClaim = this.loadClaim(claimID);
 			ClaimListSingleton.addClaim(fetchedClaim);
 		}
-	
-		
-		//LoginActivity.available.release();
-		//ClaimListSingleton.getClaimList().notifyListeners();
-		//ClaimViewerFragment.claimAdapter.update();
-		
+			
 	}
 
 
@@ -394,16 +388,9 @@ public class NetworkPersistance{
 		 * Creates a search request from a search string and a field
 		 */
 		HttpPost searchRequest = new HttpPost(SEARCH_CLAIM_URL);
-	//	SearchCommand command = new SearchCommand("userName:"+userName);
-		//String query = gson.toJson(command);
-		//StringEntity stringEntity = null;
-		//try {
-		//	stringEntity = new StringEntity(query);
-		//} catch (UnsupportedEncodingException e) {
-		//	throw new RuntimeException(e);
-	//	}
+
 		searchRequest.setHeader("Accept", "application/json");
-		//searchRequest.setEntity(stringEntity);
+
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpResponse response = null;
 		try {
@@ -454,7 +441,6 @@ public class NetworkPersistance{
 			Claim fetchedClaim = this.loadClaim(claimID);
 			ClaimListSingleton.addClaim(fetchedClaim);
 		}
-		 LoginActivity.available.release();
 	}
 	
 
