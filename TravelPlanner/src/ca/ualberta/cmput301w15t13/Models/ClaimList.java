@@ -76,9 +76,9 @@ public class ClaimList {
 		//Check for duplicates
 		if (!claimList.contains(claim)) {
 			claimList.add(claim);
-			
+
 			//DataManager.setOfflineMode();
-			//DataManager.saveClaim(claim);
+			DataManager.saveClaim(claim);
 			//new SaveASyncTask().execute(claim.getclaimID());
 			
 		}
@@ -86,7 +86,11 @@ public class ClaimList {
 
 	public void removeClaimAtIndex(int i) { 
 		//make sure the index is valid
+		String claimToDeleteID = null;
+		
 		if (!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)) {
+			claimToDeleteID = getClaimAtIndex(i).getclaimID();
+			DataManager.deleteClaim(claimToDeleteID);
 			claimList.remove(i);
 		}
 	}

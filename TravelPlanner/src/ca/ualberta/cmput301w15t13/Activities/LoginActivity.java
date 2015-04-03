@@ -49,12 +49,7 @@ public class LoginActivity extends Activity {
 	
 	public static final String USERID = "ca.ualberta.cmput301w15t13.username";
 	public static final String ISCLAIMANT = "ca.ualberta.cmput301w15t13.isclaimant";
-	
-	public static String LOAD_ALL_RESULT = "not loaded";
-	
-	private static final int MAX_AVAILABLE = 1;
-	public static final Semaphore available = new Semaphore(0, true);
-	
+
 	/**
 	 * Take the username and password inputted by the
 	 * user and attempt to login. For now, this only
@@ -85,9 +80,10 @@ public class LoginActivity extends Activity {
 			//password and username are filled in
 			User user= User.login(username, password);
 			if (user != null) {
+				Toast.makeText(getApplicationContext(), "synchronizing with server", Toast.LENGTH_SHORT).show();
+
 				DataManager.loadClaimsByUserName(username);
-				
-				//available.acquire();
+			
 				startClaimActivity(username, true);
 				
 

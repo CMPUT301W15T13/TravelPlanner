@@ -12,14 +12,12 @@ public class LoadAllASyncTask extends AsyncTask<String, Void, String> {
     protected String doInBackground(String... users) {
         try {
 
-        	//Toast.makeText(DataManager.getCurrentContext(), "Searching for user Claims", Toast.LENGTH_SHORT).show();
-        	
         	ClaimListSingleton.clearList();
         	
         	NetworkPersistance networkPersistance = new NetworkPersistance();
         	networkPersistance.loadAll();
         	
-        	//ClaimListSingleton.getClaimList().notifyListeners();
+
             return "";
         } catch (Exception e) {
             this.exception = e;
@@ -29,7 +27,8 @@ public class LoadAllASyncTask extends AsyncTask<String, Void, String> {
 
     protected void onPostExecute(String result) {
 
-    	//LoginActivity.LOAD_ALL_RESULT = "done";
+    	ClaimListSingleton.getClaimList().notifyListeners();
 
+    	Toast.makeText(DataManager.getCurrentContext(), "Synchronization complete", Toast.LENGTH_SHORT).show();
     }
 }
