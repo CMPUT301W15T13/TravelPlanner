@@ -67,9 +67,19 @@ public class TagManager {
 	public int size() {
 		HashMap<Tag, ArrayList<String>> map = manager;
 		int size = 0;
-    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+    	for (@SuppressWarnings("unused") Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
     		size += 1;
     	}
     	return size;
+	}
+	
+	public ArrayList<Tag> getTags() {
+		HashMap<Tag, ArrayList<String>> map = manager;
+		ArrayList<Tag> tags = new ArrayList<Tag>();
+    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+    		tags.add(entry.getKey());
+    	}
+    	return tags;
+    	
 	}
 }

@@ -151,6 +151,10 @@ public class ClaimList {
 		return claimList.get(ClaimIndex).getExpenseItems();
 	}
 	
+	public boolean isEmpty() {
+		return this.claimList.size() == 0; 
+	}
+	
 	
 	/** 
 	 * TEMPORARY METHOD

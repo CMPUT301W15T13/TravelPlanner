@@ -172,15 +172,17 @@ public class ClaimViewerFragment extends Fragment {
 	
 	/**
 	 * Opens a dialog letting the user select which
-	 * Tags they want to filter by
+	 * Tags they want to filter by.
+	 * Because the multi-choice dialog works only with
+	 * String arrays we must use them.
 	 */
 	
 	public void openFilterDialog() {
 		FilterFragmentDialog dialog = new FilterFragmentDialog();
 		int i = 0;
 		int size = 0;
-		String[] tags = {""};
-		boolean[] isSelected = {false};
+		String[] tags = null;
+		boolean[] isSelected = null;
 		try {
 	    	ClaimList cl = ClaimListSingleton.getClaimList();
 		    TagManager tm = cl.getTagMan();
@@ -200,14 +202,38 @@ public class ClaimViewerFragment extends Fragment {
 	}
 	
 	/**
-	 * TODO given the tag indices, make an array of
-	 * tag names and pass it to the filter function,
-	 * and finally filte
+	 * Given the user selected tag indices, make an array of
+	 * tags, Pass it to the filter function, which gets returns
+	 * the filtered claim IDs, then get them from the claimList
+	 * and finally display the filtered Claims
 	 * @param tagIndexes
 	 */
 	
 	public void filterByTag(ArrayList<Integer> tagIndexes) {
-		return;
+		ClaimList cl = ClaimListSingleton.getClaimList();
+		if (cl.isEmpty()) {
+			return;
+		}
+		ArrayList<Claim> result = new ArrayList<Claim>();
+		
+	    TagManager tm = cl.getTagMan();
+	    ArrayList<Tag> currentTags = tm.getTags();
+	    ArrayList<Tag> tagsToShow = new ArrayList<Tag>();
+	    
+	    for (int index : tagIndexes) {
+	    	tagsToShow.add(currentTags.get(index));
+	    }
+    	
+	    ArrayList<String> claimIds = cl.filter(tagsToShow);
+	    for (String claimId : claimIds) {
+	    	result.add(cl.getClaimByID(claimId));
+	    }
+		claimAdapter.clear();
+		
+		for (Claim claim : result) {
+			claimAdapter.add(claim);
+		}
+		
 	}
 	
 	/**
