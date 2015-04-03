@@ -105,9 +105,9 @@ public class DataManager {
 		helper.loadAllClaims();
 	}
 
-	public static void updateClaim(String claimID) {
+	public static void updateClaim(Claim claim) {
 		DataHelper helper = new DataHelper();
-		helper.updateClaim(claimID);
+		helper.updateClaim(claim);
 		
 	}
 
@@ -160,10 +160,10 @@ class DataHelper{
 	}
 
 
-	public void updateClaim(String claimID) {
+	public void updateClaim(Claim claim) {
 		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
-			new UpdateASyncTask().execute(claimID);
+			new UpdateASyncTask().execute(claim.getclaimID());
 		}
 		local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
 		

@@ -20,6 +20,7 @@
 
 package ca.ualberta.cmput301w15t13.Activities;
 
+import persistanceController.DataManager;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -98,6 +99,8 @@ public class ExpenseActivity extends Activity {
 	protected void onStart() {
 		super.onStart();
 		setFragmentToExpenseViewer();
+		
+		DataManager.setCurrentContext(this.getApplicationContext());
 	}
 	
 	@Override

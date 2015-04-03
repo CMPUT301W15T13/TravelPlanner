@@ -24,7 +24,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.UUID;
 
+import persistanceController.DataManager;
 import android.text.format.DateFormat;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
@@ -389,6 +391,8 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 
 	public void addExpenseItem(ExpenseItem expenseItem) {
 		this.expenseItems.add(expenseItem);
+		
+		DataManager.updateClaim(this);
 	}
 
 	public ArrayList<ExpenseItem> getExpenseItems() {
@@ -396,7 +400,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	}
 	//Maybe I don't need this, did not realize claims have expense item add methods
 	public ExpenseItemList getExpenseItemList() {
-		return this.expenseItems;
+			return new ExpenseItemList();
 	}
 
 	/**

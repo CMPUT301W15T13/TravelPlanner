@@ -454,14 +454,7 @@ public class NetworkPersistance{
 		
 		HttpClient httpClient = new DefaultHttpClient();
 		
-		//This will save all the expenses associated with the claim
-	//	ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
-		
-//		for (ExpenseItem expenseItem: expenseList){
-//			this.saveExpense(expenseItem);
-	//	}
-		//this will clear all expenses from the claim
-//		claim.clearExpenses();
+
 		
 		try {
 			HttpPut  addRequest = new HttpPut(SAVE_CLAIM_URL + itemID + "/_update");
@@ -483,7 +476,7 @@ public class NetworkPersistance{
 	
 
 	
-	
+
 	
 
 	

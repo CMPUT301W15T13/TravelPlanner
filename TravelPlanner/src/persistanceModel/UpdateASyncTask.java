@@ -15,7 +15,10 @@ public class UpdateASyncTask  extends AsyncTask<String, Void, String> {
         	try{
         	Claim claim = ClaimListSingleton.getClaimByID(claimToUpdate);
         	NetworkPersistance networkPersistance = new NetworkPersistance();
-        	networkPersistance.updateClaim(claim);
+        	
+        	networkPersistance.deleteClaim(claimToUpdate);
+        	networkPersistance.saveClaim(claim);
+        	//networkPersistance.updateClaim(claim);
             return "";
         } catch (Exception e) {
             this.exception = e;

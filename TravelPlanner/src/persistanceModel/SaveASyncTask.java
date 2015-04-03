@@ -21,6 +21,8 @@ public class SaveASyncTask extends AsyncTask<String, Void, String> {
         	
         	try{
         	Claim claim = ClaimListSingleton.getClaimByID(name);
+        	
+        	
         	new NetworkPersistance().saveClaim(claim);
         	//ClaimListSingleton.getClaimList().notifyListeners();
             return "";

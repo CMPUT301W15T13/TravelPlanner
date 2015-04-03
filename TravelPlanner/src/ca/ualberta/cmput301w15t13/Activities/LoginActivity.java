@@ -33,6 +33,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.User;
 
 /**
@@ -68,9 +69,11 @@ public class LoginActivity extends Activity {
 		passwordEditText = (EditText) findViewById(R.id.editTextPassword);
 		username = usernameEditText.getText().toString();
 		password = passwordEditText.getText().toString();
+		
+		ClaimListSingleton.getClaimList().clearListeners();
 			
 		//load data
-		DataManager.setOnlineMode();
+		//DataManager.setOnlineMode();
 		
 		if (username.equals("") || username == null) {
 			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();

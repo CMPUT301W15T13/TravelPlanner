@@ -193,8 +193,8 @@ public class ClaimList {
 		this.claimList.add(currentClaimIndex, newClaim);
 		this.removeClaimAtIndex(currentClaimIndex+1);
 		
-		DataManager.updateClaim(newClaim.getclaimID());
-		
+		//DataManager.aClaim(newClaim.getclaimID());
+		DataManager.saveClaim(newClaim);
 	}
 	
 }
