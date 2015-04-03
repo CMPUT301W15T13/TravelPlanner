@@ -230,7 +230,7 @@ public class ClaimItemListTest extends
 		test1.add(claim2.getclaimID());		// test1 = (claim1 id, claim2 id)
 		
 		//filter by 2 tags
-		assertEquals("Claim1 and Claim2 not filtered", test1 , claimList.filter(filterTags));
+		assertEquals("Claim1 and Claim2 not filtered", test1 ,claimList.filter(filterTags));
 		assertEquals(2, claimList.filter(filterTags).size());
 		
 		test1.clear();

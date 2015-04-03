@@ -78,7 +78,7 @@ public class ClaimList {
 			claimList.add(claim);
 			
 			//DataManager.setOfflineMode();
-			DataManager.saveClaim(claim);
+			//DataManager.saveClaim(claim);
 			//new SaveASyncTask().execute(claim.getclaimID());
 			
 		}
