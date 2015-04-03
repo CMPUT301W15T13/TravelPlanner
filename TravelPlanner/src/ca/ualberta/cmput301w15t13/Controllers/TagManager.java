@@ -21,6 +21,7 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
@@ -61,5 +62,14 @@ public class TagManager {
 		if (manager.containsKey(tag)) {
 			manager.get(tag).remove(claimID);
 		}
+	}
+	
+	public int size() {
+		HashMap<Tag, ArrayList<String>> map = manager;
+		int size = 0;
+    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+    		size += 1;
+    	}
+    	return size;
 	}
 }

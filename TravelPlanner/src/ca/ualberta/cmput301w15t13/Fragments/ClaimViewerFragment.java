@@ -21,6 +21,8 @@
 package ca.ualberta.cmput301w15t13.Fragments;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 import adapters.ClaimAdapter;
 import android.app.Fragment;
@@ -37,8 +39,11 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.Tag;
 import dialogs.ApproverCommentDialogFragment;
 import dialogs.FilterFragmentDialog;
 import exceptions.InvalidUserPermissionException;
@@ -172,7 +177,26 @@ public class ClaimViewerFragment extends Fragment {
 	
 	public void openFilterDialog() {
 		FilterFragmentDialog dialog = new FilterFragmentDialog();
-		dialog.show(getFragmentManager(), "TEST TAG");
+		int i = 0;
+		int size = 0;
+		String[] tags = {""};
+		boolean[] isSelected = {false};
+		try {
+	    	ClaimList cl = ClaimListSingleton.getClaimList();
+		    TagManager tm = cl.getTagMan();
+		    size = tm.size();
+		    tags = new String[size];
+		    isSelected = new boolean[size];
+	    	HashMap<Tag, ArrayList<String>> map = tm.getManager();
+	    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+	    		tags[i] = entry.getKey().getTagName();
+	    		isSelected[i] = false;
+	    		i += 1;
+	    	}
+		} catch (NullPointerException e) {}
+		dialog.setTags(tags);
+		dialog.setIsSelected(isSelected);
+		dialog.show(getFragmentManager(), "FILTER TAG");
 	}
 	
 	/**

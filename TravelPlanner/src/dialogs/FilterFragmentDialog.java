@@ -30,11 +30,7 @@ import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
-import android.widget.Toast;
+
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
@@ -56,17 +52,18 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
 
 public class FilterFragmentDialog extends DialogFragment {
 	// based on http://www.101apps.co.za/articles/making-a-list-coding-multiple-choice-list-dialogs.html on April 2nd, 2015
-    
-	@Override
+	private String[] tags = null;
+	private boolean[] isSelected = null;
+
+
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		boolean[] isSelected = {true,false,true,false};
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-	    String[] test = {"tag1", "tag2", "tag3", "tag4"};
+	    
 	    final ArrayList<Integer> indexList = new ArrayList<Integer>();
 	    
 	    builder.setTitle(R.string.filterMenu)
 	    
-	    	.setMultiChoiceItems(test,isSelected, new DialogInterface.OnMultiChoiceClickListener() {
+	    	.setMultiChoiceItems(tags,isSelected, new DialogInterface.OnMultiChoiceClickListener() {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
@@ -97,22 +94,36 @@ public class FilterFragmentDialog extends DialogFragment {
 	    	
 	    return builder.create();
 	}
+	
+	
+	public String[] getTags() {
+		return tags;
+	}
+
+
+
+	public void setTags(String[] tags) {
+		this.tags = tags;
+	}
+
+
+
+	public boolean[] getIsSelected() {
+		return isSelected;
+	}
+
+
+
+	public void setIsSelected(boolean[] isSelected) {
+		this.isSelected = isSelected;
+	}
 }
 	    
 //	    LayoutInflater inflater = getActivity().getLayoutInflater();
 //	    
 //	    final ArrayAdapter<String> tagAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_multichoice);
 //	    
-//	    ClaimList cl = ClaimListSingleton.getClaimList();
-//	    TagManager tm = cl.getTagMan();
 //	    
-//	    try {
-//	    	HashMap<Tag, ArrayList<String>> map = tm.getManager();
-//	    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
-//	    		tagAdapter.add(entry.getKey().getTagName());
-//	    	}
-//		} catch (NullPointerException e) {
-//			
 //		}
 //	    
 //	    tagAdapter.add("All Tags");
