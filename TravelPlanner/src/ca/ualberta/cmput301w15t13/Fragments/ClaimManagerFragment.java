@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import persistanceController.DataManager;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.content.Intent;
@@ -295,6 +296,8 @@ public class ClaimManagerFragment extends Fragment{
 		}
 		claimlist.setTagMan(tm);
 		//TODO needs a sort method
+		
+		//DataManager.updateClaim(newClaim);
 	}
 	
 	/**

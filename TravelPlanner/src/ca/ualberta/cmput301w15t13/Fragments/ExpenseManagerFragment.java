@@ -174,6 +174,10 @@ public class ExpenseManagerFragment extends Fragment {
 		editExpense.setCurrency(currencySet);
 		editExpense.setLinkedToclaimID(claimID);
 		editExpense.setExpenseName(expenseName);
+		
+		//Claim newClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		
+	//	ClaimListSingleton.getClaimList().replaceClaimAtIndex(claimIndex, newClaim);
 	}
 	
 	/**

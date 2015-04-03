@@ -194,7 +194,7 @@ public class ClaimList {
 		this.removeClaimAtIndex(currentClaimIndex+1);
 		
 		//DataManager.aClaim(newClaim.getclaimID());
-		DataManager.saveClaim(newClaim);
+		//DataManager.updateClaim(newClaim);
 	}
 	
 }
