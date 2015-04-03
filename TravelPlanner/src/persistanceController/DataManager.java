@@ -130,10 +130,12 @@ class DataHelper{
 	private void isNetworkConnected(){
 		ConnectivityManager cm =
 		        (ConnectivityManager)DataManager.getCurrentContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-		 
+
 		NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
 		boolean isConnected = activeNetwork != null &&
 		                      activeNetwork.isConnectedOrConnecting();
+		
+
 		
 		if(isConnected){
 			DataManager.setOnlineMode();
@@ -163,6 +165,7 @@ class DataHelper{
 		if (DataManager.isNetworkAvailable()){
 			new UpdateASyncTask().execute(claimID);
 		}
+		local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
 		
 	}
 
@@ -187,6 +190,7 @@ class DataHelper{
 		if (DataManager.isNetworkAvailable()){
 			new DeleteASyncTask().execute(claimID);
 		}
+		local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
 	}
 	
 	/**
@@ -200,6 +204,7 @@ class DataHelper{
 				network.saveExpense(expense);
 			}
 		}
+		local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
 	}
 	
 	/**
