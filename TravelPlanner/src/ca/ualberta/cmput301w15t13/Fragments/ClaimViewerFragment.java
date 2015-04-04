@@ -63,7 +63,6 @@ public class ClaimViewerFragment extends Fragment {
 	public static ClaimAdapter claimAdapter;
 	private ArrayList<Claim> claims;
 	private ClaimActivity activity;
-	private ArrayList<String> filterTags = new ArrayList<String>();
 	public boolean isFiltered = false;
 	
 	private Listener updateClaimList = new Listener(){
@@ -189,7 +188,7 @@ public class ClaimViewerFragment extends Fragment {
 		
 		if (this.isFiltered) {
 			Button filterButton = (Button) getActivity().findViewById(R.id.ButtonClaimFilter);
-			filterButton.setText("Filter");
+			filterButton.setText("Manage");
 		
 			claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 			claims = activity.getUser().getPermittableClaims(claims);

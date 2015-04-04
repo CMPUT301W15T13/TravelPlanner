@@ -77,6 +77,15 @@ public class FilterFragmentDialog extends DialogFragment {
 					fragment.filterByTag(indexList);
 				}
 
+			})
+			
+			.setNegativeButton(R.string.delete, new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					
+				}
+
 			});
 	    
 	    	
