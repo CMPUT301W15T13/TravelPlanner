@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
+import ca.ualberta.cmput301w15t13.Fragments.ManageTagsFragment;
 
 /**
  * This is a custom dialog fragment for 
@@ -55,7 +56,7 @@ public class TagDialogFragment extends DialogFragment {
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(inflater.inflate(R.layout.tag_dialog_layout, null))
 	    // Add action buttons
-	           .setPositiveButton(R.string.finish, new DialogInterface.OnClickListener() {
+	           .setNegativeButton(R.string.add, new DialogInterface.OnClickListener() {
 	        	   
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
@@ -68,6 +69,17 @@ public class TagDialogFragment extends DialogFragment {
 					   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
 					   
 					   fragment.addTagItem(tagText);
+	               }
+	           });
+	    
+	    builder.setView(inflater.inflate(R.layout.tag_dialog_layout, null))
+	    // Add action buttons
+	           .setPositiveButton(R.string.addExisting, new DialogInterface.OnClickListener() {
+	        	   
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	            	   ManageTagsFragment tagListDialog = new ManageTagsFragment();
+	            	   tagListDialog.show(getFragmentManager(), "LIST TAG");
 	               }
 	           });
      

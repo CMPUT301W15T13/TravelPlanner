@@ -374,7 +374,6 @@ public class ClaimManagerFragment extends Fragment{
 	
 	}
 	
-	
 	public void editTagItem(String tag, int tagIndex) {
 		if (tagNameList.contains(tag)) {
 			Toast.makeText(activity, "Tag already associated with claim", Toast.LENGTH_SHORT).show();
@@ -391,6 +390,10 @@ public class ClaimManagerFragment extends Fragment{
 		tagView.setText(tag_list);
 	}
 	
+	/**
+	 * removes a 
+	 * @param tagIndex
+	 */
 	public void removeTagItem(int tagIndex) {
 		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();
 		this.tagNameList.remove(claimTags.get(tagIndex).getTagName());
@@ -401,6 +404,28 @@ public class ClaimManagerFragment extends Fragment{
 		}
 		tagView.setText(tag_list);
 	}
+	/**
+	 * This method is used to associate a claim with
+	 * a tag that already exists
+	 * @param tag
+	 */
+	public void associateTag(Tag tag) {
+		
+		if (tagNameList.contains(tag.getTagName())) {
+			Toast.makeText(activity, "Tag has already been added", Toast.LENGTH_SHORT).show();
+			return;
+		} 
+		this.tagList.add(tag);
+		this.tagNameList.add(tag.getTagName());
+		String tag_list = tagView.getText().toString();
+		
+		if(!tag_list.equals("")){
+			tag_list += ",";
+		}
+		tag_list += "  " + tag.getTagName();
+		tagView.setText(tag_list);
+	}
+		
 		
 	public void setClaimIndex(int index){
 		this.claimIndex = index;

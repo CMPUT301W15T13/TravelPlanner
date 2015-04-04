@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
@@ -63,6 +64,7 @@ public class ClaimViewerFragment extends Fragment {
 	private ArrayList<Claim> claims;
 	private ClaimActivity activity;
 	private ArrayList<String> filterTags = new ArrayList<String>();
+	public boolean isFiltered = false;
 	
 	private Listener updateClaimList = new Listener(){
 
@@ -171,6 +173,10 @@ public class ClaimViewerFragment extends Fragment {
 	}
 	
 	/**
+	 * If the user has already filtered they 
+	 * need to reset before filtering again.
+	 * This checks if the claims are filtered and resets
+	 * the claim-view is so. Else it
 	 * Opens a dialog letting the user select which
 	 * Tags they want to filter by.
 	 * Because the multi-choice dialog works only with
@@ -178,11 +184,28 @@ public class ClaimViewerFragment extends Fragment {
 	 */
 	
 	public void openFilterDialog() {
+		if (this.isFiltered) {
+			Button filterButton = (Button) getActivity().findViewById(R.id.ButtonClaimFilter);
+			filterButton.setText("Filter");
+		
+			claims = ClaimListSingleton.getClaimList().getClaimArrayList();
+			claims = activity.getUser().getPermittableClaims(claims);
+			
+			// claims arraylist is a new instance, the adapter is using some other arraylist
+			claimAdapter.clear();
+			claimAdapter.addAll(claims);
+			claimAdapter.notifyDataSetChanged();
+			this.isFiltered = false;
+			return;
+		}
 		FilterFragmentDialog dialog = new FilterFragmentDialog();
 		int i = 0;
 		int size = 0;
 		String[] tags = null;
 		boolean[] isSelected = null;
+		
+		//Goes through the TagManager hashmap and extracts
+		//the tags to pass to the filter dilaog
 		try {
 	    	ClaimList cl = ClaimListSingleton.getClaimList();
 		    TagManager tm = cl.getTagMan();
@@ -214,6 +237,7 @@ public class ClaimViewerFragment extends Fragment {
 		if (cl.isEmpty()) {
 			return;
 		}
+		
 		ArrayList<Claim> result = new ArrayList<Claim>();
 		
 	    TagManager tm = cl.getTagMan();
@@ -229,10 +253,12 @@ public class ClaimViewerFragment extends Fragment {
 	    	result.add(cl.getClaimByID(claimId));
 	    }
 		claimAdapter.clear();
+		claimAdapter.addAll(result);
+		claimAdapter.notifyDataSetChanged();
 		
-		for (Claim claim : result) {
-			claimAdapter.add(claim);
-		}
+		Button filterButton = (Button) getActivity().findViewById(R.id.ButtonClaimFilter);
+		filterButton.setText("Reset");
+		this.isFiltered = true;
 		
 	}
 	

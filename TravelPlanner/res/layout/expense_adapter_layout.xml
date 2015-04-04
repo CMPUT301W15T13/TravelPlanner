@@ -75,7 +75,7 @@
         android:padding="2dp"
         android:textColor="@color/incomplete" 
         android:textSize="24sp"
-        android:text="@string/exclamation"/>
+        android:text="@string/holder"/>
     
     <ImageView
         android:id="@+id/receiptViewatAdapter"

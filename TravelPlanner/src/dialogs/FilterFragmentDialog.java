@@ -32,13 +32,10 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 /**
  * This is a custom dialog fragment for 
- * adding a destination-reason pair to a
- * claim. It provides two edit text fields
- * and a submit button. No cancel button is
- * available because clicking outside the
- * dialog will automatically close it.
- * @author mfritze
- *
+ * choosing which tags to filter the claims
+ * by. Note that the tags and isSelected 
+ * array must be set before this dialog is
+ * shown.
  */
 
 public class FilterFragmentDialog extends DialogFragment {
@@ -58,7 +55,8 @@ public class FilterFragmentDialog extends DialogFragment {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which, boolean isChecked) {
-					// TODO Auto-generated method stub
+					// This tells me which item is checked
+					// and returns the index
 					if (isChecked) {
 						indexList.add(which);
 					} else if (indexList.contains(which)) {
