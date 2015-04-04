@@ -34,6 +34,7 @@ import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import dialogs.ClaimantChoiceDialogFragment;
 import exceptions.InvalidUserPermissionException;
 
@@ -129,4 +130,13 @@ public class Claimant extends User {
 		return View.VISIBLE;
 	}
 	
+	
+	public static boolean isComplete(Claim claim){
+		for(ExpenseItem item: claim.getExpenseItems()){
+			if(!item.isComplete()){
+				return false;
+			}
+		}
+		return true;
+	}
 }

@@ -25,13 +25,18 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 /**
  * 
  * This is a custom Alert Dialog for when a claimant
@@ -67,10 +72,34 @@ public class ClaimantChoiceDialogFragment extends DialogFragment{
         @Override
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
-      	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.submitClaim(claimIndex);
+      	   final ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+      	   Claim claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
       	   Dialog d = getDialog();
       	   d.dismiss();
+      	   if(Claimant.isComplete(claim)){
+      		   fragment.submitClaim(claimIndex);
+      	   }else{
+      		   AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
+      		   alert.setTitle("Are you sure?");
+      		   alert.setMessage("The claim has is flagged as incomplete. Submit?");
+      		   alert.setPositiveButton("Do it", new DialogInterface.OnClickListener(){
+			
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						fragment.submitClaim(claimIndex);
+					}
+      		   		
+      	   		});
+      		   
+      		   alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+      				
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+					}
+      		   		
+      	   		});
+          	   alert.show();
+      	   }
         }
     };
     

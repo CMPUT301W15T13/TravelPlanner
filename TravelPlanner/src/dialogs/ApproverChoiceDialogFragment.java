@@ -85,7 +85,7 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 		public void onClick(final View v) {
       	   FragmentManager fm = getFragmentManager();
       	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.viewClaim(claimIndex); // TODO
+      	   fragment.viewClaim(claimIndex);
       	   Dialog d = getDialog();
       	   d.dismiss();
         }
