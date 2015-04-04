@@ -30,6 +30,7 @@ import android.view.LayoutInflater;
 import android.widget.EditText;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
+import ca.ualberta.cmput301w15t13.Fragments.ManageTagsFragment;
 
 /**
  * This is a custom dialog fragment for 
@@ -65,6 +66,18 @@ public class TagChoiceFragment extends DialogFragment {
 					   
 					   fragment.addTagItem(tagText);}
 	           });
+	    
+	    builder.setView(inflater.inflate(R.layout.tag_dialog_layout, null))
+	    // Add action buttons
+	           .setNeutralButton(R.string.addExisting, new DialogInterface.OnClickListener() {
+	        	   
+	               @Override
+	               public void onClick(DialogInterface dialog, int id) {
+	            	   ManageTagsFragment tagListDialog = new ManageTagsFragment();
+	            	   tagListDialog.show(getFragmentManager(), "LIST TAG");
+	               }
+	           });
+     
 	    
 	    builder.setView(inflater.inflate(R.layout.tag_dialog_layout, null))
 	           .setPositiveButton(R.string.editExisting, new DialogInterface.OnClickListener() {

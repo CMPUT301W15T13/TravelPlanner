@@ -27,6 +27,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.app.FragmentManager;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -58,6 +59,7 @@ public class ManageTagsFragment extends DialogFragment {
 	    
 	    final ArrayAdapter<String> tagAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_item);
 	    
+	    final ArrayList<Tag> relatedTags = new ArrayList<Tag>();
 	    ClaimList cl = ClaimListSingleton.getClaimList();
 	    TagManager tm = cl.getTagMan();
 	    
@@ -65,6 +67,7 @@ public class ManageTagsFragment extends DialogFragment {
 	    	HashMap<Tag, ArrayList<String>> map = tm.getManager();
 	    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
 	    		tagAdapter.add(entry.getKey().getTagName());
+	    		relatedTags.add(entry.getKey());
 	    	}
 		} catch (NullPointerException e) {
 			
@@ -74,21 +77,11 @@ public class ManageTagsFragment extends DialogFragment {
 
           @Override
           public void onClick(DialogInterface dialog, int which) {
-        	  String strName = tagAdapter.getItem(which);
-              AlertDialog.Builder builderInner = new AlertDialog.Builder(getActivity());
-              builderInner.setMessage(strName);
-              builderInner.setTitle("Your Selected Item is");
-              builderInner.setPositiveButton("Ok",
-                      new DialogInterface.OnClickListener() {
-
-                          @Override
-                          public void onClick(
-                                  DialogInterface dialog,
-                                  int which) {
-                              dialog.dismiss();
-                          }
-                      });
-              builderInner.show();
+        	  Tag tag = relatedTags.get(which);
+        	  FragmentManager fm = getFragmentManager();
+			  ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
+			   
+			  fragment.associateTag(tag);
           }
       });
 		

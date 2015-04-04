@@ -409,7 +409,23 @@ public class ClaimManagerFragment extends Fragment{
 		}
 		tagView.setText(tag_list);
 	}
-	
+	public void associateTag(Tag tag) {
+		
+		if (tagNameList.contains(tag.getTagName())) {
+			Toast.makeText(activity, "Tag has already been added", Toast.LENGTH_SHORT).show();
+			return;
+		} 
+		this.tagList.add(tag);
+		this.tagNameList.add(tag.getTagName());
+		String tag_list = tagView.getText().toString();
+		
+		if(!tag_list.equals("")){
+			tag_list += ",";
+		}
+		tag_list += "  " + tag.getTagName();
+		tagView.setText(tag_list);
+	}
+		
 		
 	public void setClaimIndex(int index){
 		this.claimIndex = index;

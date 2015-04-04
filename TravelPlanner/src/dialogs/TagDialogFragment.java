@@ -56,7 +56,7 @@ public class TagDialogFragment extends DialogFragment {
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(inflater.inflate(R.layout.tag_dialog_layout, null))
 	    // Add action buttons
-	           .setNegativeButton(R.string.finish, new DialogInterface.OnClickListener() {
+	           .setNegativeButton(R.string.add, new DialogInterface.OnClickListener() {
 	        	   
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {
