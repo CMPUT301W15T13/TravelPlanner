@@ -378,7 +378,6 @@ public class ClaimManagerFragment extends Fragment{
 	
 	}
 	
-	
 	public void editTagItem(String tag, int tagIndex) {
 		if (tagNameList.contains(tag)) {
 			Toast.makeText(activity, "Tag already associated with claim", Toast.LENGTH_SHORT).show();
@@ -409,6 +408,11 @@ public class ClaimManagerFragment extends Fragment{
 		}
 		tagView.setText(tag_list);
 	}
+	/**
+	 * This method is used to associate a claim with
+	 * a tag that already exists
+	 * @param tag
+	 */
 	public void associateTag(Tag tag) {
 		
 		if (tagNameList.contains(tag.getTagName())) {

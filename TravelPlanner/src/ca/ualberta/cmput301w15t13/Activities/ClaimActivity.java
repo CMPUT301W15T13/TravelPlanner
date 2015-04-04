@@ -20,10 +20,7 @@
 
 package ca.ualberta.cmput301w15t13.Activities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
+
 
 import persistanceController.DataManager;
 import android.annotation.SuppressLint;
@@ -34,21 +31,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Controllers.Listener;
-import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Controllers.User;
-import ca.ualberta.cmput301w15t13.Models.ClaimList;
-import ca.ualberta.cmput301w15t13.Models.Tag;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;

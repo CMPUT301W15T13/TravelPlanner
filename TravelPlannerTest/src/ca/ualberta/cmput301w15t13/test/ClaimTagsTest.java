@@ -27,6 +27,7 @@ import java.util.HashMap;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -156,6 +157,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 
 	} 
 	
+	
 	/**Part of Use Case C1
 	 * Test Renaming a tag
 	 * US03.02.04
@@ -208,6 +210,8 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		tm.add(tag2, c1ID);
 		ClaimListSingleton.addClaim(claim1);
 		
+		//Claim 1 --> tag1,tag2
+		
 		Claim claim2 = new Claim ("User2", new Date(10), new Date(200), null, null);
 		String c2ID = claim2.getclaimID();
 		claim2.addTag(tag1);
@@ -216,6 +220,8 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		tm.add(tag3, c2ID);
 		ClaimListSingleton.addClaim(claim2);
 		
+		//Claim2 --> tag1,tag3
+		
 		Claim claim3 = new Claim ("User3", new Date(10), new Date(200), null, null);
 		String c3ID = claim3.getclaimID();
 		claim3.addTag(tag4);
@@ -223,6 +229,9 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		claim3.addTag(tag3);
 		tm.add(tag3, c3ID);
 		ClaimListSingleton.addClaim(claim3);
+		ClaimListSingleton.getClaimList().setTagMan(tm);
+		
+		//Claim3 --> tag4, tag3
 		
 		// currently have 3 claims with a variety of tags
 		// Tests that the tagManager contains the appropriate information
@@ -236,6 +245,15 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		assertTrue("Aniversary gift Tag not found", manager.containsKey(tag4));
 		assertEquals("Incorrect number of tags for claim1",2, claim1.tags.size());
 		assertEquals("Incorrect number of claims for tag1", 2, tm.getAssociatedClaims(tag1).size());
+		
+		ArrayList<Tag> filterBy = new ArrayList<Tag>();
+		ArrayList<String> check = new ArrayList<String>();
+		filterBy.add(tag2);
+		check.add(claim1.getclaimID());
+		ArrayList<String> filts = ClaimListSingleton.getClaimList().filter(filterBy);
+		assertEquals("filtered too many",1,filts.size());
+		assertEquals("filtered wrong",check,filts);
+		
 		
 		// test tag removal
 		claim1.removeTag(tag1);

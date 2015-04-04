@@ -25,6 +25,7 @@ import java.util.Date;
 
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -181,8 +182,9 @@ public class ClaimItemListTest extends
 		ArrayList<Tag> tags1 = new  ArrayList<Tag>();
 		ArrayList<Tag> tags2 = new  ArrayList<Tag>();
 		tags1.add(tag1);
-
-		ClaimList claimList = new ClaimList();
+		
+		ClaimListSingleton cls = new ClaimListSingleton();
+		ClaimList claimList = cls.getClaimList();
 		Claim claim1 = new Claim("Name", new Date(1), new Date(2), null, null);
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), null, null);
 		

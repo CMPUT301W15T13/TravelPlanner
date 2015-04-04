@@ -132,10 +132,7 @@ public class ClaimListSingleton {
 				
 			}
 		}
-		
-	
-
-		}
+	}
 		
 	
 }
