@@ -24,6 +24,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 	 * Sets up the view for the custom array item 
 	 * including Expense Item details.
 	 */
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {		
 		View view = convertView;
@@ -71,6 +73,8 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			TextView costView = (TextView) view.findViewById(R.id.textViewAdapterExpenseAmount);
 			TextView currView = (TextView) view.findViewById(R.id.textViewAdapterCurrency);
 			TextView catView = (TextView) view.findViewById(R.id.TextViewExpenseCategory);
+			TextView incompleteView = (TextView) view.findViewById(R.id.incompletenessIndicator);
+			
 			//Will need this for properly handling images
 			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			titleView.setText(expense.getExpenseName());
@@ -79,6 +83,13 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			costView.setText(String.valueOf(decim.format(expense.getAmount())));
 			currView.setText(expense.getCurrency());
 			catView.setText(expense.getExpenseCategory());
+			
+			// Keep the if-else, since the button will be a toggle.
+			if(expense.isComplete()){
+				incompleteView.setText("");
+			}else{
+				incompleteView.setText("!");
+			}
 
 		}
 		

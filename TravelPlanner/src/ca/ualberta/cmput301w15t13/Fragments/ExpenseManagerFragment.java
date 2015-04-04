@@ -3,7 +3,6 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.Calendar;
 import java.util.Date;
 
-import persistanceController.DataManager;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.os.Bundle;
@@ -149,8 +148,8 @@ public class ExpenseManagerFragment extends Fragment {
 	}
 	
 	/**
-	 * Returns if the expense is new or 
-	 * a modification.
+	 * Returns false if the expense is new or 
+	 * true if a modification.
 	 * @return
 	 */
 	public boolean isEditing(){
@@ -245,6 +244,7 @@ public class ExpenseManagerFragment extends Fragment {
 	 * @param day
 	 * @param text
 	 */
+	@SuppressWarnings("deprecation")
 	public void addDateData(int year, int month, int day, TextView text){
 		Date date;
 		date = Date;

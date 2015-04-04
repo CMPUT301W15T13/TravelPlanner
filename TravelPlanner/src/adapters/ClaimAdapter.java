@@ -23,6 +23,7 @@ package adapters;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,6 +56,7 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 	 * elements, including the claim details
 	 * and an image to describe it's status.
 	 */
+	@SuppressLint("InflateParams")
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {		
 		View view = convertView;
@@ -88,6 +90,7 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 			}else{ // CLOSED
 				statusView.setImageResource(android.R.drawable.ic_menu_myplaces);
 			}
+			
 		}
 		return view;
 	}

@@ -125,10 +125,13 @@ public class ExpenseListViewerFragment extends Fragment {
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-				expenseIndex = position;
 				if(((ExpenseActivity) getActivity()).isClaimant()){
-					new ClaimantExpenseDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
+					ClaimantExpenseDialogFragment dialog = new ClaimantExpenseDialogFragment();
+				    Bundle args = new Bundle();
+				    args.putInt("expenseIndex", position);
+				    args.putInt("claimIndex", claimIndex);
+				    dialog.setArguments(args);
+				    dialog.show(getFragmentManager(), "Long Click Pop-Up");
 				}else{
 					//TEMP THIS IS FOR THE APPROVER
 					//new ApproverExpenseDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");

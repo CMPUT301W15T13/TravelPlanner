@@ -57,5 +57,6 @@
     <string name="title_activity_filter_fragment_dialog">Filter By Tags</string>
     <string name="filterMenu">Filter Claims By Tag</string>
     <string name="manageTags">Manage Tags</string>
+    <string name="exclamation">!</string>
 
 </resources>

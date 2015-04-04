@@ -3,34 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:background="@color/background">
-    
-    <LinearLayout
-        android:id="@+id/incompletenessIndicator"
-        android:layout_width="3dp"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/incomplete"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        >
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imageViewExpenseAdapterStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/textViewAdapterClaimDate"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:src="@android:drawable/ic_menu_edit" 
-        android:contentDescription="@string/adapter_status_description"
-        />
 
     <TextView
         android:id="@+id/textViewAdapterExpenseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textViewAdapterExpenseTitle"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/textViewAdapterExpenseTitle"
         android:text="@string/holder"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -41,46 +19,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textViewAdapterExpenseDate"
-        android:layout_toRightOf="@+id/incompletenessIndicator"
+        android:layout_alignParentLeft="true"
         android:text="@string/$"
         android:textColor="@color/text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
     <TextView
-        android:id="@+id/textViewAdapterExpenseAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewAdapterExpenseDate"
-        android:layout_toRightOf="@+id/moneySignText"
-        android:gravity="right"
-        android:text="@string/holder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/text" />
-
-    <TextView
-        android:id="@+id/textViewAdapterCurrency"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textViewAdapterExpenseDate"
-        android:layout_toRightOf="@+id/textViewAdapterExpenseAmount"
-        android:gravity="right"
-        android:text="@string/holder"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/text" />
-
-    <ImageView
-        android:id="@+id/receiptViewatAdapter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/imageViewExpenseAdapterStatus"
-        android:src="@drawable/ic_ayy" />
-
-    <TextView
         android:id="@+id/textViewAdapterExpenseTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/moneySignText"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:text="@string/holder"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -95,5 +43,47 @@
         android:text="@string/holder"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/title" />
+
+    <TextView
+        android:id="@+id/textViewAdapterExpenseAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/moneySignText"
+        android:layout_toRightOf="@+id/moneySignText"
+        android:gravity="right"
+        android:text="@string/holder"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text" />
+
+    <TextView
+        android:id="@+id/textViewAdapterCurrency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/moneySignText"
+        android:layout_toRightOf="@+id/textViewAdapterExpenseAmount"
+        android:gravity="right"
+        android:text="@string/holder"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/text" />
+    
+   <TextView
+       	android:id="@+id/incompletenessIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@+id/moneySignText"
+        android:padding="2dp"
+        android:textColor="@color/incomplete" 
+        android:textSize="24sp"
+        android:text="@string/exclamation"/>
+    
+    <ImageView
+        android:id="@+id/receiptViewatAdapter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/incompletenessIndicator"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/holder"
+        android:src="@drawable/ic_ayy" />
 
 </RelativeLayout>

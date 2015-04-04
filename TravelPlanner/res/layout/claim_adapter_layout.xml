@@ -4,27 +4,18 @@
     android:layout_height="wrap_content" 
     android:background="@color/background">
     
-    <LinearLayout
-        android:id="@+id/incompletenessIndicator"
-        android:layout_width="3dp"
-        android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:background="@color/incomplete"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        >
-    </LinearLayout>
 
    	<TextView
         android:id="@+id/textViewAdapterClaimTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/incompletenessIndicator"
+        android:layout_alignParentLeft="true"
         android:text="@string/holder"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/text" />
-        
+   	
+
     <TextView
         android:id="@+id/textViewAdapterClaimDate"
         android:layout_width="wrap_content"

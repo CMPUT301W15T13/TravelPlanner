@@ -36,6 +36,12 @@
            android:text="@string/delete"
            android:textColor="@color/text" />
 
-
+       <Button
+           android:id="@+id/buttonToggleIncompletenessIndicator"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textSize="12sp"
+           android:text="@string/holder"
+           android:textColor="@color/text" />
 
    </LinearLayout>

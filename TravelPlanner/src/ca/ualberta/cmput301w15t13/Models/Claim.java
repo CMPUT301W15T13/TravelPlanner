@@ -26,7 +26,6 @@ import java.util.UUID;
 
 import persistanceController.DataManager;
 import android.text.format.DateFormat;
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
