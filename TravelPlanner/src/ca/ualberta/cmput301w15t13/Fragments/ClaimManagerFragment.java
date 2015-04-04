@@ -68,8 +68,7 @@ public class ClaimManagerFragment extends Fragment{
 	private EditText descriptionView;
 	private ArrayList<Tag> tagList;
 	private ArrayList<String> tagNameList;
-	private ArrayList<String> commentList;
-	private TextView startDateView, endDateView, destinationView, tagView, commentView;
+	private TextView startDateView, endDateView, destinationView, tagView;
 	private String description, startDateText, endDateText;
 	private TravelItineraryList itineraryList;
 	private Date startDate, endDate;
@@ -107,8 +106,6 @@ public class ClaimManagerFragment extends Fragment{
 			for (Tag t : editClaim.tags) {
 				this.tagNameList.add(t.getTagName());
 			}
-			
-			getApproverComments();
 					
 			//changes the tag button text
 			Button tagButton = (Button) getView().findViewById(R.id.addTags);
@@ -435,22 +432,6 @@ public class ClaimManagerFragment extends Fragment{
 	public boolean isEditing(){
 		return this.isEditing;
 	}
-	
-	/**
-	 * TODO the claim's getComments method is returning an ArrayList<String> of all the comments
-	 * from most recent to oldest
-	 * But setText only takes String
-	 * So I need to come up with the method that will take Strings
-	 * @author Ji Hwan Kim
-	 */
-	
-	public void getApproverComments() {
-		Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-		commentList = editClaim.getComments();
-		for (int i = 0; i < commentList.size(); i++) {
-			commentView.setText(commentList.get(i));
-		}
-	}
 
 	/* Below this is android stuff */
 	
@@ -479,8 +460,6 @@ public class ClaimManagerFragment extends Fragment{
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
 		tagView = (TextView) getView().findViewById(R.id.textViewTags);
-		// approver comment will be shown in this textView
-		commentView = (TextView) getView().findViewById(R.id.ApproverCommentView);
 		Button tagButton = (Button) getView().findViewById(R.id.addTags);
 		tagButton.setText("Add");
 				

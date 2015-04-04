@@ -20,6 +20,8 @@
 
 package ca.ualberta.cmput301w15t13.Fragments;
 
+import java.util.ArrayList;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -43,6 +45,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
  */
 public class ClaimDetailViewerFragment extends Fragment {
 	private Claim claim;
+	private ArrayList<String> commentList;
 
 	final OnClickListener closeFragment = new OnClickListener() {
 		
@@ -71,20 +74,31 @@ public class ClaimDetailViewerFragment extends Fragment {
 		destination.setText(claim.getTravelItineraryAsString());
 		descrption.setText(claim.getDescription());
 		tags.setText(claim.getTagsAsString());
-		
-		/**
-		 * Currently our claim class has addcomment method that takes multiple approver's comment
-		 * this seems to be conflicting from what I know, which is that only one approver can
-		 * comment upon the returning
-		 * It's not possible that multiple approver comments and return at the same time
-		 * 
-		 * I need to come up with the way to setText to the comment TextView
-		 * Perhaps I need to change the claim class addcomment & getcomment methods
-		 */
+		getApproverComments(comments);
+
 	}
 	
 	public void setClaim(int i){
 		this.claim = ClaimListSingleton.getClaimList().getClaimAtIndex(i);
+	}
+	
+	/**
+	 * TODO the claim's getComments method is returning an ArrayList<String> of all the comments
+	 * from most recent to oldest
+	 * But setText only takes String
+	 * So I need to come up with the method that will take Strings
+	 * @author Ji Hwan Kim
+	 */
+	
+	public void getApproverComments(TextView comments) {
+		commentList = claim.getComments();
+		/**
+		 * Using for loops, it will iterate through the commentList
+		 * and show from most recent to oldest
+		 */
+		for (int i = 0; i < commentList.size(); i++) {
+			comments.setText(commentList.get(i));
+		}
 	}
 	
 	/* Below this is android stuff */
