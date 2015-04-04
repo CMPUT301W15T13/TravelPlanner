@@ -395,6 +395,10 @@ public class ClaimManagerFragment extends Fragment{
 		tagView.setText(tag_list);
 	}
 	
+	/**
+	 * removes a 
+	 * @param tagIndex
+	 */
 	public void removeTagItem(int tagIndex) {
 		ArrayList<Tag> claimTags = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getTags();
 		this.tagNameList.remove(claimTags.get(tagIndex).getTagName());
@@ -405,6 +409,7 @@ public class ClaimManagerFragment extends Fragment{
 		}
 		tagView.setText(tag_list);
 	}
+	
 		
 	public void setClaimIndex(int index){
 		this.claimIndex = index;

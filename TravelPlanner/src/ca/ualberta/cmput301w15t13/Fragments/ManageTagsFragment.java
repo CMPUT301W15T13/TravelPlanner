@@ -56,7 +56,7 @@ public class ManageTagsFragment extends DialogFragment {
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    
-	    final ArrayAdapter<String> tagAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_multichoice);
+	    final ArrayAdapter<String> tagAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.select_dialog_item);
 	    
 	    ClaimList cl = ClaimListSingleton.getClaimList();
 	    TagManager tm = cl.getTagMan();
@@ -69,8 +69,6 @@ public class ManageTagsFragment extends DialogFragment {
 		} catch (NullPointerException e) {
 			
 		}
-	    
-	    tagAdapter.add("All Tags");
 	    
 	    builder.setAdapter(tagAdapter,new DialogInterface.OnClickListener() {
 
@@ -97,7 +95,7 @@ public class ManageTagsFragment extends DialogFragment {
 
 	    // Inflate and set the layout for the dialog
 	    // Pass null as the parent view because its going in the dialog layout
-	    builder.setPositiveButton(R.string.filter, new DialogInterface.OnClickListener() {
+	    builder.setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
 	        	   
 	               @Override
 	               public void onClick(DialogInterface dialog, int id) {}
@@ -107,22 +105,3 @@ public class ManageTagsFragment extends DialogFragment {
 	}
 	
 }
-
-//AlertDialog.Builder builderSingle = new AlertDialog.Builder(
-//        DialogActivity.this);
-//builderSingle.setTitle("Select One Name:-");
-
-
-//final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(
-//        DialogActivity.this,
-//        android.R.layout.select_dialog_singlechoice);
-
-//builderSingle.setNegativeButton("cancel",
-//        new DialogInterface.OnClickListener() {
-//
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//

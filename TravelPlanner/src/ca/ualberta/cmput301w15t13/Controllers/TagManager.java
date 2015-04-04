@@ -40,13 +40,17 @@ public class TagManager {
 	}
 	
 	public void add(Tag tag, String claimID) {
-		if (manager.containsKey(tag)) {
-			manager.get(tag).add(claimID);
-		} else {
-			ArrayList<String> relatedClaimIds = new ArrayList<String>();
-			relatedClaimIds.add(claimID);
-			manager.put(tag, relatedClaimIds);
-		}
+		HashMap<Tag, ArrayList<String>> map = manager;
+		
+    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+    		if (tag.getTagName() == entry.getKey().getTagName()) {
+    			manager.get(entry.getKey()).add(claimID);
+    			return;
+    		}
+    	}
+    	ArrayList<String> relatedClaimIds = new ArrayList<String>();
+		relatedClaimIds.add(claimID);
+		manager.put(tag, relatedClaimIds);
 	}
 	
 	public ArrayList<String> getAssociatedClaims(Tag tag) {
