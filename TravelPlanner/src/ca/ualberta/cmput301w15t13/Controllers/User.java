@@ -47,19 +47,6 @@ public abstract class User {
 	}
 	
 	/**
-	 * Gets an instance of a User, either a 
-	 * claimant or an approver by their username
-	 * TODO tests will come when the server
-	 * is in use.
-	 */
-	public static User getUserByUsername(String username){
-		if(username.equals("TESTUSER")){
-			return new Approver("Approver name");
-		}
-		return new Claimant(username);
-	}
-	
-	/**
 	 * Returns the claims that are viewable by either an approver or a 
 	 * claimant. TODO This will be moved to a controller.
 	 */

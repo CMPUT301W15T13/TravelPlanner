@@ -20,11 +20,6 @@
 
 package ca.ualberta.cmput301w15t13.Activities;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import persistanceController.DataManager;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -34,21 +29,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.Approver;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Controllers.Listener;
-import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.User;
-import ca.ualberta.cmput301w15t13.Models.ClaimList;
-import ca.ualberta.cmput301w15t13.Models.Tag;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -159,7 +150,12 @@ public class ClaimActivity extends Activity  {
 		
 		Intent intent = getIntent();
 		String username = intent.getStringExtra(LoginActivity.USERID);
-		this.user = User.getUserByUsername(username);
+		boolean isClaimant = intent.getBooleanExtra(LoginActivity.ISCLAIMANT,true);
+		if(isClaimant){
+			this.user = new Claimant(username);
+		}else{
+			this.user = new Approver(username);
+		}
 	}
 	
 	@Override
