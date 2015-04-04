@@ -157,7 +157,9 @@ public class ClaimItemListTest extends
 
 	}
 
-	// Tests that the listener interacts with the claim list.
+	/**
+	 *  Tests that the listener interacts with the claim list.
+	 */
 	public void testListeners(){
 		ClaimList claimList = new ClaimList();
 		MockListener l = new MockListener();
@@ -169,6 +171,60 @@ public class ClaimItemListTest extends
 		});
 		claimList.notifyListeners();
 		assertTrue("Listener Called", l.called);
+	}
+	
+	/**
+	 * Test the indexList of the claimList.
+	 * We basically want to put in a subset of the whole
+	 * list and get an array of the correct indexes of 
+	 * that list, in order.
+	 * 
+	 * @throws EmptyFieldException
+	 * @throws InvalidDateException
+	 */
+	public void testIndexList() throws EmptyFieldException, InvalidDateException {
+		ClaimList cl = new ClaimList();
+		//Add arbitrary claims to the list
+		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
+		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
+		Claim claim3 = new Claim("Name3", new Date(3), new Date(3), "Desc3", new TravelItineraryList());
+		Claim claim4 = new Claim("Name4", new Date(4), new Date(4), "Desc4", new TravelItineraryList());
+		cl.add(claim);
+		cl.add(claim2);
+		cl.add(claim3);
+		cl.add(claim4);
+		
+		//mock filtered list
+		ArrayList<Claim> filtered = new ArrayList<Claim>();
+		filtered.add(claim2);
+		filtered.add(claim4);
+		
+		//make the expected arrayList
+		ArrayList<Integer> expected = new ArrayList<Integer>();
+		expected.add(1);
+		expected.add(3);
+		
+		cl.setIndexList(filtered);
+		assertEquals("Wrong indexes returned", expected, cl.getIndexList());
+		assertEquals("Wrong amount of indexes returned", 2, cl.getIndexList().size());
+		
+		filtered.clear();
+		filtered.add(claim);
+		filtered.add(claim2);
+		filtered.add(claim3);
+		filtered.add(claim4);
+		
+		expected.clear();
+		expected.add(0);
+		expected.add(1);
+		expected.add(2);
+		expected.add(3);
+		
+		cl.setIndexList(filtered);
+		assertEquals("Wrong indexes returned", expected, cl.getIndexList());
+		assertEquals("Wrong amount of indexes returned", 4, cl.getIndexList().size());
+		
+		
 	}
 	
 	// These are tests for the filtering of claims via user selected tags

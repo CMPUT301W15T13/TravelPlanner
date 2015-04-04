@@ -60,6 +60,6 @@ public abstract class User {
 	public abstract OnItemClickListener getClaimAdapterShortClickListener(Activity activity);
 	
 	public abstract OnItemLongClickListener getClaimAdapterLongClickListener(FragmentManager fm);
-
+	
 	public abstract int getButtonVisibility();
 }

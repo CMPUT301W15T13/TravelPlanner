@@ -182,8 +182,6 @@ public class ClaimManagerFragment extends Fragment{
 		}else{
 			invalidDates = false;
 		}
-			
-		// TODO make sure that this checks the start date is before the end date
 	}
 
 	/**
@@ -227,7 +225,6 @@ public class ClaimManagerFragment extends Fragment{
 			if (claimlist.getTagMan() == null) {
 				TagManager tm = new TagManager();
 				String claimId = newClaim.getclaimID();
-				
 				for (int i = 0; i < tagList.size(); i++) {
 					tm.add(tagList.get(i), claimId);
 				}
@@ -235,7 +232,6 @@ public class ClaimManagerFragment extends Fragment{
 			} else { 
 				TagManager tm = claimlist.getTagMan();
 				String claimId = newClaim.getclaimID();
-				
 				for (int i = 0; i < tagList.size(); i++) {
 					tm.add(tagList.get(i), claimId);
 				}
@@ -440,12 +436,12 @@ public class ClaimManagerFragment extends Fragment{
 		return this.isEditing;
 	}
 	
-	/*
-	 * Ji Hwan Kim
+	/**
 	 * TODO the claim's getComments method is returning an ArrayList<String> of all the comments
 	 * from most recent to oldest
 	 * But setText only takes String
 	 * So I need to come up with the method that will take Strings
+	 * @author Ji Hwan Kim
 	 */
 	
 	public void getApproverComments() {

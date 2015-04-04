@@ -99,6 +99,8 @@ public class ClaimViewerFragment extends Fragment {
 		final ListView claimListView = (ListView) getView().findViewById(R.id.listViewClaim);
 		claimListView.setAdapter(claimAdapter);
 		
+		ClaimListSingleton.getClaimList().setIndexList(claimAdapter.claims);
+		
 		claimListView.setOnItemClickListener(activity.getUser().getClaimAdapterShortClickListener(getActivity()));
 		
 		claimListView.setOnItemLongClickListener(activity.getUser().getClaimAdapterLongClickListener(getFragmentManager()));
@@ -184,6 +186,7 @@ public class ClaimViewerFragment extends Fragment {
 	 */
 	
 	public void openFilterDialog() {
+		
 		if (this.isFiltered) {
 			Button filterButton = (Button) getActivity().findViewById(R.id.ButtonClaimFilter);
 			filterButton.setText("Filter");
@@ -237,9 +240,7 @@ public class ClaimViewerFragment extends Fragment {
 		if (cl.isEmpty()) {
 			return;
 		}
-		
 		ArrayList<Claim> result = new ArrayList<Claim>();
-		
 	    TagManager tm = cl.getTagMan();
 	    ArrayList<Tag> currentTags = tm.getTags();
 	    ArrayList<Tag> tagsToShow = new ArrayList<Tag>();
@@ -259,7 +260,6 @@ public class ClaimViewerFragment extends Fragment {
 		Button filterButton = (Button) getActivity().findViewById(R.id.ButtonClaimFilter);
 		filterButton.setText("Reset");
 		this.isFiltered = true;
-		
 	}
 	
 	/**

@@ -76,7 +76,7 @@ public class Claimant extends User {
 	@Override
 	public OnItemClickListener getClaimAdapterShortClickListener(final Activity claimActivity) {
 		final OnItemClickListener listener = new OnItemClickListener() {
-
+			
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
@@ -85,7 +85,9 @@ public class Claimant extends User {
 				 * IE: The claim holds our expense list so we need to know which
 				 * claim to get expense items from
 				 */
-				int claimIndex = position;
+				ArrayList<Integer> indexList = ClaimListSingleton.getClaimList().getIndexList();	//must be set beforehand
+				int Index = position;
+				int claimIndex = indexList.get(Index);
 				ArrayList<Claim> claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 				String claimID = claims.get(claimIndex).getclaimID();
 				if(ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).isEditable()){
@@ -111,11 +113,12 @@ public class Claimant extends User {
 		final OnItemLongClickListener listener = new OnItemLongClickListener() {
 			
 			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
+			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+				//ArrayList<Integer> indexList = ClaimListSingleton.getClaimList().getIndexList();	//must be set beforehand
+				//int claimIndex = indexList.get(position);
 				ClaimantChoiceDialogFragment dialog = new ClaimantChoiceDialogFragment();
 			    Bundle args = new Bundle();
-			    args.putInt("index", position);
+			    args.putInt("index", ClaimListSingleton.getClaimList().getIndexList().get(position));
 			    dialog.setArguments(args);
 			    dialog.show(fm, "Long Click Pop-Up");
 				return true;

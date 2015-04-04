@@ -41,8 +41,26 @@ public class ClaimList {
 	
 	private ArrayList<Claim> claimList = null;
 	private ArrayList<Listener> listenerList = null;
+	private ArrayList<Integer> indexList = null;
 	public TagManager tagManager = null;
+	
+	public ArrayList<Integer> getIndexList() {
+		return this.indexList;
+	}
 
+	//Returns an array list containing all relevant indexes
+	//of a filtered claimList
+	public void setIndexList(ArrayList<Claim> claims) {
+		this.indexList.clear();
+		for (int i = 0; i<claimList.size(); i++) {
+			for (Claim c : claims) {
+				if (claimList.get(i).equals(c)) {
+					this.indexList.add(i);
+				}
+			}
+		}
+	}
+	
 	public ClaimList(ArrayList<Claim> oldClaims) {
 		if (oldClaims != null) {
 			claimList = oldClaims;
@@ -51,11 +69,15 @@ public class ClaimList {
 		}
 		listenerList = new ArrayList<Listener>();
 		this.tagManager = new TagManager();
+		this.indexList = new ArrayList<Integer>();
+		
 	}
 
 	public ClaimList() {
 		claimList = new ArrayList<Claim>();
 		listenerList = new ArrayList<Listener>();
+		this.tagManager = new TagManager();
+		this.indexList = new ArrayList<Integer>();
 	}
 
 	public int size() {
