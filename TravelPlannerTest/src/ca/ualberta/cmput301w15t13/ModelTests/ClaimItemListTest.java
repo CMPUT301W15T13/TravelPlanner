@@ -64,8 +64,14 @@ public class ClaimItemListTest extends
 		super.setUp();
 	}
 	
-	// This tests that a claimList can be constructed correctly either from scratch
-	// or from an existing ArrayList
+	/**
+	 *  This tests that a claimList can be constructed correctly either from scratch
+	 *  or from an existing ArrayList
+	 *  Tests US01.01.01, US01.02.01
+	 * @throws InvalidDateException
+	 * @throws EmptyFieldException
+	 * @throws InvalidUserPermissionException
+	 */
 	public void testSetUp() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		ClaimList itemList = new ClaimList();
 		assertNotNull("Item list is null", itemList);
@@ -130,8 +136,15 @@ public class ClaimItemListTest extends
 		assertFalse("Claim list contains claim 2", claimList.contains(claim2));
 	}
 
-	// Tests that a specific claim can be removed or accessed from the claim 
-	// list via index without error.
+	/**
+	 * Tests that a specific claim can be removed or accessed from the claim 
+	 * list via index without error.
+	 * Tests US01.05.01
+	 * @throws InvalidDateException
+	 * @throws EmptyFieldException
+	 * @throws InvalidUserPermissionException
+	 */
+	
 	public void testIndexRemoval() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
@@ -320,6 +333,7 @@ public class ClaimItemListTest extends
 		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
 		assertEquals(1, claimList.filter(filterTags).size());			
 	}
+	
 	/**
 	 * Test the claim sort function.
 	 * Tests US02.02.01

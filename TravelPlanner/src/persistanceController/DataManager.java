@@ -135,8 +135,6 @@ class DataHelper{
 		boolean isConnected = activeNetwork != null &&
 		                      activeNetwork.isConnectedOrConnecting();
 		
-
-		
 		if(isConnected){
 			DataManager.setOnlineMode();
 			Toast.makeText(DataManager.getCurrentContext(), "Is connected", Toast.LENGTH_SHORT).show();

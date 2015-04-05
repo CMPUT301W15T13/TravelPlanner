@@ -34,6 +34,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.R.string;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Approver;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
@@ -188,7 +189,7 @@ public class ClaimViewerFragment extends Fragment {
 		
 		if (this.isFiltered) {
 			Button filterButton = (Button) getActivity().findViewById(R.id.buttonClaimFilter);
-			filterButton.setText("Manage");
+			filterButton.setText(string.manageTags);
 		
 			claims = ClaimListSingleton.getClaimList().getClaimArrayList();
 			claims = activity.getUser().getPermittableClaims(claims);

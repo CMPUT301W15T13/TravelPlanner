@@ -414,7 +414,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public ArrayList<ExpenseItem> getExpenseItems() {
 		return this.expenseItems.getExpenseList();
 	}
-	//Maybe I don't need this, did not realize claims have expense item add methods
+	
 	public ExpenseItemList getExpenseItemList() {
 			return new ExpenseItemList();
 	}
@@ -424,10 +424,14 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 * @return
 	 */
 	public boolean isEditable() {
-		// TODO Auto-generated method stub
 		return this.status.isEditable();
 	}
 	
+	/**
+	 * remove a given expense item from
+	 * a claim
+	 * @param expenseItem
+	 */
 	public void removeExpenseItem(ExpenseItem expenseItem) {
 		this.expenseItems.delete(expenseItem);
 	}

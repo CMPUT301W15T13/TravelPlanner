@@ -54,8 +54,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		super.setUp();
 	}
 	
-	/**Part of use case F1
+	/**
+	 * Part of use case F1
 	 * Test that you can add a bitmap to a claim
+	 * Tests US06.01.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/61
 	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
@@ -76,9 +78,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		assertEquals("Bitmap has been changed", bitmap, returnedBitmap);
 	}	
 	
-	/**Part of Use Case F1
+	/**
+	 * Part of Use Case F1
 	 * Test that you bitmaps are compressed before they're stored
-	 * US06.04.01
+	 * Tests US06.04.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/64
 	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
@@ -101,8 +104,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		assertNotSame("Bitmap wasn't modified", bitmapLarge, returnedBitmap);
 	}
 	
-	/**Use case F3
+	/** 
+	 * Use case F3
 	 * Test that you can delete a bitmap from a claim
+	 * Tests US06.03.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/63
 	 * @throws EmptyFieldException 
 	 * @throws InvalidNameException 
