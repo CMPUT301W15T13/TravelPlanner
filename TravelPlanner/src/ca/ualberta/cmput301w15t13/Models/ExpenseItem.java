@@ -35,15 +35,14 @@ import exceptions.InvalidUserPermissionException;
  */
 public class ExpenseItem implements ExpenseClaim {
 	
-
-  /**these are the allowed variables that will show up on the Activities
-   * 
+  /**
+   * these are the allowed variables that will show up on the Activities
    */
   private static ArrayList<String> allowedCategories = new ArrayList<String>();
   private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
 	
-  /**these are the input fields for the expense
-   * 
+  /**
+   * these are the input fields for the expense
    */
 
   protected String ExpenseName = null;
@@ -56,8 +55,8 @@ public class ExpenseItem implements ExpenseClaim {
   protected String ClaimID = null;
   protected String ExpenseID = null;
 
-  /**this does not need to be initialized
-   * 
+  /**
+   * this does not need to be initialized
    */
   protected Currency currencyEnum;
   public Receipt receipt = null;
@@ -74,7 +73,8 @@ public class ExpenseItem implements ExpenseClaim {
    * @throws InvalidUserPermissionException 
    */
   public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID) {
-    /** TODO for project 5
+    /** 
+     * TODO for project 5
      * this looks through the singleton list to see if the claim is edit-able
 	 * if so, it makes the expense
 	 */ 
@@ -88,7 +88,6 @@ public class ExpenseItem implements ExpenseClaim {
 
     /** 
      * These variables are the expense item categories that are visible on the activity 
-     * 
      */
     this.allowedCategories.add("Air Fare");  this.allowedCategories.add("Ground Transport");  this.allowedCategories.add("Vehicle Rental");  this.allowedCategories.add("Private Automobile");
 	this.allowedCategories.add("Fuel"); this.allowedCategories.add("Parking"); this.allowedCategories.add("Registration"); this.allowedCategories.add("Accommodation");
@@ -96,7 +95,6 @@ public class ExpenseItem implements ExpenseClaim {
 			
 	/**
 	 * These variables are tge expense item currencies that are visible on the activity
-	 * 
 	 */
 	this.allowedCurrencies.add("CAD"); this.allowedCurrencies.add("USD"); this.allowedCurrencies.add("EUR");
 	this.allowedCurrencies.add("GBP"); this.allowedCurrencies.add("CHF"); this.allowedCurrencies.add("JPY");
@@ -231,7 +229,7 @@ public class ExpenseItem implements ExpenseClaim {
   }
   
   /**
-   * Copied from
+   * Copied by
    * James Devito, http://stackoverflow.com/a/3973886
    * on March 16 2015
    * 

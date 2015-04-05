@@ -92,7 +92,10 @@ public class ClaimItemListTest extends
 	}
 	
 	
-	// This tests the claim list's ability to add and remove it's Claims
+	/** 
+	 * This tests the claim list's ability to add and remove it's Claims
+	 * Tests US01.01.01, US01.02.01
+	 */
 	public void testAddRemove() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
@@ -174,7 +177,8 @@ public class ClaimItemListTest extends
 	}
 	
 	/**
-	 * Test the indexList of the claimList.
+	 * Used for the filter function, to get
+	 * the correct claim indices.
 	 * We basically want to put in a subset of the whole
 	 * list and get an array of the correct indexes of 
 	 * that list, in order.
@@ -227,9 +231,18 @@ public class ClaimItemListTest extends
 		
 	}
 	
+	/**
+	 * Tests the filter function, such that
+	 * given an array of Tags, the correct claims
+	 * are returned.
+	 * Tests US03.03.01
+	 * @throws InvalidDateException
+	 * @throws DuplicateException
+	 * @throws EmptyFieldException
+	 * @throws InvalidUserPermissionException
+	 */
 	// These are tests for the filtering of claims via user selected tags
 	public void testFilter() throws InvalidDateException,DuplicateException, EmptyFieldException, InvalidUserPermissionException {
-		// Create a tag manager and tags
 		TagManager tm = new TagManager();
 		Tag tag1 = new Tag("Ugent");
 		Tag tag2 = new Tag("Money");
@@ -239,8 +252,7 @@ public class ClaimItemListTest extends
 		ArrayList<Tag> tags2 = new  ArrayList<Tag>();
 		tags1.add(tag1);
 		
-		ClaimListSingleton cls = new ClaimListSingleton();
-		ClaimList claimList = cls.getClaimList();
+		ClaimList claimList = ClaimListSingleton.getClaimList();
 		Claim claim1 = new Claim("Name", new Date(1), new Date(2), null, null);
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), null, null);
 		
@@ -306,7 +318,43 @@ public class ClaimItemListTest extends
 		filterTags.add(tag1);
 		
 		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
-		assertEquals(1, claimList.filter(filterTags).size());		
+		assertEquals(1, claimList.filter(filterTags).size());			
+	}
+	/**
+	 * Test the claim sort function.
+	 * Tests US02.02.01
+	 * @throws EmptyFieldException
+	 * @throws InvalidDateException
+	 */
+	public void testSort() throws EmptyFieldException, InvalidDateException {
+		ClaimList cl = new ClaimList();
+		// create claims with a distinct date difference, and add in nonsorted order
+		// Test to see if they are put in the right order.
+		
+		// Per the description: As a claimant, I want the list of expense claims to be sorted by 
+		// starting date of travel, in order from most recent to oldest, so that ongoing or recent 
+		// travel expenses are quickly accessible.
+		
+		Claim claim1 = new Claim("Name", new Date(1), new Date(1), null, null);
+		Claim claim2 = new Claim("Name2", new Date(50), new Date(52), null, null);
+		cl.add(claim1);
+		cl.add(claim2);
+		
+		cl.sortClaimListByDate();
+		ArrayList<Claim> sorted = cl.getClaimArrayList();
+		
+		// Since Date(X) is X milliseconds after Jan 1st 1970, I expect claim2 to be first in the
+		// list as it is most recent
+		assertEquals("Claims were not sorted", sorted.get(0).getStartDateAsString(), claim2.getStartDateAsString());
+		
+		// Create a claim that should go in between the two created
+		Claim claim3 = new Claim("Name2", new Date(25), new Date(25), null, null);
+		cl.add(claim3);
+		
+		cl.sortClaimListByDate();
+		sorted = cl.getClaimArrayList();
+		
+		assertEquals("Claims were not sorted", sorted.get(1).getStartDateAsString(), claim3.getStartDateAsString());
 		
 		
 	}

@@ -34,11 +34,21 @@ import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
+/**
+ * This is a Custom array adapter used to 
+ * display the necessary info for an expense Item.
+ * It should be used when you have to display
+ * a list of expenseItem objects. Use as you 
+ * would use an ordinary arrayAdapter.
+ * 
+ * Classes it works with: ExpenseItem 
+ * 
+ * Sample use:
+ * This.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);
+ *
+ */
+
 public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
-	/** 
-	 * The custom array adapter used to 
-	 * display the necessary info for an expense item.
-	 */
 	
 	//based on http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view Jan 24th 2015
 	// and http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter Jan 25 2015
@@ -48,7 +58,6 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 		super(context, textViewResourceId,expenses);
 		this.expenses = (ArrayList<ExpenseItem>) expenses;
 	}
-
 	
 	/**
 	 * Sets up the view for the custom array item 
@@ -58,15 +67,13 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {		
 		View view = convertView;
-		
-		if(view == null){
+		if (view == null) {
 			LayoutInflater inflater;
 			inflater = LayoutInflater.from(getContext());
 			view = inflater.inflate(R.layout.expense_adapter_layout, null);
 		}
 		
 		ExpenseItem expense = expenses.get(position);
-		
 		if(expense != null){
 			TextView titleView = (TextView) view.findViewById(R.id.textViewAdapterExpenseTitle);
 			TextView dateView = (TextView) view.findViewById(R.id.textViewAdapterExpenseDate);
@@ -85,14 +92,13 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			catView.setText(expense.getExpenseCategory());
 			
 			// Keep the if-else, since the button will be a toggle.
-			if(expense.isComplete()){
+
+			if (expense.isComplete()) {
 				incompleteView.setText(" ");
-			}else{
+			} else {
 				incompleteView.setText("!");
 			}
-
 		}
-		
 		return view;
 	}
 }

@@ -35,7 +35,7 @@ import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 /**
- * Tests that a Claim can have statuses that affect it's operatiosn
+ * Tests that a Claim can have statuses that affect it's operations
  * 
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
@@ -72,9 +72,6 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		
 		assertEquals("Claim is submitted",statusEnum.SUBMITTED, claim.getStatus());
 		assertEquals("Claim cannot be editted by claimant", statusEnum.SUBMITTED, claim.getStatus());
-		
-		// LoginActivity.setUserType("claimant"); 
-		// LoginActivity.submit(claim);
 	}
 	
 	/**
@@ -93,8 +90,6 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		claim.giveStatus(statusEnum.RETURNED);
 		
 		assertEquals("Claim can be editted by claimant", statusEnum.RETURNED, claim.getStatus());
-		
-		//LoginActivity.setUserType("Claimant");
 	}
 	
 	/**
@@ -114,8 +109,6 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		claim.giveStatus(statusEnum.APPROVED);
 		
 		assertEquals("Claim is approved and can't be editted",statusEnum.APPROVED, claim.getStatus());
-		
-		//LoginActivity.setUserType("Claimant");
 	}
 
 }

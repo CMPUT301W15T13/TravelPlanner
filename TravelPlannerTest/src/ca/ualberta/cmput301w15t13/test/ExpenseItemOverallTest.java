@@ -48,20 +48,9 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
     super.setUp();
   }
 	
-  /**Use Case D1
-     * https://github.com/CMPUT301W15T13/TravelPlanner/issues/81
-     * Test that you can add one or more expense items to an existing claim
-	 * as a claimant.
-	 * @throws EmptyFieldException
-	 * @throws InvalidNameException
-	 * @throws InvalidDateException 
-	 * @throws InvalidUserPermissionException 
-	 * @throws InvalidFieldEntryException 
-	 */
-	
 	/**
 	 * This is part of Use case D1
-	 * 
+	 * Tests US04.01.01
 	 * This adds and tests the addition of expense items
 	 * @throws EmptyFieldException
 	 * @throws InvalidNameException
@@ -87,7 +76,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
     //ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
     assertNotNull("Expense list is null", expenseList);
     assertEquals("Expenselist is empty", 3, expenseList.size() );
-    for(ExpenseItem e : expenseList){
+    for (ExpenseItem e : expenseList){
       assertEquals("Expense Item has wrong date",date,  e.getPurchaseDate());
       assertEquals("Expense Item has wrong category",category,  e.getExpenseCategory());
       assertEquals("Expense Item has wrong Description",description,  e.getExpenseDescription());
@@ -98,6 +87,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	/** This is part of Use case D1
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/82
 	 * Test that a category must be one of the proper categories
+	 * Tests US04.01.01, US04.02.01
 	 * @throws EmptyFieldException
 	 * @throws InvalidDateException 
 	 * @throws InvalidFieldEntryException 
@@ -126,6 +116,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	/** This is part of Use case D1
 	 * Test that you can only add the valid currencies
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/83
+	 * Tests US04.01.01, US04.03.01
 	 * @throws EmptyFieldException
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -152,19 +143,18 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
     }
   }
 
-	/** Use case D2
-	 *
+	/** 
+	 * Use case D2
+	 * This test is to Check the incompleteness indicator in the expense Item
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/84
-	 * Test that you can flag and unflag an expenseItem 
+	 * Test that you can flag and un-flag an expenseItem 
+	 * Tests US04.04.01
 	 * @throws InvalidDateException
 	 * @throws InvalidNameException 
 	 * @throws InvalidUserPermissionException 
 	 * @throws EmptyFieldException 
 	 */
 
-  // This test is to Check the incompleteness indicator in the expense Item
-  // This test is supposed to be implemented for the project 5
-  // Therefore this test is meant to fail for the project 4
   public void testFlagExpenseItem() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
     Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
     ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
@@ -176,11 +166,11 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
     assertFalse("Expense item flag is set when it should be off", expenseItem.isComplete());
   }
 
-
 	/** Use Case D3
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/85
 	 * Test that you're only allowed to manage an expenseItem when 
 	 * the claim is editable
+	 * Tests US04.06.01
 	 * @throws EmptyFieldException
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -190,7 +180,6 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
   public void testEditExpenseItem() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
     Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
     ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
-    ArrayList<ExpenseItem> expenseList = null;
     
     claim.addExpenseItem(expenseItem);
     
@@ -210,6 +199,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	/** Use case D4
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/86
 	 * Test that you can delete an expense Item from a claim
+	 * Tests US04.07.01
 	 * @throws EmptyFieldException
 	 * @throws InvalidNameException
 	 * @throws InvalidDateException 

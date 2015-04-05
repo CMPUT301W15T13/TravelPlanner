@@ -19,7 +19,8 @@ public class Persistance extends ActivityInstrumentationTestCase2<LoginActivity>
 	  
 	  
 /**
- * Test Save	  
+ * Test Save
+ * Tests US01.06.01 
  * @throws InvalidDateException 
  * @throws EmptyFieldException 
  */
@@ -115,7 +116,7 @@ public void tesltLoadClaim(){
  * @throws EmptyFieldException 
  * @throws InterruptedException 
  */
-public void tesstNetworkDete() throws EmptyFieldException, InvalidDateException, InterruptedException{
+public void tesstNetworkDelete() throws EmptyFieldException, InvalidDateException, InterruptedException{
 	Claim claim = new Claim("Group13",new Date(100), new Date(200), "testing", null);
 
 	String claimID = claim.getclaimID();

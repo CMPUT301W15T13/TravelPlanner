@@ -44,12 +44,16 @@ import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 /**
- * This activity is used to manage claims for all users.
- * You can view all claims you have permission to see,
- * whether thats your own claims or submitted claims.
+ * This activity is used to manage Expense Items for 
+ * all claims you have permission to see,
+ * whether your own claims or submitted claims.
  * From this activity you can also create, edit, and 
- * approve claims which are supported by corresponding 
- * fragments.
+ * approve expense items which are supported by 
+ * corresponding fragments.
+ * Classes it works with: ExpenseManagerFragment,
+ * ExpenseItemViewFragment, TakePictureFragment,
+ * ExpenseListViewerFragment ... 
+ * TODO finish comment
  */
 
 public class ExpenseActivity extends Activity {
@@ -230,14 +234,12 @@ public class ExpenseActivity extends Activity {
 	 */
 	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException, InvalidFieldEntryException{
 		ExpenseManagerFragment.updateReferences();
-		if(ExpenseManagerFragment.isEditing()){ //check if we're updating a claim or creating a claim
+		if (ExpenseManagerFragment.isEditing()) { //check if we're updating a claim or creating a claim
 			ExpenseManagerFragment.updateExpense();
 		}
-		else{
+		else {
 			ExpenseManagerFragment.createExpenseItem();
-
 		} 
-		
 		ClaimListSingleton.getClaimList().notifyListeners();
 		setFragmentToExpenseViewer();
 	}
