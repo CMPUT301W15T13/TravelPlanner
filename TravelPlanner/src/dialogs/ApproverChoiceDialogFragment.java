@@ -30,8 +30,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
+import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Controllers.User;
 
 
 /**
@@ -45,12 +49,16 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
  */
 public class ApproverChoiceDialogFragment extends DialogFragment{
 	int claimIndex;
+	Claim claim;
+	User user;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    claimIndex = getArguments().getInt("index");
 	}
+	
+	public 
 	
 	/**
 	 * Upon returning, Comment is mandatory; Thus, approver must comment before returning
@@ -61,22 +69,51 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
          * This will call ApproverComment dialog fragment
          */
         public void onClick(final View v) {
+        	
+        	/**
+        	 * Ji Hwan Kim
+        	 * Need to verify if the claim has been first returned
+        	 * or it has been returned and it has been re-submitted
+        	 * If latter is true then we check if the approver name is same as the returned approver name 
+        	 */        	
+        		
         	FragmentManager fm = getFragmentManager();
         	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
         	fragment.approverComment(claimIndex);
         	Dialog d = getDialog();
         	d.dismiss();
+        	
+    	
         }
     };
     
+    /**
+     * for Approving a claim, an approver who has not returned a claim cannot approve same claim that has been re-submitted
+     * It will warn the approver by showing the error message
+     */
     final OnClickListener approveClaim = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
-      	   FragmentManager fm = getFragmentManager();
-      	   ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   fragment.approveClaim(claimIndex);
-      	   Dialog d = getDialog();
-      	   d.dismiss();
+           
+        	claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+        	
+        	if (claim.getReturnedBefore() == true) {
+        		if (claim.getlastApproverName() != user.getName()) {
+        			Toast.makeText(getActivity(), "You don't have permission to return this claim", Toast.LENGTH_SHORT).show();
+        		} else {
+        			FragmentManager fm = getFragmentManager();
+              	   	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+              	   	fragment.approveClaim(claimIndex);
+              	   	Dialog d = getDialog();
+              	   	d.dismiss();
+        		}
+        	}
+        	
+        	FragmentManager fm = getFragmentManager();
+      	   	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+      	   	fragment.approveClaim(claimIndex);
+      	   	Dialog d = getDialog();
+      	   	d.dismiss();
         }
     };
     

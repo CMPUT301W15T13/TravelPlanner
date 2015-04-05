@@ -213,6 +213,11 @@ public class ClaimManagerFragment extends Fragment{
 		}else{
 			Claim newClaim = new Claim(activity.getUser().getName(), startDate, endDate, 
 					this.description, itineraryList);
+			/**
+			 * Ji Hwan Kim
+			 * set the newly made claim to have no returned history
+			 */
+			newClaim.setReturnedBefore(false);
 			newClaim.tags = tagList;
 			ClaimList claimlist = ClaimListSingleton.getClaimList();
 			claimlist.add(newClaim);
