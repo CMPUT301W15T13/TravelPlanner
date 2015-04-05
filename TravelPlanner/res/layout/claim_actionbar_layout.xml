@@ -14,11 +14,19 @@
 		    
 		    <Button
 		        android:id="@+id/ButtonClaimFilter"
-		        android:layout_width="0px"
+		        android:layout_width="114dp"
 		        android:layout_height="match_parent"
-		        android:layout_weight="0.5"
 		        android:prompt="@string/search"
-		        android:text="@string/manageTags" />
+		        android:text="@string/manageTags"
+		        android:textSize="14sp" />
+		    
+		    <Button
+		        android:id="@+id/geo"
+		        android:layout_width="98dp"
+		        android:layout_height="match_parent"
+		        android:layout_weight="0.17"
+		        android:text="@string/geo"
+		        android:textSize="14dp" />
 		    
 		    <LinearLayout
 		        android:layout_width="1dp"
@@ -30,13 +38,14 @@
 		    <EditText
 		        android:id="@+id/editTextSearchClaims"
 		        android:layout_width="0px"
-		        android:layout_weight=".4"
 		        android:layout_height="match_parent"
+		        android:layout_weight="0.59"
+		        android:ems="10"
 		        android:hint="@string/search"
-		        android:textColor="@color/text"
-		        android:maxLines="1"
 		        android:maxLength="255"
-		        android:ems="10" >
+		        android:maxLines="1"
+		        android:textColor="@color/text" >
+
 		        <requestFocus />
 		    </EditText>
 
@@ -45,6 +54,7 @@
 		        android:layout_width="wrap_content"
 		        android:layout_height="match_parent"
 		        android:src="@android:drawable/ic_menu_search" />
+		    
 		    
     </LinearLayout>
 

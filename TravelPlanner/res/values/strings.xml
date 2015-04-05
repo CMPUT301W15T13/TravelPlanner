@@ -58,5 +58,6 @@
     <string name="filterMenu">Filter Claims By Tag</string>
     <string name="manageTags">Manage Tags</string>
     <string name="addExisting">Add Existing</string>
+    <string name="geo">Set Location</string>
 
 </resources>
