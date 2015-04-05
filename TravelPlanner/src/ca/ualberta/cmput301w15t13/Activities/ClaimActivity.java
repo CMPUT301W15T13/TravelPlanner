@@ -49,12 +49,18 @@ import exceptions.InvalidUserPermissionException;
 /**
  * This activity is used to manage claims for all users.
  * You can view all claims you have permission to see,
- * whether thats your own claims or submitted claims.
+ * whether your own claims or submitted claims.
  * From this activity you can also create, edit, and 
  * approve claims which are supported by corresponding 
  * fragments.
+ * Classes it works with: ClaimFagmentNavigator
  * 
- * Outstanding Issues: Searching of claims by tag is unimplemented
+ * Overall It acts as the base activity of the App and should
+ * be used this way.
+ * 
+ * Sample use:
+ * Intent intent = new Intent(this, ClaimActivity.class);
+ * startActivity(intent);
  */
 
 public class ClaimActivity extends Activity  {
@@ -104,6 +110,11 @@ public class ClaimActivity extends Activity  {
 		ClaimFragmentNavigator.newClaim();
 	}
 	
+	/**
+	 * Opens a dialog for the user to
+	 * select Tags to filter the claimList
+	 * by.
+	 */
 	public void filterClaim() {
 		ClaimFragmentNavigator.filterClaim();
 	}
@@ -131,6 +142,12 @@ public class ClaimActivity extends Activity  {
 		ClaimFragmentNavigator.showClaimViewer();
 	}
 	
+	/**
+	 * Called when the user wants to add
+	 * a tag, opens a dialog which also has
+	 * options to edit current tags
+	 * @param v
+	 */
 	public void addTag(View v) {
 		ClaimFragmentNavigator.openTag();
 	}
@@ -169,11 +186,7 @@ public class ClaimActivity extends Activity  {
 	protected void onResume() {
 		super.onResume();
 		DataManager.setCurrentContext(getApplicationContext());
-	
 		ClaimListSingleton.getClaimList().notifyListeners();
-
-
-
 	}
 
 	/**
@@ -191,28 +204,13 @@ public class ClaimActivity extends Activity  {
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
 			
-		ImageButton searchButton = (ImageButton) findViewById(R.id.buttonSearchClaim);
-		searchButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				EditText searchBar = (EditText) findViewById(R.id.editTextSearchClaims);
-				String searchMessage = searchBar.getText().toString();
-				// TODO test for not null and not empty throw exception thing
-				//TODO actually search
-				Toast.makeText(getBaseContext(), searchMessage, Toast.LENGTH_SHORT).show();
-			}
-		});
-		
 		Button filterButton = (Button) findViewById(R.id.ButtonClaimFilter);
 		filterButton.setOnClickListener(new View.OnClickListener() {
-			
 			@Override
 			public void onClick(View v) {
 				filterClaim();
 			}
 		});
-	
 	}
  
 	@Override

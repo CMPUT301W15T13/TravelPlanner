@@ -230,14 +230,12 @@ public class ExpenseActivity extends Activity {
 	 */
 	public void finishClaim(View v) throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException, InvalidNameException, InvalidFieldEntryException{
 		ExpenseManagerFragment.updateReferences();
-		if(ExpenseManagerFragment.isEditing()){ //check if we're updating a claim or creating a claim
+		if (ExpenseManagerFragment.isEditing()) { //check if we're updating a claim or creating a claim
 			ExpenseManagerFragment.updateExpense();
 		}
-		else{
+		else {
 			ExpenseManagerFragment.createExpenseItem();
-
 		} 
-		
 		ClaimListSingleton.getClaimList().notifyListeners();
 		setFragmentToExpenseViewer();
 	}

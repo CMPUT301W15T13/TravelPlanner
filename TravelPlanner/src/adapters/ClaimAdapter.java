@@ -35,12 +35,20 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 
+/** 
+ * This is a Custom array adapter used to 
+ * display the necessary info for a claim.
+ * It should be used when you have to display
+ * a list of claim objects, as you would use
+ * an ordinary arrayAdapter.
+ * 
+ * Classes it works with: Claim, ClaimStatus
+ * 
+ * Sample use
+ * ClaimViewerFragment.claimAdapter = new ClaimAdapter(activity, R.layout.claim_adapter_layout, this.claims);
+ *
+ */
 public class ClaimAdapter extends ArrayAdapter<Claim>{
-	/** 
-	 * The custom array adapter used to 
-	 * display the necessary info for a claim.
-	 */
-	
 	//based on http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view Jan 24th 2015
 	// and http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter Jan 25 2015
 	public ArrayList<Claim> claims;
@@ -49,7 +57,6 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 		super(context, textViewResourceId,claims);
 		this.claims = (ArrayList<Claim>) claims;
 	}
-	
 	
 	/**
 	 * Sets up the details in the custom array
@@ -64,12 +71,9 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 		if (view == null) {
 			LayoutInflater inflater;
 			inflater = LayoutInflater.from(getContext());
-			view = inflater.inflate(R.layout.claim_adapter_layout, null);
-			
+			view = inflater.inflate(R.layout.claim_adapter_layout, null);	
 		}
-		
 		Claim claim = claims.get(position);
-		
 		if (claim != null) {
 			TextView titleView = (TextView) view.findViewById(R.id.textViewAdapterClaimTitle);
 			TextView dateView = (TextView) view.findViewById(R.id.textViewAdapterClaimDate);
@@ -81,16 +85,15 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 			costView.setText(claim.getCost());
 			
 			ClaimStatus.statusEnum status = claim.getStatus();
-			if(status == ClaimStatus.statusEnum.INPROGRESS){
+			if (status == ClaimStatus.statusEnum.INPROGRESS) {
 				statusView.setImageResource(android.R.drawable.ic_menu_edit);
-			}else if(status == ClaimStatus.statusEnum.SUBMITTED){
+			} else if (status == ClaimStatus.statusEnum.SUBMITTED) {
 				statusView.setImageResource(android.R.drawable.ic_dialog_email);
-			}else if(status == ClaimStatus.statusEnum.RETURNED){
+			} else if (status == ClaimStatus.statusEnum.RETURNED) {
 				statusView.setImageResource(android.R.drawable.ic_menu_revert);
-			}else{ // CLOSED
+			} else { // CLOSED
 				statusView.setImageResource(android.R.drawable.ic_menu_myplaces);
 			}
-			
 		}
 		return view;
 	}
