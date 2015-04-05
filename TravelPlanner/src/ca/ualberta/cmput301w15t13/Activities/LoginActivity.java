@@ -67,7 +67,6 @@ public class LoginActivity extends Activity {
 			Toast.makeText(this, "Add username before logging in", Toast.LENGTH_SHORT).show();
 			return null;
 		}
-
 		return username;
 	}
 	
