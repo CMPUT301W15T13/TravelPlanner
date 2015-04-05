@@ -18,7 +18,7 @@
 		        android:layout_height="match_parent"
 		        android:layout_weight="0.5"
 		        android:prompt="@string/search"
-		        android:text="@string/filter" />
+		        android:text="@string/manageTags" />
 		    
 		    <LinearLayout
 		        android:layout_width="1dp"

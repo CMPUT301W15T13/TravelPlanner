@@ -83,7 +83,10 @@ public class FilterFragmentDialog extends DialogFragment {
 				
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
+					FragmentManager fm = getFragmentManager();
+					ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
 					
+					fragment.TagManRemove(indexList);
 				}
 
 			});

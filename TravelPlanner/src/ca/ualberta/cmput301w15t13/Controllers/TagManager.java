@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
 /* 
@@ -85,5 +86,14 @@ public class TagManager {
     	}
     	return tags;
     	
+	}
+	
+	public void removeFromManager(Tag tag) {
+		HashMap<Tag, ArrayList<String>> map = manager;
+		for (String cid : map.get(tag)) {
+			Claim c = ClaimListSingleton.getClaimList().getClaimByID(cid);
+			c.tags.remove(tag);
+    	}
+		map.remove(tag);
 	}
 }

@@ -43,16 +43,5 @@
            android:textSize="12sp"
            android:text="@string/delete"
            android:textColor="@color/text" />
-       
-       <Button
-           android:id="@+id/buttonManageTags"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:textSize="12sp"
-           android:text="@string/manageTags"
-           android:textColor="@color/text" />
-       
-
-
 
    </LinearLayout>

@@ -236,7 +236,7 @@ public class ClaimViewerFragment extends Fragment {
 	
 	public void filterByTag(ArrayList<Integer> tagIndexes) {
 		ClaimList cl = ClaimListSingleton.getClaimList();
-		if (cl.isEmpty()) {
+		if (tagIndexes.isEmpty()) {
 			return;
 		}
 		ArrayList<Claim> result = new ArrayList<Claim>();
@@ -259,6 +259,20 @@ public class ClaimViewerFragment extends Fragment {
 		Button filterButton = (Button) getActivity().findViewById(R.id.ButtonClaimFilter);
 		filterButton.setText("Reset");
 		this.isFiltered = true;
+	}
+	
+	
+	public void TagManRemove(ArrayList<Integer> tagIndexes) {
+		ClaimList cl = ClaimListSingleton.getClaimList();
+		if (tagIndexes.isEmpty()) {
+			return;
+		}
+	    TagManager tm = cl.getTagMan();
+	    ArrayList<Tag> currentTags = tm.getTags();
+	    
+	    for (int index : tagIndexes) {
+	    	tm.removeFromManager(currentTags.get(index));
+	    }
 	}
 	
 	/**
