@@ -282,7 +282,6 @@ public class ClaimViewerFragment extends Fragment {
 	 * @param index
 	 */
 	public void approverComment(int claimIndex) {
-		// shows the approver comment dialog fragment
 		ApproverCommentDialogFragment dialog = new ApproverCommentDialogFragment();
 	    Bundle args = new Bundle();
 	    args.putInt("index", claimIndex);

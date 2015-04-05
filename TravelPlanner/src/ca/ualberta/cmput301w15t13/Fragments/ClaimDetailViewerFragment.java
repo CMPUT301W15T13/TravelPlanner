@@ -97,7 +97,7 @@ public class ClaimDetailViewerFragment extends Fragment {
 		 * and show from most recent to oldest
 		 */
 		for (int i = 0; i < commentList.size(); i++) {
-			comments.setText(commentList.get(i));
+			comments.setText(commentList.get(i)+" by "+claim.getlastApproverName());
 		}
 	}
 	
