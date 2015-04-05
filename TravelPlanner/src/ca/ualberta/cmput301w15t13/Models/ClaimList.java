@@ -103,7 +103,6 @@ public class ClaimList {
 			//DataManager.setOfflineMode();
 			DataManager.saveClaim(claim);
 			//new SaveASyncTask().execute(claim.getclaimID());
-			
 		}
 	}
 
