@@ -231,9 +231,18 @@ public class ClaimItemListTest extends
 		
 	}
 	
+	/**
+	 * Tests the filter function, such that
+	 * given an array of Tags, the correct claims
+	 * are returned.
+	 * Tests US03.03.01
+	 * @throws InvalidDateException
+	 * @throws DuplicateException
+	 * @throws EmptyFieldException
+	 * @throws InvalidUserPermissionException
+	 */
 	// These are tests for the filtering of claims via user selected tags
 	public void testFilter() throws InvalidDateException,DuplicateException, EmptyFieldException, InvalidUserPermissionException {
-		// Create a tag manager and tags
 		TagManager tm = new TagManager();
 		Tag tag1 = new Tag("Ugent");
 		Tag tag2 = new Tag("Money");
@@ -311,8 +320,6 @@ public class ClaimItemListTest extends
 		assertEquals("Claim1 not filtered", test1 , claimList.filter(filterTags));
 		assertEquals(1, claimList.filter(filterTags).size());			
 	}
-	
-	
 	/**
 	 * Test the claim sort function.
 	 * Tests US02.02.01

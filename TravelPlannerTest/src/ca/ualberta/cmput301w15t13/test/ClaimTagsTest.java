@@ -64,9 +64,8 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	 * Part of Use Case C1
 	 * Tests that you're able to add a tag to a claim
 	 * and that the tag MUST be alphanumeric
-	 * US03.01.01
+	 * Tests US03.01.01, US03.02.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
-	 * US03.02.02 - Adding a tag
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -103,9 +102,8 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	/**Part of Use Case C1
 	 * Test that you can remove a tag
-	 * US03.01.02
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
-	 * US03.02.03 - Deleting a tag
+	 * Tests US03.01.01, US03.02.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -127,7 +125,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	/**Part of Use Case C1
 	 * Test that you cannot add duplicate tags
-	 * US03.01.03
+	 * Tests US03.01.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/56
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -151,16 +149,13 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 			} catch (DuplicateException e) {
 				
 			}
-			
 			assertEquals("Duplicate Tag was added", originalSize, claim.tags.size());
 		}
 
 	} 
-	
-	
 	/**Part of Use Case C1
 	 * Test Renaming a tag
-	 * US03.02.04
+	 * Tests US03.02.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -186,7 +181,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 
 	/**
 	 * Test listing available tags as well as the TagManager
-	 * US03.02.01
+	 * Tests US03.02.01, US03.03.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/57
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -232,13 +227,12 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		ClaimListSingleton.getClaimList().setTagMan(tm);
 		
 		//Claim3 --> tag4, tag3
-		
 		// currently have 3 claims with a variety of tags
 		// Tests that the tagManager contains the appropriate information
 		
-		HashMap<Tag, ArrayList<String>> manager = tm.getManager();
+		HashMap<Tag, ArrayList<String>> manager = ClaimListSingleton.getClaimList().getTagMan().getManager();
 
-		assertEquals("Contains more or less than 4 tags",4, manager.keySet().size());
+		assertEquals("Contains more or less than 4 tags",4, manager.size());
 		assertTrue("yolo Tag not found", manager.containsKey(tag1));
 		assertTrue("Gift to self Tag not found", manager.containsKey(tag2));
 		assertTrue("On Sale Tag not found", manager.containsKey(tag3));
@@ -246,6 +240,8 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		assertEquals("Incorrect number of tags for claim1",2, claim1.tags.size());
 		assertEquals("Incorrect number of claims for tag1", 2, tm.getAssociatedClaims(tag1).size());
 		
+		// Test the tagManager acts correctly regarding
+		// Filtering claims
 		ArrayList<Tag> filterBy = new ArrayList<Tag>();
 		ArrayList<String> check = new ArrayList<String>();
 		filterBy.add(tag2);
@@ -253,8 +249,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 		ArrayList<String> filts = ClaimListSingleton.getClaimList().filter(filterBy);
 		assertEquals("filtered too many",1,filts.size());
 		assertEquals("filtered wrong",check,filts);
-		
-		
+	
 		// test tag removal
 		claim1.removeTag(tag1);
 		tm.remove(tag1, c1ID);

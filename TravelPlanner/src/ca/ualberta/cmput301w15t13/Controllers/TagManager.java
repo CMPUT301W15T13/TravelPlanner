@@ -34,10 +34,10 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
 
 public class TagManager {
 	
-	public static HashMap<Tag, ArrayList<String>> manager;
+	public HashMap<Tag, ArrayList<String>> manager;
 	
 	public TagManager() {
-		TagManager.manager = new HashMap<Tag, ArrayList<String>>();
+		this.manager = new HashMap<Tag, ArrayList<String>>();
 	}
 	
 	public void add(Tag tag, String claimID) {
@@ -60,7 +60,7 @@ public class TagManager {
 	}
 	
 	public HashMap<Tag, ArrayList<String>> getManager() {
-		return TagManager.manager;
+		return this.manager;
 	}
 	
 	public void remove(Tag tag, String claimID) {
@@ -69,10 +69,11 @@ public class TagManager {
 		}
 	}
 	
+	@SuppressWarnings("unused")
 	public int size() {
 		HashMap<Tag, ArrayList<String>> map = manager;
 		int size = 0;
-    	for (@SuppressWarnings("unused") Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
+    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {
     		size += 1;
     	}
     	return size;
