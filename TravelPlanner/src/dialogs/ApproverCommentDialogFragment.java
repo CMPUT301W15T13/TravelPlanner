@@ -74,8 +74,6 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		    	
 		    	claim.addComment(comment, claim.getlastApproverName());
 		    	
-		    	Toast.makeText(getActivity(), "Last ApproverName is :"+claim.getlastApproverName(), Toast.LENGTH_SHORT).show();
-		    	
 		    	FragmentManager fm = getFragmentManager();
 		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");	
 		     	fragment.returnClaim(claimIndex);

@@ -56,6 +56,11 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	protected ExpenseItemList expenseItems = null;
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected double totalCost = 0;
+	/**
+	 * returnedBefore will distinguish a claim that has been returned in the past or not
+	 * if it has been returned in the past, then only approver who returned can approve the submitted claim
+	 */
+	protected boolean returnedBefore;
 
 /**
  * 
@@ -332,6 +337,18 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public void clearComments() {
 		this.approverComments = new HashMap<String, ArrayList<String>>();
 		this.lastApproverName = null;
+	}
+	
+	/**
+	 * this method will let the fragments know if the claim has been returned before
+	 * @return
+	 */
+	public boolean getReturnedBefore() {
+		return this.returnedBefore;
+	}
+	
+	public void setReturnedBefore(boolean returned) {
+		this.returnedBefore = returned;
 	}
 
 	/**
