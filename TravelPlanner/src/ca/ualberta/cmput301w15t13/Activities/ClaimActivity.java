@@ -29,6 +29,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
@@ -141,18 +142,30 @@ public class ClaimActivity extends Activity  {
 	}
 	
 	/**
-<<<<<<< HEAD
-	 * Opens the dialog to add a tag to a claim.
-=======
 	 * Called when the user wants to add
 	 * a tag, opens a dialog which also has
 	 * options to edit current tags
->>>>>>> e663ea71c05cb42bf1d4ab92a89963e7168b6274
 	 * @param v
 	 */
 	public void addTag(View v) {
 		ClaimFragmentNavigator.openTag();
 	}
+	
+	/* On Click Listeners */
+	
+	private OnClickListener filterListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			filterClaim();
+		}
+	};
+	
+	private OnClickListener locationListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View v) {
+			ClaimFragmentNavigator.openLocationDialog();
+		}
+	};
 	
 	/* Below this is android stuff */
 	
@@ -160,8 +173,6 @@ public class ClaimActivity extends Activity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claim_activity_layout);
-		
-		setActionBar();
 		
 		ClaimFragmentNavigator.createInstance(getFragmentManager());
 		
@@ -175,6 +186,7 @@ public class ClaimActivity extends Activity  {
 		}else{
 			this.user = new Approver(username);
 		}
+		setActionBar();
 	}
 	
 	@Override
@@ -205,13 +217,12 @@ public class ClaimActivity extends Activity  {
 		actionBar.setDisplayShowCustomEnabled(true);
 		actionBar.setCustomView(actionBarLayout);
 			
-		Button filterButton = (Button) findViewById(R.id.ButtonClaimFilter);
-		filterButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				filterClaim();
-			}
-		});
+		Button filterButton = (Button) findViewById(R.id.buttonClaimFilter);		
+		filterButton.setOnClickListener(filterListener);
+		
+		Button locationButton = (Button) findViewById(R.id.buttonHomeLocation);
+		locationButton.setOnClickListener(locationListener);
+		locationButton.setVisibility(user.getButtonVisibility());
 	}
  
 	@Override

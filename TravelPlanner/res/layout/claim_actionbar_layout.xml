@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_dark"
-    android:onClick="filterPopup" >
+	>
 
 		<LinearLayout 
 		    android:layout_height="match_parent"
@@ -13,27 +13,26 @@
 		    android:orientation="horizontal">
 		    
 		    <Button
-		        android:id="@+id/ButtonClaimFilter"
-		        android:layout_width="114dp"
+		        style="?android:attr/buttonBarButtonStyle"
+		        android:id="@+id/buttonClaimFilter"
+		        android:layout_width="113dp"
 		        android:layout_height="match_parent"
 		        android:layout_weight="0.13"
 		        android:prompt="@string/search"
+		        android:paddingRight="2dp"
 		        android:text="@string/manageTags" />
+
 		    
 		    <Button
-		        android:id="@+id/geo"
-		        android:layout_width="98dp"
+		        style="?android:attr/buttonBarButtonStyle"
+		        android:id="@+id/buttonHomeLocation"
+		        android:layout_width="97dp"
 		        android:layout_height="match_parent"
 		        android:layout_weight="0.17"
-		        android:text="@string/geo" />
+		        android:paddingLeft="2dp"
+		        android:text="@string/set_location" />
 		    
-		    <LinearLayout
-		        android:layout_width="1dp"
-		        android:layout_height="match_parent"
-		        android:background="@color/background" >
-		        
-		    </LinearLayout>
-		    
+
 		    
     </LinearLayout>
 

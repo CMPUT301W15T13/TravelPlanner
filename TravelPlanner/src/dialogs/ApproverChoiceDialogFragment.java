@@ -58,8 +58,6 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
 	    claimIndex = getArguments().getInt("index");
 	}
 	
-	public 
-	
 	/**
 	 * Upon returning, Comment is mandatory; Thus, approver must comment before returning
 	 */

@@ -187,7 +187,7 @@ public class ClaimViewerFragment extends Fragment {
 	public void openFilterDialog() {
 		
 		if (this.isFiltered) {
-			Button filterButton = (Button) getActivity().findViewById(R.id.ButtonClaimFilter);
+			Button filterButton = (Button) getActivity().findViewById(R.id.buttonClaimFilter);
 			filterButton.setText("Manage");
 		
 			claims = ClaimListSingleton.getClaimList().getClaimArrayList();
@@ -256,7 +256,7 @@ public class ClaimViewerFragment extends Fragment {
 		claimAdapter.addAll(result);
 		claimAdapter.notifyDataSetChanged();
 		
-		Button filterButton = (Button) getActivity().findViewById(R.id.ButtonClaimFilter);
+		Button filterButton = (Button) getActivity().findViewById(R.id.buttonClaimFilter);
 		filterButton.setText("Reset");
 		this.isFiltered = true;
 	}

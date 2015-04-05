@@ -8,6 +8,7 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
+import dialogs.ClaimantLocationDialog;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -143,5 +144,16 @@ public class ClaimFragmentNavigator {
 
 	public static void openTag(){
 		claimManagerFragment.openTagDialog();
+	}
+
+	/**
+	 * Opens the location dialog which gives
+	 * the user options to set home location
+	 * to either their gps coordinates, or a
+	 * selected location from a map. 
+	 */
+	public static void openLocationDialog() {
+		ClaimantLocationDialog dialog = new ClaimantLocationDialog();
+	    dialog.show(fm, "Select Location");
 	}
 }

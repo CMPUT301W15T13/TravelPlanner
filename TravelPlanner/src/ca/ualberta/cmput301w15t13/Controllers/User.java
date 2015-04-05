@@ -23,20 +23,22 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.FragmentManager;
+import android.location.Location;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 
 /**
  * Parent class to Approver and Claimant.
- * Currently very bare, because we 
- * need more details on how users
- * log-in and interact.
+ * Most of the methods are abstract, but
+ * it provides the get and set methods for
+ * a user's name and location.
  */
 
 public abstract class User {
 	
 	protected String name;
+	protected Location location; //TODO change this type to something relevant
 	
 	public User(String name){
 		this.name = name;
