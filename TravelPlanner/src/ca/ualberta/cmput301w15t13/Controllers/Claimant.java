@@ -39,11 +39,6 @@ import dialogs.ClaimantChoiceDialogFragment;
 import exceptions.InvalidUserPermissionException;
 
 /**
- * Claimant child class.
- * Currently only submits but 
- * as more details
- * are released, as will more
- * functionality
  */
 
 public class Claimant extends User {
@@ -58,7 +53,6 @@ public class Claimant extends User {
 	 * Therefore, the claim should be able to submit when the statusEnum == RETURNED 
 	 * 
 	 * Claim can now be re-submitted after it has been returned
-	 * Ji Hwan Kim
 	 * @param claim
 	 * @throws InvalidUserPermissionException
 	 */
@@ -67,7 +61,12 @@ public class Claimant extends User {
 			claim.giveStatus(statusEnum.SUBMITTED);
 		}
 	}
-
+	
+	/**
+	 * Gets an ArrayList of claims that the given
+	 * user is allowed to see. Claimants can see
+	 * any claim made in their own name.
+	 */
 	@Override
 	public ArrayList<Claim> getPermittableClaims(ArrayList<Claim> claims) {
 		ArrayList<Claim> newClaims = new ArrayList<Claim>();
@@ -118,14 +117,20 @@ public class Claimant extends User {
 		return listener;
 	}
 	
+	/**
+	 * Returns the OnItemLongClickListener that the approver will
+	 * see when the long-click a submitted claim. Specifically
+	 * it creates a new dialog that displays the options to 
+	 * View, edit, submit, delete.
+	 */
 	@Override
 	public OnItemLongClickListener getClaimAdapterLongClickListener(final FragmentManager fm) {
 		final OnItemLongClickListener listener = new OnItemLongClickListener() {
 			
 			@Override
 			public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-				//ArrayList<Integer> indexList = ClaimListSingleton.getClaimList().getIndexList();	//must be set beforehand
-				//int claimIndex = indexList.get(position);
+				// ArrayList<Integer> indexList = ClaimListSingleton.getClaimList().getIndexList();	//must be set beforehand
+				// int claimIndex = indexList.get(position);
 				ClaimantChoiceDialogFragment dialog = new ClaimantChoiceDialogFragment();
 			    Bundle args = new Bundle();
 			    args.putInt("index", ClaimListSingleton.getClaimList().getIndexList().get(position));
@@ -137,13 +142,22 @@ public class Claimant extends User {
 		return listener;
 	}
 
-
+	/**
+	 * Claimants should be able to see and use the
+	 * the Create Claim button, as such it's visibility 
+	 * is set to VISIBLE.
+	 */
 	@Override
 	public int getButtonVisibility() {
 		return View.VISIBLE;
 	}
 	
-	
+	/**
+	 * Checks each of a claim's expense items to check
+	 * for incompleteness indicators. 
+	 * @param claim
+	 * @return true when all claims are complete.
+	 */
 	public static boolean isComplete(Claim claim){
 		for(ExpenseItem item: claim.getExpenseItems()){
 			if(!item.isComplete()){

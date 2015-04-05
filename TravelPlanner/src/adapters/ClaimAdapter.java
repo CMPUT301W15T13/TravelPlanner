@@ -80,6 +80,7 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 			dateView.setText("From: " + claim.getStartDateAsString() + ",  To: " + claim.getEndDateAsString());
 			costView.setText(claim.getCost());
 			
+			// Sets an icon to display the status
 			ClaimStatus.statusEnum status = claim.getStatus();
 			if(status == ClaimStatus.statusEnum.INPROGRESS){
 				statusView.setImageResource(android.R.drawable.ic_menu_edit);

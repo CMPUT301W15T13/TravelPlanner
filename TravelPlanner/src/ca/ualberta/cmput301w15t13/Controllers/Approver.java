@@ -35,11 +35,10 @@ import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import dialogs.ApproverChoiceDialogFragment;
 
 /**
- * Approver child class.
- * Currently only approves and 
- * returns, but as more details
- * are released, as will more
- * functionality
+ * Manages Approver specific data.
+ * Provides the ability to approver and submit claims,
+ * add comments, get the approver-viewable claims,
+ * and on click listeners.
  */
 
 public class Approver extends User {
@@ -48,6 +47,11 @@ public class Approver extends User {
 		super(name);
 	}
 	
+	/**
+	 * Sets a submitted claim's status to approved,
+	 * and marks the approver's name on the claim.
+	 * @param claim
+	 */
 	public void approveClaim(Claim claim) {
 		if (claim != null && claim.getStatus() == statusEnum.SUBMITTED) {
 			claim.setLastApproverName(this.name);
@@ -55,6 +59,11 @@ public class Approver extends User {
 		}
 	}
 	
+	/**
+	 * Sets a submitted claim's status to returned,
+	 * and marks the approver's name on the claim.
+	 * @param claim
+	 */
 	public void returnClaim(Claim claim) {
 		// claim can only be returned if comments are written by an approver
 		if (claim != null && claim.getStatus() == statusEnum.SUBMITTED && claim.getComments()!=null) {
@@ -64,12 +73,22 @@ public class Approver extends User {
 		}
 	}
 
+	/**
+	 * Adds an approver's comment to a submitted claim.
+	 * @param claim
+	 * @param comment
+	 */
 	public void addComment(Claim claim, String comment) {
 		if (claim.getStatus() == statusEnum.SUBMITTED && comment != null) {
 			claim.addComment(comment, this.name);
 		}
 	}
 	
+	/**
+	 * Gets an ArrayList of claims that the given
+	 * user is allowed to see. Approvers 
+	 * will see submitted claims.
+	 */
 	@Override
 	public ArrayList<Claim> getPermittableClaims(ArrayList<Claim> claims) {
 		ArrayList<Claim> newClaims = new ArrayList<Claim>();
@@ -100,6 +119,12 @@ public class Approver extends User {
 		return listener;
 	}
 
+	/**
+	 * Returns the OnItemLongClickListener that the approver will
+	 * see when the long-click a submitted claim. Spcefically
+	 * it creates a new dialog that displays the options to 
+	 * Approve, return and view.
+	 */
 	@Override
 	public OnItemLongClickListener getClaimAdapterLongClickListener(final FragmentManager fm) {
 		final OnItemLongClickListener listener = new OnItemLongClickListener() {
@@ -118,7 +143,10 @@ public class Approver extends User {
 		return listener;
 	}
 
-	
+	/**
+	 * Approvers should not see the Create Claim button,
+	 * and as such it's visibility should be GONE.
+	 */
 	@Override
 	public int getButtonVisibility() {
 		return View.GONE;

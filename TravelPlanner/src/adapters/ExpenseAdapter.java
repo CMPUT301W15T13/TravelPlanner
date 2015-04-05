@@ -37,7 +37,7 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 	/** 
 	 * The custom array adapter used to 
-	 * display the necessary info for an expense
+	 * display the necessary info for an expense item.
 	 */
 	
 	//based on http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view Jan 24th 2015
@@ -75,8 +75,8 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			TextView catView = (TextView) view.findViewById(R.id.TextViewExpenseCategory);
 			TextView incompleteView = (TextView) view.findViewById(R.id.incompletenessIndicator);
 			
-			//Will need this for properly handling images
-			//ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
+			// Will need this for properly handling images
+			// ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
 			titleView.setText(expense.getExpenseName());
 			dateView.setText(expense.getPurchseDateAsString());
 			DecimalFormat decim = new DecimalFormat("0.00");
@@ -86,7 +86,7 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			
 			// Keep the if-else, since the button will be a toggle.
 			if(expense.isComplete()){
-				incompleteView.setText("");
+				incompleteView.setText(" ");
 			}else{
 				incompleteView.setText("!");
 			}

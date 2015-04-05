@@ -63,6 +63,13 @@ public class ClaimActivity extends Activity  {
 	public User getUser() {
 		return this.user;
 	}
+	
+	/**
+	 * Opens up a dialog to filter a claim by tag.
+	 */
+	public void filterClaim() {
+		ClaimFragmentNavigator.filterClaim();
+	}
 
 	/* OnClick button methods */ 
 	
@@ -104,10 +111,6 @@ public class ClaimActivity extends Activity  {
 		ClaimFragmentNavigator.newClaim();
 	}
 	
-	public void filterClaim() {
-		ClaimFragmentNavigator.filterClaim();
-	}
-	
 	/**
 	 * Create a new claim object,
 	 * then return to the viewing fragment. 
@@ -131,6 +134,10 @@ public class ClaimActivity extends Activity  {
 		ClaimFragmentNavigator.showClaimViewer();
 	}
 	
+	/**
+	 * Opens the dialog to add a tag to a claim.
+	 * @param v
+	 */
 	public void addTag(View v) {
 		ClaimFragmentNavigator.openTag();
 	}
@@ -141,7 +148,6 @@ public class ClaimActivity extends Activity  {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claim_activity_layout);
-		// TODO make a better method for removing listeners
 		
 		setActionBar();
 		
@@ -169,11 +175,7 @@ public class ClaimActivity extends Activity  {
 	protected void onResume() {
 		super.onResume();
 		DataManager.setCurrentContext(getApplicationContext());
-	
 		ClaimListSingleton.getClaimList().notifyListeners();
-
-
-
 	}
 
 	/**
