@@ -38,16 +38,25 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 public abstract class User {
 	
 	protected String name;
-	protected Location location; //TODO change this type to something relevant
+	protected Location location;
 	
 	public User(String name){
 		this.name = name;
+		location = null;
 	}
 	
 	public String getName(){
 		return this.name;
 	}
 	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	/**
 	 * Returns the claims that are viewable by either an approver or a 
 	 * claimant. TODO This will be moved to a controller.
