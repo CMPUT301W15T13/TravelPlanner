@@ -52,8 +52,18 @@ public class Claimant extends User {
 		super(name);
 	}
 	
+	/**
+	 * A claim can be submitted when it has been newly created
+	 * A claim can also be re-submitted when it has been returned
+	 * Therefore, the claim should be able to submit when the statusEnum == RETURNED 
+	 * 
+	 * Claim can now be re-submitted after it has been returned
+	 * Ji Hwan Kim
+	 * @param claim
+	 * @throws InvalidUserPermissionException
+	 */
 	public void submitClaim(Claim claim) throws InvalidUserPermissionException{
-		if (claim != null && claim.getStatus() == statusEnum.INPROGRESS) {
+		if (claim != null && (claim.getStatus() == statusEnum.INPROGRESS) || claim.getStatus() == statusEnum.RETURNED) {
 			claim.giveStatus(statusEnum.SUBMITTED);
 		}
 	}

@@ -71,7 +71,7 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		    	 * claim.getlastApproverName method currently is not implemented
 		    	 */
 		    	
-		    	claim.addComment(comment, "approvername");
+		    	claim.addComment(comment, claim.getlastApproverName());
 		    	
 		    	FragmentManager fm = getFragmentManager();
 		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");	
