@@ -26,6 +26,7 @@ import java.util.UUID;
 
 import ca.ualberta.cmput301w15t13.Models.Currency.CurrencyEnum;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.text.format.DateFormat;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
@@ -56,6 +57,7 @@ public class ExpenseItem implements ExpenseClaim {
 
   protected String ClaimID = null;
   protected String ExpenseID = null;
+  protected Uri receiptUri = null;
 
   /**
    * this does not need to be initialized
@@ -64,6 +66,7 @@ public class ExpenseItem implements ExpenseClaim {
   public Receipt receipt = null;
 
   public boolean complete = false;
+  
 	
   /**
    * 
@@ -205,8 +208,8 @@ public class ExpenseItem implements ExpenseClaim {
    *  method for adding a receipt for the expense item, this is to be implemented for project 5
    * @param receipt
    */
-  public void addReceipt(Receipt receipt) {
-    this.receipt = receipt;
+  public void addReceipt() {
+    this.receipt = new Receipt();
   }
 
   /**
@@ -218,6 +221,7 @@ public class ExpenseItem implements ExpenseClaim {
      *  TODO for project 5
      */
   }
+
 
   /**
    *  this method will determine if the expense item is complete or not

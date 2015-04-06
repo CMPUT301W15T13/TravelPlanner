@@ -26,10 +26,14 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -81,6 +85,7 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			TextView currView = (TextView) view.findViewById(R.id.textViewAdapterCurrency);
 			TextView catView = (TextView) view.findViewById(R.id.TextViewExpenseCategory);
 			TextView incompleteView = (TextView) view.findViewById(R.id.incompletenessIndicator);
+			ImageView ib = (ImageView) view.findViewById(R.id.receiptViewatAdapter);
 			
 			// Will need this for properly handling images
 			// ImageView statusView = (ImageView) view.findViewById(R.id.imageViewAdapterStatus);
@@ -91,6 +96,12 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			currView.setText(expense.getCurrency());
 			catView.setText(expense.getExpenseCategory());
 			
+			if (expense.getReceipt()!= null) {
+				Drawable pic = Drawable.createFromPath(expense.getReceipt().getReceiptUri().getPath());
+				pic = resize(pic);
+				ib.setImageDrawable(pic);
+			}
+			
 			// Keep the if-else, since the button will be a toggle.
 
 			if (expense.isComplete()) {
@@ -100,5 +111,10 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			}
 		}
 		return view;
+	}
+	protected Drawable resize(Drawable image) {
+	    Bitmap b = ((BitmapDrawable)image).getBitmap();
+	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 200, 300, false);
+	    return new BitmapDrawable(bitmapResized);
 	}
 }

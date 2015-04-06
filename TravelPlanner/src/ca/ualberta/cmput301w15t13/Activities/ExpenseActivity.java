@@ -21,6 +21,7 @@
 package ca.ualberta.cmput301w15t13.Activities;
 
 import persistanceController.DataManager;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -118,6 +119,7 @@ public class ExpenseActivity extends Activity {
 	 * Very simple and planeactionbar
 	 * Useful for screen space economy
 	 */
+	@SuppressLint("InflateParams")
 	private void setActionBar(){
 		//Based on http://stackoverflow.com/questions/6746665/accessing-a-font-under-assets-folder-from-xml-file-in-android Jan 25 2015
 		final ViewGroup actionBarLayout = (ViewGroup) getLayoutInflater().inflate(R.layout.expense_actionbar_layout, null);
@@ -280,9 +282,13 @@ public class ExpenseActivity extends Activity {
 	 * Take a picture
 	 * @param v
 	 */
-	public void takePicture(View v) {
+	public void takePicture(int index) {
 		setFragmentToTakePic();
+		Bundle bundle = new Bundle();
+		bundle.putInt("claimIndex", claimIndex);
+		bundle.putInt("expenseIndex", index);
 		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
+		intent.putExtra("bundle", bundle);
 		startActivity(intent);
 	}
 	private void setFragmentToTakePic() {

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseListViewerFragment;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -79,6 +80,14 @@ public class ClaimantExpenseDialogFragment extends DialogFragment{
      	    d.dismiss();
 		}
 	};
+    final OnClickListener attachReceipt = new OnClickListener() {
+        @Override
+		public void onClick(final View v) {
+     	   ((ExpenseActivity) getActivity()).takePicture(expenseIndex);
+     	   Dialog d = getDialog();
+     	   d.dismiss();
+        }
+    };
     
 	@SuppressLint("InflateParams")
 	@Override
@@ -94,11 +103,14 @@ public class ClaimantExpenseDialogFragment extends DialogFragment{
 	    Button delete = (Button) view.findViewById(R.id.buttonDeleteExpense);
 	    Button viewButton = (Button) view.findViewById(R.id.buttonViewExpense);
 	    Button incompleteView = (Button) view.findViewById(R.id.buttonToggleIncompletenessIndicator);
+	    Button receipt = (Button) view.findViewById(R.id.receiptButton);
 	    
 	    edit.setOnClickListener(editExpenseItem);
 	    delete.setOnClickListener(deleteExpenseItem);
 	    viewButton.setOnClickListener(viewExpenseItem);
 	    incompleteView.setOnClickListener(incompleteToggle);
+	    receipt.setOnClickListener(attachReceipt);
+	    
 	    if(item.isComplete()){
 	    	incompleteView.setText("Mark Incomplete");
 	    }else{
