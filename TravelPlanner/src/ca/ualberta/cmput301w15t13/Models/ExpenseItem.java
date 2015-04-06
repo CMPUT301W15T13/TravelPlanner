@@ -38,8 +38,8 @@ public class ExpenseItem implements ExpenseClaim {
   /**
    * these are the allowed variables that will show up on the Activities
    */
-  private static ArrayList<String> allowedCategories = new ArrayList<String>();
-  private static ArrayList<String> allowedCurrencies = new ArrayList<String>();
+  private ArrayList<String> allowedCategories = new ArrayList<String>();
+  private ArrayList<String> allowedCurrencies = new ArrayList<String>();
 	
   /**
    * these are the input fields for the expense
@@ -102,6 +102,16 @@ public class ExpenseItem implements ExpenseClaim {
 		
   }
   
+
+  public boolean isCategoryValid(String category){
+	  boolean valid = false;
+	  for (String cat: allowedCategories){
+		  valid = true;
+	  }
+	  return valid;
+	 
+  }
+  
   public String getExpenseName() {
 	  return this.ExpenseName;
   }
@@ -120,11 +130,11 @@ public class ExpenseItem implements ExpenseClaim {
    * @throws InvalidFieldEntryException
    */
   public void setExpenseCategory(String expenseCategory) throws InvalidFieldEntryException  {
-    if (!this.allowedCategories.contains(expenseCategory)){
+  if (!allowedCategories.contains(expenseCategory)){
       throw new InvalidFieldEntryException("Not a valid Category");
-    } else {
+  } else {
       this.ExpenseCategory = expenseCategory;
-    }
+   }
   }
 
   public Date getPurchaseDate() {
