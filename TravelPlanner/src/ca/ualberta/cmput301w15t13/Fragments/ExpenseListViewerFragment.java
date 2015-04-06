@@ -132,6 +132,9 @@ public class ExpenseListViewerFragment extends Fragment {
 				    args.putInt("claimIndex", claimIndex);
 				    dialog.setArguments(args);
 				    dialog.show(getFragmentManager(), "Long Click Pop-Up");
+				    
+				    //redundancy needed for long click listener to work
+				    expenseIndex = position;
 				}else{
 					//TEMP THIS IS FOR THE APPROVER
 					//new ApproverExpenseDialogFragment().show(getFragmentManager(), "Long Click Pop-Up");
@@ -157,7 +160,10 @@ public class ExpenseListViewerFragment extends Fragment {
 	}
 
 	public void deleteExpenseItem() {
+		ExpenseItem expense = expenses.get(expenseIndex);
 		expenses.remove(expenseIndex);
+	//	Claim claim = ClaimListSingleton.getClaimByID(claimID).removeExpenseItem(ex);
+		ClaimListSingleton.getClaimByID(claimID).removeExpenseItem(expense);
 		ExpenseAdapter.notifyDataSetChanged();		
 	}
 

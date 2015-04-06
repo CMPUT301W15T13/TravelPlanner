@@ -434,6 +434,9 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 */
 	public void removeExpenseItem(ExpenseItem expenseItem) {
 		this.expenseItems.delete(expenseItem);
+		
+		DataManager.updateClaim(this);
+
 	}
 
 	/**

@@ -22,6 +22,9 @@ package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
 
+import persistanceController.DataManager;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+
 /**
  * This class is a container for individual expense
  * items. It is used by a claim to manage it's
@@ -72,6 +75,10 @@ public class ExpenseItemList {
 			 *  there is an Expense in a list we can delete, then delete
 			 */
 			expenseItemList.remove(Expense);
+			
+			//save the claim
+		//	Claim claim = ClaimListSingleton.getClaimByID(claimID);
+			//DataManager.saveClaim(claim);
 		}	
 	}
 	

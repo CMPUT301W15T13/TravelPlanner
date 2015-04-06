@@ -108,7 +108,7 @@ public class LoginActivity extends Activity {
 	public void startClaimActivity(String username, boolean isClaimant){	
 		ClaimListSingleton.getClaimList().clearListeners();
 		//load data
-		DataManager.setOnlineMode();
+		DataManager.setOfflineMode();
 		Toast.makeText(getApplicationContext(), "synchronizing with server", Toast.LENGTH_SHORT).show();
 		DataManager.loadClaimsByUserName(username);
 		
