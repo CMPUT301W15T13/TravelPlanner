@@ -26,16 +26,19 @@ import java.util.Date;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Approver;
+import ca.ualberta.cmput301w15t13.Controllers.Claimant;
+import ca.ualberta.cmput301w15t13.Controllers.User;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
-/*
+/**
  * This test suite tests the functionality of the application
  * when the user is an approver. Specifically, that an approver
  * can approve claims, comment on claims, and return claims.
@@ -57,9 +60,10 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		super.setUp();
 	}
 	
-	
-	/** Test Case H2
+	/** 
+	 * Test Case H2
 	 * Tests that as an approver you are able to return a claim
+	 * Tests US08.07.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/78
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -90,9 +94,10 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		assertEquals("Approver was able to return a RETURNED claim",statusEnum.RETURNED, claim.getStatus() );
 	}
 	
-	
-	/** Test Case H3
+	/** 
+	 * Test Case H3
 	 * Tests that as an approver you are able to approve a claim
+	 * Tests US08.08.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -121,12 +126,13 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		claim.giveStatus(statusEnum.APPROVED);
 		approver.approveClaim(claim);
 		assertEquals("Approver was able to approve an APPROVED claim",statusEnum.APPROVED, claim.getStatus());
-		
 	}
 	
-	/** Use Case H4
+	/** 
+	 * Use Case H4
 	 * Approver can set one or more comments on a claim that is submitted,
 	 * and cannot modify a claim that is not submitted.
+	 * Tests US08.06.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/77
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -165,7 +171,6 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		approver.addComment(claim, comment);
 		comments = claim.getComments();
 		assertEquals("A comment was added to an approved claim",0 , comments.size());	
-		
 	}
 	
 	/**
@@ -235,4 +240,31 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		allClaims.add(claim3);
 		assertEquals("submitted claims weren't sorted", claim3, a.getPermittableClaims(allClaims).get(0));
 	}
+	
+	/**
+	 * Tests the approvers ability to get the expense Items 
+	 * of a claim, and that they show up in the right order.
+	 * Tests US08.04.01
+	 * @throws EmptyFieldException
+	 * @throws InvalidDateException
+	 */
+	public void testExpenseItemList() throws EmptyFieldException, InvalidDateException {
+		Approver a = new Approver("andry");
+		Claim claim = new Claim("name", new Date(1000), new Date(1100), "Dest", new TravelItineraryList());
+		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
+		ExpenseItem expenseItem2 = new ExpenseItem("air", new Date(120), "yolo" , 22.43, "cdn", claim.getclaimID());
+		claim.addExpenseItem(expenseItem);
+		claim.addExpenseItem(expenseItem2);
+		
+		ArrayList<Claim> allClaims = new ArrayList<Claim>();
+		allClaims.add(claim);
+		claim.giveStatus(statusEnum.SUBMITTED);
+		ArrayList<Claim> approverClaims = a.getPermittableClaims(allClaims);
+		
+		// Test that the approver's claims can get its constituent expense items
+		assertNotNull("Expense items don't exist", approverClaims.get(0).getExpenseItems());
+		assertEquals("Too many or too few expense items added",2,approverClaims.get(0).getExpenseItems().size());
+		assertEquals("Expense items not in order added",expenseItem,approverClaims.get(0).getExpenseItems().get(0));
+
+	}	
 }
