@@ -56,6 +56,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	protected ExpenseItemList expenseItems = null;
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected double totalCost = 0;
+	protected ClaimCurrencies totalCurrencies;
 	/**
 	 * returnedBefore will distinguish a claim that has been returned in the past or not
 	 * if it has been returned in the past, then only approver who returned can approve the submitted claim
@@ -227,6 +228,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 */
 	public void giveStatus(statusEnum status) {
 		this.status.setStatus(status);
+		DataManager.updateClaim(this);
 	}
 		
 	/**
@@ -294,6 +296,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 */
 	public void setLastApproverName(String name) {
 		this.lastApproverName = name;
+		DataManager.updateClaim(this);
 	}
 
 	/**
@@ -311,6 +314,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		}
 		comments.add(comment);
 		this.approverComments.put(name, comments);
+		DataManager.updateClaim(this);
 	}
 
 	/**
@@ -506,7 +510,14 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 
 	public String getCost() {
 		// TODO Auto-generated method stub
-		return "0.00";
+		//return "0.00";
+		this.totalCurrencies = new ClaimCurrencies();
+		for (ExpenseItem expense:expenseItems.getExpenseList()){
+			totalCurrencies.addCurrency(expense.getExpenseCurrency());
+		}
+		
+		return totalCurrencies.getCurrenciesAsString();
+		
 	}
 	
 	public void addToCost(double newCost){
