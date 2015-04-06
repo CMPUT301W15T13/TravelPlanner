@@ -29,6 +29,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.widget.EditText;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import exceptions.EmptyFieldException;
@@ -73,6 +74,7 @@ public class DestinationDialogFragment extends DialogFragment {
 	                	   FragmentManager fm = getFragmentManager();
 	                	   ClaimManagerFragment fragment = (ClaimManagerFragment) fm.findFragmentByTag("ClaimManager");
 	                	   fragment.addTravelItenerarItem(item);
+	                	   ClaimFragmentNavigator.updateDestinations();
 	                   } catch (EmptyFieldException e) {
 	                	   e.printStackTrace();
 	                   }

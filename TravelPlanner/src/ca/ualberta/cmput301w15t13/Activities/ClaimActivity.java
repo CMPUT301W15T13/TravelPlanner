@@ -26,7 +26,6 @@ import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -64,18 +63,7 @@ import exceptions.InvalidUserPermissionException;
 
 public class ClaimActivity extends Activity  {
 	private User user;
-	private Location currentLocation;
 	
-	public Location getCurrentLocation() {
-		return currentLocation;
-	}
-
-
-	public void setCurrentLocation(Location currentLocation) {
-		this.currentLocation = currentLocation;
-	}
-
-
 	public User getUser() {
 		return this.user;
 	}

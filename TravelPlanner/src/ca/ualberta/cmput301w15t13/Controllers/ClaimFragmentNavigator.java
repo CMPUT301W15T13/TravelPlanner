@@ -8,6 +8,7 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
+import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import dialogs.ClaimantHomeLocationDialog;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
@@ -155,5 +156,24 @@ public class ClaimFragmentNavigator {
 	public static void openLocationDialog() {
 		ClaimantHomeLocationDialog dialog = new ClaimantHomeLocationDialog();
 	    dialog.show(fm, "Select Location");
+	}
+	
+	/**
+	 * Updates the list view that
+	 * holds the data for the destinations.
+	 */
+	public static void updateDestinations(){
+		claimManagerFragment.updateDestinationList();
+	}
+
+	/**
+	 * Gets the Travel Itinerary Item so that the
+	 * Dialog can update the item's location.
+	 * @param travelItemIndex index of the TravelItinerary item
+	 * @return The corresponding TravelItinerary item.
+	 */
+	public static TravelItinerary getFragmentManagerTravelItinenary(
+			int travelItemIndex) {
+		return claimManagerFragment.getTravelItineraryItem(travelItemIndex);
 	}
 }

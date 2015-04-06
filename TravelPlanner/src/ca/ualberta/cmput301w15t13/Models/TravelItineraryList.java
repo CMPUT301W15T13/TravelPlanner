@@ -16,13 +16,10 @@ public class TravelItineraryList {
 
 	protected ArrayList<TravelItinerary> travelList = null;
 	
-	public ArrayList<TravelItinerary> getTravelList() {
+	public ArrayList<TravelItinerary> getTravelArrayList() {
 		return travelList;
 	}
 
-	public void setTravelList(ArrayList<TravelItinerary> travelList) {
-		this.travelList = travelList;
-	}
 
 	public TravelItineraryList(){
 		this.travelList = new ArrayList<TravelItinerary>();

@@ -18,12 +18,13 @@
         android:layout_below="@+id/textViewDestination"
         />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/imageButtonAddedLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
+        android:paddingRight="3dp"
         android:visibility="gone"
         android:contentDescription="@string/hello_world"
         android:src="@android:drawable/ic_dialog_map" />
