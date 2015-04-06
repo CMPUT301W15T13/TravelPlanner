@@ -15,9 +15,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.TagManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
+import ca.ualberta.cmput301w15t13.Models.Tag;
 
 
 /**
@@ -90,6 +92,17 @@ public class DataManager {
 	public static void loadClaimsByUserName(String userName){
 		DataHelper helper = new DataHelper();
 		helper.loadClaimsByUserName(userName);
+		
+		//This goes through all the claims and reloads the tags
+		ArrayList<Tag> tagList;
+		for (Claim claim: ClaimListSingleton.getClaimList().getClaimArrayList()){
+			tagList = claim.getTags();
+			
+			for (int index = 0; index < tagList.size(); index++){
+				ClaimListSingleton.getClaimList().tagManager.add(tagList.get(index), claim.getclaimID());
+			}
+			
+		}
 	}
 	
 	public static void setCurrentContext(Context context){
