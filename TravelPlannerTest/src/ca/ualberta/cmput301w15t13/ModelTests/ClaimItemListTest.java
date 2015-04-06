@@ -23,6 +23,8 @@ package ca.ualberta.cmput301w15t13.ModelTests;
 import java.util.ArrayList;
 import java.util.Date;
 
+import persistanceController.DataManager;
+
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
@@ -103,6 +105,8 @@ public class ClaimItemListTest extends
 	 * Tests US01.01.01, US01.02.01
 	 */
 	public void testAddRemove() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
+		
+		DataManager.setTestMode();
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());
