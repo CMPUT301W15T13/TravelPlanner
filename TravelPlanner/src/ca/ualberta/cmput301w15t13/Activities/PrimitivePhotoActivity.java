@@ -17,6 +17,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 /**
  * This activity is a copy of bogopic from the CMPUT 301 lab
@@ -80,8 +81,11 @@ public class PrimitivePhotoActivity extends Activity {
 				Drawable pic = Drawable.createFromPath(imageFileUri.getPath());
 				pic = resize(pic);
 				ib.setImageDrawable(pic);
-				
-				ClaimListSingleton.getClaimList().getExpenseList(claimIndex).get(expenseIndex).setReceiptUri(imageFileUri);
+				ExpenseItem expense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
+				if (expense.getReceipt() == null) {
+					expense.addReceipt();
+				}
+				expense.getReceipt().setReceiptUri(imageFileUri);
 			}else if (resultCode == RESULT_CANCELED) {
 				TextView tv = (TextView) findViewById(R.id.textView3);
 				tv.setText("Photograph Cancelled");

@@ -61,7 +61,7 @@ public class ExpenseItem implements ExpenseClaim {
    * this does not need to be initialized
    */
   protected Currency currencyEnum;
-  public Uri receipt = null;
+  public Receipt receipt = null;
 
   public boolean complete = false;
   
@@ -188,7 +188,7 @@ public class ExpenseItem implements ExpenseClaim {
     this.ClaimID = linkedToclaimID;
   }
 
-  public Uri getReceipt() {
+  public Receipt getReceipt() {
     return receipt;
   }
 
@@ -196,8 +196,8 @@ public class ExpenseItem implements ExpenseClaim {
    *  method for adding a receipt for the expense item, this is to be implemented for project 5
    * @param receipt
    */
-  public void addReceipt(Uri receipt) {
-    this.receipt = receipt;
+  public void addReceipt() {
+    this.receipt = new Receipt();
   }
 
   /**
@@ -209,12 +209,7 @@ public class ExpenseItem implements ExpenseClaim {
      *  TODO for project 5
      */
   }
-  public void setReceiptUri(Uri newUri) {
-	  receiptUri = newUri;
-  }
-  public Uri getReceiptUri(Uri newUri) {
-	  return receiptUri;
-  }
+
 
   /**
    *  this method will determine if the expense item is complete or not

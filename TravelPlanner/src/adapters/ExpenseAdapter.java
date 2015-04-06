@@ -97,7 +97,7 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			catView.setText(expense.getExpenseCategory());
 			
 			if (expense.getReceipt()!= null) {
-				Drawable pic = Drawable.createFromPath(expense.getReceipt().getPath());
+				Drawable pic = Drawable.createFromPath(expense.getReceipt().getReceiptUri().getPath());
 				pic = resize(pic);
 				ib.setImageDrawable(pic);
 			}
