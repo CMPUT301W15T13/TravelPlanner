@@ -48,4 +48,14 @@
         android:text="Waiting..."
         android:textColor="@color/text" />
 
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignRight="@+id/expenseManagerPictureButton"
+        android:layout_below="@+id/textView3"
+        android:onClick="done"
+        android:text="Done" />
+
 </RelativeLayout>

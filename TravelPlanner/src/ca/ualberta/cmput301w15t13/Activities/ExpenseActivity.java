@@ -23,6 +23,7 @@ package ca.ualberta.cmput301w15t13.Activities;
 import persistanceController.DataManager;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -97,6 +98,7 @@ public class ExpenseActivity extends Activity {
 		
 		// TODO load data
 		// TODO add a save file listener
+		
 	}
 	
 	@Override
@@ -280,12 +282,17 @@ public class ExpenseActivity extends Activity {
 	 * Take a picture
 	 * @param v
 	 */
-	public void takePicture(View v) {
-		setFragmentToTakePic();
+	public void takePicture(int index) {
+		//setFragmentToTakePic();
+		Bundle bundle=new Bundle();
+		bundle.putInt("claimIndex", claimIndex);
+		bundle.putString("claimID", claimID);
+		bundle.putInt("expenseIndex",index);
 		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
+		intent.putExtra("bundle", bundle);
 		startActivity(intent);
 	}
-	private void setFragmentToTakePic() {
+	private void setFragmentToTakePic(int index) {
 		actionBar.hide();
 		//Inspired by
 		//http://stackoverflow.com/a/16036693
@@ -293,6 +300,7 @@ public class ExpenseActivity extends Activity {
 		Bundle bundle=new Bundle();
 		bundle.putInt("claimIndex", claimIndex);
 		bundle.putString("claimID", claimID);
+		bundle.putInt("expenseIndex",index);
 		//set Fragmentclass Arguments
 		TakePictureFragment.setArguments(bundle);
 		

@@ -171,4 +171,8 @@ public class ExpenseListViewerFragment extends Fragment {
 		((ExpenseActivity) getActivity()).viewExpense(expenseIndex);
 	}
 
+	public void takePicture() {
+		((ExpenseActivity) getActivity()).takePicture(expenseIndex);
+	}
+
 }

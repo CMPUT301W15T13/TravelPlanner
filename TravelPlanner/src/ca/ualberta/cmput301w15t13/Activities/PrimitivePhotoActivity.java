@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 
 /**
  * This activity is a copy of bogopic from the CMPUT 301 lab
@@ -24,7 +25,8 @@ import ca.ualberta.cmput301w15t13.R;
 public class PrimitivePhotoActivity extends Activity {
 
 	Uri imageFileUri;
-	
+	int claimIndex;
+	int expenseIndex;
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	
@@ -32,6 +34,10 @@ public class PrimitivePhotoActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		Intent intent = getIntent();
+		Bundle bundle = intent.getBundleExtra("bundle");
+		claimIndex = (Integer) bundle.get("claimIndex");
+		expenseIndex = (Integer) bundle.get("expenseIndex");
 		setContentView(R.layout.take_a_photo);
 	}
 
@@ -99,5 +105,8 @@ public class PrimitivePhotoActivity extends Activity {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();
 	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 200, 300, false);
 	    return new BitmapDrawable(getResources(), bitmapResized);
+	}
+	public void done(View v){
+		ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex).addReceipt(imageFileUri);
 	}
 }
