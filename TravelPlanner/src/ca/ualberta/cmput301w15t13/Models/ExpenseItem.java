@@ -116,9 +116,11 @@ public class ExpenseItem implements ExpenseClaim {
   public Currency getExpenseCurrency(){
 	  return this.expenseCurrency;
   }
-
-
   
+  public boolean hasReciept() {
+	  return !(receipt.equals(null));
+  }
+
   public String getExpenseName() {
 	  return this.ExpenseName;
   }

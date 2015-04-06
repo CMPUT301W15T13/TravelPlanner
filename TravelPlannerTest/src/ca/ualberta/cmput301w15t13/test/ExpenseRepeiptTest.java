@@ -22,10 +22,14 @@ package ca.ualberta.cmput301w15t13.test;
 
 import java.util.Date;
 
+import persistanceController.DataManager;
+
 import android.graphics.Bitmap;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.Receipt;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
@@ -52,6 +56,7 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		DataManager.setTestMode();
 	}
 	
 	/**
@@ -133,6 +138,18 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		assertNull("Bitmap was not removed", returnedBitmap);
 	}
 	
-
-
+	public void testViewPhoto() throws EmptyFieldException, InvalidDateException {
+		//US06.02.01
+		//As a claimant, I want to view any attached photographic receipt for an expense item.
+		ClaimList cl = ClaimListSingleton.getClaimList();
+		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
+		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
+		claim.addExpenseItem(expenseItem);
+		cl.add(claim);
+		
+		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
+		Receipt receipt = new Receipt(bitmapLarge);
+		expenseItem.addReceipt(receipt);
+		assertNotNull("Claimant cannot view photo",cl.getClaimArrayList().get(0).getExpenseItems().get(0).getReceipt());
+	}
 }

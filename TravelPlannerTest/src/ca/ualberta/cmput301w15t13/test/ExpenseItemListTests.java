@@ -34,14 +34,17 @@ import java.util.Date;
 
 import persistanceController.DataManager;
 
+import android.graphics.Bitmap;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import ca.ualberta.cmput301w15t13.Models.Receipt;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 
@@ -90,7 +93,7 @@ public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<Login
   /**
    * Test that as a claimant, I can "view" 
    * an expense item and its details. 
-   * Tests US04.05.01
+   * Tests US04.05.01, US05.01.01 - without geolocation
    * @throws EmptyFieldException 
    * @throws InvalidDateException 
    */
@@ -98,6 +101,9 @@ public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<Login
 	  ClaimList cl = ClaimListSingleton.getClaimList();
 	  Claim claim1 = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 	  ExpenseItem expenseItem1 = new ExpenseItem("air", new Date(100), "yolo" , 10.00, "USD", claim1.getclaimID());
+	  Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
+	  Receipt receipt = new Receipt(bitmapLarge);
+	  expenseItem1.addReceipt(receipt);
 	  claim1.addExpenseItem(expenseItem1);
 	  cl.add(claim1);
 	  
@@ -108,6 +114,10 @@ public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<Login
 	  assertNotNull("Claimant cannot view eDate", cl.getClaimAtIndex(0).getExpenseItems().get(0).getPurchaseDate());
 	  assertNotNull("Claimant cannot view eDescription", cl.getClaimAtIndex(0).getExpenseItems().get(0).getExpenseDescription());
 	  assertNotNull("Claimant cannot view eAmount", cl.getClaimAtIndex(0).getExpenseItems().get(0).getAmount());
+	  
+	  //Additional tests regarding ExpenseItem listing
+	  assertNotNull("ExpenseItem doesn't show reciept", cl.getClaimAtIndex(0).getExpenseItems().get(0).getReceipt());
+	  assertNotNull("ExpenseItem doesn't show incompleteness indicator", cl.getClaimAtIndex(0).getExpenseItems().get(0).isComplete());
   }
   
   

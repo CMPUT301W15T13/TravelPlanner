@@ -163,10 +163,10 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
     ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
     
     expenseItem.setIncompletenessIndicator();
-    assertTrue("Expense item flag wasn't set", expenseItem.isComplete());
+    assertFalse("Expense item flag wasn't set", expenseItem.isComplete());
     
     expenseItem.removeIncompletenessIndicator();    
-    assertFalse("Expense item flag is set when it should be off", expenseItem.isComplete());
+    assertTrue("Expense item flag is set when it should be off", expenseItem.isComplete());
   }
 
 	/** Use Case D3
