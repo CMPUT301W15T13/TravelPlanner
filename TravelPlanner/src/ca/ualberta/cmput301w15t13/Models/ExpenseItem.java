@@ -55,6 +55,7 @@ public class ExpenseItem implements ExpenseClaim {
 
   protected String ClaimID = null;
   protected String ExpenseID = null;
+  protected Uri receiptUri = null;
 
   /**
    * this does not need to be initialized
@@ -63,6 +64,7 @@ public class ExpenseItem implements ExpenseClaim {
   public Uri receipt = null;
 
   public boolean complete = false;
+  
 	
   /**
    * 
@@ -206,6 +208,12 @@ public class ExpenseItem implements ExpenseClaim {
     /**
      *  TODO for project 5
      */
+  }
+  public void setReceiptUri(Uri newUri) {
+	  receiptUri = newUri;
+  }
+  public Uri getReceiptUri(Uri newUri) {
+	  return receiptUri;
   }
 
   /**

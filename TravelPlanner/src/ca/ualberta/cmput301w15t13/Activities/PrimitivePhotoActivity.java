@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 
 /**
  * This activity is a copy of bogopic from the CMPUT 301 lab
@@ -24,7 +25,8 @@ import ca.ualberta.cmput301w15t13.R;
 public class PrimitivePhotoActivity extends Activity {
 
 	Uri imageFileUri;
-	
+	protected int claimIndex;
+	protected int expenseIndex;
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 	
@@ -33,6 +35,9 @@ public class PrimitivePhotoActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.take_a_photo);
+		Bundle bundle = getIntent().getExtras();
+		claimIndex = bundle.getInt("claimIndex");
+		expenseIndex = bundle.getInt("expenseIndex");
 	}
 
 	@Override
@@ -76,7 +81,7 @@ public class PrimitivePhotoActivity extends Activity {
 				pic = resize(pic);
 				ib.setImageDrawable(pic);
 				
-				
+				ClaimListSingleton.getClaimList().getExpenseList(claimIndex).get(expenseIndex).setReceiptUri(imageFileUri);
 			}else if (resultCode == RESULT_CANCELED) {
 				TextView tv = (TextView) findViewById(R.id.textView3);
 				tv.setText("Photograph Cancelled");
