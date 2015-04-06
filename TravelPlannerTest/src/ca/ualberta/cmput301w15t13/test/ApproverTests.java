@@ -168,5 +168,34 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		
 	}
 	
-
+	/**
+	 * Test that the Approver sees the correct submitted claims
+	 * Tests US08.01.01 - partly
+	 * @throws EmptyFieldException
+	 * @throws InvalidDateException
+	 */
+	
+	public void testApproverView() throws EmptyFieldException, InvalidDateException {
+		Approver a = new Approver("andry");
+		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
+		Claim claim1 = new Claim("name1", new Date(1), new Date(2), "Dest", new TravelItineraryList());
+		Claim claim2 = new Claim("name2", new Date(1), new Date(2), "Dest", new TravelItineraryList());
+		Claim claim3 = new Claim("name3", new Date(1), new Date(2), "Dest", new TravelItineraryList());
+		
+		//submit two claims
+		claim.giveStatus(statusEnum.SUBMITTED);
+		claim1.giveStatus(statusEnum.SUBMITTED);
+		
+		ArrayList<Claim> allClaims = new ArrayList<Claim>();
+		allClaims.add(claim);
+		allClaims.add(claim1);
+		allClaims.add(claim2);
+		allClaims.add(claim3);
+		
+		//Test to see that the approver only sees the submitted claims
+		assertEquals("Approver sees wrong number of claims",2, a.getPermittableClaims(allClaims).size());
+		assertEquals("Approver sees wrong claim", claim, a.getPermittableClaims(allClaims).get(0));
+		assertEquals("Approver sees wrong claim", claim1, a.getPermittableClaims(allClaims).get(1));	
+	}
+	
 }
