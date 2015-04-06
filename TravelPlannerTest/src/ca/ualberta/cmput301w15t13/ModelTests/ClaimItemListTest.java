@@ -114,7 +114,6 @@ public class ClaimItemListTest extends
 	 */
 	public void testAddRemove() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
 		
-		DataManager.setTestMode();
 		ClaimList claimList = new ClaimList();
 		Claim claim = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 		Claim claim2 = new Claim("Name2", new Date(2), new Date(3), "Desc2", new TravelItineraryList());

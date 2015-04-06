@@ -58,6 +58,7 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		DataManager.setTestMode();
 	}
 	
 	/** 

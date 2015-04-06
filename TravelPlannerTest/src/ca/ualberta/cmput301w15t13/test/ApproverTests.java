@@ -105,8 +105,12 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 	
 	/** 
 	 * Test Case H3
-	 * Tests that as an approver you are able to approve a claim
-	 * Tests US08.08.01
+	 * Tests that as an approver you are able to approve a claim.
+	 * In addition, our interface is designed in such a way that
+	 * if you are logged in as a claimant, there is no option to 
+	 * approve your own claims. This has been confirmed through
+	 * manual testing.
+	 * Tests US08.08.01,US08.09.01
 	 * https://github.com/CMPUT301W15T13/TravelPlanner/issues/79
 	 * @throws InvalidNameException 
 	 * @throws InvalidDateException 
@@ -364,4 +368,5 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		//Tests the ability of the approver to view the photo
 		assertNotNull("ExpenseItem doesn't show photo", approverClaims.get(0).getExpenseItems().get(0).getReceipt());
 	}
+	
 }

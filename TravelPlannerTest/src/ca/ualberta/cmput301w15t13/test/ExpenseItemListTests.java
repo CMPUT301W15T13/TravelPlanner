@@ -56,6 +56,7 @@ public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<Login
   @Override
   protected void setUp() throws Exception{
 	  super.setUp();
+	  DataManager.setTestMode();
   }
   
   /**

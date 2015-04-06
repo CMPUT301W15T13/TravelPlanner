@@ -16,6 +16,7 @@ public class Persistance extends
 		ActivityInstrumentationTestCase2<LoginActivity> {
 	public Persistance() {
 		super(LoginActivity.class);
+		DataManager.setTestMode();
 	}
 
 	/**
