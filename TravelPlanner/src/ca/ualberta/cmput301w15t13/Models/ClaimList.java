@@ -91,6 +91,8 @@ public class ClaimList {
 	public void remove(Claim claim) {
 			if (claimList.contains(claim)) {
 				claimList.remove(claim);
+
+				DataManager.deleteClaim(claim.getclaimID());
 				if (DataManager.isNetworkAvailable() == false){
 				DataManager.saveClaim(claim);
 				}
@@ -102,7 +104,9 @@ public class ClaimList {
 		//Check for duplicates
 		if (!claimList.contains(claim)) {
 			claimList.add(claim);
-
+			//DataManager.setOfflineMode();
+			DataManager.saveClaim(claim);
+			//new SaveASyncTask().execute(claim.getclaimID());
 			DataManager.saveClaim(claim);
 		}
 	}
@@ -112,6 +116,8 @@ public class ClaimList {
 		String claimToDeleteID = null;
 		
 		if (!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)) {
+			claimToDeleteID = getClaimAtIndex(i).getclaimID();
+			DataManager.deleteClaim(claimToDeleteID);
 			//claimToDeleteID = getClaimAtIndex(i).getclaimID();
 			//DataManager.deleteClaim(claimToDeleteID);
 			claimList.remove(i);
