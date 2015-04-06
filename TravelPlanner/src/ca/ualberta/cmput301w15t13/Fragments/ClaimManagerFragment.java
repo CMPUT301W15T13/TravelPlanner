@@ -48,7 +48,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
-import dialogs.ClaimantGetLocationDialog;
+import dialogs.ClaimantGetDestinationLocationDialog;
 import dialogs.DestinationDialogFragment;
 import dialogs.EditTagFragment;
 import dialogs.TagChoiceFragment;
@@ -463,7 +463,7 @@ public class ClaimManagerFragment extends Fragment{
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
-			ClaimantGetLocationDialog dialog = new ClaimantGetLocationDialog();
+			ClaimantGetDestinationLocationDialog dialog = new ClaimantGetDestinationLocationDialog();
 		    Bundle args = new Bundle();
 		    args.putInt("claimIndex", claimIndex);
 		    args.putInt("travelIndex", position);

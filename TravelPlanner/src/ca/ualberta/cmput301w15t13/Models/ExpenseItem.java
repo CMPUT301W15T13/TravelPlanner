@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import android.graphics.Bitmap;
+import android.location.Location;
 import android.text.format.DateFormat;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
@@ -51,6 +52,7 @@ public class ExpenseItem implements ExpenseClaim {
   protected String ExpenseDescription = null;
   protected double Amount = 0.00;
   protected String currency;
+  protected Location location = null;
 
   protected String ClaimID = null;
   protected String ExpenseID = null;
@@ -247,5 +249,13 @@ public class ExpenseItem implements ExpenseClaim {
 		 * 
 		 */
 		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
+	}
+	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }

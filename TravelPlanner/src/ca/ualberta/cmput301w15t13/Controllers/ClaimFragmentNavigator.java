@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
@@ -22,12 +23,14 @@ public class ClaimFragmentNavigator {
 	private static ClaimViewerFragment claimViewerFragment;
 	private static ClaimManagerFragment claimManagerFragment;
 	private static ClaimDetailViewerFragment claimDetailViewerFragment;
+	private static ClaimActivity claimActivity;
 
-	public static void createInstance(FragmentManager f){
+	public static void createInstance(FragmentManager f, ClaimActivity activity){
 		fm = f;
 		claimViewerFragment = new ClaimViewerFragment();
 		claimManagerFragment = new ClaimManagerFragment();
 		claimDetailViewerFragment = new ClaimDetailViewerFragment();
+		claimActivity = activity;
 	}
 	
 	/**
@@ -175,5 +178,9 @@ public class ClaimFragmentNavigator {
 	public static TravelItinerary getFragmentManagerTravelItinenary(
 			int travelItemIndex) {
 		return claimManagerFragment.getTravelItineraryItem(travelItemIndex);
+	}
+
+	public static User getUser() {
+		return claimActivity.getUser();
 	}
 }

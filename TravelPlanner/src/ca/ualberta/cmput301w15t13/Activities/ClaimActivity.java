@@ -174,7 +174,7 @@ public class ClaimActivity extends Activity  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.claim_activity_layout);
 		
-		ClaimFragmentNavigator.createInstance(getFragmentManager());
+		ClaimFragmentNavigator.createInstance(getFragmentManager(), this);
 		
 		DataManager.setCurrentContext(this.getApplicationContext());
 		

@@ -47,9 +47,7 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
         	lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, listener);
         	Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         	if(location != null){
-        		Toast.makeText(activity,"Lat: " + location.getLatitude() +
-        								"Long: " + location.getLongitude()
-        								,Toast.LENGTH_SHORT).show();
+        		Toast.makeText(activity,"Added Home Location" ,Toast.LENGTH_SHORT).show();
         		user.setLocation(location);
         	}else{
         		Toast.makeText(activity, "Could not get location", Toast.LENGTH_SHORT).show();
