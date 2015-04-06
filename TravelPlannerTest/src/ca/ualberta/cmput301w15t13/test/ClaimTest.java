@@ -22,8 +22,10 @@ package ca.ualberta.cmput301w15t13.test;
 
 import java.util.Date;
 
+import persistanceController.DataManager;
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import exceptions.ClaimPermissionException;
@@ -96,19 +98,20 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	 */
 	public void testAddClaim() throws EmptyFieldException, InvalidDateException {
 		// ClaimList to hold claims
-		ClaimList claimList = new ClaimList();
+		//ClaimList claimList = new ClaimList();
+		DataManager.setTestMode();
 		Claim claim1 = new Claim("Name1", new Date(100), new Date(120),null, null );
-		claimList.add(claim1);
+		ClaimListSingleton.addClaim(claim1);
 		
 		// Test claim was added
-		assertEquals("Claimlist size is not 1", 1, claimList.size());
+		assertEquals("Claimlist size is not 1", 1, ClaimListSingleton.getClaimList().getClaimArrayList().size());
 		// add 2 more claims
-		Claim claim2 = new Claim("Name2", new Date(100), new Date(120), null, null);
-		Claim claim3 = new Claim("Name3", new Date(100), new Date(120), null, null);
-		claimList.add(claim2);
-		claimList.add(claim3);
+		Claim claim2 = new Claim("Name1", new Date(120), new Date(120), null, null);
+		Claim claim3 = new Claim("Name1", new Date(120), new Date(130), null, null);
+		ClaimListSingleton.addClaim(claim2);
+		ClaimListSingleton.addClaim(claim3);
 		// check to see that all items were added
-		assertEquals("Claimlist size is not 3 ", 3, claimList.size());
+		assertEquals("Claimlist size is not 3 ", 3, ClaimListSingleton.getClaimList().getClaimArrayList().size());
 	}
 		
 	/**
