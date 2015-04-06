@@ -22,6 +22,8 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.ArrayList;
 import java.util.Date;
 
+import persistanceController.DataManager;
+
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -46,6 +48,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
   @Override
   protected void setUp() throws Exception {
     super.setUp();
+    DataManager.setTestMode();
   }
 	
 	/**
@@ -223,11 +226,20 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	  assertEquals("Too many expenses deleted", 2, claim.getExpenseItems().size());
   	}
   
+  /**
+   * "Tests" minimal navigation re: adding expense items
+   *  you may notice that this test doesn't do anything.
+   *  This is because minimal navigation is a subjective
+   *  idea, and can't be quantified. This test represents
+   *  that we have looked at the user story and fulfilled it 
+   *  to our satisfaction.
+   *  Tests US04.08.01
+   * @throws EmptyFieldException
+   * @throws InvalidDateException
+   */
   public void testNavigation() throws EmptyFieldException, InvalidDateException {
 	  Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
 	  ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
-
 	  claim.addExpenseItem(expenseItem);
-	  
   }	
 }

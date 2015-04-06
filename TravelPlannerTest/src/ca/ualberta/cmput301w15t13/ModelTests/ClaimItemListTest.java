@@ -71,6 +71,7 @@ public class ClaimItemListTest extends
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		DataManager.setTestMode();
 	}
 	
 	/**
