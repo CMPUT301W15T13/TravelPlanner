@@ -36,6 +36,7 @@ public class DataManager {
 
 	private static boolean networkAvailable = false;
 	private static Context currentContext;
+	private static boolean isTesting = false;
 	
 	/**
 	 * This returns the status of the network
@@ -53,6 +54,10 @@ public class DataManager {
 		networkAvailable = true;
 	}
 	
+	public static void setTestMode(){
+		isTesting = true;
+	}
+	
 	/**
 	 * This will save 1 Claim
 	 * @param claim
@@ -60,17 +65,25 @@ public class DataManager {
 	 */
 	public static boolean saveClaim(Claim claim){
 		//This will go through a claim and save all the expenses
-		DataHelper helper = new DataHelper();	
-		helper.saveClaim(claim);
-		return false;
+		if (isTesting == false){
+			DataHelper helper = new DataHelper();	
+			helper.saveClaim(claim);
+			return false;
+		}else{
+			return false;
+		}
+		
 	}
 	
 
 	
 	public static void saveClaims(ArrayList<Claim> claimList){
-		for(Claim claim: claimList){
-			saveClaim(claim);
+		if (isTesting == false){
+			for(Claim claim: claimList){
+				saveClaim(claim);
+			}
 		}
+
 	}
 	
 	/**
@@ -79,8 +92,10 @@ public class DataManager {
 	 */
 	public static void deleteClaim(String claimID){
 		//This will go through a claim and save all the expenses
-		DataHelper helper = new DataHelper();	
-		helper.DeleteClaim(claimID);
+		if (isTesting == false){
+			DataHelper helper = new DataHelper();	
+			helper.DeleteClaim(claimID);
+		}
 	}
 	
 	
@@ -90,23 +105,26 @@ public class DataManager {
 	 * @return
 	 */
 	public static void loadClaimsByUserName(String userName){
-		DataHelper helper = new DataHelper();
-		helper.loadClaimsByUserName(userName);
-		
-		//This goes through all the claims and reloads the tags
-		ArrayList<Tag> tagList;
-		for (Claim claim: ClaimListSingleton.getClaimList().getClaimArrayList()){
-			tagList = claim.getTags();
+		if (isTesting == false){
+			DataHelper helper = new DataHelper();
+			helper.loadClaimsByUserName(userName);
 			
-			for (int index = 0; index < tagList.size(); index++){
-				ClaimListSingleton.getClaimList().tagManager.add(tagList.get(index), claim.getclaimID());
+			//This goes through all the claims and reloads the tags
+			ArrayList<Tag> tagList;
+			for (Claim claim: ClaimListSingleton.getClaimList().getClaimArrayList()){
+				tagList = claim.getTags();
+				
+				for (int index = 0; index < tagList.size(); index++){
+					ClaimListSingleton.getClaimList().tagManager.add(tagList.get(index), claim.getclaimID());
+				}
 			}
-			
 		}
 	}
 	
 	public static void setCurrentContext(Context context){
-		currentContext = context;
+		if (isTesting == false){
+			currentContext = context;
+		}
 	}
 	
 	public static Context getCurrentContext(){
@@ -114,13 +132,17 @@ public class DataManager {
 	}
 	
 	public static void loadAllClaims() throws InterruptedException, ExecutionException{
-		DataHelper helper = new DataHelper();
-		helper.loadAllClaims();
+		if (isTesting == false){
+			DataHelper helper = new DataHelper();
+			helper.loadAllClaims();
+		}
 	}
 
 	public static void updateClaim(Claim claim) {
-		DataHelper helper = new DataHelper();
-		helper.updateClaim(claim);
+		if (isTesting == false){
+			DataHelper helper = new DataHelper();
+			helper.updateClaim(claim);
+		}
 		
 	}
 

@@ -1,11 +1,15 @@
 package ca.ualberta.cmput301w15t13.Models;
 
+
+/**
+ * Currency class
+ * Defines data and overall functionality
+ */
+
+
 public class Currency{
 
-	/**
-	 * Currency class
-	 * Defines data and overall functionality
-	 */
+
 	public enum CurrencyEnum {
 			CAD("Canadian Dollar","CAD"),
 			USD("American Dollar","USD"), 
@@ -46,14 +50,40 @@ public class Currency{
 	
 	}
 	
+	
 	protected CurrencyEnum currencyType;	//Currency Type
 	protected double amount;				//Currency amount
+	
+	public Currency(String currencyType, double newAmount){
+		CurrencyEnum type = this.getEnumFromString(currencyType);
+		this.currencyType = type;
+		amount = newAmount;
+	}
 	
 	public Currency(CurrencyEnum type){
 		currencyType = type;
 		amount = 0;
 	}
 	
+	
+	private CurrencyEnum getEnumFromString(String currencyType){
+		if (currencyType.equals("CAD")){
+			return CurrencyEnum.CAD;
+		}else if (currencyType.equals("USD")){
+			return CurrencyEnum.USD;
+		}else if (currencyType.equals("EUR")){
+			return CurrencyEnum.EUR;
+		}else if (currencyType.equals("GBP")){
+			return CurrencyEnum.GBP;
+		}else if (currencyType.equals("CHF")){
+			return CurrencyEnum.CHF;
+		}else if (currencyType.equals("JPY")){
+			return CurrencyEnum.JPY;
+		}else{
+			return CurrencyEnum.CNY;
+		}
+		
+	}
 	
 	public CurrencyEnum getcurrencyType(){
 		return currencyType;
@@ -71,7 +101,9 @@ public class Currency{
 		this.amount = newAmount;
 	}
 
-
+	public String getcurrencyTypeAsString() {
+		return this.currencyType.getCurrencyAbbr();
+	}
 
 	
 	

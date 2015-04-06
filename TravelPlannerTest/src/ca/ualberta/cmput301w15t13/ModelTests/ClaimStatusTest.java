@@ -22,6 +22,8 @@ package ca.ualberta.cmput301w15t13.ModelTests;
 
 import java.util.Date;
 
+import persistanceController.DataManager;
+
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -53,6 +55,7 @@ public class ClaimStatusTest extends
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		DataManager.setTestMode();
 	}
 	
 	// This tests that a claimStatus can be made without error

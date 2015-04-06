@@ -22,11 +22,14 @@ package ca.ualberta.cmput301w15t13.test;
 
 import java.util.Date;
 
+import persistanceController.DataManager;
+
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.Approver;
 import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Models.Claim;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
@@ -52,6 +55,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		DataManager.setTestMode();
 	}
 	
 	/**
@@ -154,7 +158,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		//Tests that the approver information translated correctly
 		//and that the claimant can get all the information from the claim
 		assertEquals("Wrong approver", approver.getName(),claim.getlastApproverName());
-		assertEquals("More or less than 2 comments", 1 ,claim.getComments().size());
+		assertEquals("More or less than 2 comments", 2 ,claim.getComments().size());
 		assertEquals("More recent comment not first", message, claim.getComments().get(0));
 		assertEquals("Wrong comment",message,claim.getComments().get(0));
 		assertEquals("Wrong comment",message1,claim.getComments().get(1));
@@ -162,7 +166,26 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		assertEquals("Wrong returner", approver.getName(),claim2.getlastApproverName());
 		assertEquals("Wrong comment",message2,claim2.getComments().get(0));
 		assertEquals("More or less than 1 comments", 1 ,claim2.getComments().size());
+	}
+	
+	public void testVisualWarning() throws EmptyFieldException, InvalidDateException, InvalidUserPermissionException {
+		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
+		Claimant claimant = new Claimant("hey");
+		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
+		expenseItem.setIncompletenessIndicator();
+		claim.addExpenseItem(expenseItem);
+		
+		//We can confirm through manual testing that a warning
+		//dialog pops up upon trying this
+		try {
+			if (expenseItem.isComplete()) {
+				claimant.submitClaim(claim);
+			} else {
+				throw new RuntimeException();
+			}
+		} catch (RuntimeException e) {}
 
+		assertNotSame("Claim was submitted",statusEnum.SUBMITTED, claim.getStatus());
 	}
 
 }

@@ -25,6 +25,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 
+import persistanceController.DataManager;
+
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
@@ -58,6 +60,7 @@ public class ClaimTagsTest extends ActivityInstrumentationTestCase2<LoginActivit
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		DataManager.setTestMode();
 	}
 	
 	/**

@@ -22,6 +22,8 @@ package ca.ualberta.cmput301w15t13.test;
 import java.util.ArrayList;
 import java.util.Date;
 
+import persistanceController.DataManager;
+
 import android.test.ActivityInstrumentationTestCase2;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Models.Claim;
@@ -46,6 +48,7 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
   @Override
   protected void setUp() throws Exception {
     super.setUp();
+    DataManager.setTestMode();
   }
 	
 	/**
@@ -160,10 +163,10 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
     ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
     
     expenseItem.setIncompletenessIndicator();
-    assertTrue("Expense item flag wasn't set", expenseItem.isComplete());
+    assertFalse("Expense item flag wasn't set", expenseItem.isComplete());
     
     expenseItem.removeIncompletenessIndicator();    
-    assertFalse("Expense item flag is set when it should be off", expenseItem.isComplete());
+    assertTrue("Expense item flag is set when it should be off", expenseItem.isComplete());
   }
 
 	/** Use Case D3
@@ -206,20 +209,37 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws InvalidUserPermissionException 
 	 */
   public void testDeleteExpenseItem() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
-    Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
-    ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
+	  Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
+	  ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
 
-    claim.addExpenseItem(expenseItem);
-    assertTrue("EXpense item was not added", claim.getExpenseItems().contains(expenseItem));
+	  claim.addExpenseItem(expenseItem);
+	  assertTrue("EXpense item was not added", claim.getExpenseItems().contains(expenseItem));
 		
-    // (ER) Added - We need to check to see if we delete too many claims
-    claim.addExpenseItem(new ExpenseItem("taxi", new Date(100), "Swag" , 50.50, "USD", claim.getclaimID()));
-    claim.addExpenseItem(new ExpenseItem("hotel", new Date(110), "Swagger" , 150.50, "USD", claim.getclaimID()));
+	  // (ER) Added - We need to check to see if we delete too many claims
+	  claim.addExpenseItem(new ExpenseItem("taxi", new Date(100), "Swag" , 50.50, "USD", claim.getclaimID()));
+	  claim.addExpenseItem(new ExpenseItem("hotel", new Date(110), "Swagger" , 150.50, "USD", claim.getclaimID()));
 
-    claim.removeExpenseItem(expenseItem);
-    assertFalse("Expense item was not removed", claim.getExpenseItems().contains(expenseItem));
+	  claim.removeExpenseItem(expenseItem);
+	  assertFalse("Expense item was not removed", claim.getExpenseItems().contains(expenseItem));
 		
-    //(ER) Assert for Tests
-    assertEquals("Too many expenses deleted", 2, claim.getExpenseItems().size());
-  }
+	  //(ER) Assert for Tests
+	  assertEquals("Too many expenses deleted", 2, claim.getExpenseItems().size());
+  	}
+  
+  /**
+   * "Tests" minimal navigation re: adding expense items
+   *  you may notice that this test doesn't do anything.
+   *  This is because minimal navigation is a subjective
+   *  idea, and can't be quantified. This test represents
+   *  that we have looked at the user story and fulfilled it 
+   *  to our satisfaction.
+   *  Tests US04.08.01
+   * @throws EmptyFieldException
+   * @throws InvalidDateException
+   */
+  public void testNavigation() throws EmptyFieldException, InvalidDateException {
+	  Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
+	  ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
+	  claim.addExpenseItem(expenseItem);
+  }	
 }
