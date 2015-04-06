@@ -162,21 +162,24 @@ public class ExpenseManagerFragment extends Fragment {
 	 * @throws InvalidFieldEntryException 
 	 */
 	public void updateExpense() throws InvalidFieldEntryException {
+		
 		updateReferences();
 		String categorySet = categorySpinner.getSelectedItem().toString();
 		String currencySet = currencySpinner.getSelectedItem().toString();
-
+		
 		ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
+
 		editExpense.setExpenseCategory(categorySet);
+		editExpense.setCurrency(currencySet);
 		editExpense.setExpenseDescription(description);
 		editExpense.setAmount(amount);
-		editExpense.setCurrency(currencySet);
 		editExpense.setLinkedToclaimID(claimID);
 		editExpense.setExpenseName(expenseName);
 		
-		//Claim newClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		Claim newClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		
-	//	ClaimListSingleton.getClaimList().replaceClaimAtIndex(claimIndex, newClaim);
+		ClaimListSingleton.getClaimList().replaceClaimAtIndex(claimIndex, newClaim);
+		
 	}
 	
 	/**
