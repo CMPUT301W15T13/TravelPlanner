@@ -17,7 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.GeolocationMapActivity;
+import ca.ualberta.cmput301w15t13.Activities.GoogleMapActivity;
 import ca.ualberta.cmput301w15t13.Controllers.User;
 
 /**
@@ -81,7 +81,7 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
-	        	Intent intent = new Intent(getActivity(), GeolocationMapActivity.class);
+	        	Intent intent = new Intent(getActivity(), GoogleMapActivity.class);
 	        	startActivity(intent);
 	      	    Dialog d = getDialog();
 	      	    d.dismiss();
