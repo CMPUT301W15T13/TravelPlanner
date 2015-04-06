@@ -26,18 +26,25 @@ import java.util.Date;
 import persistanceController.DataManager;
 
 import android.test.ActivityInstrumentationTestCase2;
+import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.Claimant;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
+import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import ca.ualberta.cmput301w15t13.test.MockListener;
 import exceptions.DuplicateException;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
+import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
 
 
@@ -245,7 +252,6 @@ public class ClaimItemListTest extends
 		assertEquals("Wrong indexes returned", expected, cl.getIndexList());
 		assertEquals("Wrong amount of indexes returned", 4, cl.getIndexList().size());
 		
-		
 	}
 	
 	/**
@@ -375,6 +381,56 @@ public class ClaimItemListTest extends
 		assertEquals("Claims were not sorted", sorted.get(1).getStartDateAsString(), claim3.getStartDateAsString());
 		
 		
+	}
+	
+	/**
+	 * Test that a user can "View" a claim
+	 * and it's details
+	 * Tests US01.03.01, US02.01.01
+	 * @throws EmptyFieldException
+	 * @throws InvalidDateException
+	 * @throws InvalidFieldEntryException 
+	 * @throws DuplicateException 
+	 */
+	public void testView() throws EmptyFieldException, InvalidDateException, InvalidFieldEntryException, DuplicateException {
+		ClaimList cl = ClaimListSingleton.getClaimList();
+		Claim claim1 = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
+		claim1.addTravelDestination("Russia", "Bear hunting");
+		claim1.addTravelDestination("Japan", "Sushi hunting");
+		int oldClaimListSize = cl.size();
+		cl.add(claim1);
+		
+		//Test that you can get all needed information from the controller
+		assertEquals("Claimlist not populating",oldClaimListSize+1, cl.size());
+		assertNotNull("Claimant cannot view details", cl.getClaimAtIndex(2).getUserName());
+		assertNotNull("Claimant cannot view details", cl.getClaimAtIndex(2).getStartDate());
+		assertNotNull("Claimant cannot view details",cl.getClaimAtIndex(2).getEndDate());
+		assertNotNull("Claimant cannot view details",cl.getClaimAtIndex(2).getDescription());
+		assertNotNull("Claimant cannot view details",cl.getClaimAtIndex(2).getTravelItineraryAsString());
+		
+		//Tests the following:
+		//As a claimant, I want to list all my expense claims, showing for each claim: the starting date of travel, 
+		//the destination(s) of travel, the claim status, tags, and total currency amounts.
+		
+		ExpenseItem expenseItem1 = new ExpenseItem("air", new Date(100), "yolo" , 10.00, "USD", claim1.getclaimID());
+		ExpenseItem expenseItem2 = new ExpenseItem("air", new Date(100), "yolo" , 10.00, "USD", claim1.getclaimID());
+		ExpenseItem expenseItem3 = new ExpenseItem("air", new Date(100), "yolo" , 10.00, "CDN", claim1.getclaimID());
+		Tag tag = new Tag("tagname");
+		
+		claim1.addTag(tag);
+		claim1.addExpenseItem(expenseItem1);
+		claim1.addExpenseItem(expenseItem2);
+		claim1.addExpenseItem(expenseItem3);
+		
+		assertNotNull("Claim doesn't show startDate", cl.getClaimAtIndex(2).getStartDate());
+		assertNotNull("Claim doesn't show destinations", cl.getClaimAtIndex(2).getTravelDestination(0));
+		assertEquals("Claim doesn't show all destinations", 2,cl.getClaimAtIndex(2).getTravelList().numberofDestinations());
+		assertNotNull("Claim doesn't show status", cl.getClaimAtIndex(2).getStatus());
+		assertEquals("Claim doesn't show correct status", statusEnum.INPROGRESS,cl.getClaimAtIndex(2).getStatus());
+		assertNotNull("Claim doesn't show tags",cl.getClaimAtIndex(2).getTags());
+		assertNotNull("Claim doesn't show amounts",cl.getClaimAtIndex(2).getCost());
+		assertEquals("Claim doesn't show currency totals of 2 different currency types","20.00 USD\n10.00 CNY\n", cl.getClaimAtIndex(2).getCost());
+
 	}
 	
 

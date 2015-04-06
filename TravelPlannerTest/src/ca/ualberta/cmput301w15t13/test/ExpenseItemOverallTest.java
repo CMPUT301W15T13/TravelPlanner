@@ -206,20 +206,28 @@ public class ExpenseItemOverallTest extends ActivityInstrumentationTestCase2<Log
 	 * @throws InvalidUserPermissionException 
 	 */
   public void testDeleteExpenseItem() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException{
-    Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
-    ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
+	  Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
+	  ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
 
-    claim.addExpenseItem(expenseItem);
-    assertTrue("EXpense item was not added", claim.getExpenseItems().contains(expenseItem));
+	  claim.addExpenseItem(expenseItem);
+	  assertTrue("EXpense item was not added", claim.getExpenseItems().contains(expenseItem));
 		
-    // (ER) Added - We need to check to see if we delete too many claims
-    claim.addExpenseItem(new ExpenseItem("taxi", new Date(100), "Swag" , 50.50, "USD", claim.getclaimID()));
-    claim.addExpenseItem(new ExpenseItem("hotel", new Date(110), "Swagger" , 150.50, "USD", claim.getclaimID()));
+	  // (ER) Added - We need to check to see if we delete too many claims
+	  claim.addExpenseItem(new ExpenseItem("taxi", new Date(100), "Swag" , 50.50, "USD", claim.getclaimID()));
+	  claim.addExpenseItem(new ExpenseItem("hotel", new Date(110), "Swagger" , 150.50, "USD", claim.getclaimID()));
 
-    claim.removeExpenseItem(expenseItem);
-    assertFalse("Expense item was not removed", claim.getExpenseItems().contains(expenseItem));
+	  claim.removeExpenseItem(expenseItem);
+	  assertFalse("Expense item was not removed", claim.getExpenseItems().contains(expenseItem));
 		
-    //(ER) Assert for Tests
-    assertEquals("Too many expenses deleted", 2, claim.getExpenseItems().size());
-  }
+	  //(ER) Assert for Tests
+	  assertEquals("Too many expenses deleted", 2, claim.getExpenseItems().size());
+  	}
+  
+  public void testNavigation() throws EmptyFieldException, InvalidDateException {
+	  Claim claim = new Claim("Yolo", new Date(100), new Date(120), null, null);
+	  ExpenseItem expenseItem = new ExpenseItem("air", new Date(100), "yolo" , 10.50, "USD", claim.getclaimID());
+
+	  claim.addExpenseItem(expenseItem);
+	  
+  }	
 }
