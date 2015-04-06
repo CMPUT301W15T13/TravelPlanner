@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.text.format.DateFormat;
 import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
@@ -59,7 +60,7 @@ public class ExpenseItem implements ExpenseClaim {
    * this does not need to be initialized
    */
   protected Currency currencyEnum;
-  public Receipt receipt = null;
+  public Uri receipt = null;
 
   public boolean complete = false;
 	
@@ -185,7 +186,7 @@ public class ExpenseItem implements ExpenseClaim {
     this.ClaimID = linkedToclaimID;
   }
 
-  public Receipt getReceipt() {
+  public Uri getReceipt() {
     return receipt;
   }
 
@@ -193,7 +194,7 @@ public class ExpenseItem implements ExpenseClaim {
    *  method for adding a receipt for the expense item, this is to be implemented for project 5
    * @param receipt
    */
-  public void addReceipt(Receipt receipt) {
+  public void addReceipt(Uri receipt) {
     this.receipt = receipt;
   }
 

@@ -79,6 +79,16 @@ public class ClaimantExpenseDialogFragment extends DialogFragment{
      	    d.dismiss();
 		}
 	};
+    final OnClickListener attachReceipt = new OnClickListener() {
+        @Override
+		public void onClick(final View v) {
+     	   FragmentManager fm = getFragmentManager();
+     	   ExpenseListViewerFragment fragment = (ExpenseListViewerFragment) fm.findFragmentByTag("ExpenseViewer");
+     	   fragment.editExpenseItem();
+     	   Dialog d = getDialog();
+     	   d.dismiss();
+        }
+    };
     
 	@SuppressLint("InflateParams")
 	@Override
@@ -94,11 +104,14 @@ public class ClaimantExpenseDialogFragment extends DialogFragment{
 	    Button delete = (Button) view.findViewById(R.id.buttonDeleteExpense);
 	    Button viewButton = (Button) view.findViewById(R.id.buttonViewExpense);
 	    Button incompleteView = (Button) view.findViewById(R.id.buttonToggleIncompletenessIndicator);
+	    Button receipt = (Button) view.findViewById(R.id.receiptButton);
 	    
 	    edit.setOnClickListener(editExpenseItem);
 	    delete.setOnClickListener(deleteExpenseItem);
 	    viewButton.setOnClickListener(viewExpenseItem);
 	    incompleteView.setOnClickListener(incompleteToggle);
+	    receipt.setOnClickListener(attachReceipt);
+	    
 	    if(item.isComplete()){
 	    	incompleteView.setText("Mark Incomplete");
 	    }else{

@@ -61,5 +61,6 @@
     <string name="set_location">Set Location</string>
     <string name="gps_location">Use Phone\'s GPS</string>
     <string name="map_location">Pick from a map</string>
+    <string name="add_A_Receipt">Attach A Receipt</string>
 
 </resources>

@@ -280,9 +280,13 @@ public class ExpenseActivity extends Activity {
 	 * Take a picture
 	 * @param v
 	 */
-	public void takePicture(View v) {
+	public void takePicture(int index) {
 		setFragmentToTakePic();
+		Bundle bundle = new Bundle();
+		bundle.putInt("claimIndex", claimIndex);
+		bundle.putInt("expenseIndex", index);
 		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
+		intent.putExtra("bundle", bundle);
 		startActivity(intent);
 	}
 	private void setFragmentToTakePic() {

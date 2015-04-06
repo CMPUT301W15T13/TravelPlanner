@@ -44,4 +44,12 @@
            android:text="@string/holder"
            android:textColor="@color/text" />
 
+       <Button
+           android:id="@+id/receiptButton"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:text="@string/add_A_Receipt"
+           android:textColor="@color/text"
+           android:textSize="12sp" />
+
    </LinearLayout>
