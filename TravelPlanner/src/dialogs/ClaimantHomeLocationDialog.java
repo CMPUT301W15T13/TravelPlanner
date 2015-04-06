@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -16,6 +17,7 @@ import android.widget.Button;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
+import ca.ualberta.cmput301w15t13.Activities.GeolocationMapActivity;
 import ca.ualberta.cmput301w15t13.Controllers.User;
 
 /**
@@ -25,7 +27,7 @@ import ca.ualberta.cmput301w15t13.Controllers.User;
  * to pick a location from a map.
  *
  */
-public class ClaimantLocationDialog extends DialogFragment{
+public class ClaimantHomeLocationDialog extends DialogFragment{
 	User user;
 	ClaimActivity activity;
 	public static final String MOCK_PROVIDER = "mockLocationProvider";
@@ -81,8 +83,10 @@ public class ClaimantLocationDialog extends DialogFragment{
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
-	      	   Dialog d = getDialog();
-	      	   d.dismiss();
+	        	Intent intent = new Intent(getActivity(), GeolocationMapActivity.class);
+	        	startActivity(intent);
+	      	    Dialog d = getDialog();
+	      	    d.dismiss();
 	        }
     };
 	
@@ -92,7 +96,7 @@ public class ClaimantLocationDialog extends DialogFragment{
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 	    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 	    LayoutInflater inflater = getActivity().getLayoutInflater();
-	    View view = inflater.inflate(R.layout.claim_location_dialog, null);
+	    View view = inflater.inflate(R.layout.claimant_location_dialog, null);
 
 	    // Pass null as the parent view because its going in the dialog layout
 	    builder.setView(view);

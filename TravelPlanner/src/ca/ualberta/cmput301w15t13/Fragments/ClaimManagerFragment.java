@@ -23,16 +23,21 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
+import adapters.DestinationAdapter;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
@@ -44,6 +49,7 @@ import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
+import dialogs.ClaimantGetLocationDialog;
 import dialogs.DestinationDialogFragment;
 import dialogs.EditTagFragment;
 import dialogs.TagChoiceFragment;
@@ -68,13 +74,15 @@ public class ClaimManagerFragment extends Fragment{
 	private EditText descriptionView;
 	private ArrayList<Tag> tagList;
 	private ArrayList<String> tagNameList;
-	private TextView startDateView, endDateView, destinationView, tagView;
+	private TextView startDateView, endDateView, tagView;
+	private ListView destinations;
 	private String description, startDateText, endDateText;
 	private TravelItineraryList itineraryList;
 	private Date startDate, endDate;
 	private boolean incompleteFields, invalidDates, isEditing;
 	private int claimIndex;	
 	private ClaimActivity activity;	
+	private DestinationAdapter destAdapter;
 
 	/**
 	 * Sets the "Mode" of the fragment to edit or create, 
@@ -100,7 +108,6 @@ public class ClaimManagerFragment extends Fragment{
 			
 			this.startDateView.setText(editClaim.getStartDateAsString());
 			this.endDateView.setText(editClaim.getEndDateAsString());
-			this.destinationView.setText(editClaim.getTravelItineraryAsString());
 			this.tagView.setText(editClaim.getTagsAsString());
 			
 			for (Tag t : editClaim.tags) {
@@ -202,7 +209,6 @@ public class ClaimManagerFragment extends Fragment{
 	 * @throws EmptyFieldException
 	 * @return valid claim created 
 	 */
-	
 	public boolean createClaim() throws InvalidDateException, InvalidUserPermissionException, EmptyFieldException{
 		if(invalidDates){
 			Toast.makeText(getActivity(), "Start Date must be before End Date", Toast.LENGTH_SHORT).show();
@@ -331,13 +337,6 @@ public class ClaimManagerFragment extends Fragment{
 		dest_list += "  " + item.getDestinationName() + " : " + item.getDestinationDescription();
 		destinationView.setText(dest_list);
 
-		// TODO this needs to change the layout size
-		//if(itineraryList.size() > 2){
-			//If the text view is set to wrap content too early,
-			//it looks like the field is too small
-			//Toast.makeText(activity, "GROW ME", Toast.LENGTH_SHORT).show();
-			//destinationView.setHeight(LayoutParams.WRAP_CONTENT); 
-		//}
 	}
 
 	/** uses the addTravelItenerarItem function as a template,
@@ -389,7 +388,7 @@ public class ClaimManagerFragment extends Fragment{
 	}
 	
 	/**
-	 * removes a 
+	 * Removes a tag at the given index. 
 	 * @param tagIndex
 	 */
 	public void removeTagItem(int tagIndex) {
@@ -402,6 +401,7 @@ public class ClaimManagerFragment extends Fragment{
 		}
 		tagView.setText(tag_list);
 	}
+	
 	/**
 	 * This method is used to associate a claim with
 	 * a tag that already exists
@@ -438,6 +438,41 @@ public class ClaimManagerFragment extends Fragment{
 		return this.isEditing;
 	}
 
+	/**
+	 * Initialize the destination adapter to 
+	 * correspond to the destination list.
+	 */
+	private void initializeAdapter(){
+		Claim claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		TravelItineraryList destinationList = claim.getTravelList();
+		List<TravelItinerary> travelList = destinationList.getTravelList();
+		destAdapter = new DestinationAdapter(getActivity(), R.layout.destination_adapter_layout, travelList);
+	}
+	
+	
+	/**
+	 * Links the DestinationAdapter to the destination
+	 * list view, and sets the on-item click listener.
+	 */
+	private void initializeDestinationList(){
+		final ListView destListView = (ListView) getView().findViewById(R.id.listViewDestinations);
+		destListView.setAdapter(destAdapter);
+		destListView.setOnItemClickListener(destinationListner);
+		
+	}
+	
+	private final OnItemClickListener destinationListner = new OnItemClickListener() {
+
+		@Override
+		public void onItemClick(AdapterView<?> parent, View view, int position,
+				long id) {
+			ClaimantGetLocationDialog dialog = new ClaimantGetLocationDialog();
+		    Bundle args = new Bundle();
+		    args.putInt("index", position);
+		    dialog.setArguments(args);
+			dialog.show(getFragmentManager(), "Add a location");
+		}
+	};
 	/* Below this is android stuff */
 	
 	@Override
@@ -448,6 +483,8 @@ public class ClaimManagerFragment extends Fragment{
 		startDate = new Date();
 		endDate = new Date();
 		activity = (ClaimActivity) getActivity();
+		
+		initializeAdapter();
 	}
 
 	@Override
@@ -461,10 +498,10 @@ public class ClaimManagerFragment extends Fragment{
 	public void onStart() {
 		super.onStart();
 		descriptionView = (EditText) getView().findViewById(R.id.editTextClaimDescription);
-		destinationView = (TextView) getView().findViewById(R.id.textViewDestinationsList);
 		startDateView = (TextView) getView().findViewById(R.id.textViewStartDate);
 		endDateView = (TextView) getView().findViewById(R.id.textViewEndDate);
 		tagView = (TextView) getView().findViewById(R.id.textViewTags);
+		destinations = (ListView) getView().findViewById(R.id.listViewDestinations);
 		Button tagButton = (Button) getView().findViewById(R.id.addTags);
 		tagButton.setText("Add");
 				
@@ -472,6 +509,7 @@ public class ClaimManagerFragment extends Fragment{
 		this.tagNameList = new ArrayList<String>();
 		this.tagNameList.add("");
 		
+		initializeDestinationList();
 		setFields();
 	}
 	

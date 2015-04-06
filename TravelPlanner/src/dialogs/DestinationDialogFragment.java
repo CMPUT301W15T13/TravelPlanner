@@ -45,7 +45,7 @@ import exceptions.EmptyFieldException;
 
 public class DestinationDialogFragment extends DialogFragment {
 	// Based on http://developer.android.com/guide/topics/ui/dialogs.html March 06 2015
-    
+	
 	@SuppressLint("InflateParams")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {

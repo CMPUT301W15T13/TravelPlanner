@@ -8,7 +8,7 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
-import dialogs.ClaimantLocationDialog;
+import dialogs.ClaimantHomeLocationDialog;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -153,7 +153,7 @@ public class ClaimFragmentNavigator {
 	 * selected location from a map. 
 	 */
 	public static void openLocationDialog() {
-		ClaimantLocationDialog dialog = new ClaimantLocationDialog();
+		ClaimantHomeLocationDialog dialog = new ClaimantHomeLocationDialog();
 	    dialog.show(fm, "Select Location");
 	}
 }

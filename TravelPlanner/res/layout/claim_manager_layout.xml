@@ -105,8 +105,8 @@
 		    	android:layout_marginLeft="3dp"
 				>
 
-				<TextView
-				    android:id="@+id/textViewDestinationsList"
+				<ListView
+				    android:id="@+id/listViewDestinations"
 				    android:layout_width="0px"
 				    android:layout_height="wrap_content"
 				    android:layout_marginBottom="3dp"
