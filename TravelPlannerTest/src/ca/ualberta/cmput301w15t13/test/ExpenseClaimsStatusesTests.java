@@ -122,15 +122,46 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		
 	}
 	
+	/**
+	 * Test that the claimant can see the name of their
+	 * claims approver along with the associated
+	 * comment(s)
+	 * Tests US07.05.01
+	 * @throws EmptyFieldException
+	 * @throws InvalidDateException
+	 * @throws InvalidUserPermissionException
+	 */
 	public void testComment() throws EmptyFieldException, InvalidDateException, InvalidUserPermissionException {
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
+		Claim claim2 = new Claim("userName", new Date(100),new Date(120), null, null);
 		Claimant claimant = new Claimant("c");
-		Approver approver = new Approver("a");
-		claimant.submitClaim(claim);
+		Approver approver = new Approver("andy");
 		
-		approver.addComment(claim, "Looks good bud");
+		claimant.submitClaim(claim);
+		claimant.submitClaim(claim2);
+	
+		String message = "I really like the photo";
+		String message1 = "Looks good bud";
+		String message2 = "not enough";
+		
+		approver.addComment(claim, message);
+		approver.addComment(claim, message1);
+		approver.addComment(claim2, message2);
+		
 		approver.approveClaim(claim);
-		//TODO finish
+		approver.returnClaim(claim2);
+		
+		//Tests that the approver information translated correctly
+		//and that the claimant can get all the information from the claim
+		assertEquals("Wrong approver", approver.getName(),claim.getlastApproverName());
+		assertEquals("More or less than 2 comments", 2 ,claim.getComments().size());
+		assertEquals("More recent comment not first", message, claim.getComments().get(0));
+		assertEquals("Wrong comment",message,claim.getComments().get(0));
+		assertEquals("Wrong comment",message1,claim.getComments().get(1));
+		
+		assertEquals("Wrong returner", approver.getName(),claim2.getlastApproverName());
+		assertEquals("Wrong comment",message2,claim2.getComments().get(0));
+		assertEquals("More or less than 1 comments", 1 ,claim2.getComments().size());
 
 	}
 

@@ -91,7 +91,7 @@ public class ClaimList {
 	public void remove(Claim claim) {
 			if (claimList.contains(claim)) {
 				claimList.remove(claim);
-				//DataManager.deleteClaim(claim.getclaimID());
+				DataManager.deleteClaim(claim.getclaimID());
 			}
 	}
 
@@ -101,7 +101,7 @@ public class ClaimList {
 			claimList.add(claim);
 
 			//DataManager.setOfflineMode();
-			//DataManager.saveClaim(claim);
+			DataManager.saveClaim(claim);
 			//new SaveASyncTask().execute(claim.getclaimID());
 		}
 	}
@@ -112,7 +112,7 @@ public class ClaimList {
 		
 		if (!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)) {
 			claimToDeleteID = getClaimAtIndex(i).getclaimID();
-			//DataManager.deleteClaim(claimToDeleteID);
+			DataManager.deleteClaim(claimToDeleteID);
 			claimList.remove(i);
 		}
 	}
