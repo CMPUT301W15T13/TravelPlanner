@@ -104,8 +104,6 @@ public class ClaimList {
 		//Check for duplicates
 		if (!claimList.contains(claim)) {
 			claimList.add(claim);
-			//DataManager.setOfflineMode();
-			DataManager.saveClaim(claim);
 			//new SaveASyncTask().execute(claim.getclaimID());
 			DataManager.saveClaim(claim);
 		}

@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
+import ca.ualberta.cmput301w15t13.Models.Currency.CurrencyEnum;
 import android.graphics.Bitmap;
 import android.text.format.DateFormat;
 import exceptions.InvalidFieldEntryException;
@@ -51,6 +52,7 @@ public class ExpenseItem implements ExpenseClaim {
   protected String ExpenseDescription = null;
   protected double Amount = 0.00;
   protected String currency;
+  protected Currency expenseCurrency;
 
   protected String ClaimID = null;
   protected String ExpenseID = null;
@@ -58,7 +60,7 @@ public class ExpenseItem implements ExpenseClaim {
   /**
    * this does not need to be initialized
    */
-  protected Currency currencyEnum;
+ // protected Currency currencyEnum;
   public Receipt receipt = null;
 
   public boolean complete = false;
@@ -83,8 +85,9 @@ public class ExpenseItem implements ExpenseClaim {
     this.ExpenseCategory = Category;
     this.purchaseDate = purchaseDate;
     this.ExpenseDescription = ExpenseDescription;
-    this.Amount = Amount;
-    this.currency = Currency;
+    
+    this.setExpenseCurrency(Amount, Currency);
+
 
     /** 
      * These variables are the expense item categories that are visible on the activity 
@@ -103,14 +106,18 @@ public class ExpenseItem implements ExpenseClaim {
   }
   
 
-  public boolean isCategoryValid(String category){
-	  boolean valid = false;
-	  for (String cat: allowedCategories){
-		  valid = true;
-	  }
-	  return valid;
-	 
+  private void setExpenseCurrency(double amount, String currencyType) {
+	    this.Amount = amount;
+	    this.currency = currencyType;
+	    
+	    this.expenseCurrency = new Currency(currencyType, amount);
   }
+  
+  public Currency getExpenseCurrency(){
+	  return this.expenseCurrency;
+  }
+
+
   
   public String getExpenseName() {
 	  return this.ExpenseName;
@@ -159,6 +166,8 @@ public class ExpenseItem implements ExpenseClaim {
 
   public void setAmount(double amount) {
     Amount = amount;
+    
+    this.setExpenseCurrency(this.Amount, this.currency);
   }
 
   public String getCurrency() {
@@ -170,6 +179,7 @@ public class ExpenseItem implements ExpenseClaim {
       throw new InvalidFieldEntryException("Unsupported Currency");
     } else {
       this.currency = currency;
+      this.setExpenseCurrency(this.Amount, this.currency);
     }
   }
 	
