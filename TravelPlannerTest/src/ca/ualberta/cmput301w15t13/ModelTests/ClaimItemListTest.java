@@ -430,7 +430,6 @@ public class ClaimItemListTest extends
 		assertNotNull("Claim doesn't show tags",cl.getClaimAtIndex(2).getTags());
 		assertNotNull("Claim doesn't show amounts",cl.getClaimAtIndex(2).getCost());
 		assertEquals("Claim doesn't show currency totals of 2 different currency types","20.00 USD\n10.00 CNY\n", cl.getClaimAtIndex(2).getCost());
-
 	}
 	
 
