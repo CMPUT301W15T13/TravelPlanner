@@ -91,6 +91,9 @@ public class ClaimList {
 	public void remove(Claim claim) {
 			if (claimList.contains(claim)) {
 				claimList.remove(claim);
+				if (DataManager.isNetworkAvailable() == false){
+				DataManager.saveClaim(claim);
+				}
 				//DataManager.deleteClaim(claim.getclaimID());
 			}
 	}
@@ -100,9 +103,7 @@ public class ClaimList {
 		if (!claimList.contains(claim)) {
 			claimList.add(claim);
 
-			//DataManager.setOfflineMode();
-			//DataManager.saveClaim(claim);
-			//new SaveASyncTask().execute(claim.getclaimID());
+			DataManager.saveClaim(claim);
 		}
 	}
 
@@ -111,9 +112,14 @@ public class ClaimList {
 		String claimToDeleteID = null;
 		
 		if (!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)) {
-			claimToDeleteID = getClaimAtIndex(i).getclaimID();
+			//claimToDeleteID = getClaimAtIndex(i).getclaimID();
 			//DataManager.deleteClaim(claimToDeleteID);
 			claimList.remove(i);
+			//When deleting from a local source, save the claim
+			if (DataManager.isNetworkAvailable() == false){
+			Claim claim = getClaimAtIndex(i);
+			DataManager.saveClaim(claim);
+			}
 		}
 	}
 	
