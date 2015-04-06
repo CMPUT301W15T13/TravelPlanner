@@ -26,12 +26,16 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 /**
@@ -91,8 +95,27 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			currView.setText(expense.getCurrency());
 			catView.setText(expense.getExpenseCategory());
 			
+			/* Sets the color of the title of the expense to red, yellow or green
+			 * depending on how far away the expense is from the home location
+			 */
+			Location homeLocation, expenseLocation;
+			homeLocation = ClaimFragmentNavigator.getUser().getLocation();
+			expenseLocation = expense.getLocation();
+			Resources r = ClaimFragmentNavigator.getResources();
+			if(expenseLocation != null && homeLocation != null){
+				double distance = homeLocation.distanceTo(expenseLocation);
+				if(distance < 1000){
+					titleView.setTextColor(r.getColor(R.color.location_close));
+				}else if (distance < 10000){
+					titleView.setTextColor(r.getColor(R.color.location_medium));
+				}else{
+					titleView.setTextColor(r.getColor(R.color.location_far));
+				}
+			}else{ /* No location, set text to white */
+				titleView.setTextColor(r.getColor(R.color.text));
+			}
+			
 			// Keep the if-else, since the button will be a toggle.
-
 			if (expense.isComplete()) {
 				incompleteView.setText(" ");
 			} else {

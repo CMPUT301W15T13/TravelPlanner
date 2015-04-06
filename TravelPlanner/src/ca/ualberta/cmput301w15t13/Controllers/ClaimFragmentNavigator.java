@@ -3,6 +3,7 @@ package ca.ualberta.cmput301w15t13.Controllers;
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.res.Resources;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
@@ -182,5 +183,13 @@ public class ClaimFragmentNavigator {
 
 	public static User getUser() {
 		return claimActivity.getUser();
+	}
+	/**
+	 * Allows global access to /res files,
+	 * such as strings and colors.
+	 * @return Android Resources object.
+	 */
+	public static Resources getResources() {
+		return claimActivity.getResources();
 	}
 }
