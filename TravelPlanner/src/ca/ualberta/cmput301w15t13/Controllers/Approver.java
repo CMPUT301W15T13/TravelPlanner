@@ -20,6 +20,7 @@
 package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -97,6 +98,7 @@ public class Approver extends User {
 				newClaims.add(c);
 			}
 		}
+		Collections.sort(newClaims);
 		return newClaims;
 	}
 

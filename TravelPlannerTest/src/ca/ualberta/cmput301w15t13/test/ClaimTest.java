@@ -57,7 +57,6 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 	protected void setUp() throws Exception {
 		super.setUp();
 	}
-
 	
 	/** 
 	 * Use Case A1 

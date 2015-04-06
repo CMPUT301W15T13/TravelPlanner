@@ -154,7 +154,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		//Tests that the approver information translated correctly
 		//and that the claimant can get all the information from the claim
 		assertEquals("Wrong approver", approver.getName(),claim.getlastApproverName());
-		assertEquals("More or less than 2 comments", 2 ,claim.getComments().size());
+		assertEquals("More or less than 2 comments", 1 ,claim.getComments().size());
 		assertEquals("More recent comment not first", message, claim.getComments().get(0));
 		assertEquals("Wrong comment",message,claim.getComments().get(0));
 		assertEquals("Wrong comment",message1,claim.getComments().get(1));
