@@ -1,7 +1,5 @@
 package ca.ualberta.cmput301w15t13.Models;
 
-import java.text.DecimalFormat;
-
 import ca.ualberta.cmput301w15t13.Models.Currency.CurrencyEnum;
 
 /**

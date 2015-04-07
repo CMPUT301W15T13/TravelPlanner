@@ -361,7 +361,7 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		assertNotNull("ExpenseItem doesn't show description", approverClaims.get(0).getExpenseItems().get(0).getExpenseDescription());
 		assertNotNull("ExpenseItem doesn't show amount", approverClaims.get(0).getExpenseItems().get(0).getAmount());
 		assertNotNull("ExpenseItem doesn't show currency", approverClaims.get(0).getExpenseItems().get(0).getExpenseCurrency());
-		assertTrue("ExpenseItem doesn't show photo", approverClaims.get(0).getExpenseItems().get(0).hasReciept());
+		assertTrue("ExpenseItem doesn't show photo", approverClaims.get(0).getExpenseItems().get(0).hasReceipt());
 		
 		//Tests the ability of the approver to view the photo
 		assertNotNull("ExpenseItem doesn't show photo", approverClaims.get(0).getExpenseItems().get(0).getReceipt());

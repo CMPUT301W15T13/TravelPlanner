@@ -172,7 +172,7 @@ public class ExpenseClaimsStatusesTests extends ActivityInstrumentationTestCase2
 		Claim claim = new Claim("userName", new Date(100),new Date(120), null, null);
 		Claimant claimant = new Claimant("hey");
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(120), "yolo" , 10.43, "cdn", claim.getclaimID());
-		expenseItem.setIncompletenessIndicator();
+		expenseItem.setComplete(false);
 		claim.addExpenseItem(expenseItem);
 		
 		//We can confirm through manual testing that a warning
