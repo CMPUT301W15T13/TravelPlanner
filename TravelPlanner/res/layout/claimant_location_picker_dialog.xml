@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+   <LinearLayout
+       xmlns:android="http://schemas.android.com/apk/res/android"
+       android:id="@+id/topRow"
+       android:layout_width="100dp"
+       android:layout_height="wrap_content"
+       android:layout_alignParentLeft="true"
+       android:layout_alignParentTop="true" 
+       android:orientation="vertical"
+       android:background="@color/background_dark"
+       android:padding="1dp"
+       >
+
+       <Button
+           android:id="@+id/buttonHomeLocation"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textSize="12sp"
+           android:text="@string/home_location" />
+
+		<Button
+           android:id="@+id/buttonGPSLocation"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textSize="12sp"
+           android:text="@string/gps_location" />
+       
+       <Button
+           android:id="@+id/buttonNewMapLocation"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textSize="12sp"
+           android:text="@string/map_location" />
+       
+       <Button
+           android:id="@+id/buttonViewMapLocation"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textSize="12sp"
+           android:text="@string/view_map_location" />
+
+   </LinearLayout>

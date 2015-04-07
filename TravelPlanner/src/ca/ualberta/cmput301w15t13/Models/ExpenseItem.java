@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
+import android.location.Location;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import exceptions.InvalidFieldEntryException;
@@ -56,6 +57,7 @@ public class ExpenseItem implements ExpenseClaim {
   protected double Amount = 0.00;
   protected String currency;
   protected Currency expenseCurrency;
+  protected Location location = null;
   protected String ClaimID = null;
   protected String ExpenseID = null;
   protected Uri receiptUri = null;
@@ -225,5 +227,13 @@ public class ExpenseItem implements ExpenseClaim {
 		 * 
 		 */
 		return dateFormat.format("dd-MMM-yyyy", newDate).toString();
+	}
+	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
 	}
 }

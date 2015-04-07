@@ -25,5 +25,12 @@
            android:layout_height="wrap_content"
            android:textSize="12sp"
            android:text="@string/map_location" />
+       
+       <Button
+           android:id="@+id/buttonViewHomeLocation"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textSize="12sp"
+           android:text="@string/view_home_location" />
 
    </LinearLayout>

@@ -3,12 +3,15 @@ package ca.ualberta.cmput301w15t13.Controllers;
 import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.res.Resources;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimDetailViewerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimManagerFragment;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
-import dialogs.ClaimantLocationDialog;
+import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
+import dialogs.ClaimantHomeLocationDialog;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
@@ -39,12 +42,14 @@ public class ClaimFragmentNavigator {
 	private static ClaimViewerFragment claimViewerFragment;
 	private static ClaimManagerFragment claimManagerFragment;
 	private static ClaimDetailViewerFragment claimDetailViewerFragment;
+	private static ClaimActivity claimActivity;
 
-	public static void createInstance(FragmentManager f){
+	public static void createInstance(FragmentManager f, ClaimActivity activity){
 		fm = f;
 		claimViewerFragment = new ClaimViewerFragment();
 		claimManagerFragment = new ClaimManagerFragment();
 		claimDetailViewerFragment = new ClaimDetailViewerFragment();
+		claimActivity = activity;
 	}
 	
 	/**
@@ -180,7 +185,38 @@ public class ClaimFragmentNavigator {
 	 * selected location from a map. 
 	 */
 	public static void openLocationDialog() {
-		ClaimantLocationDialog dialog = new ClaimantLocationDialog();
+		ClaimantHomeLocationDialog dialog = new ClaimantHomeLocationDialog();
 	    dialog.show(fm, "Select Location");
+	}
+	
+	/**
+	 * Updates the list view that
+	 * holds the data for the destinations.
+	 */
+	public static void updateDestinations(){
+		claimManagerFragment.updateDestinationList();
+	}
+
+	/**
+	 * Gets the Travel Itinerary Item so that the
+	 * Dialog can update the item's location.
+	 * @param travelItemIndex index of the TravelItinerary item
+	 * @return The corresponding TravelItinerary item.
+	 */
+	public static TravelItinerary getFragmentManagerTravelItinenary(
+			int travelItemIndex) {
+		return claimManagerFragment.getTravelItineraryItem(travelItemIndex);
+	}
+
+	public static User getUser() {
+		return claimActivity.getUser();
+	}
+	/**
+	 * Allows global access to /res files,
+	 * such as strings and colors.
+	 * @return Android Resources object.
+	 */
+	public static Resources getResources() {
+		return claimActivity.getResources();
 	}
 }

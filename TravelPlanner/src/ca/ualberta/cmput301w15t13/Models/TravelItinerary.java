@@ -1,5 +1,7 @@
 package ca.ualberta.cmput301w15t13.Models;
 
+import android.annotation.SuppressLint;
+import android.location.Location;
 import exceptions.EmptyFieldException;
 import exceptions.ExceptionHandler;
 import exceptions.ExceptionHandler.FIELD;
@@ -21,7 +23,16 @@ public class TravelItinerary {
 
 	protected String destinationName = null;
 	protected String description = null;
+	protected Location location = null;
 	
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
 	public TravelItinerary(String destination, String description) throws EmptyFieldException{
 		this.setDestinationName(destination);
 		this.setDestinationDescription(description);
@@ -46,6 +57,7 @@ public class TravelItinerary {
 		this.description = description;
 	}
 
+	@SuppressLint("DefaultLocale")
 	@Override
 	public boolean equals(Object rhs) {
 		String rhsDestination = ((TravelItinerary) rhs).getDestinationName().trim().toLowerCase();

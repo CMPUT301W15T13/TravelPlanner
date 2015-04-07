@@ -103,7 +103,6 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			
 			
 			// Keep the if-else, since the button will be a toggle.
-
 			if (expense.isComplete()) {
 				incompleteView.setText(" ");
 			} else {
