@@ -28,7 +28,12 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
 
-
+/**
+ * This class contains all the network persistance calls
+ * The elastic search calls from the elastic search lab were reused and changed to fit the needs of this app
+ * @author eorod_000
+ *
+ */
 public class NetworkPersistance{
 
 	private static final String SAVE_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/";
@@ -57,15 +62,6 @@ public class NetworkPersistance{
 		Gson gson = new Gson();
 		
 		HttpClient httpClient = new DefaultHttpClient();
-		
-		//This will save all the expenses associated with the claim
-	//	ArrayList<ExpenseItem> expenseList = claim.getExpenseItems();
-	//	for (ExpenseItem expenseItem: expenseList){
-	//		this.saveExpense(expenseItem);
-	//	}
-		//this will clear all expenses from the claim
-		//claim.clearExpenses();
-		
 		try {
 			HttpPut  addRequest = new HttpPut(SAVE_CLAIM_URL + itemID);
 
@@ -76,8 +72,6 @@ public class NetworkPersistance{
 			HttpResponse response = httpClient.execute(addRequest);
 			@SuppressWarnings("unused")
 			String status = response.getStatusLine().toString();
-			//Log.i(TAG, status);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,8 +100,6 @@ public class NetworkPersistance{
 			HttpResponse response = httpClient.execute(addRequest);
 			@SuppressWarnings("unused")
 			String status = response.getStatusLine().toString();
-			//Log.i(TAG, status);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -448,14 +440,9 @@ public class NetworkPersistance{
 
 
 	public void updateClaim(Claim claim) {
-		
 		String itemID = claim.getclaimID();
 		Gson gson = new Gson();
-		
 		HttpClient httpClient = new DefaultHttpClient();
-		
-
-		
 		try {
 			HttpPut  addRequest = new HttpPut(SAVE_CLAIM_URL + itemID + "/_update");
 
@@ -466,12 +453,10 @@ public class NetworkPersistance{
 			HttpResponse response = httpClient.execute(addRequest);
 			@SuppressWarnings("unused")
 			String status = response.getStatusLine().toString();
-			//Log.i(TAG, status);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//return itemID;
 		
 	}
 	

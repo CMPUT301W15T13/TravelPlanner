@@ -7,6 +7,7 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 
 /**
  * Required class for network load
+ * This is usedf to load the claims from a single user
  * 
  * http://stackoverflow.com/questions/6343166/android-os-networkonmainthreadexception
  * @author eorod_000
@@ -19,14 +20,11 @@ public class LoadASyncTask extends AsyncTask<String, Void, String> {
 
     protected String doInBackground(String... users) {
         try {
-        	
         	ClaimListSingleton.clearList();
-        	
         	String name = users[0];
-        	
+     
         	NetworkPersistance networkPersistance = new NetworkPersistance();
         	networkPersistance.loadClaimByUser(name);
-
             return "";
         } catch (Exception e) {
             this.exception = e;
@@ -35,12 +33,6 @@ public class LoadASyncTask extends AsyncTask<String, Void, String> {
     }
 
     protected void onPostExecute(String feed) {
-
-
     	ClaimListSingleton.getClaimList().notifyListeners();
-    	
-    	Toast.makeText(DataManager.getCurrentContext(), "Synchronization complete", Toast.LENGTH_SHORT).show();
-
-
     }
 }
