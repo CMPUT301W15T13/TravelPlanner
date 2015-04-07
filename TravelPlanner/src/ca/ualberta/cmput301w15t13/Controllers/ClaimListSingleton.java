@@ -121,6 +121,7 @@ public class ClaimListSingleton {
 
 
 	public static void addExpenseToClaim(String claimID, ExpenseItem expense) {
+		@SuppressWarnings("unused")
 		int currentClaimIndex = 0;
 		Claim newClaim;
 		for (int index = 0; index < claimList.size(); index++){
