@@ -37,7 +37,7 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 
-public class ApproverCommentDialogFragment extends DialogFragment {
+public class ApproverApproveCommentDialogFragment extends DialogFragment {
 	private String comment;
 	private EditText commentField;
 	private int claimIndex;
@@ -69,7 +69,7 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		    	
 		    	FragmentManager fm = getFragmentManager();
 		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");	
-		     	fragment.returnClaim(claimIndex);
+		     	fragment.approveClaim(claimIndex);
 				Dialog d = getDialog();
 				d.dismiss();
 		    }

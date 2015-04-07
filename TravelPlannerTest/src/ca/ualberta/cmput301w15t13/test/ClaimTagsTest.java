@@ -41,9 +41,12 @@ import exceptions.InvalidUserPermissionException;
 
 
 
-/*
+/**
  * This test suite tests that a claim can have 0 or more tags,
  * which can be removed, renamed, added, and listed correctly.
+ * 
+ * User Stories tested:
+ * US03.01.01, US03.02.01, US03.03.01
  * 
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements

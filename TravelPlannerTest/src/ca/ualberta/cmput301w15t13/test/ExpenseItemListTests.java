@@ -45,6 +45,15 @@ import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 
+
+/**
+ * Tests that the ExpenseItems can be viewed
+ * and displayed correctly
+ * 
+ * User Stories Tested:
+ * US05.01.01,US04.05.01,
+ *
+ */
 public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<LoginActivity> {
   public ExpenseItemListTests() {
     super(LoginActivity.class);
@@ -97,6 +106,7 @@ public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<Login
    */
   public void testView() throws EmptyFieldException, InvalidDateException {
 	  ClaimList cl = ClaimListSingleton.getClaimList();
+	  cl.clearList();
 	  Claim claim1 = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 	  ExpenseItem expenseItem1 = new ExpenseItem("air", new Date(100), "yolo" , 10.00, "USD", claim1.getclaimID());
 	  Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );

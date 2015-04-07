@@ -57,11 +57,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	public ArrayList<Tag> tags = new ArrayList<Tag>();
 	protected double totalCost = 0;
 	protected ClaimCurrencies totalCurrencies;
-	/**
-	 * returnedBefore will distinguish a claim that has been returned in the past or not
-	 * if it has been returned in the past, then only approver who returned can approve the submitted claim
-	 */
-	protected boolean returnedBefore;
 
 	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws EmptyFieldException, InvalidDateException {
 		//initializes the claim status to INPROGRESS (and edit-able)
@@ -285,18 +280,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		this.lastApproverName = null;
 	}
 	
-	/**
-	 * this method will let the fragments know if the claim has been returned before
-	 * @return
-	 */
-	public boolean getReturnedBefore() {
-		return this.returnedBefore;
-	}
-	
-	public void setReturnedBefore(boolean returned) {
-		this.returnedBefore = returned;
-	}
-
 	/**
 	 * adds a tag to  the instances arrayList of tags, but only if new
 	 * @param tag

@@ -23,7 +23,7 @@ package ca.ualberta.cmput301w15t13.test;
 // This is a mock Listener class used to simulate a listener.
 // We test whether this is called or not
 //
-// This by itself, doesn't test everything
+// This by itself, doesn't test anything
 
 public class MockListener {
 	
