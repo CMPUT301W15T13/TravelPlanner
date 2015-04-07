@@ -2,6 +2,8 @@ package ca.ualberta.cmput301w15t13.Activities;
 
 import java.io.File;
 
+import com.google.android.gms.fitness.data.Value;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,8 +17,10 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 /**
@@ -35,6 +39,7 @@ public class ReceiptPhotoActivity extends Activity {
 
 	Uri imageFileUri;
 	protected int claimIndex;
+	protected String claimID;
 	protected int expenseIndex;
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
@@ -79,6 +84,8 @@ public class ReceiptPhotoActivity extends Activity {
 				pic = resize(pic);
 				ib.setImageDrawable(pic);
 				ExpenseItem expense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
+				//Claim claim = ClaimListSingleton.getClaimList().getClaimByID(claimID);
+				//ExpenseItem expense = claim.getExpenseItems().get(expenseIndex);
 				if (expense.getReceipt() == null) {
 					expense.addReceipt();
 				}
@@ -113,7 +120,9 @@ public class ReceiptPhotoActivity extends Activity {
 		setContentView(R.layout.take_a_photo);
 		Bundle bundle = getIntent().getExtras();
 		claimIndex = bundle.getInt("claimIndex");
+		claimID = bundle.getString("claimID");
 		expenseIndex = bundle.getInt("expenseIndex");
+		Toast.makeText(this, String.valueOf(expenseIndex), Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
