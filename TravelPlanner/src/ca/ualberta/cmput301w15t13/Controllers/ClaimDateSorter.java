@@ -1,6 +1,5 @@
 package ca.ualberta.cmput301w15t13.Controllers;
 
-import java.util.Collections;
 import java.util.Comparator;
 
 import ca.ualberta.cmput301w15t13.Models.Claim;

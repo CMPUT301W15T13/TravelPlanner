@@ -185,6 +185,7 @@
 		android:layout_alignParentLeft="true">
 
 	  	<Button
+	  	    style="?android:attr/buttonBarButtonStyle"
 		    android:id="@+id/buttonLeaveClaim"
 		    android:layout_width="0px"
 		    android:layout_weight="0.5"
@@ -194,6 +195,7 @@
 		    android:textColor="@color/text" />
 	    		
 		<Button
+		    style="?android:attr/buttonBarButtonStyle"
 		    android:id="@+id/buttonFinishClaim"
 		    android:layout_width="0px"
 		    android:layout_weight="0.5"

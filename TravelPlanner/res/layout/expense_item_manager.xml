@@ -83,6 +83,7 @@
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
 				    android:onClick="openDateDialog"
+				    android:contentDescription="@string/holder"
 				    android:src="@android:drawable/ic_menu_my_calendar" />
 				
 			</LinearLayout>
@@ -107,7 +108,9 @@
 				    android:layout_width="0dp"
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.8"
-				    android:src="@drawable/ic_ayy" />
+				    android:src="@drawable/ic_ayy" 
+				    android:contentDescription="@string/holder"
+				    />
 
 				<Button
 				    android:id="@+id/removeReceiptButton"
@@ -202,6 +205,7 @@
 		android:layout_alignParentStart="true">
 
 	  	<Button
+	  	    style="?android:attr/buttonBarButtonStyle"
 		    android:id="@+id/buttonLeaveExpense"
 		    android:layout_width="0px"
 		    android:layout_weight="0.5"
@@ -211,6 +215,7 @@
 		    android:textColor="@color/text" />
 	    		
 		<Button
+		    style="?android:attr/buttonBarButtonStyle"
 		    android:id="@+id/buttonFinishExpense"
 		    android:layout_width="0px"
 		    android:layout_weight="0.5"

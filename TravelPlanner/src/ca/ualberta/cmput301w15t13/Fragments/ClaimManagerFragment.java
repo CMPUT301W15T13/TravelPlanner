@@ -307,9 +307,6 @@ public class ClaimManagerFragment extends Fragment{
 			tm.add(tagList.get(i), claimId);
 		}
 		claimlist.setTagMan(tm);
-		//TODO needs a sort method
-		
-		//DataManager.updateClaim(newClaim);
 	}
 	
 	/**
@@ -321,7 +318,6 @@ public class ClaimManagerFragment extends Fragment{
 		startDateText = startDateView.getText().toString().trim() + "";
 		endDateText = endDateView.getText().toString().trim() + "";
 				
-		//TODO should we assert they fill in all fields?
 		if(	!startDateText.equals("") && !endDateText.equals("") && itineraryList.numberofDestinations() != 0){
 			this.incompleteFields = false;
 		}
@@ -362,7 +358,6 @@ public class ClaimManagerFragment extends Fragment{
 		tag_list += "  " + tmp.getTagName();
 		tagView.setText(tag_list);
 
-		 //TODO this needs to change the layout size
 		if(tagList.size() > 2){
 			//If the text view is set to wrap content too early,
 			//it looks like the field is too small

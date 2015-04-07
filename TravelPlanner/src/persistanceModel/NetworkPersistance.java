@@ -16,20 +16,10 @@ import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import persistanceController.DataManager;
 import persistanceData.SearchCommand;
 import persistanceData.SearchHit;
 import persistanceData.SearchResponse;
-import adapters.ClaimAdapter;
-import android.R;
-import android.app.Application;
-import android.view.View;
-import android.webkit.WebView.FindListener;
-import android.widget.AnalogClock;
-import android.widget.ListView;
-import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
@@ -44,13 +34,18 @@ public class NetworkPersistance{
 	private static final String SAVE_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/";
 	private static final String SAVE_EXPENSE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/expense/";
 	
+	@SuppressWarnings("unused")
 	private static final String UPDATE_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/_update";
+	@SuppressWarnings("unused")
 	private static final String UPDATE_EXPENSE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/expense/_update";
 	
 	private static final String SEARCH_CLAIM_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/claim/_search";
+	@SuppressWarnings("unused")
 	private static final String SEARCH_EXPENSE_URL = "http://cmput301.softwareprocess.es:8080/cmput301w15t13/expense/_search";
 	
+	@SuppressWarnings("unused")
 	private static final String SAVE_CLAIM_URL_TEST = "http://cmput301.softwareprocess.es:8080/testing/";
+	@SuppressWarnings("unused")
 	private static final String SAVE_EXPENSE_URL_TEST = "http://cmput301.softwareprocess.es:8080/testing/_search";
 	
 	
@@ -79,6 +74,7 @@ public class NetworkPersistance{
 			addRequest.setHeader("Accept", "application/json");
 
 			HttpResponse response = httpClient.execute(addRequest);
+			@SuppressWarnings("unused")
 			String status = response.getStatusLine().toString();
 			//Log.i(TAG, status);
 
@@ -108,6 +104,7 @@ public class NetworkPersistance{
 			addRequest.setHeader("Accept", "application/json");
 
 			HttpResponse response = httpClient.execute(addRequest);
+			@SuppressWarnings("unused")
 			String status = response.getStatusLine().toString();
 			//Log.i(TAG, status);
 
@@ -313,6 +310,7 @@ public class NetworkPersistance{
 	public void loadExpenseByClaimID(String claimID){
 
 		ArrayList<String> expenseIDList = this.getExpenseIDList(claimID);
+		@SuppressWarnings("unused")
 		ArrayList<ExpenseItem> expenseList = new ArrayList<ExpenseItem>();
 		
 		for (int index=0; index < expenseIDList.size(); index++){
@@ -334,6 +332,7 @@ public class NetworkPersistance{
 	public void loadClaimByUser(String userName){
 
 		ArrayList<String> claimIDList = this.getClaimIDList(userName);
+		@SuppressWarnings("unused")
 		ArrayList<Claim> claimList = new ArrayList<Claim>();
 		
 		for (int index=0; index < claimIDList.size(); index++){
@@ -437,6 +436,7 @@ public class NetworkPersistance{
 
 	public void loadAll() {
 		ArrayList<String> claimIDList = this.loadAllClaimID();
+		@SuppressWarnings("unused")
 		ArrayList<Claim> claimList = new ArrayList<Claim>();
 		
 		for (int index=0; index < claimIDList.size(); index++){
@@ -464,6 +464,7 @@ public class NetworkPersistance{
 			addRequest.setHeader("Accept", "application/json");
 
 			HttpResponse response = httpClient.execute(addRequest);
+			@SuppressWarnings("unused")
 			String status = response.getStatusLine().toString();
 			//Log.i(TAG, status);
 
