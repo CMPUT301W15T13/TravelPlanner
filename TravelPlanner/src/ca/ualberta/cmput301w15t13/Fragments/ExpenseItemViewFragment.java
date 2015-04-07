@@ -51,14 +51,12 @@ public class ExpenseItemViewFragment extends Fragment {
 	private TextView amountView;
 	private TextView currencyView;
 	private TextView descriptionView;
-	private int claimIndex;
 	private int expenseIndex;
 	private String claimID;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		claimIndex = getArguments().getInt("claimIndex");
 		claimID = getArguments().getString("claimID");
 	}
 	
