@@ -191,7 +191,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 * It checks to see if a travel destination exists, and if the fields are valid
 	 * @throws EmptyFieldException 
 	 */
-
 	public void addTravelDestination(String destination, String description) throws EmptyFieldException {
 		// This line will make the Travel Itinerary instance
 		// if the fields are invalid, it will throw an Empty Field Exception
@@ -267,7 +266,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		
 		for (String key: approverComments.keySet()) { 
 			ArrayList<String> tempComments = approverComments.get(key);
-
+			
 			for(String comment : tempComments) {
 				comments.add(comment);
 			}
@@ -432,26 +431,22 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		return 0;
 	}
 
+	/**
+	 * This iterates will clear the current total Currency cost of the claim and recalculate it based on the expense costs.
+	 * It will then get a formated string value.
+	 * @return
+	 */
 	public String getCost() {
-		// TODO Auto-generated method stub
-		//return "0.00";
 		this.totalCurrencies = new ClaimCurrencies();
 		for (ExpenseItem expense:expenseItems.getExpenseList()){
 			totalCurrencies.addCurrency(expense.getExpenseCurrency());
 		}
-		
 		return totalCurrencies.getCurrenciesAsString();
-		
 	}
 	
-	public void addToCost(double newCost){
-	
-		
-	}
 
 	public void clearExpenses() {
 		this.expenseItems = new ExpenseItemList();
-		
 	}
 	
 }

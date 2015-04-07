@@ -98,7 +98,6 @@ public class ClaimList {
 				if (DataManager.isNetworkAvailable() == false){
 				DataManager.saveClaim(claim);
 				}
-				//DataManager.deleteClaim(claim.getclaimID());
 			}
 	}
 
@@ -106,7 +105,6 @@ public class ClaimList {
 		//Check for duplicates
 		if (!claimList.contains(claim)) {
 			claimList.add(claim);
-			//new SaveASyncTask().execute(claim.getclaimID());
 			DataManager.saveClaim(claim);
 		}
 	}
@@ -118,13 +116,11 @@ public class ClaimList {
 		if (!this.claimList.isEmpty() || (i < this.claimList.size()) || (i >= 0)) {
 			claimToDeleteID = getClaimAtIndex(i).getclaimID();
 			DataManager.deleteClaim(claimToDeleteID);
-			//claimToDeleteID = getClaimAtIndex(i).getclaimID();
-			//DataManager.deleteClaim(claimToDeleteID);
 			claimList.remove(i);
 			//When deleting from a local source, save the claim
 			if (DataManager.isNetworkAvailable() == false){
-			Claim claim = getClaimAtIndex(i);
-			DataManager.saveClaim(claim);
+				Claim claim = getClaimAtIndex(i);
+				DataManager.saveClaim(claim);
 			}
 		}
 	}
@@ -136,9 +132,7 @@ public class ClaimList {
 		if (claimList == null) {
 			this.claimList = new ArrayList<Claim>();
 		}
-		
 		Collections.sort(claimList);
-		
 		return claimList;
 	}
 
@@ -250,9 +244,7 @@ public class ClaimList {
 				claimList.remove(index+1);
 				DataManager.updateClaim(newClaim);
 			}
-		}
-		
+		}	
 	}
 	
-
 }
