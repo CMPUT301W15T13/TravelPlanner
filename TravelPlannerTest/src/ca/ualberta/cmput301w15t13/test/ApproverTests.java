@@ -49,6 +49,11 @@ import exceptions.InvalidUserPermissionException;
  * when the user is an approver. Specifically, that an approver
  * can approve claims, comment on claims, and return claims.
  *
+ * User stories tested:
+ * US08.07.01,US08.08.01,US08.09.01
+ * US08.06.01,US08.03.01, US08.04.01, 
+ * US08.05.01, US08.02.01
+ * 
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
  * 

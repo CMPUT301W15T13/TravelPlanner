@@ -37,6 +37,13 @@ import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 /** 
+ * Test the general functionality of an
+ * Expense Item
+ * 
+ * User Stories Tested:
+ * US04.01.01, US04.02.01, US04.03.01
+ * US04.04.01, US04.06.01, US04.08.01
+ * 
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
  */

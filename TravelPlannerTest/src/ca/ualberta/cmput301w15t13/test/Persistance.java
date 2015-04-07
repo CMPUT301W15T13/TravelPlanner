@@ -12,6 +12,15 @@ import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 
+/**
+ * Tests the pesistance models and 
+ * controllers
+ * 
+ * User Stories Tested:
+ * US01.06.01, US09.01.01
+ * 
+ *
+ */
 public class Persistance extends
 		ActivityInstrumentationTestCase2<LoginActivity> {
 	public Persistance() {
@@ -167,7 +176,6 @@ public class Persistance extends
 	public void tesltLoadClaim() {
 
 		// ClaimList cl = DataManager.loadClaimsByUserName("Group13");
-
 		// assertEquals("expected is 1", 3, cl.size());
 	}
 

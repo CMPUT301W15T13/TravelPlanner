@@ -41,6 +41,9 @@ import exceptions.InvalidUserPermissionException;
 /**
  * Tests that a Claim can have statuses that affect it's operations
  * 
+ * User Stories Tested:
+ * US07.01.01, US07.03.01, US07.04.01, US07.05.01
+ * 
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
  * Commented out code to be implemented for Project Part 5

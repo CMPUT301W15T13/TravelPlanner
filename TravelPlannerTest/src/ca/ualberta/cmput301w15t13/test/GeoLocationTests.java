@@ -1,5 +1,12 @@
 package ca.ualberta.cmput301w15t13.test;
 
+
+/**
+ * Due to Problems with the Google
+ * Maps API and Lab resources implementing
+ * ...
+ *
+ */
 public class GeoLocationTests {
 	
 	/**

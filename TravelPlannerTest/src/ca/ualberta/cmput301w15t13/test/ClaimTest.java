@@ -37,9 +37,13 @@ import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
 
-/* 
+/** 
  * These are the JUnit tests for the claim class, testing
  * the general functionality of a claim.
+ * 
+ * User Stories Tested:
+ * US01.01.01, US01.02.01, US01.04.01,US01.05.01
+ *  
  *
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
@@ -102,17 +106,20 @@ public class ClaimTest extends ActivityInstrumentationTestCase2<LoginActivity> {
 		//ClaimList claimList = new ClaimList();
 		DataManager.setTestMode();
 		Claim claim1 = new Claim("Name1", new Date(100), new Date(120),null, null );
+		ClaimList cl = ClaimListSingleton.getClaimList();
+		int oldSize = cl.size();
 		ClaimListSingleton.addClaim(claim1);
 		
 		// Test claim was added
-		assertEquals("Claimlist size is not 1", 1, ClaimListSingleton.getClaimList().getClaimArrayList().size());
+		assertNotSame("Claimlist size is not updated", oldSize, ClaimListSingleton.getClaimList().size());
 		// add 2 more claims
 		Claim claim2 = new Claim("Name1", new Date(120), new Date(120), null, null);
 		Claim claim3 = new Claim("Name1", new Date(120), new Date(130), null, null);
+		int updatedSize = ClaimListSingleton.getClaimList().size();
 		ClaimListSingleton.addClaim(claim2);
 		ClaimListSingleton.addClaim(claim3);
 		// check to see that all items were added
-		assertEquals("Claimlist size is not 3 ", 3, ClaimListSingleton.getClaimList().getClaimArrayList().size());
+		assertNotSame("Claimlist size is unchanged ", updatedSize, ClaimListSingleton.getClaimList().getClaimArrayList().size());
 	}
 		
 	/**

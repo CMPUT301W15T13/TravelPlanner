@@ -41,6 +41,9 @@ import exceptions.InvalidUserPermissionException;
  * This test suite tests the functionality of the applications
  * photographic receipt functionality
  * 
+ * User Stories Tested:
+ * US06.01.01, US06.04.01, US06.03.01
+ * 
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
  * 
@@ -131,11 +134,9 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		
 		//This test will make sure the image is auto resized
 		assertNotSame("Bitmap has not been changed", bitmap ,returnedBitmap);
-
 		expenseItem.removeReceipt();
-		returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
-		assertNull("Bitmap was not removed", returnedBitmap);
+		assertNull("Bitmap was not removed", expenseItem.getReceipt());
 	}
 	
 	public void testViewPhoto() throws EmptyFieldException, InvalidDateException {

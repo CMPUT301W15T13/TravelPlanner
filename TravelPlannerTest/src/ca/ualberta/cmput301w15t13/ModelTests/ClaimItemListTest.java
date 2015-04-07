@@ -44,11 +44,15 @@ import exceptions.InvalidFieldEntryException;
 import exceptions.InvalidUserPermissionException;
 
 
-/* Tests the functionality of the claim List. 
+/** Tests the functionality of the claim List. 
  * 
  * It tests the claimList's ability to add claims, remove claims, filter by tags, 
  * index the list, remove claims at a specific index, that the listener interacts 
  * with it, and that it can be created.
+ * 
+ * User Stories Tested:
+ * US01.01.01, US01.02.01 US01.05.01
+ * US03.03.01 US02.02.01
  * 
  *  General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements

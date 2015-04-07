@@ -40,6 +40,9 @@ import exceptions.InvalidDateException;
  * made, that certain claimStatus' affect edit-ability, 
  * and that a claim cannot be given an invalid status
  * 
+ * User Stories tested:
+ * US01.04.01, US01.05.01
+ * 
  * General use case can be found on the wiki at
  * https://github.com/CMPUT301W15T13/TravelPlanner/wiki/User-Stories-and-Requirements
  *
