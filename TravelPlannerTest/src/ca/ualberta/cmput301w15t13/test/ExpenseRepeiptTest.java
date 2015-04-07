@@ -72,10 +72,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	
 	public void testAddBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
-		Receipt receipt = new Receipt(bitmap);
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
-		expenseItem.addReceipt(receipt);
+		expenseItem.addReceipt();
+		expenseItem.getReceipt().setBitmap(bitmap);
 		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
 		// these tests are meant to fail as this will be implemented for project 5
@@ -96,10 +96,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	
 	public void testLargeBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
-		Receipt receipt = new Receipt(bitmapLarge);
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
-		expenseItem.addReceipt(receipt);
+		expenseItem.addReceipt();
+		expenseItem.getReceipt().setBitmap(bitmapLarge);
 		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
 		// these tests are meant to fail as this will be implemented for project 5
@@ -123,16 +123,16 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 	public void testRemoveBitmap() throws InvalidDateException, EmptyFieldException, InvalidUserPermissionException {
 		Bitmap bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888 );
 		Bitmap returnedBitmap;
-		Receipt receipt = new Receipt(bitmap);
 		Claim claim = new Claim("name", new Date(1), new Date(2), "Dest", new TravelItineraryList());
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
-		expenseItem.addReceipt(receipt);
+		expenseItem.addReceipt();
+		expenseItem.getReceipt().setBitmap(bitmap);
 		returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
 		// these tests are meant to fail as this will be implemented for project 5
 		assertEquals("Bitmap has been changed", bitmap ,returnedBitmap);
 
-		expenseItem.removeReceipt(bitmap);
+		expenseItem.removeReceipt();
 		returnedBitmap = expenseItem.getReceipt().toBitMap();
 		
 		assertNull("Bitmap was not removed", returnedBitmap);
@@ -148,8 +148,8 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		cl.add(claim);
 		
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
-		Receipt receipt = new Receipt(bitmapLarge);
-		expenseItem.addReceipt(receipt);
+		expenseItem.addReceipt();
+		expenseItem.getReceipt().setBitmap(bitmapLarge);
 		assertNotNull("Claimant cannot view photo",cl.getClaimArrayList().get(0).getExpenseItems().get(0).getReceipt());
 	}
 }

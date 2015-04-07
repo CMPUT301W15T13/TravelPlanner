@@ -103,8 +103,8 @@ public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<Login
 	  Claim claim1 = new Claim("Name", new Date(1), new Date(2), "Desc", new TravelItineraryList());
 	  ExpenseItem expenseItem1 = new ExpenseItem("air", new Date(100), "yolo" , 10.00, "USD", claim1.getclaimID());
 	  Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
-	  Receipt receipt = new Receipt(bitmapLarge);
-	  expenseItem1.addReceipt(receipt);
+	  expenseItem1.addReceipt();
+	  expenseItem1.getReceipt().setBitmap(bitmapLarge);
 	  claim1.addExpenseItem(expenseItem1);
 	  cl.add(claim1);
 	  
