@@ -37,6 +37,10 @@ import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 
+/**
+ * A custom dialog to allow an approver to add
+ * the mandatory comment when returning a claim. 
+ */
 public class ApproverCommentDialogFragment extends DialogFragment {
 	private String comment;
 	private EditText commentField;
@@ -67,6 +71,7 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		    	claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
 		    	claim.addComment(comment, claim.getlastApproverName());
 		    	
+		    	/* Return the now commented claim */
 		    	FragmentManager fm = getFragmentManager();
 		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");	
 		     	fragment.returnClaim(claimIndex);

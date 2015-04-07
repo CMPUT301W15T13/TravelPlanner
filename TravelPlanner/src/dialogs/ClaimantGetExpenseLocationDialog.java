@@ -17,6 +17,13 @@ import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.User;
 import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 
+/**
+ * Custom Alert Dialog to get location information
+ * for expense items from home location, GPS, or from a map.
+ * Alternatively you can view the currently set 
+ * location on a map.
+ *
+ */
 public class ClaimantGetExpenseLocationDialog extends DialogFragment{
 	ExpenseActivity activity;
 	int claimIndex;
@@ -30,6 +37,9 @@ public class ClaimantGetExpenseLocationDialog extends DialogFragment{
 		
 	}
 	
+	/**
+	 * Set the location to the home location.
+	 */
     final OnClickListener homeListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
@@ -39,6 +49,9 @@ public class ClaimantGetExpenseLocationDialog extends DialogFragment{
         }
     };
     
+    /**
+     * Set the location to the GPS location.
+     */
     final OnClickListener gpsListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
@@ -57,6 +70,9 @@ public class ClaimantGetExpenseLocationDialog extends DialogFragment{
 		}
 	};
     
+	/**
+	 * Select the location from a map.
+	 */
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
@@ -67,7 +83,9 @@ public class ClaimantGetExpenseLocationDialog extends DialogFragment{
 	      	    d.dismiss();
 	        }
     };
-    
+    /**
+     * View the location on a map.
+     */
     final OnClickListener viewExpenseLocationListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {

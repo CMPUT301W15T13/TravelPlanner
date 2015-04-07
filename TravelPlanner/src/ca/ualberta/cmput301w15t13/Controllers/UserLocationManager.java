@@ -7,6 +7,13 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+/**
+ * A Global access point to locations, to allow
+ * the users to access home locations, and set 
+ * the search/view locations from different activities
+ * and dialog fragments.  
+ *
+ */
 public class UserLocationManager {
 	static Location homeLocation = null;
 	static Location expenseLocation = null;
@@ -19,6 +26,13 @@ public class UserLocationManager {
 		UserLocationManager.locationListener = l;
 	}
 	
+	/**
+	 * A listener set by the user to update a location
+	 * to that of the search location. It was make like this
+	 * because there are multiple segments of code that need
+	 * to get a search location, but the variables they update
+	 * are different.
+	 */
 	public static void listenerUpdate(){
 		if(UserLocationManager.locationListener != null){
 			UserLocationManager.locationListener.update();
@@ -28,6 +42,7 @@ public class UserLocationManager {
 	public static Location getHomeLocation() {
 		return homeLocation;
 	}
+
 
 	public static void setHomeLocation(Location homeLocation) {
 		UserLocationManager.homeLocation = homeLocation;
@@ -53,6 +68,12 @@ public class UserLocationManager {
 		return UserLocationManager.searchLocation;
 	}
 
+	/**
+	 * Called to update the search location.
+	 * Make sure that a custom listener has been set before hand,
+	 * so that the required location can be updated.
+	 * @param homeLocation
+	 */
 	public static void setSearchLocation(Location searchLocation) {
 		UserLocationManager.searchLocation = searchLocation;
 	}
@@ -64,6 +85,9 @@ public class UserLocationManager {
     	return location;
 	}
 	
+	/** 
+	 * Called to update the home location, when the gps is accessed.
+	 */
     private final static LocationListener listener = new LocationListener(){
 
 		@Override

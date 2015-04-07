@@ -130,6 +130,7 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 				titleView.setTextColor(r.getColor(R.color.text));
 			}
 			
+			/* Adds destinations to the claim adapter */
 			LinearLayout destListView = (LinearLayout) view.findViewById(R.id.destinationClaimList);
 			ArrayList<TravelItinerary> destList = claim.getTravelList().getTravelArrayList();
 			for(TravelItinerary item : destList){

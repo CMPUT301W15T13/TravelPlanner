@@ -36,6 +36,9 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
 		user = activity.getUser();
 	}
 	
+	/**
+	 * Get the home location from gps.
+	 */
     final OnClickListener gpsListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
@@ -52,7 +55,10 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
     };
     
 
-    
+    /**
+     * Set the map search listener so that the searched
+     * location can be added to the home location.
+     */
     final Listener locationUpdater = new Listener() {
 		
 		@Override
@@ -67,6 +73,9 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
 		}
 	};
     
+    /**
+     * Select the location from a map.
+     */
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
@@ -78,6 +87,10 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
 	        }
     };
     
+    /**
+     * View the home location, and if it's not set,
+     * view an unmarked map.
+     */
     final OnClickListener viewHomeListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
