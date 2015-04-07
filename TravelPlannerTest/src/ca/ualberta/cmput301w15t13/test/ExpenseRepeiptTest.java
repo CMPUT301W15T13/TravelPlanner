@@ -31,7 +31,6 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
-import ca.ualberta.cmput301w15t13.Models.Receipt;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
@@ -76,11 +75,12 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
 		expenseItem.addReceipt();
 		expenseItem.getReceipt().setBitmap(bitmap);
-		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
+		Bitmap returnedBitmap = expenseItem.getReceipt().getBitmap();
 		
 		// these tests are meant to fail as this will be implemented for project 5
 		assertNotNull("Bitmap is null", returnedBitmap);
-		assertEquals("Bitmap has been changed", bitmap, returnedBitmap);
+		//The model will automatically resize the bitmap
+		assertNotSame("Bitmap has not been changed", bitmap, returnedBitmap);
 	}	
 	
 	/**
@@ -100,12 +100,12 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
 		expenseItem.addReceipt();
 		expenseItem.getReceipt().setBitmap(bitmapLarge);
-		Bitmap returnedBitmap = expenseItem.getReceipt().toBitMap();
+		Bitmap returnedBitmap = expenseItem.getReceipt().getBitmap();
 		
-		// these tests are meant to fail as this will be implemented for project 5
 		if (returnedBitmap.getByteCount() > 65536) {
 			fail("Addded a bitmap too large");
 		}
+		//Checks that the image is auto resized
 		assertNotSame("Bitmap wasn't modified", bitmapLarge, returnedBitmap);
 	}
 	
@@ -127,10 +127,10 @@ public class ExpenseRepeiptTest extends ActivityInstrumentationTestCase2<LoginAc
 		ExpenseItem expenseItem = new ExpenseItem("air", new Date(1), "Strut", 12.12, "CAD", claim.getclaimID());
 		expenseItem.addReceipt();
 		expenseItem.getReceipt().setBitmap(bitmap);
-		returnedBitmap = expenseItem.getReceipt().toBitMap();
+		returnedBitmap = expenseItem.getReceipt().getBitmap();
 		
-		// these tests are meant to fail as this will be implemented for project 5
-		assertEquals("Bitmap has been changed", bitmap ,returnedBitmap);
+		//This test will make sure the image is auto resized
+		assertNotSame("Bitmap has not been changed", bitmap ,returnedBitmap);
 
 		expenseItem.removeReceipt();
 		returnedBitmap = expenseItem.getReceipt().toBitMap();

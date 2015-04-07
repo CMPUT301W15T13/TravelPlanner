@@ -5,6 +5,7 @@ package exceptions;
  * @author eorod_000
  *
  */
+@SuppressWarnings("serial")
 public class InvalidFieldEntryException extends Exception {
 	public InvalidFieldEntryException(String message){
 		super(message);

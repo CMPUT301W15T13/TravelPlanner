@@ -447,6 +447,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 * Code taken from Eorodrig Travel Logger (Claim class)
 	 * @return
 	 */
+	@SuppressWarnings({ "deprecation", "static-access" })
 	public String getStartDateAsString() {
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();
@@ -464,6 +465,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 * Code taken from Eorodrig Travel Logger (Claim class)
 	 * @return
 	 */
+	@SuppressWarnings({ "deprecation", "static-access" })
 	public String getEndDateAsString() {
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();

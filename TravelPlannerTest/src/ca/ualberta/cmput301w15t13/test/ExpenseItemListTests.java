@@ -41,10 +41,7 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
-import ca.ualberta.cmput301w15t13.Models.Receipt;
-import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItineraryList;
-import ca.ualberta.cmput301w15t13.Models.ClaimStatus.statusEnum;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 
@@ -88,7 +85,7 @@ public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<Login
 	  
 	  //Test that a new claim is put at the the end of the list (3rd entered, 3rd in the list)
 	  assertEquals("Wrong order of expenseItems",expenseItem, test.get(0));
-	  assertEquals("Wrong order of expenseItems",expenseItem2, test.get(2));
+	  assertEquals("Wrong order of expenseItems",expenseItem2, test.get(1));
   }
   
   /**

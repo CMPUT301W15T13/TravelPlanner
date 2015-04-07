@@ -112,6 +112,7 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 		}
 		return view;
 	}
+	@SuppressWarnings("deprecation")
 	protected Drawable resize(Drawable image) {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();
 	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 100, 150, false);

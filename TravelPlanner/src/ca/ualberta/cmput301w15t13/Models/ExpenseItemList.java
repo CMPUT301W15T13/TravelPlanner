@@ -22,9 +22,6 @@ package ca.ualberta.cmput301w15t13.Models;
 
 import java.util.ArrayList;
 
-import persistanceController.DataManager;
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-
 /**
  * This class is a container for individual expense
  * items. It is used by a claim to manage it's
