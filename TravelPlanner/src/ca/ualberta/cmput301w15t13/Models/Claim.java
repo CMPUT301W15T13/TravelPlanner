@@ -352,8 +352,7 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	}
 
 	public void addExpenseItem(ExpenseItem expenseItem) {
-		this.expenseItems.add(expenseItem);
-		
+		this.expenseItems.add(expenseItem);		
 		DataManager.updateClaim(this);
 	}
 

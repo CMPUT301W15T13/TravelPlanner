@@ -2,13 +2,19 @@ package ca.ualberta.cmput301w15t13.Models;
 
 
 /**
- * Currency class
- * Defines data and overall functionality
+ * Currency class is used to
+ * enumerate over all given
+ * currencies (as in the description).
+ * This is preferred over using a hard
+ * coded arrayList
+ *
+ * It should be used to define what
+ * currencies are possible for a
+ * claim object and children, to have
+ *
  */
 
-
-public class Currency{
-
+public class Currency {
 
 	public enum CurrencyEnum {
 			CAD("Canadian Dollar","CAD"),
@@ -47,12 +53,10 @@ public class Currency{
 		public String getCurrencyAbbr() {
 			return currencyAbbr;
 		}
-	
 	}
-	
-	
-	protected CurrencyEnum currencyType;	//Currency Type
-	protected double amount;				//Currency amount
+		
+	protected CurrencyEnum currencyType;  
+	protected double amount;
 	
 	public Currency(String currencyType, double newAmount){
 		CurrencyEnum type = this.getEnumFromString(currencyType);
@@ -103,9 +107,5 @@ public class Currency{
 
 	public String getcurrencyTypeAsString() {
 		return this.currencyType.getCurrencyAbbr();
-	}
-
-	
-	
-	
+	}	
 }
