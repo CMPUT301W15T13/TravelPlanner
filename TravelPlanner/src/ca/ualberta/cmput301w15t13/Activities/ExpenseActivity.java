@@ -27,11 +27,13 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseItemViewFragment;
@@ -334,6 +336,15 @@ public class ExpenseActivity extends Activity {
 	protected void onResume() {
 		super.onResume();
 		ClaimListSingleton.getClaimList().notifyListeners();
+	}
+
+
+	public void setExpenseLocation(Location location){
+		if(location == null){
+			Toast.makeText(this, "No Home Location", Toast.LENGTH_SHORT).show();
+		} else {
+			ExpenseManagerFragment.setExpenseLocation(location);
+		}
 	}
 
 }

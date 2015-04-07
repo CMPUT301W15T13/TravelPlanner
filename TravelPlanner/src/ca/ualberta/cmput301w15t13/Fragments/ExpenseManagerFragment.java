@@ -6,21 +6,26 @@ import java.util.Date;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import dialogs.ClaimantGetExpenseLocationDialog;
 import exceptions.EmptyFieldException;
 import exceptions.InvalidDateException;
 import exceptions.InvalidFieldEntryException;
@@ -30,8 +35,8 @@ public class ExpenseManagerFragment extends Fragment {
 	private EditText expenseNameView;
 	private String expenseName;
 	private Spinner categorySpinner;
-	private TextView dateView;
 	private ImageView ib;
+	private TextView dateView, locationTextView;
 	private Date Date;
 	private String dateText;
 	private double amount;
@@ -44,6 +49,8 @@ public class ExpenseManagerFragment extends Fragment {
 	private int claimIndex;
 	private String claimID;
 	private int expenseIndex;
+	private ImageButton addLocationButton;
+	private Location location;
 	
 	
 	//TODO force change what the back button does from this screen, in that it moves to the old fragment
@@ -76,6 +83,10 @@ public class ExpenseManagerFragment extends Fragment {
 		currencySpinner = (Spinner) getView().findViewById(R.id.currencySpinner);
 		ib = (ImageView) getView().findViewById(R.id.receiptImageHolder);
 
+		locationTextView = (TextView) getView().findViewById(R.id.textViewExpenseLocation);
+		addLocationButton = (ImageButton) getView().findViewById(R.id.imageButtonLocationPicker);
+		addLocationButton.setOnClickListener(locationListener);
+
 		setFields();
 	}
 	
@@ -101,11 +112,17 @@ public class ExpenseManagerFragment extends Fragment {
 			ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
 			this.expenseNameView.setText(editExpense.getExpenseName());
 			this.description = editExpense.getExpenseDescription();
+			this.location = editExpense.getLocation();
 			dateView.setText(editExpense.getPurchseDateAsString());
 			this.descriptionView.setText(editExpense.getExpenseDescription());
 			this.amountView.setText(String.valueOf(editExpense.getAmount()));
 			this.categorySpinner.setSelection(getIndex(categorySpinner,editExpense.getExpenseCategory()));
 			this.currencySpinner.setSelection(getIndex(currencySpinner,editExpense.getExpenseCategory()));
+			if(this.location != null){
+				String tmp = "Lat: " + location.getLatitude() + 
+							 " Long: " + location.getLongitude();
+				this.locationTextView.setText(tmp);
+			}
 			
 			if ((editExpense.getReceipt() != null)) {
 				Drawable pic = editExpense.getReceipt().getDrawable();
@@ -185,6 +202,7 @@ public class ExpenseManagerFragment extends Fragment {
 		editExpense.setAmount(amount);
 		editExpense.setLinkedToclaimID(claimID);
 		editExpense.setExpenseName(expenseName);
+		editExpense.setLocation(location);
 		
 		Claim newClaim = ClaimListSingleton.getClaimList().getClaimByID(claimID);
 		ClaimListSingleton.getClaimList().replaceClaim(claimID, newClaim);
@@ -207,9 +225,8 @@ public class ExpenseManagerFragment extends Fragment {
 			String currencySet = currencySpinner.getSelectedItem().toString();
 			ExpenseItem newExpense = new ExpenseItem(categorySet, Date, description, amount, currencySet, claimID);
 			newExpense.setExpenseName(expenseName);
-			ClaimListSingleton.getClaimByID(claimID).addExpenseItem(newExpense);
-			//ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
-			
+			newExpense.setLocation(location);
+			ClaimListSingleton.getClaimByID(claimID).addExpenseItem(newExpense);	
 			
 		}else {
 			Toast.makeText(getActivity(), "Fill in all fields before submitting", Toast.LENGTH_SHORT).show();
@@ -294,5 +311,23 @@ public class ExpenseManagerFragment extends Fragment {
 		editExpense.removeReceipt();
 		int id = getResources().getIdentifier("TravelPlanner:drawable/ic_ayy.png" , null, null);
 		ib.setImageResource(id);
+	}
+	
+	private final OnClickListener locationListener = new OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			UserLocationManager.setViewLocation(location);
+			ClaimantGetExpenseLocationDialog dialog = new ClaimantGetExpenseLocationDialog();
+			dialog.show(getFragmentManager(), "Add a location");
+		}
+	};
+
+	public void setExpenseLocation(Location location) {
+		this.location = location;
+		String tmp = "Lat: " + location.getLatitude() + 
+				 " Long: " + location.getLongitude();
+		this.locationTextView.setText(tmp);
+		UserLocationManager.setExpenseLocation(location);
 	}
 } 

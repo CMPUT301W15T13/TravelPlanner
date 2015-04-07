@@ -24,26 +24,41 @@
         android:layout_below="@+id/textViewDestinationDialogTitle"
         android:orientation="horizontal"
         />
-    
-    <EditText
-        android:id="@+id/editTextDestinationName"
+    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_below="@+id/title_buffer"
-        android:hint="@string/destination_singular"
-        android:singleLine="true"
-        android:textColor="@color/text" />
+        android:orientation="horizontal">
+            <LinearLayout
+		        android:layout_height="wrap_content"
+		        android:layout_width="0px"
+		        android:layout_weight="0.8"
+		        android:orientation="vertical">
+        	
+        		<EditText
+			        android:id="@+id/editTextDestinationName"
+			        android:layout_height="wrap_content"
+			        android:layout_width="match_parent"
+			        android:hint="@string/destination_singular"
+			        android:singleLine="true"
+			        android:textColor="@color/text" >
+			        <requestFocus />
+			        </EditText>
+
     
+			    <EditText
+			        android:id="@+id/editTextReasonName"
+			        android:singleLine="true"
+			        android:layout_height="wrap_content"
+			        android:layout_width="match_parent"
+			        android:layout_marginBottom="6dp"
+			        android:hint="@string/reason"
+			        android:textColor="@color/text" />
+       
+		    </LinearLayout>
+       
+    </LinearLayout>
     
-    <EditText
-        android:id="@+id/editTextReasonName"
-        android:singleLine="true"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_below="@+id/editTextDestinationName"
-        android:layout_marginBottom="6dp"
-        android:hint="@string/reason"
-        android:textColor="@color/text" />
    
 
 </RelativeLayout>

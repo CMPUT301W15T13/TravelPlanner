@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <EditText
+        android:id="@+id/editTextMapSearch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageButtonSearchMap"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/imageButtonSearchMap"
+        android:hint="@string/search"
+        android:ems="10" >
+
+        <requestFocus />
+    </EditText>
+
+    <ImageButton
+        android:id="@+id/imageButtonSearchMap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:src="@android:drawable/ic_menu_search" 
+        android:contentDescription="@string/hello_world"
+        />
+    
+    <fragment
+	    android:id="@+id/google_map_search"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/editTextMapSearch"
+	    android:layout_above="@+id/buttonLayout"
+	    class="com.google.android.gms.maps.MapFragment" />
+    
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:layout_alignParentBottom="true"
+	    >
+		
+		<Button
+		    style="?android:attr/buttonBarButtonStyle"
+		    android:id="@+id/buttonAddLocation"
+		    android:layout_width="0px"
+		    android:layout_weight="0.5"
+		    android:layout_height="wrap_content"
+		    android:text="@string/add_location" />
+		
+		<Button
+		    style="?android:attr/buttonBarButtonStyle"
+		    android:id="@+id/buttonCloseMaps"
+		    android:layout_width="0px"
+		    android:layout_weight="0.5"
+		    android:layout_height="wrap_content"
+		    android:text="@string/cancel" />
+		
+	</LinearLayout>
+
+</RelativeLayout>

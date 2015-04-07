@@ -37,6 +37,7 @@
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_expense_viewer">ExpenseViewerActivity</string>
+    <string name="title_activity_map">GeolocationMapActivity</string>
     <string name="view">View</string>
     <string name="done">Done</string>
     <string name="approve">Approve</string>
@@ -58,9 +59,14 @@
     <string name="filterMenu">Filter Claims By Tag</string>
     <string name="manageTags">Manage Tags</string>
     <string name="addExisting">Add Existing</string>
-    <string name="set_location">Set Location</string>
+    <string name="set_location">Home Location</string>
     <string name="gps_location">Use Phone\'s GPS</string>
     <string name="map_location">Pick from a map</string>
     <string name="add_A_Receipt">Attach A Receipt</string>
 	<string name="remove">Remove</string>
+    <string name="home_location">Use Home Location</string>
+    <string name="view_map_location">View Map Location</string>
+    <string name="view_home_location">View Home Location</string>
+    <string name="add_location">Add Location</string>
+    
 </resources>

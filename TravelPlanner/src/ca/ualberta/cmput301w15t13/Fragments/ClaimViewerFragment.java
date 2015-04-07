@@ -98,11 +98,8 @@ public class ClaimViewerFragment extends Fragment {
 	private void initializeAdapter(){
 		final ListView claimListView = (ListView) getView().findViewById(R.id.listViewClaim);
 		claimListView.setAdapter(claimAdapter);
-		
 		ClaimListSingleton.getClaimList().setIndexList(claimAdapter.claims);
-		
-		claimListView.setOnItemClickListener(activity.getUser().getClaimAdapterShortClickListener(getActivity()));
-		
+		claimListView.setOnItemClickListener(activity.getUser().getClaimAdapterShortClickListener(getActivity()));	
 		claimListView.setOnItemLongClickListener(activity.getUser().getClaimAdapterLongClickListener(getFragmentManager()));
 	}
 	
@@ -163,8 +160,6 @@ public class ClaimViewerFragment extends Fragment {
 	 * claim back to the user, with the updated
 	 * information (comments). 
 	 * 
-	 * TODO approver viewer shouldn't be able to see
-	 * the returned and approver claims.
 	 */
 	public void returnClaim(int claimIndex){
 		Claim submitClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
