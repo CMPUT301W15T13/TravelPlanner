@@ -37,7 +37,7 @@
         <activity android:name="ca.ualberta.cmput301w15t13.Activities.ClaimActivity" >
         </activity>
         <activity
-            android:name="ca.ualberta.cmput301w15t13.Activities.PrimitivePhotoActivity"
+            android:name="ca.ualberta.cmput301w15t13.Activities.ReceiptPhotoActivity"
             android:label="@string/title_activity_test" >
         </activity>
         <activity

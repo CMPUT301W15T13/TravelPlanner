@@ -31,14 +31,18 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
  * Intent intent = new Intent(this, PrimitivePhotoActivity.class);
  * startActivity(intent);
  */
-public class PrimitivePhotoActivity extends Activity {
+public class ReceiptPhotoActivity extends Activity {
 
 	Uri imageFileUri;
 	protected int claimIndex;
 	protected int expenseIndex;
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	
+	/**
+	 * This will call an available android camera
+	 * Copied from the bogopic lab
+	 * @param v
+	 */
 	public void takeAPhoto(View v) {
 		
 		String folder = Environment.getExternalStorageDirectory().getAbsolutePath() + "/TravelPlannerPhotos";
@@ -59,7 +63,10 @@ public class PrimitivePhotoActivity extends Activity {
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 		
 	}
-
+	/**
+	 * This will handle the camera results. 
+	 * if successful it will set the image to the expenseItem receipt 
+	 */
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 			

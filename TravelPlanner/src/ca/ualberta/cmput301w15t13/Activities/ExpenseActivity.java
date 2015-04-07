@@ -247,7 +247,7 @@ public class ExpenseActivity extends Activity {
 		Bundle bundle = new Bundle();
 		bundle.putInt("claimIndex", claimIndex);
 		bundle.putInt("expenseIndex", index);
-		Intent intent = new Intent(this, PrimitivePhotoActivity.class);
+		Intent intent = new Intent(this, ReceiptPhotoActivity.class);
 		intent.putExtra("bundle", bundle);
 		startActivity(intent);
 	}
