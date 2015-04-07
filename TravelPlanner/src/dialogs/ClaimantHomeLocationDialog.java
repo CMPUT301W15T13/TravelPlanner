@@ -81,6 +81,8 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
+	        	MapViewerAlertDialog dialog = new MapViewerAlertDialog();
+	        	dialog.show(getFragmentManager(), "Map Searcher");
 	      	    Dialog d = getDialog();
 	      	    d.dismiss();
 	        }
