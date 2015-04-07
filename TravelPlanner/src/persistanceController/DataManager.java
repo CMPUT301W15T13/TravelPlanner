@@ -108,14 +108,13 @@ public class DataManager {
 		if (isTesting == false){
 			DataHelper helper = new DataHelper();
 			helper.loadClaimsByUserName(userName);
-			
 			//This goes through all the claims and reloads the tags
 			ArrayList<Tag> tagList;
 			for (Claim claim: ClaimListSingleton.getClaimList().getClaimArrayList()){
 				tagList = claim.getTags();
-				
 				for (int index = 0; index < tagList.size(); index++){
 					ClaimListSingleton.getClaimList().tagManager.add(tagList.get(index), claim.getclaimID());
+					
 				}
 			}
 		}

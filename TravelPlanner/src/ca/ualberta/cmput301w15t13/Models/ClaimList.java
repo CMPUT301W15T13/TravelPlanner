@@ -240,5 +240,18 @@ public class ClaimList {
 		this.removeClaimAtIndex(currentClaimIndex+1);
 		DataManager.updateClaim(newClaim);
 	}
+
+	public void replaceClaim(String claimID, Claim newClaim) {
+		int index;
+		for (Claim claim: claimList){
+			if (claim.getclaimID().equals(claim)){
+				index = claimList.indexOf(claim);
+				claimList.add(index, newClaim);
+				claimList.remove(index+1);
+				DataManager.updateClaim(newClaim);
+			}
+		}
+		
+	}
 	
 }

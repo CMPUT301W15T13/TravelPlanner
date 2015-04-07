@@ -65,7 +65,9 @@ public class ExpenseListViewerFragment extends Fragment {
 		super.onCreate(savedInstanceState);
 		claimIndex = getArguments().getInt("claimIndex");
 		claimID = getArguments().getString("claimID");
-		expenses = ClaimListSingleton.getClaimList().getExpenseList(claimIndex);
+		Claim claim = ClaimListSingleton.getClaimByID(claimID);
+		expenses = claim.getExpenseItems();
+		//expenses = ClaimListSingleton.getClaimList().getExpenseList(claimIndex);
 		this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);		
 	}
 	
