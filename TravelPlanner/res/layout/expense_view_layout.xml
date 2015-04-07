@@ -176,7 +176,7 @@
 			    	>
 
 		        <ImageView
-		            android:id="@+id/receiptViewatAdapter"
+		            android:id="@+id/receiptViewatViewer"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
 		            android:src="@drawable/ic_ayy" />

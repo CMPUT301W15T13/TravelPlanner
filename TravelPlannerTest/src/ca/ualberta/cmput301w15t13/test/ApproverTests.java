@@ -324,8 +324,9 @@ public class ApproverTests extends ActivityInstrumentationTestCase2<LoginActivit
 		ExpenseItem expenseItem3 = new ExpenseItem("air", new Date(100), "yolo" , 10.00, "CDN", claim1.getclaimID());
 		
 		Bitmap bitmapLarge = Bitmap.createBitmap(1000, 1000, Bitmap.Config.ARGB_8888 );
-		Receipt receipt = new Receipt(bitmapLarge);
-		expenseItem1.addReceipt(receipt);
+		Receipt receipt = new Receipt();
+		receipt.setBitmap(bitmapLarge);
+		//expenseItem1.addReceipt(receipt);
 		
 		approver.returnClaim(claim1);
 		claim1.addExpenseItem(expenseItem1);
