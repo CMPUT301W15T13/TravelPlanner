@@ -245,6 +245,9 @@ public class ExpenseActivity extends Activity {
 		ClaimListSingleton.getClaimList().notifyListeners();
 		setFragmentToExpenseViewer();
 	}
+	public void removeReceipt(View v) {
+		ExpenseManagerFragment.removeReceipt();
+	}
 	
 	/**
 	 * Cancels the claim creation/editing

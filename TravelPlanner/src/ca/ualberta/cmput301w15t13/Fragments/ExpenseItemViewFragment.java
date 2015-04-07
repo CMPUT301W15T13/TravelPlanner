@@ -23,10 +23,12 @@ package ca.ualberta.cmput301w15t13.Fragments;
 import java.util.Date;
 
 import android.app.Fragment;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
@@ -50,6 +52,7 @@ public class ExpenseItemViewFragment extends Fragment {
 	private String categoryString;
 	private TextView dateView;
 	private Date Date;
+	private ImageView ib;
 	private String dateText;
 	private double amount;
 	private TextView amountView;
@@ -84,6 +87,7 @@ public class ExpenseItemViewFragment extends Fragment {
 		amountView = (TextView) getView().findViewById(R.id.textViewAmountView);
 		categoryView = (TextView) getView().findViewById(R.id.textViewCategory);
 		currencyView = (TextView) getView().findViewById(R.id.TextViewCurrencyString);
+		ib = (ImageView) getView().findViewById(R.id.receiptViewatViewer);
 
 		setFields();
 	}
@@ -99,6 +103,10 @@ public class ExpenseItemViewFragment extends Fragment {
 		this.amountView.setText(String.valueOf(editExpense.getAmount()));
 		this.categoryView.setText(editExpense.getExpenseCategory());
 		this.currencyView.setText(editExpense.getCurrency());
+		if ((editExpense.getReceipt() != null)) {
+			Drawable pic = editExpense.getReceipt().getDrawable();
+			ib.setImageDrawable(pic);
+		}
 		
 	}
 	/**

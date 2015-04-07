@@ -5,6 +5,7 @@ import java.util.Date;
 
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ public class ExpenseManagerFragment extends Fragment {
 	private String expenseName;
 	private Spinner categorySpinner;
 	private TextView dateView;
+	private ImageView ib;
 	private Date Date;
 	private String dateText;
 	private double amount;
@@ -42,6 +45,7 @@ public class ExpenseManagerFragment extends Fragment {
 	private int claimIndex;
 	private String claimID;
 	private int expenseIndex;
+	
 	
 	//TODO force change what the back button does from this screen, in that it moves to the old fragment
 	
@@ -72,6 +76,7 @@ public class ExpenseManagerFragment extends Fragment {
 		amountView = (TextView) getView().findViewById(R.id.editTextAmount);
 		categorySpinner = (Spinner) getView().findViewById(R.id.categorySpinner);
 		currencySpinner = (Spinner) getView().findViewById(R.id.currencySpinner);
+		ib = (ImageView) getView().findViewById(R.id.receiptImageHolder);
 
 		setFields();
 	}
@@ -103,6 +108,11 @@ public class ExpenseManagerFragment extends Fragment {
 			this.amountView.setText(String.valueOf(editExpense.getAmount()));
 			this.categorySpinner.setSelection(getIndex(categorySpinner,editExpense.getExpenseCategory()));
 			this.currencySpinner.setSelection(getIndex(currencySpinner,editExpense.getExpenseCategory()));
+			
+			if ((editExpense.getReceipt() != null)) {
+				Drawable pic = editExpense.getReceipt().getDrawable();
+				ib.setImageDrawable(pic);
+			}
 			
 		} else {
 			this.descriptionView.setText("");
@@ -275,4 +285,11 @@ public class ExpenseManagerFragment extends Fragment {
 		  }
 		  return index;
 		 }
+
+	public void removeReceipt() {
+		ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
+		editExpense.removeReceipt();
+		int id = getResources().getIdentifier("TravelPlanner:drawable/ic_ayy.png" , null, null);
+		ib.setImageResource(id);
+	}
 } 

@@ -216,10 +216,8 @@ public class ExpenseItem implements ExpenseClaim {
    * method for removing a receipt for the expense item, this is to be implemented for project 5
    * @param bitmap
    */
-  public void removeReceipt(Bitmap bitmap) {
-    /**
-     *  TODO for project 5
-     */
+  public void removeReceipt() {
+	  this.receipt = null;
   }
 
 

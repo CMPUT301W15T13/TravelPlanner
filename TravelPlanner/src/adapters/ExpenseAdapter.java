@@ -96,11 +96,11 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			currView.setText(expense.getCurrency());
 			catView.setText(expense.getExpenseCategory());
 			
-			if (expense.getReceipt()!= null) {
-				Drawable pic = Drawable.createFromPath(expense.getReceipt().getReceiptUri().getPath());
-				pic = resize(pic);
+			if ((expense.getReceipt() != null)) {
+				Drawable pic = expense.getReceipt().getDrawable();
 				ib.setImageDrawable(pic);
 			}
+			
 			
 			// Keep the if-else, since the button will be a toggle.
 
@@ -114,7 +114,7 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 	}
 	protected Drawable resize(Drawable image) {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();
-	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 200, 300, false);
+	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 100, 150, false);
 	    return new BitmapDrawable(bitmapResized);
 	}
 }

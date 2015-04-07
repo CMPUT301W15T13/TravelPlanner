@@ -68,7 +68,6 @@ public class PrimitivePhotoActivity extends Activity {
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 		
 	}
-		
 	
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
@@ -86,6 +85,7 @@ public class PrimitivePhotoActivity extends Activity {
 					expense.addReceipt();
 				}
 				expense.getReceipt().setReceiptUri(imageFileUri);
+				ClaimListSingleton.getClaimList().notifyListeners();
 			}else if (resultCode == RESULT_CANCELED) {
 				TextView tv = (TextView) findViewById(R.id.textView3);
 				tv.setText("Photograph Cancelled");
