@@ -65,6 +65,8 @@
     <string name="home_location">Use Home Location</string>
     <string name="view_map_location">View Map Location</string>
     <string name="view_home_location">View Home Location</string>
+    <string name="add_location">Add Location</string>
+    
     
     
 </resources>

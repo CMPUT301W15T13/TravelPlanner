@@ -1,11 +1,5 @@
 package ca.ualberta.cmput301w15t13.Activities;
 
-import android.location.Location;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 
@@ -15,7 +9,14 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class GoogleMapViewerActivity extends FragmentActivity{
+import android.location.Location;
+import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+
+public class GoogleMapSearchActivity extends FragmentActivity {
 	// Based on https://developers.google.com/maps/documentation/android/ April 6th 2015
 	private GoogleMap googleMap;
 	private MarkerOptions marker;
@@ -23,12 +24,13 @@ public class GoogleMapViewerActivity extends FragmentActivity{
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setContentView(R.layout.google_maps_viewer_layout);
+		setContentView(R.layout.google_maps_search_layout);
 		//map =  findViewById(R.id.google_map);
-		googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map)).getMap();
+		googleMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map_search)).getMap();
 		getActionBar().hide();
 		
 		Button closeView = (Button) findViewById(R.id.buttonCloseMaps);
+		Button addLocation = (Button) findViewById(R.id.buttonAddLocation);
 		closeView.setOnClickListener(close);
 		
 		setLocation();
@@ -39,9 +41,6 @@ public class GoogleMapViewerActivity extends FragmentActivity{
 		if(myLocation != null){
 			LatLng ll = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
 			googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(ll, 5));
-			marker = new MarkerOptions().position(ll);
-			googleMap.addMarker(marker);
-			googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		}
 	}
 	
@@ -53,14 +52,14 @@ public class GoogleMapViewerActivity extends FragmentActivity{
 			finish();
 		}
 	};
-
-	@Override
-	protected void onDestroy() {
-		super.onDestroy();
-		UserLocationManager.setViewLocation(null); // clear the set location
-	}
 	
-	
-
+	private final OnClickListener addLocation = new View.OnClickListener() {
+		
+		@Override
+		public void onClick(View v) {
+			UserLocationManager.setViewLocation(null); // clear the set location
+			finish();
+		}
+	};
 
 }
