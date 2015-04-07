@@ -39,7 +39,6 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
-import ca.ualberta.cmput301w15t13.Models.ExpenseItemList;
 import dialogs.ClaimantExpenseDialogFragment;
 
 /**
@@ -94,7 +93,6 @@ public class ExpenseListViewerFragment extends Fragment {
 
 			@Override
 			public void update() {
-				ExpenseItemList expenses = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItemList();
 				ExpenseAdapter.notifyDataSetChanged();
 			}
 			
@@ -112,8 +110,7 @@ public class ExpenseListViewerFragment extends Fragment {
 			public void onItemClick(AdapterView<?> arg0, View view, int position,
 					long id) {
 				if(((ExpenseActivity) getActivity()).isClaimant()){
-					Claim ourClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-				((ExpenseActivity) getActivity()).viewExpense(position);
+					((ExpenseActivity) getActivity()).viewExpense(position);
 				}
 			}
 		});

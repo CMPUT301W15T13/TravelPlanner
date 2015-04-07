@@ -41,7 +41,6 @@ public class ExpenseManagerFragment extends Fragment {
 	private EditText descriptionView;
 	private boolean areFieldsComplete;
 	private boolean isEditing;
-	private boolean isThisReady;
 	private int claimIndex;
 	private String claimID;
 	private int expenseIndex;
@@ -53,7 +52,6 @@ public class ExpenseManagerFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		areFieldsComplete = false;
-		isThisReady = false;
 		Date = new Date();
 		
 		claimIndex = getArguments().getInt("claimIndex");
