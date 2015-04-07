@@ -1,3 +1,4 @@
+adapters
 ca.ualberta.cmput301w15t13
 ca.ualberta.cmput301w15t13.Activities
 ca.ualberta.cmput301w15t13.Controllers
@@ -5,4 +6,9 @@ ca.ualberta.cmput301w15t13.Fragments
 ca.ualberta.cmput301w15t13.ModelTests
 ca.ualberta.cmput301w15t13.Models
 ca.ualberta.cmput301w15t13.test
+com.google.android.gms
+dialogs
 exceptions
+persistanceController
+persistanceData
+persistanceModel

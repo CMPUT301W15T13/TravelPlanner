@@ -2,8 +2,6 @@ package ca.ualberta.cmput301w15t13.Activities;
 
 import java.io.File;
 
-import com.google.android.gms.fitness.data.Value;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -20,7 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
-import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 /**

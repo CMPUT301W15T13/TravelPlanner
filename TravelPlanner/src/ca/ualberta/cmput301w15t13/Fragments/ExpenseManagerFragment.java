@@ -193,8 +193,8 @@ public class ExpenseManagerFragment extends Fragment {
 		String currencySet = currencySpinner.getSelectedItem().toString();
 		
 		
-		//ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
-		ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimByID(claimID).getExpenseItems().get(expenseIndex);
+		ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
+		//ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimByID(claimID).getExpenseItems().get(expenseIndex);
 		
 		editExpense.setExpenseCategory(categorySet);
 		editExpense.setCurrency(currencySet);
