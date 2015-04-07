@@ -10,6 +10,8 @@ import android.net.NetworkInfo;
  * This is a network Receiver. It listens for the connection changes the connection settings.
  * WHen a change is detected, it will change the internal network status
  * 
+ * This was not implemented due to issues with loading claims and time constraints
+ * 
  * Based on Meow meo's post on:
  * http://stackoverflow.com/questions/3767591/check-intent-internet-connection
  * @author eorod_000

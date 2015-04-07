@@ -119,12 +119,20 @@ public class DataManager {
 		}
 	}
 	
+	/**
+	 * This updates the contexts so that the context is always current. It is required for local persistance
+	 * @return
+	 */
 	public static void setCurrentContext(Context context){
 		if (isTesting == false){
 			currentContext = context;
 		}
 	}
 	
+	/**
+	 * This gets the contexts so that the context is always current. It is required for local persistance
+	 * @return
+	 */
 	public static Context getCurrentContext(){
 		return currentContext ;
 	}
@@ -149,6 +157,12 @@ public class DataManager {
 ////////////////////////////////////////////////////////////////////////////
 
 
+/**
+ * This class is a helper class to the Data Manager class. It expands on the API above and determines functionality based on network status.
+ *
+ * @author eorod_000
+ *
+ */
 class DataHelper{
 	
 	LocalPersistance local = new LocalPersistance();
@@ -177,13 +191,11 @@ class DataHelper{
 		}
 	}
 	
-	
 	/**
-	 * This will determine what type of saving method to use depending on the network status.
+	 * This saves a claim. If a local save is required... All claims are saved
 	 * @param claim
 	 */
 	public void saveClaim(Claim claim) {
-	//	this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new SaveASyncTask().execute(claim.getclaimID());
 		}
@@ -191,33 +203,32 @@ class DataHelper{
 	}
 
 
+	/**
+	 * Updates by overwritting the last saved files
+	 * @param claim
+	 */
 	public void updateClaim(Claim claim) {
 		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new UpdateASyncTask().execute(claim.getclaimID());
 		}
 		local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
-		
 	}
 
 
 	public void loadAllClaims() throws InterruptedException, ExecutionException {
-		//this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new LoadAllASyncTask().execute("");
 		}else{
 			local.LoadClaims(DataManager.getCurrentContext());
 		}
-		
 	}
 
-
 	/**
-	 * This will delete a claim from the network
+	 * Deletes the claim from the network. If offline, it saves the current state
 	 * @param claimID
 	 */
 	public void DeleteClaim(String claimID){
-	//	this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			new DeleteASyncTask().execute(claimID);
 		}
@@ -225,11 +236,10 @@ class DataHelper{
 	}
 	
 	/**
-	 * This method is for network persistance. It will Save a claim's Expenses.
+	 * This saves all the claim expenses from a claim. If local, it saves the current state of the app.
 	 * @param expenseList
 	 */
 	public void saveClaimExpenses(ExpenseItemList expenseList){
-	//	this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			for (ExpenseItem expense: expenseList.getExpenseList()){
 				network.saveExpense(expense);
@@ -244,7 +254,6 @@ class DataHelper{
 	 * @return
 	 */
 	public void loadClaimsByUserName(String userName) {
-		//this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
 			//Start an Async task to load claims
 			new LoadASyncTask().execute(userName);
@@ -259,7 +268,6 @@ class DataHelper{
 	 * @param claim
 	 */
 	public String LoadLocalClaims() {
-		//this.isNetworkConnected();
 		if (!DataManager.isNetworkAvailable()){
 			local.LoadClaims();
 		}

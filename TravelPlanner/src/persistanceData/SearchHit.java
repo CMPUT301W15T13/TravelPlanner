@@ -1,5 +1,14 @@
 package persistanceData;
 
+
+/**
+ * This was taken from the elastic search lab
+ * 
+ * @author eorod_000
+ *
+ * @param <T>
+ */
+
 public class SearchHit<T> {
 	private String _index;
 	private String _type;

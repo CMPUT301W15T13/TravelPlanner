@@ -1,5 +1,13 @@
 package persistanceData;
 
+
+/**
+ * This was taken from the elastic search lab
+ * 
+ * @author eorod_000
+ *
+ * @param <T>
+ */
 public class SearchCommand {
 
 	private SimpleSearchQuery query;

@@ -3,6 +3,13 @@ package persistanceData;
 import java.util.List;
 
 
+/**
+ * This was taken from the elastic search lab
+ * 
+ * @author eorod_000
+ *
+ * @param <T>
+ */
 public class Hits<T> {
 	private int total;
 	private float max_score;
