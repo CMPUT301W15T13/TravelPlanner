@@ -53,12 +53,13 @@ public class ExpenseItemViewFragment extends Fragment {
 	private TextView descriptionView;
 	private int claimIndex;
 	private int expenseIndex;
+	private String claimID;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		claimIndex = getArguments().getInt("claimIndex");
-		getArguments().getString("claimID");
+		claimID = getArguments().getString("claimID");
 	}
 	
 	@Override
@@ -83,7 +84,7 @@ public class ExpenseItemViewFragment extends Fragment {
 	}
 	
 	private void setFields() {
-		Claim editClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		Claim editClaim = ClaimListSingleton.getClaimList().getClaimByID(claimID);
 		ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
 			
 		this.expenseNameView.setText(editExpense.getExpenseName());
