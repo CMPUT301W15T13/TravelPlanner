@@ -65,18 +65,12 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		    	Toast.makeText(getActivity(), "Comment was :"+comment, Toast.LENGTH_SHORT).show();
 		    	// This will return the claim that is currently being working on
 		    	claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-		    	
-		    	/**
-		    	 * TODO Ji Hwan Kim
-		    	 * claim.getlastApproverName method currently is not implemented
-		    	 * Need to first assign the approver name then call get last approver name
-		    	 */
-		    	
 		    	claim.addComment(comment, claim.getlastApproverName());
 		    	
 		    	FragmentManager fm = getFragmentManager();
 		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");	
 		     	fragment.returnClaim(claimIndex);
+		     	claim.setReturnedBefore(true);
 				Dialog d = getDialog();
 				d.dismiss();
 		    }

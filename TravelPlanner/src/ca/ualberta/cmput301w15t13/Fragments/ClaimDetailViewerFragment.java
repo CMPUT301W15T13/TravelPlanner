@@ -30,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
@@ -46,6 +47,7 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 public class ClaimDetailViewerFragment extends Fragment {
 	private Claim claim;
 	private ArrayList<String> commentList;
+	private String commentField;
 
 	final OnClickListener closeFragment = new OnClickListener() {
 		
@@ -67,6 +69,11 @@ public class ClaimDetailViewerFragment extends Fragment {
 		TextView descrption = (TextView) getView().findViewById(R.id.textViewDescription);
 		TextView tags = (TextView) getView().findViewById(R.id.textViewTagsList);
 		TextView comments = (TextView) getView().findViewById(R.id.textViewComments);
+		/**
+		 * http://stackoverflow.com/questions/6158123/java-android-appending-a-newline-using-textview
+		 * This allows textView to have multiple lines 
+		 */
+		comments.setSingleLine(false);
 		
 		name.setText(claim.getUserName());
 		startDate.setText(claim.getStartDateAsString());
@@ -81,24 +88,19 @@ public class ClaimDetailViewerFragment extends Fragment {
 	public void setClaim(int i){
 		this.claim = ClaimListSingleton.getClaimList().getClaimAtIndex(i);
 	}
-	
+
 	/**
-	 * TODO the claim's getComments method is returning an ArrayList<String> of all the comments
-	 * from most recent to oldest
-	 * But setText only takes String
-	 * So I need to come up with the method that will take Strings
-	 * @author Ji Hwan Kim
+	 * Using for loops, it will iterate through the commentList
+	 * and show from most recent to oldest comment with approver's name
 	 */
 	
 	public void getApproverComments(TextView comments) {
 		commentList = claim.getComments();
-		/**
-		 * Using for loops, it will iterate through the commentList
-		 * and show from most recent to oldest
-		 */
+		commentField = "";
 		for (int i = 0; i < commentList.size(); i++) {
-			comments.setText(commentList.get(i)+" by "+claim.getlastApproverName());
+			commentField += commentList.get(i) + " by " + claim.getlastApproverName() + "\n";
 		}
+		comments.setText(commentField);
 	}
 	
 	/* Below this is android stuff */
