@@ -63,16 +63,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 	 */
 	protected boolean returnedBefore;
 
-/**
- * 
- * @param username
- * @param startDate
- * @param endDate
- * @param description
- * @param travelList
- * @throws InvalidDateException
- * @throws EmptyFieldException
- */
 	public Claim(String username, Date startDate, Date endDate, String description,TravelItineraryList travelList) throws EmptyFieldException, InvalidDateException {
 		//initializes the claim status to INPROGRESS (and edit-able)
 		this.status = new ClaimStatus();
@@ -140,48 +130,26 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		this.setEndDate(endDate);
 	}
 	
-	/**
-	 * This will return the start Date for the claim
-	 * @return
-	 */
 	public Date getStartDate() {
 		return this.startDate;
 	}
 
-	/**
-	 * This will set the start Date for the claim
-	 */
 	private void setStartDate(Date startDate) {
 		this.startDate = startDate;
 	}
 
-	/**
-	 * This will return the end Date for the claim
-	 * @return
-	 */
 	public Date getEndDate() {
 		return this.endDate;
 	}
 
-	/**
-	 * This will set the end Date for the claim
-	 */
 	private void setEndDate(Date endDate) {
 		this.endDate = endDate;
 	}
 
-	/**
-	 * This will return the description of the claim
-	 * @return
-	 */
 	public String getDescription() {
 		return description;
 	}
 
-	/**
-	 * This sets the Claim description
-	 * @param description 
-	 */
 	public void setDescription(String description) {
 		if (description == null || description.trim().isEmpty()) {
 			this.description = "";
@@ -191,10 +159,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		}
 	}
 	
-	/**
-	 * This returns the travel Itinerary list of the claim
-	 * @return
-	 */
 	public TravelItineraryList getTravelList() {
 		return travelList;
 	}
@@ -213,10 +177,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		}
 	}
 
-	/**
-	 * Returns the status of a claim
-	 * @return
-	 */
 	public statusEnum getStatus() {
 		return this.status.getStatus();
 	}
@@ -244,10 +204,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		this.travelList.addTravelDestination(travelItinerary);
 	}
 	
-	/**
-	 * THis will return the number of travel destinations
-	 * @return
-	 */
 	public int numberOfDestinations() {
 		return this.travelList.numberofDestinations();
 	}
@@ -274,36 +230,25 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		travelList.editTravelDestination(index, travelItinerary);
 	}
 
-	/**
-	 * This will delete a travel Itinerary at the specified index
-	 * @param i
-	 */
 	public void deleteTravelDestination(int i) {
 		this.travelList.deleteTravelDestination(i);
 	}
 
 	/**
-	 * This will get the name of the last approver
+	 * Get the name of the last approver.
+	 * Useful for keeping track of approvers
+	 * overall
 	 * @return
 	 */
 	public String getlastApproverName() {
 		return this.lastApproverName;
 	}
 
-	/**
-	 * This will set the name of the last approver
-	 * @param name
-	 */
 	public void setLastApproverName(String name) {
 		this.lastApproverName = name;
 		DataManager.updateClaim(this);
 	}
 
-	/**
-	 * This will add a comment
-	 * @param comment
-	 * @param name
-	 */
 	public void addComment(String comment, String name) {
 		ArrayList<String> comments;
 		setLastApproverName(name);
@@ -335,9 +280,6 @@ public class Claim implements Comparable<Claim>, ExpenseClaim {
 		return comments;
 	}
 
-	/**
-	 * This will clear the comments from a claim
-	 */
 	public void clearComments() {
 		this.approverComments = new HashMap<String, ArrayList<String>>();
 		this.lastApproverName = null;
