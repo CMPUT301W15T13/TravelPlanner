@@ -48,7 +48,26 @@
         android:text="@string/holder"
         android:textColor="@color/text"
         android:textAppearance="?android:attr/textAppearanceSmall" />
+    
+    <LinearLayout
+        android:id="@+id/destinationClaimList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewAdapterClaimDate"
+        android:orientation="vertical"
+        >
+        
+    </LinearLayout>
 
+	<LinearLayout
+        android:id="@+id/tagClaimList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/destinationClaimList"
+        android:orientation="vertical"
+        >
+        
+    </LinearLayout>
 
 
 </RelativeLayout>

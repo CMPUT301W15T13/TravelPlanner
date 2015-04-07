@@ -32,12 +32,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
+import ca.ualberta.cmput301w15t13.Models.Tag;
+import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 
 /** 
  * This is a Custom array adapter used to 
@@ -60,11 +63,13 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 	 * points. Short is with 10KM and medium is within 1000km.
 	 */
 	private final int SHORT = 10000, MEDIUM = 1000000;  
+	private Context activityContext;
 
 	
 	public ClaimAdapter(Context context, int textViewResourceId, List<Claim> claims) {
 		super(context, textViewResourceId,claims);
 		this.claims = (ArrayList<Claim>) claims;
+		activityContext = context;
 	}
 	
 	/**
@@ -125,6 +130,19 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 			}else{ /* No location, set text to white */
 				titleView.setTextColor(r.getColor(R.color.text));
 			}
+			
+			LinearLayout destListView = (LinearLayout) view.findViewById(R.id.destinationClaimList);
+			ArrayList<TravelItinerary> destList = claim.getTravelList().getTravelArrayList();
+			for(TravelItinerary item : destList){
+				TextView destItem = new TextView(activityContext);
+				destItem.setText(item.getDestinationName() + ": " + item.getDestinationDescription());
+				destListView.addView(destItem);
+			}
+			
+			LinearLayout tagListView = (LinearLayout) view.findViewById(R.id.tagClaimList);
+			TextView tagItem = new TextView(activityContext);
+			tagItem.setText(claim.getTagsAsString());
+			tagListView.addView(tagItem);
 		}
 		return view;
 	}
