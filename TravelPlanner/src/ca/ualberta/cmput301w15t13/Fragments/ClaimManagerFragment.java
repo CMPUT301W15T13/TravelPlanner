@@ -217,7 +217,6 @@ public class ClaimManagerFragment extends Fragment{
 			 * Ji Hwan Kim
 			 * set the newly made claim to have no returned history
 			 */
-			newClaim.setReturnedBefore(false);
 			newClaim.tags = tagList;
 			ClaimList claimlist = ClaimListSingleton.getClaimList();
 			claimlist.add(newClaim);
