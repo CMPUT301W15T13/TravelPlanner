@@ -26,6 +26,12 @@ package ca.ualberta.cmput301w15t13.Models;
  * knowing if the claim is editable
  * and provides the public constants
  * for consistency and readability.
+ * 
+ * It should be used to denote a
+ * Claim object with a predefined
+ * status
+ * 
+ * 
  */
 
 public class ClaimStatus {	
@@ -38,7 +44,7 @@ public class ClaimStatus {
 	
 	/**
 	 * Constructor for the class. 
-	 * Inits it to be in progress
+	 * The default status is "In progress"
 	 */
 	
 	public ClaimStatus(){
@@ -54,7 +60,7 @@ public class ClaimStatus {
 	}
 
 	/**
-	 * Returns true if the claim is editable
+	 * Returns true if the claim can be edited
 	 * @return
 	 */
 	public boolean isEditable() {

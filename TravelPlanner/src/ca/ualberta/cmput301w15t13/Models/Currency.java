@@ -38,18 +38,10 @@ public class Currency {
 			this.currencyAbbr = currencyAbbr;
 		}
 		
-		/**
-		 * 
-		 * @return
-		 */
 		public String getCurrencyName() {
 			return currencyName;
 		}
 		
-		/**
-		 * 
-		 * @return
-		 */
 		public String getCurrencyAbbr() {
 			return currencyAbbr;
 		}
@@ -89,6 +81,7 @@ public class Currency {
 		
 	}
 	
+	/* Getters and Setters */
 	public CurrencyEnum getcurrencyType(){
 		return currencyType;
 	}

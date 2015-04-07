@@ -6,15 +6,18 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 /**
- * This defines the basic structure and calls for a receipt
+ * This class is represent 
+ * the model containing a user-taken
+ * photograph, ideally of a receipt.
+ * It should be used to represent the
+ * receipt to an expenseItem of a claim
  */
 public class Receipt {
 	Uri receiptUri;
 	Bitmap receiptBitmap;
 
-	public Receipt() {
-		// TODO for project 
-	}
+	public Receipt() {}
+	
 	/**
 	 * This method handles setting the bitmap and will
 	 * call a method to resize it

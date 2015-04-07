@@ -27,11 +27,15 @@ import java.util.UUID;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import exceptions.InvalidFieldEntryException;
-import exceptions.InvalidUserPermissionException;
-
 
 /**
- * This is an expense item. It defines the model characteristics of an expense
+ * Expense item class models the functionality
+ * of an expense Claim. It should be used to store
+ * relevant expenseItem information such as 
+ * a photo receipt or a puchaseDate.
+ * 
+ * Classes it works with:
+ * Currency,Category,Receipt,
  */
 public class ExpenseItem implements ExpenseClaim {
 	
@@ -42,9 +46,9 @@ public class ExpenseItem implements ExpenseClaim {
   private ArrayList<String> allowedCurrencies = new ArrayList<String>();
 	
   /**
-   * these are the input fields for the expense
+   * an ExpenseItem requires the user 
+   * to fulfill these fields (via the UI)
    */
-
   protected String ExpenseName = null;
   protected String ExpenseCategory = null;
   protected Date purchaseDate = null;
@@ -52,29 +56,13 @@ public class ExpenseItem implements ExpenseClaim {
   protected double Amount = 0.00;
   protected String currency;
   protected Currency expenseCurrency;
-
   protected String ClaimID = null;
   protected String ExpenseID = null;
   protected Uri receiptUri = null;
-
-  /**
-   * this does not need to be initialized
-   */
- // protected Currency currencyEnum;
   public Receipt receipt = null;
-
   public boolean complete = false;
   
-	
-  /**
-   * 
-   * @param ClaimID
-   * @param Category
-   * @param purchaseDate
-   * @param Amount
-   * @param Currency
-   * @throws InvalidUserPermissionException 
-   */
+
   public ExpenseItem(String Category, Date purchaseDate, String ExpenseDescription, double Amount, String Currency, String ClaimID) {
     /** 
      * TODO for project 5
@@ -85,10 +73,8 @@ public class ExpenseItem implements ExpenseClaim {
     this.ExpenseID = UUID.randomUUID().toString();
     this.ExpenseCategory = Category;
     this.purchaseDate = purchaseDate;
-    this.ExpenseDescription = ExpenseDescription;
-    
+    this.ExpenseDescription = ExpenseDescription;    
     this.setExpenseCurrency(Amount, Currency);
-
 
     /** 
      * These variables are the expense item categories that are visible on the activity 
@@ -118,7 +104,7 @@ public class ExpenseItem implements ExpenseClaim {
 	  return this.expenseCurrency;
   }
   
-  public boolean hasReciept() {
+  public boolean hasReceipt() {
 	  return !(receipt.equals(null));
   }
 
@@ -202,52 +188,20 @@ public class ExpenseItem implements ExpenseClaim {
     return receipt;
   }
 
-  /**
-   *  method for adding a receipt for the expense item, this is to be implemented for project 5
-   * @param receipt
-   */
   public void addReceipt() {
     this.receipt = new Receipt();
   }
 
-  /**
-   * method for removing a receipt for the expense item, this is to be implemented for project 5
-   * @param bitmap
-   */
   public void removeReceipt() {
 	  this.receipt = null;
   }
 
-
-  /**
-   *  this method will determine if the expense item is complete or not
-   * 
-   * @return
-   */
   public boolean isComplete() {
     return complete;
   }
 
   public void setComplete(boolean complete) {
     this.complete = complete;
-  }
-
-  /**
-   * method that is to be implemented for project 5
-   */
-  public void setIncompletenessIndicator() {
-    /**
-     *  TODO for project 5
-     */
-  }
-
-  /**
-   * method that is to be implemented for project 5
-   */
-  public void removeIncompletenessIndicator() {
-    /**
-     *  TODO for project 5
-     */
   }
   
   /**
@@ -264,6 +218,7 @@ public class ExpenseItem implements ExpenseClaim {
 		DateFormat dateFormat = new DateFormat();
 		Date newDate = (Date) this.purchaseDate.clone();
 		int year = newDate.getYear();
+		//For some reason this is necessary
 		newDate.setYear(year-1900);
 		
 		/**this is where we format the start and end dates
