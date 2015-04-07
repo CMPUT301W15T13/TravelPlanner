@@ -42,7 +42,7 @@
         android:layout_toRightOf="@+id/textViewAdapterExpenseDate"
         android:text="@string/holder"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/title" />
+        android:textColor="@color/text" />
 
     <TextView
         android:id="@+id/textViewAdapterExpenseAmount"
@@ -75,7 +75,7 @@
         android:padding="2dp"
         android:textColor="@color/incomplete" 
         android:textSize="24sp"
-        android:text="@string/holder"/>
+        />
     
     <ImageView
         android:id="@+id/receiptViewatAdapter"

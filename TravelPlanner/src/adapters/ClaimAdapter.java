@@ -25,6 +25,8 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
+import android.location.Location;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +34,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
 
@@ -52,6 +56,11 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 	//based on http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view Jan 24th 2015
 	// and http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter Jan 25 2015
 	public ArrayList<Claim> claims;
+	/* These are distances, in meters to measure distance between location
+	 * points. Short is with 10KM and medium is within 1000km.
+	 */
+	private final int SHORT = 10000, MEDIUM = 1000000;  
+
 	
 	public ClaimAdapter(Context context, int textViewResourceId, List<Claim> claims) {
 		super(context, textViewResourceId,claims);
@@ -94,6 +103,27 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 				statusView.setImageResource(android.R.drawable.ic_menu_revert);
 			} else { // CLOSED
 				statusView.setImageResource(android.R.drawable.ic_menu_myplaces);
+			}
+			
+			/* Sets the color of the title of the expense to red, yellow or green
+			 * depending on how far away the expense is from the home location
+			 */
+			Location homeLocation, claimLocation;
+			homeLocation = UserLocationManager.getHomeLocation();
+			// TODO jeeeezus better make sure this NEVER NullPointers
+			claimLocation = claim.getTravelList().getTravelArrayList().get(0).getLocation();
+			Resources r = ClaimFragmentNavigator.getResources();
+			if(claimLocation != null && homeLocation != null){
+				double distance = homeLocation.distanceTo(claimLocation);
+				if(distance < SHORT){
+					titleView.setTextColor(r.getColor(R.color.location_close));
+				}else if (distance < MEDIUM){
+					titleView.setTextColor(r.getColor(R.color.location_medium));
+				}else{
+					titleView.setTextColor(r.getColor(R.color.location_far));
+				}
+			}else{ /* No location, set text to white */
+				titleView.setTextColor(r.getColor(R.color.text));
 			}
 		}
 		return view;

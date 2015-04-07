@@ -70,7 +70,6 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		    	FragmentManager fm = getFragmentManager();
 		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");	
 		     	fragment.returnClaim(claimIndex);
-		     	claim.setReturnedBefore(true);
 				Dialog d = getDialog();
 				d.dismiss();
 		    }

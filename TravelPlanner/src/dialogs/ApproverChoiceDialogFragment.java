@@ -30,12 +30,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
-import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ClaimViewerFragment;
-import ca.ualberta.cmput301w15t13.Models.Claim;
-import ca.ualberta.cmput301w15t13.Controllers.User;
 
 
 /**
@@ -49,8 +45,6 @@ import ca.ualberta.cmput301w15t13.Controllers.User;
  */
 public class ApproverChoiceDialogFragment extends DialogFragment{
 	int claimIndex;
-	Claim claim;
-	User user;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,7 +75,6 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
         	Dialog d = getDialog();
         	d.dismiss();
         	
-    	
         }
     };
     
@@ -92,26 +85,11 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
     final OnClickListener approveClaim = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
-           
-        	claim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
-        	
-        	if (claim.getReturnedBefore() == true) {
-        		if (claim.getlastApproverName() != user.getName()) {
-        			Toast.makeText(getActivity(), "You don't have permission to return this claim", Toast.LENGTH_SHORT).show();
-        		} else {
-        			FragmentManager fm = getFragmentManager();
-              	   	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-              	   	fragment.approveClaim(claimIndex);
-              	   	Dialog d = getDialog();
-              	   	d.dismiss();
-        		}
-        	}
-        	
         	FragmentManager fm = getFragmentManager();
-      	   	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
-      	   	fragment.approveClaim(claimIndex);
-      	   	Dialog d = getDialog();
-      	   	d.dismiss();
+        	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");
+        	fragment.approverApproveComment(claimIndex);
+        	Dialog d = getDialog();
+        	d.dismiss();
         }
     };
     

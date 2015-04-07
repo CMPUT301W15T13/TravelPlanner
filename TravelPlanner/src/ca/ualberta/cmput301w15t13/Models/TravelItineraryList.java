@@ -22,6 +22,11 @@ public class TravelItineraryList {
 
 	protected ArrayList<TravelItinerary> travelList = null;
 	
+	public ArrayList<TravelItinerary> getTravelArrayList() {
+		return travelList;
+	}
+
+
 	public TravelItineraryList(){
 		this.travelList = new ArrayList<TravelItinerary>();
 	}

@@ -47,7 +47,7 @@
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
 				    android:onClick="openStartDateDialog"
-				    android:contentDescription="StartDate"
+				    android:contentDescription="@string/end_date"
 				    android:src="@android:drawable/ic_menu_my_calendar" />
 				
 			</LinearLayout>
@@ -84,7 +84,7 @@
 				    android:layout_height="wrap_content"
 				    android:layout_weight="0.2"
 				    android:onClick="openEndDateDialog"
-				    android:contentDescription="End Date"
+				    android:contentDescription="@string/holder"
 				    android:src="@android:drawable/ic_menu_my_calendar" />
 				
 			</LinearLayout>
@@ -105,10 +105,10 @@
 		    	android:layout_marginLeft="3dp"
 				>
 
-				<TextView
-				    android:id="@+id/textViewDestinationsList"
+				<ListView
+				    android:id="@+id/listViewDestinations"
 				    android:layout_width="0px"
-				    android:layout_height="wrap_content"
+				    android:layout_height="100dp"
 				    android:layout_marginBottom="3dp"
 				    android:layout_marginTop="3dp"
 				    android:layout_weight="0.8"
