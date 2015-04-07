@@ -37,9 +37,18 @@ import dialogs.ApproverChoiceDialogFragment;
 
 /**
  * Manages Approver specific data.
- * Provides the ability to approver and submit claims,
- * add comments, get the approver-viewable claims,
- * and on click listeners.
+ * Provides the ability to approve and return claims,
+ * with comments, get the approver-viewable claims,
+ * and on click listeners. It should be used as
+ * a way to control the interface, re: both display
+ * and functionality.
+ * 
+ * Classes it works with:
+ * User, Claim, ClaimStatus,ApproverChoiceDialogFragment
+ * 
+ * Sample use:
+ * Approver a = new Approver("approver name");
+ * a.approveClaim(claim)
  */
 
 public class Approver extends User {

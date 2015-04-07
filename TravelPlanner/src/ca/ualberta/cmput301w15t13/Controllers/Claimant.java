@@ -39,8 +39,20 @@ import dialogs.ClaimantChoiceDialogFragment;
 import exceptions.InvalidUserPermissionException;
 
 /**
+ * Manages Claimant specific data.
+ * Provides the ability to create and submit claims including
+ * constituent expense Items, and channel a claimant 
+ * specific interface. It should be used as
+ * a way to control the interface, re: both display
+ * and functionality.
+ * 
+ * Classes it works with:
+ * User, Claim, ClaimStatus,ApproverChoiceDialogFragment
+ * 
+ * Sample use:
+ * Claimant c = new Claimant("name");
+ * c.submitClaim(claim)
  */
-
 public class Claimant extends User {
 	
 	public Claimant(String name) {

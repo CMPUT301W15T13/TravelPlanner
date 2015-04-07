@@ -21,9 +21,9 @@
 package ca.ualberta.cmput301w15t13.Controllers;
 
 /**
- *Listener interface used to update
- *views/activities with relevant and
- * new data
+ * Listener interface used to update
+ * views/activities with relevant and
+ * new/changed data
  */
 public interface Listener {
 	public void update();

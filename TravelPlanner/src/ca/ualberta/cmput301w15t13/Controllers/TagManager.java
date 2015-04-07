@@ -26,10 +26,20 @@ import java.util.Map.Entry;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.Tag;
 
-/* 
+/** 
  * TagManager class controls the interface between
  * claims and tags. It associates tags with claim
- * Ids.
+ * Ids.It should be used to manage all tags, that is
+ * ,whenever a tag is added, edit, or removed it,
+ * the same operations should be done on the
+ * TagManager
+ * 
+ * Classes it works with:
+ * Tag,Claim
+ * 
+ * Sample use:
+ * TagManager tm = new TagManager();
+ * tm.add(Tag object, ClaimId)
  */
 
 public class TagManager {
@@ -40,6 +50,16 @@ public class TagManager {
 		this.manager = new HashMap<Tag, ArrayList<String>>();
 	}
 	
+	/**
+	 * Method to add a tag to the manager/claim.
+	 * This is where association occurs, as if
+	 * the tag already exists, it adds the given
+	 * claimID to the existing list, else it 
+	 * creates a new mapping of the given tag to the
+	 * given ClaimId
+	 * @param tag
+	 * @param claimID
+	 */
 	public void add(Tag tag, String claimID) {
 		HashMap<Tag, ArrayList<String>> map = manager;
 		
@@ -54,6 +74,12 @@ public class TagManager {
 		manager.put(tag, relatedClaimIds);
 	}
 	
+	/**
+	 * Given a tag this returns the associated
+	 * List of ClaimIDs
+	 * @param tag
+	 * @return
+	 */
 	public ArrayList<String> getAssociatedClaims(Tag tag) {
 		ArrayList<String> claims = manager.get(tag);
 		return claims;
@@ -69,6 +95,11 @@ public class TagManager {
 		}
 	}
 	
+	/**
+	 * Bulky method count the number of 
+	 * keys/Tags the tagManager has.
+	 * @return
+	 */
 	@SuppressWarnings("unused")
 	public int size() {
 		HashMap<Tag, ArrayList<String>> map = manager;
@@ -79,6 +110,10 @@ public class TagManager {
     	return size;
 	}
 	
+	/**
+	 * Get all tags so far created
+	 * @return
+	 */
 	public ArrayList<Tag> getTags() {
 		HashMap<Tag, ArrayList<String>> map = manager;
 		ArrayList<Tag> tags = new ArrayList<Tag>();
@@ -86,9 +121,13 @@ public class TagManager {
     		tags.add(entry.getKey());
     	}
     	return tags;
-    	
 	}
 	
+	/**
+	 * Method to remove a tag from the 
+	 * manger, and 
+	 * @param tag
+	 */
 	public void removeFromManager(Tag tag) {
 		HashMap<Tag, ArrayList<String>> map = manager;
 		for (String cid : map.get(tag)) {
