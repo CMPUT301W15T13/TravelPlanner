@@ -56,9 +56,21 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 		public void update() {
 			TravelItinerary item = ClaimFragmentNavigator.getFragmentManagerTravelItinenary(travelItemIndex);
 			item.setLocation(UserLocationManager.getSearchLocation());
+       	 	ClaimFragmentNavigator.updateDestinations();
 		}
 	};
    
+    final OnClickListener gpsListener = new OnClickListener() {
+        @Override
+		public void onClick(final View v) {
+       	 	TravelItinerary item = ClaimFragmentNavigator.getFragmentManagerTravelItinenary(travelItemIndex);
+    		Location gpsLocation = UserLocationManager.getGPSLocation(activity);
+    		item.setLocation(gpsLocation);
+        	Dialog d = getDialog();
+        	d.dismiss();
+       	 	ClaimFragmentNavigator.updateDestinations();
+        }
+    };
     
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
@@ -93,10 +105,12 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 	    Button homeLocation = (Button) view.findViewById(R.id.buttonHomeLocation);
 	    Button mapLocation = (Button) view.findViewById(R.id.buttonNewMapLocation);
 	    Button viewLocation = (Button) view.findViewById(R.id.buttonViewMapLocation);
+	    Button gpsLocation = (Button) view.findViewById(R.id.buttonGPSLocation);
 
 	    homeLocation.setOnClickListener(homeListener);
 	    mapLocation.setOnClickListener(mapListener);
 	    viewLocation.setOnClickListener(viewMapListener);
+	    gpsLocation.setOnClickListener(gpsListener);
 	    
 	    return builder.create();
 	}

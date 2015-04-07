@@ -4,10 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,46 +39,31 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
     final OnClickListener gpsListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
-        	LocationManager lm = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-        	lm.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 1, listener);
-        	Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        	if(location != null){
-        		Toast.makeText(activity,"Added Home Location" ,Toast.LENGTH_SHORT).show();
-        		UserLocationManager.setHomeLocation(location);
-        	}else{
-        		Toast.makeText(activity, "Could not get location", Toast.LENGTH_SHORT).show();
-        	}
-    		
+    		Location homeLocation = UserLocationManager.getGPSLocation(activity);
+    		if(homeLocation != null){
+        		UserLocationManager.setHomeLocation(homeLocation);
+        		Toast.makeText(activity, "Home Location Set", Toast.LENGTH_SHORT).show();
+    		}else{
+        		Toast.makeText(activity, "Couldn't set Home Location", Toast.LENGTH_SHORT).show();
+    		}
         	Dialog d = getDialog();
         	d.dismiss();
         }
     };
     
-    private final LocationListener listener = new LocationListener(){
 
-		@Override
-		public void onLocationChanged(Location location) {
-			if(location != null){
-				UserLocationManager.setHomeLocation(location);
-			}
-		}
-		/* These methods won't be over-written */
-		@Override
-		public void onStatusChanged(String provider, int status, Bundle extras) {}
-
-		@Override
-		public void onProviderEnabled(String provider) {}
-
-		@Override
-		public void onProviderDisabled(String provider) {}
-    
-    };
     
     final Listener locationUpdater = new Listener() {
 		
 		@Override
 		public void update() {
-			UserLocationManager.setHomeLocation(UserLocationManager.getSearchLocation());
+			Location homeLocation = UserLocationManager.getSearchLocation();
+    		if(homeLocation != null){
+        		UserLocationManager.setHomeLocation(homeLocation);
+        		Toast.makeText(activity, "Home Location Set", Toast.LENGTH_SHORT).show();
+    		}else{
+        		Toast.makeText(activity, "Couldn't set Home Location", Toast.LENGTH_SHORT).show();
+    		}
 		}
 	};
     

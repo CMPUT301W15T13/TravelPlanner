@@ -39,6 +39,16 @@ public class ClaimantGetExpenseLocationDialog extends DialogFragment{
         }
     };
     
+    final OnClickListener gpsListener = new OnClickListener() {
+        @Override
+		public void onClick(final View v) {
+    		Location gpsLocation = UserLocationManager.getGPSLocation(activity);
+    		activity.setExpenseLocation(gpsLocation);
+        	Dialog d = getDialog();
+        	d.dismiss();
+        }
+    };
+    
     final Listener locationUpdater = new Listener() {
 		
 		@Override
@@ -83,10 +93,12 @@ public class ClaimantGetExpenseLocationDialog extends DialogFragment{
 	    Button homeLocation = (Button) view.findViewById(R.id.buttonHomeLocation);
 	    Button mapLocation = (Button) view.findViewById(R.id.buttonNewMapLocation);
 	    Button expenseLocation = (Button) view.findViewById(R.id.buttonViewMapLocation);
+	    Button getGPSLocation = (Button) view.findViewById(R.id.buttonGPSLocation);
 
 	    homeLocation.setOnClickListener(homeListener);
 	    mapLocation.setOnClickListener(mapListener);
 	    expenseLocation.setOnClickListener(viewExpenseLocationListener);
+	    getGPSLocation.setOnClickListener(gpsListener);
 	    
 	    return builder.create();
 	}
