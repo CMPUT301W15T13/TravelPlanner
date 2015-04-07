@@ -5,11 +5,17 @@ import java.util.ArrayList;
 import exceptions.InvalidFieldEntryException;
 
 /**
- * This class is a controller class for TravelItineraries.
+ * This class is a model class for TravelItineraries.
  * Essentially, as a claim can have many travel
  * destinations with descriptions, each of those
  * are made into a class instance (a travelItinerary)
  * and managed here.
+ * This should be used to collect and contain
+ * all travelItinerary objects for a particular
+ * claim.
+ * 
+ * Classes it works with:
+ * Claim,TravelItinerary
  */
 
 public class TravelItineraryList {
@@ -20,17 +26,13 @@ public class TravelItineraryList {
 		this.travelList = new ArrayList<TravelItinerary>();
 	}
 
-	/**
-	 * This will add a Travel Destination
-	 * @param travelDestination
-
-	 */
 	public void addTravelDestination(TravelItinerary travelDestination) {
 			this.travelList.add(travelDestination);
 	}
 
 	/**
-	 * This will edit the travel Destination if index is within bounds
+	 * Edit the travel Destination if the
+	 * index is appropriate
 	 * @param index
 	 * @param travelDestination
 	 */
@@ -42,16 +44,13 @@ public class TravelItineraryList {
 		this.travelList.set(index, travelDestination);
 	}
 
-	/**
-	 * This will return the number of destinations
-	 * @return
-	 */
 	public int numberofDestinations() {
 		return this.travelList.size();
 	}
 
 	/**
-	 * This will return a travel itinerary based on a selected index
+	 * This will return a travel itinerary 
+	 * based on a given index
 	 * @param index
 	 * @return
 	 * @throws InvalidFieldEntryException
@@ -63,10 +62,6 @@ public class TravelItineraryList {
 		return this.travelList.get(index);
 	}
 	
-	/**
-	 * This will delete a travel destination at the specified index
-	 * @param index
-	 */
 	public void deleteTravelDestination(int index) {
 		if (this.travelList.size() >= index) {
 			this.travelList.remove(index);
@@ -74,7 +69,10 @@ public class TravelItineraryList {
 	}
 
 	/**
-	 * This will check to see if the travel Itinerary exists
+	 * Can be used check to see 
+	 * if the travel Itinerary exists
+	 * or is related to the claim
+	 * in question
 	 * @param travelItinerary
 	 * @return
 	 */
@@ -88,15 +86,9 @@ public class TravelItineraryList {
 	}
 	
 	/**
-	 * this will return the size of the list
-	 * @return
-	 */
-	public int size() {
-		return travelList.size(); 
-	}
-	
-	/**
-	 * This will turn the list into a string
+	 * Returns all travelItinerary objects
+	 * in the list as a ready-to-display
+	 * String
 	 */
 	@Override
 	public String toString() {

@@ -6,11 +6,15 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
 /**
- * This class is represent 
- * the model containing a user-taken
- * photograph, ideally of a receipt.
+ * This class is the model containing
+ * a user-taken photograph, 
+ * ideally of a receipt.
  * It should be used to represent the
- * receipt to an expenseItem of a claim
+ * receipt attached to an expenseItem 
+ * and fit inside any requirements set
+ * 
+ * Classes it works with:
+ * ExpenseItem
  */
 public class Receipt {
 	Uri receiptUri;
@@ -28,10 +32,7 @@ public class Receipt {
 		receiptBitmap = newBitmap;
 		return;
 	}
-	/**
-	 * Simple getter
-	 * @return
-	 */
+
 	public Bitmap getBitmap() {
 		return receiptBitmap;
 	}
@@ -45,21 +46,16 @@ public class Receipt {
 		receiptBitmap = Bitmap.createScaledBitmap(receiptBitmap, 100, 150, false);
 		return receiptBitmap;
 	}
-	/**
-	 * Simple Setter. Will call a method to set the Uri to a bitmap
-	 * @param newUri
-	 */
+	
 	  public void setReceiptUri(Uri newUri) {
 		  receiptUri = newUri;
 		  receiptBitmap = toBitMap();
 	  }
-	  /**
-	   * Simple Getter
-	   * @return
-	   */
+	  
 	  public Uri getReceiptUri() {
 		  return receiptUri;
 	  }
+	  
 	/**
 	 * This method will take a bitmap object and will resize it.
 	 * this method is called automatically by some setters 
@@ -70,10 +66,7 @@ public class Receipt {
 		Bitmap bitmapResized = Bitmap.createScaledBitmap(image, 100, 150, false);
 		return bitmapResized;
 	}
-	/**
-	 * Simple getter returns an object that can be set to imageviews
-	 * @return
-	 */
+
 	@SuppressWarnings("deprecation")
 	public Drawable getDrawable(){
 		return new BitmapDrawable(receiptBitmap);

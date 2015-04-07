@@ -9,6 +9,13 @@ import exceptions.ExceptionHandler.FIELD;
  * visit. It contains a destination, an
  * associated reason for travel, and operations
  * on it's data.
+ * It should be used for just that; holding
+ * a destination and reason. This is preferable to
+ * using strings as we can have a single List
+ * of Itinerary objects, each with both fields.
+ * 
+ * Classes it works with:
+ * TravelItineraryList, Claim
  */
 public class TravelItinerary {
 
@@ -20,36 +27,20 @@ public class TravelItinerary {
 		this.setDestinationDescription(description);
 	}
 	
-	/**
-	 * This will get the destination Name
-	 * @return
-	 */
 	public String getDestinationName() {
 		return destinationName;
 	}
-	/**
-	 * This will set the destination name
-	 * @param name
-	 * @throws EmptyFieldException
-	 */
+
 	public void setDestinationName(String name) throws EmptyFieldException {
 		new ExceptionHandler().throwExeptionIfEmpty(name,FIELD.TRAVEL_DESTINATION);
 		this.destinationName = name;
 	}
 	
-	/**
-	 * This will get the destination description
-	 * @return
-	 */
+
 	public String getDestinationDescription() {
 		return description;
 	}
 	
-	/**
-	 * This will set the destination description
-	 * @param description
-	 * @throws EmptyFieldException
-	 */
 	public void setDestinationDescription(String description) throws EmptyFieldException {
 		new ExceptionHandler().throwExeptionIfEmpty(description,FIELD.TRAVEL_DESCRIPTION);
 		this.description = description;

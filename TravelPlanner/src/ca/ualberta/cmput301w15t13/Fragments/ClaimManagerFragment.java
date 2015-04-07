@@ -309,7 +309,7 @@ public class ClaimManagerFragment extends Fragment{
 		endDateText = endDateView.getText().toString().trim() + "";
 				
 		//TODO should we assert they fill in all fields?
-		if(	!startDateText.equals("") && !endDateText.equals("") && itineraryList.size() != 0){
+		if(	!startDateText.equals("") && !endDateText.equals("") && itineraryList.numberofDestinations() != 0){
 			this.incompleteFields = false;
 		}
 	}
