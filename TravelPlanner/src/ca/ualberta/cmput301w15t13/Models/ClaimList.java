@@ -239,7 +239,7 @@ public class ClaimList {
 		this.removeClaimAtIndex(currentClaimIndex+1);
 		DataManager.updateClaim(newClaim);
 	}
-<<<<<<< HEAD
+
 
 	public void replaceClaim(String claimID, Claim newClaim) {
 		int index;
@@ -254,6 +254,5 @@ public class ClaimList {
 		
 	}
 	
-=======
->>>>>>> ca088a69eb2c174023d3516bf36e0cabb5f9123b
+
 }
