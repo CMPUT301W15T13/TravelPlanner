@@ -175,8 +175,10 @@ public class ExpenseManagerFragment extends Fragment {
 		String categorySet = categorySpinner.getSelectedItem().toString();
 		String currencySet = currencySpinner.getSelectedItem().toString();
 		
-		ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
-
+		
+		//ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).getExpenseItems().get(expenseIndex);
+		ExpenseItem editExpense = ClaimListSingleton.getClaimList().getClaimByID(claimID).getExpenseItems().get(expenseIndex);
+		
 		editExpense.setExpenseCategory(categorySet);
 		editExpense.setCurrency(currencySet);
 		editExpense.setExpenseDescription(description);
@@ -184,9 +186,11 @@ public class ExpenseManagerFragment extends Fragment {
 		editExpense.setLinkedToclaimID(claimID);
 		editExpense.setExpenseName(expenseName);
 		
-		Claim newClaim = ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex);
+		Claim newClaim = ClaimListSingleton.getClaimList().getClaimByID(claimID);
+		ClaimListSingleton.getClaimList().replaceClaim(claimID, newClaim);
 		
-		ClaimListSingleton.getClaimList().replaceClaimAtIndex(claimIndex, newClaim);
+		
+		//ClaimListSingleton.getClaimList().replaceClaimAtIndex(claimIndex, newClaim);
 		
 	}
 	
@@ -203,7 +207,8 @@ public class ExpenseManagerFragment extends Fragment {
 			String currencySet = currencySpinner.getSelectedItem().toString();
 			ExpenseItem newExpense = new ExpenseItem(categorySet, Date, description, amount, currencySet, claimID);
 			newExpense.setExpenseName(expenseName);
-			ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
+			ClaimListSingleton.getClaimByID(claimID).addExpenseItem(newExpense);
+			//ClaimListSingleton.getClaimList().getClaimAtIndex(claimIndex).addExpenseItem(newExpense);
 			
 			
 		}else {

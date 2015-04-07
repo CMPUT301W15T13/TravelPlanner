@@ -44,6 +44,7 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
 public class ClaimListSingleton {
 	
 	private static ClaimList claimList; 
+	public static String testIndex;
 	
 	/**
 	 * Method used throughout the app to
