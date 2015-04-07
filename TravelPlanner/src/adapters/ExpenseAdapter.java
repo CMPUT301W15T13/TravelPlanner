@@ -36,6 +36,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 /**
@@ -99,7 +100,7 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			 * depending on how far away the expense is from the home location
 			 */
 			Location homeLocation, expenseLocation;
-			homeLocation = ClaimFragmentNavigator.getUser().getLocation();
+			homeLocation = UserLocationManager.getHomeLocation();
 			expenseLocation = expense.getLocation();
 			Resources r = ClaimFragmentNavigator.getResources();
 			if(expenseLocation != null && homeLocation != null){

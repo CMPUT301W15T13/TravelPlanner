@@ -14,8 +14,9 @@ import android.widget.Button;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.GoogleMapActivity;
+import ca.ualberta.cmput301w15t13.Activities.GoogleMapViewerActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Controllers.User;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 
@@ -34,10 +35,11 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 	}
 	
     final OnClickListener homeListener = new OnClickListener() {
+    	
         @Override
 		public void onClick(final View v) {
         	 TravelItinerary item = ClaimFragmentNavigator.getFragmentManagerTravelItinenary(travelItemIndex);
-        	 Location location = user.getLocation();
+        	 Location location = UserLocationManager.getHomeLocation();
         	 if(location != null){
         		 item.setLocation(location);
         	 }else {
@@ -48,13 +50,12 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
         	 ClaimFragmentNavigator.updateDestinations();
         }
     };
-    
-
+   
     
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
-	        	Intent intent = new Intent(getActivity(), GoogleMapActivity.class);
+	        	Intent intent = new Intent(getActivity(), GoogleMapViewerActivity.class);
 	        	startActivity(intent);
 	      	    Dialog d = getDialog();
 	      	    d.dismiss();
@@ -62,7 +63,16 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 	        }
     };
 	
-    
+    final OnClickListener viewMapListener = new OnClickListener() {
+        @Override
+		public void onClick(final View v) {
+        	Intent intent = new Intent(getActivity(), GoogleMapViewerActivity.class);
+        	startActivity(intent);
+      	    Dialog d = getDialog();
+      	    d.dismiss();
+        }
+    };
+	
 	@SuppressLint("InflateParams")
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -73,9 +83,11 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 	    
 	    Button homeLocation = (Button) view.findViewById(R.id.buttonHomeLocation);
 	    Button mapLocation = (Button) view.findViewById(R.id.buttonNewMapLocation);
+	    Button viewLocation = (Button) view.findViewById(R.id.buttonViewMapLocation);
 
 	    homeLocation.setOnClickListener(homeListener);
 	    mapLocation.setOnClickListener(mapListener);
+	    viewLocation.setOnClickListener(viewMapListener);
 	    
 	    return builder.create();
 	}

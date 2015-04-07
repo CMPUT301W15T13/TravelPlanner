@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 import dialogs.ClaimantExpenseDialogFragment;
@@ -294,12 +295,7 @@ public class ExpenseManagerFragment extends Fragment {
 		
 		@Override
 		public void onClick(View v) {
-//			ClaimantGetDestinationLocationDialog dialog = new ClaimantGetDestinationLocationDialog();
-//		    Bundle args = new Bundle();
-//		    args.putInt("claimIndex", claimIndex);
-//		    args.putInt("travelIndex", position);
-//		    dialog.setArguments(args);
-//			dialog.show(getFragmentManager(), "Add a location");
+			UserLocationManager.setViewLocation(location);
 			ClaimantGetExpenseLocationDialog dialog = new ClaimantGetExpenseLocationDialog();
 			dialog.show(getFragmentManager(), "Add a location");
 		}
@@ -310,5 +306,6 @@ public class ExpenseManagerFragment extends Fragment {
 		String tmp = "Lat: " + location.getLatitude() + 
 				 " Long: " + location.getLongitude();
 		this.locationTextView.setText(tmp);
+		UserLocationManager.setExpenseLocation(location);
 	}
 } 

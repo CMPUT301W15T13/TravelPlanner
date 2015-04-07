@@ -17,8 +17,9 @@ import android.widget.Button;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.GoogleMapActivity;
+import ca.ualberta.cmput301w15t13.Activities.GoogleMapViewerActivity;
 import ca.ualberta.cmput301w15t13.Controllers.User;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 
 /**
  * Dialog pop-up to allow the user to set their home location.
@@ -30,7 +31,6 @@ import ca.ualberta.cmput301w15t13.Controllers.User;
 public class ClaimantHomeLocationDialog extends DialogFragment{
 	User user;
 	ClaimActivity activity;
-	public static final String MOCK_PROVIDER = "mockLocationProvider";
 	
 	
 	@Override
@@ -48,7 +48,7 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
         	Location location = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         	if(location != null){
         		Toast.makeText(activity,"Added Home Location" ,Toast.LENGTH_SHORT).show();
-        		user.setLocation(location);
+        		UserLocationManager.setHomeLocation(location);
         	}else{
         		Toast.makeText(activity, "Could not get location", Toast.LENGTH_SHORT).show();
         	}
@@ -63,7 +63,7 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
 		@Override
 		public void onLocationChanged(Location location) {
 			if(location != null){
-				user.setLocation(location);
+				UserLocationManager.setHomeLocation(location);
 			}
 		}
 		/* These methods won't be over-written */
@@ -81,11 +81,21 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
-	        	Intent intent = new Intent(getActivity(), GoogleMapActivity.class);
-	        	startActivity(intent);
 	      	    Dialog d = getDialog();
 	      	    d.dismiss();
 	        }
+    };
+    
+    final OnClickListener viewHomeListener = new OnClickListener() {
+        @Override
+		public void onClick(final View v) {
+        	Location homeLocation = UserLocationManager.getHomeLocation();
+        	UserLocationManager.setViewLocation(homeLocation);
+        	Intent intent = new Intent(getActivity(), GoogleMapViewerActivity.class);
+        	startActivity(intent);
+      	    Dialog d = getDialog();
+      	    d.dismiss();
+        }
     };
 	
     
@@ -101,9 +111,11 @@ public class ClaimantHomeLocationDialog extends DialogFragment{
 	    
 	    Button gpsLocation = (Button) view.findViewById(R.id.buttonGPSLocation);
 	    Button mapLocation = (Button) view.findViewById(R.id.buttonMapLocation);
+	    Button viewLocation = (Button) view.findViewById(R.id.buttonViewHomeLocation);
 
 	    gpsLocation.setOnClickListener(gpsListener);
 	    mapLocation.setOnClickListener(mapListener);
+	    viewLocation.setOnClickListener(viewHomeListener);
 	    
 	    return builder.create();
 	}

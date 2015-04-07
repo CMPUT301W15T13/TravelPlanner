@@ -27,6 +27,7 @@ import java.util.Date;
 import adapters.DestinationAdapter;
 import android.app.DatePickerDialog;
 import android.app.Fragment;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,6 +44,7 @@ import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Controllers.TagManager;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.Tag;
@@ -463,6 +465,8 @@ public class ClaimManagerFragment extends Fragment{
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position,
 				long id) {
+			Location viewLocation = travelApdapterItineraryList.get(position).getLocation();
+			UserLocationManager.setViewLocation(viewLocation);
 			ClaimantGetDestinationLocationDialog dialog = new ClaimantGetDestinationLocationDialog();
 		    Bundle args = new Bundle();
 		    args.putInt("claimIndex", claimIndex);

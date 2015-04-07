@@ -63,5 +63,8 @@
     <string name="gps_location">Use Phone\'s GPS</string>
     <string name="map_location">Pick from a map</string>
     <string name="home_location">Use Home Location</string>
-
+    <string name="view_map_location">View Map Location</string>
+    <string name="view_home_location">View Home Location</string>
+    
+    
 </resources>
