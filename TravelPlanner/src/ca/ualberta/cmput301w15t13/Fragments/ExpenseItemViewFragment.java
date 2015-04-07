@@ -20,8 +20,6 @@
 
 package ca.ualberta.cmput301w15t13.Fragments;
 
-import java.util.Date;
-
 import android.app.Fragment;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -47,28 +45,20 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 public class ExpenseItemViewFragment extends Fragment {
 	private TextView expenseNameView;
-	private String expenseName;
 	private TextView categoryView;
-	private String categoryString;
 	private TextView dateView;
-	private Date Date;
 	private ImageView ib;
-	private String dateText;
-	private double amount;
 	private TextView amountView;
 	private TextView currencyView;
-	private String currencyString;
-	private String description; 
 	private TextView descriptionView;
 	private int claimIndex;
-	private String claimID;
 	private int expenseIndex;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		claimIndex = getArguments().getInt("claimIndex");
-		claimID = getArguments().getString("claimID");
+		getArguments().getString("claimID");
 	}
 	
 	@Override
@@ -97,7 +87,7 @@ public class ExpenseItemViewFragment extends Fragment {
 		ExpenseItem editExpense = editClaim.getExpenseItems().get(expenseIndex);
 			
 		this.expenseNameView.setText(editExpense.getExpenseName());
-		this.description = editExpense.getExpenseDescription();
+		editExpense.getExpenseDescription();
 		dateView.setText(editExpense.getPurchseDateAsString());
 		this.descriptionView.setText(editExpense.getExpenseDescription());
 		this.amountView.setText(String.valueOf(editExpense.getAmount()));
