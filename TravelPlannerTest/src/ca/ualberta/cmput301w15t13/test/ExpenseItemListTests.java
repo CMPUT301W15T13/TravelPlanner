@@ -85,7 +85,7 @@ public class ExpenseItemListTests extends ActivityInstrumentationTestCase2<Login
 	  
 	  //Test that a new claim is put at the the end of the list (3rd entered, 3rd in the list)
 	  assertEquals("Wrong order of expenseItems",expenseItem, test.get(0));
-	  assertEquals("Wrong order of expenseItems",expenseItem2, test.get(2));
+	  assertEquals("Wrong order of expenseItems",expenseItem2, test.get(1));
   }
   
   /**
