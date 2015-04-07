@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,10 +13,10 @@ import android.widget.Button;
 import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ClaimActivity;
-import ca.ualberta.cmput301w15t13.Activities.GoogleMapViewerActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
-import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
+import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.User;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 
 public class ClaimantGetDestinationLocationDialog extends DialogFragment{
@@ -50,13 +49,23 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
         	 ClaimFragmentNavigator.updateDestinations();
         }
     };
+    
+    final Listener locationUpdater = new Listener() {
+		
+		@Override
+		public void update() {
+			TravelItinerary item = ClaimFragmentNavigator.getFragmentManagerTravelItinenary(travelItemIndex);
+			item.setLocation(UserLocationManager.getSearchLocation());
+		}
+	};
    
     
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
-	        	Intent intent = new Intent(getActivity(), GoogleMapViewerActivity.class);
-	        	startActivity(intent);
+	        	UserLocationManager.setLocationListener(locationUpdater);
+	        	MapSearchAlertDialog dialog = new MapSearchAlertDialog();
+	        	dialog.show(getFragmentManager(), "Search Location");
 	      	    Dialog d = getDialog();
 	      	    d.dismiss();
 	      	    ClaimFragmentNavigator.updateDestinations();
@@ -66,8 +75,8 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
     final OnClickListener viewMapListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
-        	Intent intent = new Intent(getActivity(), GoogleMapViewerActivity.class);
-        	startActivity(intent);
+        	MapViewAlertDialog dialog = new MapViewAlertDialog();
+        	dialog.show(getFragmentManager(), "View Location");
       	    Dialog d = getDialog();
       	    d.dismiss();
         }

@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
-import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,10 +12,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
-import ca.ualberta.cmput301w15t13.Activities.GoogleMapViewerActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
-import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
+import ca.ualberta.cmput301w15t13.Controllers.Listener;
 import ca.ualberta.cmput301w15t13.Controllers.User;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 
 public class ClaimantGetExpenseLocationDialog extends DialogFragment{
 	ExpenseActivity activity;
@@ -40,9 +39,20 @@ public class ClaimantGetExpenseLocationDialog extends DialogFragment{
         }
     };
     
+    final Listener locationUpdater = new Listener() {
+		
+		@Override
+		public void update() {
+			activity.setExpenseLocation(UserLocationManager.getSearchLocation());
+		}
+	};
+    
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
+	        	UserLocationManager.setLocationListener(locationUpdater);
+	        	MapSearchAlertDialog dialog = new MapSearchAlertDialog();
+	        	dialog.show(getFragmentManager(), "Search Map");
 	      	    Dialog d = getDialog();
 	      	    d.dismiss();
 	        }
@@ -53,8 +63,8 @@ public class ClaimantGetExpenseLocationDialog extends DialogFragment{
 		public void onClick(final View v) {
         	Location expenseLocation = UserLocationManager.getExpenseLocation();
         	UserLocationManager.setViewLocation(expenseLocation);
-        	Intent intent = new Intent(getActivity(), GoogleMapViewerActivity.class);
-        	startActivity(intent);
+        	MapViewAlertDialog dialog = new MapViewAlertDialog();
+        	dialog.show(getFragmentManager(), "View Location");
       	    Dialog d = getDialog();
       	    d.dismiss();
         }

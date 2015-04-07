@@ -58,6 +58,10 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 	//based on http://stackoverflow.com/questions/8166497/custom-adapter-for-list-view Jan 24th 2015
 	// and http://www.ezzylearning.com/tutorial/customizing-android-listview-items-with-custom-arrayadapter Jan 25 2015
 	ArrayList<ExpenseItem> expenses;
+	/* These are distances, in meters to measure distance between location
+	 * points. Short is with 10KM and medium is within 1000km.
+	 */
+	private final int SHORT = 10000, MEDIUM = 1000000;  
 	
 	public ExpenseAdapter(Context context, int textViewResourceId, List<ExpenseItem> expenses) {
 		super(context, textViewResourceId,expenses);
@@ -105,9 +109,9 @@ public class ExpenseAdapter extends ArrayAdapter<ExpenseItem>{
 			Resources r = ClaimFragmentNavigator.getResources();
 			if(expenseLocation != null && homeLocation != null){
 				double distance = homeLocation.distanceTo(expenseLocation);
-				if(distance < 1000){
+				if(distance < SHORT){
 					titleView.setTextColor(r.getColor(R.color.location_close));
-				}else if (distance < 10000){
+				}else if (distance < MEDIUM){
 					titleView.setTextColor(r.getColor(R.color.location_medium));
 				}else{
 					titleView.setTextColor(r.getColor(R.color.location_far));

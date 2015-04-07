@@ -16,8 +16,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.Toast;
 import ca.ualberta.cmput301w15t13.R;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -25,7 +25,11 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapViewerAlertDialog extends DialogFragment{
+/**
+ * TODO
+ *
+ */
+public class MapSearchAlertDialog extends DialogFragment{
 	private Geocoder geoCoder;
 	private GoogleMap googleMap;
 	private Location location;
@@ -40,7 +44,7 @@ public class MapViewerAlertDialog extends DialogFragment{
 	    view = inflater.inflate(R.layout.map_search_alert_dialog, null);
 	    builder.setView(view);
 		
-	    googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.google_map)).getMap();
+	    googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.google_map_search)).getMap();
 		googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		
 		geoCoder = new Geocoder(getActivity());
@@ -69,7 +73,8 @@ public class MapViewerAlertDialog extends DialogFragment{
 		@Override
 		public void onClick(View v) {
 			if(location != null){
-				Toast.makeText(getActivity(), "Location: " + location.getLatitude(), Toast.LENGTH_SHORT).show();
+				UserLocationManager.setSearchLocation(location);
+				UserLocationManager.listenerUpdate();
 			}
 			Dialog d = getDialog();
 			d.dismiss();
@@ -105,5 +110,14 @@ public class MapViewerAlertDialog extends DialogFragment{
 		}
 	};
 	
+	@Override
+	public void onDestroyView() {
+		// Based on http://stackoverflow.com/questions/17533619/null-pointer-on-inflated-view-when-loading-for-the-second-time-a-google-map-frag April 6th
+	    super.onDestroyView();
+	    MapFragment f = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map_search);
+	    if (f != null){ 
+	        getFragmentManager().beginTransaction().remove(f).commit();
+	    }
+	}
 	
 }
