@@ -6,6 +6,13 @@ import ca.ualberta.cmput301w15t13.Models.Currency.CurrencyEnum;
 
 /**
  * This class holds a total of all the currencies in a claim
+ * It is used to keep track of the currency totals
+ * for each claim such that it can be displayed
+ * from a high level point of view
+ *
+ * It should be used as a container class
+ * To keep track of totals in predefined
+ * categories, and attached to a Claim object
  * @author eorod_000
  *
  */

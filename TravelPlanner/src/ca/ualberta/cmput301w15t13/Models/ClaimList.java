@@ -48,8 +48,10 @@ public class ClaimList {
 		return this.indexList;
 	}
 
-	//Returns an array list containing all relevant indexes
-	//of a filtered claimList
+       /**
+        * Returns an array list containing all relevant indexes
+        * of a filtered claimList
+        */
 	public void setIndexList(ArrayList<Claim> claims) {
 		this.indexList.clear();
 		for (int i = 0; i<claimList.size(); i++) {
@@ -127,6 +129,9 @@ public class ClaimList {
 		}
 	}
 	
+    /**
+     * Returns the sorted claimList 
+     */
 	public ArrayList<Claim> getClaimArrayList() {
 		if (claimList == null) {
 			this.claimList = new ArrayList<Claim>();
@@ -175,6 +180,13 @@ public class ClaimList {
 		return control.filterClaimList(tags, this.tagManager);
 	}
 
+       /**
+        * This is a setter method to set the 
+        * tag manager of a ClaimList. It provides 
+        * a way of batch adding new  tags
+        * rather than having to add them one by one
+        * to an existing TagManager
+        */
 	public void setTagMan(TagManager tm) {
 		this.tagManager = tm;
 	}
@@ -205,6 +217,9 @@ public class ClaimList {
 		
 	}
 
+       /**
+        * Returns a specific claim via it's unique ID
+        */
 	public Claim getClaimByID(String iD) {
 		for (Claim claim: claimList){
 			if (claim.getclaimID().equals(iD)){
@@ -223,7 +238,6 @@ public class ClaimList {
 	public void replaceClaimAtIndex(int currentClaimIndex, Claim newClaim) {
 		this.claimList.add(currentClaimIndex, newClaim);
 		this.removeClaimAtIndex(currentClaimIndex+1);
-		
 		DataManager.updateClaim(newClaim);
 	}
 	
