@@ -5,6 +5,7 @@ package exceptions;
  * @author eorod_000
  *
  */
+@SuppressWarnings("serial")
 public class InvalidUserPermissionException extends Exception {
 	public InvalidUserPermissionException(String message){
 		super(message);

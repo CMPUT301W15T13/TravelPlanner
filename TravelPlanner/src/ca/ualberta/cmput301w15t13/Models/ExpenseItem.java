@@ -24,8 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
-import ca.ualberta.cmput301w15t13.Models.Currency.CurrencyEnum;
-import android.graphics.Bitmap;
 import android.net.Uri;
 import android.text.format.DateFormat;
 import exceptions.InvalidFieldEntryException;
@@ -260,6 +258,7 @@ public class ExpenseItem implements ExpenseClaim {
    * this method translates java date format into the string format
    * the format is done so that we can analyze as we pass the result as string format
    */
+	@SuppressWarnings({ "deprecation", "static-access" })
 	public String getPurchseDateAsString() {
 		//we need this item to format our dates
 		DateFormat dateFormat = new DateFormat();

@@ -5,6 +5,7 @@ package exceptions;
  * @author eorod_000
  *
  */
+@SuppressWarnings("serial")
 public class DuplicateException extends Exception {
 	public DuplicateException(String message){
 		super(message);
