@@ -22,7 +22,6 @@ package ca.ualberta.cmput301w15t13.Controllers;
 
 import java.util.ArrayList;
 
-import persistanceController.DataManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimList;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
@@ -32,13 +31,25 @@ import ca.ualberta.cmput301w15t13.Models.Tag;
  * Singleton pattern for the ClaimList 
  * class. It provides sorting method
  * which sorts the claims and their nested
- * ExpenseLists by start date
+ * ExpenseLists by start date. It should be used 
+ * to manage all the claims of the app.
+ * 
+ * Classes it works with:
+ * Claim,ExpenseItem,Tag,ClaimList
+ * 
+ * Sample use:
+ * ClaimList cl = ClaimListSingleton.getClaimList();
  */
 
 public class ClaimListSingleton {
 	
 	private static ClaimList claimList; 
 	
+	/**
+	 * Method used throughout the app to
+	 * get the same claimList instance.
+	 * @return
+	 */
 	static public ClaimList getClaimList() {
 		if (claimList == null) {
 			claimList = new ClaimList();
@@ -59,7 +70,15 @@ public class ClaimListSingleton {
 		}
 		claimList.add(claim);
 	}
-
+	
+	/**
+	 * Based on the possible statuses
+	 * and their implications, this 
+	 * function returns whether a claim
+	 * can be edited
+	 * @param claimID
+	 * @return
+	 */
 	public static boolean isClaimEditable(String claimID) {
 		if (claimList == null) {
 			claimList = new ClaimList();
@@ -115,22 +134,30 @@ public class ClaimListSingleton {
 		claimList.clearList();
 	}
 	
+	/**
+	 * Returns a specific claim in the
+	 * claimList via its unique ID
+	 * @param ID
+	 * @return
+	 */
 	public static Claim getClaimByID(String ID){
 		return claimList.getClaimByID(ID);
 	}
 
-
+	/**
+	 * Adds an expense Item to a claim
+	 * in the claimList
+	 * @param claimID
+	 * @param expense
+	 */
 	public static void addExpenseToClaim(String claimID, ExpenseItem expense) {
-		@SuppressWarnings("unused")
-		int currentClaimIndex = 0;
 		Claim newClaim;
 		for (int index = 0; index < claimList.size(); index++){
 			newClaim = claimList.getClaimAtIndex(index);
 			if (newClaim.getclaimID().equals(claimID)){
 				newClaim.addExpenseItem(expense);
-				currentClaimIndex = index;
+				//currentClaimIndex = index;
 				claimList.replaceClaimAtIndex(0, newClaim);
-				
 			}
 		}
 	}

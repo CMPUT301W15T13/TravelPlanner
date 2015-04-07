@@ -33,6 +33,14 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
  * Most of the methods are abstract, but
  * it provides the get and set methods for
  * a user's name and location.
+ * 
+ * It should be used to conform
+ * user objects to act in wanted ways; child
+ * classes must implement these methods and 
+ * thus must have certain functionality
+ * 
+ * Classes it works with:
+ * Location,Claim,(Claimant,Approver - implicitly)
  */
 
 public abstract class User {
