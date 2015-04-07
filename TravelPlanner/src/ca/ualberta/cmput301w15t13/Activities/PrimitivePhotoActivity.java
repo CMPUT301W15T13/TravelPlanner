@@ -21,7 +21,15 @@ import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
 
 /**
  * This activity is a copy of bogopic from the CMPUT 301 lab
- * Currently its main purpose is demonstration
+ * Currently its main purpose is demonstration...
+ * TODO: Finish
+ * 
+ * Classes it works with:
+ * TODO: Finish
+ * 
+ * Sample Use:
+ * Intent intent = new Intent(this, PrimitivePhotoActivity.class);
+ * startActivity(intent);
  */
 public class PrimitivePhotoActivity extends Activity {
 
@@ -30,23 +38,6 @@ public class PrimitivePhotoActivity extends Activity {
 	protected int expenseIndex;
 	
 	private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
-	
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.take_a_photo);
-		Bundle bundle = getIntent().getExtras();
-		claimIndex = bundle.getInt("claimIndex");
-		expenseIndex = bundle.getInt("expenseIndex");
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.test, menu);
-		return true;
-	}
 	
 	public void takeAPhoto(View v) {
 		
@@ -68,7 +59,7 @@ public class PrimitivePhotoActivity extends Activity {
 		startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
 		
 	}
-	
+
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
 			
@@ -85,14 +76,12 @@ public class PrimitivePhotoActivity extends Activity {
 					expense.addReceipt();
 				}
 				expense.getReceipt().setReceiptUri(imageFileUri);
+			} else if (resultCode == RESULT_CANCELED) {
+
 				ClaimListSingleton.getClaimList().notifyListeners();
-			}else if (resultCode == RESULT_CANCELED) {
 				TextView tv = (TextView) findViewById(R.id.textView3);
 				tv.setText("Photograph Cancelled");
-				
-				
-			}else {
-				
+			} else {
 				TextView tv = (TextView) findViewById(R.id.textView3);
 				tv.setText("Error");
 			}			
@@ -108,5 +97,22 @@ public class PrimitivePhotoActivity extends Activity {
 	    Bitmap b = ((BitmapDrawable)image).getBitmap();
 	    Bitmap bitmapResized = Bitmap.createScaledBitmap(b, 200, 300, false);
 	    return new BitmapDrawable(getResources(), bitmapResized);
+	}
+	
+	/* Below this is android stuff*/
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.take_a_photo);
+		Bundle bundle = getIntent().getExtras();
+		claimIndex = bundle.getInt("claimIndex");
+		expenseIndex = bundle.getInt("expenseIndex");
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.test, menu);
+		return true;
 	}
 }

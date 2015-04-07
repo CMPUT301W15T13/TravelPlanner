@@ -40,6 +40,13 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
  * their access rights. The server set up happens before
  * the users login, so that the claims are ready
  * before the next activity starts.
+ * 
+ * Classes it works with:
+ * DataManager
+ * 
+ * Sample use:
+ * Intent intent = new Intent(this, LoginActivity.class);
+ * startActivity(intent);
  */
 
 public class LoginActivity extends Activity {
