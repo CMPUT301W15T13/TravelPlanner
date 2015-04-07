@@ -75,8 +75,8 @@ public class ApproverCommentDialogFragment extends DialogFragment {
 		    	FragmentManager fm = getFragmentManager();
 		     	ClaimViewerFragment fragment = (ClaimViewerFragment) fm.findFragmentByTag("ClaimViewer");	
 		     	fragment.returnClaim(claimIndex);
-				Dialog d = getDialog();
-				d.dismiss();
+			Dialog d = getDialog();
+			d.dismiss();
 		    }
 		}
 	};
