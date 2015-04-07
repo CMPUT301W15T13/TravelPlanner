@@ -51,10 +51,14 @@ import exceptions.InvalidUserPermissionException;
  * From this activity you can also create, edit, and 
  * approve expense items which are supported by 
  * corresponding fragments.
- * Classes it works with: ExpenseManagerFragment,
- * ExpenseItemViewFragment, TakePictureFragment,
- * ExpenseListViewerFragment ... 
- * TODO finish comment
+ * 
+ * Classes it works with: 
+ * ExpenseManagerFragment,ExpenseItemViewFragment, TakePictureFragment,
+ * ExpenseListViewerFragment, DataManager
+ * 
+ * Sample use:
+ * Intent intent = new Intent(this, ExpenseActivity.class);
+ * startActivity(intent);
  */
 
 public class ExpenseActivity extends Activity {
@@ -74,49 +78,9 @@ public class ExpenseActivity extends Activity {
 	private int claimIndex;
 	private String claimID;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.claim_activity_layout);
-		
-		setActionBar();
-		this.actionBar = getActionBar();
-		
-		this.fm = getFragmentManager();
-		ExpenseViewerFragment = new ExpenseListViewerFragment();
-		ExpenseManagerFragment = new ExpenseManagerFragment();
-		ExpenseItemViewFragment = new ExpenseItemViewFragment();
-		TakePictureFragment = new TakePictureFragment();
-		
-		//Need to extract passed claim info
-		Bundle bundle = getIntent().getExtras();
-		claimIndex = bundle.getInt("claimIndex");
-		claimID = bundle.getString("claimID");
-		//TODO handle isClaimant properly
-		//this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
-		//this.username = intent.getStringExtra(LoginActivity.USERID);
-		
-		// TODO load data
-		// TODO add a save file listener
-	}
-	
-	@Override
-	protected void onStart() {
-		super.onStart();
-		setFragmentToExpenseViewer();
-		
-		DataManager.setCurrentContext(this.getApplicationContext());
-	}
-	
-	@Override
-	protected void onResume() {
-		super.onResume();
-		ClaimListSingleton.getClaimList().notifyListeners();
-	}
-
 	/**
 	 * Set the action bar
-	 * Very simple and planeactionbar
+	 * Very simple and plain action-bar
 	 * Useful for screen space economy
 	 */
 	@SuppressLint("InflateParams")
@@ -130,13 +94,6 @@ public class ExpenseActivity extends Activity {
 		actionBar.setCustomView(actionBarLayout);
 	}
  
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.claim, menu);
-		return true;
-	}
-
 	/**
 	 * Switches the fragment/layout
 	 * to the expense viewer.
@@ -224,7 +181,7 @@ public class ExpenseActivity extends Activity {
 	}
 	
 	/**
-	 * TODO THIS IS CALLED WHEN THE FINISH BUTTEN IS PRESSED
+	 * TODO THIS IS CALLED WHEN THE FINISH BUTTON IS PRESSED
 	 * IT WTILL CREATE/UPDATE THE EXPENSE
 	 * Create a new claim object,
 	 * then return to the viewing fragment. 
@@ -308,7 +265,6 @@ public class ExpenseActivity extends Activity {
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, this.TakePictureFragment, "TakePicture");
 		ft.commit();
-		
 	}
 
 	/**
@@ -320,8 +276,64 @@ public class ExpenseActivity extends Activity {
 		ExpenseManagerFragment.setStateAsEditing(true);
 		ExpenseManagerFragment.setExpenseIndex(index);
 	}
+	
+	/**
+	 * Opens a fragment to view the details
+	 * of a selected expense item
+	 * @param index
+	 */
 	public void viewExpense(int index) {
 		setFragmentToExpenseItemViewer();
 		ExpenseItemViewFragment.setExpenseIndex(index);
 	}
+	
+	
+	/* Below this is android stuff */
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.claim_activity_layout);
+		
+		setActionBar();
+		this.actionBar = getActionBar();
+		
+		this.fm = getFragmentManager();
+		ExpenseViewerFragment = new ExpenseListViewerFragment();
+		ExpenseManagerFragment = new ExpenseManagerFragment();
+		ExpenseItemViewFragment = new ExpenseItemViewFragment();
+		TakePictureFragment = new TakePictureFragment();
+		
+		//Need to extract passed claim info
+		Bundle bundle = getIntent().getExtras();
+		claimIndex = bundle.getInt("claimIndex");
+		claimID = bundle.getString("claimID");
+		//TODO handle isClaimant properly
+		//this.isClaimant = intent.getExtras().getBoolean(LoginActivity.ISCLAIMANT);
+		//this.username = intent.getStringExtra(LoginActivity.USERID);
+		
+		// TODO load data
+		// TODO add a save file listener
+	}
+	
+	@Override
+	protected void onStart() {
+		super.onStart();
+		setFragmentToExpenseViewer();
+		
+		DataManager.setCurrentContext(this.getApplicationContext());
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.claim, menu);
+		return true;
+	}
+	
+	@Override
+	protected void onResume() {
+		super.onResume();
+		ClaimListSingleton.getClaimList().notifyListeners();
+	}
+
 }

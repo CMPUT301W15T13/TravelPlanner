@@ -14,6 +14,24 @@ import exceptions.InvalidDateException;
 import exceptions.InvalidNameException;
 import exceptions.InvalidUserPermissionException;
 
+/**
+ * This is a controller for the ClaimActivity.
+ * It connects the activity with various models
+ * and methods to give it functionality.
+ * 
+ * It works with the following classes:
+ * FragmentManager,FragmentTransaction,
+ * ClaimViewerFragment, ClaimManagerFragment,
+ * ClaimDetailViewerFragment, as well as
+ * various UI dialogs 
+ * 
+ * It should be used to link a claimActivity
+ * class to defined methods.
+ * 
+ * Sample use:
+ * 	TextView textId = (TextView) findViewById(R.id.textViewStartDate);
+ * 	ClaimFragmentNavigator.openStartDateDialog(textId);
+ */
 @SuppressLint("CommitTransaction") 
 public class ClaimFragmentNavigator {
 	private static FragmentManager fm;
@@ -57,7 +75,6 @@ public class ClaimFragmentNavigator {
 		ft = fm.beginTransaction();
 		ft.replace(R.id.mainFragmentHolder, claimDetailViewerFragment, "ClaimDetailsViewer");
 		ft.commit();
-		
 		claimDetailViewerFragment.setClaim(claimIndex);
 	}
 	
@@ -129,6 +146,11 @@ public class ClaimFragmentNavigator {
 		claimManagerFragment.openDateDialog(textId);
 	}
 	
+	/**
+	 * Opens the filterClaim dialog which
+	 * allows the user to filter the 
+	 * claimList by tag
+	 */
 	public static void filterClaim() {
 		claimViewerFragment.openFilterDialog();
 	}
@@ -141,6 +163,11 @@ public class ClaimFragmentNavigator {
 	public static void addDestination() {
 		claimManagerFragment.openDestinationDialog();
 	}
+	
+	/**
+	 * opens the tag dialog, which allows the 
+	 * user to add or edit tags to claims
+	 */
 
 	public static void openTag(){
 		claimManagerFragment.openTagDialog();

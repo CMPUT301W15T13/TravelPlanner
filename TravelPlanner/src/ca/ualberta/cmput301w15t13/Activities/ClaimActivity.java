@@ -51,7 +51,8 @@ import exceptions.InvalidUserPermissionException;
  * From this activity you can also create, edit, and 
  * approve claims which are supported by corresponding 
  * fragments.
- * Classes it works with: ClaimFagmentNavigator, User
+ * Classes it works with: ClaimFagmentNavigator, User,
+ * DataManager
  * 
  * Overall It acts as the base activity of the App and should
  * be used this way.
