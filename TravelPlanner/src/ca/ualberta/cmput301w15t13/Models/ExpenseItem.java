@@ -128,11 +128,7 @@ public class ExpenseItem implements ExpenseClaim {
    * @throws InvalidFieldEntryException
    */
   public void setExpenseCategory(String expenseCategory) throws InvalidFieldEntryException  {
-  if (!allowedCategories.contains(expenseCategory)){
-      throw new InvalidFieldEntryException("Not a valid Category");
-  } else {
-      this.ExpenseCategory = expenseCategory;
-   }
+     this.ExpenseCategory = expenseCategory;
   }
 
   public Date getPurchaseDate() {
@@ -166,12 +162,8 @@ public class ExpenseItem implements ExpenseClaim {
   }
 
   public void setCurrency(String currency) throws InvalidFieldEntryException {
-    if (!allowedCurrencies.contains(currency)) {
-      throw new InvalidFieldEntryException("Unsupported Currency");
-    } else {
-      this.currency = currency;
-      this.setExpenseCurrency(this.Amount, this.currency);
-    }
+     this.currency = currency;
+     this.setExpenseCurrency(this.Amount, this.currency);
   }
 	
   public String getclaimID()  {
