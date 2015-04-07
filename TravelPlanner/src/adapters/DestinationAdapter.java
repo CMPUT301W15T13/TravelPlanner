@@ -15,6 +15,12 @@ import android.widget.TextView;
 import ca.ualberta.cmput301w15t13.R;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 
+/**
+ * Custom array adapter to display the destination information
+ * for the claim manager. ALso sets the on click listener for 
+ * each element to allow the attachment of locations.
+ *
+ */
 public class DestinationAdapter extends ArrayAdapter<TravelItinerary>{
 	public ArrayList<TravelItinerary> travelList;
 	

@@ -19,6 +19,11 @@ import ca.ualberta.cmput301w15t13.Controllers.User;
 import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 
+/**
+ * A custom array alert dialog that presents the options to 
+ * use the home location, add via gps, or pick it from a google
+ * map.
+ */
 public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 	ClaimActivity activity;
 	int travelItemIndex, claimIndex;
@@ -33,6 +38,9 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 		claimIndex = getArguments().getInt("claimIndex");
 	}
 	
+	/**
+	 * Gets the location from the home location.
+	 */
     final OnClickListener homeListener = new OnClickListener() {
     	
         @Override
@@ -50,6 +58,10 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
         }
     };
     
+    /**
+     * Updates the location of the TravelItinerary item
+     * and refreshes the view. 
+     */
     final Listener locationUpdater = new Listener() {
 		
 		@Override
@@ -60,6 +72,10 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 		}
 	};
    
+	/**
+	 * Gets the location for the Travel Itinerary item
+	 * from the GPS coordinates.
+	 */
     final OnClickListener gpsListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
@@ -72,6 +88,9 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
         }
     };
     
+    /**
+     * Selects a new location from a custom map.
+     */
     final OnClickListener mapListener = new OnClickListener() {
 	        @Override
 			public void onClick(final View v) {
@@ -84,6 +103,10 @@ public class ClaimantGetDestinationLocationDialog extends DialogFragment{
 	        }
     };
 	
+    /**
+     * Shows the location of the travel itinerary item 
+     * on a map.
+     */
     final OnClickListener viewMapListener = new OnClickListener() {
         @Override
 		public void onClick(final View v) {

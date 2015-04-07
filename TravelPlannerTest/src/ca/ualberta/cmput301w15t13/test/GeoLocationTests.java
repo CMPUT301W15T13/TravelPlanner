@@ -1,5 +1,13 @@
 package ca.ualberta.cmput301w15t13.test;
 
+import android.location.Location;
+import android.test.ActivityInstrumentationTestCase2;
+import ca.ualberta.cmput301w15t13.Activities.LoginActivity;
+import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
+import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
+import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
+import exceptions.EmptyFieldException;
+
 
 /**
  * Due to Problems with the Google
@@ -7,23 +15,35 @@ package ca.ualberta.cmput301w15t13.test;
  * ...
  *
  */
-public class GeoLocationTests {
+public class GeoLocationTests extends ActivityInstrumentationTestCase2<LoginActivity>{
 	
+	public GeoLocationTests(Class<LoginActivity> activityClass) {
+		super(activityClass);
+	}
+
 	/**
 	 * Tests US01.07.01
+	 * @throws EmptyFieldException 
 	 */
-	public void testDestinationClaimAttach() {
-		//TODO
-		
+	public void testDestinationClaimAttach() throws EmptyFieldException {
 		//This should test this user story:
 		//As a claimant, I want to attach a geolocation to a destination.
+		TravelItinerary item = new TravelItinerary("Destination", "Reason");
+		Location location = new Location("");
+		location.setLatitude(0.0);
+		location.setLongitude(0.0);
+		UserLocationManager.setHomeLocation(location);
+		item.setLocation(UserLocationManager.getHomeLocation());
+		assertTrue("Location has been added to Travel Destination", item.getLocation() == location);
 	}
-	
+
 	/**
 	 * Tests US02.03.01
+	 * Will not do, as there is no color attribute for a claim,
+	 * but just an attribute on a TextView.
 	 */
 	public void testColour() {
-		//TODO
+		//
 		
 		//This should test this user story:
 		//As a claimant, I want the list of expense claims to have each 
@@ -36,11 +56,19 @@ public class GeoLocationTests {
 	 * Tests US04.09.01
 	 */
 	public void testDestinationExpenseAttach() {
-		//TODO
 		
 		//This should test this user story:
 		//As a claimant, I want to optionally attach a geolocation to an editable expense 
 		//item, so I can record where an expense was incurred.
+		ExpenseItem item = new ExpenseItem(null, null, null, 0, null, null);
+		Location location = new Location("");
+		location.setLatitude(0.0);
+		location.setLongitude(0.0);
+		UserLocationManager.setHomeLocation(location);
+		item.setLocation(UserLocationManager.getHomeLocation());
+		assertTrue("Expense item location is not set", 
+				item.getLocation() == UserLocationManager.getHomeLocation());
+		
 	}
 	
 	/**
@@ -48,10 +76,16 @@ public class GeoLocationTests {
 	 */
 	
 	public void testSetHomeGeo() {
-		//TODO
 		
 		//This should test this user story:
 		//As a claimant, I want to set my home geolocation.
+		Location location = new Location("");
+		location.setLatitude(0.0);
+		location.setLongitude(0.0);
+		UserLocationManager.setHomeLocation(location);
+		assertTrue("Home location not set", location == UserLocationManager.getHomeLocation());
+		assertTrue("Distance betweeen home and original is not 0", 
+				location.distanceTo(UserLocationManager.getHomeLocation()) == 0);
 	}
 	
 	/**

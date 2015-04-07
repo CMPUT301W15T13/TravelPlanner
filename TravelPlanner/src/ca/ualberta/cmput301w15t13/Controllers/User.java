@@ -23,7 +23,6 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.FragmentManager;
-import android.location.Location;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import ca.ualberta.cmput301w15t13.Models.Claim;

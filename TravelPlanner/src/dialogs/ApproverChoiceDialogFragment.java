@@ -63,7 +63,6 @@ public class ApproverChoiceDialogFragment extends DialogFragment{
         public void onClick(final View v) {
         	
         	/**
-        	 * Ji Hwan Kim
         	 * Need to verify if the claim has been first returned
         	 * or it has been returned and it has been re-submitted
         	 * If latter is true then we check if the approver name is same as the returned approver name 

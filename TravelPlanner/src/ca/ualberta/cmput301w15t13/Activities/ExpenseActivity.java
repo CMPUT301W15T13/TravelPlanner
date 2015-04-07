@@ -248,6 +248,7 @@ public class ExpenseActivity extends Activity {
 		setFragmentToTakePic();
 		Bundle bundle = new Bundle();
 		bundle.putInt("claimIndex", claimIndex);
+		bundle.putString("claimID", claimID);
 		bundle.putInt("expenseIndex", index);
 		Intent intent = new Intent(this, ReceiptPhotoActivity.class);
 		intent.putExtra("bundle", bundle);

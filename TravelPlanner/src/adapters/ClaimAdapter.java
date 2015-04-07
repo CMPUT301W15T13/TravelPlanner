@@ -39,7 +39,6 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimFragmentNavigator;
 import ca.ualberta.cmput301w15t13.Controllers.UserLocationManager;
 import ca.ualberta.cmput301w15t13.Models.Claim;
 import ca.ualberta.cmput301w15t13.Models.ClaimStatus;
-import ca.ualberta.cmput301w15t13.Models.Tag;
 import ca.ualberta.cmput301w15t13.Models.TravelItinerary;
 
 /** 
@@ -115,7 +114,7 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 			 */
 			Location homeLocation, claimLocation;
 			homeLocation = UserLocationManager.getHomeLocation();
-			// TODO jeeeezus better make sure this NEVER NullPointers
+			//jeeeezus better make sure this NEVER NullPointers
 			claimLocation = claim.getTravelList().getTravelArrayList().get(0).getLocation();
 			Resources r = ClaimFragmentNavigator.getResources();
 			if(claimLocation != null && homeLocation != null){
@@ -131,6 +130,7 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 				titleView.setTextColor(r.getColor(R.color.text));
 			}
 			
+			/* Adds destinations to the claim adapter */
 			LinearLayout destListView = (LinearLayout) view.findViewById(R.id.destinationClaimList);
 			ArrayList<TravelItinerary> destList = claim.getTravelList().getTravelArrayList();
 			for(TravelItinerary item : destList){

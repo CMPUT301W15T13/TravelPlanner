@@ -6,7 +6,8 @@ import ca.ualberta.cmput301w15t13.Models.Claim;
 
 public class UpdateASyncTask  extends AsyncTask<String, Void, String> {
 
-    private Exception exception;
+    @SuppressWarnings("unused")
+	private Exception exception;
 
     protected String doInBackground(String... claimID) {
         	String claimToUpdate = claimID[0];

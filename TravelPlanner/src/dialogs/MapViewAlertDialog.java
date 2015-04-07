@@ -19,8 +19,17 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 /**
- * TODO
- *
+ * An alert dialog that displays a set
+ * location, from UserLocationManager, on a map.
+ * If there is no location set, it will show an
+ * unmarked map.
+ * Before starting the dialog, you should set the 
+ * desired location, as follows: 
+ * 
+ * Location viewLocation = someLocation();
+ * UserLocationManager.setViewLocation(viewLocation);
+ * MapViewAlertDialog dialog = new MapViewAlertDialog();
+ * dialog.show(getFragmentManager(), "View Map");
  */
 public class MapViewAlertDialog extends DialogFragment{
 	private GoogleMap googleMap;
@@ -36,6 +45,7 @@ public class MapViewAlertDialog extends DialogFragment{
 	    view = inflater.inflate(R.layout.map_view_alert_dialog, null);
 	    builder.setView(view);
 		
+	    /* Get the map fragment and set viewing type to hybrid.*/
 	    googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.google_map_view)).getMap();
 		googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		
@@ -47,6 +57,13 @@ public class MapViewAlertDialog extends DialogFragment{
 	    return builder.create();
 	}
 	
+	/**
+	 * Moves the map the set location,
+	 * and adds a marker to it. 
+	 * 
+	 * Outstanding issues: Consider allowing the 
+	 * user to set the zoom depth, currently set to 8.
+	 */
 	private void moveToLocation(){
 		location = UserLocationManager.getViewLocation();
 		if(location != null){
@@ -66,6 +83,10 @@ public class MapViewAlertDialog extends DialogFragment{
 		}
 	};
 	
+	/**
+	 * You must destroy the map after use,
+	 * else you can't open another one.
+	 */
 	@Override
 	public void onDestroyView() {
 		// Based on http://stackoverflow.com/questions/17533619/null-pointer-on-inflated-view-when-loading-for-the-second-time-a-google-map-frag April 6th

@@ -11,7 +11,8 @@ import android.os.AsyncTask;
  */
 public class DeleteASyncTask extends AsyncTask<String, Void, String> {
 
-	    private Exception exception;
+	    @SuppressWarnings("unused")
+		private Exception exception;
 
 	    protected String doInBackground(String... claimID) {
 	    	String claimName = claimID[0];

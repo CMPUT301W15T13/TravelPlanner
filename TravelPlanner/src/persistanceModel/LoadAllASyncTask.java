@@ -7,7 +7,8 @@ import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 
 public class LoadAllASyncTask extends AsyncTask<String, Void, String> {
 
-    private Exception exception;
+    @SuppressWarnings("unused")
+	private Exception exception;
 
     protected String doInBackground(String... users) {
         try {

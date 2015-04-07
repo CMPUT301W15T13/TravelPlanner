@@ -26,8 +26,27 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 /**
- * TODO
+ * An Alert Dialog that allows the user to search a location
+ * and add it to either an expense item, TraverItinerary item,
+ * or home location.
+ * Before starting the search dialog, it needs to know what to do with 
+ * the location once it has been selected. To do so, create a custom listener, for example:
+ * 
+ * final Listener locationUpdater = new Listener() {
+		
+		@Override
+		public void update() {
+			TravelItinerary item = ClaimFragmentNavigator.getFragmentManagerTravelItinenary(travelItemIndex);
+			item.setLocation(UserLocationManager.getSearchLocation());
+       	 	ClaimFragmentNavigator.updateDestinations();
+		}
+	};
  *
+ * Then you can start the dialog.
+ * 
+ * 	  MapSearchAlertDialog dialog = new MapSearchAlertDialog();
+      dialog.show(getFragmentManager(), "Search Location");
+ * 
  */
 public class MapSearchAlertDialog extends DialogFragment{
 	private Geocoder geoCoder;
@@ -44,6 +63,7 @@ public class MapSearchAlertDialog extends DialogFragment{
 	    view = inflater.inflate(R.layout.map_search_alert_dialog, null);
 	    builder.setView(view);
 		
+	    /* Set the map fragment */
 	    googleMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.google_map_search)).getMap();
 		googleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 		
@@ -81,7 +101,11 @@ public class MapSearchAlertDialog extends DialogFragment{
 		}
 	};
 	
-	
+	/**
+	 * Take the text in the search box, and get a list of at most 1
+	 * address that could match the search text. Then turn that into a location,
+	 * move to it, and add a marker on it.
+	 */
 	private final OnClickListener searchListener = new OnClickListener() {
 		
 		@Override
@@ -110,6 +134,10 @@ public class MapSearchAlertDialog extends DialogFragment{
 		}
 	};
 	
+	/**
+	 * The map must be destroyed, else you can't start
+	 * another one.
+	 */
 	@Override
 	public void onDestroyView() {
 		// Based on http://stackoverflow.com/questions/17533619/null-pointer-on-inflated-view-when-loading-for-the-second-time-a-google-map-frag April 6th

@@ -14,3 +14,9 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 - - -
+
+
+### How to add Google Play Services to the project
+1. Import google play services library into Eclipse
+2. In TravelPlanner properties, click Android>add library, and select google-play-services-lib
+3. Change the target of the google-play-services-lib: go to Properties > Android > Project Build Target > click Google Play API 17.

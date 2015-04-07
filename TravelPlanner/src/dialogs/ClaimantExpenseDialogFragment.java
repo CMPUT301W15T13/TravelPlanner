@@ -15,7 +15,12 @@ import ca.ualberta.cmput301w15t13.Activities.ExpenseActivity;
 import ca.ualberta.cmput301w15t13.Controllers.ClaimListSingleton;
 import ca.ualberta.cmput301w15t13.Fragments.ExpenseListViewerFragment;
 import ca.ualberta.cmput301w15t13.Models.ExpenseItem;
-
+/**
+ * Custom array adapter to get basic functionality out of expenses,
+ * including ability to view, edit, delete,toggle the incompleteness
+ * indicator and add a receipt.
+ *
+ */
 public class ClaimantExpenseDialogFragment extends DialogFragment{
 	int expenseIndex;
 	int claimIndex;
@@ -52,6 +57,7 @@ public class ClaimantExpenseDialogFragment extends DialogFragment{
      	   d.dismiss();
         }
     };
+    
     final OnClickListener viewExpenseItem = new OnClickListener() {
         @Override
 		public void onClick(final View v) {
@@ -63,6 +69,10 @@ public class ClaimantExpenseDialogFragment extends DialogFragment{
         }
     };
     
+    /**
+     * The listener that decides if the incompleteness indicator
+     * will be set.
+     */
     final OnClickListener incompleteToggle = new OnClickListener() {
 		
 		@Override
