@@ -133,15 +133,20 @@ public class ClaimAdapter extends ArrayAdapter<Claim>{
 			/* Adds destinations to the claim adapter */
 			LinearLayout destListView = (LinearLayout) view.findViewById(R.id.destinationClaimList);
 			ArrayList<TravelItinerary> destList = claim.getTravelList().getTravelArrayList();
+			
+			destListView.removeAllViews();
+			
 			for(TravelItinerary item : destList){
 				TextView destItem = new TextView(activityContext);
 				destItem.setText(item.getDestinationName() + ": " + item.getDestinationDescription());
 				destListView.addView(destItem);
 			}
 			
+			
 			LinearLayout tagListView = (LinearLayout) view.findViewById(R.id.tagClaimList);
 			TextView tagItem = new TextView(activityContext);
 			tagItem.setText(claim.getTagsAsString());
+			tagListView.removeAllViews();
 			tagListView.addView(tagItem);
 		}
 		return view;

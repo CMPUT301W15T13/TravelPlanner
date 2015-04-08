@@ -111,7 +111,9 @@ public class DataManager {
 			ArrayList<Tag> tagList;
 			for (Claim claim: ClaimListSingleton.getClaimList().getClaimArrayList()){
 				tagList = claim.getTags();
+				ClaimListSingleton.getClaimList().resetTagManager();
 				for (int index = 0; index < tagList.size(); index++){
+					
 					ClaimListSingleton.getClaimList().tagManager.add(tagList.get(index), claim.getclaimID());
 					
 				}
@@ -210,7 +212,8 @@ class DataHelper{
 	public void updateClaim(Claim claim) {
 		this.isNetworkConnected();
 		if (DataManager.isNetworkAvailable()){
-			new UpdateASyncTask().execute(claim.getclaimID());
+			//new UpdateASyncTask().execute(claim.getclaimID());
+			new SaveASyncTask().execute(claim.getclaimID());
 		}
 		local.saveClaims(ClaimListSingleton.getClaimList().getClaimArrayList(), DataManager.getCurrentContext());
 	}

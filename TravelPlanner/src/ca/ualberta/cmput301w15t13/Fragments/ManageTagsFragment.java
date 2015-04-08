@@ -57,6 +57,8 @@ public class ManageTagsFragment extends DialogFragment {
 	    ClaimList cl = ClaimListSingleton.getClaimList();
 	    TagManager tm = cl.getTagMan();
 	    
+	    
+	    
 	    try {
 	    	HashMap<Tag, ArrayList<String>> map = tm.getManager();
 	    	for (Entry<Tag, ArrayList<String>> entry : map.entrySet()) {

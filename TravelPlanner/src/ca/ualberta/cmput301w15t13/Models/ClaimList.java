@@ -246,5 +246,21 @@ public class ClaimList {
 			}
 		}	
 	}
+
+	public int getClaimIndexOf(String claimID) {
+		int index =0;
+		for (Claim claim: claimList){
+			index++;
+			if (claim.getclaimID().equals(claimID)){
+				return index;
+			}
+		}
+		return -1;
+	}
+
+	public void resetTagManager() {
+		this.tagManager = new TagManager();
+		
+	}
 	
 }

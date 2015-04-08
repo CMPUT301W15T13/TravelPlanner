@@ -53,6 +53,7 @@ public class ExpenseListViewerFragment extends Fragment {
 	private ExpenseAdapter ExpenseAdapter;
 	private ArrayList<ExpenseItem> expenses;
 	private int claimIndex;
+
 	private String claimID;
 	private int expenseIndex;
 
@@ -67,6 +68,8 @@ public class ExpenseListViewerFragment extends Fragment {
 		claimID = getArguments().getString("claimID");
 		Claim claim = ClaimListSingleton.getClaimByID(claimID);
 		expenses = claim.getExpenseItems();
+		//claimIndex = ClaimListSingleton.getClaimList().getClaimIndexOf(claimID);
+		
 		//expenses = ClaimListSingleton.getClaimList().getExpenseList(claimIndex);
 		this.ExpenseAdapter = new ExpenseAdapter(getActivity(), R.layout.expense_adapter_layout, this.expenses);		
 	}
@@ -129,6 +132,7 @@ public class ExpenseListViewerFragment extends Fragment {
 				    Bundle args = new Bundle();
 				    args.putInt("expenseIndex", position);
 				    args.putInt("claimIndex", claimIndex);
+				    //claimIndex = ClaimListSingleton.getClaimList().getClaimIndexOf(claimID);
 				    dialog.setArguments(args);
 				    dialog.show(getFragmentManager(), "Long Click Pop-Up");
 				    

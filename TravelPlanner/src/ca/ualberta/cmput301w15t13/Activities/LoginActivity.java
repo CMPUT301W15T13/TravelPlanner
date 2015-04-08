@@ -111,14 +111,15 @@ public class LoginActivity extends Activity {
 	 * next activity, ClaimActivity, then starts it.
 	 * @param username
 	 * @param isClaimant
+	 * @throws ExecutionException 
+	 * @throws InterruptedException 
 	 */
-	public void startClaimActivity(String username, boolean isClaimant){	
+	public void startClaimActivity(String username, boolean isClaimant) throws InterruptedException, ExecutionException{	
 		ClaimListSingleton.getClaimList().clearListeners();
 		//load data
 		DataManager.setOfflineMode();
 		Toast.makeText(getApplicationContext(), "synchronizing with server", Toast.LENGTH_SHORT).show();
 		DataManager.loadClaimsByUserName(username);
-		
 		Intent intent = new Intent(this, ClaimActivity.class);
 		intent.putExtra(USERID, username);
 		intent.putExtra(ISCLAIMANT, isClaimant);
