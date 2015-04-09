@@ -20,3 +20,6 @@ Unless required by applicable law or agreed to in writing, software distributed 
 1. Import google play services library into Eclipse
 2. In TravelPlanner properties, click Android>add library, and select google-play-services-lib
 3. Change the target of the google-play-services-lib: go to Properties > Android > Project Build Target > click Google Play API 17.
+
+### Demo
+https://www.youtube.com/watch?v=WyaSWOR6GE8
