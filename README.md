@@ -21,5 +21,12 @@ Unless required by applicable law or agreed to in writing, software distributed 
 2. In TravelPlanner properties, click Android>add library, and select google-play-services-lib
 3. Change the target of the google-play-services-lib: go to Properties > Android > Project Build Target > click Google Play API 17.
 
-### Demo
+### Videos
+
+**Demonstration**
+
 https://www.youtube.com/watch?v=WyaSWOR6GE8
+
+**Promotional**
+
+https://www.youtube.com/watch?v=cTY7RRSuV9g
